@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Precot/static/css/main.f57673d5.css",
+    "main.js": "/Precot/static/js/main.a88f7aff.js",
+    "static/js/206.e14dbd35.chunk.js": "/Precot/static/js/206.e14dbd35.chunk.js",
+    "static/media/bg.png": "/Precot/static/media/bg.fe7a50dde221aeed82b6.png",
+    "static/media/Banner-Changed.jpg": "/Precot/static/media/Banner-Changed.186b32d38598d289d6ef.jpg",
+    "static/media/approvedImg.jpg": "/Precot/static/media/approvedImg.a875c22d7bdda8db2871.jpg",
+    "static/media/waitingImg.jpg": "/Precot/static/media/waitingImg.077c74d20b902f0db881.jpg",
+    "static/media/gif.gif": "/Precot/static/media/gif.6f0ea5f9386f85b5d4a9.gif",
+    "static/media/rejectedImg.png": "/Precot/static/media/rejectedImg.39a88bf9b36c977e82d5.png",
+    "static/media/group.png": "/Precot/static/media/group.2903f6b7b99a2a7b30cf.png",
+    "static/media/add-user.png": "/Precot/static/media/add-user.a5c6ae51810f726594ac.png",
+    "static/media/passwordicon.jpg": "/Precot/static/media/passwordicon.308834c357f2d539d505.jpg",
+    "static/media/edit-icon.png": "/Precot/static/media/edit-icon.793d3979daba07955639.png",
+    "static/media/precot-login-bg.svg": "/Precot/static/media/precot-login-bg.b1af5e5a76e18180b082.svg",
+    "index.html": "/Precot/index.html",
+    "static/media/outlined-reject.svg": "/Precot/static/media/outlined-reject.7f5d2888f90be4f1f7521e8f763ae86a.svg",
+    "static/media/outlined-approve.svg": "/Precot/static/media/outlined-approve.97771b47dcdfd46e0a7e4a9abc85ee8c.svg"
+  },
+  "entrypoints": [
+    "static/css/main.f57673d5.css",
+    "static/js/main.a88f7aff.js"
+  ]
+}

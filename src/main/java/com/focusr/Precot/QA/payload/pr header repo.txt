@@ -1,0 +1,68 @@
+package com.foucsr.eprocurement.mysql.database.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.foucsr.eprocurement.mysql.database.model.PRHeaders;
+import com.foucsr.eprocurement.mysql.database.model.PRLines;
+
+@Repository
+public interface PRHeaderRepository extends JpaRepository<PRHeaders, Long> {
+
+	@Override
+	List<PRHeaders> findAll();
+
+//	@Query(value = "SELECT CASE WHEN EXISTS ( SELECT WEB_ORDER_NO FROM DPORT_ORDER_HEADERS_TBL WHERE WEB_ORDER_NO = :web_order_no ) THEN true ELSE false END", nativeQuery = true)
+//	Integer existsOrderByWebNo(@Param("web_order_no") Long web_order_no);
+//	
+//	
+//	@Query(value = "SELECT * FROM PR_HEADERS_TBL_S WHERE WEB_PR_NO = :web_pr_no", nativeQuery = true)
+//	PRHeaders findOrderByWebNo(@Param("web_pr_no") Long web_pr_no);
+	
+	@Query(value = " SELECT * FROM PR_HEADERS where WEB_PR_NO = :web_pr_no ", nativeQuery = true)
+	List<PRHeaders> getPrdeatilsByWEBNO(@Param("web_pr_no") Long web_pr_no);
+//	
+//	
+//	@Query(value = "SELECT * FROM DPORT_ORDER_HEADERS_TBL WHERE STATUS like :status AND DEALER_ID =:dealer_id ORDER BY WEB_ORDER_NO", nativeQuery = true)
+//	List<OrderHeaders> findOrdersByStatusToShowDealer(@Param("status") String status , @Param("dealer_id") Long dealer_id);
+//	
+//	
+//	
+//	@Query(value = "SELECT * FROM DPORT_ORDER_HEADERS_TBL WHERE STATUS = :status AND ZONE_CODE =:zone_code", nativeQuery = true)
+//	List<OrderHeaders> findOrdersByStatusAndZoneToShowSalesPerson(@Param("status") String status , @Param("zone_code") String zone_code);
+//	
+//	
+//	@Query(value = "SELECT * FROM DPORT_ORDER_HEADERS_TBL WHERE STATUS = :status", nativeQuery = true)
+//	List<OrderHeaders> findAllZoneOrdersToShowManager(@Param("status") String status );
+//	
+//	
+//	@Query(value = "SELECT * FROM DPORT_ORDER_HEADERS_TBL WHERE WEB_ORDER_NO IN (:web_order_nos) ORDER BY WEB_ORDER_NO", nativeQuery = true)
+//	List<OrderHeaders> findOrdersByWebOrderNos(@Param("web_order_nos") Set<Long> web_order_nos );
+//	
+//	
+//	@Query(value = "select MIN(WEB_ORDER_NO) from DPORT_ORDER_HEADERS_TBL", nativeQuery = true)
+//	Long findMinimumWebOrderNo();
+//	
+//	
+//	@Query(value = "select MAX(WEB_ORDER_NO) from DPORT_ORDER_HEADERS_TBL", nativeQuery = true)
+//	Long findMaximumWebOrderNo();
+//	
+//	@Query(value = "select MIN(CREATED_AT) from DPORT_ORDER_HEADERS_TBL", nativeQuery = true)
+//	Date findMinimumCreationDate();
+//	
+//	
+//	@Query(value = "select MAX(CREATED_AT) from DPORT_ORDER_HEADERS_TBL", nativeQuery = true)
+//	Date findMaximumCreationDate();
+//	
+//	
+//	@Query(value = "SELECT * FROM DPORT_ORDER_HEADERS_TBL WHERE STATUS = 'INPROCESS' ORDER BY WEB_ORDER_NO", nativeQuery = true)
+//	List<OrderHeaders> findOrdersToInterfaceInBackground();
+
+	// public void save(PRHeaders header, PRLines lines);
+
+}
