@@ -1,0 +1,1379 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-unused-expressions */
+import React, { useState, useEffect } from "react";
+import {
+  Table,
+  Button,
+  Modal,
+  DatePicker,
+  Select,
+  Input,
+  Form,
+  Col,
+  Drawer,
+  Row,
+  Menu,
+  Avatar,
+  message,
+} from "antd";
+import {
+  EyeOutlined,
+  EditOutlined,
+  PlusOutlined,
+  LeftOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { BiLock } from "react-icons/bi";
+import Spunlace_f25_edit from "./Spunlace_f25_edit";
+import BleachingHeader from "../Components/BleachingHeader";
+import { createGlobalStyle } from "styled-components";
+import axios from "axios";
+import { IoSave, IoPrint, IoCreate } from "react-icons/io5";
+import { GrDocumentStore } from "react-icons/gr";
+import { Tooltip } from "antd";
+import { MdLockOutline } from "react-icons/md";
+import { FaArrowRight } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { FaUserCircle } from "react-icons/fa";
+import { IoIosArrowBack } from "react-icons/io";
+import { BiEdit, BiNavigation } from "react-icons/bi";
+import { FaLock } from "react-icons/fa6";
+import { TbMenuDeep } from "react-icons/tb";
+import { jwtDecode } from "jwt-decode";
+import logo from "../Assests/logo.png";
+import PrecotSidebar from "../Components/PrecotSidebar.js";
+
+// import "./Giridharan.css";
+import API from "../baseUrl.json";
+import moment from "moment";
+
+const { Option } = Select;
+
+const Spunlace_f25_summary = () => {
+  const GlobalStyle = createGlobalStyle`
+  @media print {
+    @page {
+      size: portrait;
+    }
+    body {
+      -webkit-print-color-adjust: exact;
+      width: 100%;
+      height: 100%;
+      transform: scale(0.9); /* Adjust scale as needed */
+      // transform-origin: top right; /* Adjust the origin if needed */
+      // transform-origin: bottom top ;
+      transform-origin: bottom top;
+      // transform-origin: top left;
+
+    }
+  }
+`;
+
+  const [selectedRow, setSelectedRow] = useState(null);
+  // console.log("selected row", selectedRow);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newModal, setNewModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [modalData, setModalData] = useState(null);
+  // const [availableShifts, setAvailableShifts] = useState([]);
+  const [newStatus, setNewStatus] = useState("");
+  const [cakingData, setCakingData] = useState([]);
+  const [searchDate, setSearchDate] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
+  const [apiData, setApiData] = useState(null);
+  const [selectedShift, setSelectedShift] = useState("");
+  const [shiftSelections, setShiftSelections] = useState(Array(1).fill(""));
+  const [shift, setShift] = useState(null);
+  const [newDate, setNewDate] = useState("");
+  const [printDate, setPrintDate] = useState("");
+  const [printShift, setPrintShift] = useState("");
+  const [gotobtn, setGotobtn] = useState(true);
+  const [shiftOptions, setShiftOptions] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState("left");
+  const [messageApi, contextHolder] = message.useMessage();
+  const [printResponseData, setPrintResponseData] = useState(null);
+  const [reason, setReason] = useState(false);
+
+  const [getImage, setGetImage] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const username = printResponseData?.supervisor_sign;
+    if (username) {
+      // console.log("usernameparams", username);
+
+      axios
+        .get(
+          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            responseType: "arraybuffer",
+          }
+        )
+        .then((res) => {
+          // console.log("Response:", res.data);
+          const base64 = btoa(
+            new Uint8Array(res.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
+          );
+          const url = `data:image/jpeg;base64,${base64}`;
+          setGetImage(url);
+        })
+        .catch((err) => {
+          // console.log("Error in fetching image:", err);
+        });
+    }
+  }, [printResponseData, API.prodUrl]);
+
+  const [getImage1, setGetImage1] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const username = printResponseData?.hod_sign;
+    if (username) {
+      // console.log("usernameparams", username);
+
+      axios
+        .get(
+          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            responseType: "arraybuffer",
+          }
+        )
+        .then((res) => {
+          // console.log("Response:", res.data);
+          const base64 = btoa(
+            new Uint8Array(res.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
+          );
+          const url = `data:image/jpeg;base64,${base64}`;
+          setGetImage1(url);
+        })
+        .catch((err) => {
+          // console.log("Error in fetching image:", err);
+        });
+    }
+  }, [printResponseData, API.prodUrl]);
+
+  const formattedDatesupervisor = () => {
+    if (printResponseData?.supervisor_submit_on) {
+      const date = moment(printResponseData?.supervisor_submit_on);
+      if (date.isValid()) {
+        return date.format("DD/MM/YYYY HH:mm");
+      }
+    }
+    return "";
+  };
+  const formattedDate = printResponseData?.date
+    ? new Date(printResponseData.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      })
+    : "";
+  const formattedDateHod = () => {
+    if (printResponseData?.hod_submit_on) {
+      const date = moment(printResponseData?.hod_submit_on);
+      if (date.isValid()) {
+        return date.format("DD/MM/YYYY HH:mm");
+      }
+    }
+    return "";
+  };
+
+  const entriesPerPage = 8;
+  const chunkedSanitizationList = [];
+  if (
+    printResponseData &&
+    printResponseData &&
+    printResponseData.sanitizationList
+  ) {
+    for (
+      let i = 0;
+      i < printResponseData.sanitizationList.length;
+      i += entriesPerPage
+    ) {
+      chunkedSanitizationList.push(
+        printResponseData.sanitizationList.slice(i, i + entriesPerPage)
+      );
+    }
+  } else {
+    console.warn(
+      "printResponseData or sanitizationList is undefined or empty."
+    );
+  }
+
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  const userRole = decodedToken.role;
+  const [showModal, setShowModal] = useState(false);
+  let formattedSupervisorDate;
+
+  const navigate = useNavigate();
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    month = month < 10 ? `0${month}` : month;
+    day = day < 10 ? `0${day}` : day;
+
+    return `${year}-${month}-${day}`;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const role = localStorage.getItem("role");
+
+        let apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/getSummary`;
+
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok.");
+        }
+
+        const data = await response.json();
+
+        // console.log("Fetched data:", data);
+
+        if (!data || !Array.isArray(data)) {
+          throw new Error("Data is not an array or undefined");
+        }
+
+        setCakingData(data);
+
+        setFilteredData(
+          data.map((item) => ({
+            key: item.header_id, // Assuming header_id is unique
+            formatName: item.formatName,
+            formatNo: item.formatNo,
+            revisionNo: item.revisionNo,
+            date: item.date,
+            orderNo: item.order_no,
+
+            productName: item.product_name,
+
+            shift: item.shift,
+
+            status: item.status,
+            hod_status: item.hod_status,
+            supervisor_status: item.supervisor_status,
+            mailstatus: item.mail_status,
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error.response);
+        //alert(error)
+        message.error(error.response?.data?.message || "An error occurred");
+        // Set the flag to true after showing the error message
+        // setSummary([]); // Set an empty array in case of error
+        //navigate("/Precot/choosenScreen");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const findReason = () => {
+      for (const data of filteredData) {
+        if (data.hod_status === "HOD_REJECTED") {
+          setReason(true);
+          break;
+        }
+      }
+    };
+    findReason();
+  }, [filteredData]);
+
+  const printDateSubmit = () => {
+    window.print();
+  };
+
+  const handlePrint = () => {
+    setShowModal(true);
+    // window.print()
+    // console.log("print screen works");
+    // Add any other print-related logic here
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        // console.log("Shift details fetched:", res.data);
+        // const shifts = res.data.map((shift) => shift.value);
+        // setAvailableShifts(shifts);
+        setShiftOptions(res.data);
+      })
+      .catch((err) => {
+        // console.log("Error fetching shifts:", err);
+      });
+  }, []);
+
+  const handleViewDetails = (record) => {
+    setSelectedRow(record);
+    setIsModalVisible(true);
+  };
+  const handleDatePrint = (event) => {
+    const value = event.target.value;
+
+    setPrintDate(value);
+  };
+
+  const handleGoToChange = () => {
+    if (newDate == "" || newDate == null) {
+      message.warning("Please Select Date");
+      return;
+    } else if (shift == "" || shift == null) {
+      message.warning("Please Select Shift");
+      return;
+    }
+
+    // console.log("e5dr6ft7gy8iuo ", newDate, shift);
+    navigate("/Precot/Spunlace/F-25", {
+      state: {
+        date: newDate,
+        shiftvalue: shift,
+      },
+    });
+  };
+
+  const handleEdit = (record) => {
+    // console.log("values", record);
+    const { shift, date } = record;
+    navigate("/Precot/Spunlace/F-25/edit", {
+      state: {
+        shift: shift,
+        date41: date,
+      },
+    });
+    // console.log("precot", shift, date);
+
+    const x = cakingData.filter((x, i) => {
+      return record.formatNo == formatNo;
+      navigate("/Precot/Spunlace/F-25");
+    });
+    setNewStatus(x);
+    setModalData(record);
+    setNewModal(true);
+  };
+
+  const handleShiftChange = (value) => {
+    // console.log(" Shift ", value);
+    setShift(value);
+    setGotobtn(false);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setPrintShift(null);
+    setPrintDate(null);
+  };
+  useEffect(() => {
+    // console.log("print response data", printResponseData);
+  }, [printResponseData]);
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    if (printDate && printShift) {
+      setSubmitButtonDisabled(false);
+    } else {
+      setSubmitButtonDisabled(true);
+    }
+  }, [printDate]);
+  const handlePrintChange = (value) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.error("No token found in localStorage.");
+      message.error("No token found. Please log in again.");
+      return;
+    }
+
+    // console.log("Token:", token); // Log the token for debugging purposes
+
+    try {
+      setPrintShift(value);
+
+      axios
+        .get(
+          `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShiftPrintApi?date=${printDate}&shift=${value}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          const printres = res.data;
+          // console.log("print resssss", res.data);
+          // console.log("printtt", printres);
+
+          if (printres && printres.message === "No data") {
+            message.error("No data found.");
+            setSubmitButtonDisabled(true); // Disable the submit button
+          } else if (printres && Object.keys(printres).length > 0) {
+            setPrintResponseData(printres);
+            setSubmitButtonDisabled(false); // Enable the submit button
+          } else {
+            message.error("No data found for the selected date and shift.");
+            setSubmitButtonDisabled(true); // Disable the submit button
+          }
+        })
+        .catch((err) => {
+          console.error("Error in axios get request:", err.response);
+          message.error("Failed to fetch data. Please try again later.");
+          setSubmitButtonDisabled(true); // Disable the submit button on error
+        });
+    } catch (error) {
+      console.error("Error in handlePrintChange:", error);
+      message.error("An unexpected error occurred. Please try again later.");
+      setSubmitButtonDisabled(true); // Disable the submit button on unexpected error
+    }
+  };
+
+  const handleBack = () => {
+    navigate("/Precot/choosenScreen");
+  };
+  // const handlePrint = () => {
+  //   window.print();
+  // };
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const baseColumns = [
+    {
+      title: "S.No",
+      key: "serial",
+      align: "center",
+      render: (text, record, index) => index + 1,
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      align: "center",
+      render: (text) => formatDate(text),
+    },
+    {
+      title: "Shift",
+      dataIndex: "shift",
+      key: "shift",
+      align: "center",
+    },
+    {
+      title: "Supervisor Status",
+      dataIndex: "supervisor_status",
+      key: "supervisor_status",
+      align: "center",
+    },
+    {
+      title: "Hod Status",
+      dataIndex: "hod_status",
+      key: "hod_status",
+      align: "center",
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      align: "center",
+      render: (_, record) => (
+        <>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+            style={{ width: "100%" }}
+          >
+            Review
+          </Button>
+        </>
+      ),
+    },
+  ];
+
+  const Reason = {
+    title: "Reason",
+    dataIndex: "reason",
+    key: "reason",
+    align: "center",
+    render: (text) => (text ? text : "N/A"),
+  };
+
+  let columns = [...baseColumns];
+
+  // Insert the "Reason" column before the "Action" column if `reason` exists
+  if (reason) {
+    const actionIndex = columns.findIndex((col) => col.key === "actions");
+    columns.splice(actionIndex, 0, Reason);
+  }
+
+  let sanitizationList = [];
+  if (selectedRow && selectedRow.sanitizationList) {
+    sanitizationList = selectedRow.sanitizationList.slice(0, 1);
+    while (sanitizationList.length < 1) {
+      sanitizationList.push({});
+    }
+  }
+
+  const formatNo = "PH-PRD02/F-023";
+  const revisionNo = "01";
+  const sopNo = "PH-HRD01-D-0";
+  const unit = "UNIT-H";
+
+  return (
+    <div>
+      <GlobalStyle />
+      <div id="section-to-print">
+        <style></style>
+
+        {chunkedSanitizationList.map((sanitizationChunk, pageIndex) => (
+          <table
+            style={{
+              width: "90%",
+              borderCollapse: "collapse",
+              pageBreakBefore: pageIndex > 1 ? "always" : "auto",
+              marginTop: "20px",
+              tableLayout: "fixed",
+            }}
+            key={pageIndex}
+          >
+            <tbody>
+              <tr style={{ border: "none" }}>
+                <td style={{ border: "none" }} colSpan="90"></td>
+              </tr>
+              <tr style={{ border: "none" }}>
+                <td style={{ border: "none" }} colSpan="90"></td>
+              </tr>
+              <tr>
+                <th
+                  colSpan="15"
+                  rowSpan="4"
+                  style={{ height: "80px", textAlign: "center" }}
+                >
+                  <img
+                    src={logo}
+                    alt="Logo"
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                  <br />
+                  <br />
+                  Unit H
+                </th>
+                <th
+                  colSpan="43"
+                  rowSpan="4"
+                  style={{ textAlign: "center", height: "80px" }}
+                >
+                  Spunlace Hand Sanitization Report
+                </th>
+                <th colSpan="17" style={{ border: "1px solid black" }}>
+                  Format No.:
+                </th>
+                <td colSpan="15" style={{ border: "1px solid black" }}>
+                  PH-PRD02/F-025
+                </td>
+              </tr>
+              <tr>
+                <th colSpan="17" style={{ border: "1px solid black" }}>
+                  Revision No.:
+                </th>
+                <td colSpan="15" style={{ border: "1px solid black" }}>
+                  01
+                </td>
+              </tr>
+              <tr>
+                <th colSpan="17" style={{ border: "1px solid black" }}>
+                  Ref.SOP No.:
+                </th>
+                <td colSpan="15" style={{ border: "1px solid black" }}>
+                  PH-HRD01-D-0
+                </td>
+              </tr>
+              <tr>
+                <th colSpan="17" style={{ border: "1px solid black" }}>
+                  Page No.:
+                </th>
+                <td colSpan="15" style={{ border: "1px solid black" }}>
+                  {pageIndex + 1} of {chunkedSanitizationList.length}
+                </td>
+              </tr>
+              <tr>
+                <td
+                  colSpan="90"
+                  style={{ border: "none", height: "10px" }}
+                ></td>
+                <br></br>
+              </tr>
+              <tr>
+                <th
+                  colSpan="49"
+                  style={{ height: "20px", border: "1px solid black" }}
+                >
+                  Date: {formattedDate}
+                </th>
+
+                <th colSpan="41" style={{ border: "1px solid black" }}>
+                  Shift:{printResponseData?.shift}
+                </th>
+                {/* <th colSpan="88" style={{ height: "20px", border: '1px solid black' }}>{formatDate(newDate)}</th> */}
+              </tr>
+
+              <tr>
+                <th
+                  colSpan="8"
+                  style={{
+                    border: "1px solid black",
+                    height: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  S.No.
+                </th>
+
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  ID-No
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  1st <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  2nd <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  3rd <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  4th <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  5th <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  6th <br /> Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  7th <br />
+                  Hour
+                </th>
+                <th
+                  colSpan="8"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  8th <br /> Hour
+                </th>
+                <th
+                  colSpan="10"
+                  style={{ border: "1px solid black", textAlign: "center" }}
+                >
+                  Remarks
+                </th>
+              </tr>
+              {sanitizationChunk.map((entry, index) => (
+                <tr key={index}>
+                  <td
+                    colSpan="8"
+                    style={{
+                      border: "1px solid black",
+                      height: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {index + 1 + pageIndex * entriesPerPage}
+                  </td>
+
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.idNumber}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour1 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour2 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour3 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour4 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour5 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour6 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour7 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="8"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.hour8 === "Y" ? "✓" : "✗"}
+                  </td>
+                  <td
+                    colSpan="10"
+                    style={{ border: "1px solid black", textAlign: "center" }}
+                  >
+                    {entry.remarks}
+                  </td>
+                </tr>
+              ))}
+
+              <>
+                <tr>
+                  <td colSpan="90" style={{ border: "1px solid black" }}>
+                    <div style={{ lineHeight: "1.0" }}>
+                      ಗಮನಿಸಿ: ALCONOX- ಸಾಕಷ್ಟು ಪ್ರಮಾಣದ ಹ್ಯಾಂಡ್ ಸ್ಯಾನಿಟೈಜರ್ ಅನ್ನು
+                      ಅನ್ವಯಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಕೈಗಳನ್ನು ಒಟ್ಟಿಗೆ ಉಜ್ಜಿಕೊಳ್ಳಿ,
+                      ಅಂಗೈಗಳು, ಬೆರಳುಗಳು ಮತ್ತು ಉಗುರುಗಳು
+                    </div>
+                    <div style={{ lineHeight: "1.5" }}>
+                      ಸೇರಿದಂತೆ ನಿಮ್ಮ ಕೈಗಳ ಎಲ್ಲಾ ಬೆರಳುಗಳನ್ನು ಕನಿಷ್ಠ 20 ಸೆಕೆಂಡುಗಳ
+                      ಕಾಲ ಉಜ್ಜಲು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    colSpan="45"
+                    style={{
+                      height: "10px",
+                      textAlign: "center",
+                      border: "1px solid black",
+                      height: "15%",
+                    }}
+                  >
+                    <b>Production Supervisor Sign & Date</b>
+                    <br></br>
+                    <br></br>
+                    <div>
+                      {printResponseData &&
+                        printResponseData.supervisor_sign && (
+                          <span>{printResponseData.supervisor_sign}</span>
+                        )}
+                      <br></br>
+                      {formattedDatesupervisor()}
+                      <br />
+                      {getImage && (
+                        <img
+                          src={getImage}
+                          alt="Supervisor Sign"
+                          style={{
+                            width: "22%",
+                            height: "8%",
+                            marginLeft: "20px",
+                            objectFit: "contain",
+                            mixBlendMode: "multiply",
+                            justifyContent: "space-evenly",
+                          }}
+                        />
+                      )}
+                    </div>
+                    Sign & Date
+                  </td>
+                  <td
+                    colSpan="45"
+                    style={{
+                      textAlign: "center",
+                      border: "1px solid black",
+                      height: "15%",
+                    }}
+                  >
+                    <b>HOD/ Designee Sign & Date</b>
+                    <br></br>
+                    <br></br>
+                    <div>
+                      {printResponseData && printResponseData.hod_sign && (
+                        <span>{printResponseData.hod_sign}</span>
+                      )}
+                      <br />
+                      {formattedDateHod()} <br />
+                      {getImage1 && (
+                        <img
+                          src={getImage1}
+                          alt="Hod Sign"
+                          style={{
+                            width: "22%",
+                            height: "8%",
+                            marginLeft: "20px",
+                            objectFit: "contain",
+                            mixBlendMode: "multiply",
+                            justifyContent: "space-evenly",
+                          }}
+                        />
+                      )}
+                    </div>
+                    Sign & Date
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    colSpan="90"
+                    style={{ border: "1px solid black", border: "none" }}
+                  ></td>
+                </tr>
+                <tr>
+                  <th
+                    colSpan="15"
+                    style={{ textAlign: "center", border: "1px solid black" }}
+                  >
+                    Particular
+                  </th>
+                  <th
+                    colSpan="30"
+                    style={{ textAlign: "center", border: "1px solid black" }}
+                  >
+                    Prepared by
+                  </th>
+                  <th
+                    colSpan="20"
+                    style={{ textAlign: "center", border: "1px solid black" }}
+                  >
+                    Reviewed by
+                  </th>
+                  <th
+                    colSpan="25"
+                    style={{ textAlign: "center", border: "1px solid black" }}
+                  >
+                    Approved by
+                  </th>
+                </tr>
+                <tr>
+                  <th colSpan="15" style={{ border: "1px solid black" }}>
+                    Name
+                  </th>
+                  <td colSpan="30" style={{ border: "1px solid black" }}></td>
+                  <td colSpan="20" style={{ border: "1px solid black" }}></td>
+                  <td colSpan="25" style={{ border: "1px solid black" }}></td>
+                </tr>
+                <tr>
+                  <th colSpan="15" style={{ border: "1px solid black" }}>
+                    Signature & Date
+                  </th>
+                  <td colSpan="30" style={{ border: "1px solid black" }}></td>
+                  <td colSpan="20" style={{ border: "1px solid black" }}></td>
+                  <td colSpan="25" style={{ border: "1px solid black" }}></td>
+                </tr>
+              </>
+            </tbody>
+          </table>
+        ))}
+      </div>
+      {contextHolder}
+      {/* <Drawer
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        open={open}
+        width="fit-content"
+        style={{
+          padding: "1em",
+        }}
+      >
+        <Row>
+          <Col>
+            <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
+          </Col>
+
+          <Col
+            style={{
+              marginLeft: "1em",
+            }}
+          >
+            <p>{localStorage.getItem("username")}</p>
+            <p
+              style={{
+                fontSize: "x-small",
+              }}
+            >
+              {localStorage.getItem("role")}
+            </p>
+          </Col>
+        </Row>
+
+        <Menu
+          theme="dark"
+          mode="inline"
+          // defaultSelectedKeys={["1"]}
+          style={{
+            backgroundColor: "transparent",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            padding: "0",
+            margin: "0",
+          }}
+          items={
+            localStorage.getItem("role") == "ROLE_QA"
+              ? [
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Generation
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Generate"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Mapping"),
+                  },
+                  {
+                    key: "4",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "5",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Raw Material Isuue
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/RawMaterialIssue"),
+                  },
+                  {
+                    key: "6",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
+              : [
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Mapping"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "4",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
+          }
+        />
+      </Drawer> */}
+      <BleachingHeader
+        unit="Unit-H"
+        formName="Spunlace Hand Sanitization Report"
+        formatNo="PH-PRD02/F-023"
+        MenuBtn={
+          <Button
+            type="primary"
+            icon={<TbMenuDeep />}
+            onClick={showDrawer}
+          ></Button>
+        }
+        buttonsArray={[
+          <Button
+            style={{
+              backgroundColor: "#E5EEF9",
+              color: "#00308F",
+              fontWeight: "bold",
+            }}
+            icon={<IoPrint color="#00308F" />}
+            onClick={handlePrint}
+            shape="round"
+          >
+            Print
+          </Button>,
+
+          <Button
+            type="primary"
+            style={{
+              backgroundColor: "#E5EEF9",
+              color: "#00308F",
+              fontWeight: "bold",
+            }}
+            shape="round"
+            // icon={<IoIosArrowBack style={{ color: "#00308F" }} />}
+            icon={<GoArrowLeft color="#00308F" />}
+            onClick={() => navigate("/Precot/choosenScreen")}
+          >
+            Back
+          </Button>,
+
+          <Button
+            type="primary"
+            style={{
+              backgroundColor: "#E5EEF9",
+              color: "#00308F",
+              fontWeight: "bold",
+            }}
+            shape="round"
+            icon={<BiLock color="#00308F" />}
+            onClick={() => {
+              if (confirm("You Want to logged out")) {
+                localStorage.removeItem("token");
+                navigate("/Precot");
+              }
+            }}
+          >
+            Logout
+          </Button>,
+          <Tooltip
+            trigger="click"
+            style={{
+              backgroundColor: "#fff",
+            }}
+            title={
+              <div>
+                <h3>{localStorage.getItem("username")}</h3>
+                <p>{localStorage.getItem("role")}</p>
+              </div>
+            }
+          >
+            <Button
+              type="primary"
+              style={{
+                backgroundColor: "#E5EEF9",
+              }}
+              shape="circle"
+              icon={<FaUserCircle color="#00308F" size={20} />}
+            />
+          </Tooltip>,
+          <PrecotSidebar
+            open={open}
+            onClose={onClose}
+            role={localStorage.getItem("role")}
+          />,
+        ]}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            width: "20%",
+            alignItems: "center",
+          }}
+        >
+          <Input
+            addonBefore="Date"
+            placeholder="Date"
+            type="date"
+            size="small"
+            value={newDate}
+            style={{ fontWeight: "bold", marginRight: "1em" }}
+            onChange={(e) => setNewDate(e.target.value)}
+            max={getCurrentDate()}
+          />
+          <label>Shift:</label>
+          <Select
+            placeholder="Select Shift"
+            value={shift}
+            onChange={handleShiftChange}
+            style={{ width: 120, fontWeight: "bold", marginright: "60px" }}
+          >
+            {shiftOptions.map((shift) => (
+              <Option key={shift.id} value={shift.value}>
+                {shift.value}
+              </Option>
+            ))}
+          </Select>
+
+          <Button
+            type="primary"
+            style={{
+              backgroundColor: "#E5EEF9",
+              color: "#00308F",
+              fontWeight: "bold",
+            }}
+            shape="round"
+            icon={<BiNavigation color="#00308F" />}
+            onClick={handleGoToChange}
+          >
+            Go To
+          </Button>
+        </div>
+      </div>
+
+      <Table
+        bordered
+        style={{ textAlign: "center" }}
+        columns={columns}
+        dataSource={apiData || cakingData}
+      />
+
+      <Modal
+        title="Edit Form"
+        visible={newModal}
+        onCancel={() => setNewModal(false)}
+        width="100vw"
+      >
+        <Spunlace_f25_edit data={modalData} status={newStatus} />
+      </Modal>
+      <Modal
+        title="Print"
+        open={showModal}
+        onOk={handleModalClose}
+        onCancel={handleModalClose}
+        destroyOnClose={true}
+        footer={[
+          <Button
+            key="submit"
+            type="primary"
+            onClick={printDateSubmit}
+            disabled={submitButtonDisabled}
+          >
+            Submit
+          </Button>,
+        ]}
+      >
+        {" "}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "16px",
+            width: "100%",
+          }}
+        >
+          <label>Date:</label>
+          <Input
+            type="date"
+            size="small"
+            value={printDate}
+            style={{ fontWeight: "bold", marginRight: "1em", width: "60%" }}
+            onChange={handleDatePrint}
+            max={getCurrentDate()}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "16px",
+            width: "100%",
+          }}
+        >
+          <label style={{ textAlign: "center" }}>Shift:</label>
+
+          <Select
+            addonBefore="Shift"
+            placeholder="Select Shift"
+            value={printShift}
+            onChange={handlePrintChange}
+            style={{ fontWeight: "bold", marginright: "70px", width: "60%" }}
+          >
+            {shiftOptions.map((shift) => (
+              <Option key={shift.id} value={shift.value}>
+                {shift.value}
+              </Option>
+            ))}
+          </Select>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export default Spunlace_f25_summary;

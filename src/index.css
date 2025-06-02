@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}   
+
+.form-09{
+  font-size: 14px !important;
+}
+#form-09{
+  font-size: 14px !important;
+}
+ 
+.waste-bale-form {
+  width: 100%;
+  height: 100%;
+}
+.waste-bale-form > h1 {
+  width: 100%;
+  text-align: center;
+}
+.center-bale {
+  display: flex;
+  justify-content: space-between;
+  overflow-y: hidden;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+table,
+tr,
+td,
+th {
+  font-size: x-small !important;
+  letter-spacing: 0.4px;
+}
+p {
+  font-size: small;
+}
+.bold {
+  font-weight: bold;
+}
+.print-header{
+  display: none;
+}
+#section-to-print-san{
+  display: none;
+}
+
+@media print {
+  body {
+    visibility: hidden;
+  }
+  .print-header{
+    display: block;
+  }
+  .no-print {
+    display: none;
+  }
+  #section-to-print {
+    display: block;
+    visibility: visible;
+    width: 90%; /* Adjust for page margins */
+    height: auto;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    page-break-inside: avoid;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: 12;
+  }
+ 
+  #section-to-print table {
+    border-collapse: collapse;
+    width: 90%;
+    height: auto;
+    page-break-inside: avoid;
+    font-family: 'Times New Roman', Times, serif !important;
+  }
+  #f-33-print {
+    display: block;
+    visibility: visible;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+ 
+  }
+ 
+  #section-to-print table th,
+  #section-to-print table td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: left;
+    font-size: 12px !important;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  #section-to-print-san{
+    display: block;
+    visibility: visible;/* Adjust for page margins */ /* Include padding and border in the element's total width and height */
+    page-break-inside: avoid;
+    margin:5px;
+ 
+ 
+  }
+ 
+  #section-to-print-san table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+   
+  }
+ 
+  #section-to-print-san table th,
+  #section-to-print-san table td {
+    border: 1px solid black;
+    text-align: left;
+    padding:2px;
+    font-size: 12px !important;
+    font-family: "Times New Roman", Times, serif;
+  }
+ 
+  @page {
+    size: A4;
+  }
+
+}
+/* .editable-row{ */
+/* background-color: aqua; */
+/* width: 10px !important; */
+/* } */
+.ant-table-tbody {
+  padding: 0 !important;
+}
+.ant-table-tbody > tr > td {
+  padding: 0 !important;
+}
+ 
+/* .new-table table th,tr
+.new-table table td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: left;
+    font-size: 24px !important;
+  } */
+.new-div-1 {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background-image: url("./Assests/precot-login-bg.svg");
+  background-size: cover;
+  background-position: center;
+}
+.left-sign {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background-image: url("./Assests/Banner-Changed.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  align-items: center;
+}
+ 
+.inp-new:focus {
+  outline: none !important;
+}
+/*
+.over-tab{
+  width: 500px !important;
+} */
+ 
+.dummy-one {
+  width: 90px !important;
+}
+.hell-1 {
+  width: 100%;
+  height: 100vh;
+  background-image: url(./Assests/Banner-Changed.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.hell-1 {
+  width: 100%;
+  height: 100vh;
+}
+.content-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dull-text {
+  color: #d1c6c6;
+  text-transform: uppercase;
+}
+.login-left {
+  background-image: url(./Assests/bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-self: center;
+  justify-items: center;
+  position: relative;
+  padding-top: 5%;
+}
+/* display: "flex",
+flexDirection: "coulmn",
+justifyContent: "center",
+alignItems: "center",
+height: "100%",
+width:'100%', */
+ 
+.nisha-table-header{
+  text-align: center;
+  font-weight: bold;
+}
+
+.text-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 95%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  /* border-radius: 8px;
+  background-color: #f9f9f9; */
+}
+ 
+.text-input {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+ 
+.word-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.data-border {
+  border: 1px solid black;
+  padding: 5px;
+}
+ 
+.data-border-header {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+ 
+.data-border-signature {
+  border: 1px solid black;
+  padding: 10px;
+  font-weight: bold;
+}
+ 
+.data-border-remarks {
+  border: 1px solid black;
+  padding: 25px;
+}
+ 
+.signature {
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px;
+}
+ 
+.disabled-select {
+  pointer-events: none;
+  background-color: initial;
+  color: inherit;
+}
+
+.signature{
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  border: none;
+}
+
+.rotated-text {
+  display: inline-block;
+  transform: rotate(270deg);
+  transform-origin: left bottom; /* Adjust origin as needed */
+  font-size: 14px; /* Adjust font size if needed */
+}

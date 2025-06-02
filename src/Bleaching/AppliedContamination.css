@@ -1,0 +1,42 @@
+.tablesContainer {
+  display: flex;
+  margin: 2px;
+}
+
+.tableContainer {
+  margin: 4px;
+}
+
+.top-heading {
+  font-weight: bold;
+}
+.bottom-heading {
+  font-weight: bold;
+}
+.table-contamination {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-top: 5px;
+  width: 70%;
+}
+.header-center-down {
+  text-align: center;
+}
+.content-header-top {
+  display: none;
+}
+.content-header-bottom-2 {
+  display: none;
+}
+.btnContainer button {
+  margin: 5px;
+  padding: 5px;
+}
+.inp-new:focus {
+  outline: none !important;
+}
+.inp-new{
+    border: none;
+    width: 100%;
+    text-align: center;
+}

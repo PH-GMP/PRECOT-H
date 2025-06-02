@@ -1,0 +1,4892 @@
+   {/* print layout code */}
+      <div id="section-to-print">
+        <table style={{ width: "90%", tableLayout: "fixed" }}>
+          <br></br>
+          <thead>
+            <tr style={{ border: "none" }}>
+              <td style={{ border: "none" }} colSpan="15"></td>
+            </tr>
+
+            <tr>
+              <th
+                colspan="5"
+                rowSpan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Unit H
+              </th>
+              <th
+                colspan="9"
+                rowSpan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Batch Manufacturing Record
+              </th>
+              <th
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Format.:
+              </th>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02/F-26
+              </td>
+            </tr>
+            <tr>
+              <th
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Revision No.:
+              </th>
+              <td
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                01
+              </td>
+            </tr>
+            <tr>
+              <th
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Ref SOP No.:
+              </th>
+              <td
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QAD01-D-64
+              </td>
+            </tr>
+            <tr>
+              <th
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Page NO.:
+              </th>
+              <td
+                colSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+            </tr>
+
+            <br />
+            <tr>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Department Name
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Spunlace
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                BMR No. / Rev. No.
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                SL-RG-001 / 01
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Product Name
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Roll Goods
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Effective Date{" "}
+              </td>
+              <td
+                colSpan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+            </tr>
+            <tr></tr>
+          </thead>
+          <br></br>
+          <tbody>
+            <tr>
+              <th
+                colSpan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1.0 PRODUCTION DETAILS{" "}
+              </th>
+            </tr>
+            <tr>
+              <th
+                colSpan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                BATCH NO:
+              </th>
+            </tr>
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Product Description{" "}
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].Product_Description
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Width in mm{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].Width_in_mm
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Mixing
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].Mixing
+                  : "NA"}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                No. of Rolls / Shaft
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].No_of_Rolls_Shaft
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Batch Quantity (Kgs)
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].Batch_Quantity
+                  : "NA"}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Shaft Number Start From
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0]
+                      .Shaft_Number_Start_From
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                No of Shaft{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].No_of_Shaft
+                  : "NA"}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Shaft Number Ended
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].Shaft_Number_Ended
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Product Supply
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                In House
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].IN_HOUSE_EXPORT ==
+                    "In House"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                Export
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetailsSap[0].IN_HOUSE_EXPORT ==
+                    "Export"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Manufacturing Start Date
+              </td>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Manufacturing Completion Date{" "}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Date{" "}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? moment(
+                      printData &&
+                        printData.bmr01productiondetails[0].start_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Time{" "}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetails[0].start_time
+                  : "NA"}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Date
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? moment(
+                      printData && printData.bmr01productiondetails[0].end_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Time
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr01productiondetailsSap.length > 0
+                  ? printData.bmr01productiondetails[0].end_time
+                  : "NA"}
+              </td>
+            </tr>
+
+            <br />
+
+            <tr>
+              <th
+                colSpan="20"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRODUCTION BATCH RECORD ISSUANCE DETAILS{" "}
+              </th>
+            </tr>
+            <tr>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Issued by: Quality Assurance has reviewed the Batch Record to
+                ensure that the copy is a complete, accurate copy of the Master
+                Batch Record.
+              </td>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Received by: Production has reviewed the Batch Record to ensure
+                that the copy is complete and correct. Production is responsible
+                for the Batch Record, following the issuance.
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colSpan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                  height: "50px",
+                }}
+              >
+                Issued by (QA)
+                <div style={{ verticalAlign: "Bottom" }}>
+                  {printData && printData.bmr01productiondetails.length > 0
+                    ? printData.bmr01productiondetails[0].issued_by
+                    : "NA"}
+                  <br></br>
+                  {printData && printData.bmr01productiondetails.length > 0
+                    ? moment(
+                        printData.bmr01productiondetails[0].issued_on
+                      ).format("DD/MM/YYYY - HH:mm")
+                    : "NA"}
+                </div>{" "}
+              </td>
+              <td
+                colSpan="10"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                  height: "50px",
+                }}
+              >
+                Received by (Production)
+                <div style={{ verticalAlign: "Bottom" }}>
+                  {printData && printData.bmr01productiondetails.length > 0
+                    ? printData.bmr01productiondetails[0].received_by
+                    : "NA"}
+                  <br></br>
+                  {printData && printData.bmr01productiondetails.length > 0
+                    ? moment(
+                        printData &&
+                          printData.bmr01productiondetails[0].received_on
+                      ).format("DD/MM/YYYY - HH:mm")
+                    : "NA"}
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                  border: "none",
+                }}
+              >
+                <strong>
+                  {" "}
+                  Instructions while filling in BMR: <br />
+                </strong>
+                1. Record all data in blue ink. <br />
+                2. Record time as HR: MM in 24 hours format. <br />
+                3. Record date in DD/MM/YYYY or DD/MM/YY format.
+                <br />
+                4. Do not leave any blank space. If there is any blank space, NA
+                should be written, and the line should be <br />
+                marked as "Z" Shape with sign and date. 5. Blue ink should be
+                used by QA for review. <br />
+                6. Immediately do the entry in BMR, along with the completion of
+                activity. The time entered should be <br />
+                considered as completion time of the activity.
+                <br />
+                7. Time of starting the batch shall be considered as start time
+                and end of the completion of activity from <br />
+                the equipment should be considered as completion time of batch.
+                <br />
+                8.Whenever any Deviation occurs, raise the deviation,
+                investigation of deviation shall be performed & <br /> enter the
+                deviation in the BMR.
+                <br />
+                9. Note: Tick mark "√" indicates activity selected /completed &
+                Cross mark '"×" <br />
+                indicate not selected/ not completed. <br />
+                <strong>Safety Instructions: </strong>
+                <br />
+                Use personal Protective Equipment like Apron, Helmet, Safety
+                goggles, Nose mask and hand gloves, etc <br />
+                during material handling and sampling. Ear plugs are used in
+                high noise areas.
+              </td>
+            </tr>
+
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                2.0 BALE CONSUMPTION: Refer the attachment. (Format# PRD02/F-08)
+              </th>
+            </tr>
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                3.0 PACKING MATERIAL ISSUE:{" "}
+              </th>
+            </tr>
+            <tr>
+              <th colSpan="2">S.No</th>
+              <th colSpan="4">Particulars</th>
+              <th colSpan="4">Batch No</th>
+              <th colSpan="4">Quantity</th>
+              <th colSpan="4">Remarks</th>
+              <th colSpan="2">Unit</th>
+            </tr>
+            {printData && printData.bmr03packingmeterialissue.length > 0
+              ? printData.bmr03packingmeterialissue[0].detailsRecords03.map(
+                  (x, i) => {
+                    return (
+                      <tr>
+                        <td colSpan="2">{i + 1}</td>
+                        <td colSpan="4">{x.particulars}</td>
+                        <td colSpan="4">{x.batch_no}</td>
+                        <td colSpan="4">{x.quantity}</td>
+                        <td colSpan="4">{x.remarks}</td>
+                        <td colSpan="2">{x.unit}</td>
+                      </tr>
+                    );
+                  }
+                )
+              : null}
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                4.0 REFERENCE DOCUMENTS:{" "}
+              </th>
+            </tr>
+
+            <tr>
+              <th
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                Sl.No.
+              </th>
+              <th
+                colspan="12"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                Title{" "}
+              </th>
+              <th
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                Document No.{" "}
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                GOOD DOCUMENTATION PRACTICES{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QAD01-D-50
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                2
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR CLEANING
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-26
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                3
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR BALE FEEDING AREA{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-06
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                4
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR BALE OPENER{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-07
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                5
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR WEIGHING BALE OPENER{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02/D-08
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                6
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                CALIBRATION AND VERIFICATION OF WEIGHING SCALE{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-09
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                7
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR AIR LAY CARDING MACHINE
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-10
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                8
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR REITER CARDING MACHINE{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-11
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                9
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR JETLACE
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-14
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                10
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR DRYER
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {" "}
+                PRD02-D-15
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                11
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR WINDER
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-16
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                12
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                INSTRUCTION FOR MAHLO{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-18
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                13
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                WORK INSTRUCTION FOR LUCID{" "}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PRD02-D-19
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                14
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                OUT-OF-SPECIFICATION
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QCL01-D-22
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                15
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                DEVIATIONS MANAGEMENT
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QAD01-D-43
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                16
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                CHANGE CONTROL
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QAD01-D-41{" "}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                <strong>5.0 EQUPEMENTS USED FOR THE PROCESS: </strong>
+                <p>
+                  PROCESSING EQUIPMENTS (MEASURING DEVICES) CALIBRATION STATUS:
+                  Refer Annexure No-1
+                </p>
+              </td>
+            </tr>
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                6.0 VERIFICATION OF RECORDS:
+              </th>
+            </tr>
+
+            <tr>
+              <th
+                colspan="7"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Name of the Record{" "}
+              </th>
+              <th
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Checked by/Date{" "}
+              </th>
+              <th
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Verified by/Date{" "}
+              </th>
+              <th
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Status
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Housekeeping cleaning checking list
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[0].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[0].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Machine Cleaning Record{" "}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[1].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[1].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Logbook
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[2].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[2].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Production Records
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[3].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[3].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Bale Consumption Record
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[4].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[4].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Product change over
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[5].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[5].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sharp tool issue record
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[6].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[6].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="7"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Machine sanitizer
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
+                      .checked_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[7].checked_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
+                      .verified_sign
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? moment(
+                      printData.bmr06verificationofrecords[0]
+                        .detailsRecords06[7].verified_date
+                    ).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
+                      .details == "SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Satisfactory
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr06verificationofrecords.length > 0
+                  ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
+                      .details == "NOT SATISFACTORY"
+                    ? "✓"
+                    : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                7.0 MANUFACTURING STEPS:{" "}
+              </th>
+            </tr>
+
+            <tr>
+              <th
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Step.No.
+              </th>
+              <th
+                colspan="7"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Operation
+              </th>
+              <th
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Observation
+              </th>
+              <th
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Performed by <br />
+                (Sign / Date){" "}
+              </th>
+              <th
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Checked by <br /> (Sign / Date)
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                WBO 01 & 02: Set the mixing ratio in HMI. Take the AB cotton
+                bales and feed them to the feed table. Start the WBO-1 and WBO
+                -2 by pushing. ALC- opening button in operating panel. BALE
+                OPENER: Take the AB cotton bales and feed them onto the feed
+                table. Start BO by pushing C-60 opening button in operating
+                panel.
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Mixing Ratio AB-Cotton:                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].ab_cotton
+                  : "NA"}
+                <br />
+                RP-Cotton:                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].rp_cotton
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].wbo_sign_sign
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].wbo_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].wbo_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].wbo_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                2
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                CARDING M/C ALC-: Start the push button main on HMI. Set GSM: 20
+                to 300 Switch “ON” feeding
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Actual Set GSM: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc1_actual_set_gsm
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                3
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                CARDING M/C REITER 01: Press the start button on HMI Set the GSM
+                and Web delivery to collecting belt. o Set GSM: 8 to 57
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Actual Set GSM: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].reiter01_actual_set_gsm
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                4
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                CARDING M/C ALC-2: Start the main “ON” in HMI by Push the ALC-1
+                PUSH button. o Set GSM: 20 to 300 o Switch “ON” the feeding.
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Actual Set GSM: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_actual_set_gsm
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                5
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                o CARDING M/C REITER 02: Press the start button on HMI Set the
+                GSM and Pressure of transmitter Web delivery to collecting belt.
+                o Set GSM: 8 to 57
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Actual Set GSM: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].reiter02_actual_set_gsm
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].alc2_sign_qa
+                  : ""}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].alc2_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                6
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                6 JETLACE: Switch “ON” the filtration. Start the conveyors and
+                water pressure and link Jetlace to card Pass the card web, jet
+                lace through dryer and winder and change the production mode
+                after reached required speed ensure the fleece weight (GSM),
+                thickness, bonding, drying, moisture and folding. Card Speed
+                (MPM): 8 to 100 Vacuum suction in %: 0 to 100 Pre-Wetting water
+                pressure (BAR): 0 to 12 All Injector water pressure (BAR) - 0 to
+                120 Card Speed 8 to 100 MPM Vacuum suction 0 to 100 %
+                Pre-Wetting: Injector 0 to 12 Bar Pattern: Text (LOV) Injector
+                01: 0 to 120 Bar Injector IPA: 0 to 120 Bar Injector 11 or 12: 0
+                to 120 Bar Injector 21: 0 to 120 Bar Digital sign & Date by
+                Prod. Digital sign & Date by QA
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Card Speed <br />
+                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_car_speed
+                  : "NA"}
+                <br />
+                Vacuum suction <br />
+                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_vacum_section
+                  : "NA"}<br />
+                Pre-Wetting: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_pre_wetting
+                  : "NA"}
+                <br />
+                Pattern: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_pattern
+                  : "NA"}
+                <br />
+                Injector 01:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].injector_11
+                  : "NA"}
+                <br />
+                Bar <br />
+                Injector IPA: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].injector_ipa
+                  : "NA"} <br />
+                Injector 11 or 12: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].injector_11
+                  : "NA"}
+                <br />
+                Injector 21: {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].injector_21
+                  : "NA"}
+                <br />
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].jetlace_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].jetlace_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].jetlace_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                7
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                DRYER A: Start the blowers and simultaneously start the dryer
+                drums. <br />
+                Set the temperature Min 50 – Max 200°C
+                <br />
+                Set the blower Speed Min 50 – Max 100%
+                <br />
+                Drum speed Min 8 - Max 100 mtrs/min
+                <br />
+                Inlet damper Setting: Min 0 – Max 100%
+                <br />
+                Outlet damper Setting: Min 0 – Max 100%
+                <br />
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Dryer A Temperature:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera_temp
+                  : "NA"}
+                <br />
+                Blower speed:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera_blow_speed
+                  : "NA"}
+                <br />
+                Drum speed:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera_drum_speed
+                  : "NA"} <br />
+                Inlet Damper setting:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera__intel_drum_speed
+                  : "NA"} <br />
+                Outlet damper setting:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera__outlet_drum_speed
+                  : "NA"} <br />
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].dryera_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryera_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].dryera_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+             <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                8
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                DRYER B: Start the blowers and simultaneously start the dryer
+                drums.
+                <br />
+                Set the temperature Min 50 – Max 200°C
+                <br />
+                Set the blower Speed Min 50 – Max 100%
+                <br />
+                Drum speed Min 8 - Max 100 Mtrs/min
+                <br />
+                Inlet damper Setting: Min 0 – Max 100%
+                <br />
+                Outlet damper Setting: Min 0 – Max 100%
+                <br />
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Dryer B Temperature:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb_temp
+                  : "NA"}
+                <br />
+                Blower speed:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb_blow_speed
+                  : "NA"}
+                <br />
+                Drum speed:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb_drum_speed
+                  : "NA"} <br />
+                Inlet Damper setting:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb__intel_drum_speed
+                  : "NA"} <br />
+                Outlet damper setting:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb__outlet_drum_speed
+                  : "NA"}
+                <br />
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].dryerb_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].dryerb_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].dryerb_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                9
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                WINDER: Set the cutter & Width As per Product Planning. Keep
+                paper tubes of the required size near the m/c. and set the paper
+                tubes in the shaft and proper air lock. Thread the fabric from
+                let-off stand into the m/c. Start the winder: Take a sample of
+                the 1st shaft of every batch for testing (GSM, thickness, and
+                strength of the fabric). Line Speed (mtrs/min) – Min 08 to
+                Max100
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Line Speed:                 {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].winder_line_speed
+                  : "NA"}
+                <br />
+                Roll width {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].winder_roll_width
+                  : "NA"}mm.
+                <br />
+                Roll GSM (g): Roll thickness {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].winder_roll_thickness
+                  : "NA"} mm.
+                <br />
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].winder_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].winder_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].winder_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].winder_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                10
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                MAHLO: Switch “ON” the main. <br />
+                Set GSM and moisture as per product requirement.
+                <br />
+                Target GSM _________ (± 10 %)
+                <br />
+                Target Moisture (%) __________ (± 0.5)
+                <br />
+                START traverse movement.
+                <br />
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1st Shaft No.:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].mahlo_shaft_no
+                  : "NA"}
+                <br />
+                Actual GSM.:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].mahlo_actual_gsm
+                  : "NA"}
+                <br />
+                Actual Moisture.:{printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].mahlo_actual_moisture
+                  : "NA"}
+                <br />
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].mahlo_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].mahlo_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].mahlo_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].mahlo_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                11
+              </td>
+              <td
+                colspan="7"
+                rowSpan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                LUCID: Switch “ON” desktop with operator log in web inspection
+                Go to create job and Create report of contamination/square meter
+                every day. Verify detected contaminations really exist in fleece
+                or not. Any abnormalities inform to shift supervisor
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Any abnormalities observed:
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].lucid_sign_prod
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].liucid_date_prod).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                               {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].lucid_sign_qa
+                  : "NA"}
+                  <br></br>
+                  {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? moment(printData.bmr07manufacturingsteps[0].lucid_date_qa).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                yes
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].lucid_observed_01 != "" ? "NA" : printData.bmr07manufacturingsteps[0].lucid_observed_01
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                No
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr07manufacturingsteps.length > 0
+                  ? printData.bmr07manufacturingsteps[0].lucid_observed_02 != "" ? "NA" : printData.bmr07manufacturingsteps[0].lucid_observed_02 
+                  : "NA"}
+              </td>
+            </tr>
+
+            <br />
+            <tr>
+              <td
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                <strong>8.0 PRODUCT RECONCILIATION:</strong> <br />
+                Yield in % = (Output Qty / Input Qty) x 100
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Input Quantity
+                <br /> (Kgs)
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+                align="center"
+              >
+                {printData && printData.bmr08productionreconciliation.length > 0
+                  ? printData.bmr08productionreconciliation[0].input_quantity
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Output Quantity <br /> (Kgs){" "}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+                align="center"
+              >
+                {printData && printData.bmr08productionreconciliation.length > 0
+                  ? printData.bmr08productionreconciliation[0].output_quantity
+                  : "NA"}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                % Yield (Specification: 80% to 100%)
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+                align="center"
+              >
+                {printData && printData.bmr08productionreconciliation.length > 0
+                  ? printData.bmr08productionreconciliation[0].calculation
+                  : "NA"}
+              </td>
+            </tr>
+            <br />
+
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                9.0 PROCESS DELAY / EQUIPMENT BREAK DOWN RECORD
+              </th>
+            </tr>
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                S.No.
+              </td>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Date
+              </td>
+
+              <td
+                colspan="9"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Process Delay / Down Time
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Remarks
+              </td>
+              <td
+                colspan="3"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sign and Date
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                From (hours or Minutes)
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                To (hours or Minutes)
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Total (hours or Minutes)
+              </td>
+            </tr>
+
+            {printData && printData.bmr09processdlyequpbrkdwnrecord.length > 0
+                  ? printData.bmr09processdlyequpbrkdwnrecord[0].stoppageMapList.map((x,i) => {
+                    return (
+                      <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {i + 1}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {x.PackDate}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {x.fromTime}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {x.toTime}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {x.totalHours}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {x.remarks}
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                      {printData && printData.bmr09processdlyequpbrkdwnrecord.length > 0
+                  ? printData.bmr09processdlyequpbrkdwnrecord[0].bmrSummaryDateList[0].prod_date
+                  : "NA"}      
+                  <br></br>
+                  {printData && printData.bmr09processdlyequpbrkdwnrecord.length > 0
+                  ? printData.bmr09processdlyequpbrkdwnrecord[0].bmrSummaryDateList[0].prod_sign
+                  : "NA"}
+              </td>
+            </tr>
+                    )
+                  })
+                  : null}
+            
+
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                10.0 PROCESS DEVIATION RECORD
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                S No.
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Deviation Log No
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sign and date
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                QA Remarks
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sign and Date
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].deviation_log_no_01
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa1_sign_01
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa1_date_01
+                  : "NA"}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].remarks_01
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa1_sign_02
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa1_date_02
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                2
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].deviation_log_no_02
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa2_sign_01
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa2_date_01
+                  : "NA"}
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].remarks_02
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa2_sign_02
+                  : "NA"}
+                <br></br>
+                {printData && printData.bmr10processdeviationrecord.length > 0
+                  ? printData.bmr10processdeviationrecord[0].qa2_date_02
+                  : "NA"}
+              </td>
+            </tr>
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                11.0 LIST OF ENCLOSURES:
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                S No.
+              </td>
+              <td
+                colspan="10"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Title
+              </td>
+              <td
+                colspan="7"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Remarks
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1.
+              </td>
+              <td
+                colspan="10"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Bale Consumptions Report
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Attached
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr11listsofenclosures.length > 0
+                  ? printData.bmr11listsofenclosures[0].remarks_01 == "ATTACHED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not attached
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                {printData && printData.bmr11listsofenclosures.length > 0
+                  ? printData.bmr11listsofenclosures[0].remarks_01 == "NOT ATTACHED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="3"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                2.
+              </td>
+              <td
+                colspan="10"
+                rowSpan="2"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Processing Equipment’s (Measuring Devices) Calibration Report
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Attached
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                {printData && printData.bmr11listsofenclosures.length > 0
+                  ? printData.bmr11listsofenclosures[0].remarks_02 == "ATTACHED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not attached
+              </td>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                {printData && printData.bmr11listsofenclosures.length > 0
+                  ? printData.bmr11listsofenclosures[0].remarks_02 == "NOT ATTACHED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <br />
+
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                12.0 POST-PRODUCTION REVIEW:
+              </th>
+            </tr>
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Designation
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Production Supervisor
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Head of the Department/ Designee
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Approved by Manager-QA/ Designee
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Signature
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                {printData && printData.bmr12postprodreview.length > 0
+                  ? printData.bmr12postprodreview[0].sup_sign
+                  : "NA"}
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                {printData && printData.bmr12postprodreview.length > 0
+                  ? printData.bmr12postprodreview[0].designee_sign
+                  : "NA"}
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                {printData && printData.bmr12postprodreview.length > 0
+                  ? printData.bmr12postprodreview[0].qa_sign
+                  : "NA"}
+              </td>
+            </tr>
+            
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Date
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                {printData && printData.bmr12postprodreview.length > 0
+                  ? moment( printData.bmr12postprodreview[0].sup_date).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                {printData && printData.bmr12postprodreview.length > 0
+                  ? moment( printData.bmr12postprodreview[0].designee_date).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+              <td
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                                                 {printData && printData.bmr12postprodreview.length > 0
+                  ? moment( printData.bmr12postprodreview[0].qa_date).format("DD/MM/YYYY - HH:mm")
+                  : "NA"}
+              </td>
+            </tr>
+            <br />
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                13.0 QA RELEASE:
+              </th>
+            </tr>
+            <tr>
+              <th
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                S.No
+              </th>
+              <th
+                colspan="8"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Description
+              </th>
+              <th
+                colspan="6"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Status
+              </th>
+              <th
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sign and Date
+              </th>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                1
+              </td>
+              <td
+                colspan="8"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                All critical process parameters reviewed. (Within/Not within
+                range)
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[0].status_1 == "REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[0].sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr13qarelease.length > 0
+                ? moment(printData.bmr13qarelease[0].details[0].date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[0].status_1 == "NOT REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                2
+              </td>
+              <td
+                colspan="8"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                In process checks reviewed. (Meeting/Not meeting the
+                specification)
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[1].status_1 == "REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[1].sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr13qarelease.length > 0
+                ? moment(printData.bmr13qarelease[0].details[1].date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[1].status_1 == "NOT REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                3
+              </td>
+              <td
+                colspan="8"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Deviations reviewed. (Found/Not found)
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[2].status_1 == "REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[2].sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr13qarelease.length > 0
+                ? moment(printData.bmr13qarelease[0].details[2].date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[2].status_1 == "NOT REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                4
+              </td>
+              <td
+                colspan="8"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                If deviations are logged
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Closed{" "}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >              {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[3].status_1 == "REVIEWED" ? "✓" : "NA"
+                : "NA"}</td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[3].sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr13qarelease.length > 0
+                ? moment(printData.bmr13qarelease[0].details[3].date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Closed{" "}
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[3].status_1 == "NOT REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="2"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                5
+              </td>
+              <td
+                colspan="8"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                The Batch is released to next step.
+              </td>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >              {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[4].status_1 == "REVIEWED" ? "✓" : "NA"
+                : "NA"}
+                </td>
+              <td
+                colspan="4"
+                rowSpan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr13qarelease.length > 0
+                ? printData.bmr13qarelease[0].details[4].sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr13qarelease.length > 0
+                ? moment(printData.bmr13qarelease[0].details[4].date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Not Reviewed
+              </td>
+              <td
+                colspan="2"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                              {printData && printData.bmr13qarelease.length > 0
+                  ? printData.bmr13qarelease[0].details[4].status_1 == "NOT REVIEWED" ? "✓" : "NA"
+                  : "NA"}
+              </td>
+            </tr>
+            <br />
+            <br />
+            <br />
+
+            <tr>
+              <th
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                14.0 PRODUCT RELEASE
+              </th>
+            </tr>
+            <tr>
+              <td
+                colspan="20"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                The material produced through the execution of this Batch Record
+                shall be archival by QA according to Product Release Procedure
+                (SOP-QAD01-D-61) and documented as per the Format: QAD01/F-34
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >Particulars</td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Checked by QA
+              </td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Approved by Manager-QA / Designee
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Name
+              </td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr14productrelease.length > 0
+                ? printData.bmr14productrelease[0].chk_qa_sign
+                : "NA"}
+              </td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr14productrelease.length > 0
+                ? printData.bmr14productrelease[0].apr_qa_sign
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                colspan="4"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sign & Date
+              </td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr14productrelease.length > 0
+                ? printData.bmr14productrelease[0].chk_qa_sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr14productrelease.length > 0
+                ? moment(printData.bmr14productrelease[0].chk_qa_date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+              <td
+                colspan="8"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                                {printData && printData.bmr14productrelease.length > 0
+                ? printData.bmr14productrelease[0].apr_qa_sign
+                : "NA"}
+                <br></br>
+                {printData && printData.bmr14productrelease.length > 0
+                ? moment(printData.bmr14productrelease[0].apr_qa_date).format("DD/MM/YYYY - HH:mm")
+                : "NA"}
+              </td>
+            </tr>
+
+            <tr style={{ border: "none" }}>
+              <td style={{ border: "none" }} colSpan="15"></td>
+            </tr>
+          </tbody>
+          <br />
+          <br />
+          <br></br>
+          <tfoot>
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Particulars
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Prepared by
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Reviewed by
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Apporved by
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Name
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+            </tr>
+            <tr>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Signature & Date
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              ></td>
+            </tr>
+          </tfoot>
+          <br></br>
+          <br></br>
+        </table>
+        {/* print layout ended here */}
+        </div>

@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif !important;
+}
+
+@media print {
+  body {
+    visibility: hidden;
+  }
+  .no-print {
+    display: none;
+  }
+  #section-to-print {
+    display: block;
+    visibility: visible;
+    width: 100%; /* Adjust for page margins */
+    height: auto;
+    margin: 1em 1em 1em 1em;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    page-break-inside: avoid;
+  }
+
+  #section-to-print table {
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+  }
+
+  #section-to-print table th,
+  #section-to-print table td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: left;
+    font-size: 12px !important;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+  @page {
+    size: A4;
+    margin: 1cm;
+  }
+}
+
+
+.new-div-1 {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background-image: url("../Assests/precot-login-bg.svg");
+  background-size: cover;
+  background-position: center;
+}
+.left-sign {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background-image: url("../Assests/Banner-Changed.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.inp-new:focus {
+  outline: none !important;
+}
+/* 
+.over-tab{
+  width: 500px !important;
+} */
+
+/* .dummy-one {
+  width: 90px !important;
+} */
+.hell-1 {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../Assests/Banner-Changed.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.hell-1 {
+  width: 100%;
+  height: 100vh;
+}
+.content-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dull-text {
+  color: #d1c6c6;
+  text-transform: uppercase;
+}
+.login-left {
+  background-image: url(../Assests/bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-self: center;
+  justify-items: center;
+  position: relative;
+  padding-top: 5%;
+}

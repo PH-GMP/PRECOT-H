@@ -1,0 +1,77 @@
+.mainContainer {
+    overflow-x: auto;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  table {
+    width: 90%;
+    
+    margin-left: auto;
+    margin-right: auto;
+
+    border-collapse: collapse;
+    /* table-layout: fixed;  */
+  }
+   td{
+    border:1px solid black;
+    font-weight: bold;
+    font-size: 10px;
+
+  }
+
+
+  th{
+    border:1px solid black;
+    font-weight:900;
+    font-size: 10px;
+
+  }
+
+  
+
+ /* th, td {
+    border: 1px solid ;
+   
+    font-weight: bold;
+    padding: 0px;
+    
+    text-align: left;
+    white-space: pre-wrap; 
+    word-break: break-word; 
+  } */
+
+  
+
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 80px; 
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+      
+  }
+  
+  @media only screen and (max-width: 600px) {
+    th, td {
+      font-size: 12px;
+      padding: 4px;
+    }
+  
+    td[colspan="35"], td[colspan="45"] {
+      font-size: 10px;
+    }
+  
+    td[colspan="25"] center, td[colspan="3"] center, td[colspan="15"] center {
+      text-align: center;
+    }
+  
+    th[colspan="15"], td[colspan="15"] {
+      display: none;
+    }
+  }
+  
