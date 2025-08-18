@@ -353,8 +353,7 @@ const Pad_Punching_BMR = () => {
   const baleConsumptionReport = () => {
     axios
       .get(
-        `${
-          API.prodUrl
+        `${API.prodUrl
         }/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachinePrint?date=${moment(
           baleDate
         ).format("YYYY-MM-DD")}&shift=${baleShift}&machineName=${baleMachine}`,
@@ -418,7 +417,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -444,7 +443,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -487,7 +486,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -513,7 +512,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -540,7 +539,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -566,7 +565,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -593,7 +592,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -620,7 +619,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -646,7 +645,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -671,13 +670,13 @@ const Pad_Punching_BMR = () => {
           role={localStorage.getItem("role")}
           loggedInQaManQADes={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -702,13 +701,13 @@ const Pad_Punching_BMR = () => {
           role={localStorage.getItem("role")}
           loggedInQaManQADes={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -734,7 +733,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -760,7 +759,7 @@ const Pad_Punching_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -922,6 +921,7 @@ const Pad_Punching_BMR = () => {
             options={oderNoLovs}
             placeholder="Select Batch No"
             style={{
+              width: "180px",
               marginRight: "2em",
             }}
           />
@@ -1000,7 +1000,7 @@ const Pad_Punching_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PRD02/F-26
+                PH-QAD01/F-070
               </td>
             </tr>
             <tr>
@@ -1575,11 +1575,11 @@ const Pad_Punching_BMR = () => {
                 {printData && printData.productionDetails.length > 0
                   ? printData &&
                     printData.productionDetails[0].manufactureStartDate.length >
-                      0
+                    0
                     ? moment(
-                        printData &&
-                          printData.productionDetails[0].manufactureStartDate
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData &&
+                      printData.productionDetails[0].manufactureStartDate
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"
                   : "NA"}
               </td>
@@ -1630,9 +1630,9 @@ const Pad_Punching_BMR = () => {
                   ? printData &&
                     printData.productionDetails[0].manufactureEndDate.length > 0
                     ? moment(
-                        printData &&
-                          printData.productionDetails[0].manufactureEndDate
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData &&
+                      printData.productionDetails[0].manufactureEndDate
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"
                   : "NA"}
               </td>
@@ -1700,14 +1700,14 @@ const Pad_Punching_BMR = () => {
                     : "NA"
                   : "NA"} */}
                 {printData &&
-                printData.productionDetails &&
-                printData.productionDetails.length > 0
+                  printData.productionDetails &&
+                  printData.productionDetails.length > 0
                   ? printData.productionDetails[0].manufactureCompletionDate &&
                     printData.productionDetails[0].manufactureCompletionDate
                       .length > 0
                     ? moment(
-                        printData.productionDetails[0].manufactureCompletionDate
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData.productionDetails[0].manufactureCompletionDate
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"
                   : "NA"}
               </td>
@@ -1735,13 +1735,13 @@ const Pad_Punching_BMR = () => {
                     : "NA"
                   : "NA"} */}
                 {printData &&
-                printData.productionDetails &&
-                printData.productionDetails.length > 0
+                  printData.productionDetails &&
+                  printData.productionDetails.length > 0
                   ? printData.productionDetails[0].manufactureCompletionTime &&
                     printData.productionDetails[0].manufactureCompletionTime
                       .length > 0
                     ? printData.productionDetails[0].manufactureCompletionTime
-                        .length
+                      .length
                     : "NA"
                   : "NA"}
               </td>
@@ -1805,8 +1805,8 @@ const Pad_Punching_BMR = () => {
                   <br></br>
                   {printData && printData.productionDetails.length > 0
                     ? moment(printData.productionDetails[0].qaDate).format(
-                        "DD/MM/YYYY - HH:mm"
-                      )
+                      "DD/MM/YYYY - HH:mm"
+                    )
                     : "NA"}
                 </div>{" "}
               </td>
@@ -1827,9 +1827,9 @@ const Pad_Punching_BMR = () => {
                   <br></br>
                   {printData && printData.productionDetails.length > 0
                     ? moment(
-                        printData &&
-                          printData.productionDetails[0].supervisiorDate
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData &&
+                      printData.productionDetails[0].supervisiorDate
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"}
                 </div>
               </td>
@@ -1917,17 +1917,17 @@ const Pad_Punching_BMR = () => {
             </tr>
             {printData && printData.packingMaterial.length > 0
               ? printData.packingMaterial[0].pckdetails.map((x, i) => {
-                  return (
-                    <tr>
-                      <td colSpan="2">{i + 1}</td>
-                      <td colSpan="4">{x.name_of_the_meterial}</td>
-                      <td colSpan="4">{x.packing_batch_no}</td>
-                      <td colSpan="4">{x.quantity}</td>
-                      <td colSpan="4">{x.remarks}</td>
-                      <td colSpan="2">{x.unit}</td>
-                    </tr>
-                  );
-                })
+                return (
+                  <tr>
+                    <td colSpan="2">{i + 1}</td>
+                    <td colSpan="4">{x.name_of_the_meterial}</td>
+                    <td colSpan="4">{x.packing_batch_no}</td>
+                    <td colSpan="4">{x.quantity}</td>
+                    <td colSpan="4">{x.remarks}</td>
+                    <td colSpan="2">{x.unit}</td>
+                  </tr>
+                );
+              })
               : null}
             <br />
             <tr>
@@ -2162,29 +2162,29 @@ const Pad_Punching_BMR = () => {
             </tr>
             {printData.equipmentDetails.length > 0
               ? printData.equipmentDetails[0].details.map((x, i) => {
-                  return (
-                    <tr>
-                      <td colSpan="4">{i + 1}</td>
-                      <td colSpan="2">{x.equipmentName}</td>
-                      <td colSpan="2">{x.equipmentCode}</td>
-                      <td colSpan="4">
-                        {moment(x.dateOfCalibration).format(
-                          "DD/MM/YYYY - HH:mm"
-                        )}
-                      </td>
-                      <td colSpan="4">
-                        {moment(x.calibrationDueOn).format(
-                          "DD/MM/YYYY - HH:mm"
-                        )}
-                      </td>
-                      <td colSpan="4">
-                        {x.checked_name}
-                        <br />
-                        {moment(x.checked_date).format("DD/MM/YYYY - HH:mm")}
-                      </td>
-                    </tr>
-                  );
-                })
+                return (
+                  <tr>
+                    <td colSpan="4">{i + 1}</td>
+                    <td colSpan="2">{x.equipmentName}</td>
+                    <td colSpan="2">{x.equipmentCode}</td>
+                    <td colSpan="4">
+                      {moment(x.dateOfCalibration).format(
+                        "DD/MM/YYYY - HH:mm"
+                      )}
+                    </td>
+                    <td colSpan="4">
+                      {moment(x.calibrationDueOn).format(
+                        "DD/MM/YYYY - HH:mm"
+                      )}
+                    </td>
+                    <td colSpan="4">
+                      {x.checked_name}
+                      <br />
+                      {moment(x.checked_date).format("DD/MM/YYYY - HH:mm")}
+                    </td>
+                  </tr>
+                );
+              })
               : null}
             <br />
             <tr>
@@ -2270,8 +2270,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[0].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[0].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2289,9 +2289,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[0]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[0]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2314,7 +2314,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[0]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2342,7 +2342,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[0]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2376,8 +2376,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[1].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[1].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2395,9 +2395,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[1]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[1]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2420,7 +2420,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[1]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2448,7 +2448,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[1]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2482,8 +2482,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[2].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[2].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2501,9 +2501,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[2]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[2]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2526,7 +2526,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[2]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2554,7 +2554,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[2]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2588,8 +2588,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[3].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[3].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2607,9 +2607,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[3]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[3]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2632,7 +2632,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[3]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2660,7 +2660,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[3]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2694,8 +2694,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[4].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[4].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2713,9 +2713,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[4]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[4]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2738,7 +2738,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[4]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2766,7 +2766,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[4]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2800,8 +2800,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[5].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[5].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2819,9 +2819,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[5]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[5]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2844,7 +2844,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[5]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2872,7 +2872,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[5]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -2905,8 +2905,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[6].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[6].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2924,9 +2924,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[6]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[6]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2949,7 +2949,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[6]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -2977,7 +2977,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[6]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -3010,8 +3010,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[7].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[7].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -3029,9 +3029,9 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.verificationOfRecords.length > 0
                   ? moment(
-                      printData.verificationOfRecords[0].details[7]
-                        .verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.verificationOfRecords[0].details[7]
+                      .verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -3054,7 +3054,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[7]
-                      .satisfactory == "SATISFACTORY"
+                    .satisfactory == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -3082,7 +3082,7 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.verificationOfRecords.length > 0
                   ? printData.verificationOfRecords[0].details[7]
-                      .satisfactory == "NOT SATISFACTORY"
+                    .satisfactory == "NOT SATISFACTORY"
                     ? "✕"
                     : "NA"
                   : "NA"}
@@ -3198,7 +3198,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[0]?.observation ==
-                "READY"
+                  "READY"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3254,7 +3254,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[0]?.observation ==
-                "NOT READY"
+                  "NOT READY"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3319,7 +3319,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[1]?.observation ==
-                "READY"
+                  "READY"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3375,7 +3375,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[1]?.observation ==
-                "NOT READY"
+                  "NOT READY"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3434,7 +3434,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[2]?.observation ==
-                "CHECKED"
+                  "CHECKED"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3489,7 +3489,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[2]?.observation ==
-                "NOT READY"
+                  "NOT READY"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3539,7 +3539,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[3]?.observation ==
-                "PERFORMED"
+                  "PERFORMED"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3594,7 +3594,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[3]?.observation ==
-                "NOT PERFORMED"
+                  "NOT PERFORMED"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3644,7 +3644,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[4]?.observation ==
-                "READY"
+                  "READY"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3699,7 +3699,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[4]?.observation ==
-                "NOT READY"
+                  "NOT READY"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3763,7 +3763,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[5]?.observation ==
-                "READY"
+                  "READY"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3818,7 +3818,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[5]?.observation ==
-                "NOT READY"
+                  "NOT READY"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3877,7 +3877,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[6]?.observation ==
-                "CHECKED"
+                  "CHECKED"
                   ? "✓"
                   : "NA"}
               </td>
@@ -3932,7 +3932,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[6]?.observation ==
-                "NOT CHECKED"
+                  "NOT CHECKED"
                   ? "✕"
                   : "NA"}
               </td>
@@ -3982,7 +3982,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[7]?.observation ==
-                "PERFORMED"
+                  "PERFORMED"
                   ? "✓"
                   : "NA"}
               </td>
@@ -4037,7 +4037,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData.manufactureSteps[0]?.details[7]?.observation ==
-                "NOT PERFORMED"
+                  "NOT PERFORMED"
                   ? "✕"
                   : "NA"}
               </td>
@@ -4087,7 +4087,7 @@ const Pad_Punching_BMR = () => {
             "order": "800012843"
                   : "NA"} */}
                 {printData.reconillation[0]?.input !== null ||
-                printData.reconillation[0]?.input.length > 0
+                  printData.reconillation[0]?.input.length > 0
                   ? printData.reconillation[0]?.input
                   : "NA"}
               </td>
@@ -4114,7 +4114,7 @@ const Pad_Punching_BMR = () => {
                   ? printData.reconillation[0].output_quantity
                   : "NA"} */}
                 {printData.reconillation[0]?.output !== null ||
-                printData.reconillation[0]?.output.length > 0
+                  printData.reconillation[0]?.output.length > 0
                   ? printData.reconillation[0]?.output
                   : "NA"}
               </td>
@@ -4141,7 +4141,7 @@ const Pad_Punching_BMR = () => {
                   ? printData.reconillation[0].calculation
                   : "NA"} */}
                 {printData.reconillation[0]?.calculation !== null ||
-                printData.reconillation[0]?.calculation.length > 0
+                  printData.reconillation[0]?.calculation.length > 0
                   ? printData.reconillation[0]?.calculation
                   : "NA"}
               </td>
@@ -4252,89 +4252,89 @@ const Pad_Punching_BMR = () => {
 
             {printData && printData.stoppage.length > 0
               ? printData.stoppage[0].details.map((x, i) => {
-                  return (
-                    <tr>
-                      <td
-                        colspan="2"
-                        style={{
-                          textAlign: "center",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {i + 1}
-                      </td>
-                      <td
-                        colspan="2"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {moment(x.date).format("DD/MM/YYYY")}
-                      </td>
-                      <td
-                        colspan="3"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {x.fromTime}
-                      </td>
-                      <td
-                        colspan="3"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {x.toTime}
-                      </td>
-                      <td
-                        colspan="3"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {x.totalTime}
-                      </td>
-                      <td
-                        colspan="4"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {x.remarks}
-                      </td>
-                      <td
-                        colspan="3"
-                        style={{
-                          textAlign: "left",
-                          fontSize: "10pt",
-                          fontFamily: "Times New Roman, Times, serif",
-                        }}
-                      >
-                        {x.supervisorName.length > 0 ||
+                return (
+                  <tr>
+                    <td
+                      colspan="2"
+                      style={{
+                        textAlign: "center",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {i + 1}
+                    </td>
+                    <td
+                      colspan="2"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {moment(x.date).format("DD/MM/YYYY")}
+                    </td>
+                    <td
+                      colspan="3"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {x.fromTime}
+                    </td>
+                    <td
+                      colspan="3"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {x.toTime}
+                    </td>
+                    <td
+                      colspan="3"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {x.totalTime}
+                    </td>
+                    <td
+                      colspan="4"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {x.remarks}
+                    </td>
+                    <td
+                      colspan="3"
+                      style={{
+                        textAlign: "left",
+                        fontSize: "10pt",
+                        fontFamily: "Times New Roman, Times, serif",
+                      }}
+                    >
+                      {x.supervisorName.length > 0 ||
                         x.supervisorName !== null
-                          ? x.supervisorName
-                          : "NA"}
-                        <br></br>
-                        {x.supervisorDate.length > 0 ||
+                        ? x.supervisorName
+                        : "NA"}
+                      <br></br>
+                      {x.supervisorDate.length > 0 ||
                         x.supervisorDate !== null
-                          ? x.supervisorDate
-                          : "NA"}
-                      </td>
-                    </tr>
-                  );
-                })
+                        ? x.supervisorDate
+                        : "NA"}
+                    </td>
+                  </tr>
+                );
+              })
               : null}
             <br />
             {/* // */}
@@ -4721,8 +4721,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[0].supervisorDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[0].supervisorDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
               <td
@@ -4751,8 +4751,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[0].qaDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[0].qaDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
             </tr>
@@ -4794,8 +4794,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[1].supervisorDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[1].supervisorDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
               <td
@@ -4824,8 +4824,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[1].qaDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[1].qaDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
             </tr>
@@ -4867,8 +4867,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[2].supervisorDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[2].supervisorDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
               <td
@@ -4897,8 +4897,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[2].qaDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[2].qaDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
             </tr>
@@ -4940,8 +4940,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[3].supervisorDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[3].supervisorDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
               <td
@@ -4970,8 +4970,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.deviationRecord.length > 0
                   ? moment(
-                      printData.deviationRecord[0].details[3].qaDate
-                    ).format("DD/MM/YYYY")
+                    printData.deviationRecord[0].details[3].qaDate
+                  ).format("DD/MM/YYYY")
                   : "NA"}
               </td>
             </tr>
@@ -5104,8 +5104,8 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.postProductionReview.length > 0
                   ? moment(
-                      printData.postProductionReview[0].supervisiorSubmittedDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.postProductionReview[0].supervisiorSubmittedDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5118,8 +5118,8 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.postProductionReview.length > 0
                   ? moment(
-                      printData.postProductionReview[0].hodSubmittedDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.postProductionReview[0].hodSubmittedDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5132,8 +5132,8 @@ const Pad_Punching_BMR = () => {
               >
                 {printData && printData.postProductionReview.length > 0
                   ? moment(
-                      printData.postProductionReview[0].qaSubmittedDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.postProductionReview[0].qaSubmittedDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5257,8 +5257,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.qualityRelease.length > 0
                   ? moment(
-                      printData.qualityRelease[0].details[0].qaDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.qualityRelease[0].details[0].qaDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5355,8 +5355,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.qualityRelease.length > 0
                   ? moment(
-                      printData.qualityRelease[0].details[1].qaDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.qualityRelease[0].details[1].qaDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5452,8 +5452,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.qualityRelease.length > 0
                   ? moment(
-                      printData.qualityRelease[0].details[2].qaDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.qualityRelease[0].details[2].qaDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5550,8 +5550,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.qualityRelease.length > 0
                   ? moment(
-                      printData.qualityRelease[0].details[3].qaDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.qualityRelease[0].details[3].qaDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5648,8 +5648,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.qualityRelease.length > 0
                   ? moment(
-                      printData.qualityRelease[0].details[4].qaDate
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.qualityRelease[0].details[4].qaDate
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5808,8 +5808,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.productRelease.length > 0
                   ? moment(printData.productRelease[0].checkedOn).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
               <td
@@ -5826,8 +5826,8 @@ const Pad_Punching_BMR = () => {
                 <br></br>
                 {printData && printData.productRelease.length > 0
                   ? moment(printData.productRelease[0].approvedOn).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -5843,234 +5843,234 @@ const Pad_Punching_BMR = () => {
           {/* //attached here */}
           {printData?.enclosureList[0]?.remarks1 == "ATTACHED"
             ? baleData?.map((machine, index) => (
-                //    <table style={{ marginTop: "10px", scale: "95%" }} >
-                <tbody style={{ width: "90%" }} key={index}>
-                  <tr>
-                    <th colSpan="10">
-                      DATE:
-                      {moment(baleData?.[index]?.date).format("DD/MM/YYYY")}
-                    </th>
-                    <th colSpan="10">SHIFT:{baleData?.[index]?.shift}</th>
-                  </tr>
-                  <tr>
-                    <th colSpan="4" rowSpan="2" style={{ textAlign: "center" }}>
-                      Machine Name
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      Type Of Pad
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      Product Name
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      BMR NO. / ORDER NO.
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      Pattern
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      GSM
-                    </th>
-                    <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
-                      Edge
-                    </th>
-                    <th colSpan="4" style={{ textAlign: "center" }}>
-                      No of Pads / Bags{" "}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colSpan="2" style={{ textAlign: "center" }}>
-                      STD
-                    </th>
-                    <th colSpan="2" style={{ textAlign: "center" }}>
-                      Act
-                    </th>
-                  </tr>
+              //    <table style={{ marginTop: "10px", scale: "95%" }} >
+              <tbody style={{ width: "90%" }} key={index}>
+                <tr>
+                  <th colSpan="10">
+                    DATE:
+                    {moment(baleData?.[index]?.date).format("DD/MM/YYYY")}
+                  </th>
+                  <th colSpan="10">SHIFT:{baleData?.[index]?.shift}</th>
+                </tr>
+                <tr>
+                  <th colSpan="4" rowSpan="2" style={{ textAlign: "center" }}>
+                    Machine Name
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    Type Of Pad
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    Product Name
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    BMR NO. / ORDER NO.
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    Pattern
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    GSM
+                  </th>
+                  <th colSpan="2" rowSpan="2" style={{ textAlign: "center" }}>
+                    Edge
+                  </th>
+                  <th colSpan="4" style={{ textAlign: "center" }}>
+                    No of Pads / Bags{" "}
+                  </th>
+                </tr>
+                <tr>
+                  <th colSpan="2" style={{ textAlign: "center" }}>
+                    STD
+                  </th>
+                  <th colSpan="2" style={{ textAlign: "center" }}>
+                    Act
+                  </th>
+                </tr>
 
-                  {baleData?.[index]?.machineDetails?.map((slice, index) => (
+                {baleData?.[index]?.machineDetails?.map((slice, index) => (
+                  <tr key={index}>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {machine.machineName}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.typeOfPad}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.productName}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.bmrNo}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.pattern}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.gsm}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.edge}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.noOfPadsStd}
+                    </td>
+                    <td colSpan="2" style={{ textAlign: "center" }}>
+                      {slice.noOfPadsAct}
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <th colSpan="20">Roll Consumption Details</th>
+                </tr>
+                <tr>
+                  <th colSpan="2" style={{ textAlign: "center" }}>
+                    Date
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Time
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    BMR NO. / ORDER NO
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Roll No
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Shaft No.
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Net Wt.
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Balance Wt.
+                  </th>
+                </tr>
+                {baleData?.[index]?.rollConsumptionDetails?.map(
+                  (slice, index) => (
                     <tr key={index}>
                       <td colSpan="2" style={{ textAlign: "center" }}>
-                        {machine.machineName}
+                        {moment(slice.date).format("DD/MM/YYYY")}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.typeOfPad}
+                      <td colSpan="3" style={{ textAlign: "center" }}>
+                        {moment(slice.time).format("DD/MM/YYYY")}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.productName}
-                      </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
+                      <td colSpan="3" style={{ textAlign: "center" }}>
                         {slice.bmrNo}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.pattern}
+                      <td colSpan="3" style={{ textAlign: "center" }}>
+                        {slice.rollNo}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.gsm}
+                      <td colSpan="3" style={{ textAlign: "center" }}>
+                        {slice.shaftNo}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.edge}
+                      <td colSpan="3" style={{ textAlign: "center" }}>
+                        {slice.netWt}
                       </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.noOfPadsStd}
-                      </td>
-                      <td colSpan="2" style={{ textAlign: "center" }}>
-                        {slice.noOfPadsAct}
+                      <td colSpan="3" style={{ textAlign: "center" }}>
+                        {slice.balanceWt}
                       </td>
                     </tr>
-                  ))}
-                  <tr>
-                    <th colSpan="20">Roll Consumption Details</th>
-                  </tr>
-                  <tr>
-                    <th colSpan="2" style={{ textAlign: "center" }}>
-                      Date
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Time
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      BMR NO. / ORDER NO
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Roll No
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Shaft No.
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Net Wt.
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Balance Wt.
-                    </th>
-                  </tr>
-                  {baleData?.[index]?.rollConsumptionDetails?.map(
-                    (slice, index) => (
-                      <tr key={index}>
-                        <td colSpan="2" style={{ textAlign: "center" }}>
-                          {moment(slice.date).format("DD/MM/YYYY")}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {moment(slice.time).format("DD/MM/YYYY")}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {slice.bmrNo}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {slice.rollNo}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {slice.shaftNo}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {slice.netWt}
-                        </td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>
-                          {slice.balanceWt}
-                        </td>
-                      </tr>
-                    )
-                  )}
-                  <tr>
-                    <th colSpan="20">Stoppage Details</th>
-                  </tr>
-                  <tr>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      M/c stop time (min)
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      M/c start time (min)
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Total min
-                    </th>
-                    <th colSpan="3" style={{ textAlign: "center" }}>
-                      Reason
-                    </th>
-                    <th colSpan="4" style={{ textAlign: "center" }}>
-                      Attend by
-                    </th>
-                    <th colSpan="4" style={{ textAlign: "center" }}>
-                      Remarks
-                    </th>
-                  </tr>
-                  {baleData?.[index]?.stoppageDetails?.map((slice, index) => (
-                    <tr key={index}>
-                      <td colSpan="3" style={{ textAlign: "center" }}>
-                        {slice.stopTime}
-                      </td>
-                      <td colSpan="3" style={{ textAlign: "center" }}>
-                        {slice.startTime}
-                      </td>
-                      <td colSpan="3" style={{ textAlign: "center" }}>
-                        {slice.totalMin}
-                      </td>
-                      <td colSpan="3" style={{ textAlign: "center" }}>
-                        {slice.reason}
-                      </td>
-                      <td colSpan="4" style={{ textAlign: "center" }}>
-                        {slice.attendBy}
-                      </td>
-                      <td colSpan="4" style={{ textAlign: "center" }}>
-                        {slice.remarks}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <th colSpan="20" style={{ height: "30px" }}>
-                      Production Details in Bags :
-                      {baleData?.[index]?.prodDetailsInBags || "NA"}{" "}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th colSpan="5" style={{ textAlign: "center" }}>
-                      Operator Sign & Date
-                    </th>
-                    <th colSpan="5" style={{ textAlign: "center" }}>
-                      Production Supervisor Sign & Date
-                    </th>
-                    <th colSpan="5" style={{ textAlign: "center" }}>
-                      HOD/Designee Sign & Date
-                    </th>
-                    <th
-                      colSpan="5"
-                      rowSpan="2"
-                      style={{ verticalAlign: "top" }}
-                    >
-                      Remarks:
-                      {baleData?.[index]?.prodDetailsInBags || "NA"}{" "}
-                    </th>
-                  </tr>
-                  <tr>
-                    <td
-                      colSpan="5"
-                      style={{ textAlign: "center", height: "30px" }}
-                    >
-                      {baleData[index].operator_sign || ""}
-                      <br />
-                      {moment(baleData[index]?.operator_submitted_on).format(
-                        "DD/MM/YYYY - HH:mm"
-                      )}
+                  )
+                )}
+                <tr>
+                  <th colSpan="20">Stoppage Details</th>
+                </tr>
+                <tr>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    M/c stop time (min)
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    M/c start time (min)
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Total min
+                  </th>
+                  <th colSpan="3" style={{ textAlign: "center" }}>
+                    Reason
+                  </th>
+                  <th colSpan="4" style={{ textAlign: "center" }}>
+                    Attend by
+                  </th>
+                  <th colSpan="4" style={{ textAlign: "center" }}>
+                    Remarks
+                  </th>
+                </tr>
+                {baleData?.[index]?.stoppageDetails?.map((slice, index) => (
+                  <tr key={index}>
+                    <td colSpan="3" style={{ textAlign: "center" }}>
+                      {slice.stopTime}
                     </td>
-                    <td colSpan="5" style={{ textAlign: "center" }}>
-                      {" "}
-                      {baleData[index].supervisor_sign || ""}
-                      <br />
-                      {moment(baleData[index]?.supervisor_submit_on).format(
-                        "DD/MM/YYYY - HH:mm"
-                      )}
+                    <td colSpan="3" style={{ textAlign: "center" }}>
+                      {slice.startTime}
                     </td>
-                    <td colSpan="5" style={{ textAlign: "center" }}>
-                      {" "}
-                      {baleData[index].hod_sign || ""}
-                      <br />
-                      {moment(baleData[index]?.hod_submit_on).format(
-                        "DD/MM/YYYY - HH:mm"
-                      )}
+                    <td colSpan="3" style={{ textAlign: "center" }}>
+                      {slice.totalMin}
+                    </td>
+                    <td colSpan="3" style={{ textAlign: "center" }}>
+                      {slice.reason}
+                    </td>
+                    <td colSpan="4" style={{ textAlign: "center" }}>
+                      {slice.attendBy}
+                    </td>
+                    <td colSpan="4" style={{ textAlign: "center" }}>
+                      {slice.remarks}
                     </td>
                   </tr>
-                </tbody>
-              ))
+                ))}
+                <tr>
+                  <th colSpan="20" style={{ height: "30px" }}>
+                    Production Details in Bags :
+                    {baleData?.[index]?.prodDetailsInBags || "NA"}{" "}
+                  </th>
+                </tr>
+                <tr>
+                  <th colSpan="5" style={{ textAlign: "center" }}>
+                    Operator Sign & Date
+                  </th>
+                  <th colSpan="5" style={{ textAlign: "center" }}>
+                    Production Supervisor Sign & Date
+                  </th>
+                  <th colSpan="5" style={{ textAlign: "center" }}>
+                    HOD/Designee Sign & Date
+                  </th>
+                  <th
+                    colSpan="5"
+                    rowSpan="2"
+                    style={{ verticalAlign: "top" }}
+                  >
+                    Remarks:
+                    {baleData?.[index]?.prodDetailsInBags || "NA"}{" "}
+                  </th>
+                </tr>
+                <tr>
+                  <td
+                    colSpan="5"
+                    style={{ textAlign: "center", height: "30px" }}
+                  >
+                    {baleData[index].operator_sign || ""}
+                    <br />
+                    {moment(baleData[index]?.operator_submitted_on).format(
+                      "DD/MM/YYYY - HH:mm"
+                    )}
+                  </td>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    {" "}
+                    {baleData[index].supervisor_sign || ""}
+                    <br />
+                    {moment(baleData[index]?.supervisor_submit_on).format(
+                      "DD/MM/YYYY - HH:mm"
+                    )}
+                  </td>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    {" "}
+                    {baleData[index].hod_sign || ""}
+                    <br />
+                    {moment(baleData[index]?.hod_submit_on).format(
+                      "DD/MM/YYYY - HH:mm"
+                    )}
+                  </td>
+                </tr>
+              </tbody>
+            ))
             : null}
 
           {reworkList && reworkList.length > 0 && (

@@ -188,7 +188,7 @@ const Audittrail = () => {
     department: "",
     changeControlNo: "",
     departmentName: "",
-    machineNo : ""
+    machineNo: ""
   });
   const [qaParamLov, setQAParamLov] = useState({
     formatNoLov: [],
@@ -203,27 +203,27 @@ const Audittrail = () => {
     bmrLov: [],
     deptLov: [],
     changeControlLov: [],
-    machineLov:[]
+    machineLov: []
   });
 
   // ----------------- COTTON BUDS State ---------------------
-  const [cbFrequency,setCbFrequency] = useState ({
-    shift : "",
-    bmrNumber : "",
-    machineName : "",
-    orderNumber : ""
+  const [cbFrequency, setCbFrequency] = useState({
+    shift: "",
+    bmrNumber: "",
+    machineName: "",
+    orderNumber: ""
   })
 
-  const [cbParamLov,setCBParamLov] = useState({
-    shiftLov : [
-      {value:'I',label:'I'},
-      {value:'II',label:'II'},
-      {value:'III',label:'III'},
+  const [cbParamLov, setCBParamLov] = useState({
+    shiftLov: [
+      { value: 'I', label: 'I' },
+      { value: 'II', label: 'II' },
+      { value: 'III', label: 'III' },
 
     ],
-    bmrLov :[],
-    orderNoLov : [],
-    machineLov : []
+    bmrLov: [],
+    orderNoLov: [],
+    machineLov: []
   })
 
 
@@ -455,7 +455,7 @@ const Audittrail = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Format/Service/formList?departmentId=${value}`,
+        `${API.prodUrl}/Precot/api/Format/Service/formList?departmentId=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -480,7 +480,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
+            `${API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -508,7 +508,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`,
+            `${API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -536,7 +536,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Store/gatepassNo`,
+            `${API.prodUrl}/Precot/api/Store/gatepassNo`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -565,7 +565,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Store/Invoice`,
+            `${API.prodUrl}/Precot/api/Store/Invoice`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -623,7 +623,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Store/invoice/descriptions?invoiceNo=${storesFrequency.invoiceNo}`,
+            `${API.prodUrl}/Precot/api/Store/invoice/descriptions?invoiceNo=${storesFrequency.invoiceNo}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -652,7 +652,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/ProductDevelopment/api/pds`,
+            `${API.prodUrl}/Precot/api/ProductDevelopment/api/pds`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -680,7 +680,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Engineering/getbisnos`,
+            `${API.prodUrl}/Precot/api/Engineering/getbisnos`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -708,7 +708,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Engineering/getRcano`,
+            `${API.prodUrl}/Precot/api/Engineering/getRcano`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -736,7 +736,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Engineering/getworno`,
+            `${API.prodUrl}/Precot/api/Engineering/getworno`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -765,7 +765,7 @@ const Audittrail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Engineering/getbisnos`,
+            `${API.prodUrl}/Precot/api/Engineering/getbisnos`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -857,15 +857,15 @@ const Audittrail = () => {
       department: "",
       changeControlNo: "",
       departmentName: "",
-      machineNo : ""
+      machineNo: ""
     }));
 
-    setCbFrequency (prevState => ({
+    setCbFrequency(prevState => ({
       ...prevState,
-      shift : "",
-      bmrNumber : "",
-      machineName : "",
-      orderNumber : ""
+      shift: "",
+      bmrNumber: "",
+      machineName: "",
+      orderNumber: ""
     }))
     try {
       const token = localStorage.getItem("token");
@@ -882,7 +882,7 @@ const Audittrail = () => {
         value === "Equipment Usage Log Book - Cake Press"
       ) {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -896,7 +896,7 @@ const Audittrail = () => {
         ]);
       } else if (value === "Contamination Report (Raw Cotton)") {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -905,7 +905,7 @@ const Audittrail = () => {
         );
       } else if (value === "Laydown Checklist") {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -916,7 +916,7 @@ const Audittrail = () => {
         value === "Contamination Checking Report (Absorbent Bleached Cotton)"
       ) {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -924,17 +924,17 @@ const Audittrail = () => {
           }
         );
       } else if (value === 'RE-PROCESSING REPORT') {
-        response = await axios.get(`${ API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`, {
+        response = await axios.get(`${API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-    } else if (
+      } else if (
         value === "Bleaching Hand Sanitization Report" ||
         value === "Shift Log Book"
       ) {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -946,7 +946,7 @@ const Audittrail = () => {
         value === "Shift Log Book"
       ) {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -955,7 +955,7 @@ const Audittrail = () => {
         );
       } else {
         response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -986,7 +986,7 @@ const Audittrail = () => {
         case "Sample Report - Spunlace":
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/spulance/orders`,
+              `${API.prodUrl}/Precot/api/spulance/orders`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1013,7 +1013,7 @@ const Audittrail = () => {
         case "Bag Making - Specification Details":
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/padpunching/MachineLov`,
+              `${API.prodUrl}/Precot/api/padpunching/MachineLov`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1047,7 +1047,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QcForm/CustomerName`,
+            `${API.prodUrl}/Precot/api/QcForm/CustomerName`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1070,7 +1070,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QcForm/ChemicalName`,
+            `${API.prodUrl}/Precot/api/QcForm/ChemicalName`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1093,7 +1093,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
+            `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1120,7 +1120,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/qc/ChemicalAnalysisReport/GetChemicalAnalysisReportPdeData`,
+            `${API.prodUrl}/Precot/api/qc/ChemicalAnalysisReport/GetChemicalAnalysisReportPdeData`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1146,7 +1146,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
+            `${API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1169,7 +1169,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
+            `${API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1192,7 +1192,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
+            `${API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1215,7 +1215,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spulance/orders`,
+            `${API.prodUrl}/Precot/api/spulance/orders`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1238,7 +1238,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE-EQID`,
+            `${API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE-EQID`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1262,7 +1262,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
+            `${API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1288,7 +1288,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/chemicaltest/ARF014/PDE`,
+            `${API.prodUrl}/Precot/api/chemicaltest/ARF014/PDE`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1315,7 +1315,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/getAllBatchNumbers/finalInspectionReport`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/getAllBatchNumbers/finalInspectionReport`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1341,7 +1341,7 @@ const Audittrail = () => {
           try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/QA/Service/changeControlLogBook/getAllExistingchangeControlNos`,
+              `${API.prodUrl}/Precot/api/QA/Service/changeControlLogBook/getAllExistingchangeControlNos`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1364,15 +1364,15 @@ const Audittrail = () => {
         };
         findChangeControl();
         break;
-        case "online_inspection_report_pads":
-        case "online_inspection_report_balls":
-        case "online_inspection_report_buds":
-      
+      case "online_inspection_report_pads":
+      case "online_inspection_report_balls":
+      case "online_inspection_report_buds":
+
         const MachineLov = async () => {
           try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/QA/Service/api/machineLov`,
+              `${API.prodUrl}/Precot/api/QA/Service/api/machineLov`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1400,7 +1400,7 @@ const Audittrail = () => {
           try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/QA/Service/api/departmentsLov`,
+              `${API.prodUrl}/Precot/api/QA/Service/api/departmentsLov`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1430,12 +1430,12 @@ const Audittrail = () => {
 
     }
     // -------------- Case To Get CB Lov APIs --------------------------
-    switch(value){
+    switch (value) {
       case "buds_equipment_usage":
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/buds/bmr/fetchProductionDetails`,
+            `${API.prodUrl}/Precot/api/buds/bmr/fetchProductionDetails`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1449,7 +1449,7 @@ const Audittrail = () => {
             }));
           setCBParamLov((prevState) => ({
             ...prevState,
-           bmrLov : options,
+            bmrLov: options,
           }));
         } catch (error) {
           // message.error("Error Occurs On QC Lov");
@@ -1460,7 +1460,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/buds/sap/Service/orderInfo`,
+            `${API.prodUrl}/Precot/api/buds/sap/Service/orderInfo`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1475,7 +1475,7 @@ const Audittrail = () => {
             }));
           setCBParamLov((prevState) => ({
             ...prevState,
-           orderNoLov : options,
+            orderNoLov: options,
           }));
         } catch (error) {
           // message.error("Error Occurs On QC Lov");
@@ -1485,7 +1485,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/buds/sap/Service/machineList`,
+            `${API.prodUrl}/Precot/api/buds/sap/Service/machineList`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1499,7 +1499,7 @@ const Audittrail = () => {
             }));
           setCBParamLov((prevState) => ({
             ...prevState,
-           machineLov : options,
+            machineLov: options,
           }));
         } catch (error) {
           // message.error("Error Occurs On QC Lov");
@@ -1515,7 +1515,7 @@ const Audittrail = () => {
 
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QcForm/ProductName?customer=${qcFrequency.customer}`,
+            `${API.prodUrl}/Precot/api/QcForm/ProductName?customer=${qcFrequency.customer}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1757,7 +1757,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/bmrLov?department=${qaFrequency.dept}`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/bmrLov?department=${qaFrequency.dept}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1785,7 +1785,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Engineering/getProductionDetails?department=${qaFrequency.department}`,
+            `${API.prodUrl}/Precot/api/Engineering/getProductionDetails?department=${qaFrequency.department}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1816,7 +1816,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/pOderLov?department=${qaFrequency.dept}&batchNo=${qaFrequency.bmrNO}`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/pOderLov?department=${qaFrequency.dept}&batchNo=${qaFrequency.bmrNO}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1839,12 +1839,12 @@ const Audittrail = () => {
       };
       findPOrderLov();
     }
-    if((formName == "online_inspection_report_balls" || formName == "online_inspection_report_pads" || formName == "online_inspection_report_buds") && qaFrequency.department !== "" ){
+    if ((formName == "online_inspection_report_balls" || formName == "online_inspection_report_pads" || formName == "online_inspection_report_buds") && qaFrequency.department !== "") {
       const findBmr = async () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/bmrLov?department=${qaFrequency.department}`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/bmrLov?department=${qaFrequency.department}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1866,12 +1866,12 @@ const Audittrail = () => {
         }
       };
       findBmr();
-      if(qaFrequency.bmrNO !== ""){
+      if (qaFrequency.bmrNO !== "") {
         const findPOrder = async () => {
           try {
             const token = localStorage.getItem("token");
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/QA/Service/api/pOderLov?department=${qaFrequency.department}&batchNo=${qaFrequency.bmrNO}`,
+              `${API.prodUrl}/Precot/api/QA/Service/api/pOderLov?department=${qaFrequency.department}&batchNo=${qaFrequency.bmrNO}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -1895,7 +1895,7 @@ const Audittrail = () => {
         findPOrder();
       }
     }
-    
+
   }, [qaFrequency.dept, qaFrequency.bmrNO, qaFrequency.department]);
 
   useEffect(() => {
@@ -1951,7 +1951,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${inwardDate}`,
+            `${API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${inwardDate}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1984,7 +1984,7 @@ const Audittrail = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${inwardDate}&supplier=${qaFrequency.supplierName}`,
+            `${API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${inwardDate}&supplier=${qaFrequency.supplierName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -2045,11 +2045,11 @@ const Audittrail = () => {
     function generateYearRanges(startYear, endYear) {
       const yearRanges = [];
       for (let year = startYear; year < endYear; year++) {
-          yearRanges.push({ key: `${year}-${year + 1}`, value: `${year}-${year + 1}` });
+        yearRanges.push({ key: `${year}-${year + 1}`, value: `${year}-${year + 1}` });
       }
       return yearRanges;
-  }
-   
+    }
+
     const yearOptions = generateYearRanges(2024, 2100);
 
     const yearLovII = yearOptions.map((option) => ({
@@ -2069,7 +2069,7 @@ const Audittrail = () => {
       { value: "Spunlace", label: "Spunlace" },
       { value: "Pad_Punching", label: "Pad_Punching" },
       { value: "Dry_Goods", label: "Dry_Goods" },
-    ];  
+    ];
     switch (formName) {
       case "customer_complaint_register_form":
       case "management_of_incidence":
@@ -2126,8 +2126,8 @@ const Audittrail = () => {
         }));
         break;
       case "list_of_glass_hard_plastic_wood_ceramic":
-        case "training_questionnaire":
-        case "deviation_form":
+      case "training_questionnaire":
+      case "deviation_form":
         setQAParamLov((prevState) => ({
           ...prevState,
           monthLov: monthTypeI,
@@ -2160,14 +2160,14 @@ const Audittrail = () => {
       case "batch_release_checklist":
         setQAParamLov((prevState) => ({
           ...prevState,
-          deptLov : departmantLOV2
+          deptLov: departmantLOV2
         }));
       case "online_inspection_report_pads":
       case "online_inspection_report_balls":
       case "online_inspection_report_buds":
         setQAParamLov((prevState) => ({
           ...prevState,
-          shiftLov : shiftTypeI
+          shiftLov: shiftTypeI
         }));
         break;
     }
@@ -2177,11 +2177,11 @@ const Audittrail = () => {
 
   // ------------- Cotton Buds Lov ----------------------------
 
-  useEffect (() => {
-    if(department == 12){
+  useEffect(() => {
+    if (department == 12) {
 
     }
-  },[formName,department])
+  }, [formName, department])
 
 
 
@@ -2206,12 +2206,12 @@ const Audittrail = () => {
               value.trim().toLowerCase()
             );
           };
-          case "RE-PROCESSING REPORT":
-            return (freq) => {
-  
-              // Ensure you're checking against bleach_bmr_no
-              return freq.bleach_bmr_no?.trim().toLowerCase() === value.trim().toLowerCase();
-            };
+        case "RE-PROCESSING REPORT":
+          return (freq) => {
+
+            // Ensure you're checking against bleach_bmr_no
+            return freq.bleach_bmr_no?.trim().toLowerCase() === value.trim().toLowerCase();
+          };
         case "Equipment Usage Log Book – Cake Press":
         case "Bleaching Job Card":
         case "Equipment Usage Log Book – Hydro Extractor":
@@ -2242,7 +2242,7 @@ const Audittrail = () => {
           case "Bleaching Job Card":
           case "Equipment Usage Log Book – Hydro Extractor":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${bmr_no}`,
+              `${API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${bmr_no}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2253,7 +2253,7 @@ const Audittrail = () => {
 
           case "Contamination Checking Report (Absorbent Bleached Cotton)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmr_no}`,
+              `${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmr_no}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2262,10 +2262,10 @@ const Audittrail = () => {
             );
             break;
 
-            case "RE-PROCESSING REPORT":
+          case "RE-PROCESSING REPORT":
 
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmr_no}`,
+              `${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmr_no}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2305,7 +2305,7 @@ const Audittrail = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${batchNo}&bmr_no=${selectedFrequency}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${batchNo}&bmr_no=${selectedFrequency}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -2396,8 +2396,8 @@ const Audittrail = () => {
             return (
               (selectedFrequency && Subbatch && bale) || isDateRangeComplete
             );
-            case "RE-PROCESSING REPORT":
-              return (selectedFrequency && Subbatch ) || isDateRangeComplete;
+          case "RE-PROCESSING REPORT":
+            return (selectedFrequency && Subbatch) || isDateRangeComplete;
           case "Applied Contamination Report (AB Cotton)":
             return isFrequencyOnly || isDateRangeComplete;
           default:
@@ -2417,7 +2417,7 @@ const Audittrail = () => {
         switch (formName) {
           case "Laydown Checklist":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/laydownChecklist`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/laydownChecklist`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2433,7 +2433,7 @@ const Audittrail = () => {
             break;
           case "Metal Detector Checklist":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/MetalDetectorF03`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/MetalDetectorF03`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2450,7 +2450,7 @@ const Audittrail = () => {
 
           case "Applied Contamination Report (Raw Cotton)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/RawCottonF04`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/RawCottonF04`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2466,7 +2466,7 @@ const Audittrail = () => {
             break;
           case "Contamination Checking Report (Raw Cotton)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/RawCottonF05`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/RawCottonF05`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2484,7 +2484,7 @@ const Audittrail = () => {
             break;
           case "Equipment Usage Log Book – Blow room and Carding":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/BlowroomAndCardingF34`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/BlowroomAndCardingF34`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2500,7 +2500,7 @@ const Audittrail = () => {
             break;
           case "Equipment Usage Log Book – Cake Press":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/CakePressF09`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/CakePressF09`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2517,7 +2517,7 @@ const Audittrail = () => {
             break;
           case "Bleaching Job Card":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/BleachJobcardF13`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/BleachJobcardF13`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2536,7 +2536,7 @@ const Audittrail = () => {
             break;
           case "Equipment Usage Log Book – Hydro Extractor":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/EquipmentF11`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/EquipmentF11`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2553,7 +2553,7 @@ const Audittrail = () => {
             break;
           case "Sanitization of machines and surfaces":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/SanitizationF01`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/SanitizationF01`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2571,7 +2571,7 @@ const Audittrail = () => {
             break;
           case "Bleaching Hand Sanitization Report":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/handSanitizationF41`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/handSanitizationF41`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2587,7 +2587,7 @@ const Audittrail = () => {
             break;
           case "Shift Log Book":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/ShiftLogBookF36`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/ShiftLogBookF36`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2603,7 +2603,7 @@ const Audittrail = () => {
             break;
           case "Mixing Change Over and Machine Cleaning Checklist":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/MachineCleaningF38`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/MachineCleaningF38`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2622,7 +2622,7 @@ const Audittrail = () => {
             break;
           case "Equipment Usage Log Book - Waste Bale Press":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/EquipmentUsageF33`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/EquipmentUsageF33`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2639,7 +2639,7 @@ const Audittrail = () => {
             break;
           case "House Keeping Cleaning Checklist (Bleaching and AB Cotton Godown)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/HouseKeepingF02`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/HouseKeepingF02`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2655,7 +2655,7 @@ const Audittrail = () => {
             break;
           case "House Keeping Cleaning Checklist (Blow room, Carding & Waste Bale Press)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/HouseKeepingF02A`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/HouseKeepingF02A`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2670,7 +2670,7 @@ const Audittrail = () => {
             break;
           case "Contamination Checking Report (Absorbent Bleached Cotton)":
             response = await axios.get(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/bleachConstAbsF18`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/bleachConstAbsF18`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2688,59 +2688,59 @@ const Audittrail = () => {
               }
             );
             break;
-            case 'RE-PROCESSING REPORT':
-              try {
-                const response = await axios.post(
-                  `${ API.prodUrl}/Precot/api/bleaching/Service/downloadExcel`,
-                  {
-                    department: "Bleaching",
-                    formName: "reprocess",
-                    bmr: selectedFrequency,
-                    batchNo: Subbatch,
-                    start: startDate,
-                    end: endDate,
+          case 'RE-PROCESSING REPORT':
+            try {
+              const response = await axios.post(
+                `${API.prodUrl}/Precot/api/bleaching/Service/downloadExcel`,
+                {
+                  department: "Bleaching",
+                  formName: "reprocess",
+                  bmr: selectedFrequency,
+                  batchNo: Subbatch,
+                  start: startDate,
+                  end: endDate,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
                   },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                    responseType: 'blob', // This is necessary for file downloads
-                  }
-                );
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', `${formName.replace(/\s+/g, '_')}_${selectedFrequency || ''}.xlsx`);
-                document.body.appendChild(link);
-                link.click();
-                link.remove();
-        
-                if (response.status == 200 || response.status == 201) {
-                  message.success('File downloaded successfully.');
+                  responseType: 'blob', // This is necessary for file downloads
                 }
-              } 
-              catch (error) {
-                if (error) {
-                  // const errorBlob = error.response.data;
-                  const reader = new FileReader();
-        
-                  reader.onloadend = () => {
-                    // const errorText = reader.result;
-                    try {
-                      // const errorData = JSON.parse(errorText);
-                      // message.error(errorData.message);
-                    } catch (parseError) {
-                      // message.error('Error downloading file: ' + errorText);
-                    }
-                  };
-                  // reader.readAsText(errorBlob);
-                } 
+              );
+              const url = window.URL.createObjectURL(new Blob([response.data]));
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', `${formName.replace(/\s+/g, '_')}_${selectedFrequency || ''}.xlsx`);
+              document.body.appendChild(link);
+              link.click();
+              link.remove();
+
+              if (response.status == 200 || response.status == 201) {
+                message.success('File downloaded successfully.');
               }
-            
-              break;
+            }
+            catch (error) {
+              if (error) {
+                // const errorBlob = error.response.data;
+                const reader = new FileReader();
+
+                reader.onloadend = () => {
+                  // const errorText = reader.result;
+                  try {
+                    // const errorData = JSON.parse(errorText);
+                    // message.error(errorData.message);
+                  } catch (parseError) {
+                    // message.error('Error downloading file: ' + errorText);
+                  }
+                };
+                // reader.readAsText(errorBlob);
+              }
+            }
+
+            break;
           case "Applied Contamination Report (AB Cotton)":
             response = await axios.post(
-              `${ API.prodUrl}/Precot/api/Bleaching/audit/ABCottonF08`,
+              `${API.prodUrl}/Precot/api/Bleaching/audit/ABCottonF08`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2965,7 +2965,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Spunlace/audit/getAuditSummary`,
+          `${API.prodUrl}/Precot/api/Spunlace/audit/getAuditSummary`,
           payload,
           {
             headers: {
@@ -3109,7 +3109,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/padpunching/audit/getAuditSummary`,
+          `${API.prodUrl}/Precot/api/padpunching/audit/getAuditSummary`,
           payload,
           {
             headers: {
@@ -3250,7 +3250,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Drygoods/audit/getAuditSummary`,
+          `${API.prodUrl}/Precot/api/Drygoods/audit/getAuditSummary`,
           payload,
           {
             headers: {
@@ -3327,7 +3327,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Ppc/getAuditSummary`,
+          `${API.prodUrl}/Precot/api/Ppc/getAuditSummary`,
           payload,
           {
             headers: {
@@ -3412,7 +3412,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Store/Audit/getStoreAuditSummary`,
+          `${API.prodUrl}/Precot/api/Store/Audit/getStoreAuditSummary`,
           payload,
           {
             headers: {
@@ -3489,7 +3489,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/ProductDevelopment/getProductDevelopmentAudit`,
+          `${API.prodUrl}/Precot/api/ProductDevelopment/getProductDevelopmentAudit`,
           payload,
           {
             headers: {
@@ -3576,7 +3576,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Engineering/Audit/getengineeringAuditSummary`,
+          `${API.prodUrl}/Precot/api/Engineering/Audit/getengineeringAuditSummary`,
           payload,
           {
             headers: {
@@ -3772,7 +3772,7 @@ const Audittrail = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/Qc/audit/getAuditSummary`,
+          `${API.prodUrl}/Precot/api/Qc/audit/getAuditSummary`,
           payload,
           {
             headers: {
@@ -3827,9 +3827,9 @@ const Audittrail = () => {
         formName == "online_inspection_report_balls" ||
         formName == "online_inspection_report_buds"
       ) {
-        apiUrl = `${ API.prodUrl}/Precot/api/qa/excel/getAuditSummary`;
+        apiUrl = `${API.prodUrl}/Precot/api/qa/excel/getAuditSummary`;
       } else {
-        apiUrl = `${ API.prodUrl}/Precot/api/qa/excel/download`;
+        apiUrl = `${API.prodUrl}/Precot/api/qa/excel/download`;
       }
       let payload = {
         // "department": "QUALITY_ASSURANCE",
@@ -3858,33 +3858,33 @@ const Audittrail = () => {
             year: qaFrequency.year,
           };
           break;
-          case "deviation_form":
-            payload = {
-              ...payload,
-              month: qaFrequency.month,
-              year: qaFrequency.year,
-              "dateOfInitiation":"",
-              "deviationNumber":""
-          
-            };
-            break;
+        case "deviation_form":
+          payload = {
+            ...payload,
+            month: qaFrequency.month,
+            year: qaFrequency.year,
+            "dateOfInitiation": "",
+            "deviationNumber": ""
+
+          };
+          break;
         case "bmr_issue_register":
           payload = {
             ...payload,
             department: qaFrequency.department,
           };
           break;
-        case "summary_traceability" :
+        case "summary_traceability":
           payload = {
             ...payload,
-            bmr_no : qaFrequency.bmrNO
+            bmr_no: qaFrequency.bmrNO
           };
           break;
-        case "batch_release_checklist" :
+        case "batch_release_checklist":
           payload = {
             ...payload,
-            department : qaFrequency.department,
-            bmr_no : qaFrequency.bmrNO
+            department: qaFrequency.department,
+            bmr_no: qaFrequency.bmrNO
           };
           break;
         case "pest_controller":
@@ -3952,7 +3952,7 @@ const Audittrail = () => {
             form_no: "PH-QAD01-F-042",
             changeControlNo: qaFrequency.changeControlNo,
           };
-        break;
+          break;
         case "master_list_of_sharp_tools":
           payload = {
             ...payload,
@@ -3965,7 +3965,7 @@ const Audittrail = () => {
           payload = {
             ...payload,
             "department": qaFrequency.department,
-            "year":qaFrequency.year
+            "year": qaFrequency.year
           };
           break;
         case "online_inspection_report_pads":
@@ -3973,11 +3973,11 @@ const Audittrail = () => {
         case "online_inspection_report_buds":
           payload = {
             ...payload,
-            "department":"QUALITY ASSURANCE",
-            "shift":qaFrequency.shift,
-            "machine_no":qaFrequency.machineNo,
-            "bmrNo":qaFrequency.bmrNO,
-            "pOrder":qaFrequency.porder
+            "department": "QUALITY ASSURANCE",
+            "shift": qaFrequency.shift,
+            "machine_no": qaFrequency.machineNo,
+            "bmrNo": qaFrequency.bmrNO,
+            "pOrder": qaFrequency.porder
           }
           break;
         default:
@@ -4036,46 +4036,46 @@ const Audittrail = () => {
     }
 
     // -------------------------- CB Submit Api ------------------------
-    else if(department == 12){
+    else if (department == 12) {
       let apiUrl;
-      if(formName == "final_inspection_report"){
-        apiUrl =`${ API.prodUrl}/Precot/api/buds/audit/getAuditSummary`
+      if (formName == "final_inspection_report") {
+        apiUrl = `${API.prodUrl}/Precot/api/buds/audit/getAuditSummary`
       }
       else {
-        apiUrl = `${ API.prodUrl}/Precot/api/buds/audit/download`
+        apiUrl = `${API.prodUrl}/Precot/api/buds/audit/download`
       }
       let payload = {
-        "department" : "COTTON_BUDS",
-        "formName" : formName,
-        "fromDate" :startDate,
-        "toDate" :endDate,
+        "department": "COTTON_BUDS",
+        "formName": formName,
+        "fromDate": startDate,
+        "toDate": endDate,
       };
-      switch (formName){
+      switch (formName) {
         case "buds_logbook":
           payload = {
             ...payload,
-          "shift" : cbFrequency.shift,
+            "shift": cbFrequency.shift,
           }
-        break;
+          break;
         case "final_inspection_report":
           payload = {
             ...payload,
-          "shift" : cbFrequency.shift,
-          "orderNumber" : cbFrequency.orderNumber
+            "shift": cbFrequency.shift,
+            "orderNumber": cbFrequency.orderNumber
           }
           break;
         case "buds_equipment_usage":
           payload = {
             ...payload,
-          "shift" : cbFrequency.shift,
-          "bmrNumber" : cbFrequency.bmrNumber
+            "shift": cbFrequency.shift,
+            "bmrNumber": cbFrequency.bmrNumber
           }
           break;
         case "buds_daily_production_sliver":
           payload = {
             ...payload,
             "machineName": cbFrequency.machineName,
-            "shift" : cbFrequency.shift,
+            "shift": cbFrequency.shift,
           }
           break;
         case "buds_product_changeover":
@@ -4093,7 +4093,7 @@ const Audittrail = () => {
           },
           responseType: 'arraybuffer', // Handle binary data
         });
-      
+
         if (
           (response.status === 200 || response.status === 400) &&
           (response.data.message === "No data" || response.data.message === "No data found")
@@ -4101,7 +4101,7 @@ const Audittrail = () => {
           message.error(response.data.message);
           return;
         }
-      
+
         const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -4113,7 +4113,7 @@ const Audittrail = () => {
         document.body.appendChild(link);
         link.click();
         link.remove();
-      
+
         if (response.status === 200 || response.status === 201) {
           message.success("File downloaded successfully.");
         }
@@ -4122,11 +4122,11 @@ const Audittrail = () => {
           message.error(error.response.data.message);
           return;
         }
-      
+
         if (error.response) {
           const errorBlob = new Blob([error.response.data]);
           const reader = new FileReader();
-      
+
           reader.onloadend = () => {
             try {
               const errorData = JSON.parse(reader.result);
@@ -4141,7 +4141,7 @@ const Audittrail = () => {
           message.error("Error downloading file.");
         }
       }
-      
+
     }
   };
 
@@ -4150,7 +4150,7 @@ const Audittrail = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -4203,8 +4203,8 @@ const Audittrail = () => {
           return "Select BMR";
         case "Contamination Checking Report (Absorbent Bleached Cotton)":
           return " Select BMR, Sub Batch, Bale";
-          case "RE-PROCESSING REPORT":
-            return " Select BMR, Sub Batch";
+        case "RE-PROCESSING REPORT":
+          return " Select BMR, Sub Batch";
       }
     }
     // ------------------------ Spunlace Dept -----------------------------------------------
@@ -4445,19 +4445,19 @@ const Audittrail = () => {
       }
     }
     // ------------------------ CB Dept ---------------------------------
-    else if(department == 12){
-      switch(formName){
+    else if (department == 12) {
+      switch (formName) {
 
-      case "buds_logbook":
+        case "buds_logbook":
           return "Select Shift";
-      case "buds_equipment_usage":
-        return "Select Shift , BMR No";
-      case "buds_daily_production_sliver":
-        return "Select Shift , Machine Name";
-      case "buds_product_changeover":
-        return "Select Order";
-      case "final_inspection_report":
-        return "Select Shift , Order"
+        case "buds_equipment_usage":
+          return "Select Shift , BMR No";
+        case "buds_daily_production_sliver":
+          return "Select Shift , Machine Name";
+        case "buds_product_changeover":
+          return "Select Order";
+        case "final_inspection_report":
+          return "Select Shift , Order"
       }
     }
 
@@ -4486,7 +4486,7 @@ const Audittrail = () => {
         "Date",
       "Applied Contamination Report (AB Cotton)": "BMR wise",
       "Contamination Checking Report (Absorbent Bleached Cotton)": "BMR ",
-        "RE-PROCESSING REPORT": "BMR "
+      "RE-PROCESSING REPORT": "BMR "
     };
 
     return formatUniqueMappings[formName] || "Select Frequency";
@@ -4570,7 +4570,7 @@ const Audittrail = () => {
           padding: "1em",
         }}
       >
-        {(departmentId <= 12 )? (
+        {(departmentId <= 12) ? (
           <>
             <Row>
               <Col>
@@ -4608,121 +4608,121 @@ const Audittrail = () => {
               items={
                 role === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Generation
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Generate"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Generation
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Generate"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
 
-                      {
-                        key: "4",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Mapping
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Mapping"),
-                      },
-                      {
-                        key: "5",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Closing
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Closing"),
-                      },
-                      {
-                        key: "6",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "7",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "6",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "7",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : role === "ROLE_SUPERVISOR" ||
                     role === "ROLE_HOD" ||
                     role === "ROLE_DESIGNEE" ||
                     role === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -4819,7 +4819,7 @@ const Audittrail = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -4900,79 +4900,79 @@ const Audittrail = () => {
               items={
                 role === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
 
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "4",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "4",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : role === "ROLE_SUPERVISOR" ||
                     role === "ROLE_HOD" ||
                     role === "ROLE_DESIGNEE" ||
                     role === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5027,7 +5027,7 @@ const Audittrail = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5124,78 +5124,78 @@ const Audittrail = () => {
               items={
                 role === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "4",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "4",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : role === "ROLE_SUPERVISOR" ||
                     role === "ROLE_HOD" ||
                     role === "ROLE_DESIGNEE" ||
                     role === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5236,7 +5236,7 @@ const Audittrail = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5317,121 +5317,121 @@ const Audittrail = () => {
               items={
                 role === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Generation
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Generate"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Generation
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Generate"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
 
-                      {
-                        key: "4",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Mapping
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Mapping"),
-                      },
-                      {
-                        key: "5",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Closing
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Closing"),
-                      },
-                      {
-                        key: "6",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "7",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "6",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "7",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : role === "ROLE_SUPERVISOR" ||
                     role === "ROLE_HOD" ||
                     role === "ROLE_DESIGNEE" ||
                     role === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5472,7 +5472,7 @@ const Audittrail = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -5644,9 +5644,9 @@ const Audittrail = () => {
                   </Option>
                 </Select>
               ) : formName ===
-                  "House Keeping Cleaning Checklist (Bleaching and AB Cotton Godown)" ||
+                "House Keeping Cleaning Checklist (Bleaching and AB Cotton Godown)" ||
                 formName ===
-                  "House Keeping Cleaning Checklist (Blow room, Carding & Waste Bale Press)" ||
+                "House Keeping Cleaning Checklist (Blow room, Carding & Waste Bale Press)" ||
                 formName === "Equipment Usage Log Book - Waste Bale Press" ? (
                 <Card
                   style={{
@@ -5721,7 +5721,7 @@ const Audittrail = () => {
               ) : (
                 <>
                   {formName ===
-                  "Mixing Change Over and Machine Cleaning Checklist" ? (
+                    "Mixing Change Over and Machine Cleaning Checklist" ? (
                     <>
                       <Select
                         showSearch
@@ -5821,37 +5821,12 @@ const Audittrail = () => {
                   {(formName === "Equipment Usage Log Book – Cake Press" ||
                     formName === "Bleaching Job Card" ||
                     formName ===
-                      "Equipment Usage Log Book – Hydro Extractor") && (
-                    <Select
-                      showSearch
-                      placeholder="Select Sub Batch"
-                      value={Subbatch}
-                      onChange={handleAdditionalInputChange}
-                      style={{
-                        marginTop: "16px",
-                        width: "100%",
-                        textAlign: "center",
-                      }}
-                    >
-                      {subBatchOptions.map((option) => (
-                        <Option
-                          key={option.value}
-                          value={option.value}
-                          style={{ textAlign: "center" }}
-                        >
-                          {option.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
-                  {formName ===
-                    "Contamination Checking Report (Absorbent Bleached Cotton)" && (
-                    <>
+                    "Equipment Usage Log Book – Hydro Extractor") && (
                       <Select
                         showSearch
                         placeholder="Select Sub Batch"
                         value={Subbatch}
-                        onChange={handleSubBatchChange}
+                        onChange={handleAdditionalInputChange}
                         style={{
                           marginTop: "16px",
                           width: "100%",
@@ -5868,31 +5843,56 @@ const Audittrail = () => {
                           </Option>
                         ))}
                       </Select>
+                    )}
+                  {formName ===
+                    "Contamination Checking Report (Absorbent Bleached Cotton)" && (
+                      <>
+                        <Select
+                          showSearch
+                          placeholder="Select Sub Batch"
+                          value={Subbatch}
+                          onChange={handleSubBatchChange}
+                          style={{
+                            marginTop: "16px",
+                            width: "100%",
+                            textAlign: "center",
+                          }}
+                        >
+                          {subBatchOptions.map((option) => (
+                            <Option
+                              key={option.value}
+                              value={option.value}
+                              style={{ textAlign: "center" }}
+                            >
+                              {option.name}
+                            </Option>
+                          ))}
+                        </Select>
 
-                      <Select
-                        showSearch
-                        placeholder="Select Bale"
-                        value={bale}
-                        onChange={handleBaleChange}
-                        style={{
-                          marginTop: "16px",
-                          width: "100%",
-                          textAlign: "center",
-                        }}
-                      >
-                        {baleOptions.map((option) => (
-                          <Option
-                            key={option.value}
-                            value={option.value}
-                            style={{ textAlign: "center" }}
-                          >
-                            {option.name}
-                          </Option>
-                        ))}
-                      </Select>
-                    </>
-                  )}
-                    {formName === 'RE-PROCESSING REPORT' && (
+                        <Select
+                          showSearch
+                          placeholder="Select Bale"
+                          value={bale}
+                          onChange={handleBaleChange}
+                          style={{
+                            marginTop: "16px",
+                            width: "100%",
+                            textAlign: "center",
+                          }}
+                        >
+                          {baleOptions.map((option) => (
+                            <Option
+                              key={option.value}
+                              value={option.value}
+                              style={{ textAlign: "center" }}
+                            >
+                              {option.name}
+                            </Option>
+                          ))}
+                        </Select>
+                      </>
+                    )}
+                  {formName === 'RE-PROCESSING REPORT' && (
                     <>
                       <Select
                         showSearch
@@ -5908,7 +5908,7 @@ const Audittrail = () => {
                         ))}
                       </Select>
 
-                     
+
                     </>
                   )}
                 </>
@@ -5927,18 +5927,18 @@ const Audittrail = () => {
               }}
             >
               {formName == "Bale Consumption Report" ||
-              formName == "Process Setup Verification Opening Line" ||
-              formName == "Process Setup Details Jetlace & Dryer" ||
-              formName == "Process Setup Details - Winder" ||
-              formName == "Daily Production Report - Spunlace" ||
-              formName == "Daily Rejection Report - Spunlace" ||
-              formName == "Spunlace GSM Analysis Report" ||
-              formName == "Product Change Over Check List Spunlace" ||
-              formName == "Shift Wise Sliter Winder Production Report" ||
-              formName == "Process Setup Verification Sliter Winder" ||
-              formName == "Shift wise RP Production Report" ||
-              formName == "Process Setup Verification - RP Bale Press" ||
-              formName == "Sample Report - Spunlace" ? (
+                formName == "Process Setup Verification Opening Line" ||
+                formName == "Process Setup Details Jetlace & Dryer" ||
+                formName == "Process Setup Details - Winder" ||
+                formName == "Daily Production Report - Spunlace" ||
+                formName == "Daily Rejection Report - Spunlace" ||
+                formName == "Spunlace GSM Analysis Report" ||
+                formName == "Product Change Over Check List Spunlace" ||
+                formName == "Shift Wise Sliter Winder Production Report" ||
+                formName == "Process Setup Verification Sliter Winder" ||
+                formName == "Shift wise RP Production Report" ||
+                formName == "Process Setup Verification - RP Bale Press" ||
+                formName == "Sample Report - Spunlace" ? (
                 <>
                   <Select
                     options={shiftOptions}
@@ -6072,9 +6072,9 @@ const Audittrail = () => {
               }}
             >
               {formName == "Daily Roll Consumption Report - Pad Punching" ||
-              formName == "Product Change Over" ||
-              formName == "Machine Cleaning Check List" ||
-              formName == "Log Book - Bag Making" ? (
+                formName == "Product Change Over" ||
+                formName == "Machine Cleaning Check List" ||
+                formName == "Log Book - Bag Making" ? (
                 <>
                   <Select
                     options={shiftOptions}
@@ -6209,7 +6209,7 @@ const Audittrail = () => {
               ) : formName == "Argus Metal Detector - Check List" ||
                 formName == "House Keeping Cleaning Check List PH_HRD01_F006" ||
                 formName ==
-                  "House Keeping Cleaning Check List PH_HRD01_F010" ? (
+                "House Keeping Cleaning Check List PH_HRD01_F010" ? (
                 <>
                   <Card
                     style={{
@@ -6303,7 +6303,7 @@ const Audittrail = () => {
                   ></Select>
                 </>
               ) : formName ==
-                  "Ball Pleat & Wool Roll Finished Goods Transfer Record" ||
+                "Ball Pleat & Wool Roll Finished Goods Transfer Record" ||
                 formName == "Production Report - Mini Roll" ||
                 formName == "Log Book - Dry Goods" ||
                 formName == "Hand Sanitization Report - Dry Goods" ? (
@@ -6548,13 +6548,13 @@ const Audittrail = () => {
               }}
             >
               {formName == "COA FOR AB COTTON" ||
-              formName == "COA FOR COTTON PADS" ||
-              formName == "COA FOR COTTON BALLS" ||
-              formName == "COA FOR COTTON WOOL ROLL" ||
-              formName == "COA FOR COTTON WOOL PLEAT" ||
-              formName == "COA FOR COTTON ROLL GOODS" ||
-              formName == "COA FOR INFUSED COTTON PADS" ||
-              formName == "COA FOR MOISTURE CONTENT (%)" ? (
+                formName == "COA FOR COTTON PADS" ||
+                formName == "COA FOR COTTON BALLS" ||
+                formName == "COA FOR COTTON WOOL ROLL" ||
+                formName == "COA FOR COTTON WOOL PLEAT" ||
+                formName == "COA FOR COTTON ROLL GOODS" ||
+                formName == "COA FOR INFUSED COTTON PADS" ||
+                formName == "COA FOR MOISTURE CONTENT (%)" ? (
                 <>
                   <Select
                     options={qcParamLov.customerLov}
@@ -6754,7 +6754,7 @@ const Audittrail = () => {
                 </>
               ) : formName == "FINISHED PRODUCT ANALYSIS REPORT" ||
                 formName ==
-                  "ABSORBENT BLEACHED COTTON CONSOLIDATED ANALYTICAL REPORT" ||
+                "ABSORBENT BLEACHED COTTON CONSOLIDATED ANALYTICAL REPORT" ||
                 formName == "RAW COTTON CONSOLIDATED ANALYTICAL REPORT" ||
                 formName == "NON-WOVEN FLEECE ANALYSIS REPORT" ? (
                 <>
@@ -6776,12 +6776,12 @@ const Audittrail = () => {
               ) : formName == "WEIGHING SCALE CALIBRATION REPORT" ||
                 formName == "pH-METER CALIBRATION REPORT" ||
                 formName ==
-                  "BACTERIAL INCUBATOR TEMPRATURE CALIBRATION REPORT" ||
+                "BACTERIAL INCUBATOR TEMPRATURE CALIBRATION REPORT" ||
                 formName == "VALIDATION FOR AUTOCLAVE BY CHEMICAL INDICATOR" ||
                 formName ==
-                  "FUNGAL INCUBATOR TEMPERATURE VERIFICATION REPORT" ||
+                "FUNGAL INCUBATOR TEMPERATURE VERIFICATION REPORT" ||
                 formName ==
-                  "TEMPERATURE & RELATIVE HUMIDITY RECORD OF DRY & WET BULB" ? (
+                "TEMPERATURE & RELATIVE HUMIDITY RECORD OF DRY & WET BULB" ? (
                 <>
                   <Select
                     options={qcParamLov.eqIdLov}
@@ -6915,12 +6915,12 @@ const Audittrail = () => {
                 </>
               ) : formName == "FLOOR SWAB - MICROBIOLOGICAL ANALYSIS REPORT" ||
                 formName ==
-                  "HANDLER'S SWAB - MICROBIOLOGICAL ANALYSIS REPORT" ||
+                "HANDLER'S SWAB - MICROBIOLOGICAL ANALYSIS REPORT" ||
                 formName == "MACHINE SWAB - MICROBIOLOGICAL ANALYSIS REPORT" ||
                 formName == "DISTILLED WATER ANALYSIS REPORT" ||
                 formName == "TDS-METER CALIBRATION REPORT" ||
                 formName ==
-                  "SHELF LIFE PERIOD PHYSICAL, CHEMICAL & MICROBIOLOGICAL TESTING REPORT DATA" ||
+                "SHELF LIFE PERIOD PHYSICAL, CHEMICAL & MICROBIOLOGICAL TESTING REPORT DATA" ||
                 formName == "FUMIGATION AND MICROBIOLOGICAL ANALYSIS FOR AIR" ||
                 formName == "POTABLE WATER ANALYSIS REPORT" ||
                 formName == "WATER ANALYSIS REPORT" ||
@@ -6957,18 +6957,18 @@ const Audittrail = () => {
               }}
             >
               {formName == "customer_complaint_register_form" ||
-              formName == "management_of_incidence" ||
-              formName == "internal_audit_schedule" ||
-              formName == "non_conformity_report" ||
-              formName == "minutes_of_mrm" ||
-              formName == "agenda_for_management_review_meeting" ||
-              formName == "request_and_issuance_of_document" ||
-              formName == "distribution_and_destruction_record" ||
-              formName == "internal_audit_report" ||
-              formName == "list_of_glass_hard_plastic_wood_ceramic" ||
-              formName == "control_of_glass_hard_plastic_wood_ceramic" ||
-              formName == "minutes_of_meeting_mock_recall" || formName == "training_questionnaire" ||
-              formName == "deviation_form"? (
+                formName == "management_of_incidence" ||
+                formName == "internal_audit_schedule" ||
+                formName == "non_conformity_report" ||
+                formName == "minutes_of_mrm" ||
+                formName == "agenda_for_management_review_meeting" ||
+                formName == "request_and_issuance_of_document" ||
+                formName == "distribution_and_destruction_record" ||
+                formName == "internal_audit_report" ||
+                formName == "list_of_glass_hard_plastic_wood_ceramic" ||
+                formName == "control_of_glass_hard_plastic_wood_ceramic" ||
+                formName == "minutes_of_meeting_mock_recall" || formName == "training_questionnaire" ||
+                formName == "deviation_form" ? (
                 <>
                   <Select
                     options={qaParamLov.yearLov}
@@ -7126,9 +7126,9 @@ const Audittrail = () => {
                     dropdownStyle={{ textAlign: "center" }}
                   ></Select>
                 </>
-              ) : (formName == "online_inspection_report_pads" || formName == "online_inspection_report_balls" 
+              ) : (formName == "online_inspection_report_pads" || formName == "online_inspection_report_balls"
                 || formName == "online_inspection_report_buds"
-              )  ? (
+              ) ? (
                 <>
                   <Select
                     options={qaParamLov.shiftLov}
@@ -7162,7 +7162,7 @@ const Audittrail = () => {
                     }}
                     dropdownStyle={{ textAlign: "center" }}
                   ></Select>
-                                    <Select
+                  <Select
                     options={qaParamLov.deptLov}
                     value={
                       qaFrequency.department
@@ -7173,7 +7173,7 @@ const Audittrail = () => {
                       handleQaField(e, "department");
                     }}
                     showSearch
-                    style={{ width: "100%", textAlign: "center", marginTop:'5px' }}
+                    style={{ width: "100%", textAlign: "center", marginTop: '5px' }}
                     dropdownStyle={{ textAlign: "center" }}
                   ></Select>
                   <Select
@@ -7311,7 +7311,7 @@ const Audittrail = () => {
                     style={{ width: "100%", textAlign: "center" }}
                     dropdownStyle={{ textAlign: "center" }}
                   ></Select>
-                              <Select
+                  <Select
                     options={qaParamLov.bmrLov}
                     value={
                       qaFrequency.bmrNO ? qaFrequency.bmrNO : "Select BMR No"
@@ -7424,7 +7424,7 @@ const Audittrail = () => {
                 formName == "annual_product_review" ||
                 formName == "batch_release_notes" ||
                 formName == "production_retained_sample_register" ||
-              formName == "corrective_action_report") ? (
+                formName == "corrective_action_report") ? (
                 <>
                   <Card
                     style={{
@@ -7571,122 +7571,122 @@ const Audittrail = () => {
         )}
         {formName && department == 12 && (
           <Col span={8}>
-          <Card
-            title={getFrequencyTitle()}
-            style={{
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            { (formName == "buds_logbook") ? (
-              <>
-                <Select
-                  options={cbParamLov.shiftLov}
-                  value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
-                  onChange={(e) => {
-                    handleCbField(e, "shift");
-                  }}
-                  showSearch
-                  style={{ width: "100%", textAlign: "center" }}
-                  dropdownStyle={{ textAlign: "center" }}
-                ></Select>
-              </>
-            ) :
-            (formName == "buds_equipment_usage" ) ? (
-              <>
-              <Select
-                options={cbParamLov.shiftLov}
-                value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
-                onChange={(e) => {
-                  handleCbField(e, "shift");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center" }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-              <Select
-                options={cbParamLov.bmrLov}
-                value={cbFrequency.bmrNumber ? cbFrequency.bmrNumber : "Select BMR No"}
-                onChange={(e) => {
-                  handleCbField(e, "bmrNumber");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center", marginTop : '5px' }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-            </>
+            <Card
+              title={getFrequencyTitle()}
+              style={{
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              }}
+            >
+              {(formName == "buds_logbook") ? (
+                <>
+                  <Select
+                    options={cbParamLov.shiftLov}
+                    value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
+                    onChange={(e) => {
+                      handleCbField(e, "shift");
+                    }}
+                    showSearch
+                    style={{ width: "100%", textAlign: "center" }}
+                    dropdownStyle={{ textAlign: "center" }}
+                  ></Select>
+                </>
+              ) :
+                (formName == "buds_equipment_usage") ? (
+                  <>
+                    <Select
+                      options={cbParamLov.shiftLov}
+                      value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
+                      onChange={(e) => {
+                        handleCbField(e, "shift");
+                      }}
+                      showSearch
+                      style={{ width: "100%", textAlign: "center" }}
+                      dropdownStyle={{ textAlign: "center" }}
+                    ></Select>
+                    <Select
+                      options={cbParamLov.bmrLov}
+                      value={cbFrequency.bmrNumber ? cbFrequency.bmrNumber : "Select BMR No"}
+                      onChange={(e) => {
+                        handleCbField(e, "bmrNumber");
+                      }}
+                      showSearch
+                      style={{ width: "100%", textAlign: "center", marginTop: '5px' }}
+                      dropdownStyle={{ textAlign: "center" }}
+                    ></Select>
+                  </>
 
-            ) :
-            (formName == "final_inspection_report" ) ? (
-              <>
-              <Select
-                options={cbParamLov.shiftLov}
-                value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
-                onChange={(e) => {
-                  handleCbField(e, "shift");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center" }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-              <Select
-                options={cbParamLov.orderNoLov}
-                value={cbFrequency.orderNumber ? cbFrequency.orderNumber : "Select Order No"}
-                onChange={(e) => {
-                  handleCbField(e, "orderNumber");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center", marginTop : '5px' }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-            </>
+                ) :
+                  (formName == "final_inspection_report") ? (
+                    <>
+                      <Select
+                        options={cbParamLov.shiftLov}
+                        value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
+                        onChange={(e) => {
+                          handleCbField(e, "shift");
+                        }}
+                        showSearch
+                        style={{ width: "100%", textAlign: "center" }}
+                        dropdownStyle={{ textAlign: "center" }}
+                      ></Select>
+                      <Select
+                        options={cbParamLov.orderNoLov}
+                        value={cbFrequency.orderNumber ? cbFrequency.orderNumber : "Select Order No"}
+                        onChange={(e) => {
+                          handleCbField(e, "orderNumber");
+                        }}
+                        showSearch
+                        style={{ width: "100%", textAlign: "center", marginTop: '5px' }}
+                        dropdownStyle={{ textAlign: "center" }}
+                      ></Select>
+                    </>
 
-            )
-            :
-            
-            (formName == "buds_daily_production_sliver" ) ? (
-              <>
-              <Select
-                options={cbParamLov.shiftLov}
-                value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
-                onChange={(e) => {
-                  handleCbField(e, "shift");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center" }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-              <Select
-                options={cbParamLov.machineLov}
-                value={cbFrequency.machineName ? cbFrequency.machineName : "Select Machine Name"}
-                onChange={(e) => {
-                  handleCbField(e, "machineName");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center", marginTop : '5px' }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-            </>
+                  )
+                    :
 
-            )
-            : 
-            (formName == "buds_product_changeover" ) ? (
-              <>
-              <Select
-                options={cbParamLov.orderNoLov}
-                value={cbFrequency.orderNumber ? cbFrequency.orderNumber : "Select Order No"}
-                onChange={(e) => {
-                  handleCbField(e, "orderNumber");
-                }}
-                showSearch
-                style={{ width: "100%", textAlign: "center", marginTop : '5px' }}
-                dropdownStyle={{ textAlign: "center" }}
-              ></Select>
-            </>
+                    (formName == "buds_daily_production_sliver") ? (
+                      <>
+                        <Select
+                          options={cbParamLov.shiftLov}
+                          value={cbFrequency.shift ? cbFrequency.shift : "Select Shift"}
+                          onChange={(e) => {
+                            handleCbField(e, "shift");
+                          }}
+                          showSearch
+                          style={{ width: "100%", textAlign: "center" }}
+                          dropdownStyle={{ textAlign: "center" }}
+                        ></Select>
+                        <Select
+                          options={cbParamLov.machineLov}
+                          value={cbFrequency.machineName ? cbFrequency.machineName : "Select Machine Name"}
+                          onChange={(e) => {
+                            handleCbField(e, "machineName");
+                          }}
+                          showSearch
+                          style={{ width: "100%", textAlign: "center", marginTop: '5px' }}
+                          dropdownStyle={{ textAlign: "center" }}
+                        ></Select>
+                      </>
 
-            ) :null}
-          </Card>
-        </Col>
+                    )
+                      :
+                      (formName == "buds_product_changeover") ? (
+                        <>
+                          <Select
+                            options={cbParamLov.orderNoLov}
+                            value={cbFrequency.orderNumber ? cbFrequency.orderNumber : "Select Order No"}
+                            onChange={(e) => {
+                              handleCbField(e, "orderNumber");
+                            }}
+                            showSearch
+                            style={{ width: "100%", textAlign: "center", marginTop: '5px' }}
+                            dropdownStyle={{ textAlign: "center" }}
+                          ></Select>
+                        </>
+
+                      ) : null}
+            </Card>
+          </Col>
         )}
       </Row>
 
@@ -7726,22 +7726,22 @@ const Audittrail = () => {
           )}
           {formName ===
             "Contamination Checking Report (Absorbent Bleached Cotton)" && (
-            <Button
-              type="primary"
-              onClick={handleSubmit}
-              loading={loading}
-              style={{
-                backgroundColor: "#E5EEF9",
-                color: "#00308F",
-                fontWeight: "bold",
-              }}
-              icon={<FaDownload />}
-              shape="round"
-            >
-              Download Absorbent Cotton Checklist
-            </Button>
-          )}
-           {formName === 'RE-PROCESSING REPORT' && (
+              <Button
+                type="primary"
+                onClick={handleSubmit}
+                loading={loading}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                }}
+                icon={<FaDownload />}
+                shape="round"
+              >
+                Download Absorbent Cotton Checklist
+              </Button>
+            )}
+          {formName === 'RE-PROCESSING REPORT' && (
             <Button
               type="primary"
               onClick={handleSubmit}
@@ -7951,38 +7951,38 @@ const Audittrail = () => {
           )}
           {formName ===
             "House Keeping Cleaning Checklist (Bleaching and AB Cotton Godown)" && (
-            <Button
-              type="primary"
-              onClick={handleSubmit}
-              loading={loading}
-              style={{
-                backgroundColor: "#E5EEF9",
-                color: "#00308F",
-                fontWeight: "bold",
-              }}
-              icon={<FaDownload />}
-              shape="round"
-            >
-              Download House Keeping AB cotton Report
-            </Button>
-          )}
+              <Button
+                type="primary"
+                onClick={handleSubmit}
+                loading={loading}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                }}
+                icon={<FaDownload />}
+                shape="round"
+              >
+                Download House Keeping AB cotton Report
+              </Button>
+            )}
           {formName ===
             "House Keeping Cleaning Checklist (Blow room, Carding & Waste Bale Press)" && (
-            <Button
-              type="primary"
-              onClick={handleSubmit}
-              loading={loading}
-              style={{
-                backgroundColor: "#E5EEF9",
-                color: "#00308F",
-                fontWeight: "bold",
-              }}
-              icon={<FaDownload />}
-              shape="round"
-            >
-              Download House Keeping Blow Room Report
-            </Button>
-          )}
+              <Button
+                type="primary"
+                onClick={handleSubmit}
+                loading={loading}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                }}
+                icon={<FaDownload />}
+                shape="round"
+              >
+                Download House Keeping Blow Room Report
+              </Button>
+            )}
           {formName === "Applied Contamination Report (AB Cotton)" && (
             <Button
               type="primary"

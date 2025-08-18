@@ -14,7 +14,7 @@ import {
   Tooltip,
 } from "antd";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiLock } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
@@ -80,14 +80,14 @@ const DryGoods_f05 = () => {
     hod_submit_by: "",
     hod_sign: "",
     prodDetails: [],
-    selectedPOrder: "",  
+    selectedPOrder: "", // To track the selected POrder value
     stoppage: [],
   });
- 
+  // Utility to remove duplicates from POrder
   const getUniquePOrders = (prodDetails) => {
     return [...new Set(prodDetails.map((item) => item.POrder))];
   };
- 
+
   const [laydown, setLayDown] = useState("");
   const token = localStorage.getItem("token");
   const [eSign, setESign] = useState({
@@ -137,7 +137,7 @@ const DryGoods_f05 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
+            `${API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -166,7 +166,7 @@ const DryGoods_f05 = () => {
       if (username) {
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -193,7 +193,6 @@ const DryGoods_f05 = () => {
     });
   }, [token, formData.operator_sign, formData.hod_sign]);
 
- 
   useEffect(() => {
     console.log("orderNos", orderNos);
     if (!initialized.current) {
@@ -220,7 +219,7 @@ const DryGoods_f05 = () => {
 
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROll1?date=${date}&shift=${pdeShift}&oderno=${orderNos}`,
+            `${API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROll1?date=${date}&shift=${pdeShift}&oderno=${orderNos}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -229,11 +228,13 @@ const DryGoods_f05 = () => {
           );
           if (response.data.length == 0) {
             message.warning("No Record Found");
-  
+            // setTimeout(() => {
+            //   navigate("/Precot/DryGoods/F-05/Summary");
+            // }, [1000]);
           }
 
           if (response.data.length > 0) {
-        
+            // setLayDown(response.data[0].POrder)
             const uniquePOrders = getUniquePOrders(response.data);
 
             setFormData((prevState) => ({
@@ -243,14 +244,16 @@ const DryGoods_f05 = () => {
           }
         } catch (error) {
           message.error(error.response.data.message);
- 
+          // setTimeout(() => {
+          //   navigate("/Precot/DryGoods/F-05/Summary");
+          // }, 1000);
         }
       };
 
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Drygoods/Service/getRolldetailsbyF05?date=${date}&shift=${shift}&order_no=${orderNos}`,
+            `${API.prodUrl}/Precot/api/Drygoods/Service/getRolldetailsbyF05?date=${date}&shift=${shift}&order_no=${orderNos}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -278,7 +281,9 @@ const DryGoods_f05 = () => {
           }
         } catch (error) {
           message.error(error.response?.data?.message);
-          
+          // setTimeout(() => {
+          //   navigate("/Precot/DryGoods/F-05/Summary");
+          // }, 1000);
         }
       };
       fetchProductionDetails();
@@ -308,7 +313,7 @@ const DryGoods_f05 = () => {
           console.log("Api Call Happen");
           const response2 = await axios.get(
             `${
-            API.prodUrl
+              API.prodUrl
             }/Precot/api/goods/api/dryGoodsMiniROllStoppage?date=${date}&order_no=${Number(
               order_no
             )}&shift=${pdeShift}`,
@@ -402,7 +407,7 @@ const DryGoods_f05 = () => {
   const handleSave = async () => {
     let apiUrl, payload;
     if (role == "ROLE_OPERATOR") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/saveMiniRollDetails05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/saveMiniRollDetails05`;
       payload = {
         unit: "Unit H",
         formatNo: "PH-PRD04/F-005",
@@ -441,7 +446,7 @@ const DryGoods_f05 = () => {
         }
       });
     } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject05`;
       payload = {
         id: formData.roll_id,
         status: "Approve",
@@ -478,7 +483,7 @@ const DryGoods_f05 = () => {
   const handleSubmit = async () => {
     let apiUrl, payload;
     if (role == "ROLE_OPERATOR") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/submitMiniRollDetails05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/submitMiniRollDetails05`;
       payload = {
         unit: "Unit H",
         formatNo: "PH-PRD04/F-005",
@@ -517,7 +522,7 @@ const DryGoods_f05 = () => {
         message.warning("Please Enter The Reason");
         return;
       }
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject05`;
       payload = {
         id: formData.roll_id,
         status: "Reject",
@@ -836,8 +841,6 @@ const DryGoods_f05 = () => {
           </Col>
           <Col xs={24} sm={12} md={5}>
             <Space direction="vertical">
-           
-
               <Input
                 type="text"
                 addonBefore="Order No :"
@@ -845,8 +848,6 @@ const DryGoods_f05 = () => {
                 style={{ width: "100%", textAlign: "center" }}
                 readOnly
               ></Input>
-
-        
             </Space>
           </Col>
           <Col xs={24} sm={12} md={5}>
@@ -998,6 +999,7 @@ const DryGoods_f05 = () => {
               <td style={{ textAlign: "center", padding: "10px" }}>
                 Idle Time (in Min)
               </td>
+              <td style={{ textAlign: "center", padding: "10px" }}>Remarks</td>
             </tr>
             {paginatedData2.map((details, index) => (
               <tr key={index}>
@@ -1007,7 +1009,8 @@ const DryGoods_f05 = () => {
                 <td style={{ textAlign: "center" }}>{details.SCAUSE}</td>
                 <td style={{ textAlign: "center" }}>{details.FTime}</td>
                 <td style={{ textAlign: "center" }}>{details.TTime}</td>
-                <td style={{ textAlign: "center" }}>{details.FTime}</td>
+                <td style={{ textAlign: "center" }}>{details.TotHrs}</td>
+                <td style={{ textAlign: "center" }}>{details.SRemarks}</td>
               </tr>
             ))}
           </table>

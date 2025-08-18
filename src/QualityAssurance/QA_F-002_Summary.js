@@ -19,15 +19,14 @@ import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const QA_F002_Summary = () => {
   const initial = useRef(false);
-  const [deaprtment, setdepartment] = useState([]);
-  const [deaprtment_list, setdepartment_list] = useState([]);
+  const [department_list, setdepartment_list] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
   const [modalData, setmodalData] = useState([]);
   const [monthPrint, setMonthPrint] = useState("");
   const [yearPrint, setYearPrint] = useState("");
   const [isFetchSuccessful, setIsFetchSuccessful] = useState(false);
   const [printResponseData, setPrintResponseData] = useState(null);
-  const [availableshiftlov, setAvailableShiftslov] =
-    useState("Select Department");
+
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [matchFound, setMatchFound] = useState(false);
@@ -144,7 +143,6 @@ const QA_F002_Summary = () => {
       initial.current = true;
       fetchDataOrderNumber();
       fetchDataCCRNO();
-      fetchdata_departmentid();
       fetchData_dep_by_id();
     }
   }, []);
@@ -265,39 +263,6 @@ const QA_F002_Summary = () => {
     }
   };
 
-  const fetchdata_departmentid = async () => {
-    try {
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      let dep_id = localStorage.getItem("departmentId");
-
-      const foundDepartment = response.data?.find((dept) => {
-        const numericDepId = Number(dep_id);
-
-        if (dept.id === numericDepId) {
-          return true;
-        } else {
-          return false; // Return false to continue searching
-        }
-      });
-
-      if (foundDepartment) {
-        setdepartment(foundDepartment.department);
-
-        fetchData_dep_by_id(foundDepartment.department);
-      } else {
-        setdepartment("Department not found");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const fetchData_dep_by_id = async () => {
     const roleBase = localStorage.getItem("role");
@@ -313,7 +278,6 @@ const QA_F002_Summary = () => {
           },
         },
       );
-
       if (
         response.data &&
         (response.data?.length > 0 || response.data?.length == undefined)
@@ -343,7 +307,7 @@ const QA_F002_Summary = () => {
 
     try {
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getRequestAndIssunceOfDocumentPrint`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getF002Print`,
         {
           params: {
             date: date1,
@@ -360,11 +324,8 @@ const QA_F002_Summary = () => {
 
       if (response.data?.length) {
         const resData = response.data;
-
         setPrintResponseData(response.data);
-
         message.success("Data fetched successfully.");
-
         await fetchImages(response.data, token);
         printDateSubmit();
       } else {
@@ -392,14 +353,15 @@ const QA_F002_Summary = () => {
           },
         })
         .then((res) => {
-          const data = res.data?.map((laydownno) => laydownno.department);
-          setdepartment_list(data);
-          if (
-            res.data &&
-            (res.data?.length > 0 || res.data?.length == undefined)
-          ) {
-            const data = res.data?.map((laydownno) => laydownno.department);
-            setdepartment_list(data);
+          if (res.data.length > 0) {
+            const data = res.data?.map((item) => {
+              return {
+                label: item.department,
+                value: item.department,
+                id: item.id
+              }
+            })
+            setdepartment_list(data)
           }
         });
     } catch (error) {
@@ -437,27 +399,46 @@ const QA_F002_Summary = () => {
   };
 
   const handleGo = async () => {
-    if (
-      date == null ||
-      date == "" ||
-      date == "[]" ||
-      availableshiftlov == "Select Date" ||
-      availableshiftlov == 0
-    ) {
+    if (!date || date === "[]") {
       message.warning("Please Select Date");
       return;
     }
+
+    if (!selectedDepartment) {
+      message.warning("Please Select Department");
+      return;
+    }
+
+    // Get departmentId list from localStorage and convert to array of numbers
+    const departmentIdListString = localStorage.getItem("departmentId");
+    const departmentIdList = departmentIdListString
+      ?.split(",")
+      .map((id) => parseInt(id.trim()));
+
+    // Check if selected department id is in the list
+    if (!departmentIdList?.includes(selectedDepartment.id)) {
+      message.warning("Selected department is not in your department list");
+      return;
+    }
+
+    console.log('Selected department id:', selectedDepartment.id);
+
     navigate("/Precot/QA/F-002", {
       state: {
         datevalue: date,
+        department_name: selectedDepartment.value,
       },
     });
   };
 
+
   const handleEdit = (record) => {
+    console.log("record", record)
+    console.log("record.department_nam", record.department)
     navigate("/Precot/QA/F-002", {
       state: {
         datevalue: record.date,
+        department_name: record.department,
       },
     });
   };
@@ -479,23 +460,27 @@ const QA_F002_Summary = () => {
       render: (text, record, index) => index + 1,
       align: "center",
     },
-
     {
       title: "Date",
       dataIndex: "date",
       key: "date",
-      render: (text) => formatDate(text),
+      render: (text) => <div style={{ padding: "8px" }}>{formatDate(text)}</div>,
     },
-
     {
-      title: "HOD Status",
-      dataIndex: "qa_hod_designee_status",
-      key: "qa_hod_designee_status",
+      title: "Department",
+      dataIndex: "department",
+      key: "department",
       render: (text) => <div style={{ padding: "8px" }}>{text}</div>,
     },
 
     {
-      title: "QA Manager status",
+      title: "HOD / Designee / Supervisor Status",
+      dataIndex: "qa_hod_designee_status",
+      key: "qa_hod_designee_status",
+      render: (text) => <div style={{ padding: "8px" }}>{text}</div>,
+    },
+    {
+      title: "QA Manager / MR status",
       dataIndex: "qa_mr_status",
       key: "qa_mr_status",
       render: (text) => <div style={{ padding: "8px" }}>{text}</div>,
@@ -663,6 +648,25 @@ const QA_F002_Summary = () => {
             max={getCurrentDate()}
             style={{ width: "10%", height: "30px" }}
           />
+
+          <div
+            style={{
+              fontSize: "14px",
+              marginTop: "8px",
+            }}
+          >
+            Select Department
+          </div>
+          <Select
+            options={department_list}
+            value={selectedDepartment?.value}
+            onChange={(value, option) => {
+              setSelectedDepartment(option);
+            }}
+            size="small"
+            style={{ width: "10%", height: "30px" }}
+          />
+
           <Button
             key="go"
             onClick={handleGo}

@@ -1,8 +1,7 @@
 import { Button, Input, message, Radio, Select } from "antd";
-import useMessage from "antd/es/message/useMessage";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import API from "../../baseUrl.json";
-import React, { useEffect, useState } from "react";
 
 const Verification_Of_Records = (props) => {
   const [status, setStatus] = useState({
@@ -12,7 +11,7 @@ const Verification_Of_Records = (props) => {
     qa_approved: false,
     new_save: false,
     masterId: "",
-    supervisor_status:""
+    supervisor_status: "",
   });
   const updateState = (updates) => {
     setStatus((prevState) => ({
@@ -124,11 +123,27 @@ const Verification_Of_Records = (props) => {
     setVerificationData(updatedItems);
   };
 
+  const formatDateTime = (dateString) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    // Extract YYYY-MM-DD
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+
+    // Extract HH:MM
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  };
   useEffect(() => {
     // Precot/api/punching/bmr/getVerificationRecords?order=7000
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getVerificationRecords?order=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/getVerificationRecords?order=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -150,7 +165,7 @@ const Verification_Of_Records = (props) => {
             res.data[0].supervisor_status === "" ||
             res.data[0].supervisor_status == null,
           masterId: res.data[0].verificationId,
-          supervisor_status:res.data[0].supervisor_status
+          supervisor_status: res.data[0].supervisor_status,
         });
 
         // Update verificationData from the response
@@ -159,9 +174,9 @@ const Verification_Of_Records = (props) => {
             id: index + 1,
             recordName: verificationData[index].recordName, // Keep original names
             performedBySign: item.checked_sign,
-            performedByDate: item.checked_date,
+            performedByDate: formatDateTime(item.checked_date),
             verifiedBySign: item.verified_sign,
-            verifiedByDate: item.verified_date,
+            verifiedByDate: formatDateTime(item.verified_date),
             activity: item.satisfactory,
             lineId: item.lineId,
             verified_id: item.verified_id,
@@ -459,8 +474,10 @@ const Verification_Of_Records = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/submitVerificationRecords`,
-        status.supervisor_saved || status.supervisor_approved ? submitPayload_2 : submitPayload_1,
+        `${API.prodUrl}/Precot/api/punching/bmr/submitVerificationRecords`,
+        status.supervisor_saved || status.supervisor_approved
+          ? submitPayload_2
+          : submitPayload_1,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -471,51 +488,51 @@ const Verification_Of_Records = (props) => {
         console.log("response", res.data);
         message.success("Verification of Record Submitted Successfully");
         axios
-      .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getVerificationRecords?order=${props.batchNo}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("response", res.data);
+          .get(
+            `${API.prodUrl}/Precot/api/punching/bmr/getVerificationRecords?order=${props.batchNo}`,
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then((res) => {
+            console.log("response", res.data);
 
-        // Update the status based on the response
-        updateState({
-          supervisor_saved:
-            res.data[0].supervisor_status === "SUPERVISOR_SAVED",
-          supervisor_approved:
-            res.data[0].supervisor_status === "SUPERVISOR_APPROVED",
-          qa_saved: res.data[0].qa_status === "QA_SAVED",
-          qa_approved: res.data[0].qa_status === "QA_APPROVED",
-          new_save:
-            res.data[0].supervisor_status === "" ||
-            res.data[0].supervisor_status == null,
-          masterId: res.data[0].verificationId,
-          supervisor_status:res.data[0].supervisor_status
-        });
+            // Update the status based on the response
+            updateState({
+              supervisor_saved:
+                res.data[0].supervisor_status === "SUPERVISOR_SAVED",
+              supervisor_approved:
+                res.data[0].supervisor_status === "SUPERVISOR_APPROVED",
+              qa_saved: res.data[0].qa_status === "QA_SAVED",
+              qa_approved: res.data[0].qa_status === "QA_APPROVED",
+              new_save:
+                res.data[0].supervisor_status === "" ||
+                res.data[0].supervisor_status == null,
+              masterId: res.data[0].verificationId,
+              supervisor_status: res.data[0].supervisor_status,
+            });
 
-        // Update verificationData from the response
-        setVerificationData(
-          res.data[0].details.map((item, index) => ({
-            id: index + 1,
-            recordName: verificationData[index].recordName, // Keep original names
-            performedBySign: item.checked_sign,
-            performedByDate: item.checked_date,
-            verifiedBySign: item.verified_sign,
-            verifiedByDate: item.verified_date,
-            activity: item.satisfactory,
-            lineId: item.lineId,
-            verified_id: item.verified_id,
-            checked_id: item.checked_id,
-          }))
-        );
-      })
-      .catch((err) => {
-        console.log("Error", err);
-      });
+            // Update verificationData from the response
+            setVerificationData(
+              res.data[0].details.map((item, index) => ({
+                id: index + 1,
+                recordName: verificationData[index].recordName, // Keep original names
+                performedBySign: item.checked_sign,
+                performedByDate: formatDateTime(item.checked_date),
+                verifiedBySign: item.verified_sign,
+                verifiedByDate: formatDateTime(item.verified_date),
+                activity: item.satisfactory,
+                lineId: item.lineId,
+                verified_id: item.verified_id,
+                checked_id: item.checked_id,
+              }))
+            );
+          })
+          .catch((err) => {
+            console.log("Error", err);
+          });
       })
       .catch((err) => {
         console.log("Error", err);
@@ -808,7 +825,7 @@ const Verification_Of_Records = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/saveVerificationRecords`,
+        `${API.prodUrl}/Precot/api/punching/bmr/saveVerificationRecords`,
         status.supervisor_saved ? submitPayload_2 : submitPayload_1,
         {
           headers: {
@@ -917,17 +934,13 @@ const Verification_Of_Records = (props) => {
                       (props.loggedInSupervisor &&
                         status.supervisor_approved) ||
                       !props.loggedInSupervisor ||
-                      props.loggedInHod  ||
+                      props.loggedInHod ||
                       (status.supervisor_approved && status.qa_approved)
                     }
                   />
                   <Input
                     type="datetime-local"
-                    value={
-                      x.performedByDate
-                        ? formatDateForInput(x.performedByDate)
-                        : ""
-                    }
+                    value={x.performedByDate ? x.performedByDate : ""}
                     onChange={(e) =>
                       updateVerification(
                         x.id,
@@ -964,11 +977,7 @@ const Verification_Of_Records = (props) => {
                   />
                   <Input
                     type="datetime-local"
-                    value={
-                      x.verifiedByDate
-                        ? formatDateForInput(x.verifiedByDate)
-                        : ""
-                    }
+                    value={x.verifiedByDate ? x.verifiedByDate : ""}
                     onChange={(e) =>
                       updateVerification(x.id, "verifiedByDate", e.target.value)
                     }
@@ -978,7 +987,6 @@ const Verification_Of_Records = (props) => {
                       !props.loggedInQa ||
                       props.loggedInHod ||
                       (status.supervisor_approved && status.qa_approved)
-        
                     }
                   />
                 </td>
@@ -995,9 +1003,9 @@ const Verification_Of_Records = (props) => {
                     disabled={
                       (props.loggedInSupervisor &&
                         status.supervisor_approved) ||
-                      props.loggedInHod || !props.loggedInQa ||
+                      props.loggedInHod ||
+                      !props.loggedInQa ||
                       (status.supervisor_approved && status.qa_approved)
-        
                     }
                   >
                     <Radio value="SATISFACTORY">Satisfactory</Radio>

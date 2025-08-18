@@ -96,7 +96,7 @@ const Padpunching_f25 = (props) => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=3`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=3`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const Padpunching_f25 = (props) => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationName`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationName`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const Padpunching_f25 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const Padpunching_f25 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -320,7 +320,7 @@ const Padpunching_f25 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
         {
           id: handSanitizationId,
           status: "Approve",
@@ -360,7 +360,7 @@ const Padpunching_f25 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
         {
           id: handSanitizationId,
           status: "Reject",
@@ -470,7 +470,7 @@ const Padpunching_f25 = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -606,7 +606,7 @@ const Padpunching_f25 = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/saveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/saveHandSanitationF24`,
         payload,
         {
           headers: {
@@ -686,7 +686,7 @@ const Padpunching_f25 = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/submitHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/submitHandSanitationF24`,
         payload,
         {
           headers: {
@@ -731,7 +731,7 @@ const Padpunching_f25 = (props) => {
     setShift(shiftvalue);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/punching/getHandSanitationF24?date=${date}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/punching/getHandSanitationF24?date=${date}&shift=${shiftvalue}`,
 
         {
           headers: {
@@ -806,7 +806,7 @@ const Padpunching_f25 = (props) => {
         setIsHODApproved(responseData.hod_status === "HOD_APPROVED");
         setIsEditable(
           !supervisor_status === "SUPERVISOR_APPROVED" &&
-            (hod_status === "HOD_APPROVED" || hod_status === "HOD_SAVED")
+          (hod_status === "HOD_APPROVED" || hod_status === "HOD_SAVED")
         );
       } else {
         setDataExists(false);
@@ -1260,30 +1260,30 @@ const Padpunching_f25 = (props) => {
               >
                 {((apiData && apiData?.hod_status === "HOD_REJECTED") ||
                   (apiData && apiData?.hod_status === "HOD_APPROVED")) && (
-                  <div>
-                    {apiData && apiData.hod_sign && (
-                      <span>{apiData.hod_sign}</span>
-                    )}
-                    <br />
-                    {formattedHODDate}
-                    <br />
-                    <br />
-                    {getImage1 && (
-                      <img
-                        src={getImage1}
-                        alt="Hod Sign"
-                        style={{
-                          width: "70px",
-                          height: "50px",
-                          marginLeft: "20px",
-                          objectFit: "contain",
-                          mixBlendMode: "multiply",
-                          justifyContent: "space-evenly",
-                        }}
-                      />
-                    )}
-                  </div>
-                )}
+                    <div>
+                      {apiData && apiData.hod_sign && (
+                        <span>{apiData.hod_sign}</span>
+                      )}
+                      <br />
+                      {formattedHODDate}
+                      <br />
+                      <br />
+                      {getImage1 && (
+                        <img
+                          src={getImage1}
+                          alt="Hod Sign"
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                            marginLeft: "20px",
+                            objectFit: "contain",
+                            mixBlendMode: "multiply",
+                            justifyContent: "space-evenly",
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
                 {/* Signature & Date */}
               </td>
             </tr>
@@ -1346,212 +1346,11 @@ const Padpunching_f25 = (props) => {
   };
   return (
     <div>
-      {/* <Drawer
-        placement="left"
-        closable={false}
-        onClose={onClose}
-        open={open}
-        width="fit-content"
-        style={{
-          padding: "1em",
-        }}
-      >
-        <Row>
-          <Col>
-            <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
-          </Col>
 
-          <Col
-            style={{
-              marginLeft: "1em",
-            }}
-          >
-            <p>{localStorage.getItem("username")}</p>
-            <p
-              style={{
-                fontSize: "x-small",
-              }}
-            >
-              {localStorage.getItem("role")}
-            </p>
-          </Col>
-        </Row>
-
-        <Menu
-          theme="dark"
-          mode="inline"
-          // defaultSelectedKeys={["1"]}
-          style={{
-            backgroundColor: "transparent",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            padding: "0",
-            margin: "0",
-          }}
-          items={
-            localStorage.getItem("role") == "ROLE_QA"
-              ? [
-                {
-                  key: "1",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Form Browser
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/choosenScreen"),
-                },
-                {
-                  key: "2",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Generation
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Generate"),
-                },
-                {
-                  key: "3",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Mapping
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Mapping"),
-                },
-                {
-                  key: "4",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Closing
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Closing"),
-                },
-                {
-                  key: "5",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Raw Material Isuue
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/RawMaterialIssue"),
-                },
-                {
-                  key: "6",
-                  icon: (
-                    <FaLock
-                      color="#151718"
-                      onClick={() => navigate("/Precot")}
-                    />
-                  ),
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Logout
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot"),
-                },
-              ]
-              : [
-                {
-                  key: "1",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Form Browser
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/choosenScreen"),
-                },
-                {
-                  key: "2",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Mapping
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Mapping"),
-                },
-                {
-                  key: "3",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Closing
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Closing"),
-                },
-                {
-                  key: "4",
-                  icon: (
-                    <FaLock
-                      color="#151718"
-                      onClick={() => navigate("/Precot")}
-                    />
-                  ),
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Logout
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot"),
-                },
-              ]
-          }
-        />
-      </Drawer> */}
       <BleachingHeader
         unit="Unit-H"
         formName="Hand Sanitisation Report"
-        formatNo="PH-HRD03/F-006"
+        formatNo="PH-HRD01-F-023"
         MenuBtn={
           <Button
             type="primary"
@@ -1575,77 +1374,77 @@ const Padpunching_f25 = (props) => {
             Back
           </Button>,
           ...(role === "ROLE_HOD" ||
-          role === "ROLE_QA" ||
-          role === "ROLE_QC" ||
-          role === "ROLE_DESIGNEE"
+            role === "ROLE_QA" ||
+            role === "ROLE_QC" ||
+            role === "ROLE_DESIGNEE"
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={rejectIcon} alt="Reject Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={rejectIcon} alt="Reject Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : [
-                <Button
-                  key="save"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButton2(),
-                  }}
-                  shape="round"
-                  icon={<IoSave color="#00308F" />}
-                >
-                  Save
-                </Button>,
-                <Button
-                  key="submit"
-                  loading={submitLoading}
-                  type="primary"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ]),
+              <Button
+                key="save"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButton2(),
+                }}
+                shape="round"
+                icon={<IoSave color="#00308F" />}
+              >
+                Save
+              </Button>,
+              <Button
+                key="submit"
+                loading={submitLoading}
+                type="primary"
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ]),
           <Button
             key="logout"
             type="primary"

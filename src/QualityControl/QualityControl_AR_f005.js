@@ -1,23 +1,21 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
-import { Button, Input, Tabs, Select, Tooltip, message, Modal } from "antd";
-import { AiOutlinePlus } from "react-icons/ai";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock, FaTrash } from "react-icons/fa6";
-import { BiFontSize, BiLock } from "react-icons/bi";
-import { IoChevronBackSharp, IoCreate, IoSave } from "react-icons/io5";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useRef, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { GrDocumentStore } from "react-icons/gr";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { IoSave } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
 import BleachingHeader from "../Components/BleachingHeader";
-import API from "../baseUrl.json";
-import moment from "moment";
 import PrecotSidebar from "../Components/PrecotSidebar";
+import API from "../baseUrl.json";
 
 const QCLARF05 = () => {
   const navigate = useNavigate();
@@ -37,42 +35,150 @@ const QCLARF05 = () => {
   const initialized = useRef(false);
 
   useEffect(() => {
-    if (BMR_No) {
-      const token = localStorage.getItem("token");
-      const fetchFormData = async () => {
+    if (!initialized.current) {
+      initialized.current = true;
+      console.log("BMR_No", BMR_No);
+      const fetchData = async () => {
+        const token = localStorage.getItem("token");
+
         try {
           const response = await axios.get(
-            `${API.prodUrl}/Precot/api/chemicaltest/ARF005/PDE/${BMR_No}`,
+            `${API.prodUrl}/Precot/api/chemicaltest/ARF005/${formData.bmrNumber}`,
             {
               headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
+                Authorization: `Bearer ${token}`,
               },
-              responseType: "json", // Use json if the response is in JSON format
+              responseType: "json",
             }
           );
 
-          // Extract values from the response
-          const { gsm, shaftNo, mixing, pattern, product_name } =
-            response.data[0];
+          if (response.data && response.data.length > 0) {
+            const data = response.data[0];
+            setMainID(data.test_id);
+            setSelectedRow(data);
 
-          // Update formData state
-          setFormData((prevState) => ({
-            ...prevState,
-            productName: product_name,
-            shaftNo: shaftNo,
-            mixing: mixing,
-            gsm: gsm,
-            pattern: pattern,
-          }));
+            if (roleauth === "QA_MANAGER") {
+              if (
+                response.data[0]?.qa_inspector_status ===
+                "QA_INSPECTOR_APPROVED" &&
+                response.data[0]?.qa_mng_status === "QA_MANAGER_REJECTED"
+              ) {
+                message.warning("QA Inspector Not Yet Approved");
+                setTimeout(() => {
+                  navigate("/Precot/QualityControl/AR_F-005/Summary");
+                }, 1500);
+              }
+            }
+
+
+            setFormData({
+              bmrNumber: data.bmr_no || BMR_No,
+              details: data.line1.map((detail) => ({
+                line_id: detail.line_id || "",
+                date: detail.date || "",
+                productName: detail.product_name || "",
+                shaftNo: detail.shaft_no || "",
+                mixing: detail.mixing || "",
+                gsm: detail.gsm || "",
+                pattern: detail.pattern || "",
+                analysisNumber: detail.analysis_request_number || "",
+                shift: detail.shift || "",
+                jetlacePressure: detail.jetlace_parameters_pressure || "",
+                jetlaceText: detail.jetlace_parameters_text || "",
+                moistureMahlo: detail.moisture_mahlo || "",
+                moistureProbe: detail.moisture_phobe || "",
+                thickness: detail.thickness || "",
+                strengthCD: detail.strength_cross_direction || "",
+                strengthMD: detail.strength_machine_direction || "",
+                friction: detail.friction || "",
+                appearance: detail.appearance || "",
+              })),
+            });
+
+
+          } else {
+            fetchFormData()
+            setFormData({
+              bmrNumber: BMR_No,
+              details: [
+                {
+                  line_id: "",
+                  productName: "",
+                  shaftNo: "",
+                  mixing: "",
+                  gsm: "",
+                  pattern: "",
+                  date: "",
+                  analysisNumber: "",
+                  shift: "",
+                  jetlacePressure: "",
+                  jetlaceText: "",
+                  moistureMahlo: "",
+                  moistureProbe: "",
+                  thickness: "",
+                  strengthCD: "",
+                  strengthMD: "",
+                  friction: "",
+                  appearance: "",
+                },
+              ],
+            });
+
+          }
         } catch (error) {
+          // Handle any errors that occur during the fetch
           console.error("Error fetching data:", error);
+          message.info("Unable to fetch data. Try again later..");
         }
       };
 
-      fetchFormData();
+      fetchData();
     }
   }, [BMR_No]);
+
+  const fetchFormData = async () => {
+    try {
+      const response = await axios.get(
+        `${API.prodUrl}/Precot/api/chemicaltest/ARF005/PDE/${BMR_No}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+          responseType: "json",
+        }
+      );
+
+      const staticRows = response.data.map((item) => ({
+        analysisNumber: "",
+        date: "",
+        shift: "",
+        jetlacePressure: "",
+        jetlaceText: "",
+        moistureMahlo: "",
+        moistureProbe: "",
+        thickness: "",
+        strengthCD: "",
+        strengthMD: "",
+        friction: "",
+        appearance: "",
+        productName: item.product_name,
+        shaftNo: item.shaftNo,
+        mixing: item.mixing,
+        gsm: item.gsm,
+        pattern: item.pattern,
+      }));
+
+      setFormData((prev) => ({
+        ...prev,
+        details: staticRows.length ? staticRows : prev.details,
+      }));
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -145,26 +251,87 @@ const QCLARF05 = () => {
   }, [selectedRow, API.prodUrl, token]);
 
   const [formData, setFormData] = useState({
-    analysisNumber: "",
     bmrNumber: BMR_No,
-    date: "",
-    shift: "",
-    productName: "",
-    shaftNo: "",
-    jetlacePressure: "",
-    jetlaceText: "",
-    mixing: "",
-    gsm: "",
-    pattern: "",
-    moistureMahlo: "",
-    moistureProbe: "",
-    thickness: "",
-    strengthCD: "",
-    strengthMD: "",
-    friction: "",
-    appearance: "",
-  });
 
+    details: [
+      {
+        line_id: "",
+        date: "",
+        analysisNumber: "",
+        shift: "",
+        jetlacePressure: "",
+        jetlaceText: "",
+        moistureMahlo: "",
+        moistureProbe: "",
+        thickness: "",
+        strengthCD: "",
+        strengthMD: "",
+        friction: "",
+        appearance: "",
+        productName: "",
+        shaftNo: "",
+        mixing: "",
+        gsm: "",
+        pattern: "",
+      },
+    ],
+  });
+  const addRow = () => {
+    setFormData((prev) => ({
+      ...prev,
+      details: [
+        ...prev.details,
+        {
+          analysisNumber: "",
+          date: "",
+          shift: "",
+          jetlacePressure: "",
+          jetlaceText: "",
+          moistureMahlo: "",
+          moistureProbe: "",
+          thickness: "",
+          strengthCD: "",
+          strengthMD: "",
+          friction: "",
+          appearance: "",
+          productName: "",
+          shaftNo: "",
+          mixing: "",
+          gsm: "",
+          pattern: "",
+        },
+      ],
+    }));
+  };
+
+  const deleteRow = (index) => {
+    if (!Array.isArray(formData.details) || formData.details.length === 1) {
+      alert("At least one row is required.");
+      return;
+    }
+
+    if (
+      window.confirm(
+        "Are you sure you want to delete this row? This action cannot be undone."
+      )
+    ) {
+      const updatedRows = formData.details.filter((_, i) => i !== index);
+      setFormData((prev) => ({
+        ...prev,
+        details: updatedRows,
+      }));
+    }
+  };
+
+  // Function to handle input changes
+  const handleInputChange = (field, value, index) => {
+    const updatedDetails = [...formData.details];
+    updatedDetails[index][field] = value;
+    setFormData((prevData) => ({
+      ...prevData,
+      details: updatedDetails,
+    }));
+  };
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -183,98 +350,7 @@ const QCLARF05 = () => {
       });
   }, []);
 
-  // Function to handle input changes
-  const handleInputChange = (field, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
-
   // Fetch data from API when component mounts
-  useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      console.log("BMR_No", BMR_No);
-      const fetchData = async () => {
-        const token = localStorage.getItem("token");
-
-        try {
-          const response = await axios.get(
-            `${API.prodUrl}/Precot/api/chemicaltest/ARF005/${formData.bmrNumber}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              responseType: "json",
-            }
-          );
-
-          if (response.data && response.data.length > 0) {
-            const data = response.data[0];
-            setMainID(data.test_id);
-            setSelectedRow(data);
-
-            if (roleauth === "QA_MANAGER") {
-              if (
-                response.data[0]?.qa_inspector_status === "QA_INSPECTOR_APPROVED" &&
-                response.data[0]?.qa_mng_status === "QA_MANAGER_REJECTED"
-              ) {
-                message.warning("QA Inspector Not Yet Approved");
-                setTimeout(() => {
-                  navigate("/Precot/QualityControl/AR_F-005/Summary");
-                }, 1500);
-              }
-            }
-
-            setFormData({
-              analysisNumber: data.analysis_request_number,
-              bmrNumber: data.bmr_no,
-              date: data.date,
-              shift: data.shift,
-              jetlacePressure: data.jetlace_parameters_pressure,
-              jetlaceText: data.jetlace_parameters_text,
-              moistureMahlo: data.moisture_mahlo,
-              moistureProbe: data.moisture_phobe,
-              thickness: data.thickness,
-              strengthCD: data.strength_cross_direction,
-              strengthMD: data.strength_machine_direction,
-              friction: data.friction,
-              appearance: data.appearance,
-            });
-          } else {
-            setFormData({
-              analysisNumber: "",
-              bmrNumber: BMR_No,
-              date: "",
-              shift: "",
-              productName: "",
-              shaftNo: "",
-              jetlacePressure: "",
-              jetlaceText: "",
-              mixing: "",
-              gsm: "",
-              pattern: "",
-              moistureMahlo: "",
-              moistureProbe: "",
-              thickness: "",
-              strengthCD: "",
-              strengthMD: "",
-              friction: "",
-              appearance: "",
-            });
-          }
-        } catch (error) {
-          // Handle any errors that occur during the fetch
-          console.error("Error fetching data:", error);
-          message.info("Unable to fetch data. Try again later..");
-        }
-      };
-
-      fetchData();
-    }
-  }, [BMR_No]);
 
   const handleSave = async () => {
     setSaveLoading(true);
@@ -284,30 +360,36 @@ const QCLARF05 = () => {
     console.log("maind", mainID);
 
     const payload = {
-      test_id: mainID || null, // Update this with the actual test_id if needed
-      format: "Non-Woven Fleece Analysis Report", // Fixed format name
-      format_no: "PH-QCL01-AR-F-005", // Use the format number as specified
-      ref_sop_no: "PH-QCL01-D-05", // Use the SOP number as specified
-      revision_no: "03", // Use the revision number as specified
-      bmr_no: formData.bmrNumber, // Use BMR number or 'NA'
-      analysis_request_number: formData.analysisNumber, // Assuming analysisNumber is the same as request number
-      date: formData.date, // Date or 'NA'
-      shift: formData.shift, // Shift or 0
-      product_name: formData.productName?.trim(), // Trimmed product name or 'NA'
-      shaft_no: formData.shaftNo, // Shaft number or 0
-      jetlace_parameters_pressure: formData.jetlacePressure, // Jetlace pressure or 0
-      jetlace_parameters_text: formData.jetlaceText?.trim(), // Trimmed Jetlace text or 'NA'
-      mixing: formData.mixing, // Mixing or 0
-      gsm: formData.gsm, // GSM or 0
-      pattern: formData.pattern, // Pattern or 0
-      moisture_mahlo: formData.moistureMahlo, // Moisture Mahlo or 0
-      moisture_phobe: formData.moistureProbe, // Moisture probe or 0
-      thickness: formData.thickness, // Thickness or 0
-      strength_cross_direction: formData.strengthCD, // Strength CD or 0
-      strength_machine_direction: formData.strengthMD, // Strength MD or 0
-      friction: formData.friction, // Friction or 0
-      appearance: formData.appearance?.trim(), // Trimmed appearance or 'NA'
+      test_id: mainID || null,
+      format: "Non-Woven Fleece Analysis Report",
+      format_no: "PH-QCL01-AR-F-005",
+      ref_sop_no: "PH-QCL01-D-05",
+      revision_no: "03",
+      bmr_no: formData.bmrNumber,
+
+
+      line1: formData.details.map((row) => ({
+        line_id: row.line_id || null,
+        product_name: row.productName?.trim(),
+        shaft_no: row.shaftNo,
+        mixing: row.mixing,
+        gsm: row.gsm,
+        pattern: row.pattern,
+        analysis_request_number: row.analysisNumber,
+        date: row.date,
+        shift: row.shift,
+        jetlace_parameters_pressure: row.jetlacePressure,
+        jetlace_parameters_text: row.jetlaceText,
+        moisture_mahlo: row.moistureMahlo,
+        moisture_phobe: row.moistureProbe,
+        thickness: row.thickness,
+        strength_cross_direction: row.strengthCD,
+        strength_machine_direction: row.strengthMD,
+        friction: row.friction,
+        appearance: row.appearance,
+      })),
     };
+
     console.log(payload, "payload");
 
     const token = localStorage.getItem("token");
@@ -340,105 +422,38 @@ const QCLARF05 = () => {
   const handleSubmit = async () => {
     setSubmitLoading(true);
     console.log("BMR_No", BMR_No);
-
-    const allFieldsEmpty =
-      !formData.analysisNumber &&
-      !formData.date &&
-      !formData.shift &&
-      !formData.jetlacePressure &&
-      !formData.jetlaceText?.trim() &&
-      !formData.moistureMahlo &&
-      !formData.moistureProbe &&
-      !formData.thickness &&
-      !formData.strengthCD &&
-      !formData.strengthMD &&
-      !formData.friction &&
-      !formData.appearance?.trim();
-
-    if (allFieldsEmpty) {
-      message.error("No fields entered.");
-      setSubmitLoading(false);
-      return;
-    }
-
-    if (!formData.analysisNumber) {
-      message.error("Please enter Analysis Reference Number.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.date) {
-      message.error("Please select a Date.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.shift) {
-      message.error("Please select Shift.");
-      setSubmitLoading(false);
-      return;
-    }
-
-    if (!formData.moistureMahlo) {
-      message.error("Please enter Moisture Mahlo.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.moistureProbe) {
-      message.error("Please enter Moisture Probe.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.thickness) {
-      message.error("Please enter Thickness.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.strengthCD) {
-      message.error("Please enter Strength Cross Direction.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.strengthMD) {
-      message.error("Please enter Strength Machine Direction.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.friction) {
-      message.error("Please enter Friction.");
-      setSubmitLoading(false);
-      return;
-    }
-    if (!formData.appearance?.trim()) {
-      message.error("Please enter Appearance.");
-      setSubmitLoading(false);
-      return;
-    }
-
     // Prepare the payload
     console.log("maind", mainID);
+
     const payload = {
-      test_id: mainID || null, // Update this with the actual test_id if needed
-      format: "Non-Woven Fleece Analysis Report", // Fixed format name
-      format_no: "PH-QCL01-AR-F-005", // Use the format number as specified
-      ref_sop_no: "PH-QCL01-D-05", // Use the SOP number as specified
-      revision_no: "03", // Use the revision number as specified
-      bmr_no: formData.bmrNumber || "N/A", // Use BMR number or 'NA'
-      analysis_request_number: formData.analysisNumber || 0, // Assuming analysisNumber is the same as request number
-      date: formData.date || "N/A", // Date or 'NA'
-      shift: formData.shift || 0, // Shift or 0
-      product_name: formData.productName?.trim() || "N/A", // Trimmed product name or 'NA'
-      shaft_no: formData.shaftNo || 0, // Shaft number or 0
-      jetlace_parameters_pressure: formData.jetlacePressure || 0, // Jetlace pressure or 0
-      jetlace_parameters_text: formData.jetlaceText?.trim() || "N/A", // Trimmed Jetlace text or 'NA'
-      mixing: formData.mixing || 0, // Mixing or 0
-      gsm: formData.gsm || 0, // GSM or 0
-      pattern: formData.pattern || 0, // Pattern or 0
-      moisture_mahlo: formData.moistureMahlo || 0, // Moisture Mahlo or 0
-      moisture_phobe: formData.moistureProbe || 0, // Moisture probe or 0
-      thickness: formData.thickness || 0, // Thickness or 0
-      strength_cross_direction: formData.strengthCD || 0, // Strength CD or 0
-      strength_machine_direction: formData.strengthMD || 0, // Strength MD or 0
-      friction: formData.friction || 0, // Friction or 0
-      appearance: formData.appearance?.trim() || "N/A", // Trimmed appearance or 'NA'
+      test_id: mainID || null,
+      format: "Non-Woven Fleece Analysis Report",
+      format_no: "PH-QCL01-AR-F-005",
+      ref_sop_no: "PH-QCL01-D-05",
+      revision_no: "03",
+      bmr_no: formData.bmrNumber,
+
+
+      line1: formData.details.map((row) => ({
+        line_id: row.line_id || null,
+        product_name: row.productName?.trim(),
+        shaft_no: row.shaftNo,
+        mixing: row.mixing,
+        gsm: row.gsm,
+        pattern: row.pattern,
+        analysis_request_number: row.analysisNumber,
+        date: row.date,
+        shift: row.shift,
+        jetlace_parameters_pressure: row.jetlacePressure,
+        jetlace_parameters_text: row.jetlaceText,
+        moisture_mahlo: row.moistureMahlo,
+        moisture_phobe: row.moistureProbe,
+        thickness: row.thickness,
+        strength_cross_direction: row.strengthCD,
+        strength_machine_direction: row.strengthMD,
+        friction: row.friction,
+        appearance: row.appearance,
+      })),
     };
 
     const token = localStorage.getItem("token");
@@ -551,7 +566,7 @@ const QCLARF05 = () => {
     } else if (roleauth === "QA_MANAGER") {
       return !(
         (selectedRow &&
-          selectedRow.qa_inspector_status === "QA_INSPECTOR_APPROVED" && 
+          selectedRow.qa_inspector_status === "QA_INSPECTOR_APPROVED" &&
           (selectedRow.qa_mng_status === "WAITING_FOR_APPROVAL" ||
             selectedRow.qa_mng_status === "QA_MANAGER_APPROVED" ||
             selectedRow.qa_mng_status === "QA_MANAGER_REJECTED")) ||
@@ -673,51 +688,7 @@ const QCLARF05 = () => {
                   >
                     Spunlace BMR No
                   </th>
-                  <th
-                    style={{
-                      border: "1px solid black",
-                      padding: "5px 5px",
-                      width: "10%",
-                    }}
-                  >
-                    Product Name
-                  </th>
-                  <th
-                    style={{
-                      border: "1px solid black",
-                      padding: "5px 5px",
-                      width: "5%",
-                    }}
-                  >
-                    Shaft No
-                  </th>
-                  <th
-                    style={{
-                      border: "1px solid black",
-                      padding: "5px 5px",
-                      width: "10%",
-                    }}
-                  >
-                    Mixing
-                  </th>
-                  <th
-                    style={{
-                      border: "1px solid black",
-                      padding: "5px 5px",
-                      width: "5%",
-                    }}
-                  >
-                    GSM
-                  </th>
-                  <th
-                    style={{
-                      border: "1px solid black",
-                      padding: "5px 5px",
-                      width: "5%",
-                    }}
-                  >
-                    Pattern
-                  </th>
+
                 </tr>
               </thead>
               <tbody>
@@ -725,21 +696,7 @@ const QCLARF05 = () => {
                   <td style={{ padding: "5px", textAlign: "center" }}>
                     {formData.bmrNumber}
                   </td>
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    {formData.productName}
-                  </td>
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    {formData.shaftNo}
-                  </td>
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    {formData.mixing}
-                  </td>
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    {formData.gsm}
-                  </td>
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    {formData.pattern}
-                  </td>
+
                 </tr>
               </tbody>
             </table>
@@ -751,7 +708,7 @@ const QCLARF05 = () => {
                 border: "1px solid black",
                 width: "100%", // ensures the table takes up the full width of its container
                 maxWidth: "100%", // prevents the table from exceeding the container width
-                marginLeft: "20px", // adjust this if necessary for your layout
+                marginLeft: "5px", // adjust this if necessary for your layout
                 marginTop: "30px",
               }}
             >
@@ -766,7 +723,6 @@ const QCLARF05 = () => {
                   >
                     Analysis Reference Number
                   </th>
-
                   <th
                     style={{
                       border: "1px solid black",
@@ -784,7 +740,56 @@ const QCLARF05 = () => {
                       width: "10%",
                     }}
                   >
+                    Product Name
+                  </th>
+
+
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
+                    Shaft No.
+                  </th>
+
+
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
                     Jetlace Parameters Pressure and text
+                  </th>
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
+                    Mixing
+                  </th>
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
+                    GSM
+                  </th>
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
+                    Pattern
                   </th>
 
                   <th
@@ -842,215 +847,385 @@ const QCLARF05 = () => {
                   >
                     Appearance
                   </th>
+                  <th
+                    style={{
+                      border: "1px solid black",
+                      padding: "5px 5px",
+                      width: "10%",
+                    }}
+                  >
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  {/* Analysis Request Number */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="text"
-                      value={formData.analysisNumber}
-                      min={0}
-                      onChange={(e) =>
-                        handleInputChange("analysisNumber", e.target.value)
-                      }
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
-                  </td>
+                {Array.isArray(formData.details) &&
+                  formData.details.map((detail, index) => (
+                    <tr key={index}>
 
-                  {/* Date and Shift */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="date"
-                      value={formData.date}
-                      onChange={(e) =>
-                        handleInputChange("date", e.target.value)
-                      }
-                      max={getCurrentDate()}
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          value={detail.analysisNumber}
+                          min={0}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "analysisNumber",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
 
-                    <Select
-                      value={formData.shift}
-                      onChange={(value) => handleInputChange("shift", value)}
-                      style={{ width: "100%", marginTop: "10px" }}
-                      disabled={!isEditable}
-                    >
-                      {shift.map((shiftItem) => (
-                        <Select.Option
-                          value={shiftItem.value}
-                          key={shiftItem.id}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <Input
+                          type="date"
+                          value={detail.date}
+                          onChange={(e) =>
+                            handleInputChange("date", e.target.value, index)
+                          }
+                          max={getCurrentDate()}
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                        <Select
+                          value={detail.shift}
+                          onChange={(value) =>
+                            handleInputChange("shift", value, index)
+                          }
+                          style={{ width: "100%", marginTop: "10px" }}
+                          disabled={!isEditable}
                         >
-                          {shiftItem.value}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </td>
+                          {shift.map((shiftItem) => (
+                            <Select.Option
+                              value={shiftItem.value}
+                              key={shiftItem.id}
+                            >
+                              {shiftItem.value}
+                            </Select.Option>
+                          ))}
+                        </Select>
+                      </td>
 
-                  {/* Jetlace Pressure and Jetlace Text */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      value={formData.jetlacePressure}
-                      min={0}
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      onChange={(e) =>
-                        handleInputChange("jetlacePressure", e.target.value)
-                      }
-                      style={{ minWidth: "60px", marginBottom: "10px" }}
-                      disabled={!isEditable}
-                    />
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.productName}
 
-                    <Input
-                      type="text"
-                      value={formData.jetlaceText}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        handleInputChange("jetlaceText", value); // valid input
-                      }}
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
-                  </td>
+                          onChange={(e) =>
+                            handleInputChange("productName", e.target.value, index)
+                          }
 
-                  {/* Moisture Mahlo (%) and Moisture Probe (%) */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      value={formData.moistureMahlo}
-                      min={0}
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      onChange={(e) =>
-                        handleInputChange("moistureMahlo", e.target.value)
-                      }
-                      style={{ minWidth: "60px", marginBottom: "10px" }}
-                      disabled={!isEditable}
-                    />
+                          style={{ minWidth: "100px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
 
-                    <Input
-                      type="number"
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      value={formData.moistureProbe}
-                      min={0}
-                      onChange={(e) =>
-                        handleInputChange("moistureProbe", e.target.value)
-                      }
-                      disabled={!isEditable}
-                      style={{ minWidth: "60px" }}
-                    />
-                  </td>
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.shaftNo}
 
-                  {/* Thickness (mm) */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      value={formData.thickness}
-                      min={0}
-                      onChange={(e) =>
-                        handleInputChange("thickness", e.target.value)
-                      }
-                      disabled={!isEditable}
-                      style={{ minWidth: "60px" }}
-                    />
-                  </td>
+                          onChange={(e) =>
+                            handleInputChange("shaftNo", e.target.value, index)
+                          }
+                          style={{ minWidth: "70px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
 
-                  {/* Strength in CD (N) */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      value={formData.strengthCD}
-                      min={0}
-                      onChange={(e) =>
-                        handleInputChange("strengthCD", e.target.value)
-                      }
-                      style={{ minWidth: "60px" }}
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      disabled={!isEditable}
-                    />
-                  </td>
+                      {/* Jetlace Pressure and Jetlace Text */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          value={detail.jetlacePressure}
+                          min={0}
 
-                  {/* Strength in MD (N) */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      min={0}
-                      value={formData.strengthMD}
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      onChange={(e) =>
-                        handleInputChange("strengthMD", e.target.value)
-                      }
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
-                  </td>
+                          onChange={(e) =>
+                            handleInputChange(
+                              "jetlacePressure",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "60px", marginBottom: "10px" }}
+                          disabled={!isEditable}
+                        />
+                        <TextArea
+                          type="text"
+                          value={detail.jetlaceText}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "jetlaceText",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "90px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
 
-                  {/* Friction (N) */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="number"
-                      min={0}
-                      value={formData.friction}
-                      onKeyPress={(e) => {
-                        if (e.key === "-" || e.key === "e" || e.key === "E") {
-                          e.preventDefault();
-                        }
-                      }}
-                      onChange={(e) =>
-                        handleInputChange("friction", e.target.value)
-                      }
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
-                  </td>
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.mixing}
 
-                  {/* Appearance */}
-                  <td style={{ padding: "5px", textAlign: "center" }}>
-                    <Input
-                      type="text"
-                      value={formData.appearance}
-                      onChange={(e) => {
-                        const value = e.target.value;
+                          onChange={(e) =>
+                            handleInputChange("mixing", e.target.value, index)
+                          }
+                          style={{ minWidth: "100px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
 
-                        handleInputChange("appearance", value); // valid input
-                      }}
-                      style={{ minWidth: "60px" }}
-                      disabled={!isEditable}
-                    />
-                  </td>
-                </tr>
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.gsm}
+
+                          onChange={(e) =>
+                            handleInputChange("gsm", e.target.value, index)
+                          }
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.pattern}
+
+                          onChange={(e) =>
+                            handleInputChange("pattern", e.target.value, index)
+                          }
+                          style={{ minWidth: "70px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      {/* Moisture Mahlo (%) and Moisture Probe (%) */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          value={detail.moistureMahlo}
+                          min={0}
+
+                          onChange={(e) =>
+                            handleInputChange(
+                              "moistureMahlo",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "60px", marginBottom: "10px" }}
+                          disabled={!isEditable}
+                        />
+                        <TextArea
+                          type="text"
+
+                          value={detail.moistureProbe}
+                          min={0}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "moistureProbe",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          disabled={!isEditable}
+                          style={{ minWidth: "60px" }}
+                        />
+                      </td>
+
+                      {/* Thickness (mm) */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+
+                          value={detail.thickness}
+                          min={0}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "thickness",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          disabled={!isEditable}
+                          style={{ minWidth: "60px" }}
+                        />
+                      </td>
+
+                      {/* Strength in CD (N) */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          value={detail.strengthCD}
+                          min={0}
+                          onChange={(e) =>
+                            handleInputChange(
+                              "strengthCD",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "60px" }}
+
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      {/* Strength in MD (N) */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.strengthMD}
+
+                          onChange={(e) =>
+                            handleInputChange(
+                              "strengthMD",
+                              e.target.value,
+                              index
+                            )
+                          }
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      {/* Friction (N) */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          min={0}
+                          value={detail.friction}
+
+                          onChange={(e) =>
+                            handleInputChange("friction", e.target.value, index)
+                          }
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      {/* Appearance */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <TextArea
+                          type="text"
+                          value={detail.appearance}
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            handleInputChange("appearance", value, index);
+                          }}
+                          style={{ minWidth: "60px" }}
+                          disabled={!isEditable}
+                        />
+                      </td>
+
+                      {/* Action - Delete row button */}
+                      <td
+                        style={{
+                          padding: "5px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <Button
+                          type="primary"
+                          danger
+                          onClick={() => deleteRow(index)}
+                          disabled={!isEditable || formData.details.length <= 1}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
 
-          {/* <Button
+          <Button
             type="primary"
             style={{
               backgroundColor: "#E5EEF9",
@@ -1062,16 +1237,14 @@ const QCLARF05 = () => {
               marginLeft: "20px",
               marginTop: "20px",
             }}
-            // disabled={disable}
-            // disabled={!isEditable}
-
+            disabled={!isEditable}
             onClick={addRow}
             icon={
               <AiOutlinePlus style={{ color: "#00308F", marginRight: "1px" }} />
             }
           >
             Add Row
-          </Button> */}
+          </Button>
         </div>
       ),
     },
@@ -1113,21 +1286,22 @@ const QCLARF05 = () => {
                   verticalAlign: "bottom",
                 }}
               >
-                {selectedRow?.qa_inspector_status === "QA_INSPECTOR_APPROVED" && (
-                  <>
-                    {getImage && (
-                      <img
-                        className="signature"
-                        src={getImage}
-                        alt="Operator"
-                      />
-                    )}
-                    <br />
-                    {selectedRow && selectedRow.qa_inspector_sign}
-                    <br />
-                    {formattedQAINSDate}
-                  </>
-                )}
+                {selectedRow?.qa_inspector_status ===
+                  "QA_INSPECTOR_APPROVED" && (
+                    <>
+                      {getImage && (
+                        <img
+                          className="signature"
+                          src={getImage}
+                          alt="Operator"
+                        />
+                      )}
+                      <br />
+                      {selectedRow && selectedRow.qa_inspector_sign}
+                      <br />
+                      {formattedQAINSDate}
+                    </>
+                  )}
               </td>
               <td
                 colSpan="2"
@@ -1140,20 +1314,20 @@ const QCLARF05 = () => {
               >
                 {(selectedRow?.qa_mng_status === "QA_MANAGER_REJECTED" ||
                   selectedRow?.qa_mng_status === "QA_MANAGER_APPROVED") && (
-                  <>
-                    {getImage1 && (
-                      <img
-                        className="signature"
-                        src={getImage1}
-                        alt="Superviosr Sign"
-                      />
-                    )}
-                    <br />
-                    {selectedRow && selectedRow.qa_mng_sign}
-                    <br />
-                    {formattedQAMNGDate}
-                  </>
-                )}
+                    <>
+                      {getImage1 && (
+                        <img
+                          className="signature"
+                          src={getImage1}
+                          alt="Superviosr Sign"
+                        />
+                      )}
+                      <br />
+                      {selectedRow && selectedRow.qa_mng_sign}
+                      <br />
+                      {formattedQAMNGDate}
+                    </>
+                  )}
               </td>
             </tr>
           </table>

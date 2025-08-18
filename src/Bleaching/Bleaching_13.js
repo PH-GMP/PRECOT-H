@@ -117,25 +117,16 @@ const Bleaching = () => {
   const [dateprintsec, setisdateprintsec] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const onChange = (key) => {
-    //// console.log(key);
-  };
+  const onChange = (key) => {};
   const [saveBtnStatus, setSaveBtnStatus] = useState(false);
   const [submitBtnStatus, setSubmitBtnStatus] = useState(false);
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
-
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
   const location = useLocation();
-
   const { state } = location;
-
   const { subbatch, bmrnos2 } = state || {};
-  // console.log("bmrno", bmrnos2, subbatch);
-  const McNo = [1, 2, 3, 4, 5];
-  // Function to handle submitting
-
   const handleChange = (event) => {
     setsetilon_kn(event.target.value);
     const value = event.target.value;
@@ -163,9 +154,7 @@ const Bleaching = () => {
   const handleStartTimeBlur = () => {
     validateTimes(startTime, endTime);
   };
-
   const [getImage, setGetImage] = useState("");
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = selectedRow?.supervisor_sign;
@@ -299,14 +288,13 @@ const Bleaching = () => {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res);
-        // window.location.reload();
+
         message.success(res.data.message);
         navigate("/Precot/Bleaching/F-13/Summary");
       })
       .catch((err) => {
         setLoading(false);
-        // console.log("Err", err.response.data.message);
+
         message.error(err.response.data.message);
       })
       .finally(() => {
@@ -322,7 +310,7 @@ const Bleaching = () => {
 
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     if (!rejectRemarks) {
@@ -343,14 +331,13 @@ const Bleaching = () => {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res.data.message);
-        // window.location.reload();
+
         message.success(res.data.message);
         navigate("/Precot/Bleaching/F-13/Summary");
       })
       .catch((err) => {
         setLoading(false);
-        // console.log("Err", err.response.data.message);
+
         message.error(err.response.data.message);
       })
       .finally(() => {
@@ -421,29 +408,17 @@ const Bleaching = () => {
   };
   const handleDateChange = (e) => {
     const date = e.target.value;
-    // console.log("Current Date", date);
-    // console.log("SUb batch date", lastDateTime);
-    // if (lastDateTime > date) {
-    //   message.warning("Date should be big");
-    // }
-    // if(new Date (lastDateTime) >= new Date (date)){
-    //   message.warning("Date should be big")
-    //   return ;
-    // }
     setNewDate(date);
   };
 
   const handleEndDateChange = (e) => {
     const date = e.target.value;
-    // console.log("Current Date", date);
-    // console.log("SUb batch date", lastDateTime);
     setEndDate(date);
   };
 
   const handleStartTimeChange = (e) => {
     const currectstarttime = e.target.value;
-    // console.log("Current Time", currectstarttime);
-    // console.log("SUb batch StartTime", MinStartTime);
+
     if (lastDateTime == newDate) {
       if (currectstarttime >= MinStartTime) {
         setStartTime(currectstarttime);
@@ -468,9 +443,6 @@ const Bleaching = () => {
     } else {
       try {
         sendBleachingJobCard2();
-
-        //// console.log("Date Format :",new Date(INcharge_Date).toLocaleDateString() + " " +new Date(INcharge_Date).toLocaleDateString )
-        // alert("Bleaching job card submitted successfully!");
       } catch (error) {
         console.error("Error submitting bleaching job card:", error);
       }
@@ -495,8 +467,6 @@ const Bleaching = () => {
       Number(HW_waterFill2) +
       Number(NW_waterFill) +
       Number(FC_waterFill);
-
-    console.log("totalWaterFill", totalWaterFill);
 
     if (totalWaterFill > totalMinutes) {
       return true;
@@ -761,7 +731,7 @@ const Bleaching = () => {
             }
 
             statusFunction(res.data[0]);
-            // console.log("The array is not empty");
+
             if (data.hod_submit_on) {
               const datePartsupervisor_submit_onvalue = data.hod_submit_on;
               const formattedHODSubmitted = moment(
@@ -856,17 +826,11 @@ const Bleaching = () => {
               "DD/MM/YYYY"
             );
             setisdateprintsec(formattedHODSubmitteddate);
-            // console.log("datedd", dateprintsec);
 
             const data = res.data[0];
           } else {
           }
-
-          // setbatchno(data);
-          // // console.log("response of laydown",batchno);
         });
-
-      // Assuming the response data structure matches the payload structure you provided
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
@@ -875,11 +839,7 @@ const Bleaching = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(disable);
-    console.log(saveBtnStatus);
-    console.log(submitBtnStatus);
-  }, [disable, saveBtnStatus, submitBtnStatus]);
+  useEffect(() => {}, [disable, saveBtnStatus, submitBtnStatus]);
 
   const statusFunction = (responseData) => {
     if (
@@ -968,7 +928,6 @@ const Bleaching = () => {
           }
         )
         .then((res) => {
-          // // console.log("Shift details fetched:", res.data);
           const data = res.data.map((laydownno) => laydownno.value);
           setbatchno(data);
         });
@@ -1121,9 +1080,8 @@ const Bleaching = () => {
         setSaveLoading(false);
         message.success("BLEACHING JOB CARD  Saved successfully");
         fetchDataBMRdetails();
-        // console.log("messsage", res);
+
         navigate("/Precot/Bleaching/F-13/Summary");
-        // message.success("LaydownChecklist Submitted successfully");
       })
       .catch((err) => {
         setSaveLoading(false);
@@ -1148,7 +1106,6 @@ const Bleaching = () => {
 
   //SAve API
   const sendBleachingJobCard2 = () => {
-    console.log("availableshiftlov", availableshiftlov);
     const requiredFields = [
       { field: newDate, message: "Start Date is required" },
       { field: endDate, message: "End Date is required" },
@@ -1314,7 +1271,7 @@ const Bleaching = () => {
     // Make the POST request to the API endpoint
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     // Make the POST request to the API endpoint with headers
@@ -1325,16 +1282,13 @@ const Bleaching = () => {
         { headers }
       )
       .then((res) => {
-        // setSaveLoading(false);
         message.success("BLEACHING JOB CARD Submitted successfully");
-        // console.log("messsage", res);
+
         fetchDataBMRdetails();
-        // message.success("LaydownChecklist Submitted successfully");
+
         navigate("/Precot/Bleaching/F-13/Summary");
       })
       .catch((err) => {
-        // setSaveLoading(false);
-
         message.error(err.response.data.message);
       })
       .finally(() => {
@@ -1358,18 +1312,14 @@ const Bleaching = () => {
         );
         const fetchedDate = response.data[0].DATE;
         const fetchedStartTime = response.data[0].START_TIME;
-        // console.log("Fetched Time:", fetchedStartTime);
         setLastDateTime(fetchedDate);
         setminStartTime(fetchedStartTime);
         setminDate(new Date(fetchedDate));
-        // console.log("value", MinStartTime);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     getLastDate();
-    // console.log("minstarttime", MinStartTime);
   }, []);
 
   const roleBase = localStorage.getItem("role");
@@ -1395,7 +1345,6 @@ const Bleaching = () => {
         },
       })
       .then((res) => {
-        // console.log("Shift details fetched:", res.data);
         const shifts = res.data.map((shift) => shift.value);
         setAvailableShifts(shifts);
       });

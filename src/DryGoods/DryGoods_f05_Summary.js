@@ -1,25 +1,37 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import {
-  EditOutlined
-} from "@ant-design/icons";
-import { Button, Input, Modal, Select, Table, Tooltip, message } from "antd";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import { Button, Select, Table, Tooltip, message, Input, Modal } from "antd";
 import {
+  EyeOutlined,
+  EditOutlined,
+  PlusOutlined,
+  LeftOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import {
+  BiBorderLeft,
+  BiBorderNone,
+  BiBorderRight,
   BiLock,
-  BiNavigation
+  BiNavigation,
 } from "react-icons/bi";
+import BleachingTail from "../Components/BleachingTail.js";
+import BleachingPrintHeader from "../Components/BleachingPrintHeader.js";
+import BleachingHeader from "../Components/BleachingHeader.js";
 import { FaUserCircle } from "react-icons/fa";
+import { jwtDecode } from "jwt-decode";
+import { GrAdd } from "react-icons/gr";
 import { FaPrint } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
-import { TbMenuDeep } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
 import logo from "../Assests/logo.png";
 import API from "../baseUrl.json";
-import BleachingHeader from "../Components/BleachingHeader.js";
-import PrecotSidebar from "../Components/PrecotSidebar.js";
+import { TbMenuDeep } from "react-icons/tb";
+import { FaLock } from "react-icons/fa6";
+import { IoCreate } from "react-icons/io5";
 import "../index.css";
+import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const DryGoods_f05_Summary = () => {
   const [open, setOpen] = useState(false);
@@ -52,6 +64,7 @@ const DryGoods_f05_Summary = () => {
     operator_sign: "",
     hod_sign: "",
   });
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const signatureKeys = ["operator_sign", "supervisor_sign", "hod_sign"];
@@ -60,7 +73,7 @@ const DryGoods_f05_Summary = () => {
       if (username) {
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -90,9 +103,9 @@ const DryGoods_f05_Summary = () => {
   useEffect(() => {
     let apiUrl;
     if (role == "ROLE_OPERATOR") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getOperatorSummarydetailsF05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getOperatorSummarydetailsF05`;
     } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF05`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF05`;
     }
     if (!initialized.current && apiUrl) {
       initialized.current = true;
@@ -113,7 +126,6 @@ const DryGoods_f05_Summary = () => {
     }
   }, [token, navigate]);
 
-  
   useEffect(() => {
     const fetchDataLov = async () => {
       let pdeShift;
@@ -130,7 +142,7 @@ const DryGoods_f05_Summary = () => {
       }
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/goods/api/dryGoodsOderNo?date=${formParams.date}&shift=${pdeShift}`,
+          `${API.prodUrl}/Precot/api/goods/api/dryGoodsOderNo?date=${formParams.date}&shift=${pdeShift}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -172,7 +184,7 @@ const DryGoods_f05_Summary = () => {
       }
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/goods/api/dryGoodsOderNo?date=${printParams.date}&shift=${pdeShift}`,
+          `${API.prodUrl}/Precot/api/goods/api/dryGoodsOderNo?date=${printParams.date}&shift=${pdeShift}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -353,17 +365,10 @@ const DryGoods_f05_Summary = () => {
   }, [printData]);
 
   const handlePrint = async () => {
-    if (printParams.date == "" || printParams.date == null) {
-      message.warning("Please Select Date");
-      return;
-    } else if (printParams.shift == "" || printParams.shift == null) {
-      message.warning("Please Select Shift");
-      return;
-    }
     try {
       setPrintButtonLoading(true);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/getRollForPrintF05?date=${printParams.date}&shift=${printParams.shift}&order_no=${printOrder}`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/getRollForPrintF05?date=${printParams.date}&shift=${printParams.shift}&order_no=${printOrder}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -407,7 +412,7 @@ const DryGoods_f05_Summary = () => {
       }
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROll1?date=${printParams.date}&shift=${pdeShift}`,
+        `${API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROll1?date=${printParams.date}&shift=${pdeShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -428,6 +433,7 @@ const DryGoods_f05_Summary = () => {
       setPrintButtonLoading(false);
     }
   };
+
   useEffect(() => {
     if (orderNO) {
       const handleOrderNo = async () => {
@@ -448,7 +454,7 @@ const DryGoods_f05_Summary = () => {
 
         try {
           const response2 = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROllStoppage?date=${
+            `${API.prodUrl}/Precot/api/goods/api/dryGoodsMiniROllStoppage?date=${
               printParams.date
             }&order_no=${Number(orderNO)}&shift=${pdeShift}`,
             {
@@ -965,7 +971,7 @@ const DryGoods_f05_Summary = () => {
                   ></td>
                 </tr>
                 <tr>
-                  <td colSpan={5}>4.Stoppage:</td>
+                  <td colSpan={6}>4.Stoppage:</td>
                 </tr>
                 <tr>
                   <td style={{ textAlign: "center" }}>S.No.</td>
@@ -973,6 +979,7 @@ const DryGoods_f05_Summary = () => {
                   <td style={{ textAlign: "center" }}>Stop. Time</td>
                   <td style={{ textAlign: "center" }}>Restart Time</td>
                   <td style={{ textAlign: "center" }}>Idle Time (in Min)</td>
+                  <td style={{ textAlign: "center" }}>Remarks</td>
                 </tr>
               </thead>
               <tbody>
@@ -987,6 +994,7 @@ const DryGoods_f05_Summary = () => {
                     <td style={{ textAlign: "center" }}>{row.FTime}</td>
                     <td style={{ textAlign: "center" }}>{row.TTime}</td>
                     <td style={{ textAlign: "center" }}>{row.TotHrs}</td>
+                    <td style={{ textAlign: "center" }}>{row.SRemarks}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1173,17 +1181,19 @@ const DryGoods_f05_Summary = () => {
                   ></td>
                 </tr>
                 <tr>
-                  <td colSpan={4}>4.Stoppage:</td>
+                  <td colSpan={5}>4.Stoppage:</td>
                 </tr>
                 <tr>
                   <td style={{ textAlign: "center" }}>Nature Of Problem</td>
                   <td style={{ textAlign: "center" }}>Stop. Time</td>
                   <td style={{ textAlign: "center" }}>Restart Time</td>
                   <td style={{ textAlign: "center" }}>Idle Time (in Min)</td>
+                  <td style={{ textAlign: "center" }}>Remarks</td>
                 </tr>
               </thead>
               <tbody>
                 <tr tyle={{ width: "100%" }}>
+                  <td style={{ textAlign: "center" }}>NA</td>
                   <td style={{ textAlign: "center" }}>NA</td>
                   <td style={{ textAlign: "center" }}>NA</td>
                   <td style={{ textAlign: "center" }}>NA</td>

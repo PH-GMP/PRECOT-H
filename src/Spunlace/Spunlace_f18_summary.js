@@ -103,7 +103,7 @@ const Spunlace_f18_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const Spunlace_f18_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -214,7 +214,7 @@ const Spunlace_f18_summary = () => {
       };
 
       const response1 = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/report/printStoppageReport?date=${selectedDate}`,
+        `${API.prodUrl}/Precot/api/spulance/report/printStoppageReport?date=${selectedDate}`,
         { headers }
       );
 
@@ -222,7 +222,7 @@ const Spunlace_f18_summary = () => {
         setPrintResponseData(response1.data);
         // console.log("res", response1.data);
         const response2 = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/sliterwinderStoppageReport?date=${selectedDate}`,
+          `${API.prodUrl}/Precot/api/spulance/sliterwinderStoppageReport?date=${selectedDate}`,
           { headers }
         );
 
@@ -291,7 +291,7 @@ const Spunlace_f18_summary = () => {
           role === "ROLE_DESIGNEE" ||
           role === "ROLE_SUPERVISOR"
         ) {
-          apiUrl = `${ API.prodUrl}/Precot/api/spulance/report/hodSummaryF018`;
+          apiUrl = `${API.prodUrl}/Precot/api/spulance/report/hodSummaryF018`;
         } else {
           throw new Error("Role not found in localStorage.");
         }
@@ -602,10 +602,10 @@ const Spunlace_f18_summary = () => {
                 <td colSpan="3" style={{ textAlign: "center", padding: "4px" }}>
                   {printresponseData[0]?.date
                     ? new Intl.DateTimeFormat("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      }).format(new Date(printresponseData[0].date))
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    }).format(new Date(printresponseData[0].date))
                     : ""}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
@@ -621,28 +621,28 @@ const Spunlace_f18_summary = () => {
                   {detail.ProdInKg || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.LC || "NA"}
+                  {detail.LC_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.GR || "NA"}
+                  {detail.SCL_TotalHours + detail.CL_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.Other || "NA"}
+                  {detail.MI_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.TotalDowntime || "NA"}
+                  {detail.SCL_TotalHours + detail.CL_TotalHours + detail.MI_TotalHours + detail.LC_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.ER || "NA"}
+                  {detail.ER_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.MR || "NA"}
+                  {detail.MR_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.TotalBreakdown || "NA"}
+                  {detail.ER_TotalHours + detail.MR_TotalHours || "NA"}
                 </td>
                 <td colSpan="2" style={{ textAlign: "center" }}>
-                  {detail.TotalTimeInMin || "NA"}
+                  {detail.SCL_TotalHours + detail.CL_TotalHours + detail.MI_TotalHours + detail.LC_TotalHours + detail.ER_TotalHours + detail.MR_TotalHours || "NA"}
                 </td>
               </tr>
             ))}
@@ -673,15 +673,15 @@ const Spunlace_f18_summary = () => {
                 <br />
                 {printresponseData[0]?.supervisor_submit_on
                   ? new Intl.DateTimeFormat("en-GB", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: false,
-                    }).format(
-                      new Date(printresponseData[0].supervisor_submit_on)
-                    )
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  }).format(
+                    new Date(printresponseData[0].supervisor_submit_on)
+                  )
                   : ""}
                 <br />
                 <img
@@ -710,13 +710,13 @@ const Spunlace_f18_summary = () => {
                 <br />
                 {printresponseData[0]?.hod_submit_on
                   ? new Intl.DateTimeFormat("en-GB", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: false,
-                    }).format(new Date(printresponseData[0].hod_submit_on))
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  }).format(new Date(printresponseData[0].hod_submit_on))
                   : ""}
                 <br />
                 <img
@@ -888,7 +888,7 @@ const Spunlace_f18_summary = () => {
             shape="round"
             icon={<BiNavigation color={"#00308F"} />}
             onClick={goTo}
-            //disabled={!shift || !OrderNo || !newDate}
+          //disabled={!shift || !OrderNo || !newDate}
           >
             Go To
           </Button>
@@ -896,63 +896,6 @@ const Spunlace_f18_summary = () => {
       </div>
 
       <Table columns={columns} dataSource={ContaminationData} />
-
-      {/* <Modal
-        title="Print"
-        open={showModal}
-        onOk={handleModalClose}
-        onCancel={handleModalClose}
-       
-        footer={[
-          <Button key="submit" type="primary" shape="round" style={{
-            backgroundColor: "#E5EEF9",
-            color: "#00308F",
-            fontWeight: "bold",
-          }} onClick={printSubmit} disabled={!shiftPrint}  >
-            Submit
-          </Button>,
-        ]}
-      >  
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-                 <label style={{ marginRight: '8px' , width: '30%' , textAlign:'center'}}>Date:</label>
- 
-                 <Input
- 
-                  onChange={handleDatePrint}
-                  type="date"
-                  value={datePrint}
-                
-                  size="small"
-                  // max ={ formattedToday }
-                  style={{ width: '50%', height:'30px' }}
- 
-                  />
-            </div>
-             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-                <label style={{ marginRight: '8px', width: '30%' , textAlign:'center' }}>Shift:</label>
- 
-                <Select
-                   showSearch
-                   value={shiftPrint}
-                   onChange={fetchPrintValue}
-                   style={{ width: '50%' }}
-                   placeholder="Search Batch No"
-                   optionFilterProp="children"
-                >
-                 <Select.Option value="" disabled selected>
-                     Shift
-                    </Select.Option>
-                    {shiftLov.map((option) => (
-                    <Select.Option key={option.id} value={option.value}>
-                    {option.value}
-                    </Select.Option>
-                   ))}
-                </Select>
-     
-              </div> 
- 
- 
-      </Modal> */}
 
       <Modal
         title="Print"

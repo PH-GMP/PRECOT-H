@@ -1,37 +1,31 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import {
-  Alert,
   Avatar,
   Button,
-  Card,
   Col,
   Drawer,
-  Flex,
   Form,
   Input,
   Layout,
   Menu,
   message,
+  Modal,
+  notification,
   Row,
   Select,
   Space,
-  notification,
-  Modal,
-  Checkbox,
 } from "antd";
-import { CiBoxList } from "react-icons/ci";
-import { FaLock, FaRectangleList, FaTableList } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
-import { IoCreate, IoDownload } from "react-icons/io5";
-import { IoIosApps } from "react-icons/io";
-import { BiLock } from "react-icons/bi";
-import { TbMenuDeep } from "react-icons/tb";
-import API from "../baseUrl.json";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { AiOutlineSignature } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
+import { FaLock, FaRectangleList } from "react-icons/fa6";
+import { IoCreate, IoDownload } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 import addUser from "../Assests/add-user.png";
+import API from "../baseUrl.json";
 
 const { Header, Footer, Sider, Content } = Layout;
 const contentStyle = {
@@ -51,18 +45,15 @@ const UserCreate = () => {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
   const [email, setEmailId] = useState("");
-
+  const [departmentId, setDepartmentId] = useState([]);
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("left");
-  const [openalert, setopenalert] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-
-  const [departmentId, setdepartmentId] = useState("");
-  const [departmentList, setdepartmentList] = useState();
+  const [departmentList, setdepartmentList] = useState([]);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [resetBtnLoading, setResetBtnLoading] = useState(false);
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -74,6 +65,7 @@ const UserCreate = () => {
     if (nav == "navigate") {
       setTimeout(() => {
         setButtonLoading(false);
+        setResetBtnLoading(false);
         navigate("/Precot/userlist");
         notification[type]({
           message: message,
@@ -81,6 +73,7 @@ const UserCreate = () => {
       }, [1000]);
     } else if (nav == "nonavigate") {
       setButtonLoading(false);
+      setResetBtnLoading(false);
       notification[type]({
         message: message,
       });
@@ -91,21 +84,17 @@ const UserCreate = () => {
 
   const token = localStorage.getItem("token");
 
-  // Shift Get api for show the shift values.....
   useEffect(() => {
-    // Fetch shift options from the API
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json", // Adjust content type if needed
     };
-    const fetchShifts = async () => {
+    const fetchDepartments = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
-        // setdepartmentList(response.data);
-        // console.log("Shift Lov ", response.data);
         const a = response.data.map((x, i) => {
           return {
             value: x.id,
@@ -113,13 +102,11 @@ const UserCreate = () => {
           };
         });
         setdepartmentList(a);
-
-        // console.log("Aaaa", a);
       } catch (error) {
         console.error("Error fetching shifts:", error);
       }
     };
-    fetchShifts();
+    fetchDepartments();
   }, []);
 
   const [userRolesLov, setUserRolesLov] = useState();
@@ -128,7 +115,7 @@ const UserCreate = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/Users/Service/getListOfRoles`, {
+      .get(`${API.prodUrl}/Precot/api/Users/Service/getListOfRoles`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -151,22 +138,6 @@ const UserCreate = () => {
         // console.log("Error in userRole", err);
       });
   }, []);
-
-  const handleRole = (e) => {
-    setUserRoles(e.target.value);
-  };
-
-  // const onChangeDepartment = (values) => {
-  //   // console.log("Department Values :", values);
-  //   setdepartmentId(values);
-  // };
-
-  const onChangeDepartment = (value) => {
-    // Update selected departments when user selects/deselects departments
-    setSelectedDepartments(value);
-
-    console.log("Selected Department IDs: ", value); // Log the selected department IDs
-  };
 
   const onChangeRole = (values) => {
     // console.log("Role Values :", values);
@@ -192,25 +163,65 @@ const UserCreate = () => {
     setRole(x);
   }, []);
 
-  const onFinishFailed = (errorInfo) => {
-    // console.log("Failed:", errorInfo);
-    messageApi.open({
-      type: "error",
-      content: "Please fill all fields",
-    });
+  const handleChange = (selectedValues) => {
+    if (selectedValues.includes("ALL")) {
+      // Select all departments
+      const allIds = departmentList.map((item) => item.value);
+      const allNames = departmentList.map((item) => item.label);
+      console.log("allIds", allIds);
+      console.log("allNames", allNames);
+      setDepartmentId(allIds);
+      setSelectedDepartments(allNames);
+    } else {
+      // Filter out "ALL" if it was accidentally left in selected
+      const validIds = selectedValues.filter((val) => val !== "ALL");
+      const selectedNames = departmentList
+        .filter((item) => validIds.includes(item.value))
+        .map((item) => item.label);
+      console.log("validIds", validIds);
+      console.log("selectedNames", selectedNames);
+      setDepartmentId(validIds);
+      setSelectedDepartments(selectedNames);
+    }
   };
 
-  const onFinish = (values) => {
+  const getSelectedValues = () => {
+    // Convert current departmentId state to match <Select> value
+    return departmentId;
+  };
+
+  const userCreate = (values) => {
     setButtonLoading(true);
+    setResetBtnLoading(true);
+    console.log(
+      name,
+      username,
+      email,
+      password,
+      userRole,
+      departmentId,
+      values
+    );
+    if (
+      !name ||
+      !username ||
+      !email ||
+      !password ||
+      !userRole ||
+      departmentId.length === 0
+    ) {
+      message.error("Please fill in all fields.");
+      return;
+    }
+
     axios
-      .post(`${ API.prodUrl}/Precot/api/auth/signup`, {
+      .post(`${API.prodUrl}/Precot/api/auth/signup`, {
         name: name,
         username: username,
         email: email,
         password: password,
         userRoles: userRole,
-        // departmentId: departmentId,
-        departmentId: selectedDepartments,
+        departmentId: departmentId,
       })
       .then((res) => {
         message.success({
@@ -219,6 +230,7 @@ const UserCreate = () => {
         if (res.status == 200 || res.status == 201) {
           message.success(res.data.message);
           setButtonLoading(false);
+          setResetBtnLoading(false);
           setTimeout(() => {
             navigate("/Precot/userlist");
           }, [1000]);
@@ -230,6 +242,7 @@ const UserCreate = () => {
               content: res.data.message,
             });
             setButtonLoading(false);
+            setResetBtnLoading(false);
             navigate("/Precot/userlist");
           }, [1000]);
         }
@@ -247,7 +260,7 @@ const UserCreate = () => {
           if (
             err.response.data.message &&
             err.response.data.message !==
-              "User Created! but unable to Send Mail"
+            "User Created! but unable to Send Mail"
           ) {
             errorMessage2.push(err.response.data.message);
           }
@@ -272,9 +285,6 @@ const UserCreate = () => {
           openNotification("error", "An error occurred", "nonavigate");
         }
       });
-    // .finally(() => {
-    //   setLoading(false);
-    // });
   };
 
   return (
@@ -479,8 +489,6 @@ const UserCreate = () => {
               remember: true,
             }}
             layout="vertical"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <center>
@@ -612,52 +620,23 @@ const UserCreate = () => {
             >
               <Select
                 mode="multiple"
+                allowClear
+                placeholder="Select departments"
+                value={getSelectedValues()}
+                onChange={handleChange}
                 style={{ width: "100%" }}
-                placeholder="Select Departments"
-                value={selectedDepartments}
-                onChange={onChangeDepartment}
-                options={departmentList}
-                dropdownRender={(menu) => (
-                  <div>
-                    {menu}
-                    <div
-                      style={{
-                        padding: "8px",
-                        textAlign: "center",
-                        borderTop: "1px solid #e8e8e8",
-                      }}
-                    >
-                      <Checkbox
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setSelectedDepartments(
-                              departmentList.map((d) => d.value)
-                            );
-                          } else {
-                            setSelectedDepartments([]);
-                          }
-                        }}
-                        checked={
-                          selectedDepartments &&
-                          departmentList &&
-                          selectedDepartments.length === departmentList.length
-                        }
-                      >
-                        Select All
-                      </Checkbox>
-                    </div>
-                  </div>
-                )}
-                optionRender={(option) => (
-                  <Space>
-                    <Checkbox
-                      checked={selectedDepartments.includes(option.value)}
-                      onChange={() => {}}
-                    />
-                    <span>{option.label}</span>
-                  </Space>
-                )}
-              />
+              >
+                <Option key="ALL" value="ALL">
+                  Select All
+                </Option>
+                {departmentList.map((dept) => (
+                  <Option key={dept.value} value={dept.value}>
+                    {dept.label}
+                  </Option>
+                ))}
+              </Select>
+              {/* Display selected names below */}
+              <div style={{ marginTop: 10 }}></div>
             </Form.Item>
 
             <Form.Item
@@ -675,6 +654,7 @@ const UserCreate = () => {
             >
               <Select
                 onChange={onChangeRole}
+                showSearch
                 options={userRolesLov && userRolesLov}
               />
             </Form.Item>
@@ -691,10 +671,15 @@ const UserCreate = () => {
                   type="primary"
                   htmlType="submit"
                   loading={buttonLoading}
+                  onClick={userCreate}
                 >
                   Create
                 </Button>
-                <Button type="default" htmlType="reset" loading={buttonLoading}>
+                <Button
+                  type="default"
+                  htmlType="reset"
+                  loading={resetBtnLoading}
+                >
                   Reset
                 </Button>
               </Space>

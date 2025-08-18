@@ -1,36 +1,29 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import logo from "../Assests/logo.png";
 import {
-  Table,
-  Modal,
-  Select,
-  InputGroup,
-  message,
-  Tooltip,
-  Menu,
-  Avatar,
-  Drawer,
-} from "antd";
-import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
+  EditOutlined
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import BleachingHeader from "../Components/BleachingHeader.js";
-import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
-import { FaLock, FaUserCircle } from "react-icons/fa";
-import API from "../baseUrl.json";
-import { GoArrowLeft } from "react-icons/go";
-import { Tabs, Button, Col, Input, Row } from "antd";
-import { IoCreate, IoPrint } from "react-icons/io5";
-import { TbMenuDeep } from "react-icons/tb";
+import {
+  Button, Col, Input,
+  message,
+  Modal,
+  Row,
+  Select,
+  Table,
+  Tooltip
+} from "antd";
+import axios from "axios";
 import moment from "moment";
-import { createGlobalStyle } from "styled-components";
+import { useEffect, useState } from "react";
+import { BiLock, BiNavigation } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { IoPrint } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader.js";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const PadPunching_f03_Summary = () => {
@@ -46,12 +39,24 @@ const PadPunching_f03_Summary = () => {
   const [getImage1, setGetImage1] = useState("");
   const [getImage2, setGetImage2] = useState("");
   const [getImage3, setGetImage3] = useState("");
+
   const showDrawer = () => {
     setOpen(true);
   };
+
+  const [orderProductDetails, setorderProductDetails] = useState("");
+  const [orderProductDetails2, setorderProductDetails2] = useState("");
+
+  const [firstOrderNumber, setFirstOrderNumber] = useState("");
+  const [secondOrderNumber, setSecondOrderNumber] = useState("");
+  const [firstOrderNumberPrint, setFirstOrderNumberPrint] = useState("");
+  const [secondOrderNumberPrint, setSecondOrderNumberPrint] = useState("");
+
+
   const onClose = () => {
     setOpen(false);
   };
+  const [orderNumberLov, setOrderNumberLov] = useState([]);
   const [open, setOpen] = useState(false);
   const [shift, setShift] = useState("");
   const [machineName, setMachineName] = useState("");
@@ -61,24 +66,37 @@ const PadPunching_f03_Summary = () => {
   const [shiftPrint, setShiftPrint] = useState("");
   const [machineNamePrint, setMacineNamePrint] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
+  useEffect(() => {
+    const fetchOrderNumberOptions = async () => {
+      try {
+        const response = await fetch(
+          `${API.prodUrl}/Precot/api/padpunching/orderNoList`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
 
-  const formattedDateSupervisor = (dateString) => {
-    if (dateString) {
-      const date = moment(dateString);
-      if (date.isValid()) {
-        return date.format("DD/MM/YYYY HH:mm");
+        if (Array.isArray(data)) {
+          setOrderNumberLov(data);
+        } else {
+          console.error("API response is not an array", data);
+          setOrderNumberLov([]);
+        }
+
+      } catch (error) {
+        console.error("Error fetching BMR options:", error);
+        setOrderNumberLov([]);
       }
-    }
-    return "";
-  };
+    };
 
-  function generateYearOptions(startYear, endYear) {
-    const years = [];
-    for (let year = startYear; year <= endYear; year++) {
-      years.push({ id: year, value: year.toString() });
-    }
-    return years;
-  }
+    fetchOrderNumberOptions();
+  }, [token])
+
   const formattedDate = (dateString) => {
     if (dateString) {
       const date = moment(dateString);
@@ -88,6 +106,7 @@ const PadPunching_f03_Summary = () => {
     }
     return "";
   };
+
   const formattedDateOnly = (dateString) => {
     if (dateString) {
       const date = moment(dateString);
@@ -108,7 +127,7 @@ const PadPunching_f03_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -141,6 +160,8 @@ const PadPunching_f03_Summary = () => {
       }
     });
   }, [printResponseData, API.prodUrl, token]);
+
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -151,7 +172,7 @@ const PadPunching_f03_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -196,7 +217,7 @@ const PadPunching_f03_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -231,24 +252,7 @@ const PadPunching_f03_Summary = () => {
     });
   }, [printResponseData, API.prodUrl, token]);
 
-  const formattedDatesupervisor = (dateString) => {
-    if (dateString) {
-      const date = moment(dateString);
-      if (date.isValid()) {
-        return date.format("DD/MM/YYYY HH:mm");
-      }
-    }
-    return "";
-  };
-  const formattedDateCommon = (dateString) => {
-    if (dateString) {
-      const date = moment(dateString);
-      if (date.isValid()) {
-        return date.format("DD/MM/YYYY");
-      }
-    }
-    return "";
-  };
+
   const handleBack = () => {
     navigate("/Precot/choosenScreen");
   };
@@ -257,7 +261,7 @@ const PadPunching_f03_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -282,11 +286,12 @@ const PadPunching_f03_Summary = () => {
 
     fetchShiftOptions();
   }, [token]);
+
   useEffect(() => {
     const fetchmachineNameOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/MachineLov`,
+          `${API.prodUrl}/Precot/api/padpunching/MachineLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -322,9 +327,6 @@ const PadPunching_f03_Summary = () => {
   const handleMachineNameChange = (value) => {
     setMachineName(value);
   };
-  const handleMachineNamePrintChange = (value) => {
-    setMacineNamePrint(value);
-  };
 
   //   print Model
   const handlePrint = () => {
@@ -340,7 +342,7 @@ const PadPunching_f03_Summary = () => {
       setTimeout(() => {
         window.print();
         handleModalClose();
-      }, 2000);
+      }, 3000);
     }
   }, [printResponseData]);
 
@@ -349,6 +351,8 @@ const PadPunching_f03_Summary = () => {
     setDatePrint(null);
     setShiftPrint(null);
     setMacineNamePrint(null);
+    setFirstOrderNumberPrint(null)
+    setSecondOrderNumberPrint(null)
   };
 
   //   handle edit
@@ -357,16 +361,21 @@ const PadPunching_f03_Summary = () => {
     const { machineName } = record;
     const { shift } = record;
     const { date } = record;
+    const { orderNo1 } = record;
+    const { orderNo2 } = record;
     const formattedDate = moment(date).format("YYYY-MM-DD");
     navigate("/Precot/PadPunching/F-03", {
       state: {
         machineName: machineName,
         shift: shift,
         date: formattedDate,
+        firstOrderNumber: orderNo1,
+        secondOrderNumber: orderNo2
       },
     });
     console.log("selected Date edit", date);
   };
+
   useEffect(() => {
     if (token) {
       fetchData();
@@ -379,7 +388,7 @@ const PadPunching_f03_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/punching/summaryproductChangeOverF03`;
+      let apiUrl = `${API.prodUrl}/Precot/api/punching/summaryproductChangeOverF03`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -416,6 +425,8 @@ const PadPunching_f03_Summary = () => {
             hod_status: item.hod_status,
             id: item.id,
             sno: index + 1,
+            orderNo1: item.orderNo1,
+            orderNo2: item.orderNo2,
             reason: item.reason,
           }))
         );
@@ -430,6 +441,7 @@ const PadPunching_f03_Summary = () => {
     } finally {
     }
   };
+
   useEffect(() => {
     const findReason = () => {
       for (const data of cakingData) {
@@ -506,7 +518,7 @@ const PadPunching_f03_Summary = () => {
             icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             style={{ width: "100%" }}
-            //   disabled={record.status == "SUBMIT" ? true : false}
+          //   disabled={record.status == "SUBMIT" ? true : false}
           >
             Review
           </Button>
@@ -552,7 +564,7 @@ const PadPunching_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/punching/getproductChangeOverPrintF03?date=${dateP}&shift=${shiftP}&machine=${machineP}`,
+          `${API.prodUrl}/Precot/api/punching/getproductChangeOverPrintF03?date=${dateP}&shift=${shiftP}&machine=${machineP}&order1=${firstOrderNumberPrint}&order2=${secondOrderNumberPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -595,10 +607,7 @@ const PadPunching_f03_Summary = () => {
 
   //   goto button
   const goTo = () => {
-    if ((machineName == "") | (machineName == null)) {
-      message.warning("Please Select Machine Name");
-      return;
-    }
+    console.log("!firstOrderNumber && !secondOrderNumber", firstOrderNumber, secondOrderNumber)
     if (date == "" || date == null) {
       message.warning("Please Select Date");
       return;
@@ -612,11 +621,18 @@ const PadPunching_f03_Summary = () => {
       message.warning("Please Select Machine Name");
       return;
     }
+
+    if (!firstOrderNumber || !secondOrderNumber || (!firstOrderNumber && !secondOrderNumber)) {
+      message.warning("Please Select Order Numbers");
+      return;
+    }
     navigate("/Precot/PadPunching/F-03", {
       state: {
         machineName: machineName,
         date: date,
         shift: shift,
+        firstOrderNumber: firstOrderNumber,
+        secondOrderNumber: secondOrderNumber
       },
     });
   };
@@ -853,8 +869,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].innerBag === "Y"
                       ? "Yes"
                       : printResponseData[index].innerBag === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -874,8 +890,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].outerBag === "Y"
                       ? "Yes"
                       : printResponseData[index].outerBag === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -895,8 +911,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].innerCarton === "Y"
                       ? "Yes"
                       : printResponseData[index].innerCarton === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -916,8 +932,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].outerCarton === "Y"
                       ? "Yes"
                       : printResponseData[index].outerCarton === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -937,8 +953,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].fleezeRoll === "Y"
                       ? "Yes"
                       : printResponseData[index].fleezeRoll === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -975,8 +991,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].toolChangeRequired === "Y"
                       ? "Yes"
                       : printResponseData[index].toolChangeRequired === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -996,8 +1012,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].toolChangeDone === "Y"
                       ? "Yes"
                       : printResponseData[index].toolChangeDone === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1017,8 +1033,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].machineSetting === "Y"
                       ? "Yes"
                       : printResponseData[index].machineSetting === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1055,8 +1071,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].metalDetectorTeach === "Y"
                       ? "Yes"
                       : printResponseData[index].metalDetectorTeach === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1076,8 +1092,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].metalDetectorCheck === "Y"
                       ? "Yes"
                       : printResponseData[index].metalDetectorCheck === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1122,8 +1138,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].productionCheck === "Y"
                       ? "Yes"
                       : printResponseData[index].productionCheck === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1143,8 +1159,8 @@ const PadPunching_f03_Summary = () => {
                     ? printResponseData[index].qualityVerification === "Y"
                       ? "Yes"
                       : printResponseData[index].qualityVerification === "N"
-                      ? "No"
-                      : "N/A"
+                        ? "No"
+                        : "N/A"
                     : "N/A"}
                 </td>
                 <td colSpan="35" style={{ textAlign: "center" }}>
@@ -1159,10 +1175,10 @@ const PadPunching_f03_Summary = () => {
                   CCP Maintained by
                 </td>
                 <td colSpan="30" style={{ textAlign: "center" }}>
-                Verified by QA Sign & Date
+                  Verified by QA Sign & Date
                 </td>
                 <td colSpan="30" style={{ textAlign: "center" }}>
-                HOD/ Designee Sign & Date
+                  HOD/ Designee Sign & Date
                 </td>
               </tr>
               <tr>
@@ -1427,6 +1443,55 @@ const PadPunching_f03_Summary = () => {
             </Select>
           </Col>
           <Col>
+            <label>Order Number:</label>
+          </Col>
+          <Col>
+            <Select
+              showSearch
+              value={firstOrderNumber}
+              onChange={(value) => {
+                setFirstOrderNumber(value);
+              }}
+              style={{ width: "100%" }}
+              placeholder="Search Order Number"
+            >
+              <Select.Option value="" disabled selected>
+                Select Order Number
+              </Select.Option>
+              {orderNumberLov.map((order) => (
+                <Select.Option key={order.value} value={order.value}>
+                  {order.value}
+                </Select.Option>
+              ))}
+            </Select>
+          </Col>
+          <Col>
+            <label>Order Number:</label>
+          </Col>
+          <Col>
+            <Select
+              showSearch
+              value={secondOrderNumber}
+              onChange={(value) => {
+                setSecondOrderNumber(value);
+              }}
+              style={{ width: "100%" }}
+              placeholder="Search Order Number"
+
+            >
+              <Select.Option value="" disabled selected>
+                Select Order Number
+              </Select.Option>
+              {orderNumberLov.map((order) => (
+                <Select.Option key={order.value} value={order.value}>
+                  {order.value}
+                </Select.Option>
+              ))}
+            </Select>
+          </Col>
+
+
+          <Col>
             <Button
               key="go"
               onClick={goTo}
@@ -1558,6 +1623,72 @@ const PadPunching_f03_Summary = () => {
             {machineNameLov.map((option) => (
               <Select.Option key={option.id} value={option.MCN}>
                 {option.MCN}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "16px",
+          }}
+        >
+          <label
+            style={{ marginRight: "8px", width: "30%", textAlign: "center" }}
+          >
+            Running Order Number:
+          </label>
+          <Select
+            showSearch
+            value={firstOrderNumberPrint}
+            onChange={(value) => {
+              setFirstOrderNumberPrint(value);
+            }}
+            style={{ width: "100%" }}
+            placeholder="Search Order Number"
+          >
+            <Select.Option value="" disabled selected>
+              Select Order Number
+            </Select.Option>
+            {orderNumberLov.map((order) => (
+              <Select.Option key={order.value} value={order.value}>
+                {order.value}
+              </Select.Option>
+            ))}
+          </Select>
+        </div>
+
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "16px",
+          }}
+        >
+          <label
+            style={{ marginRight: "8px", width: "30%", textAlign: "center" }}
+          >
+            Change Over Order Number:
+          </label>
+          <Select
+            showSearch
+            value={secondOrderNumberPrint}
+            onChange={(value) => {
+              setSecondOrderNumberPrint(value);
+            }}
+            style={{ width: "100%" }}
+            placeholder="Search Order Number"
+
+          >
+            <Select.Option value="" disabled selected>
+              Select Order Number
+            </Select.Option>
+            {orderNumberLov.map((order) => (
+              <Select.Option key={order.value} value={order.value}>
+                {order.value}
               </Select.Option>
             ))}
           </Select>

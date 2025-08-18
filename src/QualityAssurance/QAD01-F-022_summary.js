@@ -53,7 +53,7 @@ const QA_f22_Summary = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage1(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [printResponseData, API.prodUrl, token]);
 
@@ -84,7 +84,7 @@ const QA_f22_Summary = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [printResponseData, API.prodUrl, token]);
 
@@ -187,13 +187,6 @@ const QA_f22_Summary = () => {
             sno: index + 1,
           }))
         );
-      } else {
-        const errorMessage =
-          data?.message || "Failed to fetch data or invalid response";
-        message.error(errorMessage);
-        setTimeout(() => {
-          navigate("/Precot/choosenScreen");
-        }, 1500);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

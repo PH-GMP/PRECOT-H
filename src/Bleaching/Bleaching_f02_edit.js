@@ -1,41 +1,36 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
 import {
+  Avatar,
   Button,
   Col,
-  Input,
-  Row,
-  Tabs,
-  Select,
+  Drawer,
   Form,
+  Input,
+  Menu,
   message,
+  Modal,
+  Radio,
+  Row,
+  Select,
+  Table,
   Tooltip,
   Typography,
-  Table,
-  Radio,
-  Menu,
-  Avatar,
-  Drawer,
-  Modal,
 } from "antd";
 import axios from "axios";
-import BleachingHeader from "../Components/BleachingHeader";
-import { useNavigate, useLocation } from "react-router-dom";
-import API from "../baseUrl.json";
+import { useEffect, useState } from "react";
 import { BiLock } from "react-icons/bi";
-import { IoMdPrint } from "react-icons/io";
-import { IoCreate, IoPrint, IoSave } from "react-icons/io5";
+import { FaUserCircle } from "react-icons/fa";
 import { GrDocumentStore } from "react-icons/gr";
-import { FaBackward, FaUserCircle } from "react-icons/fa";
-import { IoCaretBackCircleSharp } from "react-icons/io5";
-import BleachingTail from "../Components/BleachingTail";
-import BleachingPrintHeader from "../Components/BleachingPrintHeader";
+import { IoCaretBackCircleSharp, IoCreate } from "react-icons/io5";
+import { useLocation, useNavigate } from "react-router-dom";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 // import logo from "../Assests/Logo.png";
+import TextArea from "antd/es/input/TextArea";
 import moment from "moment";
 import { FaLock } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
-import TextArea from "antd/es/input/TextArea";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
 const { Paragraph } = Typography;
@@ -50,7 +45,7 @@ function Bleaching_f02_edit(props) {
   const department = "Blow room & Carding, AB Cotton";
 
   const [newDate, setNewDate] = useState("");
-  const [newData, setNewData] = useState();
+
   const [frequency, setFrequency] = useState("");
   const [floorcleaning, setFloorcleaning] = useState("");
   const [removalofunwantedmaterials, setRemovalofunwantedmaterials] =
@@ -62,7 +57,7 @@ function Bleaching_f02_edit(props) {
   const [fireExtinguishers, setFireExtinguishers] = useState("");
   const [firstAidBox, setFirstAidBox] = useState("");
   const [rapidDoors, setRapidDoors] = useState("");
-   const [roofCleaning, setRoofCleaning] = useState("");
+  const [roofCleaning, setRoofCleaning] = useState("");
   const [remark, setRemark] = useState("");
   const [VerifiedbySupervisor, setVerifiedbySupervisor] = useState("");
   const [VerifiedbyHR, setVerifiedbyHR] = useState("");
@@ -97,23 +92,6 @@ function Bleaching_f02_edit(props) {
   const [rejectRemarks, setRejectRemarks] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  // Based on the Frequency we need the validation...
-  // const [floorcleaningstatus, setFloorcleaningstatus] = useState(false);
-  // const [removalofunwantedmaterialsstatus,setRemovalofunwantedmaterialsstatus] = useState(false);
-  // const [sidewallscornersstatus, setSidewallscornersstatus] = useState(false);
-  // const [windowsstatus, setWindowsstatus] = useState(false);
-  // const [emergencyDoorsstatus, setEmergencyDoorsstatus] = useState(false);
-  // const [fireExtinguishersstatus, setFireExtinguishersstatus] = useState(false);
-  // const [firstAidBoxstatus, setFirstAidBoxstatus] = useState(false);
-  // const [rapidDoorsstatus, setRapidDoorsstatus] = useState(false);
-  // const [remarkstatus, setRemarkstatus] = useState(false);
-  // const [VerifiedbySupervisorstatus, setVerifiedbySupervisorstatus] =
-  //   useState(false);
-  // const [VerifiedbyHRstatus, setVerifiedbyHRstatus] = useState(false);
-  // const [reviewedbyHODstatus, setReviewedbyHODstatus] = useState(false);
-
-  // Button Validation for based on role....
-  // const [saveBtnStatus, setSaveBtnStatus] = useState(true);
   const [submitBtnStatus, setSubmitBtnStatus] = useState(true);
   const [printBtnStatus, setPrintBtnStatus] = useState(true);
   const [printData, setPrintData] = useState([
@@ -131,12 +109,6 @@ function Bleaching_f02_edit(props) {
   const { Option } = Select;
 
   const { state } = useLocation();
-
-  const shiftOption = [
-    { id: 1, value: "Once in a day" },
-    { id: 2, value: "Twice in a week" },
-    { id: 3, value: "Quarterly" },
-  ];
 
   const transformValue = (value) => {
     switch (value) {
@@ -161,7 +133,7 @@ function Bleaching_f02_edit(props) {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: clean_id,
           status: "Approve",
@@ -170,8 +142,7 @@ function Bleaching_f02_edit(props) {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res);
-        // window.location.reload();
+
         message.success(res.data.message);
         navigate("/Precot/Bleaching/F-02/Summary");
       })
@@ -187,9 +158,6 @@ function Bleaching_f02_edit(props) {
 
   const handleRejectModal = () => {
     setShowModal(true);
-    // window.print()
-    // console.log("print screen works");
-    // Add any other print-related logic here
   };
   const handleReject = async () => {
     setSaveLoading(true);
@@ -207,7 +175,7 @@ function Bleaching_f02_edit(props) {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: clean_id,
           status: "Reject",
@@ -232,83 +200,11 @@ function Bleaching_f02_edit(props) {
       });
   };
 
-  const fetchPrintData = (date) => {
-    // console.log("machineDatadate", date);
-    // console.log("print data machine", printData);
-    const record = printData.find((record) => record.date == date);
-    // console.log("finded Data", record);
-    let result = {
-      floor_cleaninh: "",
-      removel_unwanted_meterials: "",
-      side_wall_corners: "",
-      windows: "",
-      drink_water_tank: "",
-      emergency_door: "",
-      fire_extinguishers: "",
-      first_aid_box: "",
-      rapid_doors: "",
-      roof_cleaning:"",
-      remarks: "",
-      supervisor_submit_by: "",
-      hr_submit_by: "",
-      hod_submit_by: "",
-    };
-
-    if (record) {
-      result = {
-        floor_cleaninh: transformValue(record.floor_cleaninh),
-        roof_cleaning:transformValue(record.roof_cleaning),
-        removel_unwanted_meterials: transformValue(
-          record.removel_unwanted_meterials
-        ),
-        side_wall_corners: transformValue(record.side_wall_corners),
-        windows: transformValue(record.windows),
-        drink_water_tank: transformValue(record.drink_water_tank),
-        emergency_door: transformValue(record.emergency_door),
-        fire_extinguishers: transformValue(record.fire_extinguishers),
-        first_aid_box: transformValue(record.first_aid_box),
-        rapid_doors: transformValue(record.rapid_doors),
-        remarks: record.remarks,
-        supervisor_submit_by: record.supervisor_submit_by,
-        hr_submit_by: record.hr_submit_by,
-        hod_submit_by: record.hod_submit_by,
-      };
-    } else {
-      result = {
-        floor_cleaninh: "",
-        removel_unwanted_meterials: "",
-        side_wall_corners: "",
-        windows: "",
-        drink_water_tank: "",
-        emergency_door: "",
-        fire_extinguishers: "",
-        first_aid_box: "",
-        rapid_doors: "",
-        roof_cleaning:"",
-        remarks: "",
-        supervisor_submit_by: "",
-        hr_submit_by: "",
-        hod_submit_by: "",
-      };
-    }
-
-    // console.log("result", result);
-
-    return result;
-  };
-
-  // Get the current date
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
-  const currentYear = currentDate.getFullYear();
-  // const formattedDate = `${currentDay.toString().padStart(2, "0")}/${currentMonth.toString().padStart(2, "0")}/${currentYear}`;
-
   const formattedDate = moment(newDate).format("DD-MM-YYYY HH:mm");
 
   // const [isChecked, setIsChecked] = useState(false);
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("left");
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -351,39 +247,40 @@ function Bleaching_f02_edit(props) {
   const handleroofCleaningChange = (e) => {
     setRoofCleaning(e.target.value);
   };
-  
 
   useEffect(() => {
     setDatesForMonth(state.monthSummary);
-    // // console.log("props Data : ", props.data);
+
     const { date, shiftvalue, clean_id } = state || {};
-    // console.log("first Id", clean_id);
-    // console.log("Date", date);
+
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02`, {
-        headers,
-        params: {
-          date: date,
-        },
-      })
+      .get(
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02`,
+        {
+          headers,
+          params: {
+            date: date,
+          },
+        }
+      )
       .then((res) => {
         // console.log("response", res.data);
         if (res.data.length == 0) {
           // console.log(" Length", res.data.length);
           if (
-            localStorage.getItem("role") == "ROLE_SUPERVISOR" &&
+            localStorage.getItem("role") == "ROLE_HR" &&
             res.data.length == 0
           ) {
             // setSaveBtnStatus(true);
             setSubmitBtnStatus(true);
             setPrintBtnStatus(false);
           } else if (
-            localStorage.getItem("role") == "ROLE_HR" &&
+            localStorage.getItem("role") == "ROLE_SUPERVISOR" &&
             res.data.length == 0
           ) {
             setSubmitBtnStatus(false);
@@ -396,9 +293,6 @@ function Bleaching_f02_edit(props) {
             setPrintBtnStatus(false);
           }
         } else if (res.data.length != 0) {
-          // console.log("floor cleaning", res.data[0].floor_cleaninh);
-          // // console.log(" Hod status",res.data.hod_status)
-          // // console.log("Supervisor ",res.data.supervisor_status)
           setclean_id(res.data[0].clean_id);
           setNewDate(res.data[0].date);
           setFloorcleaning(res.data[0].floor_cleaninh);
@@ -432,7 +326,6 @@ function Bleaching_f02_edit(props) {
           setRemark(res.data[0].remarks);
           setCleanedBySign(res.data[0].cleaned_by);
 
-
           const data = res.data[0];
 
           const isRole = (roleCheck) => role === roleCheck;
@@ -444,16 +337,16 @@ function Bleaching_f02_edit(props) {
           setDisable(true);
           setRemarkDisable(false);
 
-          if (isRole("ROLE_SUPERVISOR")) {
+          if (isRole("ROLE_HR")) {
             if (
-              isStatus("hr_status", "WAITING_FOR_APPROVAL") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "WAITING_FOR_APPROVAL") &&
               isStatus("hod_status", "")
             ) {
               setDisable(true);
             } else if (
-              isStatus("hr_status", "HR_REJECTED") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "SUPERVISOR_REJECTED") &&
               isStatus("hod_status", "")
             ) {
               setSubmitBtnStatus(true);
@@ -472,30 +365,30 @@ function Bleaching_f02_edit(props) {
             ) {
               setSubmitBtnStatus(true);
               setDisable(false);
-            } else if (isStatus("hr_status", "HR_REJECTED")) {
+            } else if (isStatus("supervisor_status", "SUPERVISOR_REJECTED")) {
               setSubmitBtnStatus(true);
               setDisable(false);
             }
-          } else if (isRole("ROLE_HR")) {
+          } else if (isRole("ROLE_SUPERVISOR")) {
             if (
-              isStatus("hr_status", "WAITING_FOR_APPROVAL") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "WAITING_FOR_APPROVAL") &&
               isStatus("hod_status", "")
             ) {
               setSubmitBtnStatus(true);
               setRemarkDisable(true);
             } else if (
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
-              (isStatus("hr_status", "HR_APPROVED") ||
-                isStatus("hr_status", "HR_REJECTED")) &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              (isStatus("supervisor_status", "SUPERVISOR_APPROVED") ||
+                isStatus("supervisor_status", "SUPERVISOR_REJECTED")) &&
               (isStatus("hod_status", "HOD_REJECTED") ||
                 isStatus("hod_status", "HOD_APPROVED"))
             ) {
               setRemarkDisable(true);
               setSubmitBtnStatus(false);
             } else if (
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
-              isStatus("hr_status", "HR_REJECTED") &&
+              isStatus("supervisor_status", "SUPERVISOR_REJECTED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
               isStatus("hod_status", "WAITING_FOR_APPROVAL")
             ) {
               setRemarkDisable(false);
@@ -574,7 +467,7 @@ function Bleaching_f02_edit(props) {
             };
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
+                `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
                 {
                   headers,
                   params: {
@@ -622,8 +515,8 @@ function Bleaching_f02_edit(props) {
 
   const handleSubmit = async () => {
     setSubmitLoading(true);
-    
-    if(cleanedBySign =="null" || cleanedBySign==""){
+
+    if (cleanedBySign == "null" || cleanedBySign == "") {
       message.warning("Cleaned By Name Required");
       setSubmitLoading(false);
       return;
@@ -640,15 +533,7 @@ function Bleaching_f02_edit(props) {
       month: month,
       year: year,
       department: department,
-      //   floor_cleaninh: floorcleaning == "" ? "NA" : floorcleaning,
-      //   removel_unwanted_meterials:
-      //     removalofunwantedmaterials == "" ? "NA" : removalofunwantedmaterials,
-      //   side_wall_corners: sidewallscorners == "" ? "NA" : sidewallscorners,
-      //   windows: windows == "" ? "NA" : windows,
-      //   emergency_door: emergencyDoors == "" ? "NA" : emergencyDoors,
-      //   fire_extinguishers: fireExtinguishers == "" ? "NA" : fireExtinguishers,
-      //   first_aid_box: firstAidBox == "" ? "NA" : firstAidBox,
-      //   rapid_doors: rapidDoors == "" ? "NA" : rapidDoors,
+
       floor_cleaninh: floorcleaning,
       removel_unwanted_meterials: removalofunwantedmaterials,
       side_wall_corners: sidewallscorners,
@@ -657,9 +542,9 @@ function Bleaching_f02_edit(props) {
       fire_extinguishers: fireExtinguishers,
       first_aid_box: firstAidBox,
       rapid_doors: rapidDoors,
-      roof_cleaning:roofCleaning,
+      roof_cleaning: roofCleaning,
       drink_water_tank: drinkingWaterTank == "" ? "NA" : drinkingWaterTank,
-      // roof_cleaning: "Cleaned",
+
       remarks: remark,
       supervisor_status: supervisorStatus,
       hod_status: hodStatus,
@@ -677,13 +562,13 @@ function Bleaching_f02_edit(props) {
       hr_submit_id: hrSubmitId,
       hr_sign: hrSign,
       hr_status: hrStatus,
-      cleaned_by:cleanedBySign
+      cleaned_by: cleanedBySign,
     };
     const token = localStorage.getItem("token");
     try {
       const response = await axios
         .post(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02`,
           payload,
           {
             headers: {
@@ -705,16 +590,12 @@ function Bleaching_f02_edit(props) {
           });
 
           navigate("/Precot/Bleaching/F-02/Summary");
-          // console.log("Erorr", err);
         })
         .finally(() => {
           setSubmitLoading(false);
         });
-      // console.log("API Response:", payload);
-      // console.log("Response", response.data);
     } catch (error) {
       console.error("Error:", error);
-      //   alert("Failed to save data.");
     }
   };
 
@@ -746,7 +627,6 @@ function Bleaching_f02_edit(props) {
       dataIndex: "actions",
       key: "actions",
       align: "center",
-      // render: (text, record) => moment(record.date).format('YYYY-MM-DD')
       render: (text, record) => {
         if (record.key === "1") {
           return (
@@ -760,8 +640,6 @@ function Bleaching_f02_edit(props) {
               <Radio value="NA">NA</Radio>
             </Radio.Group>
           );
-          // return <input type="checkbox" className="large-checkbox" checked={isChecked}
-          // onChange={handleChange}/>;
         }
         if (record.key === "2") {
           return (
@@ -867,19 +745,19 @@ function Bleaching_f02_edit(props) {
             </Radio.Group>
           );
         }
-         if (record.key === "10") {
-                  return (
-                    <Radio.Group
-                      onChange={handleroofCleaningChange}
-                      value={roofCleaning}
-                      disabled={disable}
-                    >
-                      <Radio value="Y">Yes</Radio>
-                      <Radio value="N">No</Radio>
-                      <Radio value="NA">NA</Radio>
-                    </Radio.Group>
-                  );
-                }
+        if (record.key === "10") {
+          return (
+            <Radio.Group
+              onChange={handleroofCleaningChange}
+              value={roofCleaning}
+              disabled={disable}
+            >
+              <Radio value="Y">Yes</Radio>
+              <Radio value="N">No</Radio>
+              <Radio value="NA">NA</Radio>
+            </Radio.Group>
+          );
+        }
         // return <Input  />;
         else {
           return <span style={{ fontSize: "12px" }}>{text}</span>;
@@ -960,22 +838,6 @@ function Bleaching_f02_edit(props) {
       frequency: "Twice in a week",
       [newDate]: <Input />,
     },
-    // {
-    //   key: "9",
-    //   srNo: "9",
-    //   cleaningArea: "Roof cleaning ",
-    //   frequency: "Quarterly",
-    //   // [`day${currentDay}`]: <Input />,
-    // },
-    // {
-    //   srNo:"Remark / Comment (in case of any abnormality observed) : "
-    // },
-    // {
-    //   srNo:"Verified by (Production Supervisor): "
-    // },
-    // {
-    //   srNo:"Verified by (HR):  "
-    // }
   ];
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -1193,6 +1055,7 @@ function Bleaching_f02_edit(props) {
           }
         />
       </Drawer>
+
       <BleachingHeader
         unit={unit}
         formName={formatName}
@@ -1206,7 +1069,7 @@ function Bleaching_f02_edit(props) {
         }
         buttonsArray={[
           role === "ROLE_HOD" ||
-          role === "ROLE_HR" ||
+          role === "ROLE_SUPERVISOR" ||
           role === "ROLE_QA" ||
           role === "ROLE_QC" ||
           role === "ROLE_DESIGNEE" ? (
@@ -1380,9 +1243,7 @@ function Bleaching_f02_edit(props) {
           </p>
         </Form.Item>
         <Form.Item style={{ marginBottom: 0 }}>
-          <p style={{ fontWeight: "bold" }}>
-          Bleaching & AB Cotton Godown{" "}
-          </p>
+          <p style={{ fontWeight: "bold" }}>Bleaching & AB Cotton Godown </p>
         </Form.Item>
       </Form>
 
@@ -1424,7 +1285,7 @@ function Bleaching_f02_edit(props) {
           // disabled={remarkDisable}
           disabled={disable}
         />
-         <Input
+        <Input
           addonBefore="Cleaned by (Trained person) : "
           // placeholder="Date"
           type="text"

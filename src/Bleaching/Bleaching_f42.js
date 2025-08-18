@@ -72,7 +72,6 @@ export default function Bleaching_f42() {
   const [CheckforkliftClean, setCheckforkliftClean] = useState("");
   const [CheckCleanlaydown, setCheckCleanlaydown] = useState("");
   const [suppliedbales, setsuppliedbales] = useState("");
-  const [toolsforCuttingStraps, settoolsforCuttingStraps] = useState("");
   const [PackingMaterial, setPackingMaterial] = useState("");
   const [typeofbags, settypeofbags] = useState("");
   const [selectedRow, setSelectedRow] = useState(null);
@@ -91,11 +90,13 @@ export default function Bleaching_f42() {
   const [Bmrno, setBMRNO] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [toolsForCuttingStraps , setToolForCuttingStarps] = useState("")
+  const [toolsForCuttingStraps, setToolForCuttingStarps] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [toolLov , setToolLov] = useState([
-    {value : "Cutter" , label : "Cutter"}
+
+  const [toolLov, setToolLov] = useState([
+    { value: "Cutter", label: "Cutter" },
+    { value: "Scissors", label: "Scissors" },
   ]);
 
   const [ROLE_SUPERVISIOR_STATUS, setrolesupervisior] = useState("");
@@ -104,7 +105,7 @@ export default function Bleaching_f42() {
   const containerRef = useRef(null); // Ref to a container element
   const navigate = useNavigate();
   const [loading, setLoading] = useState("");
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -127,7 +128,7 @@ export default function Bleaching_f42() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -163,7 +164,7 @@ export default function Bleaching_f42() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -247,32 +248,28 @@ export default function Bleaching_f42() {
 
   const handleToolStrip = (value) => {
     setToolForCuttingStarps(value);
-  }
+  };
 
   const onChange = (key) => {
     // console.log(key);
   };
 
   const handleSelectText = (e) => {
-     
- 
     if (
       !/[0-9a-zA-Z._ ]/.test(e.key) &&
-      e.key !== 'Backspace' &&
-      e.key !== 'Delete' &&
-      e.key !== 'ArrowLeft' &&
-      e.key !== 'ArrowRight' &&
-      e.key !== 'Tab'
+      e.key !== "Backspace" &&
+      e.key !== "Delete" &&
+      e.key !== "ArrowLeft" &&
+      e.key !== "ArrowRight" &&
+      e.key !== "Tab"
     ) {
       e.preventDefault();
     }
- 
- 
-    if (e.key == 'Enter') {
+
+    if (e.key == "Enter") {
       setToolForCuttingStarps(e.target.value);
-     
-    }  
-  }
+    }
+  };
   const handleViewDetails = (record) => {
     const x = newData.filter((x, i) => {
       return record.headerID == x.header_id;
@@ -381,7 +378,7 @@ export default function Bleaching_f42() {
       // console.log("stored bmr inside", bmrNolocal);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LaydownChechListF33/GetByBMR?formatNo=PRD01/F-42&bmrNo=${bmrnos}`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LaydownChechListF33/GetByBMR?formatNo=PRD01/F-42&bmrNo=${bmrnos}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -391,12 +388,7 @@ export default function Bleaching_f42() {
       );
       // console.log("response of edit", response.data);
       if (response.data && response.data.length > 0) {
-        // setIsEdit(true);
-        // const dateFromUserInput = data.layDownStartdate; // example date string from user input
-        // const date = moment(dateFromUserInput, 'YYYY-MM-DD');
         const data = response.data[0];
-        // console.log("date start", data.layDownStartdate, data.layDownEnddate);
-
         if (data.hod_submit_on) {
           const datePartsupervisor_submit_onvalue = data.hod_submit_on;
           const formattedHODSubmitted = moment(
@@ -448,9 +440,6 @@ export default function Bleaching_f42() {
         setReason(data.reason);
         setToolForCuttingStarps(data.toolsForCuttingStraps);
 
-        // setsupervisor_submit_on(data.supervisor_submit_on);
-        // sethod_submit_on(data.hod_submit_on);
-        // console.log("date is ", data.laydownStartdate);
         const datelayoutstarttimeformatprint = moment(
           data.laydownStartdate
         ).format("DD/MM/YYYY");
@@ -474,7 +463,7 @@ export default function Bleaching_f42() {
     try {
       setLoading(true);
       const response = await axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/laydownNumberLOV`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/laydownNumberLOV`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -496,7 +485,7 @@ export default function Bleaching_f42() {
     try {
       setLoading(true);
       const response = await axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -514,9 +503,7 @@ export default function Bleaching_f42() {
       setLoading(false);
     }
   };
-  const isPrintEnabled =
-    selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" &&
-    selectedRow?.hod_status === "HOD_APPROVED";
+
 
   const savelaydownChecklist = () => {
     const isValid = () => {
@@ -529,6 +516,7 @@ export default function Bleaching_f42() {
       message.error(validationMessage);
       return;
     }
+    console.log("toolsForCuttingStraps", toolsForCuttingStraps)
     setLoading(true);
     let idvalue;
     const remarkToSave = remarks.trim() === "" ? "N/A" : remarks;
@@ -549,7 +537,7 @@ export default function Bleaching_f42() {
       checkForkliftClean: CheckforkliftClean,
       checkCleanLayDown: CheckCleanlaydown,
       suppliedBales: suppliedbales,
-      toolsForCuttingStraps: "Cutter",
+      // toolsForCuttingStraps: "Cutter",
       packingMaterial: PackingMaterial,
       typeOfBags: typeofbags,
       contaminationInspection: contaminationInspection,
@@ -558,19 +546,16 @@ export default function Bleaching_f42() {
       remarks: remarkToSave,
       hodOrDesigneeSign: hodOrDesigneeSign,
       supervisorSign: supervisorSign,
-      toolsForCuttingStraps : toolsForCuttingStraps 
+      toolsForCuttingStraps: toolsForCuttingStraps,
     };
-
-    // Make the POST request to the API endpoint
+    console.log("payload", payload)
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
-
-    // Make the POST request to the API endpoint with headers
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveLayDownCheckF42`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveLayDownCheckF42`,
         payload,
         { headers }
       )
@@ -603,7 +588,7 @@ export default function Bleaching_f42() {
       if (!Checkbalecondition)
         return "Checking bale conditions(appearence of packing)";
       if (!CheckforkliftClean) return "Check fork lift Clean is required";
-
+      if (!toolsForCuttingStraps) return "Tools for cutting straps is required";
       if (!CheckCleanlaydown)
         return "Checking the cleanliness of lay down place is required";
       if (!suppliedbales)
@@ -646,7 +631,7 @@ export default function Bleaching_f42() {
       checkForkliftClean: CheckforkliftClean,
       checkCleanLayDown: CheckCleanlaydown,
       suppliedBales: suppliedbales,
-      toolsForCuttingStraps: "Cutter",
+      // toolsForCuttingStraps: "Cutter",
       packingMaterial: PackingMaterial,
       typeOfBags: typeofbags,
       contaminationInspection: contaminationInspection,
@@ -655,10 +640,9 @@ export default function Bleaching_f42() {
       remarks: remarkToSave,
       hodOrDesigneeSign: hodOrDesigneeSign,
       supervisorSign: supervisorSign,
-      toolsForCuttingStraps : toolsForCuttingStraps 
+      toolsForCuttingStraps: toolsForCuttingStraps,
     };
-
-
+    console.log("payload", payload)
     // Make the POST request to the API endpoint
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -668,7 +652,7 @@ export default function Bleaching_f42() {
     // Make the POST request to the API endpoint with headers
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitLayDownCheckF42`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitLayDownCheckF42`,
         payload,
         { headers }
       )
@@ -719,40 +703,35 @@ export default function Bleaching_f42() {
   };
   useEffect(() => {
     const handleToolLov = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/getSharpCutterTools`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const uniqueOptions = [...new Set(response.data)].map(value => ({
-        value: value,
-        label: value
-      }));
-
-      setToolLov(prevState => {
-        const allOptions = [...prevState, ...uniqueOptions];
-        const uniqueOptionsSet = allOptions.filter((option, index, self) =>
-          index === self.findIndex((o) => o.value === option.value)
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/getSharpCutterTools`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-      
-        return uniqueOptionsSet;
-      });
-    } catch (error) {
+        const uniqueOptions = [...new Set(response.data)].map((value) => ({
+          value: value,
+          label: value,
+        }));
 
-    }
-    }
+        setToolLov((prevState) => {
+          const allOptions = [...prevState, ...uniqueOptions];
+          const uniqueOptionsSet = allOptions.filter(
+            (option, index, self) =>
+              index === self.findIndex((o) => o.value === option.value)
+          );
 
-  handleToolLov();
-  
+          return uniqueOptionsSet;
+        });
+      } catch (error) { }
+    };
 
-  },[])
-  
-
+    handleToolLov();
+  }, []);
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -764,7 +743,7 @@ export default function Bleaching_f42() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveLaydown`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveLaydown`,
         {
           id: id,
           status: "Approve",
@@ -810,7 +789,7 @@ export default function Bleaching_f42() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveLaydown`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveLaydown`,
         {
           id: id,
           status: "Reject",
@@ -960,7 +939,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1000,7 +979,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1050,7 +1029,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1084,7 +1063,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1170,7 +1149,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1222,7 +1201,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1274,7 +1253,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1326,7 +1305,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1379,21 +1358,38 @@ export default function Bleaching_f42() {
                     marginLeft: "0px",
                   }}
                 >
-                  <Select value={toolsForCuttingStraps}  style={{ textAlign: 'center', width: '300px' }} options={toolLov} onChange={(e) => {handleToolStrip(e)}} onInputKeyDown={(e) => { handleSelectText(e) }}  dropdownStyle={{ textAlign: 'center' }} showSearch filterOption={false} onKeyDown={(e) => { handleSelectText(e) }}    disabled={
-                    (roleauth === "ROLE_SUPERVISOR" &&
-                      selectedRow?.supervisor_status ===
+                  <Select
+                    value={toolsForCuttingStraps}
+                    style={{ textAlign: "center", width: "300px" }}
+                    options={toolLov}
+                    onChange={(e) => {
+                      handleToolStrip(e);
+                    }}
+                    onInputKeyDown={(e) => {
+                      handleSelectText(e);
+                    }}
+                    dropdownStyle={{ textAlign: "center" }}
+                    showSearch
+                    filterOption={false}
+                    onKeyDown={(e) => {
+                      handleSelectText(e);
+                    }}
+                    disabled={
+                      (roleauth === "ROLE_SUPERVISOR" &&
+                        selectedRow?.supervisor_status ===
                         "SUPERVISOR_APPROVED" &&
-                      selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
-                    selectedRow?.hod_status === "HOD_APPROVED" ||
-                    (roleauth === "ROLE_HOD" &&
-                      (selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
-                        selectedRow?.hod_status === "HOD_APPROVED" ||
-                        selectedRow?.hod_status === "HOD_REJECTED")) ||
-                    (roleauth === "ROLE_DESIGNEE" &&
-                      (selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
-                        selectedRow?.hod_status === "HOD_APPROVED" ||
-                        selectedRow?.hod_status === "HOD_REJECTED"))
-                  }></Select>
+                        selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
+                      selectedRow?.hod_status === "HOD_APPROVED" ||
+                      (roleauth === "ROLE_HOD" &&
+                        (selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
+                          selectedRow?.hod_status === "HOD_APPROVED" ||
+                          selectedRow?.hod_status === "HOD_REJECTED")) ||
+                      (roleauth === "ROLE_DESIGNEE" &&
+                        (selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
+                          selectedRow?.hod_status === "HOD_APPROVED" ||
+                          selectedRow?.hod_status === "HOD_REJECTED"))
+                    }
+                  ></Select>
                 </span>
               </td>
             </tr>
@@ -1421,7 +1417,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1466,7 +1462,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1511,7 +1507,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1565,7 +1561,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1610,7 +1606,7 @@ export default function Bleaching_f42() {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -1750,8 +1746,8 @@ export default function Bleaching_f42() {
               >
                 {(selectedRow?.hod_status === "HOD_REJECTED" ||
                   selectedRow?.hod_status === "HOD_APPROVED") && (
-                  <>
-                    {/* <input
+                    <>
+                      {/* <input
                 value={hodOrDesigneeSign}
                 onChange={(e) => sethodOrDesigneeSign(e.target.value)}
                 className="borderbuttom" 
@@ -1759,25 +1755,25 @@ export default function Bleaching_f42() {
                 disabled={ selectedRow?.hod_status==="HOD_APPROVED"}
               ></input> */}
 
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{selectedRow.hod_sign}</div>
-                        <div>{hod_submit_on}</div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div>
+                          {" "}
+                          <div>{selectedRow.hod_sign}</div>
+                          <div>{hod_submit_on}</div>
+                        </div>
+                        {getImage1 !== "" && (
+                          <img className="signature" src={getImage1} alt="HOD" />
+                        )}
                       </div>
-                      {getImage1 !== "" && (
-                        <img className="signature" src={getImage1} alt="HOD" />
-                      )}
-                    </div>
-                    {/* <span style={{fontSize:'11px',marginLeft:"0px"}}>Signature & Date</span> */}
-                  </>
-                )}
+                      {/* <span style={{fontSize:'11px',marginLeft:"0px"}}>Signature & Date</span> */}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
@@ -1851,91 +1847,91 @@ export default function Bleaching_f42() {
             items={
               role === "ROLE_QA"
                 ? [
-                    {
-                      key: "1",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Form Browser
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/choosenScreen"),
-                    },
-                    {
-                      key: "2",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Generation
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Generate"),
-                    },
-                    {
-                      key: "3",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Mapping
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                    },
-                    {
-                      key: "4",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Closing
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Closing"),
-                    },
-                    {
-                      key: "5",
-                      icon: (
-                        <FaLock
-                          color="#151718"
-                          onClick={() => {
-                            if (confirm("Are you sure want to logout")) {
-                              localStorage.removeItem("token");
-                              navigate("/Precot");
-                            }
-                          }}
-                        />
-                      ),
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Logout
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot"),
-                    },
-                  ]
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Generation
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Generate"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "4",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "5",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => {
+                          if (confirm("Are you sure want to logout")) {
+                            localStorage.removeItem("token");
+                            navigate("/Precot");
+                          }
+                        }}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
                 : role === "ROLE_SUPERVISOR" ||
                   role === "ROLE_HOD" ||
                   role === "ROLE_DESIGNEE"
-                ? [
+                  ? [
                     {
                       key: "1",
                       icon: <IoCreate color="#151718" />,
@@ -2017,7 +2013,7 @@ export default function Bleaching_f42() {
                       onClick: () => navigate("/Precot"),
                     },
                   ]
-                : [
+                  : [
                     {
                       key: "1",
                       icon: <IoCreate color="#151718" />,
@@ -2115,9 +2111,9 @@ export default function Bleaching_f42() {
             </Button>,
 
             role === "ROLE_HOD" ||
-            role === "ROLE_QA" ||
-            role === "ROLE_QC" ||
-            role === "ROLE_DESIGNEE" ? (
+              role === "ROLE_QA" ||
+              role === "ROLE_QC" ||
+              role === "ROLE_DESIGNEE" ? (
               <>
                 <Button
                   loading={saveLoading}

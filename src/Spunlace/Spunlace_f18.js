@@ -112,7 +112,7 @@ const Spunlace_f18 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const Spunlace_f18 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -227,7 +227,7 @@ const Spunlace_f18 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF018`,
+        `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF018`,
         {
           id: OverallID,
           status: "Approve",
@@ -261,7 +261,7 @@ const Spunlace_f18 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF018`,
+        `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF018`,
         {
           id: OverallID,
           status: "Reject",
@@ -298,7 +298,7 @@ const Spunlace_f18 = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/report/getByDateF018?date=${date}`,
+        `${API.prodUrl}/Precot/api/spulance/report/getByDateF018?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -437,7 +437,7 @@ const Spunlace_f18 = () => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spulance/report/submitShiftWiseStoppage`,
+          `${API.prodUrl}/Precot/api/spulance/report/submitShiftWiseStoppage`,
           payload,
           { headers }
         )
@@ -472,7 +472,7 @@ const Spunlace_f18 = () => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spulance/report/submitShiftWiseStoppage`,
+          `${API.prodUrl}/Precot/api/spulance/report/submitShiftWiseStoppage`,
           payload,
           { headers }
         )
@@ -506,7 +506,7 @@ const Spunlace_f18 = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/sliterwinderStoppageReport?date=${newdate}`,
+        `${API.prodUrl}/Precot/api/spulance/sliterwinderStoppageReport?date=${newdate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -514,10 +514,6 @@ const Spunlace_f18 = () => {
           },
         }
       );
-      // console.loglog("response Fecthget", response.data);
-
-      // console.loglog("Moistore",response.data[0].ER)
-      // console.loglog("report rr",response.data[0].reportDetails)
 
       setReportDetails(response.data);
 
@@ -646,28 +642,28 @@ const Spunlace_f18 = () => {
                     {detail.ProdInKg}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.LC}
+                    {detail.LC_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.GR}
+                    {detail.SCL_TotalHours + detail.CL_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.Other}
+                    {detail.MI_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.TotalDowntime}
+                    {detail.SCL_TotalHours + detail.CL_TotalHours + detail.MI_TotalHours + detail.LC_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.ER}
+                    {detail.ER_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.MR}
+                    {detail.MR_TotalHours}
                   </td>
                   <td colSpan="2" style={{ textAlign: "center" }}>
-                    {detail.TotalBreakdown}
+                    {detail.ER_TotalHours + detail.MR_TotalHours}
                   </td>
                   <td colSpan="3" style={{ textAlign: "center" }}>
-                    {detail.TotalTimeInMin}
+                    {detail.SCL_TotalHours + detail.CL_TotalHours + detail.MI_TotalHours + detail.LC_TotalHours + detail.ER_TotalHours + detail.MR_TotalHours}
                   </td>
                 </tr>
               ))}
@@ -741,7 +737,7 @@ const Spunlace_f18 = () => {
                   disabled={
                     (roleauth === "ROLE_SUPERVISOR" &&
                       selectedRow?.supervisor_status ===
-                        "SUPERVISOR_APPROVED" &&
+                      "SUPERVISOR_APPROVED" &&
                       selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                     selectedRow?.hod_status === "HOD_APPROVED" ||
                     (roleauth === "ROLE_HOD" &&
@@ -809,27 +805,27 @@ const Spunlace_f18 = () => {
               <td colSpan="10" style={{ height: "70px", textAlign: "center" }}>
                 {(selectedRow?.hod_status === "HOD_REJECTED" ||
                   selectedRow?.hod_status === "HOD_APPROVED") && (
-                  <div>
-                    {HodSign}
-                    <br />
-                    {formattedhodDate}
-                    <br />
-                    {getImage1 && (
-                      <img
-                        src={getImage1}
-                        alt="Hod Sign"
-                        style={{
-                          width: "70px",
-                          height: "50px",
-                          marginLeft: "20px",
-                          objectFit: "contain",
-                          mixBlendMode: "multiply",
-                          justifyContent: "space-evenly",
-                        }}
-                      />
-                    )}
-                  </div>
-                )}
+                    <div>
+                      {HodSign}
+                      <br />
+                      {formattedhodDate}
+                      <br />
+                      {getImage1 && (
+                        <img
+                          src={getImage1}
+                          alt="Hod Sign"
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                            marginLeft: "20px",
+                            objectFit: "contain",
+                            mixBlendMode: "multiply",
+                            justifyContent: "space-evenly",
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
               </td>
             </tr>
           </table>
@@ -868,77 +864,62 @@ const Spunlace_f18 = () => {
             Back
           </Button>,
           ...(role === "ROLE_HOD" ||
-          role === "ROLE_QA" ||
-          role === "ROLE_QC" ||
-          role === "ROLE_DESIGNEE"
+            role === "ROLE_QA" ||
+            role === "ROLE_QC" ||
+            role === "ROLE_DESIGNEE"
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={rejectIcon} alt="Reject Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={rejectIcon} alt="Reject Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : [
-                // <Button
-                //   key="save"
-                //   loading={saveLoading}
-                //   type="primary"
-                //   onClick={ha}
-                //   style={{
-                //     backgroundColor: "#E5EEF9",
-                //     color: "#00308F",
-                //     fontWeight: "bold",
-                //     display:canDisplayButton2(),
-                //   }}
-                //   shape="round"
-                //   icon={<IoSave color="#00308F" />}
-                // >
-                //   Save
-                // </Button>,
-                <Button
-                  key="submit"
-                  loading={submitLoading}
-                  type="primary"
-                  onClick={submitData}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ]),
+
+              <Button
+                key="submit"
+                loading={submitLoading}
+                type="primary"
+                onClick={submitData}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ]),
           <Button
             key="logout"
             type="primary"

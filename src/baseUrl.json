@@ -1,8 +1,8 @@
-{  
-   "url":"https://secure.focusrtech.com:5555",
-   "devUrl":"https://secure.focusrtech.com:5050",
-   "dev6060Url":"https://secure.focusrtech.com:6060",
-   "uatUrl":"http://172.20.0.71:9090",
-   "prodUrl":"http://172.25.0.13:9090",
-   "anotherUrl":"http://172.25.0.17:9090"
-}  
+{
+  "url": "https://secure.focusrtech.com:5555",
+  "devUrl": "https://secure.focusrtech.com:5050",
+  "dev6060Url": "https://secure.focusrtech.com:6060",
+  "uatUrl": "http://172.20.0.71:9090",
+  "prodUrl": "http://172.25.0.13:9090",
+  "anotherUrl": "http://172.25.0.17:9090"
+}

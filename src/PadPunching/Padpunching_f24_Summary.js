@@ -747,7 +747,7 @@ const Padpunching_f25_summary = () => {
                         Format No.:
                       </th>
                       <td colSpan="15" style={{ border: "1px solid black" }}>
-                        PH-HRD03/F-006
+                        PH-HRD01-F-023
                       </td>
                     </tr>
                     <tr>
@@ -1131,7 +1131,7 @@ const Padpunching_f25_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="Hand Sanitisation Report"
-        formatNo="PH-HRD03/F-006"
+        formatNo="PH-HRD01-F-023"
         MenuBtn={
           <Button
             type="primary"

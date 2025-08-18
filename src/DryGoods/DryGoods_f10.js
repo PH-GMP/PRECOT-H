@@ -251,7 +251,7 @@ const DryGoods_f10 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=DRY_GOODS`,
+            `${API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=DRY_GOODS`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -288,7 +288,7 @@ const DryGoods_f10 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Drygoods/Service/getDryParamF10?date=${date}&shift=${shift}`,
+            `${API.prodUrl}/Precot/api/Drygoods/Service/getDryParamF10?date=${date}&shift=${shift}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -379,7 +379,7 @@ const DryGoods_f10 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/getLogBookMechineNoLov`,
+            `${API.prodUrl}/Precot/api/goods/getLogBookMechineNoLov`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -409,7 +409,7 @@ const DryGoods_f10 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -446,7 +446,7 @@ const DryGoods_f10 = () => {
   const handleSave = async () => {
     let apiUrl, payload;
     if (role == "ROLE_SUPERVISOR") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/saveLogBookF10`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/saveLogBookF10`;
       payload = {
         unit: "Unit H",
         formatNo: "PH-PRD04/F-010",
@@ -573,7 +573,7 @@ const DryGoods_f10 = () => {
         }
       });
     } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF10`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF10`;
       payload = {
         id: formData.log_id,
         status: "Approve",
@@ -633,7 +633,7 @@ const DryGoods_f10 = () => {
             return "TC-10-1 Breakages";
           case "tc_b_brk":
             return "TC-10-2 Breakages";
- 
+
           case "ball_mc_two_c":
             return "All Required Ball MC-2 production";
           case "nxt_prod_sup_date":
@@ -641,8 +641,8 @@ const DryGoods_f10 = () => {
             return "Next Production Supervisor Details";
         }
       };
- 
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/submitLogBookF10`;
+
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/submitLogBookF10`;
       payload = {
         unit: "Unit H",
         formatNo: "PH-PRD04/F-010",
@@ -764,7 +764,7 @@ const DryGoods_f10 = () => {
         message.warning("Please Enter The Reason");
         return;
       }
-      apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF10`;
+      apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF10`;
       payload = {
         id: formData.log_id,
         status: "Reject",
@@ -871,7 +871,7 @@ const DryGoods_f10 = () => {
       return { ...prevFormData, manpowerDetails: updatedManpowerDetails };
     });
   };
- 
+
   const handleObjectInput = (e, field) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -884,7 +884,6 @@ const DryGoods_f10 = () => {
       [field]: e,
     }));
   };
- 
 
   const handleMachineChange = async (selectedMachine) => {
     setMachine((prevState) => ({
@@ -913,7 +912,7 @@ const DryGoods_f10 = () => {
 
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/goods/machinedetailsF009?date=${date}&shift=${pdeShift}&machine_name=${selectedMachine}`,
+        `${API.prodUrl}/Precot/api/goods/machinedetailsF009?date=${date}&shift=${pdeShift}&machine_name=${selectedMachine}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -940,7 +939,7 @@ const DryGoods_f10 = () => {
             ...item,
             order_no: item.OrderNumber,
             prod_name: item.Material,
-            order_qty: updatedOrderQty, // Corrected OrderQty update logic
+            order_qty: updatedOrderQty,
             bag: item.Bags,
             box: item.Box,
             macine_name: selectedMachine,
@@ -977,7 +976,6 @@ const DryGoods_f10 = () => {
 
   //---------------------------------------------------------------------------------
   const handleKeyDown_text = (e) => {
- 
     if (
       !/[0-9a-zA-Z._]/.test(e.key) && // Exclude the space character from the regex pattern
       e.key !== "Backspace" &&
@@ -3038,24 +3036,6 @@ const DryGoods_f10 = () => {
                       ) : null}
                     </div>
                   </div>
-                  {/* <div>
-                  <Select style={{ width: '50%',textAlign:'center' }} options={supervisorLov} value={formData.nxt_prod_sup_sign} onChange={(e) => {handleLovChange(e,'nxt_prod_sup_sign')}} dropdownStyle={{textAlign:'center'}} disabled={status.fieldStatus}> </Select><br></br><br></br>
-                  <Input type="dateTime-local" style={{ width: '60%' }} value={formData.nxt_prod_sup_date} max={today} onChange={(e) => {handleObjectInput(e,'nxt_prod_sup_date')}} readOnly={status.fieldStatus}></Input>
-                  <div style={{ marginLeft: "20px" }}>
-                      {eSign.supervisor_sign ? (
-                        <img
-                          src={eSign.supervisor_sign}
-                          alt="Supervisor eSign"
-                          style={{
-                            width: "150px",
-                            height: "70px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                          }}
-                        />
-                      ) : null}
-                    </div>
-                  </div> */}
                 </td>
                 <td colspan="1" style={{ height: "35%", textAlign: "center" }}>
                   {formData.hod_status !== "WAITING_FOR_APPROVAL" &&

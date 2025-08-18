@@ -101,7 +101,7 @@ const Bleaching_f03 = () => {
         // const date = "2024/07/01"
         const section = initialValues.selectSection;
         // Make the GET request
-        axios.get(`${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getByDateMetalDetectorList?date=${date}&section=${section}`, config)
+        axios.get(`${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getByDateMetalDetectorList?date=${date}&section=${section}`, config)
             .then(response => {
                 // Handle the response
                 // console.log('res', response.data);
@@ -128,49 +128,44 @@ const Bleaching_f03 = () => {
                 // Handle any errors
                 console.error('There was an error making the request:', error);
             });
-        // // console.log("Initial Date is", initialValues.date)
-       
-        
-        // getMonthSummary(month);
-        // // console.log("set print data", printData);
     }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const username = formData?.hod_sign;
-    // console.log("UserName " , formData.hod_sign);
-    if (username) {
-      // console.log("usernameparams", username);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const username = formData?.hod_sign;
+        // console.log("UserName " , formData.hod_sign);
+        if (username) {
+            // console.log("usernameparams", username);
 
-      axios
-        .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-            responseType: "arraybuffer",
-          }
-        )
-        .then((res) => {
-          // console.log("Response:", res.data);
-          const base64 = btoa(
-            new Uint8Array(res.data).reduce(
-              (data, byte) => data + String.fromCharCode(byte),
-              ""
-            )
-          );
-          const url = `data:image/jpeg;base64,${base64}`;
-          setGetImage(url);
-        })
-        .catch((err) => {
-          // console.log("Error in fetching image:", err);
-        });
-    }
-  }, [ formData, API.prodUrl, token]);
+            axios
+                .get(
+                    `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + token,
+                        },
+                        responseType: "arraybuffer",
+                    }
+                )
+                .then((res) => {
+                    // console.log("Response:", res.data);
+                    const base64 = btoa(
+                        new Uint8Array(res.data).reduce(
+                            (data, byte) => data + String.fromCharCode(byte),
+                            ""
+                        )
+                    );
+                    const url = `data:image/jpeg;base64,${base64}`;
+                    setGetImage(url);
+                })
+                .catch((err) => {
+                    // console.log("Error in fetching image:", err);
+                });
+        }
+    }, [formData, API.prodUrl, token]);
 
-   
+
 
     const formatDate = (dateString) => {
         if (!dateString) return '';
@@ -180,93 +175,93 @@ const Bleaching_f03 = () => {
         const year = date.getFullYear();
 
         const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  
-  return `${day}/${month}/${year} ${hours}:${minutes}`;
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
     };
 
     // console.log("initialValues", initialValues);
 
     const handleApprove = async () => {
         setSaveLoading(true);
-    
+
         const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type if needed
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type if needed
         };
-    
+
         const res = await axios
-          .put(
-            `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/approveOrReject`,
-            {
-              id: id,
-              status: "Approve",
-            },
-            { headers }
-          )
-          .then((res) => {
-            
-            // console.log("messsage", res);
-            // window.location.reload();
-            message.success(res.data.message);
-            navigate("/Precot/Bleaching/F-03/Summary");
-          })
-          .catch((err) => {
-            
-            // console.log("Err", err.response.data.message);
-            message.error(err.response.data.message);
-          })
-          .finally(() => {
-            setSaveLoading(false);
-          });
-      };
-    
-      const handleRejectModal = () => {
+            .put(
+                `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/approveOrReject`,
+                {
+                    id: id,
+                    status: "Approve",
+                },
+                { headers }
+            )
+            .then((res) => {
+
+                // console.log("messsage", res);
+                // window.location.reload();
+                message.success(res.data.message);
+                navigate("/Precot/Bleaching/F-03/Summary");
+            })
+            .catch((err) => {
+
+                // console.log("Err", err.response.data.message);
+                message.error(err.response.data.message);
+            })
+            .finally(() => {
+                setSaveLoading(false);
+            });
+    };
+
+    const handleRejectModal = () => {
         setShowModal(true);
         // window.print()
         // console.log("print screen works");
         // Add any other print-related logic here
-      };
-      const handleReject = async () => {
+    };
+    const handleReject = async () => {
         setSaveLoading(true);
-    
+
         const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type if needed
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type if needed
         };
-    
-        if(!rejectRemarks) {
+
+        if (!rejectRemarks) {
             message.warning('Please Enter the Remarks!');
             setSaveLoading(false);
             return;
-          }
-      
+        }
+
         const res = await axios
-          .put(
-            `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/approveOrReject`,
-            {
-              id: id,
-              status: "Reject",
-              remarks: rejectRemarks,
-            },
-            { headers }
-          )
-          .then((res) => {
-            
-            // console.log("messsage", res.data.message);
-            // window.location.reload();
-            message.success(res.data.message);
-            navigate("/Precot/Bleaching/F-03/Summary");
-          })
-          .catch((err) => {
-            
-            // console.log("Err", err.response.data.message);
-            message.error(err.response.data.message);
-          })
-          .finally(() => {
-            setSaveLoading(false);
-          });
-      };
+            .put(
+                `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/approveOrReject`,
+                {
+                    id: id,
+                    status: "Reject",
+                    remarks: rejectRemarks,
+                },
+                { headers }
+            )
+            .then((res) => {
+
+                // console.log("messsage", res.data.message);
+                // window.location.reload();
+                message.success(res.data.message);
+                navigate("/Precot/Bleaching/F-03/Summary");
+            })
+            .catch((err) => {
+
+                // console.log("Err", err.response.data.message);
+                message.error(err.response.data.message);
+            })
+            .finally(() => {
+                setSaveLoading(false);
+            });
+    };
 
 
     // Example usage:
@@ -338,7 +333,7 @@ const Bleaching_f03 = () => {
 
     }
     const handleKeyDown = (e) => {
-        
+
         if (
             ['e', 'E', '+', '.', '-'].includes(e.key) ||
             (e.target.value.length >= 3 && e.key !== 'Backspace')
@@ -547,20 +542,20 @@ const Bleaching_f03 = () => {
                         <p >Reviewed by Head of the Department or Designee</p>
                     </td>
                     <td className='data-border-signature' >
-                    {
-                    (formData.hod_status === "HOD_APPROVED" || 
-                formData.hod_status === "HOD_REJECTED") && (
-                        <>
-                        <p>{formData.hod_submit_by}</p>
-                        <p>{formatDate(formData.hod_submit_on)}</p>
-                        {getImage !== "" && (
-                        <img className="signature"
-                          src={getImage}
-                          alt="HOD"
-                          
-                        />)}
-                         </>
-                  )}
+                        {
+                            (formData.hod_status === "HOD_APPROVED" ||
+                                formData.hod_status === "HOD_REJECTED") && (
+                                <>
+                                    <p>{formData.hod_submit_by}</p>
+                                    <p>{formatDate(formData.hod_submit_on)}</p>
+                                    {getImage !== "" && (
+                                        <img className="signature"
+                                            src={getImage}
+                                            alt="HOD"
+
+                                        />)}
+                                </>
+                            )}
                     </td>
 
                 </tbody>
@@ -640,7 +635,7 @@ const Bleaching_f03 = () => {
 
         if (accessToken) {
             axios.post(
-                `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/SaveMetalDetectorList`,
+                `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/SaveMetalDetectorList`,
                 formData,
                 {
                     headers: {
@@ -681,7 +676,7 @@ const Bleaching_f03 = () => {
         }
         formData.remarks = formData.remarks === "" ? "N/A" : formData.remarks;
         if (accessToken) {
-            axios.post(`${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/SubmitMetalDetectorList`, formData, {
+            axios.post(`${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/SubmitMetalDetectorList`, formData, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -737,72 +732,72 @@ const Bleaching_f03 = () => {
 
     const canDisplayButtons = () => {
         if (role == "ROLE_SUPERVISOR") {
-          if (
-            formData.supervisor_status == "SUPERVISOR_APPROVED" &&
-            formData.hod_status == "HOD_REJECTED"
-          ) {
+            if (
+                formData.supervisor_status == "SUPERVISOR_APPROVED" &&
+                formData.hod_status == "HOD_REJECTED"
+            ) {
+                return "block";
+            } else if (
+                (formData.supervisor_status == "SUPERVISOR_APPROVED" &&
+                    formData.hod_status == "WAITING_FOR_APPROVAL") ||
+                formData.hod_status == "HOD_APPROVED"
+            ) {
+                return "none";
+            }
+        } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
+            if (
+                formData.hod_status == "HOD_APPROVED" ||
+                formData.hod_status == "HOD_REJECTED"
+                // emptyarraycheck == 0
+            ) {
+                return "none";
+            }
             return "block";
-          } else if (
-            (formData.supervisor_status == "SUPERVISOR_APPROVED" &&
-              formData.hod_status == "WAITING_FOR_APPROVAL") ||
-            formData.hod_status == "HOD_APPROVED"
-          ) {
-            return "none";
-          }
-        } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          if (
-            formData.hod_status == "HOD_APPROVED" ||
-            formData.hod_status == "HOD_REJECTED" 
-            // emptyarraycheck == 0
-          ) {
-            return "none";
-          }
-          return "block";
         } else {
-          if (
-            formData.hod_status == "HOD_APPROVED" ||
-            formData.hod_status == "HOD_REJECTED"
-          ) {
-            return "none";
-          }
-          return "block";
+            if (
+                formData.hod_status == "HOD_APPROVED" ||
+                formData.hod_status == "HOD_REJECTED"
+            ) {
+                return "none";
+            }
+            return "block";
         }
-      };
-    
-      const canDisplayButton2 = () => {
+    };
+
+    const canDisplayButton2 = () => {
         if (role == "ROLE_SUPERVISOR") {
-          if (
-            formData.supervisor_status == "SUPERVISOR_APPROVED" &&
-            formData.hod_status == "HOD_REJECTED"
-          ) {
-            return "none"; // Disable button 2
-          } else if (
-            formData.supervisor_status == "SUPERVISOR_APPROVED" &&
-            (formData.hod_status == "WAITING_FOR_APPROVAL" ||
-              formData.hod_status == "HOD_APPROVED")
-          ) {
-            return "none"; // Enable button 2
-          }
+            if (
+                formData.supervisor_status == "SUPERVISOR_APPROVED" &&
+                formData.hod_status == "HOD_REJECTED"
+            ) {
+                return "none"; // Disable button 2
+            } else if (
+                formData.supervisor_status == "SUPERVISOR_APPROVED" &&
+                (formData.hod_status == "WAITING_FOR_APPROVAL" ||
+                    formData.hod_status == "HOD_APPROVED")
+            ) {
+                return "none"; // Enable button 2
+            }
         } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          if (
-            formData.hod_status == "HOD_APPROVED" ||
-            formData.hod_status == "HOD_REJECTED" 
-            // emptyarraycheck == 0
-          ) {
-            return "none"; // Disable button 2
-          }
-          return "block"; // Enable button 2
+            if (
+                formData.hod_status == "HOD_APPROVED" ||
+                formData.hod_status == "HOD_REJECTED"
+                // emptyarraycheck == 0
+            ) {
+                return "none"; // Disable button 2
+            }
+            return "block"; // Enable button 2
         } else {
-          if (
-            formData.hod_status == "HOD_APPROVED" ||
-            formData.hod_status == "HOD_REJECTED"
-          ) {
-            return "none"; // Disable button 2
-          }
-          return "block"; // Enable button 2
+            if (
+                formData.hod_status == "HOD_APPROVED" ||
+                formData.hod_status == "HOD_REJECTED"
+            ) {
+                return "none"; // Disable button 2
+            }
+            return "block"; // Enable button 2
         }
-      };
-    
+    };
+
     return (
         <div>
 
@@ -821,77 +816,77 @@ const Bleaching_f03 = () => {
                 buttonsArray={[
 
                     role === "ROLE_HOD" ||
-                    role === "ROLE_QA" ||
-                    role === "ROLE_QC" ||
-                    role === "ROLE_DESIGNEE" ? (
-                      <>
-                        <Button
-                          loading={saveLoading}
-                          type="primary"
-                          style={{
-                            backgroundColor: "#E5EEF9",
-                            color: "#00308F",
-                            fontWeight: "bold",
-                            display: canDisplayButtons(),
-                          }}
-                          onClick={handleApprove}
-                          shape="round"
-                          icon={ <img src={approveIcon} alt="Approve Icon" />}
-                        >
-                          &nbsp;Approve
-                        </Button>
-                        <Button
-                          loading={submitLoading}
-                          type="primary"
-                          style={{
-                            backgroundColor: "#E5EEF9",
-                            color: "#00308F",
-                            fontWeight: "bold",
-                            display: canDisplayButtons(),
-                          }}
-                          icon={<img src={rejectIcon} alt="Reject Icon" />}
-                          onClick={handleRejectModal}
-                          shape="round"
-                        >
-                          &nbsp;Reject
-                        </Button>
-                      </>
+                        role === "ROLE_QA" ||
+                        role === "ROLE_QC" ||
+                        role === "ROLE_DESIGNEE" ? (
+                        <>
+                            <Button
+                                loading={saveLoading}
+                                type="primary"
+                                style={{
+                                    backgroundColor: "#E5EEF9",
+                                    color: "#00308F",
+                                    fontWeight: "bold",
+                                    display: canDisplayButtons(),
+                                }}
+                                onClick={handleApprove}
+                                shape="round"
+                                icon={<img src={approveIcon} alt="Approve Icon" />}
+                            >
+                                &nbsp;Approve
+                            </Button>
+                            <Button
+                                loading={submitLoading}
+                                type="primary"
+                                style={{
+                                    backgroundColor: "#E5EEF9",
+                                    color: "#00308F",
+                                    fontWeight: "bold",
+                                    display: canDisplayButtons(),
+                                }}
+                                icon={<img src={rejectIcon} alt="Reject Icon" />}
+                                onClick={handleRejectModal}
+                                shape="round"
+                            >
+                                &nbsp;Reject
+                            </Button>
+                        </>
                     ) : (
                         <>
+                            <Button
+                                type="primary"
+                                loading={saveLoading}
+                                style={{
+                                    backgroundColor: "#E5EEF9",
+                                    color: "#00308F",
+                                    fontWeight: "bold",
+                                    display: canDisplayButton2()
+                                }}
+                                onClick={handleSave}
+                                shape="round"
+                                icon={<IoSave color="#00308F" />}
+                            >
+                                &nbsp;Save
+                            </Button>
+                            <Button
+                                type="primary"
+                                loading={submitLoading}
+                                style={{
+                                    backgroundColor: "#E5EEF9",
+                                    color: "#00308F",
+                                    fontWeight: "bold",
+                                    display: canDisplayButtons()
+                                }}
+                                onClick={handleSubmit}
+                                shape="round"
+                                icon={<GrDocumentStore color="#00308F" />}
+                            >
+                                &nbsp;Submit
+                            </Button>
+                        </>
+                    ),
                     <Button
-                        type="primary"
-                        loading={saveLoading}
-                        style={{
-                            backgroundColor: "#E5EEF9",
-                            color: "#00308F",
-                            fontWeight: "bold",
-                            display: canDisplayButton2()
-                        }}
-                        onClick={handleSave}
-                        shape="round"
-                        icon={<IoSave color="#00308F" />}
-                    >
-                        &nbsp;Save
-                    </Button>
-                    <Button
-                        type="primary"
-                        loading={submitLoading}
-                        style={{
-                            backgroundColor: "#E5EEF9",
-                            color: "#00308F",
-                            fontWeight: "bold",
-                            display: canDisplayButtons()
-                        }}
-                        onClick={handleSubmit}
-                        shape="round"
-                        icon={<GrDocumentStore color="#00308F" />}
-                    >
-                        &nbsp;Submit
-                    </Button>
-                    </>
-            ),
-                    <Button
-                    icon={<GoArrowLeft color="#00308F" />}
+                        icon={<GoArrowLeft color="#00308F" />}
                         onClick={handleBack}
                         style={{
                             backgroundColor: "#E5EEF9",
@@ -915,10 +910,10 @@ const Bleaching_f03 = () => {
                         // onClick={() => navigate("/Precot")}
                         onClick={() => {
                             if (confirm("You Want to logged out")) {
-                              localStorage.removeItem("token");
-                              navigate("/Precot");
+                                localStorage.removeItem("token");
+                                navigate("/Precot");
                             }
-                          }}
+                        }}
                     >
                         Logout
                     </Button>,
@@ -1162,44 +1157,44 @@ const Bleaching_f03 = () => {
                         </div>
 
                         <Modal
-          title="Reject"
-          open={showModal}
-          onOk={() => setShowModal(false)}
-          onCancel={() => setShowModal(false)}
-          destroyOnClose={true}
-          showSearch
-          footer={[
-            <Button
-              key="submit"
-              type="primary"
-              style={{
-                backgroundColor: "#E5EEF9",
-                color: "#00308F",
-                fontWeight: "bold",
-              }}
-              shape="round"
-              onClick={handleReject}
-            >
-              Submit
-            </Button>,
-          ]}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "16px",
-            }}
-          >
-            <label style={{ marginRight: "8px" }}>Remarks:</label>
-            <TextArea
-              value={rejectRemarks}
-              onChange={(e) => setRejectRemarks(e.target.value)}
-              rows={4} // Adjust the number of rows as needed
-              style={{ width: "100%" }} // Adjust the width as needed
-            />
-          </div>
-        </Modal>
+                            title="Reject"
+                            open={showModal}
+                            onOk={() => setShowModal(false)}
+                            onCancel={() => setShowModal(false)}
+                            destroyOnClose={true}
+                            showSearch
+                            footer={[
+                                <Button
+                                    key="submit"
+                                    type="primary"
+                                    style={{
+                                        backgroundColor: "#E5EEF9",
+                                        color: "#00308F",
+                                        fontWeight: "bold",
+                                    }}
+                                    shape="round"
+                                    onClick={handleReject}
+                                >
+                                    Submit
+                                </Button>,
+                            ]}
+                        >
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    marginBottom: "16px",
+                                }}
+                            >
+                                <label style={{ marginRight: "8px" }}>Remarks:</label>
+                                <TextArea
+                                    value={rejectRemarks}
+                                    onChange={(e) => setRejectRemarks(e.target.value)}
+                                    rows={4} // Adjust the number of rows as needed
+                                    style={{ width: "100%" }} // Adjust the width as needed
+                                />
+                            </div>
+                        </Modal>
 
                         <div className='no-print'>
                             <Tabs defaultActiveKey="1" items={items} onChange={onChange} />

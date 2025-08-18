@@ -3,7 +3,7 @@ import moment from "moment";
 import { Button, Input, message, Select, Spin, Empty, Checkbox } from "antd";
 import axios from "axios";
 import API from "../../baseUrl.json";
- 
+
 const Packing_Material_Issue = (props) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,25 +11,25 @@ const Packing_Material_Issue = (props) => {
   const [toDate, setToDate] = useState(null);
   const [remarks, setRemarks] = useState({});
   const [fieldsDisabled, setFieldsDisabled] = useState(false);
- 
+
   useEffect(() => {
     if (props.batchNo) {
       clearFields();
       fetchProcessDelayData(props.batchNo);
     }
   }, [props.batchNo]);
- 
+
   const clearFields = () => {
     setData([]);
     setFromDate(null);
     setToDate(null);
     setRemarks({});
   };
- 
+
   const fetchProcessDelayData = (batchNo) => {
     setLoading(true);
     axios
-      .get(`${ API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterial`, {
+      .get(`${API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterial`, {
         params: { batch_no: batchNo },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -61,14 +61,13 @@ const Packing_Material_Issue = (props) => {
         message.error("Error fetching process delay data");
       });
   };
- 
+
   const fetchStoppageData = () => {
     if (fromDate && toDate) {
       setLoading(true);
-
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/cottonBall/03.GetPackingMeterialPde?batch_no=${props.orderNo}&fromdate=${moment(fromDate).format('DD.MM.YYYY')}&todate=${moment(toDate).format('DD.MM.YYYY')}`,
+          `${API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterialPde?batch_no=${props.orderNo}&fromdate=${moment(fromDate).format('DD.MM.YYYY')}&todate=${moment(toDate).format('DD.MM.YYYY')}`,
           // `${ API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterialPde?batch_no=000800010480&fromdate=29.06.2024&todate=29.06.2024`,
           {
             headers: {
@@ -87,7 +86,7 @@ const Packing_Material_Issue = (props) => {
         });
     }
   };
- 
+
   const handleSubmit = () => {
     if (props.batchNo) {
       const recordsToSubmit = data.map((record, index) => {
@@ -100,16 +99,16 @@ const Packing_Material_Issue = (props) => {
           unit: record.unit,
         };
       });
- 
+
       const payload = {
         batch_no: props.batchNo,
         order_no: props.orderNo,
         pckdetails: recordsToSubmit,
       };
- 
+
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/punching/bmr/03.SubmitPackingMeterialIssue`,
+          `${API.prodUrl}/Precot/api/punching/bmr/03.SubmitPackingMeterialIssue`,
           payload,
           {
             headers: {
@@ -120,7 +119,7 @@ const Packing_Material_Issue = (props) => {
         .then(() => {
           message.success("Submitted successfully!");
           axios
-            .get(`${ API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterial`, {
+            .get(`${API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterial`, {
               params: { batch_no: props.batchNo },
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -160,16 +159,16 @@ const Packing_Material_Issue = (props) => {
       message.warning("Please make sure batch number is valid.");
     }
   };
- 
+
   const isSubmitDisabled = !props.batchNo || !fromDate || !toDate;
- 
+
   const handleRemarksChange = (value, rowIndex) => {
     setRemarks((prevRemarks) => ({
       ...prevRemarks,
       [rowIndex]: value,
     }));
   };
- 
+
   return (
     <>
       <Spin spinning={loading}>
@@ -204,7 +203,7 @@ const Packing_Material_Issue = (props) => {
         >
           Submit
         </Button>
- 
+
         {data.length === 0 ? (
           <Empty description="No data available" />
         ) : (
@@ -248,6 +247,5 @@ const Packing_Material_Issue = (props) => {
     </>
   );
 };
- 
+
 export default Packing_Material_Issue;
- 

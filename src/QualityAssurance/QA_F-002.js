@@ -18,16 +18,15 @@ import BleachingHeader from "../Components/BleachingHeader";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const QA_F002 = () => {
+
   const [getImageSUP, setGetImageSUP] = useState("");
   const [getImageHOD, setGetImageHOD] = useState("");
-  const [deaprtment_list, setdepartment_list] = useState([]);
 
   const [print, printdata] = useState("");
   const [comments, setcomments] = useState("");
   const [id, setid] = useState("");
   const [Critical, setCritical] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [department, setdepartment] = useState("");
   const [loading, setLoading] = useState(true);
   const [emptyarraycheck, setemptyarraycheck] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -35,14 +34,13 @@ const QA_F002 = () => {
   const [operator_signsignaturedate, setoperator_signsignaturedate] =
     useState("");
   const [hodsign, sethodsigndate] = useState("");
-  const [availableshiftlov, setAvailableShiftslov] =
-    useState("Select Department");
+
   const [selectedRow, setSelectedRow] = useState(null);
   const [saveLoading, setSaveLoading] = useState(false);
   const [dateprintsec, setisdateprintsec] = useState(false);
   const initial = useRef(false);
   const roleBase = localStorage.getItem("role");
-  const onChange = (key) => {};
+  const onChange = (key) => { };
   const [saveBtnStatus, setSaveBtnStatus] = useState(true);
   const [submitBtnStatus, setSubmitBtnStatus] = useState(true);
   const navigate = useNavigate();
@@ -63,9 +61,9 @@ const QA_F002 = () => {
   ]);
   const { state } = location;
 
-  const { datevalue } = state || {};
-
-  const [years, months] = datevalue.split("-"); // Split the date into day, month, year
+  const { datevalue, department_name } = state || {};
+  console.log("datevalue, department_name", datevalue, department_name)
+  const [years, months] = datevalue.split("-");
 
   const monthNames = [
     "Jan",
@@ -172,6 +170,7 @@ const QA_F002 = () => {
       }
     }
   };
+
   const canDisplayButton2 = () => {
     if (
       roleBase === "ROLE_HOD" ||
@@ -181,8 +180,8 @@ const QA_F002 = () => {
       if (
         selectedRow &&
         // Approved condition
-        selectedRow?.qa_hod_designee_status === "HOD_DESIGNEE_SUBMITTED" && // Not submitted
-        selectedRow?.qa_mr_status === "WAITING_FOR_APPROVAL" // HOD not waiting for approval
+        selectedRow?.qa_hod_designee_status === "HOD_DESIGNEE_SUBMITTED" &&
+        selectedRow?.qa_mr_status === "WAITING_FOR_APPROVAL"
       ) {
         return "none";
       } else if (
@@ -223,6 +222,7 @@ const QA_F002 = () => {
       }
     }
   };
+
   const canEdit = () => {
     if (
       roleBase === "ROLE_HOD" ||
@@ -249,12 +249,11 @@ const QA_F002 = () => {
   const fetchData_date = async () => {
     const [years, months, day] = datevalue.split("-");
     const monthString = monthNames[parseInt(months, 10) - 1];
-
     try {
       setLoading(true);
       axios
         .get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/findByDateRequestAndIssunceOfDocument?date=${datevalue}&month=${monthString}&year=${years}`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/findRequestAndIssunceOfDocument?date=${datevalue}&month=${monthString}&year=${years}&department=${department_name}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -266,8 +265,10 @@ const QA_F002 = () => {
 
           if (roleBase === "QA_MANAGER" || roleBase === "ROLE_MR") {
             if (res.data[0] === 0 || res.data[0] == undefined) {
-              navigate("/Precot/QA/F-002/Summary");
-              message.error("No Data found to approve");
+              setTimeout(() => {
+                navigate("/Precot/QA/F-002/Summary");
+                message.info("No Data found to approve");
+              }, 500);
             }
           }
           if (res.data[0] === 0 || res.data[0] == undefined) {
@@ -294,7 +295,7 @@ const QA_F002 = () => {
             res.data[0] &&
             (res.data[0]?.length > 0 || res.data[0]?.length == undefined)
           ) {
-            setAvailableShiftslov(res.data[0]?.department);
+
             setid(res.data[0]?.requestId);
             setSelectedRow(res.data[0]);
             setcomments(res.data[0].comments);
@@ -401,38 +402,7 @@ const QA_F002 = () => {
     }
   };
 
-  const beforeStyle = {
-    content: isMobile ? '"Choose:"' : '"Select:"',
-    zIndex: "9",
 
-    position: "absolute",
-    backgroundColor: "#fafafa",
-    border: "1px solid #dddd",
-    left: "-45px",
-    borderRadius: "5px 0px 1px 5px",
-    top: "50%",
-    padding: "7px",
-    transform: "translateY(-50%)",
-    marginRight: "8px",
-    fontSize: isMobile ? "12px" : "14px",
-    color: isMobile ? "#f00" : "#000",
-  };
-  const beforeStyle_finish = {
-    content: isMobile ? '"Choose:"' : '"Select:"',
-    zIndex: "9",
-
-    position: "absolute",
-    backgroundColor: "#fafafa",
-    border: "1px solid #dddd",
-    left: "-68px",
-    borderRadius: "5px 0px 1px 5px",
-    top: "50%",
-    padding: "7px",
-    transform: "translateY(-50%)",
-    marginRight: "8px",
-    fontSize: isMobile ? "12px" : "14px",
-    color: isMobile ? "#f00" : "#000",
-  };
 
   const handleSubmit = async () => {
     try {
@@ -450,10 +420,10 @@ const QA_F002 = () => {
         setSaveLoading(false);
       } else {
         listofsharptools_submit();
-
         setSaveBtnStatus(true);
         setSubmitBtnStatus(true);
       }
+
     } catch (error) {
       console.error("Error submitting bleaching job card:", error);
     }
@@ -462,76 +432,15 @@ const QA_F002 = () => {
     window.print();
   };
 
-  const fetchData_departmentlist = async () => {
-    try {
-      setLoading(true);
-      axios
-        .get(`${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          const data = res.data?.map((laydownno) => laydownno.department);
-          setdepartment_list(data);
-          if (
-            res.data &&
-            (res.data?.length > 0 || res.data?.length == undefined)
-          ) {
-            const data = res.data?.map((laydownno) => laydownno.department);
-            setdepartment_list(data);
-          }
-        });
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-  const fetchdata_departmentid = async () => {
-    try {
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      let dep_id = localStorage.getItem("departmentId");
 
-      const foundDepartment = response.data?.find((dept) => {
-        const numericDepId = Number(dep_id);
 
-        if (dept.id === numericDepId) {
-          // Log if ID is found
-
-          return true; // Return true to indicate a match
-        } else {
-          // Log if ID is not found
-          return false; // Return false to continue searching
-        }
-      });
-
-      if (foundDepartment) {
-        setdepartment(foundDepartment.department);
-
-        // setbatchno2(foundDepartment.department);
-      } else {
-        setdepartment("Department not found");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   const handleBack = () => {
     navigate("/Precot/QA/F-002/Summary");
   };
 
   const sharptools_save = () => {
-    const isValid = () => {};
+    const isValid = () => { };
     const validationMessage = isValid();
     if (validationMessage) {
       message.error(validationMessage);
@@ -556,6 +465,7 @@ const QA_F002 = () => {
       "Nov",
       "Dec",
     ];
+
     const monthString = monthNames[parseInt(months, 10) - 1];
 
     const payload = {
@@ -566,12 +476,13 @@ const QA_F002 = () => {
       sopNumber: "PH-QAD01-D-12",
       unit: "Unit H",
       date: datevalue,
+      department: department_name,
       month: monthString,
       year: years,
       comments: comments || "NA",
       details: rows.map((row) => ({
         lineId: row.lineId,
-        department: department,
+        department: department_name,
         documentName: row.documentName,
         documentNo: row.documentNo,
         revisionNo: row.revisionNo,
@@ -627,8 +538,7 @@ const QA_F002 = () => {
     }
   };
 
-  //SAve API
-
+  //Save API
   const listofsharptools_submit = () => {
     const isValid = () => {
       return null;
@@ -649,6 +559,7 @@ const QA_F002 = () => {
       formatNo: "PH-QAD01/F-002",
       revisionNumber: 2,
       sopNumber: "PH-QAD01-D-12",
+      department: department_name,
       unit: "Unit H",
       date: datevalue,
       month: monthString,
@@ -656,7 +567,7 @@ const QA_F002 = () => {
       comments: comments || "NA",
       details: rows.map((row) => ({
         lineId: row.lineId,
-        department: department,
+        department: department_name,
         documentName: row.documentName,
         documentNo: row.documentNo,
         revisionNo: row.revisionNo,
@@ -780,8 +691,6 @@ const QA_F002 = () => {
       initial.current = true;
 
       fetchData_date();
-      fetchData_departmentlist();
-      fetchdata_departmentid();
     }
   }, [token]);
 
@@ -1106,42 +1015,42 @@ const QA_F002 = () => {
                 <td colspan={50}>
                   {selectedRow?.qa_hod_designee_status ===
                     "HOD_DESIGNEE_APPROVED" && (
-                    <>
-                      <div>{selectedRow?.qa_hod_designee_sign}</div>
-                      <div>{hodsign}</div>
+                      <>
+                        <div>{selectedRow?.qa_hod_designee_sign}</div>
+                        <div>{hodsign}</div>
 
-                      {getImageHOD && (
-                        <>
-                          <br />
-                          <img
-                            src={getImageHOD}
-                            alt="logo"
-                            className="signature"
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
+                        {getImageHOD && (
+                          <>
+                            <br />
+                            <img
+                              src={getImageHOD}
+                              alt="logo"
+                              className="signature"
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
                 </td>
                 <td colspan={50}>
                   {(selectedRow?.qa_mr_status === "QA_MR_APPROVED" ||
                     selectedRow?.qa_mr_status === "QA_MR_REJECTED") && (
-                    <>
-                      <div>{selectedRow?.qa_mr_sign}</div>
-                      <div>{supersigndate}</div>
+                      <>
+                        <div>{selectedRow?.qa_mr_sign}</div>
+                        <div>{supersigndate}</div>
 
-                      {getImageSUP && (
-                        <>
-                          <br />
-                          <img
-                            src={getImageSUP}
-                            alt="logo"
-                            className="signature"
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
+                        {getImageSUP && (
+                          <>
+                            <br />
+                            <img
+                              src={getImageSUP}
+                              alt="logo"
+                              className="signature"
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
                 </td>
               </tr>
             </tbody>
@@ -1185,76 +1094,76 @@ const QA_F002 = () => {
           </Button>,
           roleBase === "QA_MANAGER" || roleBase === "ROLE_MR"
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
 
-                // Only render the Reject button if the roleBase is "QA_MANAGER"
+              // Only render the Reject button if the roleBase is "QA_MANAGER"
 
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : [
-                <Button
-                  key="save"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButton2(),
-                  }}
-                  shape="round"
-                  icon={<IoSave color="#00308F" />}
-                >
-                  Save
-                </Button>,
-                <Button
-                  key="submit"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ],
+              <Button
+                key="save"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButton2(),
+                }}
+                shape="round"
+                icon={<IoSave color="#00308F" />}
+              >
+                Save
+              </Button>,
+              <Button
+                key="submit"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ],
           <Button
             key="logout"
             type="primary"
@@ -2729,8 +2638,21 @@ const QA_F002 = () => {
           disabled
           style={{ width: "30%", height: "35px" }}
         />
+
+        <Input
+          addonBefore="Department:"
+          placeholder="Department"
+          type="text"
+          value={department_name}
+          disabled
+          style={{ width: "30%", height: "35px" }}
+        />
       </div>
-      ,
+
+
+
+
+
       <Tabs
         defaultActiveKey="1"
         items={items}

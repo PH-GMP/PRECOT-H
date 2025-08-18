@@ -36,21 +36,7 @@ const QA_F019_summary = () => {
   const [selectedPrintFinYear, setSelectedPrintFinYear] = useState();
   const [apiData, setApiData] = useState([]);
   const itemsPerPage = 25;
-  useEffect(() => {
-    if (data1) {
-      let apiData = [];
-      apiData.push(data1);
-      setApiData(apiData);
-    }
-  }, [data1]);
 
-  useEffect(() => {
-    if (data2) {
-      let apiData = [];
-      apiData.push(data2);
-      setApiData1(apiData);
-    }
-  }, [data2]);
   const { values, handleInputChange, setValues } = useInputArray([
     {
       sno: 1,
@@ -262,6 +248,21 @@ const QA_F019_summary = () => {
       { category: "contamination", value: item.contamination },
     ])
     .flat();
+
+  useEffect(() => {
+    if (data1) {
+      let apiData = [];
+      apiData.push(data1);
+      setApiData(apiData);
+    }
+  }, [data1]);
+  useEffect(() => {
+    if (data2) {
+      let apiData = [];
+      apiData.push(data2);
+      setApiData1(apiData);
+    }
+  }, [data2]);
 
   return (
     <>

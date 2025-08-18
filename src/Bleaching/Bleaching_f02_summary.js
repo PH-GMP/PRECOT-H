@@ -126,9 +126,9 @@ const Bleaching_f02_Summary = () => {
       fire_extinguishers: "",
       first_aid_box: "",
       rapid_doors: "",
-      roof_cleaning:"",
+      roof_cleaning: "",
       remarks: "",
-      cleaned_by:"",
+      cleaned_by: "",
       supervisor_submit_by: "",
       hr_submit_by: "",
       hod_submit_by: "",
@@ -137,7 +137,7 @@ const Bleaching_f02_Summary = () => {
     if (record) {
       result = {
         floor_cleaninh: transformValue(record.floor_cleaninh),
-        roof_cleaning:transformValue(record.roof_cleaning),
+        roof_cleaning: transformValue(record.roof_cleaning),
         removel_unwanted_meterials: transformValue(
           record.removel_unwanted_meterials
         ),
@@ -149,7 +149,7 @@ const Bleaching_f02_Summary = () => {
         first_aid_box: transformValue(record.first_aid_box),
         rapid_doors: transformValue(record.rapid_doors),
         remarks: record.remarks,
-        cleaned_by:record.cleaned_by,
+        cleaned_by: record.cleaned_by,
         supervisor_submit_by: record.supervisor_submit_by,
         hr_submit_by: record.hr_submit_by,
         hod_submit_by: record.hod_submit_by,
@@ -157,7 +157,7 @@ const Bleaching_f02_Summary = () => {
     } else {
       result = {
         floor_cleaninh: "",
-        roof_cleaning:"",
+        roof_cleaning: "",
         removel_unwanted_meterials: "",
         side_wall_corners: "",
         windows: "",
@@ -167,7 +167,7 @@ const Bleaching_f02_Summary = () => {
         first_aid_box: "",
         rapid_doors: "",
         remarks: "",
-        cleaned_by:"",
+        cleaned_by: "",
         supervisor_submit_by: "",
         hr_submit_by: "",
         hod_submit_by: "",
@@ -186,7 +186,7 @@ const Bleaching_f02_Summary = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingSummeryF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingSummeryF02`,
         {
           headers,
         }
@@ -211,7 +211,7 @@ const Bleaching_f02_Summary = () => {
             month: x.month,
             removalofunwantedmaterials: x.removal_unwanted_materials,
             rapidDoors: x.rapid_doors,
-            roofCleaning:x.roof_cleaning,
+            roofCleaning: x.roof_cleaning,
             sidewallscorners: x.side_wall_corners,
             windows: x.windows,
             year: x.year,
@@ -247,27 +247,6 @@ const Bleaching_f02_Summary = () => {
     };
     findReason();
   }, [summary]);
-
-  const handleViewDetails = (record) => {
-    if (role == "ROLE_SUPERVISOR") {
-      const x = summary.filter((x, i) => {
-        return record.slb_id == x.slb_id;
-      });
-      // console.log("X", x);
-
-      setSelectedRow(x);
-      setIsModalVisible(true);
-    }
-    if (role == "ROLE_HOD") {
-      const x = summary.filter((x, i) => {
-        return record.slb_id == x.slb_id;
-      });
-      // console.log("X", x);
-
-      setSelectedRow(x);
-      setIsModalVisible(true);
-    }
-  };
 
   const generateselectMonthDates = (month, year) => {
     const dates = [];
@@ -378,15 +357,15 @@ const Bleaching_f02_Summary = () => {
     },
 
     {
-      title: "Supervisor Status",
-      dataIndex: "supervisor_status",
-      key: "supervisor_status",
-      align: "center",
-    },
-    {
       title: "HR Status",
       dataIndex: "hr_status",
       key: "hr_status",
+      align: "center",
+    },
+    {
+      title: "Supervisor Status",
+      dataIndex: "supervisor_status",
+      key: "supervisor_status",
       align: "center",
     },
     {
@@ -471,62 +450,9 @@ const Bleaching_f02_Summary = () => {
   const day = String(today.getDate()).padStart(2, "0");
   const formattedToday = `${year}-${month}-${day}`;
 
-  // const handlePrintSummary = () => {
-  //   setPrintButtonLoading(true);
-
-  //   if (selectMonth == "" || selectMonth == null) {
-  //     message.warning("Please Select Month!");
-  //     setPrintButtonLoading(false);
-  //     return;
-  //   } else if (selectYear == "" || selectYear == null) {
-  //     message.warning("Please Select Year!");
-  //     setPrintButtonLoading(false);
-  //     return;
-  //   }
-
-  //   // console.log("month", selectMonth);
-  //   // console.log("year", selectYear);
-  //   const monthDates = generateselectMonthDates(selectMonth, selectYear);
-  //   setSelectMonthDates(monthDates);
-  //   // console.log("selectedMonthDates", selectMonthDates);
-
-  //   const headers = {
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     "Content-Type": "application/json",
-  //   };
-  //   axios
-  //     .get(
-  //       `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
-  //       {
-  //         headers,
-  //         params: {
-  //           month: selectMonth,
-  //           year: selectYear,
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       // console.log("Month&Year Details", res.data);
-  //       res.data.forEach((item) => {
-  //         //  console.log(
-  //         //   `Date At: ${item.date}, Floor Cleaning ID: ${item.floor_cleaninh}`
-  //         // );
-  //       });
-
-  //       setPrintData(res.data);
-  //     })
-  //     .catch((err) => {
-  //       // console.log("Error", err);
-  //     });
-  //   setTimeout(() => {
-  //     window.print();
-  //     setPrintButtonLoading(false);
-  //   }, 1000);
-  // };
-
   const handlePrintSummary = () => {
     setPrintButtonLoading(true);
-  
+
     // Validate if all fields are selected
     if (selectMonth === "" || selectMonth === null) {
       message.warning("Please Select Month!");
@@ -537,18 +463,18 @@ const Bleaching_f02_Summary = () => {
       setPrintButtonLoading(false);
       return;
     }
-  
+
     const monthDates = generateselectMonthDates(selectMonth, selectYear);
     setSelectMonthDates(monthDates);
-  
+
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
     };
-  
+
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
         {
           headers,
           params: {
@@ -559,10 +485,10 @@ const Bleaching_f02_Summary = () => {
       )
       .then((res) => {
         const data = res.data;
-  
+
         if (data && data.length > 0) {
           setPrintData(data);
-  
+
           // Delay before printing to ensure data is set
           setTimeout(() => {
             window.print();
@@ -580,7 +506,6 @@ const Bleaching_f02_Summary = () => {
         setPrintButtonLoading(false);
       });
   };
-  
 
   const monthNames = [
     "January",
@@ -608,7 +533,10 @@ const Bleaching_f02_Summary = () => {
             revisionNo={revisionNo}
             refSopNo={sopNo}
             pageNo={"1 of 2"}
-          /><br/><br/><br/>
+          />
+          <br />
+          <br />
+          <br />
         </div>
         <div style={{ marginTop: "1px" }}>
           <table style={{ borderCollapse: "collapse", width: "97%" }}>
@@ -902,137 +830,153 @@ const Bleaching_f02_Summary = () => {
 
               <tr>
                 {" "}
-                <td colSpan="34" style={{height:"20px"}}>Remarks :</td>
+                <td colSpan="34" style={{ height: "20px" }}>
+                  Remarks :
+                </td>
               </tr>
-
-            
             </tbody>
           </table>
-          <div style={{ margin: "2px 0", marginTop: "10px" }}><br/><br/><br/><br/><br/>
-          <BleachingTail /><br/><br/><br/><br/>
-        </div>
+          <div style={{ margin: "2px 0", marginTop: "10px" }}>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <BleachingTail />
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
           <div style={{ marginBottom: "10px", marginTop: "40px" }}>
-          <BleachingPrintHeader
-            formName={formName}
-            formatNo={formatNo}
-            revisionNo={revisionNo}
-            refSopNo={sopNo}
-            pageNo={"2 of 2"}
-          />
-        </div><br/><br/><br/><br/><br/>
+            <BleachingPrintHeader
+              formName={formName}
+              formatNo={formatNo}
+              revisionNo={revisionNo}
+              refSopNo={sopNo}
+              pageNo={"2 of 2"}
+            />
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
           <table>
-             
-        
-              <tr>
-                <td className="data-border" colSpan={3}>
-                  Cleaned By(Trained Person):
-                </td>
+            <tr>
+              <td className="data-border" colSpan={3}>
+                Cleaned By(Trained Person):
+              </td>
 
-                {selectMonthDates.map((record, rowIndex) => (
-                  <td key={rowIndex} className="data-border">
-                    <p
-                         style={{
-                          width: '5px',
-                          wordWrap: 'break-word',
-                          overflowWrap: 'break-word',
-                          height: "90px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          transform: "rotate(270deg)",
-                      }}
-                    > {fetchPrintData(record).cleaned_by
+              {selectMonthDates.map((record, rowIndex) => (
+                <td key={rowIndex} className="data-border">
+                  <p
+                    style={{
+                      width: "5px",
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
+                      height: "90px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: "rotate(270deg)",
+                    }}
+                  >
+                    {" "}
+                    {fetchPrintData(record).cleaned_by
                       ? fetchPrintData(record).cleaned_by
-                      : "" || "NA"}</p>
-                  </td>
-                ))}
-              </tr>
-              <tr>
-  <td className="data-border" colSpan={3}>
-    Verified By (Production Supervisor):
-  </td>
-  {selectMonthDates.map((record, rowIndex) => (
-    <td key={rowIndex} className="data-border">
-      <p
-        style={{
-          width: "5px",
-          wordWrap: "break-word",
-          overflowWrap: "break-word", 
-          height: "90px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "rotate(270deg)",
-        }}
-      >
-        {fetchPrintData(record).supervisor_submit_by
-          ? fetchPrintData(record).supervisor_submit_by
-          : "NA"}
-      </p>
-    </td>
-  ))}
-</tr>
-<tr>
-  <td className="data-border" colSpan={3}>
-    Verified By (HR):
-  </td>
-  {selectMonthDates.map((record, rowIndex) => (
-    <td key={rowIndex} className="data-border">
-      <p
-        style={{
-          width: "5px",
-          wordWrap: "break-word",
-          overflowWrap: "break-word",
-          height: "90px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "rotate(270deg)",
-        }}
-      >
-        {fetchPrintData(record).hr_submit_by
-          ? fetchPrintData(record).hr_submit_by
-          : "NA"}
-      </p>
-    </td>
-  ))}
-</tr>
-<tr>
-  <td className="data-border" colSpan={3}>
-    Reviewed By HOD:
-  </td>
-  {selectMonthDates.map((record, rowIndex) => (
-    <td key={rowIndex} className="data-border">
-      <p
-        style={{
-          width: "5px",
-          wordWrap: "break-word",
-          overflowWrap: "break-word",
-          height: "90px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transform: "rotate(270deg)",
-        }}
-      >
-        {fetchPrintData(record).hod_submit_by
-          ? fetchPrintData(record).hod_submit_by
-          : "NA"}
-      </p>
-    </td>
-  ))}
-</tr>
-
-
-              <tr>
-                {" "}
-                <td colSpan="34">
-                  Note: Tick mark "√" indicates activity completed & Cross mark
-                  '"×" indicate not completed "NA" indicate no data.
+                      : "" || "NA"}
+                  </p>
                 </td>
-              </tr>
+              ))}
+            </tr>
+            <tr>
+              <td className="data-border" colSpan={3}>
+                Verified By (Production Supervisor):
+              </td>
+              {selectMonthDates.map((record, rowIndex) => (
+                <td key={rowIndex} className="data-border">
+                  <p
+                    style={{
+                      width: "5px",
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
+                      height: "90px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: "rotate(270deg)",
+                    }}
+                  >
+                    {fetchPrintData(record).supervisor_submit_by
+                      ? fetchPrintData(record).supervisor_submit_by
+                      : "NA"}
+                  </p>
+                </td>
+              ))}
+            </tr>
+            <tr>
+              <td className="data-border" colSpan={3}>
+                Verified By (HR):
+              </td>
+              {selectMonthDates.map((record, rowIndex) => (
+                <td key={rowIndex} className="data-border">
+                  <p
+                    style={{
+                      width: "5px",
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
+                      height: "90px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: "rotate(270deg)",
+                    }}
+                  >
+                    {fetchPrintData(record).hr_submit_by
+                      ? fetchPrintData(record).hr_submit_by
+                      : "NA"}
+                  </p>
+                </td>
+              ))}
+            </tr>
+            <tr>
+              <td className="data-border" colSpan={3}>
+                Reviewed By HOD:
+              </td>
+              {selectMonthDates.map((record, rowIndex) => (
+                <td key={rowIndex} className="data-border">
+                  <p
+                    style={{
+                      width: "5px",
+                      wordWrap: "break-word",
+                      overflowWrap: "break-word",
+                      height: "90px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      transform: "rotate(270deg)",
+                    }}
+                  >
+                    {fetchPrintData(record).hod_submit_by
+                      ? fetchPrintData(record).hod_submit_by
+                      : "NA"}
+                  </p>
+                </td>
+              ))}
+            </tr>
+
+            <tr>
+              {" "}
+              <td colSpan="34">
+                Note: Tick mark "√" indicates activity completed & Cross mark
+                '"×" indicate not completed "NA" indicate no data.
+              </td>
+            </tr>
           </table>
-        </div><br/><br/>
+        </div>
+        <br />
+        <br />
         <div style={{ margin: "2px 0", marginTop: "10px" }}>
           <BleachingTail />
         </div>

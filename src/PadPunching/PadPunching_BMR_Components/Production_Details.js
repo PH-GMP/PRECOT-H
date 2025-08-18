@@ -1,18 +1,12 @@
-import { Button, Form, Input, message, Radio, Select, Spin } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button, Input, message, Radio, Select, Spin } from "antd";
 import axios from "axios";
-import API from "../../baseUrl.json";
-import useMessage from "antd/es/message/useMessage";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import API from "../../baseUrl.json";
 
 const Production_Details = (props) => {
-  //All states entered here
-  //console.log("propsdata", props.orderNo);
-  const [messageApi, contextHolder] = useMessage();
   const [loading, setLoading] = useState(false);
-  const [hadData, setHadData] = useState(false);
   const [newSave, setNewSave] = useState(false);
-  const [orderNoLov, setOrderNoLov] = useState([]);
   const [productionId, setProductionId] = useState("");
   console.log("Prodid", productionId);
   const [primaryKeys, setPrimaryKeys] = useState({
@@ -27,7 +21,7 @@ const Production_Details = (props) => {
     Product_Description: "",
     PO_No: "",
     PO_quantity: "",
-    manufactureCompletionDate:"",
+    manufactureCompletionDate: "",
     Product_Code: "",
     No_Of_Bags: "",
     Lot_No: "",
@@ -41,13 +35,44 @@ const Production_Details = (props) => {
     ReceivedBy_Date: "",
     orderNo: "",
     poStatus: "",
-    SFQ_Bags:"",
-    SFQ_Boxes:"",
-    RQ_Bags:"",
-    RQ_Boxes:"",
-    OD_Bags:"",
-    OD_Boxes:""
+    SFQ_Bags: "",
+    SFQ_Boxes: "",
+    RQ_Bags: "",
+    RQ_Boxes: "",
+    OD_Bags: "",
+    OD_Boxes: "",
   });
+
+  const role = localStorage.getItem("role");
+  useEffect(() => {
+    console.log(" matchedValue.value");
+    const userName = localStorage.getItem("username");
+    if (userName && role == "ROLE_QA") {
+      const matchedValue = props.qaLov.find((item) => item.value === userName);
+      if (matchedValue) {
+        console.log(" matchedValue.value", matchedValue.value);
+        setProductionDetails((prevState) => ({
+          ...prevState,
+          IssuedBy_Sign: matchedValue.value,
+        }));
+      }
+    }
+  }, [props.qaLov, productionDetails.IssuedBy_Sign]);
+
+  useEffect(() => {
+    console.log(" matchedValue.value");
+    const userName = localStorage.getItem("username");
+    if (userName && role == "ROLE_SUPERVISOR") {
+      const matchedValue = props.supLov.find((item) => item.value === userName);
+      if (matchedValue) {
+        console.log(" matchedValue.value", matchedValue.value);
+        setProductionDetails((prevState) => ({
+          ...prevState,
+          ReceivedBy_Sign: matchedValue.value,
+        }));
+      }
+    }
+  }, [props.supLov, productionDetails.ReceivedBy_Sign]);
 
   //State update here in standard approach
   const updateProductionDetails = (updates) => {
@@ -64,107 +89,120 @@ const Production_Details = (props) => {
       ...updates,
     }));
   };
- 
+
   useEffect(() => {
-    updateProductionDetails({ batchNo: props.batchNo });
-    axios
-      .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log("Res", response.data);
-        if (response.data.length > 0) {
-          setNewSave(false);
-          setProductionId(response.data[0].productionId);
-          updateProductionDetails({
-            Product_Description: response.data[0].productionDescription,
-            PO_No: response.data[0].poNumber,
-            PO_quantity: response.data[0].poQuantityBoxes,
-            Product_Code: response.data[0].productCode,
-            No_Of_Bags: response.data[0].poQuantityBags,
-            Lot_No: response.data[0].lotNumber,
-            MStart_Date: response.data[0].manufactureStartDate,
-            MEnd_Date:response.data[0].manufactureEndDate,
-            MStart_Time: response.data[0].manufactureStartTime,
-            MEnd_Time: response.data[0].manufactureEndTime,
-            IssuedBy_Sign: response.data[0].qaName,
-            IssuedBy_Date: response.data[0].qaDate,
-            ReceivedBy_Sign: response.data[0].supervisiorName,
-            ReceivedBy_Date: response.data[0].supervisiorDate,
-            orderNo: response.data[0].orderNumber,
-            poStatus: response.data[0].poStatus,
-            SFQ_Bags: response.data[0].packedQuantityBags,
-            SFQ_Boxes: response.data[0].packedQuantityBoxes,
-            RQ_Bags:response.data[0].remainingQuantityBags,
-            RQ_Boxes:response.data[0].remainingQuantityBoxes,
-            OD_Bags:response.data[0].packDateQtyBag,
-            OD_Boxes:response.data[0].packDateQtyBox
-          });
-          const manufactureData = response.data[0];
-          console.log("Manufacture Data",manufactureData)
-          const manufactureStartDate = manufactureData.manufactureStartDate
-          ? manufactureData.manufactureStartDate.split("T")[0]
-          : "";
-          const manufactureEndDate = manufactureData.manufactureEndDate 
-          ? manufactureData.manufactureEndDate.split("T")[0]
-          : "";
-          localStorage.setItem("prod_start_date", manufactureStartDate || "");
-        localStorage.setItem("prod_end_date", manufactureEndDate || "");
-        console.log("prod_start_date",manufactureStartDate )
-        console.log("prod_end_date",manufactureEndDate )
-        
-          updateKeys({
-            supApproved:
-              response.data[0].supervisiorStatus == "SUPERVISOR_APPROVED"
-                ? true
-                : false,
-            qaApproved:
-              response.data[0].qaStatus == "QA_APPROVED" ? true : false,
-            supSaved:
-              response.data[0].supervisiorStatus == "SUPERVISOR_SAVED"
-                ? true
-                : false,
-            qaSaved: response.data[0].qaStatus == "QA_SAVED" ? true : false,
-            productionId: response.data[0].productionId,
-          });
-        } else if (response.data.length == 0) {
-          setProductionDetails({
-            batch_no: props.batchNo,
-            Product_Description: "",
-            PO_No: "",
-            PO_quantity: "",
-            Product_Code: "",
-            No_Of_Bags: "",
-            Lot_No: "",
-            MStart_Date: "",
-            MEnd_Date: "",
-            MStart_Time: "",
-            MEnd_Time: "",
-            IssuedBy_Sign: "",
-            IssuedBy_Date: "",
-            ReceivedBy_Sign: "",
-            ReceivedBy_Date: "",
-            orderNo: "",
-            poStatus:"",
-            SFQ_Bags: "",
-            SFQ_Boxes: "",
-            RQ_Bags:"",
-            RQ_Boxes:"",
-            OD_Bags:"",
-            OD_Boxes:""
-          });
-          message.info("Please Select From Date and To Date");
-        }
-      })
-      .catch((err) => {
-        console.log("Error", err);
-      });
+    console.log("props.batchNo]", props.batchNo);
+    if (props.batchNo) {
+      updateProductionDetails({ batchNo: props.batchNo });
+      axios
+        .get(
+          `${API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("Res", response.data);
+          if (response.data.length > 0) {
+            setNewSave(false);
+            setProductionId(response.data[0].productionId);
+            updateProductionDetails({
+              Product_Description: response.data[0].productionDescription,
+              PO_No: response.data[0].poNumber,
+              PO_quantity: response.data[0].poQuantityBoxes,
+              Product_Code: response.data[0].productCode,
+              No_Of_Bags: response.data[0].poQuantityBags,
+              Lot_No: response.data[0].lotNumber,
+              MStart_Date: response.data[0].manufactureStartDate,
+              MEnd_Date: response.data[0].manufactureEndDate,
+              MStart_Time: response.data[0].manufactureStartTime,
+              MEnd_Time: response.data[0].manufactureEndTime,
+              IssuedBy_Sign: response.data[0].qaName,
+              IssuedBy_Date: response.data[0].qaDate,
+              ReceivedBy_Sign: response.data[0].supervisiorName,
+              ReceivedBy_Date: response.data[0].supervisiorDate,
+              orderNo: response.data[0].orderNumber,
+              poStatus: response.data[0].poStatus,
+              SFQ_Bags: response.data[0].packedQuantityBags,
+              SFQ_Boxes: response.data[0].packedQuantityBoxes,
+              RQ_Bags: response.data[0].remainingQuantityBags,
+              RQ_Boxes: response.data[0].remainingQuantityBoxes,
+              OD_Bags: response.data[0].packDateQtyBag,
+              OD_Boxes: response.data[0].packDateQtyBox,
+            });
+            const manufactureData = response.data[0];
+            console.log("Manufacture Data", manufactureData);
+            const manufactureStartDate = manufactureData.manufactureStartDate
+              ? manufactureData.manufactureStartDate.split("T")[0]
+              : "";
+            const manufactureEndDate = manufactureData.manufactureEndDate
+              ? manufactureData.manufactureEndDate.split("T")[0]
+              : "";
+            localStorage.setItem("prod_start_date", manufactureStartDate || "");
+            localStorage.setItem("prod_end_date", manufactureEndDate || "");
+            console.log("prod_start_date", manufactureStartDate);
+            console.log("prod_end_date", manufactureEndDate);
+
+            updateKeys({
+              supApproved:
+                response.data[0].supervisiorStatus == "SUPERVISOR_APPROVED"
+                  ? true
+                  : false,
+              qaApproved:
+                response.data[0].qaStatus == "QA_APPROVED" ? true : false,
+              supSaved:
+                response.data[0].supervisiorStatus == "SUPERVISOR_SAVED"
+                  ? true
+                  : false,
+              qaSaved: response.data[0].qaStatus == "QA_SAVED" ? true : false,
+              productionId: response.data[0].productionId,
+            });
+          } else if (response.data.length == 0) {
+            updateKeys({
+              supApproved: false,
+              qaApproved: false,
+              supSaved: false,
+              qaSaved: false,
+            });
+            setProductionDetails({
+              batch_no: props.batchNo,
+              Product_Description: "",
+              PO_No: "",
+              PO_quantity: "",
+              Product_Code: "",
+              No_Of_Bags: "",
+              Lot_No: "",
+              MStart_Date: "",
+              MEnd_Date: "",
+              MStart_Time: "",
+              MEnd_Time: "",
+              IssuedBy_Sign: "",
+              IssuedBy_Date: "",
+              ReceivedBy_Sign: "",
+              ReceivedBy_Date: "",
+              orderNo: "",
+              poStatus: "",
+              SFQ_Bags: "",
+              SFQ_Boxes: "",
+              RQ_Bags: "",
+              RQ_Boxes: "",
+              OD_Bags: "",
+              OD_Boxes: "",
+            });
+            message.info("Please Select From Date and To Date");
+          }
+        })
+        .catch((err) => {
+          console.log("Error", err);
+        });
+    }
   }, [props.batchNo]);
+
+  useEffect(() => {
+    console.log("props.batchNo]", props.batchNo);
+  }, []);
 
   const saveData = () => {
     console.log("Data12", productionDetails);
@@ -190,7 +228,7 @@ const Production_Details = (props) => {
       manufactureStartTime: productionDetails.MStart_Time,
       manufactureEndDate: productionDetails.MEnd_Date,
       manufactureEndTime: productionDetails.MEnd_Time,
-      manufactureCompletionDate:productionDetails.manufactureCompletionDate,
+      manufactureCompletionDate: productionDetails.manufactureCompletionDate,
       supervisiorName: productionDetails.ReceivedBy_Sign,
       supervisiorStatus: "",
       supervisiorDate: productionDetails.ReceivedBy_Date,
@@ -201,7 +239,7 @@ const Production_Details = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/SaveproductionDetails`,
+        `${API.prodUrl}/Precot/api/punching/bmr/SaveproductionDetails`,
         payload,
         {
           headers: {
@@ -214,7 +252,7 @@ const Production_Details = (props) => {
         message.success("Saved Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -245,18 +283,21 @@ const Production_Details = (props) => {
                 orderNo: response.data[0].orderNumber,
               });
               const manufactureData = response.data[0];
-              console.log("Manufacture Data",manufactureData)
+              console.log("Manufacture Data", manufactureData);
               const manufactureStartDate = manufactureData.manufactureStartDate
-              ? manufactureData.manufactureStartDate.split("T")[0]
-              : "";
-              const manufactureEndDate = manufactureData.manufactureEndDate 
-              ? manufactureData.manufactureEndDate.split("T")[0]
-              : "";
-              localStorage.setItem("prod_start_date", manufactureStartDate || "");
-            localStorage.setItem("prod_end_date", manufactureEndDate || "");
-            console.log("prod_start_date",manufactureStartDate )
-            console.log("prod_end_date",manufactureEndDate )
-            
+                ? manufactureData.manufactureStartDate.split("T")[0]
+                : "";
+              const manufactureEndDate = manufactureData.manufactureEndDate
+                ? manufactureData.manufactureEndDate.split("T")[0]
+                : "";
+              localStorage.setItem(
+                "prod_start_date",
+                manufactureStartDate || ""
+              );
+              localStorage.setItem("prod_end_date", manufactureEndDate || "");
+              console.log("prod_start_date", manufactureStartDate);
+              console.log("prod_end_date", manufactureEndDate);
+
               updateKeys({
                 supApproved:
                   response.data[0].supervisiorStatus == "SUPERVISOR_APPROVED"
@@ -304,14 +345,14 @@ const Production_Details = (props) => {
   const submitData = () => {
     console.log("Data", productionDetails);
     // /Precot/api/punching/bmr/productionDetails
-     localStorage.setItem("prod_start_date",productionDetails.MStart_Date);
-    localStorage.setItem("prod_end_date",productionDetails.MEnd_Date)
+    localStorage.setItem("prod_start_date", productionDetails.MStart_Date);
+    localStorage.setItem("prod_end_date", productionDetails.MEnd_Date);
     const payload = {
       productionId: productionId,
       batchNo: props.batchNo,
       productDescription: productionDetails.Product_Description,
-      manufactureCompletionDate:productionDetails.manufactureCompletionDate,
-  
+      manufactureCompletionDate: productionDetails.manufactureCompletionDate,
+
       machine: "",
       poNumber: productionDetails.PO_No,
       orderNumber: productionDetails.orderNo,
@@ -337,10 +378,10 @@ const Production_Details = (props) => {
       qaName: productionDetails.IssuedBy_Sign,
       qaDate: productionDetails.IssuedBy_Date,
     };
-    
+
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/productionDetails`,
+        `${API.prodUrl}/Precot/api/punching/bmr/productionDetails`,
         payload,
         {
           headers: {
@@ -353,7 +394,7 @@ const Production_Details = (props) => {
         message.success("Submitted Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/punching/bmr/getProductionDetails?order=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -361,6 +402,7 @@ const Production_Details = (props) => {
             }
           )
           .then((response) => {
+            console.log(" resposne in production details");
             console.log("Res", response.data);
             setProductionId(response.data[0].productionId);
             console.log("3", productionId);
@@ -384,17 +426,20 @@ const Production_Details = (props) => {
                 orderNo: response.data[0].orderNumber,
               });
               const manufactureData = response.data[0];
-  console.log("Manufacture Data",manufactureData)
-  const manufactureStartDate = manufactureData.manufactureStartDate
-  ? manufactureData.manufactureStartDate.split("T")[0]
-  : "";
-  const manufactureEndDate = manufactureData.manufactureEndDate 
-  ? manufactureData.manufactureEndDate.split("T")[0]
-  : "";
-  localStorage.setItem("prod_start_date", manufactureStartDate || "");
-localStorage.setItem("prod_end_date", manufactureEndDate || "");
-console.log("prod_start_date",manufactureStartDate )
-console.log("prod_end_date",manufactureEndDate )
+              console.log("Manufacture Data", manufactureData);
+              const manufactureStartDate = manufactureData.manufactureStartDate
+                ? manufactureData.manufactureStartDate.split("T")[0]
+                : "";
+              const manufactureEndDate = manufactureData.manufactureEndDate
+                ? manufactureData.manufactureEndDate.split("T")[0]
+                : "";
+              localStorage.setItem(
+                "prod_start_date",
+                manufactureStartDate || ""
+              );
+              localStorage.setItem("prod_end_date", manufactureEndDate || "");
+              console.log("prod_start_date", manufactureStartDate);
+              console.log("prod_end_date", manufactureEndDate);
               updateKeys({
                 supApproved:
                   response.data[0].supervisiorStatus == "SUPERVISOR_APPROVED"
@@ -410,6 +455,13 @@ console.log("prod_end_date",manufactureEndDate )
                 productionId: response.data[0].productionId,
               });
             } else if (response.data.length == 0) {
+              console.log("no resposne in production details");
+              updateKeys({
+                supApproved: false,
+                qaApproved: false,
+                supSaved: false,
+                qaSaved: false,
+              });
               setProductionDetails({
                 batch_no: props.batchNo,
                 Product_Description: "",
@@ -427,19 +479,12 @@ console.log("prod_end_date",manufactureEndDate )
                 ReceivedBy_Sign: "",
                 ReceivedBy_Date: "",
                 orderNo: "",
-                
               });
             } else {
               setNewSave(true);
               axios
                 .get(
-                  `${
-                  API.prodUrl
-                  }/Precot/api/punching/bmr/getProductionDetailsBatchOrder?batchNo=${
-                    props.batchNo
-                  }&orderNo=${props.orderNo}&fromdate=${
-                    productionDetails.MStart_Date
-                  }&todate=${productionDetails.MEnd_Date},`,
+                  `${API.prodUrl}/Precot/api/punching/bmr/getProductionDetailsBatchOrder?batchNo=${props.batchNo}&orderNo=${props.orderNo}&fromdate=${productionDetails.MStart_Date}&todate=${productionDetails.MEnd_Date},`,
                   {
                     headers: {
                       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -452,7 +497,7 @@ console.log("prod_end_date",manufactureEndDate )
                     PO_No: res.data[0].poNumber,
                     PO_quantity: res.data[0].quantity,
                     Product_Code: res.data[0].material,
-                    No_Of_Bags: res.data[0].bags,
+                    No_Of_Bags: res.data[0].quantity / res.data[0].bags,
                   });
                 })
                 .catch((err) => {
@@ -478,10 +523,8 @@ console.log("prod_end_date",manufactureEndDate )
   const fetchApi = (endDate) => {
     axios
       .get(
-        `${
-        API.prodUrl
-        }/Precot/api/punching/bmr/getProductionDetailsBatchOrder?batchNo=${
-          props.batchNo
+        `${API.prodUrl
+        }/Precot/api/punching/bmr/getProductionDetailsBatchOrder?batchNo=${props.batchNo
         }&orderNo=${props.orderNo}&fromdate=${moment(
           productionDetails.MStart_Date
         ).format("YYYY-MM-DD")}&todate=${moment(endDate).format("YYYY-MM-DD")}`,
@@ -502,29 +545,16 @@ console.log("prod_end_date",manufactureEndDate )
             PO_No: response.data[0].poNumber,
             PO_quantity: response.data[0].quantity,
             Product_Code: "",
-            No_Of_Bags: response.data[0].bags,
+            No_Of_Bags: response.data[0].quantity / response.data[0].bags,
             orderNo: response.data[0].orderNumber,
             SFQ_Bags: response.data[0].bagPackQty,
             SFQ_Boxes: response.data[0].boxPackQty,
-            RQ_Bags: (response.data[0].quantity - response.data[0].bagPackQty),
-            RQ_Boxes: (response.data[0].bags - response.data[0].boxPackQty),
-            OD_Bags:response.data[0].bagPackDate,
-            OD_Boxes:response.data[0].boxPackDate
+            RQ_Bags: response.data[0].quantity - response.data[0].bagPackQty,
+            RQ_Boxes: response.data[0].bags - response.data[0].boxPackQty,
+            OD_Bags: response.data[0].bagPackDate,
+            OD_Boxes: response.data[0].boxPackDate,
           });
-          // updateKeys({
-          //   supApproved:
-          //     response.data[0].supervisiorStatus == "SUPERVISOR_APPROVED"
-          //       ? true
-          //       : false,
-          //   qaApproved:
-          //     response.data[0].qaStatus == "QA_APPROVED" ? true : false,
-          //   supSaved:
-          //     response.data[0].supervisiorStatus == "SUPERVISOR_SAVED"
-          //       ? true
-          //       : false,
-          //   qaSaved: response.data[0].qaStatus == "QA_SAVED" ? true : false,
-          //   productionId: response.data[0].productionId,
-          // });
+
           console.log("Response", response.data);
         }
       })
@@ -533,9 +563,8 @@ console.log("prod_end_date",manufactureEndDate )
       });
   };
 
-
   const onChange = (e) => {
-    console.log('radio checked', e.target.value);
+    console.log("radio checked", e.target.value);
     updateProductionDetails({
       poStatus: e.target.value,
     });
@@ -563,10 +592,10 @@ console.log("prod_end_date",manufactureEndDate )
                 fontWeight: "bold",
                 display:
                   !props.loggedInSupervisor ||
-                  props.loggedInHod ||
-                  (props.loggedInSupervisor && primaryKeys.supApproved) ||
-                  (props.loggedInQa && primaryKeys.qaApproved) ||
-                  primaryKeys.qaApproved 
+                    props.loggedInHod ||
+                    (props.loggedInSupervisor && primaryKeys.supApproved) ||
+                    (props.loggedInQa && primaryKeys.qaApproved) ||
+                    primaryKeys.qaApproved
                     ? "none"
                     : "block",
               }}
@@ -585,9 +614,9 @@ console.log("prod_end_date",manufactureEndDate )
                 fontWeight: "bold",
                 display:
                   props.loggedInHod ||
-                  (props.loggedInSupervisor && primaryKeys.supApproved) ||
-                  (props.loggedInQa && primaryKeys.qaApproved) ||
-                  primaryKeys.qaApproved 
+                    (props.loggedInSupervisor && primaryKeys.supApproved) ||
+                    (props.loggedInQa && primaryKeys.qaApproved) ||
+                    primaryKeys.qaApproved
                     ? "none"
                     : "block",
               }}
@@ -640,7 +669,7 @@ console.log("prod_end_date",manufactureEndDate )
                   }
                 />
               </td>
-            
+
               <td colSpan="2" style={{ padding: "1em" }}>
                 <Input
                   type="datetime-local"
@@ -658,10 +687,9 @@ console.log("prod_end_date",manufactureEndDate )
                   }
                 />
               </td>
-           
             </tr>
             <tr>
-            <td
+              <td
                 colSpan="2"
                 style={{
                   padding: "1em",
@@ -674,7 +702,9 @@ console.log("prod_end_date",manufactureEndDate )
                   type="datetime-local"
                   value={productionDetails.manufactureCompletionDate}
                   onChange={(e) => {
-                    updateProductionDetails({ manufactureCompletionDate: e.target.value });
+                    updateProductionDetails({
+                      manufactureCompletionDate: e.target.value,
+                    });
                     fetchApi(e.target.value);
                   }}
                   readOnly={
@@ -805,7 +835,7 @@ console.log("prod_end_date",manufactureEndDate )
                   padding: "1em",
                 }}
               >
-               On date packed Qty.in No of Bags:{productionDetails.OD_Bags}
+                On date packed Qty.in No of Bags:{productionDetails.OD_Bags}
               </td>
               <td
                 colSpan="2"
@@ -911,7 +941,7 @@ console.log("prod_end_date",manufactureEndDate )
                     props.loggedInHod ||
                     (props.loggedInSupervisor && primaryKeys.supApproved) ||
                     (props.loggedInQa && primaryKeys.qaApproved) ||
-                    (primaryKeys.qaApproved)
+                    primaryKeys.qaApproved
                   }
                 />
               </td>
@@ -931,7 +961,7 @@ console.log("prod_end_date",manufactureEndDate )
                     props.loggedInHod ||
                     (props.loggedInSupervisor && primaryKeys.supApproved) ||
                     (props.loggedInQa && primaryKeys.qaApproved) ||
-                    (primaryKeys.qaApproved)
+                    primaryKeys.qaApproved
                   }
                 />
                 <br />
@@ -948,7 +978,7 @@ console.log("prod_end_date",manufactureEndDate )
                     props.loggedInHod ||
                     (props.loggedInSupervisor && primaryKeys.supApproved) ||
                     (props.loggedInQa && primaryKeys.qaApproved) ||
-                    (primaryKeys.qaApproved)
+                    primaryKeys.qaApproved
                   }
                 />
               </td>

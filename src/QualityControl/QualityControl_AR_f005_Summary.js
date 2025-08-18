@@ -1,24 +1,20 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Input, Button, Table, Select, message, Tooltip, Modal } from "antd";
-import { BiLock, BiNavigation } from "react-icons/bi";
-import { TbMenuDeep } from "react-icons/tb";
-import { GoArrowLeft } from "react-icons/go";
-import { FaLock, FaUserCircle } from "react-icons/fa";
 import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
+  EditOutlined
 } from "@ant-design/icons";
-import { IoCreate, IoPrint, IoSave } from "react-icons/io5";
-import PrecotSidebar from "../Components/PrecotSidebar";
-import BleachingHeader from "../Components/BleachingHeader";
-import logo from "../Assests/logo.png";
-import API from "../baseUrl.json";
+import { Button, message, Modal, Select, Table, Tooltip } from "antd";
 import axios from "axios";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { BiLock, BiNavigation } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { IoPrint } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
+import PrecotSidebar from "../Components/PrecotSidebar";
 
 const { Option } = Select;
 
@@ -150,16 +146,19 @@ const QCLARF05Summary = () => {
             responseType: "json",
           });
           let snoCounter = 1;
-          const transformedData = response.data.map((item) => ({
-            Sno: snoCounter++, // use counter for S.No
-            bmr_no: item.bmr_no || "N/A",
-            shift: item.shift || "N/A",
-            date: item.date || "N/A",
-            product_name: item.product_name || "N/A",
-            qa_inspector_status: item.qa_inspector_status,
-            qa_mng_status: item.qa_mng_status,
-            reason: item.reason || "N/A",
-          }));
+          const transformedData = response.data.map((item) => {
+            const firstLine = item.line1?.[0] || {};
+            return {
+              Sno: snoCounter++,
+              bmr_no: item.bmr_no || "N/A",
+
+              product_name: firstLine.product_name || "N/A",
+              qa_inspector_status: item.qa_inspector_status || "N/A",
+              qa_mng_status: item.qa_mng_status || "N/A",
+              reason: item.reason || "N/A",
+            };
+          });
+
           setTableData(transformedData);
 
           const hasRejectedStatus = transformedData.some(
@@ -289,25 +288,6 @@ const QCLARF05Summary = () => {
       align: "center",
     },
     {
-      title: "Shift",
-      dataIndex: "shift",
-      key: "shift",
-      align: "center",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-      align: "center",
-      render: (text) => formatDate(text),
-    },
-    {
-      title: "Product Name",
-      dataIndex: "product_name",
-      key: "product_name",
-      align: "center",
-    },
-    {
       title: "QA Inspector Status",
       dataIndex: "qa_inspector_status",
       key: "qa_inspector_status",
@@ -321,13 +301,13 @@ const QCLARF05Summary = () => {
     },
     ...(showReasonColumn
       ? [
-          {
-            title: "Reason",
-            dataIndex: "reason",
-            key: "reason",
-            align: "center",
-          },
-        ]
+        {
+          title: "Reason",
+          dataIndex: "reason",
+          key: "reason",
+          align: "center",
+        },
+      ]
       : []),
     {
       title: "Action",
@@ -515,6 +495,7 @@ const QCLARF05Summary = () => {
         </Select>
       </Modal>
 
+
       <div
         id="section-to-print"
         style={{
@@ -527,551 +508,577 @@ const QCLARF05Summary = () => {
       @media print {
         @page {
           size: landscape;
+          margin: 0;
         }
-        // body {
-        //   -webkit-print-color-adjust: exact;
-        // }
         body {
-      -webkit-print-color-adjust: exact;
-      width: 100%;
-      height: 100%;
-      transform: scale(0.9); /* Adjust scale as needed */
-      transform-origin: top left right bottom; /* Adjust the origin if needed */
-    }
-        #section-to-print {
+          -webkit-print-color-adjust: exact;
+          width: 100%;
+          height: 100%;
+          transform: scale(0.9);
+          transform-origin: top left right bottom;
+        }
+        .page {
           page-break-after: always;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        .page:last-child {
+          page-break-after: auto;
         }
       }
     `}
         </style>
-        <table
-          className="f18table"
-          style={{ width: "100%", height: "50%", marginTop: "5%" }}
-        >
-          <tbody>
-            <tr>
-              <th
-                colSpan="10"
-                rowSpan="4"
-                style={{ textAlign: "center", height: "80px" }}
-              >
-                <img
-                  src={logo}
-                  alt="Logo"
-                  style={{ width: "100px", height: "auto" }}
-                />
-                <br></br>
-                Unit H
-              </th>
 
-              <th colSpan="60" rowSpan="4" style={{ textAlign: "center" }}>
-                Non-Woven Fleece Analysis Report
-              </th>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                Format No.:
-              </td>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                PH-QCL01-AR-F-005
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                Revision No.:
-              </td>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                03
-              </td>
-            </tr>
-            <td colSpan="10" style={{ paddingLeft: "5px" }}>
-              Ref. SOP No.:
-            </td>
-            <td colSpan="10" style={{ paddingLeft: "5px" }}>
-              PH-QCL01-D-05
-            </td>
-            <tr>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                Page NO.:
-              </td>
-              <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                1 of 1
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        {(() => {
+          const entriesPerPage = 4;
+          const allLineItems = printData.flatMap((item) => item.line1 || []);
+          const totalPages = Math.ceil(allLineItems.length / entriesPerPage);
 
-        <table style={{ width: "100%", marginTop: "2%" }}>
-          <thead>
-            <tr key="">
-              <td
-                rowSpan="2"
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-              >
-                S.No.
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Analysis .Reference Number
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Spunlace BMR No.
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                  width: "100px",
-                }}
-                rowSpan="2"
-              >
-                Date / Shift
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Product Name
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Shaft No.
-              </td>
-              <td
-                style={{
-                  width: "50px",
-                  height: "100px",
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                colSpan="2"
-              >
-                Jetlace <br />
-                Parameters
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Mixing
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                GSM
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Pattern
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                }}
-                colSpan="2"
-              >
-                Moisture
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Thickness (mm)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                  width: "100px",
-                }}
-                rowSpan="2"
-              >
-                Strength in Cross Direction (CD) (N)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                  width: "100px",
-                }}
-                rowSpan="2"
-              >
-                Strength in Machine Direction (MD) (N)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                  fontSize: "30px",
-                }}
-                rowSpan="2"
-              >
-                Friction (N)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Appearance
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Tested By (QA)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-                rowSpan="2"
-              >
-                Approved By
-              </td>
-            </tr>
+          // Split the data into pages
+          const pages = Array.from({ length: totalPages }, (_, i) =>
+            allLineItems.slice(i * entriesPerPage, (i + 1) * entriesPerPage)
+          );
 
-            <tr key="">
-              <td
-                style={{
-                  width: "10px",
-                  height: "100px",
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
+          return pages.map((pageData, pageIndex) => (
+            <div className="page" key={pageIndex}>
+              {/* Header Section - Same for all pages */}
+              <table
+                className="f18table"
+                style={{ width: "100%", marginBottom: "20px" }}
               >
-                Pressure
-              </td>
-              <td
-                style={{
-                  width: "20px",
-                  height: "100px",
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-              >
-                Text
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-              >
-                Mahlo (%)
-              </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  transform: "rotate(270deg)",
-                }}
-              >
-                Probe (%)
-              </td>
-            </tr>
-          </thead>
-
-          <tbody>
-            {printData.map((item, index) => {
-              // Format dates for each item
-              const formattedQAINSDate = item.qa_inspector_submit_on
-                ? moment(item.qa_inspector_submit_on).format("DD/MM/YYYY HH:mm") // Note "HH:mm" for minutes
-                : "";
-
-              const formattedQAMNGDate = item.qa_mng_submit_on
-                ? moment(item.qa_mng_submit_on).format("DD/MM/YYYY HH:mm")
-                : "";
-
-              return (
-                <tr key={index}>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {index + 1}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.analysis_request_number}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.bmr_no}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {formatDate(item.date)} / {item.shift}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.product_name}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.shaft_no}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.jetlace_parameters_pressure}{" "}
-                    {/* Updated field name */}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.jetlace_parameters_text} {/* Updated field name */}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.mixing}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.gsm}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.pattern}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.moisture_mahlo}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.moisture_phobe} {/* Updated field name */}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.thickness}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.strength_cross_direction} {/* Updated field name */}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.strength_machine_direction} {/* Updated field name */}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.friction}
-                  </td>
-                  <td
-                    style={{
-                      padding: "10px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {item.appearance}
-                  </td>
-                  <td
-                    style={{
-                      padding: "20px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {qaInspectorImages[index] && (
+                <tbody>
+                  <tr>
+                    <th
+                      colSpan="10"
+                      rowSpan="4"
+                      style={{ textAlign: "center", height: "80px" }}
+                    >
                       <img
-                        src={qaInspectorImages[index]}
-                        alt="QA Inspector Sign"
-                        width="50"
+                        src={logo}
+                        alt="Logo"
+                        style={{ width: "100px", height: "auto" }}
                       />
-                    )}
-                    <br />
-                    {item.qa_inspector_sign} <br />
-                    {formattedQAINSDate}
-                  </td>
+                      <br></br>
+                      Unit H
+                    </th>
 
-                  <td
-                    style={{
-                      padding: "20px",
-                      textAlign: "center",
-                      transform: "rotate(270deg)",
-                    }}
-                  >
-                    {qaMngImages[index] && (
-                      <img
-                        src={qaMngImages[index]}
-                        alt="QA Manager Sign"
-                        width="50"
-                      />
-                    )}
-                    <br />
-                    {item.qa_mng_sign} <br />
-                    {formattedQAMNGDate}
+                    <th colSpan="60" rowSpan="4" style={{ textAlign: "center" }}>
+                      Non-Woven Fleece Analysis Report
+                    </th>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      Format No.:
+                    </td>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      PH-QCL01-AR-F-005
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      Revision No.:
+                    </td>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      03
+                    </td>
+                  </tr>
+                  <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                    Ref. SOP No.:
                   </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                    PH-QCL01-D-05
+                  </td>
+                  <tr>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      Page NO.:
+                    </td>
+                    <td colSpan="10" style={{ paddingLeft: "5px" }}>
+                      {`${pageIndex + 1} of ${totalPages}`}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-        <table style={{ marginTop: "2%", width: "100%" }}>
-          <tr>
-            <td
-              colSpan="5"
-              style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
-            >
-              Particulars
-            </td>
-            <td colSpan="5" style={{ textAlign: "center" }}>
-              Prepared by
-            </td>
-            <td colSpan="5" style={{ textAlign: "center" }}>
-              Reviewed by
-            </td>
-            <td colSpan="5" style={{ textAlign: "center" }}>
-              Approved by
-            </td>
-          </tr>
-          <tr>
-            <td
-              colSpan="5"
-              style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
-            >
-              Name
-            </td>
-            <td colSpan="5"></td>
-            <td colSpan="5"></td>
-            <td colSpan="5"></td>
-          </tr>
-          <tr>
-            <td
-              colSpan="5"
-              style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
-            >
-              Signature & Date
-            </td>
-            <td colSpan="5"></td>
-            <td colSpan="5"></td>
-            <td colSpan="5"></td>
-          </tr>
-        </table>
+              {/* Main Content Table */}
+              <div style={{ flex: 1 }}>
+                <table style={{ width: "100%" }}>
+                  <thead>
+                    <tr key="">
+                      <td
+                        rowSpan="2"
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                      >
+                        S.No.
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Analysis .Reference Number
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Spunlace BMR No.
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                          width: "100px",
+                        }}
+                        rowSpan="2"
+                      >
+                        Date / Shift
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Product Name
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Shaft No.
+                      </td>
+                      <td
+                        style={{
+                          width: "50px",
+                          height: "100px",
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        colSpan="2"
+                      >
+                        Jetlace <br />
+                        Parameters
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Mixing
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        GSM
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Pattern
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                        }}
+                        colSpan="2"
+                      >
+                        Moisture
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Thickness (mm)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                          width: "100px",
+                        }}
+                        rowSpan="2"
+                      >
+                        Strength in Cross Direction (CD) (N)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                          width: "100px",
+                        }}
+                        rowSpan="2"
+                      >
+                        Strength in Machine Direction (MD) (N)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                          fontSize: "30px",
+                        }}
+                        rowSpan="2"
+                      >
+                        Friction (N)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Appearance
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Tested By (QA)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                        rowSpan="2"
+                      >
+                        Approved By
+                      </td>
+                    </tr>
+
+                    <tr key="">
+                      <td
+                        style={{
+                          width: "10px",
+                          height: "100px",
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                      >
+                        Pressure
+                      </td>
+                      <td
+                        style={{
+                          width: "20px",
+                          height: "100px",
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                      >
+                        Text
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                      >
+                        Mahlo (%)
+                      </td>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          transform: "rotate(270deg)",
+                        }}
+                      >
+                        Probe (%)
+                      </td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {pageData.map((item, index) => {
+                      const overallIndex = pageIndex * entriesPerPage + index + 1;
+                      const formattedQAINSDate = item.qa_inspector_submit_on
+                        ? moment(item.qa_inspector_submit_on).format("DD/MM/YYYY HH:mm")
+                        : "";
+
+                      const formattedQAMNGDate = item.qa_mng_submit_on
+                        ? moment(item.qa_mng_submit_on).format("DD/MM/YYYY HH:mm")
+                        : "";
+
+                      return (
+                        <tr key={index}>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {overallIndex}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.analysis_request_number}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.bmr_no || printData[0]?.bmr_no}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {formatDate(item.date)} / {item.shift}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.product_name}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.shaft_no}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.jetlace_parameters_pressure}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.jetlace_parameters_text}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.mixing}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.gsm}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.pattern}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.moisture_mahlo}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.moisture_phobe}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.thickness}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.strength_cross_direction}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.strength_machine_direction}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.friction}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {item.appearance}
+                          </td>
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {qaInspectorImages[index] && (
+                              <img
+                                src={qaInspectorImages[index]}
+                                alt="QA Inspector Sign"
+                                width="50"
+                              />
+                            )}
+                            <br />
+                            {item.qa_inspector_sign || printData[0]?.qa_inspector_sign} <br />
+                            {formattedQAINSDate}
+                          </td>
+
+                          <td
+                            style={{
+                              padding: "50px 20px 50px 20px",
+                              textAlign: "center",
+                              transform: "rotate(270deg)",
+                            }}
+                          >
+                            {qaMngImages[index] && (
+                              <img
+                                src={qaMngImages[index]}
+                                alt="QA Manager Sign"
+                                width="50"
+                              />
+                            )}
+                            <br />
+                            {item.qa_mng_sign || printData[0]?.qa_mng_sign} <br />
+                            {formattedQAMNGDate}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Footer Section - Same for all pages */}
+              <table style={{ width: "100%", marginTop: "auto" }}>
+                <tbody>
+                  <tr>
+                    <td
+                      colSpan="5"
+                      style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
+                    >
+                      Particulars
+                    </td>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      Prepared by
+                    </td>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      Reviewed by
+                    </td>
+                    <td colSpan="5" style={{ textAlign: "center" }}>
+                      Approved by
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      colSpan="5"
+                      style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
+                    >
+                      Name
+                    </td>
+                    <td colSpan="5"></td>
+                    <td colSpan="5"></td>
+                    <td colSpan="5"></td>
+                  </tr>
+                  <tr>
+                    <td
+                      colSpan="5"
+                      style={{ textAlign: "start", padding: "5px 0px 5px 10px" }}
+                    >
+                      Signature & Date
+                    </td>
+                    <td colSpan="5"></td>
+                    <td colSpan="5"></td>
+                    <td colSpan="5"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ));
+        })()}
       </div>
     </>
   );

@@ -26,6 +26,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FaLock, FaUserCircle } from "react-icons/fa";
 import API from "../baseUrl.json";
 import { IoPrint } from "react-icons/io5";
+import { ContinuousColorLegend } from "@mui/x-charts";
 const { TabPane } = Tabs;
 const { Column } = Table;
 const { Option } = Select;
@@ -65,6 +66,7 @@ const BMRSummaryRP = () => {
       const formattedDateQA = formatDateTime(now);
       setCurrentDateTimeQA(formattedDateQA);
     }
+
     if (role === "ROLE_HOD" || role == "ROLE_DESIGNEE") {
       const formattedDateHOD = formatDateTime(now);
       setCurrentDateTimeHOD(formattedDateHOD);
@@ -84,6 +86,7 @@ const BMRSummaryRP = () => {
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
   const [currentDateQA, setCurrentDateQA] = useState("");
+  const [currentDateQAman_QAdes, setCurrentDateQAman_QAdes] = useState("");
   const [currentTimeQA, setCurrentTimeQA] = useState("");
   const [currentDateHOD, setCurrentDateHOD] = useState("");
   const [currentTimeHOD, setCurrentTimeHOD] = useState("");
@@ -101,6 +104,11 @@ const BMRSummaryRP = () => {
       const { formattedDate, formattedTime } = formatDateTimes(now);
       setCurrentDateQA(formattedDate);
       setCurrentTimeQA(formattedTime);
+    }
+
+    if (role === "QA_MANAGER" || role === "QA_DESIGNEE") {
+      const formattedDate = formatDateTime(now);
+      setCurrentDateQAman_QAdes(formattedDate);
     }
 
     if (role === "ROLE_HOD" || role === "ROLE_DESIGNEE") {
@@ -134,12 +142,12 @@ const BMRSummaryRP = () => {
         (item) => item.value === userName
       );
       if (matchedValue) {
-        setSelectedValue(matchedValue.value); // Set the matched value
+        setSelectedValue(matchedValue.value);
       } else {
-        setSelectedValue(productionDetailsSign); // Fallback to existing value
+        setSelectedValue(productionDetailsSign);
       }
     } else {
-      setSelectedValue(productionDetailsSign); // Fallback to existing value
+      setSelectedValue(productionDetailsSign);
     }
   }, [SupervisorLov]);
 
@@ -148,30 +156,40 @@ const BMRSummaryRP = () => {
     if (userName) {
       const matchedValue = QaLovs.find((item) => item.value === userName);
       if (matchedValue) {
-        setSelectedValues(matchedValue.value); // Set the matched value
+        setSelectedValues(matchedValue.value);
       } else {
-        setSelectedValues(productionDetailsSign); // Fallback to existing value
+        setSelectedValues(productionDetailsSign);
       }
     } else {
-      setSelectedValues(productionDetailsSign); // Fallback to existing value
+      setSelectedValues(productionDetailsSign);
     }
   }, [QaLovs]);
 
-  // useEffect(() => {
-  //   const userName = localStorage.getItem("username");
-  //   if (userName) {
-  //     const matchedValue = props.hodLov.find((item) => item.value === userName);
-  //     if (matchedValue) {
-  //       setSelectedValuesHOD(matchedValue.value); // Set the matched value
-  //     } else {
-  //       setSelectedValuesHOD(postprod.hod_sign); // Fallback to existing value
-  //     }
-  //   } else {
-  //     setSelectedValuesHOD(postprod.hod_sign); // Fallback to existing value
-  //   }
-  // }, [props.hodLov, postprod.hod_sign]);
+  useEffect(() => {
+    const userName = localStorage.getItem("username");
+    if (Array.isArray(userLov) && userName) {
+      const matchedValue = userLov.find((item) => item.value === userName);
+      if (matchedValue) {
+        setSelectedValuesHOD(matchedValue.value);
+      } else {
+        setSelectedValuesHOD(productionDetailsSign);
+      }
+    } else {
+      setSelectedValuesHOD(productionDetailsSign);
+    }
+  }, [userLov]);
 
-  // hod login validation.
+  let QAMAN_QADES_Username = "";
+
+  if (role === "QA_MANAGER" || role == "QA_DESIGNEE") {
+    QAMAN_QADES_Username = localStorage.getItem("username");
+  }
+
+  let hod_desUsername = "";
+  if (role === "ROLE_HOD" || role == "ROLE_DESIGNEE") {
+    hod_desUsername = localStorage.getItem("username");
+  }
+
   const [loggedInHod, setLoggedInHod] = useState(false);
 
   useEffect(() => {
@@ -214,7 +232,7 @@ const BMRSummaryRP = () => {
     // Fetch data from the API
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=SPUNLACE`,
+        `${API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=SPUNLACE`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -241,7 +259,7 @@ const BMRSummaryRP = () => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=SPUNLACE`,
+        `${API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=SPUNLACE`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -345,7 +363,7 @@ const BMRSummaryRP = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const API_URL = `${ API.prodUrl}/Precot/api/spunlace/rp/summary/getBaleDetailsByOrderDate?order_no=${orderNoSelect}&fromdate=${startDateOne}&todate=${endDateOne}`;
+    const API_URL = `${API.prodUrl}/Precot/api/spunlace/rp/summary/getBaleDetailsByOrderDate?order_no=${orderNoSelect}&fromdate=${startDateOne}&todate=${endDateOne}`;
 
     const fetchData = async () => {
       try {
@@ -476,6 +494,7 @@ const BMRSummaryRP = () => {
   ]);
   const [qaReleaseData, setQaReleaseData] = useState([
     {
+      childId: "",
       key: "1",
       description:
         "All critical process parameters reviewed(Within/Not within range).",
@@ -483,6 +502,7 @@ const BMRSummaryRP = () => {
       signAndDate: { qa: "", date: "" },
     },
     {
+      childId: "",
       key: "2",
       description:
         "In process checks reviewed(Meeting/Not meeting the specification).",
@@ -490,18 +510,21 @@ const BMRSummaryRP = () => {
       signAndDate: { qa: "", date: "" },
     },
     {
+      childId: "",
       key: "3",
       description: "Deviations reviewed(Found/Not found).",
       status: "",
       signAndDate: { qa: "", date: "" },
     },
     {
+      childId: "",
       key: "4",
       description: "If deviations are logged",
       status: "",
       signAndDate: { qa: "", date: "" },
     },
     {
+      childId: "",
       key: "5",
       description: "The Batch is released to next step.",
       status: "",
@@ -550,36 +573,37 @@ const BMRSummaryRP = () => {
     role == "ROLE_QA";
 
   const disabled14 =
-    role == "ROLE_QA" && qaReleaseDetails?.[0]?.status == "QA_APPROVED";
+    (role == "QA_MANAGER" || role == "QA_DESIGNEE") &&
+    qaReleaseDetails?.[0]?.status == "QA_APPROVED";
 
   const disabled13Sup =
     (role == "ROLE_SUPERVISOR" &&
       postProductionDetails?.[0]?.status == "SUPERVISOR_APPROVED") ||
     role == "ROLE_HOD" ||
-    role == "ROLE_QA";
+    role == "QA_MANAGER" ||
+    role === "QA_DESIGNEE";
 
   const disabled13Hod =
     (role == "ROLE_HOD" &&
       postProductionDetails?.[0]?.status == "HOD_APPROVED") ||
     role == "ROLE_SUPERVISOR" ||
-    role == "ROLE_QA";
+    role == "QA_MANAGER" ||
+    role === "QA_DESIGNEE";
 
   const disabled13Qa =
-    (role == "ROLE_QA" &&
+    ((role == "QA_MANAGER" || role === "QA_DESIGNEE") &&
       postProductionDetails?.[0]?.status == "QA_APPROVED") ||
     role == "ROLE_SUPERVISOR" ||
     role == "ROLE_HOD";
 
   const disabled13Submitted =
-    (role == "ROLE_QA" &&
+    ((role == "QA_MANAGER" || role === "QA_DESIGNEE") &&
       postProductionDetails?.[0]?.status == "QA_APPROVED") ||
     (role == "ROLE_HOD" &&
       postProductionDetails?.[0]?.status == "HOD_APPROVED") ||
     (role == "ROLE_SUPERVISOR" &&
       postProductionDetails?.[0]?.status == "SUPERVISOR_APPROVED");
-  const disabled10Qa =
-    (role == "ROLE_QA" && status10 == "QA_APPROVED") ||
-    role == "ROLE_SUPERVISOR";
+
   const disabled10Submit =
     (role == "ROLE_QA" && status10 == "QA_APPROVED") ||
     (role == "ROLE_SUPERVISOR" && status10 == "SUPERVISOR_APPROVED");
@@ -621,78 +645,6 @@ const BMRSummaryRP = () => {
     console.log("date value", value);
   };
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     console.error("Token not found in localStorage.");
-  //     return;
-  //   }
-
-  //   if (orderNoSelect && startDateOne && endDateOne && selectedOption && selectedOptions) {
-  //     const fetchProductionDetails = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `${ API.prodUrl}/Precot/api/spunlace/rp/summary/getProductionDetailsByBaleOrderDate`,
-  //           {
-  //             params: {
-  //               order_no: orderNoSelect,  // Order number
-  //               fromdate: startDateOne,  // Start date
-  //               todate: endDateOne,    // End date
-  //               frombale: selectedOption,  // From Bale
-  //               tobale: selectedOptions,    // To Bale
-  //             },
-  //             headers: {
-  //               Authorization: `Bearer ${token}`,  // Authorization header with token
-  //             },
-  //           }
-  //         );
-
-  //         setProductionDetails(response.data);
-  //     console.log("production details 01", productionDetails);
-  //     const data = response.data;
-  //     if (
-  //       data.bmr01rp01productiondetails
-  //       // data.bmr01rp01productiondetails.length > 0
-  //     ) {
-  //       setStartDateOne(data.bmr01rp01productiondetails.start_date);
-  //       setendDateOne(data.bmr01rp01productiondetails.end_date);
-  //       setStartTimeOne(data.bmr01rp01productiondetails.start_time);
-  //       setEndTimeOne(data.bmr01rp01productiondetails.end_time);
-  //       setIdOne(data.bmr01rp01productiondetails.prod_id);
-  //       setproductionDetailsSign(data.bmr01rp01productiondetails.issued_by);
-  //       setproductionDetailsSignSup(
-  //         data.bmr01rp01productiondetails.received_by
-  //       );
-  //       setproductionDetailsDate(data.bmr01rp01productiondetails.issued_on);
-  //       setproductionDetailsDateSup(
-  //         data.bmr01rp01productiondetails.received_on
-  //       );
-  //       setIdOne(data.bmr01rp01productiondetails.prod_id);
-
-  //       console.log("supervisor sign", productionDetailsSignSup);
-  //     } else {
-  //       // Handle case where data is not available
-  //       setStartDateOne(null);
-  //       setendDateOne(null);
-  //       setStartTimeOne(null);
-  //       setEndTimeOne(null);
-  //       setIdOne(null);
-  //       setproductionDetailsDate(null);
-  //       setproductionDetailsDateSup(null);
-  //       setproductionDetailsSign(null);
-  //       setproductionDetailsSignSup(null);
-  //     }
-  //       } catch (err) {
-  //         console.error("Error fetching production details:", err);
-  //         setError("Failed to fetch production details.");
-  //       }
-  //     };
-
-  //     fetchProductionDetails();
-  //   } else {
-  //     console.error("Missing necessary values for API call.");
-  //   }
-  // }, [token, orderNoSelect, startDateOne, endDateOne, selectedOption,selectedOptions]);
-
   const [typematerial, setTypematerial] = useState();
   const [noofbales, setNoOfBales] = useState();
   const [batchqty, setBatchqty] = useState();
@@ -708,7 +660,7 @@ const BMRSummaryRP = () => {
       const fetchProductionDetails = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spunlace/rp/summary/getProductionDetailsByBaleOrderDate`,
+            `${API.prodUrl}/Precot/api/spunlace/rp/summary/getProductionDetailsByBaleOrderDate`,
             {
               params: {
                 order_no: orderNoSelect, // Order number
@@ -797,7 +749,7 @@ const BMRSummaryRP = () => {
   const fetchProductionDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/01.GetProductionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/01.GetProductionDetails`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -862,7 +814,7 @@ const BMRSummaryRP = () => {
       ]);
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
           {
             params: { batch_no: selectedOrderValue },
             headers: {
@@ -956,7 +908,7 @@ const BMRSummaryRP = () => {
       ]);
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/04.GetPackingMeterialDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/04.GetPackingMeterialDetails`,
           {
             params: { batch_no: selectedOrderValue },
             headers: {
@@ -1049,7 +1001,7 @@ const BMRSummaryRP = () => {
   const fetchProcessingEquipmentDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/06.GetProcessingEqupments`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/06.GetProcessingEqupments`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1102,7 +1054,7 @@ const BMRSummaryRP = () => {
   const fetchVerificationOfRecordsDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/07.GetVerificationOfRecords`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/07.GetVerificationOfRecords`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1221,29 +1173,6 @@ const BMRSummaryRP = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchManufactureStepsDetails = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${ API.prodUrl}/Precot/api/spunlace/rp/summary/08.GetManufactureSteps`,
-  //         {
-  //           params: { order_no: selectedOrderValue },
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         },
-  //       );
-  //       setManufacturingStepsData(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching manufacture steps details:', error);
-  //     }
-  //   };
-
-  //   if (selectedOrderValue) {
-  //     fetchManufactureStepsDetails();
-  //   }
-  // }, [selectedOrderValue, token]);
-
   const [productionRecBtn, setProductionRecBtn] = useState(false);
   const [isPackingMaterialDisabled, setIsPackingMaterialDisabled] =
     useState(false);
@@ -1258,7 +1187,7 @@ const BMRSummaryRP = () => {
   const fetchProductReconciliationDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/09.GetProductReconciliation`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/09.GetProductReconciliation`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1324,7 +1253,7 @@ const BMRSummaryRP = () => {
   const fetchProcessDeviationDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/10.GetProcessDeviationRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/10.GetProcessDeviationRecord`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1405,44 +1334,11 @@ const BMRSummaryRP = () => {
     }
   };
 
-  // const fetchDelayEquipmentBreakdownRecordDetails = async () => {
-  //   setProcessDelayData(initialProcessDelayData); // Reset data before fetch
-  //   try {
-  //     const response = await axios.get(
-  //       `${ API.prodUrl}/Precot/api/spunlace/rp/summary/11.GetDelayEqupmentBrkDwnRecord?order_no=${selectedOrderValue}&fromdate=${startDateOne}&todate=${endDateOne}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       },
-  //     );
-
-  //     // Map the response data to the table structure
-  //     const mappedData = response.data.bmrSummaryDateList.flatMap((item, index) =>
-  //       item.spunlacrdetails.map((detail, detailIndex) => ({
-  //         key: `${item.id}-${detailIndex}`, // Unique key
-  //         stepNo: index + 1, // Customize step logic if needed
-  //         date: detail.pde_date,
-  //         from: detail.pde_from_hr,
-  //         to: detail.pde_to_hr,
-  //         total: detail.pde_total_hr,
-  //         signatureDate: detail.prod_date ? detail.prod_date.split('T')[0] : '',
-  //         remarks: detail.remarks,
-  //       })),
-  //     );
-
-  //     // Update the process delay data state
-  //     setProcessDelayData(mappedData);
-  //   } catch (error) {
-  //     console.error('Error fetching delay equipment breakdown record details:', error);
-  //   }
-  // };
-
   const fetchDelayEquipmentBreakdownRecordDetails = async () => {
     setProcessDelayData(initialProcessDelayData); // Reset data before fetch
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/11.GetDelayEqupmentBrkDwnRecord?batch_no=${selectedOrderValue}&fromdate=${startDateOne}&todate=${endDateOne}`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/11.GetDelayEqupmentBrkDwnRecord?batch_no=${selectedOrderValue}&fromdate=${startDateOne}&todate=${endDateOne}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1542,7 +1438,7 @@ const BMRSummaryRP = () => {
   const fetchListOfEnclosures = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/12.GetListOfEnclosurs`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/12.GetListOfEnclosurs`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1618,7 +1514,7 @@ const BMRSummaryRP = () => {
   const fetchPostProductionReviewDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/13.GetPostProductionReview`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/13.GetPostProductionReview`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1634,7 +1530,7 @@ const BMRSummaryRP = () => {
         setStatus13(response.data[0].status);
         setSupervisorSign13(response.data[0].sup_sign);
         setSupervisorDate13(response.data[0].sup_date);
-        setHodSign13(response.data[0].designee_sign);
+        setHodSign13(response.data[0].designee_sign || hod_desUsername);
         sethodDate13(response.data[0].designee_date);
         setQaSign13(response.data[0].qa_sign);
         setqaDate13(response.data[0].qa_date);
@@ -1657,10 +1553,11 @@ const BMRSummaryRP = () => {
       fetchQAReleaseDetails();
     }
   }, [selectedOrderValue, token]);
+
   const fetchQAReleaseDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/14.GetQaRelease`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/14.GetQaRelease`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1670,6 +1567,7 @@ const BMRSummaryRP = () => {
       );
       setQaReleaseDetails(response.data);
       if (response.data.length > 0) {
+        console.log("response.data[0].rls_id", response.data[0].rls_id);
         setId14(response.data[0].rls_id);
       }
       const hasData =
@@ -1691,6 +1589,7 @@ const BMRSummaryRP = () => {
             return {
               ...item,
               status: data.status_1 || item.status,
+              childId: data.id,
               signAndDate: {
                 ...item.signAndDate,
                 qa: data.sign || item.signAndDate.qa,
@@ -1702,6 +1601,7 @@ const BMRSummaryRP = () => {
             return {
               ...item,
               status: data1.status_1 || item.status,
+              childId: data1.id,
               signAndDate: {
                 ...item.signAndDate,
                 qa: data1.sign || item.signAndDate.qa,
@@ -1713,6 +1613,7 @@ const BMRSummaryRP = () => {
             return {
               ...item,
               status: data2.status_1 || item.status,
+              childId: data2.id,
               signAndDate: {
                 ...item.signAndDate,
                 qa: data2.sign || item.signAndDate.qa,
@@ -1724,6 +1625,7 @@ const BMRSummaryRP = () => {
             return {
               ...item,
               status: data3.status_1 || item.status,
+              childId: data3.id,
               signAndDate: {
                 ...item.signAndDate,
                 qa: data3.sign || item.signAndDate.qa,
@@ -1736,6 +1638,7 @@ const BMRSummaryRP = () => {
             return {
               ...item,
               status: data4.status_1 || item.status,
+              childId: data4.id,
               signAndDate: {
                 ...item.signAndDate,
                 qa: data4.sign || item.signAndDate.qa,
@@ -1788,7 +1691,7 @@ const BMRSummaryRP = () => {
   const fetchProductReleaseDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/15.GetProductRelease`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/15.GetProductRelease`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -1851,7 +1754,7 @@ const BMRSummaryRP = () => {
     const fetchOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/processSetupOrders`,
+          `${API.prodUrl}/Precot/api/spulance/processSetupOrders`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`, // if token is required
@@ -1872,7 +1775,7 @@ const BMRSummaryRP = () => {
     const fetchBatch = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/01.GetBatchNoSpulanceBmr`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/01.GetBatchNoSpulanceBmr`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`, // if token is required
@@ -1890,6 +1793,7 @@ const BMRSummaryRP = () => {
   }, []);
 
   const handleOrderChange = (value) => {
+    setId14("");
     setSelectedOrderValue(value);
     setQaReleaseData([
       {
@@ -1993,20 +1897,15 @@ const BMRSummaryRP = () => {
       },
     ]);
     console.log("Selected order value:", value);
-    // fetchDelayEquipmentBreakdownRecordDetails();
-
-    // Perform additional actions based on the selected value if needed
   };
   const handleProductReconciliationSave = (value, key, column) => {
     const newData = productReconciliationdata.map((item) => {
       if (item.key === key) {
-        // Calculate yield if either inputQty or outputQty is updated
         const updatedItem = {
           ...item,
           [column]: value,
         };
 
-        // Calculate yield only if both inputQty and outputQty are valid
         if (updatedItem.inputQty > 0) {
           updatedItem.yield =
             (updatedItem.outputQty / updatedItem.inputQty) * 100;
@@ -2028,6 +1927,7 @@ const BMRSummaryRP = () => {
 
     const payload = {
       batchNo: selectedOrderValue,
+      order_no: orderNoSelect,
       form_no: "PRD02/F-27",
       // id : item.id,
       input_quantity: item.inputQty,
@@ -2037,7 +1937,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/09.SaveProductReconciliation`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/09.SaveProductReconciliation`,
         payload,
         {
           headers: {
@@ -2102,7 +2002,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/10.SaveProcessDevRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/10.SaveProcessDevRecord`,
         payload,
         {
           headers: {
@@ -2143,7 +2043,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/10.SubmitProcessDevRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/10.SubmitProcessDevRecord`,
         payload,
         {
           headers: {
@@ -2200,7 +2100,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/02.SaveAnnexurInputDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/02.SaveAnnexurInputDetails`,
         payload,
         {
           headers: {
@@ -2226,7 +2126,7 @@ const BMRSummaryRP = () => {
           ]);
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
+              `${API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
               {
                 params: { batch_no: selectedOrderValue },
                 headers: {
@@ -2330,7 +2230,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/02.SubmitAnnexurInputDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/02.SubmitAnnexurInputDetails`,
         payload,
         {
           headers: {
@@ -2343,7 +2243,7 @@ const BMRSummaryRP = () => {
         setActiveTab("2");
         const fetchInputDetailsofKg = async () => {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
+            `${API.prodUrl}/Precot/api/spunlace/rp/summary/02.GetAnnexurInputDetails`,
             {
               params: { batch_no: selectedOrderValue },
               headers: {
@@ -2393,7 +2293,8 @@ const BMRSummaryRP = () => {
     const token = localStorage.getItem("token");
     const payload = {
       packing_id: packingId04,
-      batchNo: selectedOrderValue,
+      batch_no: selectedOrderValue,
+      order_no: orderNoSelect,
       form_no: "PRD02/F-27",
       status: "Active",
       details: packingmaterialdata.map((item) => ({
@@ -2406,7 +2307,7 @@ const BMRSummaryRP = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/04.SavePackingMeterialDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/04.SavePackingMeterialDetails`,
         payload,
         {
           headers: {
@@ -2620,7 +2521,7 @@ const BMRSummaryRP = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/15.SaveProductRelease`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/15.SaveProductRelease`,
         payload,
         {
           headers: {
@@ -2689,7 +2590,7 @@ const BMRSummaryRP = () => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
+        `${API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -2888,7 +2789,7 @@ const BMRSummaryRP = () => {
               {" "}
               <Select
                 options={SupervisorLov}
-                value={supervisorSign13 || selectedValue}
+                value={supervisorSign13 || username}
                 style={{ width: "100%", textAlign: "center" }}
                 dropdownStyle={{ textAlign: "center" }}
                 disabled={disabled13Sup}
@@ -2899,7 +2800,7 @@ const BMRSummaryRP = () => {
               {" "}
               <Select
                 options={userLov}
-                value={hodSign13 || selectedValueHOD}
+                value={hodSign13 || hod_desUsername}
                 style={{ width: "100%", textAlign: "center" }}
                 dropdownStyle={{ textAlign: "center" }}
                 disabled={disabled13Hod}
@@ -2910,7 +2811,7 @@ const BMRSummaryRP = () => {
               {" "}
               <Select
                 options={userLov}
-                value={qaSign13 || selectedValues}
+                value={qaSign13 || QAMAN_QADES_Username}
                 style={{ width: "100%", textAlign: "center" }}
                 dropdownStyle={{ textAlign: "center" }}
                 disabled={disabled13Qa}
@@ -2943,7 +2844,7 @@ const BMRSummaryRP = () => {
             <td colSpan="30">
               <Input
                 type="datetime-local"
-                value={qaDate13 || currentDateQA}
+                value={qaDate13 || currentDateQAman_QAdes}
                 disabled={disabled13Qa}
                 style={{ width: "100%" }}
                 onChange={(e) => handleQADatechange(e.target.value)}
@@ -2999,25 +2900,26 @@ const BMRSummaryRP = () => {
     const payload = {
       id: id13,
       batchNo: selectedOrderValue,
+      order_no: orderNoSelect,
       form_no: "PRD02/F-27",
-      sup_sign: supervisorSign13,
-      sup_date: supervisorDate13,
+      sup_sign: supervisorSign13 || selectedValue,
+      sup_date: supervisorDate13 || currentDateTime,
       supervisor_id: supervisorId13,
       hod_id: hodId13,
       status: status13,
       // sup_time: ,
-      designee_sign: hodSign13,
-      designee_date: hodDate13,
+      designee_sign: hodSign13 || hod_desUsername,
+      designee_date: hodDate13 || currentDateTimeHOD,
       // designee_time: ,
-      qa_sign: qaSign13,
-      qa_date: qaDate13,
+      qa_sign: qaSign13 || QAMAN_QADES_Username,
+      qa_date: qaDate13 || currentDateQAman_QAdes,
       status: status13,
       // qa_time: ,
     };
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/13.SubmitPostProductionReview`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/13.SubmitPostProductionReview`,
         payload,
         {
           headers: {
@@ -3100,7 +3002,7 @@ const BMRSummaryRP = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/12.SaveListOfEnclosurs`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/12.SaveListOfEnclosurs`,
         payload,
         {
           headers: {
@@ -3120,7 +3022,7 @@ const BMRSummaryRP = () => {
         }));
 
         axios.get(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/12.GetListOfEnclosurs`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/12.GetListOfEnclosurs`,
           {
             params: { batch_no: selectedOrderValue },
             headers: {
@@ -3221,7 +3123,7 @@ const BMRSummaryRP = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/12.SubmitListOfEnclosurs`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/12.SubmitListOfEnclosurs`,
         payload,
         {
           headers: {
@@ -3329,7 +3231,7 @@ const BMRSummaryRP = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/11.SubmitDelayEqupmentBrkDwnRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/11.SubmitDelayEqupmentBrkDwnRecord`,
         payload,
         {
           headers: {
@@ -3380,7 +3282,7 @@ const BMRSummaryRP = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/11.SaveDelayEqupmentBrkDwnRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/11.SaveDelayEqupmentBrkDwnRecord`,
         payload,
         {
           headers: {
@@ -3662,7 +3564,7 @@ const BMRSummaryRP = () => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
+        `${API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -3671,15 +3573,14 @@ const BMRSummaryRP = () => {
       )
       .then((res) => {
         console.log("QA", res.data);
-
+        if (role == "QA_MANAGER" || "QA_DESIGNEE") {
+          return;
+        }
         const a = res.data.map((option) => ({
           value: option.name,
           label: option.name,
         }));
-        // setUserLov((prevLov) => ({
-        //   ...prevLov,
-        //   qalov: a,
-        // }));
+
         setUserLov(a);
       })
       .catch((err) => {
@@ -3770,7 +3671,7 @@ const BMRSummaryRP = () => {
     // Make the API call
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/06.SubmitProcessingEqupments`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/06.SubmitProcessingEqupments`,
         payload,
         {
           headers: {
@@ -3815,7 +3716,7 @@ const BMRSummaryRP = () => {
     // Make the API call
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/06.SaveProcessingEqupments`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/06.SaveProcessingEqupments`,
         payload,
         {
           headers: {
@@ -3901,8 +3802,7 @@ const BMRSummaryRP = () => {
           verified_time: VerifiedbyTime,
           verified_name: VerifiedbySign,
           verified_sign: VerifiedbySign,
-          // satisfactory: isSatisfactory ? "Tick" : "NA",
-          // non_satisfactory: isNotSatisfactory ? "Tick" : "NA",
+
           details: activityHouseKeeping,
           observation: "House Keeping Cleaning Records",
         },
@@ -3926,7 +3826,7 @@ const BMRSummaryRP = () => {
 
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/07.SaveVerificationOfRecords`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/07.SaveVerificationOfRecords`,
         {
           method: "POST",
           headers: {
@@ -3979,7 +3879,6 @@ const BMRSummaryRP = () => {
         VerifiedbySignPR == null ||
         VerifiedbyTime == null)
     ) {
-      
       message.warning("Please Select Manditory Fields");
       return;
     }
@@ -4027,7 +3926,7 @@ const BMRSummaryRP = () => {
 
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/07.SubmitVerificationOfRecords`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/07.SubmitVerificationOfRecords`,
         {
           method: "POST",
           headers: {
@@ -4359,7 +4258,7 @@ const BMRSummaryRP = () => {
     useEffect(() => {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
+          `${API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=SPUNLACE`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -4407,14 +4306,6 @@ const BMRSummaryRP = () => {
           message.error("Please fill out the Status field.");
           return; // Prevent form submission if validation fails
         }
-        if (!item.signAndDate.qa) {
-          message.error("Please fill out the Signature field.");
-          return; // Prevent form submission if validation fails
-        }
-        if (!item.signAndDate.date) {
-          message.error("Please fill out the Date field.");
-          return; // Prevent form submission if validation fails
-        }
       }
       const currentTime = moment().format("hh:mm A");
       const payload = {
@@ -4423,10 +4314,11 @@ const BMRSummaryRP = () => {
         form_no: "PRD02/F-27",
         status: "Pending",
         details: qaReleaseData.map((item) => ({
-          date: item.signAndDate.date,
+          id: item.childId || null,
+          date: item.signAndDate.date || currentDateQAman_QAdes,
           time: currentTime,
-          name: item.signAndDate.qa,
-          sign: item.signAndDate.qa,
+          name: item.signAndDate.qa || QAMAN_QADES_Username,
+          sign: item.signAndDate.qa || QAMAN_QADES_Username,
           status_1: item.status,
           status_2: item.status,
         })),
@@ -4434,7 +4326,7 @@ const BMRSummaryRP = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/14.SubmitQaRelease`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/14.SubmitQaRelease`,
           payload,
           {
             headers: {
@@ -4451,18 +4343,20 @@ const BMRSummaryRP = () => {
         message.error("Failed to Submit Form");
       }
     };
+
     const handleSave = async () => {
       const currentTime = moment().format("hh:mm A");
       const payload = {
-        rls_id: id14,
+        rls_id: id14 || null,
         batchNo: selectedOrderValue,
         form_no: "PRD02/F-27",
         status: "Pending",
         details: qaReleaseData.map((item) => ({
-          date: item.signAndDate.date,
+          id: item.childId || null,
+          date: item.signAndDate.date || currentDateQAman_QAdes,
           time: currentTime,
-          name: item.signAndDate.qa,
-          sign: item.signAndDate.qa,
+          name: item.signAndDate.qa || QAMAN_QADES_Username,
+          sign: item.signAndDate.qa || QAMAN_QADES_Username,
           status_1: item.status,
           status_2: item.status,
         })),
@@ -4470,7 +4364,7 @@ const BMRSummaryRP = () => {
 
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/14.SaveQaRelease`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/14.SaveQaRelease`,
           payload,
           {
             headers: {
@@ -4579,7 +4473,7 @@ const BMRSummaryRP = () => {
                   disabled={disabled14}
                   style={{ width: 150, marginRight: 8 }}
                   placeholder="Select QA"
-                  value={record.signAndDate.qa || selectedValues}
+                  value={record.signAndDate.qa || QAMAN_QADES_Username}
                   onChange={(value) =>
                     handleSignAndDateChange(record.key, "qa", value)
                   }
@@ -4590,11 +4484,7 @@ const BMRSummaryRP = () => {
                     </Option>
                   ))}
                 </Select>
-                {/* <DatePicker
-               
-                  value={record.signAndDate.date ? moment(record.signAndDate.date) : null}
-                  onChange={(date, dateString) => handleSignAndDateChange(record.key, 'date', dateString)}
-                /> */}
+
                 <Input
                   style={{ width: "100%" }}
                   disabled={disabled14}
@@ -4604,7 +4494,7 @@ const BMRSummaryRP = () => {
                       ? moment(record.signAndDate.date).format(
                           "YYYY-MM-DDTHH:mm"
                         )
-                      : currentDateTimeQA
+                      : currentDateQAman_QAdes
                   }
                   onChange={(e) =>
                     handleSignAndDateChange(record.key, "date", e.target.value)
@@ -4652,7 +4542,7 @@ const BMRSummaryRP = () => {
   const fetchManufactureStepsDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/08.GetManufactureSteps`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/08.GetManufactureSteps`,
         {
           params: { batch_no: selectedOrderValue },
           headers: {
@@ -4700,7 +4590,8 @@ const BMRSummaryRP = () => {
   const handlemanufactureStepsSave = async () => {
     const payload = {
       mfs_id: id_18,
-      batchNo: selectedOrderValue,
+      batch_no: selectedOrderValue,
+      order_no: orderNoSelect,
       form_no: "PRD02/F-27",
       observation1: SwitchON,
       observation2: BaleLength,
@@ -4708,15 +4599,13 @@ const BMRSummaryRP = () => {
       observation4: MaxiPressure2,
       done_by_date: DonebyDate08,
       done_by_sign: signManifactureingSteps,
-      // done_by_name: 'John Doe',
       checked_by_date: CheckedbyDate08,
       checked_by_sign: signManifactureingStepsQA,
-      // checked_by_name: 'Jane Smith',
     };
 
     try {
       await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/08.SaveManufactureSteps`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/08.SaveManufactureSteps`,
         payload,
         {
           headers: {
@@ -4739,7 +4628,8 @@ const BMRSummaryRP = () => {
   const handlemanufactureStepsSubmit = async () => {
     const payload = {
       mfs_id: id_18,
-      batchNo: selectedOrderValue,
+      batch_no: selectedOrderValue,
+      order_no: orderNoSelect,
       form_no: "PRD02/F-27",
       observation1: SwitchON,
       observation2: BaleLength,
@@ -4756,7 +4646,7 @@ const BMRSummaryRP = () => {
 
     try {
       await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/08.SubmitManufactureSteps`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/08.SubmitManufactureSteps`,
         payload,
         {
           headers: {
@@ -4904,7 +4794,7 @@ const BMRSummaryRP = () => {
         "Content-Type": "application/json",
       };
       await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/01.SaveProductionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/01.SaveProductionDetails`,
         payload,
         { headers }
       );
@@ -4943,7 +4833,7 @@ const BMRSummaryRP = () => {
         "Content-Type": "application/json",
       };
       await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/rp/summary/01.SubmitProductionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/rp/summary/01.SubmitProductionDetails`,
         payload,
         { headers }
       );
@@ -4971,9 +4861,6 @@ const BMRSummaryRP = () => {
           Batch Quantity in Kgs:
         </th>
         <td colspan="25">
-          {/* {productionDetails?.bmr01rp01productiondetailsSap?.length > 0
-    ? productionDetails.bmr01rp01productiondetailsSap[0]?.Batch_Quantity || "N/A"
-    : "N/A"} */}
           {productionDetails?.bmr01rp01productiondetailsSap?.[0]
             ?.Batch_Quantity ??
             batchqty ??
@@ -4988,10 +4875,6 @@ const BMRSummaryRP = () => {
           Type of Material:
         </th>
         <td colspan="25">
-          {/* {productionDetails?.bmr01rp01productiondetailsSap?.length > 0
-    ? productionDetails.bmr01rp01productiondetailsSap[0]?.Type_of_Material || typematerial || "N/A"
-    : "N/A"}
-    */}
           {productionDetails?.bmr01rp01productiondetailsSap?.[0]
             ?.Type_of_Material ??
             typematerial ??
@@ -4999,9 +4882,6 @@ const BMRSummaryRP = () => {
         </td>
         <th colspan="25"> No. of Bales:</th>
         <td colspan="25">
-          {/* {productionDetails?.bmr01rp01productiondetailsSap?.length > 0
-    ? productionDetails.bmr01rp01productiondetailsSap[0]?.No_of_Bales || "N/A"
-    : "N/A"} */}
           {productionDetails?.bmr01rp01productiondetailsSap?.[0]?.No_of_Bales ??
             noofbales ??
             "N/A"}
@@ -5013,11 +4893,6 @@ const BMRSummaryRP = () => {
           Po Status:
         </th>
         <td colspan="25">
-          {/* {productionDetails?.bmr01rp01productiondetailsSap[0]?.po_status ||
-            "N/A"} */}
-          {/* {productionDetails?.bmr01rp01productiondetailsSap?.length > 0
-    ? productionDetails.bmr01rp01productiondetailsSap[0]?.po_status || "N/A"
-    : "N/A"} */}
           <input
             type="radio"
             id="open"
@@ -5251,7 +5126,7 @@ const BMRSummaryRP = () => {
       setSelectedOrderValuePrint(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/rp/summary/GetRpbPrint?batch_no=${value}`,
+          `${API.prodUrl}/Precot/api/spunlace/rp/summary/GetRpbPrint?batch_no=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -5405,22 +5280,6 @@ const BMRSummaryRP = () => {
       <div style={{ display: "flex", width: 300 }}>
         <span style={{ width: "35%" }}>Bacth No:</span>
 
-        {/* <Select
-          showSearch
-          value={selectedOrderValue}
-          onChange={handleOrderChange}
-          style={{ width: '100%', marginLeft: '5px' }}
-          placeholder="Select Order Number"
-        >
-          <Select.Option value="" disabled selected>
-            Select Order Number
-          </Select.Option>
-          {options.map((option) => (
-            <Select.Option key={option.id} value={option.value}>
-              {option.value}
-            </Select.Option>
-          ))}
-        </Select> */}
         <Select
           showSearch
           value={selectedOrderValue}
@@ -5943,14 +5802,7 @@ const BMRSummaryRP = () => {
                           }
                         />
                       </td>
-                      {/* <td style={{ border: '1px solid #ccc', padding: '8px' }}>
-                <Input
-                  value={item.signature}
-                  onChange={(e) =>
-                    handleprocessdeviationChange(e.target.value, item.key, 'signature')
-                  }
-                />
-              </td> */}
+
                       <td style={{ border: "1px solid #ccc", padding: "1em" }}>
                         <Select
                           style={{ width: "100%" }}
@@ -6545,10 +6397,13 @@ const BMRSummaryRP = () => {
             </div>
           </div>
         </TabPane>
-        <TabPane tab="POST-PRODUCTION REVIEW" key="12">
-          <PostProductionReview />
-        </TabPane>
-        {role == "ROLE_QA" ? (
+        {role !== "ROLE_QA" ? (
+          <TabPane tab="POST-PRODUCTION REVIEW" key="12">
+            <PostProductionReview />
+          </TabPane>
+        ) : null}
+
+        {role == "QA_MANAGER" || role == "QA_DESIGNEE" ? (
           <>
             <TabPane tab="QA RELEASE" key="13">
               <QARelase />
@@ -7477,60 +7332,6 @@ const BMRSummaryRP = () => {
             </th>
           </tr>
           <br />
-          {/* <tr style={{ height: '30px' }}>
-            <th colspan="8">11.0 PROCESS DELAY/EQUIPMENT BREAK DOWN RECORD</th>
-          </tr>
-          <tr>
-            <th rowSpan="2" colSpan="1">
-              Step No.
-            </th>
-            <th rowSpan="2" colSpan="1">
-              Date
-            </th>
-            <th rowSpan="1" colSpan="3">
-              Process Delay/Down Time
-            </th>
-            <th rowSpan="2" colSpan="2">
-              Signature/Date
-            </th>
-            <th rowSpan="2" colSpan="1">
-              Remarks
-            </th>
-          </tr>
-          <tr>
-            <th rowSpan="1" colSpan="1">
-              From
-            </th>
-            <th rowSpan="1" colSpan="1">
-              To
-            </th>
-            <th rowSpan="1" colSpan="1">
-              Total
-            </th>
-          </tr>
-          {printResponseData?.stoppageList11?.map((slice, index) => (
-            <tr key={index}>
-              <th colSpan="1">{index + 1}</th>
-              <th colSpan="1">
-                {formattedDate(printResponseData?.stoppageList11?.[index]?.PackDate)}
-              </th>
-              <th colSpan="1">{printResponseData?.stoppageList11?.[index]?.fromTime}</th>
-              <th colSpan="1">{printResponseData?.stoppageList11?.[index]?.toTime}</th>
-              <th colSpan="1">{printResponseData?.stoppageList11?.[index]?.totalHours}</th>
-              <th colSpan="2">
-                {
-                  printResponseData?.rpb11processdlyequpbrkdwnrecord?.[0]?.spunlacrdetails?.[index]
-                    ?.prod_sign
-                }
-                <br />
-                {formattedDate(
-                  printResponseData?.rpb11processdlyequpbrkdwnrecord?.[0]?.spunlacrdetails?.[index]
-                    ?.prod_date,
-                )}
-              </th>
-              <th colSpan="1">{printResponseData?.stoppageList11?.[index]?.remarks}</th>
-            </tr>
-          ))} */}
           <tr style={{ height: "30px" }}>
             <th colSpan="8">11.0 PROCESS DELAY/EQUIPMENT BREAK DOWN RECORD</th>
           </tr>

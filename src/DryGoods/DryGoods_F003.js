@@ -1,19 +1,11 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Input,
-  message,
-  Modal,
-  Select,
-  Tabs,
-  Tooltip
-} from "antd";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
 import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiLock } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
@@ -119,7 +111,10 @@ const DryGoods_f03 = () => {
       setMachinceValue("BL2"); // or any other default value
     }
   }, [machineName]);
+  // const handleChangeOrderNo = (e) => {
+  //   setBatchNolist(e);
 
+  // };
   useEffect(() => {
     fetchData_StoppageDetails(order_no);
   }, []);
@@ -269,7 +264,9 @@ const DryGoods_f03 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          // console.log("Error in fetching image:", err);
+        });
     }
   }, [planingDetailsByDate, API.prodUrl, token]);
 
@@ -727,11 +724,16 @@ const DryGoods_f03 = () => {
   };
 
   const fetchData_StoppageDetails = async (value) => {
+    let machine_param = "";
+    if (machineName === "TEXCOR") {
+      machine_param = "BL1";
+    } else {
+      machine_param = "BL2";
+    }
     try {
       const token = localStorage.getItem("token");
-      const role = localStorage.getItem("role");
       const numberShift = convertShiftValue(shift);
-      let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getDrygoodsStoppageDetailsF003?date=${date}&shift=${numberShift}&order_no=${value}&machine_name=${MachinceValue}`;
+      let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getDrygoodsStoppageDetailsF003?date=${date}&shift=${numberShift}&order_no=${value}&machine_name=${machine_param}`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -1074,6 +1076,7 @@ const DryGoods_f03 = () => {
       Number(Bags8 || 0);
     console.log("id", planId);
     setSaveLoading(true);
+
     try {
       const payload = {
         cottonballs_id: Id,
@@ -1433,6 +1436,7 @@ const DryGoods_f03 = () => {
         const data = await response.json();
         console.log("datavalues", data);
 
+        // console.log("Summary Get List",data)
         if (data && data.length >= 0) {
           setstoppagedata(data);
           console.log("setstoppage", data);
@@ -1469,6 +1473,7 @@ const DryGoods_f03 = () => {
               <th colSpan={25}>Sliver Weight in Grams</th>
               <th colSpan={15}>Ball Weight in Grams</th>
               <th colSpan={10}>Counts / Bag</th>
+              {/* <th colSpan={10}>Std. Bags/Hr</th> */}
             </tr>
             <tr>
               <td colSpan={10}>
@@ -1483,6 +1488,7 @@ const DryGoods_f03 = () => {
                   }}
                   value={Cutting_Length}
                   onChange={(e) => setCutting_Length(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1499,6 +1505,7 @@ const DryGoods_f03 = () => {
                   }}
                   value={Feed_Roller_percentage}
                   onChange={(e) => setFeed_Roller_percentage(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1532,6 +1539,7 @@ const DryGoods_f03 = () => {
                   }}
                   value={Sliver_Weight}
                   onChange={(e) => setSliver_Weight(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1548,6 +1556,7 @@ const DryGoods_f03 = () => {
                   }}
                   value={Ball_weight}
                   onChange={(e) => setBall_weight(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1564,10 +1573,28 @@ const DryGoods_f03 = () => {
                   }}
                   value={count_Bags}
                   onChange={(e) => setcount_Bags(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
               </td>
+              {/* <td colSpan={10}>
+                <input
+                  type="number"
+                  className="inp-new"
+                  style={{
+                    width: "98%",
+                    border: "none",
+                    height: "35px",
+                    paddingLeft: "2px",
+                  }}
+                  value={std_Bags}
+                  onChange={(e) => setstd_Bags(e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  disabled={!isEditable}
+                  min="0"
+                />
+              </td> */}
             </tr>
           </table>
         </div>
@@ -1759,6 +1786,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box1}
                   onChange={(e) => handleBoxChange(e.target.value, setBox1)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1769,6 +1797,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box2}
                   onChange={(e) => handleBoxChange(e.target.value, setBox2)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1779,6 +1808,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box3}
                   onChange={(e) => handleBoxChange(e.target.value, setBox3)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1789,6 +1819,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box4}
                   onChange={(e) => handleBoxChange(e.target.value, setBox4)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1798,6 +1829,7 @@ const DryGoods_f03 = () => {
                   className="inp-new"
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box5}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   onChange={(e) => handleBoxChange(e.target.value, setBox5)}
                 />
@@ -1809,6 +1841,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box6}
                   onChange={(e) => handleBoxChange(e.target.value, setBox6)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1819,6 +1852,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box7}
                   onChange={(e) => handleBoxChange(e.target.value, setBox7)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1829,6 +1863,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box8}
                   onChange={(e) => handleBoxChange(e.target.value, setBox8)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   max={0}
                   disabled={!isEditable}
                 />
@@ -1840,6 +1875,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={calculateTotal_box()}
                   onChange={(e) => setBoxTotal(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   max={0}
                   disabled={!isEditable}
                 />
@@ -1857,6 +1893,7 @@ const DryGoods_f03 = () => {
                   value={Bags1}
                   disabled={!isEditable}
                   onChange={(e) => handleBagChange(e.target.value, setBags1)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                 />
               </td>
               <td colSpan={10}>
@@ -1866,6 +1903,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags2}
                   onChange={(e) => handleBagChange(e.target.value, setBags2)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1876,6 +1914,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags3}
                   onChange={(e) => handleBagChange(e.target.value, setBags3)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1886,6 +1925,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags4}
                   onChange={(e) => handleBagChange(e.target.value, setBags4)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1896,6 +1936,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags5}
                   onChange={(e) => handleBagChange(e.target.value, setBags5)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1906,6 +1947,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags6}
                   onChange={(e) => handleBagChange(e.target.value, setBags6)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1916,6 +1958,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags7}
                   onChange={(e) => handleBagChange(e.target.value, setBags7)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1926,6 +1969,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags8}
                   onChange={(e) => handleBagChange(e.target.value, setBags8)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1936,6 +1980,7 @@ const DryGoods_f03 = () => {
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={calculateTotal()}
                   onChange={(e) => setBagTotal(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   max={0}
                   disabled={!isEditable}
                 />
@@ -1963,6 +2008,7 @@ const DryGoods_f03 = () => {
                   value={silver_weight_kg}
                   onChange={(e) => setsilver_weight_kg(e.target.value)}
                   disabled={!isEditable}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                 />
               </th>
@@ -1979,6 +2025,7 @@ const DryGoods_f03 = () => {
                   value={Ball_weight_kg}
                   onChange={(e) => setBall_weight_kg(e.target.value)}
                   disabled={!isEditable}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                 />
               </th>
@@ -2018,7 +2065,7 @@ const DryGoods_f03 = () => {
                     {item.TotHrs}
                   </td>
                   <td colSpan={25} style={{ textAlign: "center" }}>
-                    {item.remarks}
+                    {item.Remarks}
                   </td>
                 </tr>
               ))}

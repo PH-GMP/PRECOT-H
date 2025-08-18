@@ -64,7 +64,7 @@ const Metal_detector_checklist = () => {
     // const [recentPrintData, setRecentPrintData]= useState(false);
     //----------- state for code reuse table --------------------
     const [formFields, setFormFields] = useState({
-        formNo: "PH-PRD02/F-019",
+        formNo: "PH-PRD03-F-006",
         sectionAndEquipmentFields: false,
         entryColsSpan: 1,
         cleaningColspan: 1,
@@ -84,7 +84,7 @@ const Metal_detector_checklist = () => {
     console.log('date in inital values ', initialValues.date);
     const [formData, setFormData] = useState({
         "formatName": "Argus Metal Detector - Check List",
-        "formatNo": "PH-PRD02/F-019",
+        "formatNo": "PH-PRD03-F-006",
         "revisionNo": 5,
         "refSopNo": "PRD01-D-10",
         "unit": "H",
@@ -117,12 +117,12 @@ const Metal_detector_checklist = () => {
     }, [role])
     useEffect(() => {
         switch (formNumber) {
-            case "PH-PRD02/F-019":
+            case "PH-PRD03-F-006":
                 // console.log("case entered")
-                setFormatNo("PH-PRD02/F-019")
+                setFormatNo("PH-PRD03-F-006")
                 setFormFields(prevState => ({
                     ...prevState,
-                    formNo: "PH-PRD02/F-019",
+                    formNo: "PH-PRD03-F-006",
                     sectionAndEquipmentFields: true,
                     entryColsSpan: 1,
                     cleaningColspan: 3,
@@ -368,9 +368,6 @@ const Metal_detector_checklist = () => {
                                         <p>PAD PUNCHING</p>
                                     </td>
                                 </tr>
-
-
-
                                 <tr>
                                     <td className="data-border">
                                         <p>Equipment Name:</p>
@@ -560,7 +557,7 @@ const Metal_detector_checklist = () => {
                             <p style={{ textAlign: 'center' }}>1</p>
                         </td>
                         <td className='data-border' rowSpan={formFields.calibrationCheck}>
-                            {formFields.formNo == "PH-PRD02/F-019" && (
+                            {formFields.formNo == "PH-PRD03-F-006" && (
                                 <p>Functioning of Metal Detector / Calibration Check (both detection & ejection) Using Ferrous Size : 1.0 mm</p>)}
                             {formFields.formNo == "PH-PRD02/F-020" && (
                                 <p>Functioning of Metal Detector / Calibration Check for CCP-4A & 4B (both detection & ejection)Size : Ferrous 3.0 mm Copper 4 mm</p>)}
@@ -663,8 +660,8 @@ const Metal_detector_checklist = () => {
                         <td className='data-border-remarks'>
                             <p>Remarks/Comment<br></br>(in case of any<br></br> abnormality observed) :</p>
                         </td>
-                        <td className='data-border-remarks' colSpan={formFields.issueFoundColSpan} style={{ padding: "0px", textAlign:'center' }}>
-                            <Input type="text" className='inp-new' onChange={handleChange} name="remarks" value={formData.remarks} readOnly={status.fieldStatus} style={{ width: "500px", height: "100%" , border:'1px solid black' }}></Input>
+                        <td className='data-border-remarks' colSpan={formFields.issueFoundColSpan} style={{ padding: "0px", textAlign: 'center' }}>
+                            <Input type="text" className='inp-new' onChange={handleChange} name="remarks" value={formData.remarks} readOnly={status.fieldStatus} style={{ width: "500px", height: "100%", border: '1px solid black' }}></Input>
                         </td>
                     </tr>
                 </tfoot>
@@ -724,15 +721,15 @@ const Metal_detector_checklist = () => {
         let errors = {};
 
         // ---------------- Form 03 (Bleaching) Validation ------------------------------------------
-        if (initialValues.formNumber == "PH-PRD02/F-019" && (formData.metalContaminatedMaterials == '' || formData.metalContaminatedMaterials == null)) {
+        if (initialValues.formNumber == "PH-PRD03-F-006" && (formData.metalContaminatedMaterials == '' || formData.metalContaminatedMaterials == null)) {
             errors.metalContaminatedMaterials = 'Metal contamination is required';
             notificationMessage('warning', 'Metal contamination is required');
         }
-        if (initialValues.formNumber == "PH-PRD02/F-019" && (formData.noOfMetalContaminants == '' || formData.noOfMetalContaminants == null)) {
+        if (initialValues.formNumber == "PH-PRD03-F-006" && (formData.noOfMetalContaminants == '' || formData.noOfMetalContaminants == null)) {
             errors.noOfMetalContaminants = 'Number of Metal contaminants is required';
             notificationMessage('warning', ' Number of Metal contaminants is required');
         }
-        if (initialValues.formNumber == "PH-PRD02/F-019" && (formData.functionCheck == '' || formData.functionCheck == null)) {
+        if (initialValues.formNumber == "PH-PRD03-F-006" && (formData.functionCheck == '' || formData.functionCheck == null)) {
             errors.functionCheck = 'Function check  is required';
             notificationMessage('warning', 'Function check is required')
         }
@@ -773,7 +770,7 @@ const Metal_detector_checklist = () => {
             case "PH-PRD02/F-020":
                 routePath = '/Precot/Spunlace/F-20/Summary';
                 break;
-            case "PH-PRD02/F-019":
+            case "PH-PRD03-F-006":
                 routePath = '/Precot/PadPunching/F-17/Summary';
                 break;
         }
@@ -796,7 +793,7 @@ const Metal_detector_checklist = () => {
             console.log("==========================")
             payload = {
                 "formatName": formData.formatName,
-                "formatNo": formData.formatNo,
+                "formatNo": "PH-PRD02/F-019",
                 "revisionNo": formData.revisionNo,
                 "refSopNo": formData.refSopNo,
                 "unit": formData.unit,
@@ -811,25 +808,25 @@ const Metal_detector_checklist = () => {
             }
             // ------------- Form 03 (Bleahcing) payload -------------
 
-            if (formNumber == "PH-PRD02/F-019" && formData.listId) {
+            if (formNumber == "PH-PRD03-F-006" && formData.listId) {
                 payload.listId = formData.listId;
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.section) {
+            if (formNumber == "PH-PRD03-F-006" && formData.section) {
                 payload.section = initialValues.section;
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.metalContaminatedMaterials) {
+            if (formNumber == "PH-PRD03-F-006" && formData.metalContaminatedMaterials) {
                 payload.metalContaminatedMaterials = formData.metalContaminatedMaterials
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.noOfMetalContaminants) {
+            if (formNumber == "PH-PRD03-F-006" && formData.noOfMetalContaminants) {
                 payload.noOfMetalContaminants = formData.noOfMetalContaminants
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.functionCheck) {
+            if (formNumber == "PH-PRD03-F-006" && formData.functionCheck) {
                 payload.functionCheck = formData.functionCheck
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.supervisor_status) {
+            if (formNumber == "PH-PRD03-F-006" && formData.supervisor_status) {
                 payload.supervisor_status = formData.supervisor_status
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.hod_status) {
+            if (formNumber == "PH-PRD03-F-006" && formData.hod_status) {
                 payload.hod_status = formData.hod_status
             }
 
@@ -864,20 +861,20 @@ const Metal_detector_checklist = () => {
 
             // console.log("formData", formData);
             payload.remarks = formData.remarks == "" ? "N/A" : formData.remarks;
-            if (formNumber == "PH-PRD02/F-019") {
-                apiurl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/SaveMetalDetectorCheckList`
+            if (formNumber == "PH-PRD03-F-006") {
+                apiurl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/SaveMetalDetectorCheckList`
             }
             else if (formNumber == "PH-PRD02/F-020") {
-                apiurl = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/SaveMetalDetectorCheckList`;
+                apiurl = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/SaveMetalDetectorCheckList`;
             }
         }
         else {
-            apiurl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`;
-            if (formNumber == "PH-PRD02/F-019") {
-                apiurl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`
+            apiurl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`;
+            if (formNumber == "PH-PRD03-F-006") {
+                apiurl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`
             }
             else if (formNumber == "PH-PRD02/F-020") {
-                apiurl = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/approveOrReject`;
+                apiurl = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/approveOrReject`;
             }
             payload = {
                 'id': formData.listId,
@@ -904,7 +901,7 @@ const Metal_detector_checklist = () => {
                         case "PH-PRD02/F-020":
                             routePath = '/Precot/Spunlace/F-20/Summary';
                             break;
-                        case "PH-PRD02/F-019":
+                        case "PH-PRD03-F-006":
                             routePath = '/Precot/PadPunching/F-17/Summary';
                             break;
                     }
@@ -955,7 +952,7 @@ const Metal_detector_checklist = () => {
             // console.log("submit validation verified")
             payload = {
                 "formatName": formData.formatName,
-                "formatNo": formData.formatNo,
+                "formatNo": "PH-PRD02/F-019",
                 "revisionNo": formData.revisionNo,
                 "refSopNo": formData.refSopNo,
                 "unit": formData.unit,
@@ -969,25 +966,25 @@ const Metal_detector_checklist = () => {
                 "cleanedBy": formData.cleanedBy
             }
             // ------------- Form 03 (Bleahcing) payload -------------
-            if (formNumber == "PH-PRD02/F-019" && formData.listId) {
+            if (formNumber == "PH-PRD03-F-006" && formData.listId) {
                 payload.listId = formData.listId
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.section) {
+            if (formNumber == "PH-PRD03-F-006" && formData.section) {
                 payload.section = initialValues.section;
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.metalContaminatedMaterials) {
+            if (formNumber == "PH-PRD03-F-006" && formData.metalContaminatedMaterials) {
                 payload.metalContaminatedMaterials = formData.metalContaminatedMaterials
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.noOfMetalContaminants) {
+            if (formNumber == "PH-PRD03-F-006" && formData.noOfMetalContaminants) {
                 payload.noOfMetalContaminants = formData.noOfMetalContaminants
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.functionCheck) {
+            if (formNumber == "PH-PRD03-F-006" && formData.functionCheck) {
                 payload.functionCheck = formData.functionCheck
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.supervisor_status) {
+            if (formNumber == "PH-PRD03-F-006" && formData.supervisor_status) {
                 payload.supervisor_status = formData.supervisor_status
             }
-            if (formNumber == "PH-PRD02/F-019" && formData.hod_status) {
+            if (formNumber == "PH-PRD03-F-006" && formData.hod_status) {
                 payload.hod_status = formData.hod_status
             }
             // --------------- Form 20 (Spunlace) payload -------------------------
@@ -1019,11 +1016,11 @@ const Metal_detector_checklist = () => {
                 payload.hod_status = formData.hod_status
             }
             payload.remarks = formData.remarks == "" ? "N/A" : formData.remarks;
-            if (formNumber == "PH-PRD02/F-019") {
-                apiurl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/SubmitMetalDetectorCheckList`
+            if (formNumber == "PH-PRD03-F-006") {
+                apiurl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/SubmitMetalDetectorCheckList`
             }
             else if (formNumber == "PH-PRD02/F-020") {
-                apiurl = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/SubmitMetalDetectorCheckList`;
+                apiurl = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/SubmitMetalDetectorCheckList`;
             }
         }
         else {
@@ -1032,7 +1029,7 @@ const Metal_detector_checklist = () => {
                 setStatusLoader(false);
                 return;
             }
-            apiurl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`
+            apiurl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/approveOrReject`
             payload = {
                 "id": formData.listId,
                 "status": "Reject",
@@ -1056,7 +1053,7 @@ const Metal_detector_checklist = () => {
                         case "PH-PRD02/F-020":
                             routePath = '/Precot/Spunlace/F-20/Summary';
                             break;
-                        case "PH-PRD02/F-019":
+                        case "PH-PRD03-F-006":
                             routePath = '/Precot/PadPunching/F-17/Summary';
                             break;
                     }
@@ -1088,15 +1085,6 @@ const Metal_detector_checklist = () => {
 
 
 
-    // const getMonthFromDate = (dateString) => {
-    //     console.log('dateString in getMonthFromDate', dateString)
-    //     const monthNames = [
-    //         "January", "February", "March", "April", "May", "June",
-    //         "July", "August", "September", "October", "November", "December"
-    //     ];
-    //     const monthIndex = parseInt(dateString.split('-')[1], 10) - 1;
-    //     return monthNames[monthIndex];
-    // };
     function getMonthFromDate(dateString) {
         const date = new Date(dateString);
         const options = { month: 'long' };
@@ -1106,7 +1094,6 @@ const Metal_detector_checklist = () => {
     const getYearFromDate = (dateString) => {
         return dateString.split('-')[0];
     };
-
 
     useEffect(() => {
         if (!initialized.current) {
@@ -1123,11 +1110,11 @@ const Metal_detector_checklist = () => {
             // console.log("Initial Dates Checking", date)
             const section = initialValues.selectSection;
             let url;
-            if (formNumber == "PH-PRD02/F-019") {
-                url = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getByDate?date=${date}`
+            if (formNumber == "PH-PRD03-F-006") {
+                url = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getByDate?date=${date}`
             }
             else if (formNumber == "PH-PRD02/F-020") {
-                url = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/getByDate?date=${date}`
+                url = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/getByDate?date=${date}`
             }
             axios.get(url, config)
                 .then(response => {
@@ -1137,14 +1124,11 @@ const Metal_detector_checklist = () => {
                         console.log('response From Get Api', response.data);
                         console.log('formNumber', formNumber)
                         // console.log("valid")
-                        if (formNumber == "PH-PRD02/F-019") {
+                        if (formNumber == "PH-PRD03-F-006") {
                             statusFunction(response.data);
                             if (!(response.data.hasOwnProperty('message') && response.data.message === "No data")) {
                                 setFormData(response.data);
                             }
-
-
-
                         }
                         else if (formNumber == "PH-PRD02/F-020" && response.data.message !== "No data") {
                             statusFunction(response.data);
@@ -1157,7 +1141,6 @@ const Metal_detector_checklist = () => {
                                 functionCheckCu: response.data.usingCopper,
                                 noOfMetalContaminants: response.data.noOfMetalContaminants4A,
                                 noOfMetalContaminants4B: response.data.noOfMetalContaminants4B
-
                             }))
                         }
                         else if (formNumber == "PH-PRD02/F-020" && response.data.message == "No data" && (role == "ROLE_HOD" || role == "ROLE_DESIGNEE")) {
@@ -1171,31 +1154,31 @@ const Metal_detector_checklist = () => {
                             }, 1000);
                         }
                         // ------------------------ Form 03 (Bleaching) Validation -------------------------
-                        if (formNumber == "PH-PRD02/F-019" && response.data.metalContaminatedMaterials == "yes" || response.data.metalContaminatedMaterials == "Yes") {
+                        if (formNumber == "PH-PRD03-F-006" && response.data.metalContaminatedMaterials == "yes" || response.data.metalContaminatedMaterials == "Yes") {
                             setTab1Condition(prevState => ({
                                 ...prevState,
                                 yesCheck1: true
                             }))
                         }
-                        else if (formNumber == "PH-PRD02/F-019" && response.data.metalContaminatedMaterials == "no" || response.data.metalContaminatedMaterials == "No") {
-                            ;
+                        else if (formNumber == "PH-PRD03-F-006" && response.data.metalContaminatedMaterials == "no" || response.data.metalContaminatedMaterials == "No") {
                             setTab1Condition(prevState => ({
                                 ...prevState,
                                 noCheck1: true
                             }))
                         }
-                        if (formNumber == "PH-PRD02/F-019" && response.data.functionCheck == "yes" || response.data.functionCheck == "Yes") {
+                        if (formNumber == "PH-PRD03-F-006" && response.data.functionCheck == "yes" || response.data.functionCheck == "Yes") {
                             setTab2Condition(prevState => ({
                                 ...prevState,
                                 yesCheck1: true
                             }))
                         }
-                        else if (formNumber == "PH-PRD02/F-019" && response.data.functionCheck == "no" || response.data.functionCheck == "No") {
+                        else if (formNumber == "PH-PRD03-F-006" && response.data.functionCheck == "no" || response.data.functionCheck == "No") {
                             setTab2Condition(prevState => ({
                                 ...prevState,
                                 noCheck1: true
                             }))
                         }
+
                         // ------------------------ Form 20 (Spunlace) Validation ------------------------
                         if (formNumber == "PH-PRD02/F-020" && response.data.metalContaminatedMaterials4A == "yes" || response.data.metalContaminatedMaterials4A == "Yes") {
                             setTab1Condition(prevState => ({
@@ -1204,7 +1187,7 @@ const Metal_detector_checklist = () => {
                             }))
                         }
                         if (formNumber == "PH-PRD02/F-020" && response.data.metalContaminatedMaterials4A == "no" || response.data.metalContaminatedMaterials4A == "No") {
-                            ;
+
                             setTab1Condition(prevState => ({
                                 ...prevState,
                                 noCheck1: true
@@ -1217,7 +1200,7 @@ const Metal_detector_checklist = () => {
                             }))
                         }
                         if (formNumber == "PH-PRD02/F-020" && response.data.metalContaminatedMaterials4B == "no" || response.data.metalContaminatedMaterials4B == "No") {
-                            ;
+
                             setTab1Condition(prevState => ({
                                 ...prevState,
                                 noCheck2: true
@@ -1254,13 +1237,9 @@ const Metal_detector_checklist = () => {
                     // Handle any errors
                     console.error('There was an error making the request:', error);
                 });
-            // console.log("Initial Date is", initialValues.date)
-
-
-            // getMonthSummary(month);
-            // console.log("set print data", printData);
         }
     }, []);
+
     const statusFunction = (responseData) => {
         if (role == "ROLE_SUPERVISOR" && responseData.supervisor_status == "SUPERVISOR_APPROVED") {
             // console.log("Condition 2")
@@ -1298,12 +1277,11 @@ const Metal_detector_checklist = () => {
                     });
                 }, 1000);
             }
-            else if (formNumber === "PH-PRD02/F-019") {
-
+            else if (formNumber === "PH-PRD03-F-006") {
                 setTimeout(() => {
                     navigate('/Precot/PadPunching/F-17/Summary', {
                         state: {
-                            formNo: "PH-PRD02/F-020",
+                            formNo: "PH-PRD03-F-006",
                         }
                     });
                 }, 1000);
@@ -1329,7 +1307,7 @@ const Metal_detector_checklist = () => {
 
                 axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",

@@ -56,7 +56,7 @@ const Process_Deviation = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -187,7 +187,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/saveProcessDeviation`,
+        `${API.prodUrl}/Precot/api/punching/bmr/saveProcessDeviation`,
         payload,
         {
           headers: {
@@ -202,7 +202,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -349,7 +349,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/submitProcessDeviation`,
+        `${API.prodUrl}/Precot/api/punching/bmr/submitProcessDeviation`,
         payload,
         {
           headers: {
@@ -364,7 +364,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/punching/bmr/getDeviationList?order=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -607,7 +607,7 @@ const Process_Deviation = (props) => {
               type="datetime-local"
               value={
                 devData.details[0]?.supervisorDate
-                  ? formatDateForInput(devData.details[0].supervisorDate)
+                  ? devData.details[0].supervisorDate
                   : ""
               }
               onChange={(e) => handleInput(e, 0, "supervisorDate", "input")}
@@ -638,9 +638,7 @@ const Process_Deviation = (props) => {
             <input
               type="datetime-local"
               value={
-                devData.details[0]?.qaDate
-                  ? formatDateForInput(devData.details[0].qaDate)
-                  : ""
+                devData.details[0]?.qaDate ? devData.details[0].qaDate : ""
               }
               onChange={(e) => handleInput(e, 0, "qaDate", "input")}
               readOnly={!props.loggedInSupervisor || fieldStatus}
@@ -681,7 +679,7 @@ const Process_Deviation = (props) => {
               type="datetime-local"
               value={
                 devData.details[1]?.supervisorDate
-                  ? formatDateForInput(devData.details[1].supervisorDate)
+                  ? devData.details[1].supervisorDate
                   : ""
               }
               onChange={(e) => handleInput(e, 1, "supervisorDate", "input")}
@@ -712,9 +710,7 @@ const Process_Deviation = (props) => {
             <input
               type="datetime-local"
               value={
-                devData.details[1]?.qaDate
-                  ? formatDateForInput(devData.details[1].qaDate)
-                  : ""
+                devData.details[1]?.qaDate ? devData.details[1].qaDate : ""
               }
               onChange={(e) => handleInput(e, 1, "qaDate", "input")}
               readOnly={!props.loggedInSupervisor || fieldStatus}
@@ -736,7 +732,7 @@ const Process_Deviation = (props) => {
               className="inp-new"
               value={devData.details[2]?.deviationLogNo}
               onChange={(e) => handleInput(e, 2, "deviationLogNo", "input")}
-              readOnly={!props.loggedInSupervisor || fieldStatus}
+              readOnly={!props.loggedInQa || fieldStatus}
               onKeyDown={(e) => handleKeyDown_text(e)}
             />
           </td>
@@ -755,7 +751,7 @@ const Process_Deviation = (props) => {
               type="datetime-local"
               value={
                 devData.details[2]?.supervisorDate
-                  ? formatDateForInput(devData.details[2].supervisorDate)
+                  ? devData.details[2].supervisorDate
                   : ""
               }
               onChange={(e) => handleInput(e, 2, "supervisorDate", "input")}
@@ -786,9 +782,7 @@ const Process_Deviation = (props) => {
             <input
               type="datetime-local"
               value={
-                devData.details[2]?.qaDate
-                  ? formatDateForInput(devData.details[2].qaDate)
-                  : ""
+                devData.details[2]?.qaDate ? devData.details[2].qaDate : ""
               }
               onChange={(e) => handleInput(e, 2, "qaDate", "input")}
               readOnly={!props.loggedInSupervisor || fieldStatus}
@@ -828,7 +822,7 @@ const Process_Deviation = (props) => {
               type="datetime-local"
               value={
                 devData.details[3]?.supervisorDate
-                  ? formatDateForInput(devData.details[3].supervisorDate)
+                  ? devData.details[3].supervisorDate
                   : ""
               }
               onChange={(e) => handleInput(e, 3, "supervisorDate", "input")}
@@ -859,9 +853,7 @@ const Process_Deviation = (props) => {
             <input
               type="datetime-local"
               value={
-                devData.details[3]?.qaDate
-                  ? formatDateForInput(devData.details[3].qaDate)
-                  : ""
+                devData.details[3]?.qaDate ? devData.details[3].qaDate : ""
               }
               onChange={(e) => handleInput(e, 3, "qaDate", "input")}
               readOnly={!props.loggedInSupervisor || fieldStatus}

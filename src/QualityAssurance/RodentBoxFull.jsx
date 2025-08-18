@@ -934,7 +934,7 @@ const RodentBoxFull = () => {
       },
       {
         sno: 81,
-        rodent_box_no: "RBS-21",
+        rodent_box_no: "RBS-27",
         location: "Raw Cotton Godown",
         rodent_box_type: "RBS",
         glue_paper_replaced: "",
@@ -944,7 +944,7 @@ const RodentBoxFull = () => {
       },
       {
         sno: 82,
-        rodent_box_no: "RBS-21",
+        rodent_box_no: "RBS-28",
         location: "Raw Cotton Godown",
         rodent_box_type: "RBS",
         glue_paper_replaced: "",
@@ -954,7 +954,7 @@ const RodentBoxFull = () => {
       },
       {
         sno: 83,
-        rodent_box_no: "RBS-21",
+        rodent_box_no: "RBS-29",
         location: "Raw Cotton Godown",
         rodent_box_type: "RBS",
         glue_paper_replaced: "",
@@ -964,7 +964,7 @@ const RodentBoxFull = () => {
       },
       {
         sno: 84,
-        rodent_box_no: "RBS-21",
+        rodent_box_no: "RBS-30",
         location: "Humidification Plant",
         rodent_box_type: "RBS",
         glue_paper_replaced: "",
@@ -974,7 +974,7 @@ const RodentBoxFull = () => {
       },
       {
         sno: 85,
-        rodent_box_no: "RBS-21",
+        rodent_box_no: "RBS-31",
         location: "Humidification Plant",
         rodent_box_type: "RBS",
         glue_paper_replaced: "",

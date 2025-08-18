@@ -3,39 +3,36 @@
 /* eslint-disable no-label-var */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect, useRef } from "react";
 import {
+  Avatar,
   Button,
-  Select,
-  Table,
+  Col,
+  Drawer,
+  Form,
   Input,
-  Checkbox,
+  Menu,
   Modal,
+  Radio,
+  Row,
+  Select,
+  Spin,
+  Tabs,
   Tooltip,
   message,
-  Form,
-  Drawer,
-  Menu,
-  Col,
-  Avatar,
-  Row,
-  Tabs,
-  Radio,
-  DatePicker,
-  Spin,
 } from "antd";
+import useMessage from "antd/es/message/useMessage";
 import axios from "axios";
-import BleachingHeader from "../Components/BleachingHeader";
+import moment from "moment";
+import { useEffect, useRef, useState } from "react";
 import { FaLock, FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
-import { useNavigate } from "react-router-dom";
-import { TbMenuDeep } from "react-icons/tb";
 import { IoCreate } from "react-icons/io5";
-import API from "../baseUrl.json";
-import useMessage from "antd/es/message/useMessage";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 import logo from "../Assests/logo.png";
-import moment from "moment";
-import { faBullseye } from "@fortawesome/free-solid-svg-icons";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
+
 function Bleaching_Bmr_Summary() {
   const role = localStorage.getItem("role");
   const [checkedItems, setCheckedItems] = useState({});
@@ -203,7 +200,7 @@ function Bleaching_Bmr_Summary() {
   const [rawweightTotalBaleWeight, setRawWeightTotalBaleWeight] = useState("");
   const [packingDetails, setPackingDetails] = useState();
   //verification sign
-  const [listofEnclosuresArray, setListOfEnclosuresArray] = useState();
+  const [listofEnclosuresArray, setListOfEnclosuresArray] = useState([]);
   //verification sign
 
   const [PDR_Sign1, setPDR_Sign1] = useState("");
@@ -289,6 +286,7 @@ function Bleaching_Bmr_Summary() {
     supervisorApproved: false,
     qaSaved: false,
     qaApproved: false,
+    beforeQAConditionForSupervisor: false,
   });
 
   const updateProcessDeviationValidation = (updates) => {
@@ -410,9 +408,7 @@ function Bleaching_Bmr_Summary() {
   const [pprNewSave, setPprNewSave] = useState(false);
   const [pprId, setPprId] = useState("");
   //const []
-  const onchangePdeSign = (val) => {
-    setPdeSignatureNew(val);
-  };
+
   const Qa1SignOnchange = (values) => {
     SetQaSign1(values);
   };
@@ -1281,9 +1277,6 @@ function Bleaching_Bmr_Summary() {
     updateQa({ Sign5: value });
   };
 
-  const newVerifiedBychange = (values) => {
-    setPecsVerified(values);
-  };
   //annexure 1 states
 
   const [qaSign1, SetQaSign1] = useState("");
@@ -1438,10 +1431,6 @@ function Bleaching_Bmr_Summary() {
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
       });
 
     axios
@@ -1635,30 +1624,31 @@ function Bleaching_Bmr_Summary() {
       [index]: e.target.checked,
     }));
   };
-  function formatDateForInput2(dateString) {
-    if (!dateString) return ""; // Handle empty or undefined values safely
 
-    // Check if the format is "YYYY-MM-DD HH:MM:SS" (like genDate)
-    if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(dateString)) {
-      // Convert "YYYY-MM-DD HH:MM:SS" to "YYYY-MM-DDTHH:MM:SS"
-      dateString = dateString.replace(" ", "T");
-    }
+  // function formatDateForInput2(dateString) {
+  //   if (!dateString) return ""; // Handle empty or undefined values safely
 
-    const date = new Date(dateString);
+  //   // Check if the format is "YYYY-MM-DD HH:MM:SS" (like genDate)
+  //   if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(dateString)) {
+  //     // Convert "YYYY-MM-DD HH:MM:SS" to "YYYY-MM-DDTHH:MM:SS"
+  //     dateString = dateString.replace(" ", "T");
+  //   }
 
-    if (isNaN(date.getTime())) {
-      console.warn("Invalid date received:", dateString);
-      return ""; // Return an empty string to prevent UI issues
-    }
+  //   const date = new Date(dateString);
 
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
+  //   if (isNaN(date.getTime())) {
+  //     console.warn("Invalid date received:", dateString);
+  //     return ""; // Return an empty string to prevent UI issues
+  //   }
 
-    return `${year}-${month}-${day}T${hours}:${minutes}`; // Correct format for datetime-local input
-  }
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, "0");
+  //   const day = String(date.getDate()).padStart(2, "0");
+  //   const hours = String(date.getHours()).padStart(2, "0");
+  //   const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  //   return `${year}-${month}-${day}T${hours}:${minutes}`; // Correct format for datetime-local input
+  // }
 
   function formatDateForInput1(dateString) {
     if (!dateString) return "";
@@ -1684,6 +1674,7 @@ function Bleaching_Bmr_Summary() {
     return `${day}/${month}/${year} - ${hours}:${minutes} `;
   }
 
+
   function formatDateToYYYYMMDD(dateString) {
     if (dateString && dateString.includes("/")) {
       const parts = dateString.split("/");
@@ -1701,8 +1692,7 @@ function Bleaching_Bmr_Summary() {
     console.log("KEYY", key);
     axios
       .get(
-        `${API.prodUrl}/Precot/api/bleaching/summary/getFullSummary?bmr_no=${
-          bm == undefined ? bmr : bm
+        `${API.prodUrl}/Precot/api/bleaching/summary/getFullSummary?bmr_no=${bm == undefined ? bmr : bm
         }`,
         {
           headers: {
@@ -1724,19 +1714,11 @@ function Bleaching_Bmr_Summary() {
                 (res.data.productionDetails[0].status ==
                   "SUPERVISOR_APPROVED" ||
                   res.data.productionDetails[0]?.status == "QA_APPROVED")) ||
-                (loggedInQa &&
-                  res.data.productionDetails[0].status == "QA_APPROVED")
+              (loggedInQa &&
+                res.data.productionDetails[0].status == "QA_APPROVED")
             );
             setPd_QaId(res.data.productionDetails[0].qaId);
             setPd_Status(res.data.productionDetails[0].status);
-
-            // if (res.data.productionDetails[0].isExport === "TICK") {
-            //   setpd_ProductsupplyInhouse("NA");
-            //   setpd_ProductsupplyExport("TICK");
-            // } else {
-            //   setpd_ProductsupplyInhouse("TICK");
-            //   setpd_ProductsupplyExport("NA");
-            // }
 
             if (res.data.productionDetails[0]?.mixing !== null) {
               if (
@@ -1761,13 +1743,22 @@ function Bleaching_Bmr_Summary() {
             setPd_Mixing(res.data.productionDetails[0].mixing);
             setPd_StartSub(res.data.productionDetails[0].startSubBatch);
             setPd_EndSub(res.data.productionDetails[0].endSubBatch);
+
+            const finishingValue = res.data.productionDetails[0].finishing;
+
             setpd_FinishSoft(
-              res.data.productionDetails[0].finishing == "Soft" ? "TICK" : "NA"
-            );
-            setpd_pd_finish_Crish(
-              res.data.productionDetails[0].finishing == "Crisp" ? "TICK" : "NA"
+              finishingValue ? finishingValue.toLowerCase().trim() === "soft" ? "TICK" : "NA" : "NA"
             );
 
+            setpd_pd_finish_Crish(
+              finishingValue
+                ? (finishingValue.toLowerCase().trim() === "crisp" || finishingValue.toLowerCase().trim() === "cri")
+                  ? "TICK"
+                  : "NA"
+                : "NA"
+            );
+
+            console.log("finishingValue.toLowerCase().trim()", finishingValue.toLowerCase().trim())
             setPd_ManufacturingStartDate(
               res.data.productionDetails[0].startDate.slice(0, 10)
             );
@@ -1791,7 +1782,7 @@ function Bleaching_Bmr_Summary() {
             Qa1SignOnchange(res.data.productionDetails[0].qaName);
             Prod1SignChange(res.data.productionDetails[0].supervisiorName);
             updateProdLov({
-              productionDate: res.data.productionDetails[0].supervisiorDate,
+              productionDate: res.data.productionDetails[0].supervisiorDate || localDateValue4,
             });
             updateProdLov({
               productionQADate: res.data.productionDetails[0].qaDate,
@@ -1886,10 +1877,8 @@ function Bleaching_Bmr_Summary() {
               setVerificationStatus(false);
               axios
                 .get(
-                  `${
-                    API.prodUrl
-                  }/Precot/api/bleaching/summary/recordVerificationBmr?bmr_no=${
-                    bm == undefined ? bmr : bm
+                  `${API.prodUrl
+                  }/Precot/api/bleaching/summary/recordVerificationBmr?bmr_no=${bm == undefined ? bmr : bm
                   }`,
                   {
                     headers: {
@@ -1947,32 +1936,32 @@ function Bleaching_Bmr_Summary() {
                       housekeeping[0].status == "Satisfactory"
                         ? "TICK"
                         : housekeeping[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     machineCleaning:
                       Machine[0].status == "Satisfactory"
                         ? "TICK"
                         : Machine[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     logbook:
                       Logbook[0].status == "Satisfactory"
                         ? "TICK"
                         : Logbook[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     machineSanitizer:
                       Machine_Sanitizer[0].status == "Satisfactory"
                         ? "TICK"
                         : Machine_Sanitizer[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     productionRecord:
                       Production[0].status == "Satisfactory"
                         ? "TICK"
                         : Production[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                   });
                   updateVerifiedBySign({
                     housekeeping: housekeeping[0].verifiedBy,
@@ -2013,9 +2002,9 @@ function Bleaching_Bmr_Summary() {
               res.data.summaryRecordVerificationList.summaryVerification
                 .length == 0 ||
               res.data.summaryRecordVerificationList.supervisor_status ==
-                "SUPERVISOR_SAVED" ||
+              "SUPERVISOR_SAVED" ||
               res.data.summaryRecordVerificationList.supervisor_status ==
-                "SUPERVISOR_APPROVED" ||
+              "SUPERVISOR_APPROVED" ||
               res.data.summaryRecordVerificationList.qa_status == "QA_SAVED"
             ) {
               console.log("hghgig");
@@ -2023,10 +2012,8 @@ function Bleaching_Bmr_Summary() {
               setVerificationStatus(false);
               axios
                 .get(
-                  `${
-                    API.prodUrl
-                  }/Precot/api/bleaching/summary/recordVerificationBmr?bmr_no=${
-                    bm == undefined ? bmr : bm
+                  `${API.prodUrl
+                  }/Precot/api/bleaching/summary/recordVerificationBmr?bmr_no=${bm == undefined ? bmr : bm
                   }`,
                   {
                     headers: {
@@ -2084,32 +2071,32 @@ function Bleaching_Bmr_Summary() {
                       housekeeping[0].status == "Satisfactory"
                         ? "TICK"
                         : housekeeping[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     machineCleaning:
                       Machine[0].status == "Satisfactory"
                         ? "TICK"
                         : Machine[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     logbook:
                       Logbook[0].status == "Satisfactory"
                         ? "TICK"
                         : Logbook[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     productionRecord:
                       Production[0].status == "Satisfactory"
                         ? "TICK"
                         : Production[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                     machineSanitizer:
                       Machine_Sanitizer[0].status == "Satisfactory"
                         ? "TICK"
                         : Machine_Sanitizer[0].status == "Not Satisfactory"
-                        ? "CROSS"
-                        : "NA",
+                          ? "CROSS"
+                          : "NA",
                   });
                   updateVerifiedBySign({
                     housekeeping: housekeeping[0].verifiedBy,
@@ -2169,7 +2156,7 @@ function Bleaching_Bmr_Summary() {
             } else if (
               res.data.manufacturingStepsList[0].qa_status == "QA_APPROVED" &&
               res.data.manufacturingStepsList[0].supervisor_status ==
-                "SUPERVISOR_APPROVED"
+              "SUPERVISOR_APPROVED"
             ) {
               // alert("ghjk")
               // console.log("vjhvjhg")
@@ -2350,9 +2337,9 @@ function Bleaching_Bmr_Summary() {
               );
             } else if (
               res.data.manufacturingStepsList[0].supervisor_status ==
-                "SUPERVISOR_SAVED" ||
+              "SUPERVISOR_SAVED" ||
               res.data.manufacturingStepsList[0].supervisor_status ==
-                "SUPERVISOR_APPROVED" ||
+              "SUPERVISOR_APPROVED" ||
               res.data.manufacturingStepsList[0].qa_status == "QA_SAVED"
             ) {
               setManufacturingStepsStatus(false);
@@ -2522,9 +2509,9 @@ function Bleaching_Bmr_Summary() {
               setMachineOpsNewSave(true);
             } else if (
               res.data.manufacturingOperationsList[0].qa_status ==
-                "QA_APPROVED" &&
+              "QA_APPROVED" &&
               res.data.manufacturingOperationsList[0].supervisor_status ==
-                "SUPERVISOR_APPROVED"
+              "SUPERVISOR_APPROVED"
             ) {
               setManufacturingParameterStatus(true);
               setManufacturingParametersArray(
@@ -2736,9 +2723,9 @@ function Bleaching_Bmr_Summary() {
               setMOP_AS_ReferSOP_Line2_Observation(_18[0]?.observation2);
             } else if (
               res.data.manufacturingOperationsList[0].supervisor_status ==
-                "SUPERVISOR_SAVED" ||
+              "SUPERVISOR_SAVED" ||
               res.data.manufacturingOperationsList[0].supervisor_status ==
-                "SUPERVISOR_APPROVED" ||
+              "SUPERVISOR_APPROVED" ||
               res.data.manufacturingOperationsList[0].qa_status == "QA_SAVED"
             ) {
               setMachineOpsNewSave(false);
@@ -2928,10 +2915,6 @@ function Bleaching_Bmr_Summary() {
               setMOP_FOS_BRS_Line2_Observation(_17[0]?.observation2);
               setMOP_AS_ReferSOP_Line1_Observation(_18[0]?.observation1);
               setMOP_AS_ReferSOP_Line2_Observation(_18[0]?.observation2);
-              /*
-              updateMachineOpsID
-              machineOpsID
-              */
             }
             break;
           case "10":
@@ -2996,6 +2979,15 @@ function Bleaching_Bmr_Summary() {
             }
             break;
           case "12":
+            console.log("entered sase 12 processDeviationRecords")
+
+            if (res.data.processDeviationRecords.length == 0) {
+              setProcessDeviationStatus(false);
+              updateProcessDeviationValidation({
+                beforeQAConditionForSupervisor: true,
+              })
+              console.log("beforeQAConditionForSupervisor", processDeviationStatus.beforeQAConditionForSupervisor);
+            }
             //setProcessDeviationStatus
             if (
               role == "ROLE_QA" &&
@@ -3007,79 +2999,79 @@ function Bleaching_Bmr_Summary() {
               role == "ROLE_SUPERVISOR" &&
               (res.data.processDeviationRecords[0].status !== "QA_APPROVED" ||
                 res.data.processDeviationRecords[0].status ==
-                  "SUPERVISOR_APPROVED")
+                "SUPERVISOR_APPROVED")
             ) {
               setProcessDeviationStatus(true);
             }
+            console.log("reches res.data.processDeviationRecords.length == 0)");
 
-            if (res.data.processDeviationRecords.length == 0) {
-              setProcessDeviationStatus(false);
+
+            setPdrNewSave(true);
+            updateDeviationLogNo({
+              one: res.data.processDeviationRecords[0].deviationLogNo,
+              two: res.data.processDeviationRecords[1].deviationLogNo,
+              three: res.data.processDeviationRecords[2].deviationLogNo,
+            });
+            updateRemarksQA({
+              one: res.data.processDeviationRecords[0].qaRemarks,
+              two: res.data.processDeviationRecords[1].qaRemarks,
+              three: res.data.processDeviationRecords[2].qaRemarks,
+            });
+            updateDateProd({
+              one: res.data.processDeviationRecords[0].signDate,
+              two: res.data.processDeviationRecords[1].signDate,
+              three: res.data.processDeviationRecords[2].signDate,
+            });
+            updateDateQA({
+              one: res.data.processDeviationRecords[0].qa_saved_on,
+              two: res.data.processDeviationRecords[1].qa_saved_on,
+              three: res.data.processDeviationRecords[2].qa_saved_on,
+            });
+            pdrSignOnChange1(res.data.processDeviationRecords[0].sign);
+            pdrSignOnChangeQA1(
+              res.data.processDeviationRecords[0].qa_saved_by
+            );
+            pdrSignOnChange2(res.data.processDeviationRecords[1].sign);
+            pdrSignOnChangeQA2(
+              res.data.processDeviationRecords[1].qa_saved_by
+            );
+            pdrSignOnChange3(res.data.processDeviationRecords[2].sign);
+            pdrSignOnChangeQA3(
+              res.data.processDeviationRecords[2].qa_saved_by
+            );
+            setPdrId1(res.data.processDeviationRecords[0].id);
+            setPdrId2(res.data.processDeviationRecords[1].id);
+            setPdrId3(res.data.processDeviationRecords[2].id);
+            if (
+              res.data.processDeviationRecords[0].status == "QA_APPROVED" ||
+              res.data.processDeviationRecords[0].status == "QA_SUBMITTED"
+            ) {
+              setProcessDeviationArray(res.data.processDeviationRecords);
             } else {
-              setPdrNewSave(true);
-              updateDeviationLogNo({
-                one: res.data.processDeviationRecords[0].deviationLogNo,
-                two: res.data.processDeviationRecords[1].deviationLogNo,
-                three: res.data.processDeviationRecords[2].deviationLogNo,
-              });
-              updateRemarksQA({
-                one: res.data.processDeviationRecords[0].qaRemarks,
-                two: res.data.processDeviationRecords[1].qaRemarks,
-                three: res.data.processDeviationRecords[2].qaRemarks,
-              });
-              updateDateProd({
-                one: res.data.processDeviationRecords[0].signDate,
-                two: res.data.processDeviationRecords[1].signDate,
-                three: res.data.processDeviationRecords[2].signDate,
-              });
-              updateDateQA({
-                one: res.data.processDeviationRecords[0].qa_saved_on,
-                two: res.data.processDeviationRecords[1].qa_saved_on,
-                three: res.data.processDeviationRecords[2].qa_saved_on,
-              });
-              pdrSignOnChange1(res.data.processDeviationRecords[0].sign);
-              pdrSignOnChangeQA1(
-                res.data.processDeviationRecords[0].qa_saved_by
-              );
-              pdrSignOnChange2(res.data.processDeviationRecords[1].sign);
-              pdrSignOnChangeQA2(
-                res.data.processDeviationRecords[1].qa_saved_by
-              );
-              pdrSignOnChange3(res.data.processDeviationRecords[2].sign);
-              pdrSignOnChangeQA3(
-                res.data.processDeviationRecords[2].qa_saved_by
-              );
-              setPdrId1(res.data.processDeviationRecords[0].id);
-              setPdrId2(res.data.processDeviationRecords[1].id);
-              setPdrId3(res.data.processDeviationRecords[2].id);
-              if (
-                res.data.processDeviationRecords[0].status == "QA_APPROVED" ||
-                res.data.processDeviationRecords[0].status == "QA_SUBMITTED"
-              ) {
-                setProcessDeviationArray(res.data.processDeviationRecords);
-              } else {
-                setProcessDeviationStatus(false);
-              }
-              updateProcessDeviationValidation({
-                supervisorSaved:
-                  res.data.processDeviationRecords[0].status ==
-                  "SUPERVISOR_SAVED"
-                    ? true
-                    : false,
-                supervisorApproved:
-                  res.data.processDeviationRecords[0].status ==
-                  "SUPERVISOR_APPROVED"
-                    ? true
-                    : false,
-                qaSaved:
-                  res.data.processDeviationRecords[0].status == "QA_APPROVED"
-                    ? true
-                    : false,
-                qaApproved:
-                  res.data.processDeviationRecords[0].status == "QA_APPROVED"
-                    ? true
-                    : false,
-              });
+              setProcessDeviationStatus(false);
             }
+            updateProcessDeviationValidation({
+
+              supervisorSaved:
+                res.data.processDeviationRecords[0].status ==
+                  "SUPERVISOR_SAVED"
+                  ? true
+                  : false,
+              supervisorApproved:
+                res.data.processDeviationRecords[0].status ==
+                  "SUPERVISOR_APPROVED"
+                  ? true
+                  : false,
+              qaSaved:
+                res.data.processDeviationRecords[0].status == "QA_APPROVED"
+                  ? true
+                  : false,
+              qaApproved:
+                res.data.processDeviationRecords[0].status == "QA_APPROVED"
+                  ? true
+                  : false,
+            });
+
             break;
           case "13":
             setListOfEnclosuresArray(res.data.summaryRecordVerificationList);
@@ -3175,6 +3167,8 @@ function Bleaching_Bmr_Summary() {
             }
             break;
           case "14":
+
+
             // POST PRODUCTOIN DETAILS
             const a = res.data.bmrCompletionTable.filter((x, i) => {
               return x.form == "POST PRODUCTOIN DETAILS";
@@ -3368,29 +3362,21 @@ function Bleaching_Bmr_Summary() {
                 productionReleaseData.qaName
               );
 
-              // const hasQaInspectorValues =
-              //   productionReleaseData.supervisorName ||
-              //   productionReleaseData.shoppageDate;
-
               const isQaInspectorSubmitted = !!(
                 (productionReleaseData.status == "QA_INSPECTOR_SUBMITTED")
-                // productionReleaseData.supervisorName &&
-                // productionReleaseData.shoppageDate
+
               );
 
               const isQaManagerSubmitted = !!(
                 (productionReleaseData.status == "QA_MANAGER_APPROVED")
-                // productionReleaseData.qaName &&
-                // productionReleaseData.shoppageDate2
+
               );
               console.log("isQaInspectorSubmitted", isQaInspectorSubmitted);
-              // console.log("hasQaInspectorValues", hasQaInspectorValues);
               console.log("isQaManagerSubmitted", isQaManagerSubmitted);
 
-              // Adjust the fields disabled state based on the current values
 
               setFieldsDisabled({
-                // qaInspector: isQaInspectorSubmitted || !hasQaInspectorValues,
+
                 qaInspector: isQaInspectorSubmitted,
                 qaManager: !isQaInspectorSubmitted || isQaManagerSubmitted,
               });
@@ -3400,7 +3386,6 @@ function Bleaching_Bmr_Summary() {
           default:
             break;
         }
-        //console.log("updateProdLov", res.data.bmrCompletionTable[0].qaName);
 
         updateProdLov({
           produtionProductionSign:
@@ -3411,8 +3396,6 @@ function Bleaching_Bmr_Summary() {
             res.data.bmrCompletionTable[1].supervisorName || "",
         });
 
-        //rawCottonIssueProdSign
-        // console.log("General BMR", res.data.processDeviationRecords);
         setBmrSummary(res.data);
         updateFlags({
           postProduction: true,
@@ -3420,78 +3403,76 @@ function Bleaching_Bmr_Summary() {
         });
       })
       .catch((err) => {
-        // console.log("Error", err);
-        // message.error(err.message); processDeviationRecords
       });
   };
 
   function fetchGenerationDetails() {
-    if (role === "ROLE_QA") {
-      axios
-        .get(
-          `${API.prodUrl}/Precot/api/bleaching/generation/generationDetailsByBmr?bmrNumber=${bmr}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          console.log("Array of objects from API:", data);
+    //QA
+    axios
+      .get(
+        `${API.prodUrl}/Precot/api/bleaching/generation/generationDetailsByBmr?bmrNumber=${bmr}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        const data = response.data;
+        console.log("Array of objects from API:", data);
 
-          if (Array.isArray(data) && data.length > 0) {
-            console.log("formatDate(data[0]?.createdBy)", data[0]?.createdBy);
+        if (Array.isArray(data) && data.length > 0) {
+          console.log("formatDate(data[0]?.createdBy)", data[0]?.createdBy);
+          setProductionSign1(usernameSupervisor)
+          SetQaSign1(data[0]?.createdBy);
+          console.log("formatDate(data[0]?.createdAt)", data[0]?.createdAt);
 
-            SetQaSign1(data[0]?.createdBy);
-            console.log("formatDate(data[0]?.createdAt)", data[0]?.createdAt);
+          setProductionLovStates((prevState) => ({
+            ...prevState,
+            productionQADate: formatDateForInput1(data[0]?.genDate),
+            // productionDate: formatDateForInput2(data[0]?.genDate),
+          }));
 
-            setProductionLovStates((prevState) => ({
-              ...prevState,
-              productionQADate: formatDateForInput1(data[0]?.genDate),
-            }));
-          } else {
-            console.warn("No data received from API");
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching generation details:", error);
-        });
-    } else if (role === "ROLE_SUPERVISOR") {
-      console.log("role_supervisor");
-      axios
-        .get(
-          `${API.prodUrl}/Precot/api/bleaching/generation/generationDetailsByBmr?bmrNumber=${bmr}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          console.log("Array of objects from API:", data);
+        } else {
+          console.warn("No data received from API");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching generation details:", error);
+      });
 
-          if (Array.isArray(data) && data.length > 0) {
-            console.log("formatDate(data[0]?.createdBy)", data[0]?.createdBy);
+    //Supervisor
+    // console.log("role_supervisor");
+    // axios
+    //   .get(
+    //     `${API.prodUrl}/Precot/api/bleaching/generation/mappingDetailsByBmr?bmrNumber=${bmr}`,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //       },
+    //     }
+    //   )
+    //   .then((response) => {
+    //     const data = response.data;
+    //     console.log("Array of objects from API:", data);
 
-            setProductionSign1(data[0]?.createdBy);
-            console.log("formatDate(data[0]?.createdAt)", data[0]?.createdAt);
+    //     if (Array.isArray(data) && data.length > 0) {
+    //       console.log("formatDate(data[0]?.createdBy)", data[0]?.createdBy);
 
-            setProductionLovStates((prevState) => ({
-              ...prevState,
-              productionDate: formatDateForInput2(data[0]?.genDate),
-            }));
-          } else {
-            console.warn("No data received from API");
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching generation details:", error);
-        });
-    }
+    //       setProductionSign1(data[0]?.createdBy);
+    //       console.log("formatDate(data[0]?.createdAt)", data[0]?.createdAt);
+
+
+    //     } else {
+    //       console.warn("No data received from API");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching generation details:", error);
+    //   });
+
   }
 
   const overallBMR = () => {
@@ -3510,8 +3491,6 @@ function Bleaching_Bmr_Summary() {
     } else if (filteredBmr[0].status == "CLOSED" || "COMPLETED") {
       setBmrStatus(false);
     }
-    // console.log("BMR-Filter", filteredBmr[0].status);
-    // console.log("value of BMR", value);
 
     axios
       .get(
@@ -3564,25 +3543,12 @@ function Bleaching_Bmr_Summary() {
             (loggedInSupervisor &&
               (res.data.productionDetails[0].status == "SUPERVISOR_APPROVED" ||
                 res.data.productionDetails[0].status == "QA_APPROVED")) ||
-              (loggedInQa &&
-                res.data.productionDetails[0].status == "QA_APPROVED")
+            (loggedInQa &&
+              res.data.productionDetails[0].status == "QA_APPROVED")
           );
           setPd_QaId(res.data.productionDetails[0].qaId);
           setPd_Status(res.data.productionDetails[0].status);
 
-          /*
-          finishing
-isExport
-isHouse
-          */
-
-          // if (res.data.productionDetails[0].isExport === "TICK") {
-          //   setpd_ProductsupplyInhouse("NA");
-          //   setpd_ProductsupplyExport("TICK");
-          // } else {
-          //   setpd_ProductsupplyInhouse("TICK");
-          //   setpd_ProductsupplyExport("NA");
-          // }
           if (res.data.productionDetails[0]?.mixing !== null) {
             if (
               res.data.productionDetails[0]?.mixing
@@ -3600,96 +3566,78 @@ isHouse
             setpd_ProductsupplyExport("NA");
           }
 
-          // if (
-          //   res.data.productionDetails[0]?.mixing
-          //     ?.toLowerCase()
-          //     .includes("export")
-          // ) {
-          //   setpd_ProductsupplyExport("TICK");
-          //   setpd_ProductsupplyInhouse("NA");
-          // } else {
-          //   setpd_ProductsupplyInhouse("TICK");
-          //   setpd_ProductsupplyExport("NA");
-          // }
-
           setPd_BatchQty1(res.data.productionDetails[0].baleCount);
           setPd_BatchQty2(res.data.productionDetails[0].batchCount);
           setPd_BatchQuantity(res.data.productionDetails[0].batchQuantity);
           setPd_Mixing(res.data.productionDetails[0].mixing);
           setPd_StartSub(res.data.productionDetails[0].startSubBatch);
           setPd_EndSub(res.data.productionDetails[0].endSubBatch);
+
+
+
+          const finishingValue = res.data.productionDetails[0].finishing;
+
           setpd_FinishSoft(
-            res.data.productionDetails[0].finishing == "Soft" ? "TICK" : "NA"
+            finishingValue ? finishingValue.toLowerCase().trim() === "soft" ? "TICK" : "NA" : "NA"
           );
+
           setpd_pd_finish_Crish(
-            res.data.productionDetails[0].finishing == "Crisp" ? "TICK" : "NA"
+            finishingValue
+              ? (finishingValue.toLowerCase().trim() === "crisp" || finishingValue.toLowerCase().trim() === "cri")
+                ? "TICK"
+                : "NA"
+              : "NA"
           );
 
           setPd_ManufacturingStartDate(
             res.data.productionDetails[0].startDate.slice(0, 10)
           );
+
           setPd_ManufacturingCompletionDate(
             res.data.productionDetails[0].endDate.slice(0, 10)
           );
+
           localStorage.setItem(
             "bleaching_prod_start_date",
             res.data.productionDetails[0].startDate
           );
+
           localStorage.setItem(
             "bleaching_prod_end_date",
             res.data.productionDetails[0].endDate
           );
+
           setPd_ManufacturingStartTime(res.data.productionDetails[0].startTime);
+
           setPd_ManufacturingCompletionTime(
             res.data.productionDetails[0].endTime
           );
+
           Qa1SignOnchange(res.data.productionDetails[0].qaName);
           Prod1SignChange(res.data.productionDetails[0].supervisiorName);
           updateProdLov({
-            productionDate: res.data.productionDetails[0].supervisiorDate,
+            productionDate: res.data.productionDetails[0].supervisiorDate || localDateValue4,
           });
           updateProdLov({
             productionQADate: res.data.productionDetails[0].qaDate,
           });
-          //Production Details Data ended here
-          ////////////////////
+
           setManufacturingParametersStore(res.data.manufacturingOperationsList);
 
           setLoading(false);
         } else {
-          // alert("cghcgfgf")
+
           setLoading(false);
         }
       })
       .catch((err) => {
         console.log("Error", err);
         setLoading(false);
-        // message.error(err.message);
+
       });
-    //window.location.reload()
   };
 
-  //Verification Of Rrcords Save Here
   const saveVerificationRecords = () => {
-    // if (
-    //   performedbySign.housekeeping == "" ||
-    //   verifiedbyDate.housekeeping == "" ||
-    //   performedbyDate.housekeeping == "" ||
-    //   performedbySign.logbook == "" ||
-    //   verifiedbyDate.logbook == "" ||
-    //   performedbyDate.logbook == "" ||
-    //   performedbySign.machineCleaning == "" ||
-    //   verifiedbyDate.machineCleaning == "" ||
-    //   performedbyDate.machineCleaning == "" ||
-    //   performedbySign.machineSanitizer == "" ||
-    //   verifiedbyDate.machineSanitizer == "" ||
-    //   performedbyDate.machineSanitizer == "" ||
-    //   performedbySign.productionRecord == "" ||
-    //   verifiedbyDate.productionRecord == "" ||
-    //   performedbyDate.productionRecord == ""
-    // ) {
-    //   message.error("Please Fill All Date and Signature");
-    // } else {
     console.log("Verification Of Records", vorStateObject);
     const payload = {
       bmr_no: bmr,
@@ -3702,14 +3650,14 @@ isHouse
             vorStateObject.housekeeping == "TICK"
               ? "Satisfactory"
               : vorStateObject.housekeeping == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           status2:
             vorStateObject.housekeeping == "TICK"
               ? "Satisfactory"
               : vorStateObject.housekeeping == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           verifiedBy: verifiedbySign.housekeeping || username,
           verifiedId: "",
           reviewerId: "",
@@ -3725,14 +3673,14 @@ isHouse
             vorStateObject.machineCleaning == "TICK"
               ? "Satisfactory"
               : vorStateObject.machineCleaning == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           status2:
             vorStateObject.machineCleaning == "TICK"
               ? "Satisfactory"
               : vorStateObject.machineCleaning == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           verifiedBy: verifiedbySign.machineCleaning || username,
           verifiedId: "",
           reviewerId: "",
@@ -3748,14 +3696,14 @@ isHouse
             vorStateObject.logbook == "TICK"
               ? "Satisfactory"
               : vorStateObject.logbook == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           status2:
             vorStateObject.logbook == "TICK"
               ? "Satisfactory"
               : vorStateObject.logbook == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           verifiedBy: verifiedbySign.logbook || username,
           verifiedId: "",
           reviewerId: "",
@@ -3771,14 +3719,14 @@ isHouse
             vorStateObject.productionRecord == "TICK"
               ? "Satisfactory"
               : vorStateObject.productionRecord == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           status2:
             vorStateObject.productionRecord == "TICK"
               ? "Satisfactory"
               : vorStateObject.productionRecord == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           verifiedBy: verifiedbySign.productionRecord || username,
           verifiedId: "",
           reviewerId: "",
@@ -3794,14 +3742,14 @@ isHouse
             vorStateObject.machineSanitizer == "TICK"
               ? "Satisfactory"
               : vorStateObject.machineSanitizer == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           status2:
             vorStateObject.machineSanitizer == "TICK"
               ? "Satisfactory"
               : vorStateObject.machineSanitizer == "CROSS"
-              ? "Not Satisfactory"
-              : "NA",
+                ? "Not Satisfactory"
+                : "NA",
           verifiedBy: verifiedbySign.machineSanitizer || username,
           verifiedId: "",
           reviewerId: "",
@@ -3845,24 +3793,8 @@ isHouse
     // }
   };
 
-  //Verification Of Rrcords Submit Here
   const submitVerificationRecords = () => {
     if (loggedInSupervisor) {
-      // if (
-      //   performedbySign.housekeeping == "" ||
-      //   performedbyDate.housekeeping == "" ||
-      //   performedbySign.logbook == "" ||
-      //   performedbyDate.logbook == "" ||
-      //   performedbySign.machineCleaning == "" ||
-      //   performedbyDate.machineCleaning == "" ||
-      //   performedbySign.machineSanitizer == "" ||
-      //   performedbyDate.machineSanitizer == "" ||
-      //   performedbySign.productionRecord == "" ||
-      //   performedbyDate.productionRecord == ""
-      // ) {
-      //   message.error("Please Fill All Date and Signature");
-      // }
-      // else {
       console.log("Verification Of Records", vorStateObject);
       const payload = {
         bmr_no: bmr,
@@ -3875,14 +3807,14 @@ isHouse
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.housekeeping || username,
             verifiedId: "",
             reviewerId: "",
@@ -3898,14 +3830,14 @@ isHouse
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineCleaning || username,
             verifiedId: "",
             reviewerId: "",
@@ -3921,14 +3853,14 @@ isHouse
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.logbook || username,
             verifiedId: "",
             reviewerId: "",
@@ -3944,14 +3876,14 @@ isHouse
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.productionRecord || username,
             verifiedId: "",
             reviewerId: "",
@@ -3967,14 +3899,14 @@ isHouse
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineSanitizer || username,
             verifiedId: "",
             reviewerId: "",
@@ -3999,14 +3931,14 @@ isHouse
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.housekeeping || username,
             verifiedId: "",
             reviewerId: "",
@@ -4022,14 +3954,14 @@ isHouse
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineCleaning || username,
             verifiedId: "",
             reviewerId: "",
@@ -4045,14 +3977,14 @@ isHouse
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.logbook || username,
             verifiedId: "",
             reviewerId: "",
@@ -4068,14 +4000,14 @@ isHouse
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.productionRecord || username,
             verifiedId: "",
             reviewerId: "",
@@ -4091,14 +4023,14 @@ isHouse
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineSanitizer || username,
             verifiedId: "",
             reviewerId: "",
@@ -4171,14 +4103,14 @@ isHouse
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.housekeeping || username,
             verifiedId: "",
             reviewerId: "",
@@ -4194,14 +4126,14 @@ isHouse
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineCleaning || username,
             verifiedId: "",
             reviewerId: "",
@@ -4217,14 +4149,14 @@ isHouse
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.logbook || username,
             verifiedId: "",
             reviewerId: "",
@@ -4240,14 +4172,14 @@ isHouse
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.productionRecord || username,
             verifiedId: "",
             reviewerId: "",
@@ -4263,14 +4195,14 @@ isHouse
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineSanitizer || username,
             verifiedId: "",
             reviewerId: "",
@@ -4295,14 +4227,14 @@ isHouse
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.housekeeping == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.housekeeping == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.housekeeping || username,
             verifiedId: "",
             reviewerId: "",
@@ -4318,14 +4250,14 @@ isHouse
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineCleaning == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineCleaning == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineCleaning || username,
             verifiedId: "",
             reviewerId: "",
@@ -4341,14 +4273,14 @@ isHouse
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.logbook == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.logbook == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.logbook || username,
             verifiedId: "",
             reviewerId: "",
@@ -4364,14 +4296,14 @@ isHouse
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.productionRecord == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.productionRecord == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.productionRecord || username,
             verifiedId: "",
             reviewerId: "",
@@ -4387,14 +4319,14 @@ isHouse
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             status2:
               vorStateObject.machineSanitizer == "TICK"
                 ? "Satisfactory"
                 : vorStateObject.machineSanitizer == "CROSS"
-                ? "Not Satisfactory"
-                : "NA",
+                  ? "Not Satisfactory"
+                  : "NA",
             verifiedBy: verifiedbySign.machineSanitizer || username,
             verifiedId: "",
             reviewerId: "",
@@ -4453,14 +4385,14 @@ isHouse
                 manufacturingSteps.SwitchOn == "READY"
                   ? "Ready"
                   : manufacturingSteps.SwitchOn == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               observation2:
                 manufacturingSteps.SwitchOn == "READY"
                   ? "Ready"
                   : manufacturingSteps.SwitchOn == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.one || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.one || username,
@@ -4473,14 +4405,14 @@ isHouse
                 manufacturingSteps.BlowroomRawMaterial == "READY"
                   ? "Ready"
                   : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomRawMaterial == "READY"
                   ? "Ready"
                   : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.two || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.two || username,
@@ -4493,14 +4425,14 @@ isHouse
                 manufacturingSteps.BlowroomWorkingArea == "WA1"
                   ? "WA1"
                   : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                  ? "WA2"
-                  : "NA",
+                    ? "WA2"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomWorkingArea == "WA1"
                   ? "WA1"
                   : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                  ? "WA2"
-                  : "NA",
+                    ? "WA2"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.three || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.three || username,
@@ -4513,14 +4445,14 @@ isHouse
                 manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.four || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.four || username,
@@ -4533,14 +4465,14 @@ isHouse
                 manufacturingSteps.BlowroomCardingProcess == "ON"
                   ? "On"
                   : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                  ? "Off"
-                  : "NA",
+                    ? "Off"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomCardingProcess == "ON"
                   ? "On"
                   : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                  ? "Off"
-                  : "NA",
+                    ? "Off"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.five || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.five || username,
@@ -4553,14 +4485,14 @@ isHouse
                 manufacturingSteps.BleachingCakePressing == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingCakePressing == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.six || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.six || username,
@@ -4573,14 +4505,14 @@ isHouse
                 manufacturingSteps.BleachingKier == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingKier == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.seven || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.seven || username,
@@ -4593,14 +4525,14 @@ isHouse
                 manufacturingSteps.BleachingHydro == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingHydro == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.eight || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.eight || username,
@@ -4614,15 +4546,15 @@ isHouse
                   ? "Completed"
                   : manufacturingSteps.BleachingProcessCakeOpener ==
                     "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingProcessCakeOpener ==
                     "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.nine || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.nine || username,
@@ -4645,14 +4577,14 @@ isHouse
                 manufacturingSteps.SwitchOn == "READY"
                   ? "Ready"
                   : manufacturingSteps.SwitchOn == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               observation2:
                 manufacturingSteps.SwitchOn == "READY"
                   ? "Ready"
                   : manufacturingSteps.SwitchOn == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.one || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.one || username,
@@ -4667,14 +4599,14 @@ isHouse
                 manufacturingSteps.BlowroomRawMaterial == "READY"
                   ? "Ready"
                   : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomRawMaterial == "READY"
                   ? "Ready"
                   : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                  ? "Not Ready"
-                  : "NA",
+                    ? "Not Ready"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.two || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.two || username,
@@ -4689,14 +4621,14 @@ isHouse
                 manufacturingSteps.BlowroomWorkingArea == "WA1"
                   ? "WA1"
                   : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                  ? "WA2"
-                  : "NA",
+                    ? "WA2"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomWorkingArea == "WA1"
                   ? "WA1"
                   : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                  ? "WA2"
-                  : "NA",
+                    ? "WA2"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.three || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.three || username,
@@ -4711,14 +4643,14 @@ isHouse
                 manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.four || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.four || username,
@@ -4733,14 +4665,14 @@ isHouse
                 manufacturingSteps.BlowroomCardingProcess == "ON"
                   ? "On"
                   : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                  ? "Off"
-                  : "NA",
+                    ? "Off"
+                    : "NA",
               observation2:
                 manufacturingSteps.BlowroomCardingProcess == "ON"
                   ? "On"
                   : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                  ? "Off"
-                  : "NA",
+                    ? "Off"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.five || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.five || username,
@@ -4755,14 +4687,14 @@ isHouse
                 manufacturingSteps.BleachingCakePressing == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingCakePressing == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.six || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.six || username,
@@ -4777,14 +4709,14 @@ isHouse
                 manufacturingSteps.BleachingKier == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingKier == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.seven || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.seven || username,
@@ -4799,14 +4731,14 @@ isHouse
                 manufacturingSteps.BleachingHydro == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingHydro == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.eight || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.eight || username,
@@ -4822,15 +4754,15 @@ isHouse
                   ? "Completed"
                   : manufacturingSteps.BleachingProcessCakeOpener ==
                     "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               observation2:
                 manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
                   ? "Completed"
                   : manufacturingSteps.BleachingProcessCakeOpener ==
                     "NOT COMPLETED"
-                  ? "Not Completed"
-                  : "NA",
+                    ? "Not Completed"
+                    : "NA",
               performBy:
                 manufacturingStepsPerformedbysign.nine || usernameSupervisor,
               cleanedBy: manufacturingStepsVerifiedbysign.nine || username,
@@ -4865,53 +4797,11 @@ isHouse
           })
           .catch((err) => {
             console.log("Error", err);
-            // messageApi.open({
-            //   type: "error",
-            //   content: err.response.data.message + "" + bmr,
-            // });
+
           });
       }
     } else if (loggedInQa) {
-      // if (
-      //   manufacturingStepsPerformedbysign.one == "" ||
-      //   manufacturingStepsVerifiedbysign.one == "" ||
-      //   manufacturingStepsPerformedbydate.one == "" ||
-      //   manufacturingStepsVerifiedbydate.one == "" ||
-      //   manufacturingStepsPerformedbysign.two == "" ||
-      //   manufacturingStepsVerifiedbysign.two == "" ||
-      //   manufacturingStepsPerformedbydate.two == "" ||
-      //   manufacturingStepsVerifiedbydate.two == "" ||
-      //   manufacturingStepsPerformedbysign.three == "" ||
-      //   manufacturingStepsVerifiedbysign.three == "" ||
-      //   manufacturingStepsPerformedbydate.three == "" ||
-      //   manufacturingStepsVerifiedbydate.three == "" ||
-      //   manufacturingStepsPerformedbysign.four == "" ||
-      //   manufacturingStepsVerifiedbysign.four == "" ||
-      //   manufacturingStepsPerformedbydate.four == "" ||
-      //   manufacturingStepsVerifiedbydate.four == "" ||
-      //   manufacturingStepsPerformedbysign.five == "" ||
-      //   manufacturingStepsVerifiedbysign.five == "" ||
-      //   manufacturingStepsPerformedbydate.five == "" ||
-      //   manufacturingStepsVerifiedbydate.five == "" ||
-      //   manufacturingStepsPerformedbysign.six == "" ||
-      //   manufacturingStepsVerifiedbysign.six == "" ||
-      //   manufacturingStepsPerformedbydate.six == "" ||
-      //   manufacturingStepsVerifiedbydate.six == "" ||
-      //   manufacturingStepsPerformedbysign.seven == "" ||
-      //   manufacturingStepsVerifiedbysign.seven == "" ||
-      //   manufacturingStepsPerformedbydate.seven == "" ||
-      //   manufacturingStepsVerifiedbydate.seven == "" ||
-      //   manufacturingStepsPerformedbysign.eight == "" ||
-      //   manufacturingStepsVerifiedbysign.eight == "" ||
-      //   manufacturingStepsPerformedbydate.eight == "" ||
-      //   manufacturingStepsVerifiedbydate.eight == "" ||
-      //   manufacturingStepsPerformedbysign.nine == "" ||
-      //   manufacturingStepsVerifiedbysign.nine == "" ||
-      //   manufacturingStepsPerformedbydate.nine == "" ||
-      //   manufacturingStepsVerifiedbydate.nine == ""
-      // ) {
-      //   message.error("Please Fill All Date and Signatures");
-      // } else {
+
       const payload = {
         stage: "Initial",
         operation: "Switch 'ON' all the machines & Sub machines",
@@ -4924,14 +4814,14 @@ isHouse
               manufacturingSteps.SwitchOn == "READY"
                 ? "Ready"
                 : manufacturingSteps.SwitchOn == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             observation2:
               manufacturingSteps.SwitchOn == "READY"
                 ? "Ready"
                 : manufacturingSteps.SwitchOn == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.one || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.one || username,
@@ -4944,14 +4834,14 @@ isHouse
               manufacturingSteps.BlowroomRawMaterial == "READY"
                 ? "Ready"
                 : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomRawMaterial == "READY"
                 ? "Ready"
                 : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.two || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.two || username,
@@ -4964,14 +4854,14 @@ isHouse
               manufacturingSteps.BlowroomWorkingArea == "WA1"
                 ? "WA1"
                 : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                ? "WA2"
-                : "NA",
+                  ? "WA2"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomWorkingArea == "WA1"
                 ? "WA1"
                 : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                ? "WA2"
-                : "NA",
+                  ? "WA2"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.three || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.three || username,
@@ -4984,14 +4874,14 @@ isHouse
               manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.four || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.four || username,
@@ -5004,14 +4894,14 @@ isHouse
               manufacturingSteps.BlowroomCardingProcess == "ON"
                 ? "On"
                 : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                ? "Off"
-                : "NA",
+                  ? "Off"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomCardingProcess == "ON"
                 ? "On"
                 : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                ? "Off"
-                : "NA",
+                  ? "Off"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.five || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.five || username,
@@ -5024,14 +4914,14 @@ isHouse
               manufacturingSteps.BleachingCakePressing == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingCakePressing == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.six || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.six || username,
@@ -5044,14 +4934,14 @@ isHouse
               manufacturingSteps.BleachingKier == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingKier == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.seven || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.seven || username,
@@ -5064,14 +4954,14 @@ isHouse
               manufacturingSteps.BleachingHydro == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingHydro == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.eight || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.eight || username,
@@ -5085,15 +4975,15 @@ isHouse
                 ? "Completed"
                 : manufacturingSteps.BleachingProcessCakeOpener ==
                   "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingProcessCakeOpener ==
                   "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.nine || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.nine || username,
@@ -5116,14 +5006,14 @@ isHouse
               manufacturingSteps.SwitchOn == "READY"
                 ? "Ready"
                 : manufacturingSteps.SwitchOn == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             observation2:
               manufacturingSteps.SwitchOn == "READY"
                 ? "Ready"
                 : manufacturingSteps.SwitchOn == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.one || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.one || username,
@@ -5138,14 +5028,14 @@ isHouse
               manufacturingSteps.BlowroomRawMaterial == "READY"
                 ? "Ready"
                 : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomRawMaterial == "READY"
                 ? "Ready"
                 : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-                ? "Not Ready"
-                : "NA",
+                  ? "Not Ready"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.two || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.two || username,
@@ -5160,14 +5050,14 @@ isHouse
               manufacturingSteps.BlowroomWorkingArea == "WA1"
                 ? "WA1"
                 : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                ? "WA2"
-                : "NA",
+                  ? "WA2"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomWorkingArea == "WA1"
                 ? "WA1"
                 : manufacturingSteps.BlowroomWorkingArea == "WA2"
-                ? "WA2"
-                : "NA",
+                  ? "WA2"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.three || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.three || username,
@@ -5182,14 +5072,14 @@ isHouse
               manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomReferMachine == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.four || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.four || username,
@@ -5204,14 +5094,14 @@ isHouse
               manufacturingSteps.BlowroomCardingProcess == "ON"
                 ? "On"
                 : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                ? "Off"
-                : "NA",
+                  ? "Off"
+                  : "NA",
             observation2:
               manufacturingSteps.BlowroomCardingProcess == "ON"
                 ? "On"
                 : manufacturingSteps.BlowroomCardingProcess == "OFF"
-                ? "Off"
-                : "NA",
+                  ? "Off"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.five || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.five || username,
@@ -5226,14 +5116,14 @@ isHouse
               manufacturingSteps.BleachingCakePressing == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingCakePressing == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.six || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.six || username,
@@ -5248,14 +5138,14 @@ isHouse
               manufacturingSteps.BleachingKier == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingKier == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.seven || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.seven || username,
@@ -5270,14 +5160,14 @@ isHouse
               manufacturingSteps.BleachingHydro == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingHydro == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.eight || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.eight || username,
@@ -5293,15 +5183,15 @@ isHouse
                 ? "Completed"
                 : manufacturingSteps.BleachingProcessCakeOpener ==
                   "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             observation2:
               manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
                 ? "Completed"
                 : manufacturingSteps.BleachingProcessCakeOpener ==
                   "NOT COMPLETED"
-                ? "Not Completed"
-                : "NA",
+                  ? "Not Completed"
+                  : "NA",
             performBy:
               manufacturingStepsPerformedbysign.nine || usernameSupervisor,
             cleanedBy: manufacturingStepsVerifiedbysign.nine || username,
@@ -5361,14 +5251,14 @@ isHouse
             manufacturingSteps.SwitchOn == "READY"
               ? "Ready"
               : manufacturingSteps.SwitchOn == "NOT READY"
-              ? "Not Ready"
-              : "NA",
+                ? "Not Ready"
+                : "NA",
           observation2:
             manufacturingSteps.SwitchOn == "READY"
               ? "Ready"
               : manufacturingSteps.SwitchOn == "NOT READY"
-              ? "Not Ready"
-              : "NA",
+                ? "Not Ready"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.one || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.one || username,
@@ -5383,14 +5273,14 @@ isHouse
             manufacturingSteps.BlowroomRawMaterial == "READY"
               ? "Ready"
               : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-              ? "Not Ready"
-              : "NA",
+                ? "Not Ready"
+                : "NA",
           observation2:
             manufacturingSteps.BlowroomRawMaterial == "READY"
               ? "Ready"
               : manufacturingSteps.BlowroomRawMaterial == "NOT READY"
-              ? "Not Ready"
-              : "NA",
+                ? "Not Ready"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.two || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.two || username,
@@ -5405,14 +5295,14 @@ isHouse
             manufacturingSteps.BlowroomWorkingArea == "WA1"
               ? "WA1"
               : manufacturingSteps.BlowroomWorkingArea == "WA2"
-              ? "WA2"
-              : "NA",
+                ? "WA2"
+                : "NA",
           observation2:
             manufacturingSteps.BlowroomWorkingArea == "WA1"
               ? "WA1"
               : manufacturingSteps.BlowroomWorkingArea == "WA2"
-              ? "WA2"
-              : "NA",
+                ? "WA2"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.three || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.three || username,
@@ -5427,14 +5317,14 @@ isHouse
             manufacturingSteps.BlowroomReferMachine == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           observation2:
             manufacturingSteps.BlowroomReferMachine == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BlowroomReferMachine == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.four || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.four || username,
@@ -5449,14 +5339,14 @@ isHouse
             manufacturingSteps.BlowroomCardingProcess == "ON"
               ? "On"
               : manufacturingSteps.BlowroomCardingProcess == "OFF"
-              ? "Off"
-              : "NA",
+                ? "Off"
+                : "NA",
           observation2:
             manufacturingSteps.BlowroomCardingProcess == "ON"
               ? "On"
               : manufacturingSteps.BlowroomCardingProcess == "OFF"
-              ? "Off"
-              : "NA",
+                ? "Off"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.five || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.five || username,
@@ -5471,14 +5361,14 @@ isHouse
             manufacturingSteps.BleachingCakePressing == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           observation2:
             manufacturingSteps.BleachingCakePressing == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingCakePressing == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.six || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.six || username,
@@ -5493,14 +5383,14 @@ isHouse
             manufacturingSteps.BleachingKier == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           observation2:
             manufacturingSteps.BleachingKier == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingKier == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.seven || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.seven || username,
@@ -5515,14 +5405,14 @@ isHouse
             manufacturingSteps.BleachingHydro == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           observation2:
             manufacturingSteps.BleachingHydro == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingHydro == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.eight || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.eight || username,
@@ -5537,14 +5427,14 @@ isHouse
             manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingProcessCakeOpener == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           observation2:
             manufacturingSteps.BleachingProcessCakeOpener == "COMPLETED"
               ? "Completed"
               : manufacturingSteps.BleachingProcessCakeOpener == "NOT COMPLETED"
-              ? "Not Completed"
-              : "NA",
+                ? "Not Completed"
+                : "NA",
           performBy:
             manufacturingStepsPerformedbysign.nine || usernameSupervisor,
           cleanedBy: manufacturingStepsVerifiedbysign.nine || username,
@@ -6506,6 +6396,11 @@ isHouse
   };
 
   const listofEnclosures = () => {
+
+
+
+    console.log("!listofEnclosuresArray || !listofEnclosuresArray.enclosureList start")
+
     if (
       listofEnclosuresNewArray.bleaching_job_card == "" ||
       (listofEnclosuresNewArray.freetext_new == "" && loggedInQa) ||
@@ -6516,7 +6411,6 @@ isHouse
         content: "Please Select the Values",
       });
     } else {
-      console.log("ggggggggg", listofEnclosuresArray.enclosureList);
       if (listofEnclosuresArray.enclosureList.length > 0) {
         //alert("Have Data Already");
         //console.log("ArrayEEE", listofEnclosuresArray.enclosureList);
@@ -6593,14 +6487,14 @@ isHouse
             listofEnclosuresNewArray.bleaching_job_card == "ATTACHED"
               ? "ATTACHED"
               : listofEnclosuresNewArray.bleaching_job_card == "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           remark2:
             listofEnclosuresNewArray.bleaching_job_card == "ATTACHED"
               ? "ATTACHED"
               : listofEnclosuresNewArray.bleaching_job_card == "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           enclosureId: listOf.enclosureId1,
           summary_record_id: listOf.summary_record_id1,
         });
@@ -6612,15 +6506,15 @@ isHouse
               ? "ATTACHED"
               : listofEnclosuresNewArray.process_equipment_calibration ==
                 "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           remark2:
             listofEnclosuresNewArray.process_equipment_calibration == "ATTACHED"
               ? "ATTACHED"
               : listofEnclosuresNewArray.process_equipment_calibration ==
                 "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           enclosureId: listOf.enclosureId2,
           summary_record_id: listOf.summary_record_id2,
         });
@@ -6631,14 +6525,14 @@ isHouse
             listofEnclosuresNewArray.freetext_new == "ATTACHED"
               ? "ATTACHED"
               : listofEnclosuresNewArray.freetext_new == "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           remark2:
             listofEnclosuresNewArray.freetext_new == "ATTACHED"
               ? "ATTACHED"
               : listofEnclosuresNewArray.freetext_new == "NOT ATTACHED"
-              ? "NOT ATTACHED"
-              : "NA",
+                ? "NOT ATTACHED"
+                : "NA",
           enclosureId: listOf.enclosureId3,
           summary_record_id: listOf.summary_record_id3,
         });
@@ -6674,8 +6568,8 @@ isHouse
       pd_finish_Crish === "TICK"
         ? "Crisp"
         : pd_FinishSoft === "TICK"
-        ? "Soft"
-        : "NA";
+          ? "Soft"
+          : "NA";
     const payload = {
       prodDetailsId: pd_ID,
       bmr_no: bmr,
@@ -6699,7 +6593,7 @@ isHouse
       status: pd_status,
       supervisiorName: productionSign1 || usernameSupervisor,
       supervisiorStatus: pd_prodStatus,
-      supervisiorDate: productionLovStates.productionDate,
+      supervisiorDate: productionLovStates.productionDate || localDateValue4,
       qaStatus: pd_qaStatus,
       qaId: pd_qaId,
       qaName: qaSign1,
@@ -6739,8 +6633,9 @@ isHouse
       pd_finish_Crish === "TICK"
         ? "Crisp"
         : pd_FinishSoft === "TICK"
-        ? "Soft"
-        : "NA";
+          ? "Soft"
+          : "NA";
+
     const payload = {
       prodDetailsId: pd_ID,
       bmr_no: bmr,
@@ -6764,7 +6659,7 @@ isHouse
       status: pd_status,
       supervisiorName: productionSign1 || usernameSupervisor,
       supervisiorStatus: pd_prodStatus,
-      supervisiorDate: productionLovStates.productionDate,
+      supervisiorDate: productionLovStates.productionDate || localDateValue4,
       qaStatus: pd_qaStatus,
       qaId: pd_qaId,
       qaName: qaSign1,
@@ -6855,106 +6750,6 @@ isHouse
 
   const postqareleaseSend = () => {
     console.log("qasend called");
-    // if (
-    //   qaReleaseObj.Sign1 == "" ||
-    //   qaReleaseObj.Date1 == "" ||
-    //   qaReleaseObj.Sign2 == "" ||
-    //   qaReleaseObj.Date2 == "" ||
-    //   qaReleaseObj.Sign3 == "" ||
-    //   qaReleaseObj.Date3 == "" ||
-    //   qaReleaseObj.Sign4 == "" ||
-    //   qaReleaseObj.Date4 == "" ||
-    //   qaReleaseObj.Sign5 == "" ||
-    //   qaReleaseObj.Date5 == ""
-    // ) {
-    //   message.error("Please Fill All Date and Signature");
-    // }
-
-    // else {
-
-    //   if (Array.isArray(qaReleaseStore.qualityRelease)) {
-    //     qaReleaseStore.qualityRelease.push(
-    //       {
-    //         qualityId: "",
-    //         description: "criticalProcessParameter",
-    //         status1: qaReleaseArray.criticalProcessParameter,
-    //         status2: qaReleaseArray.criticalProcessParameter,
-    //         signature: qaReleaseObj.Sign1,
-    //         signatureId: "",
-    //         date: qaReleaseObj.Date1,
-    //       },
-    //       {
-    //         qualityId: "",
-    //         description: "ProcessChecksReviewed",
-    //         status1: qaReleaseArray.ProcessChecksReviewed,
-    //         status2: qaReleaseArray.ProcessChecksReviewed,
-    //         signature: qaReleaseObj.Sign2,
-    //         signatureId: "",
-    //         date: qaReleaseObj.Date2,
-    //       },
-    //       {
-    //         qualityId: "",
-    //         description: "DeviationReviewes",
-    //         status1: qaReleaseArray.DeviationReviewes,
-    //         status2: qaReleaseArray.DeviationReviewes,
-    //         signature: qaReleaseObj.Sign3,
-    //         signatureId: "",
-    //         date: qaReleaseObj.Date3,
-    //       },
-    //       {
-    //         qualityId: "",
-    //         description: "DeivationLogged",
-    //         status1: qaReleaseArray.DeivationLogged,
-    //         status2: qaReleaseArray.DeivationLogged,
-    //         signature: qaReleaseObj.Sign4,
-    //         signatureId: "",
-    //         date: qaReleaseObj.Date4,
-    //       },
-    //       {
-    //         qualityId: "",
-    //         description: "BatchReleased",
-    //         status1: qaReleaseArray.BatchReleased,
-    //         status2: qaReleaseArray.BatchReleased,
-    //         signature: qaReleaseObj.Sign5,
-    //         signatureId: "",
-    //         date: qaReleaseObj.Date5,
-    //       }
-    //     );
-
-    //     console.log("gg", qaReleaseStore);
-    //     const a = qaReleaseStore || {};
-    //     a.key = "QUALITY";
-    //     console.log("a", a);
-
-    //     axios
-    //       .post(
-    //         `${    API.prodUrl}/Precot/api/bleaching/summary/submitMachineOperations`,
-    //         a,
-    //         {
-    //           headers: {
-    //             Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //           },
-    //         }
-    //       )
-    //       .then((res) => {
-    //         console.log("Stoppage Details", res.data);
-    //         messageApi.open({
-    //           type: "success",
-    //           content: "Qa Release Submitted Successfully",
-    //         });
-    //         onChange("15", bmr);
-    //       })
-    //       .catch((err) => {
-    //         console.log("Error", err);
-    //         messageApi.open({
-    //           type: "error",
-    //           content: err.response.data.message,
-    //         });
-    //       });
-    //   } else {
-    //     message.error("Can't able to save QA Release due to no data found");
-    //   }
-    // }
 
     ////////////////////////////
     if (qaReleaseStore?.qualityRelease.length > 0) {
@@ -7482,30 +7277,30 @@ isHouse
 
   const pdeSubmit = () => {
     const selectedData = pdeArray
-      .filter((_, index) => checkedItems[index]) // Filter only the selected rows
+      .filter((_, index) => checkedItems[index])
       .map((x, index) => ({
         id: x.id, // Assign an ID (you can adjust this based on your data)
         date:
           x.packDt != undefined
             ? moment(x.packDt).format("YYYY-MM-DD")
-            : moment(x.date).format("YYYY-MM-DD"), // Format the date
-        machine: x.mcn || x.machine, // Machine name
-        from_hour: x.f_time || x.from_hour, // From hour
-        to_hour: x.t_time || x.to_hour, // To hour
-        total_hour: x.totHrs || x.total_hour, // Total hour
+            : moment(x.date).format("YYYY-MM-DD"),
+        machine: x.mcn || x.machine,
+        from_hour: x.f_time || x.from_hour,
+        to_hour: x.t_time || x.to_hour,
+        total_hour: x.totHrs || x.total_hour,
         reason: x.reason,
-        remarks: x.remarks, // Remarks
+        remarks: x.remarks,
         shift: x.shift,
-        sign: signatureValues[index] || x.sign, // Selected signature
+        sign: signatureValues[index] || x.sign,
         sign_date:
           dateValues[index] !== null || dateValues[index] !== undefined
             ? moment(dateValues[index]).format("YYYY-MM-DD")
-            : moment(x.sign_date).format("YYYY-MM-DD"), // Selected sign date (formatted)
+            : moment(x.sign_date).format("YYYY-MM-DD"),
       }));
     const payload = {
-      process_id: process_id, // Hardcoded for now, you can make it dynamic if needed
-      bmr_no: bmr, // Hardcoded for now, can be made dynamic
-      details: selectedData, // Use selected data as details
+      process_id: process_id,
+      bmr_no: bmr,
+      details: selectedData,
     };
     console.log("paykload", payload);
     axios
@@ -7617,11 +7412,6 @@ isHouse
       setMachineOpsPerformedByDate(localDate);
       setNewDate(localDate);
     }
-
-    // role == "ROLE_QA" ? updateProdLov({ productionQADate: localDate }) : "";
-    // role == "ROLE_SUPERVISOR"
-    //   ? updateProdLov({ productionDate: localDate })
-    //   : "";
     role == "ROLE_SUPERVISOR"
       ? updatePerformedByDate({ housekeeping: localDate })
       : "";
@@ -8007,9 +7797,7 @@ isHouse
       window.print();
     } else if (listOf.freetext == true) {
       if (elementRef.current) {
-        // setElementHeight(elementRef.current.offsetHeight);
-        //console.log("HEIGHT", elementRef.current.offsetHeight);
-        // alert(elementRef.current.offsetHeight);
+
         window.print();
       }
     }
@@ -8046,11 +7834,6 @@ isHouse
   };
   //////////////////////
 
-  const handleClick = () => {
-    if (elementRef.current) {
-      setElementHeight(elementRef.current.offsetHeight);
-    }
-  };
 
   ///////////////////////
   const items = [
@@ -8466,18 +8249,18 @@ isHouse
                   }}
                 >
                   <b>
-                    Received by(Production){" "}
+                    Received by(Production)
                     <Form>
                       <Form.Item label="Production">
-                        <p>{productionSign1 || usernameSupervisor}</p>
+                        <p>{productionSign1}</p>
                       </Form.Item>
                       <Form.Item label="Date">
                         <p>
                           {productionLovStates.productionDate
                             ? moment(productionLovStates.productionDate).format(
-                                "DD/MM/YYYY - HH:mm"
-                              )
-                            : ""}
+                              "DD/MM/YYYY - HH:mm"
+                            )
+                            : localDateValue4}
                         </p>
                       </Form.Item>
                     </Form>
@@ -8524,21 +8307,21 @@ isHouse
                   }}
                 >
                   <b>
-                    Received by(Production){" "}
+                    Received by(Production)
                     <Form>
                       <Form.Item label="Select Production">
                         <Select
                           onChange={Prod1SignChange}
                           options={prodLov}
                           placeholder="Select Production"
-                          value={productionSign1}
+                          value={productionSign1 || usernameSupervisor}
                           disabled={pd_disable || !loggedInSupervisor}
                         />
                       </Form.Item>
                       <Form.Item label="Select Date">
                         <Input
                           type="datetime-local"
-                          value={productionLovStates.productionDate}
+                          value={productionLovStates.productionDate || localDateValue4}
                           onChange={(e) =>
                             updateProdLov({ productionDate: e.target.value })
                           }
@@ -8575,9 +8358,9 @@ isHouse
                 fontWeight: "bold",
                 display:
                   (loggedInSupervisor && rawCottonSupStatus) ||
-                  (loggedInQa && rawCottonQaStatus) ||
-                  loggedInQa ||
-                  loggedInHod
+                    (loggedInQa && rawCottonQaStatus) ||
+                    loggedInQa ||
+                    loggedInHod
                     ? "none"
                     : "block",
               }}
@@ -9218,33 +9001,7 @@ isHouse
               )}
             </table>
           </form>
-          {/* <table
-            style={{
-              width: "100%",
-            }}
-          >
-            <tr>
-              <td align="center">Sl. No.</td>
-              <td align="center">Equipment Name</td>
-              <td align="center">Equipment code</td>
-              <td align="center">Date of Calibration (Gauge)</td>
-              <td align="center">Calibration due on (Gauge)</td>
-            </tr>
-            {machineData.map((x, i) => {
-              return (
-                <tr key={i}>
-                  <td align="center">{x.id}</td>
-                  <td align="center">{x.name}</td>
-                  <td align="center">{x.code}</td>
-                  <td align="center">{x.startDate}</td>
-                  <td align="center">{x.endDate}</td>
-                </tr>
-              );
-            })}
-          </table> */}
-          {/* <div>
-            <p>Verified By</p>
-          </div> */}
+
         </div>
       ),
     },
@@ -12196,13 +11953,13 @@ isHouse
                   </th>
                   <th colSpan="3">Process Delay / Down Time </th>
                   <th colSpan="1" rowSpan="2">
-                    Reasons{" "}
+                    Reasons
                   </th>
                   <th colSpan="1" rowSpan="2">
-                    Remarks{" "}
+                    Remarks
                   </th>
                   <th colSpan="1" rowSpan="2">
-                    Sign and Date{" "}
+                    Sign and Date
                   </th>
                 </tr>
                 <tr>
@@ -12212,6 +11969,8 @@ isHouse
                 </tr>
                 {stoppageDetailsStore &&
                   stoppageDetailsStore.map((x, i) => {
+
+                    console.log("packDt x.packDt", x.packDt)
                     return (
                       <tr>
                         <td
@@ -12224,7 +11983,7 @@ isHouse
                           colSpan="1"
                           style={{ padding: "0.4em", textAlign: "center" }}
                         >
-                          {moment(x.packDt).format("DD/MM/YYYY")}
+                          {moment(x.date).format("DD/MM/YYYY")}
                         </td>
                         <td
                           colSpan="1"
@@ -12591,11 +12350,12 @@ isHouse
                     fontWeight: "bold",
                     display:
                       loggedInHod ||
-                      (loggedInQa && processDeviationValidation.qaApproved) ||
-                      (loggedInSupervisor &&
-                        processDeviationValidation.supervisorApproved) ||
-                      (processDeviationValidation.qaApproved &&
-                        processDeviationValidation.supervisorApproved)
+                        (loggedInSupervisor && processDeviationValidation.beforeQAConditionForSupervisor) ||
+                        (loggedInQa && processDeviationValidation.qaApproved) ||
+                        (loggedInSupervisor &&
+                          processDeviationValidation.supervisorApproved) ||
+                        (processDeviationValidation.qaApproved &&
+                          processDeviationValidation.supervisorApproved)
                         ? "none"
                         : "block",
                   }}
@@ -12613,11 +12373,12 @@ isHouse
                     fontWeight: "bold",
                     display:
                       loggedInHod ||
-                      (loggedInQa && processDeviationValidation.qaApproved) ||
-                      (loggedInSupervisor &&
-                        processDeviationValidation.supervisorApproved) ||
-                      (processDeviationValidation.qaApproved &&
-                        processDeviationValidation.supervisorApproved)
+                        (loggedInSupervisor && processDeviationValidation.beforeQAConditionForSupervisor) ||
+                        (loggedInQa && processDeviationValidation.qaApproved) ||
+                        (loggedInSupervisor &&
+                          processDeviationValidation.supervisorApproved) ||
+                        (processDeviationValidation.qaApproved &&
+                          processDeviationValidation.supervisorApproved)
                         ? "none"
                         : "block",
                   }}
@@ -12764,7 +12525,9 @@ isHouse
                       options={prodLov}
                       onChange={pdrSignOnChangeQA1}
                       disabled={
+                        processDeviationValidation.beforeQAConditionForSupervisor ||
                         !loggedInSupervisor ||
+
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -12783,7 +12546,7 @@ isHouse
                         updateDateQA({ one: e.target.value });
                       }}
                       disabled={
-                        !loggedInSupervisor ||
+                        !loggedInSupervisor || processDeviationValidation.beforeQAConditionForSupervisor ||
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -12882,7 +12645,7 @@ isHouse
                       options={prodLov}
                       onChange={pdrSignOnChangeQA2}
                       disabled={
-                        !loggedInSupervisor ||
+                        !loggedInSupervisor || processDeviationValidation.beforeQAConditionForSupervisor ||
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -12901,7 +12664,7 @@ isHouse
                         updateDateQA({ two: e.target.value });
                       }}
                       disabled={
-                        !loggedInSupervisor ||
+                        !loggedInSupervisor || processDeviationValidation.beforeQAConditionForSupervisor ||
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -13000,7 +12763,7 @@ isHouse
                       options={prodLov}
                       onChange={pdrSignOnChangeQA3}
                       disabled={
-                        !loggedInSupervisor ||
+                        !loggedInSupervisor || processDeviationValidation.beforeQAConditionForSupervisor ||
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -13019,7 +12782,7 @@ isHouse
                         updateDateQA({ three: e.target.value });
                       }}
                       disabled={
-                        !loggedInSupervisor ||
+                        !loggedInSupervisor || processDeviationValidation.beforeQAConditionForSupervisor ||
                         (loggedInQa && processDeviationValidation.qaApproved) ||
                         (loggedInSupervisor &&
                           processDeviationValidation.supervisorApproved) ||
@@ -13096,8 +12859,8 @@ isHouse
                     fontWeight: "bold",
                     display:
                       loggedInHod ||
-                      (loggedInSupervisor && freezeEnclosueSup) ||
-                      freezeEnclosureQa
+                        (loggedInSupervisor && freezeEnclosueSup) ||
+                        freezeEnclosureQa
                         ? "none"
                         : "block",
                   }}
@@ -13349,9 +13112,9 @@ isHouse
                     fontWeight: "bold",
                     display:
                       (postprodSup && loggedInSupervisor) ||
-                      postprodQa ||
-                      loggedInQa ||
-                      (postprodHod && loggedInHod)
+                        postprodQa ||
+                        loggedInQa ||
+                        (postprodHod && loggedInHod)
                         ? "none"
                         : "block",
                   }}
@@ -13405,12 +13168,7 @@ isHouse
                     Name
                   </td>
                   <td style={{ padding: "1em" }}>
-                    {" "}
-                    {/* <input
-                  className="inp-new"
-                  value={pprSupervisorName}
-                  onChange={(e) => setPprSupervisorName(e.target.value)}
-                /> */}
+
                     <Select
                       options={prodLov}
                       onChange={ppOnchangeName1}
@@ -13456,12 +13214,7 @@ isHouse
                     Sign & Date
                   </td>
                   <td style={{ padding: "1em" }}>
-                    {" "}
-                    {/* <input
-                  className="inp-new"
-                  value={pprSupervisor}
-                  onChange={(e) => setPprSupervisor(e.target.value)}
-                /> */}
+
                     <Select
                       options={prodLov}
                       onChange={ppOnchangeName1}
@@ -14066,11 +13819,7 @@ isHouse
                   />
                 </td>
                 <td>
-                  {/* <input
-                  className="inp-new"
-                  value={prSignApprover}
-                  onChange={(e) => setPrSignApprover(e.target.value)}
-                /> */}
+
                   <Select
                     value={prodRelease.Sign2 || usernameQADESANDMAN}
                     onChange={prodOnchange4}
@@ -15866,12 +15615,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[0].status == "Satisfactory"
+                  verificationArray[0].status == "Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[0].status == "Not Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -15894,12 +15643,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[0].status == "Not Satisfactory"
+                  verificationArray[0].status == "Not Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[0].status == "Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -15966,12 +15715,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[1].status == "Satisfactory"
+                  verificationArray[1].status == "Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[1].status == "Not Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -15994,12 +15743,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[1].status == "Not Satisfactory"
+                  verificationArray[1].status == "Not Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[1].status == "Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16066,12 +15815,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[2].status == "Satisfactory"
+                  verificationArray[2].status == "Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[2].status == "Not Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16094,12 +15843,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[2].status == "Not Satisfactory"
+                  verificationArray[2].status == "Not Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[2].status == "Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16166,12 +15915,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[3].status == "Satisfactory"
+                  verificationArray[3].status == "Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[3].status == "Not Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16194,12 +15943,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[3].status == "Not Satisfactory"
+                  verificationArray[3].status == "Not Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[3].status == "Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16266,12 +16015,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[4].status == "Satisfactory"
+                  verificationArray[4].status == "Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[4].status == "Not Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -16294,12 +16043,12 @@ isHouse
                 }}
               >
                 {verificationArray &&
-                verificationArray[4].status == "Not Satisfactory"
+                  verificationArray[4].status == "Not Satisfactory"
                   ? "✓"
                   : verificationArray &&
                     verificationArray[4].status == "Satisfactory"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -16413,7 +16162,7 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 == "Ready"
+                  manufacturingStepsArray[0]?.observation1 == "Ready"
                   ? "✓"
                   : "✕"}
               </td>
@@ -16427,19 +16176,19 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 !== "NA"
+                  manufacturingStepsArray[0]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[0]?.performBy
+                  manufacturingStepsArray[0]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 !== "NA"
+                  manufacturingStepsArray[0]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[0]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[0]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
-                {}
+                { }
               </td>
               <td
                 colSpan="3"
@@ -16451,17 +16200,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 !== "NA"
+                  manufacturingStepsArray[0]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[0]?.cleanedBy
+                  manufacturingStepsArray[0]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 !== "NA"
+                  manufacturingStepsArray[0]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[0]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[0]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -16486,12 +16235,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[0]?.observation1 == "Not Ready"
+                  manufacturingStepsArray[0]?.observation1 == "Not Ready"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[0]?.observation1 == "Ready"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -16554,12 +16303,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 == "Ready"
+                  manufacturingStepsArray[1]?.observation1 == "Ready"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[1]?.observation1 == "Not Ready"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -16571,17 +16320,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 !== "NA"
+                  manufacturingStepsArray[1]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[1]?.performBy
+                  manufacturingStepsArray[1]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 !== "NA"
+                  manufacturingStepsArray[1]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[1]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[1]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -16594,17 +16343,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 !== "NA"
+                  manufacturingStepsArray[1]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[1]?.cleanedBy
+                  manufacturingStepsArray[1]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 !== "NA"
+                  manufacturingStepsArray[1]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[1]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[1]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -16629,12 +16378,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[1]?.observation1 == "Not Ready"
+                  manufacturingStepsArray[1]?.observation1 == "Not Ready"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[1]?.observation1 == "Ready"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -16681,12 +16430,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 == "WA1"
+                  manufacturingStepsArray[2]?.observation1 == "WA1"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[2]?.observation1 == "WA2"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -16698,17 +16447,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 !== "NA"
+                  manufacturingStepsArray[2]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[2]?.performBy
+                  manufacturingStepsArray[2]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 !== "NA"
+                  manufacturingStepsArray[2]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[2]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[2]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -16721,17 +16470,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 !== "NA"
+                  manufacturingStepsArray[2]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[2]?.cleanedBy
+                  manufacturingStepsArray[2]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 !== "NA"
+                  manufacturingStepsArray[2]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[2]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[2]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -16756,12 +16505,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[2]?.observation1 == "WA2"
+                  manufacturingStepsArray[2]?.observation1 == "WA2"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[2]?.observation1 == "WA1"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -16807,12 +16556,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 == "Completed"
+                  manufacturingStepsArray[3]?.observation1 == "Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[3]?.observation1 == "Not Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -16824,17 +16573,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 !== "NA"
+                  manufacturingStepsArray[3]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[3]?.performBy
+                  manufacturingStepsArray[3]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 !== "NA"
+                  manufacturingStepsArray[3]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[3]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[3]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -16847,17 +16596,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 !== "NA"
+                  manufacturingStepsArray[3]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[3]?.cleanedBy
+                  manufacturingStepsArray[3]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 !== "NA"
+                  manufacturingStepsArray[3]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[3]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[3]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -16881,12 +16630,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[3]?.observation1 == "Not Completed"
+                  manufacturingStepsArray[3]?.observation1 == "Not Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[3]?.observation1 == "Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -16934,12 +16683,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 == "On"
+                  manufacturingStepsArray[4]?.observation1 == "On"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[4]?.observation1 == "Off"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -16951,17 +16700,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 !== "NA"
+                  manufacturingStepsArray[4]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[4]?.performBy
+                  manufacturingStepsArray[4]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 !== "NA"
+                  manufacturingStepsArray[4]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[4]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[4]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -16974,17 +16723,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 !== "NA"
+                  manufacturingStepsArray[4]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[4]?.cleanedBy
+                  manufacturingStepsArray[4]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 !== "NA"
+                  manufacturingStepsArray[4]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[4]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[4]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -17008,12 +16757,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[4]?.observation1 == "Off"
+                  manufacturingStepsArray[4]?.observation1 == "Off"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[4]?.observation1 == "On"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -17077,12 +16826,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 == "Completed"
+                  manufacturingStepsArray[5]?.observation1 == "Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[5]?.observation1 == "Not Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -17094,17 +16843,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 !== "NA"
+                  manufacturingStepsArray[5]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[5]?.performBy
+                  manufacturingStepsArray[5]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 !== "NA"
+                  manufacturingStepsArray[5]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[5]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[5]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -17117,17 +16866,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 !== "NA"
+                  manufacturingStepsArray[5]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[5]?.cleanedBy
+                  manufacturingStepsArray[5]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 !== "NA"
+                  manufacturingStepsArray[5]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[5]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[5]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -17151,12 +16900,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[5]?.observation1 == "Not Completed"
+                  manufacturingStepsArray[5]?.observation1 == "Not Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[5]?.observation1 == "Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -17203,12 +16952,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 == "Completed"
+                  manufacturingStepsArray[6]?.observation1 == "Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[6]?.observation1 == "Not Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -17220,17 +16969,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 !== "NA"
+                  manufacturingStepsArray[6]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[6]?.performBy
+                  manufacturingStepsArray[6]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 !== "NA"
+                  manufacturingStepsArray[6]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[6]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[6]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -17243,17 +16992,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 !== "NA"
+                  manufacturingStepsArray[6]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[6]?.cleanedBy
+                  manufacturingStepsArray[6]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 !== "NA"
+                  manufacturingStepsArray[6]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[6]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[6]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -17277,12 +17026,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[6]?.observation1 == "Not Completed"
+                  manufacturingStepsArray[6]?.observation1 == "Not Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[6]?.observation1 == "Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -17329,12 +17078,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 == "Completed"
+                  manufacturingStepsArray[7]?.observation1 == "Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[7]?.observation1 == "Not Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -17346,17 +17095,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 !== "NA"
+                  manufacturingStepsArray[7]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[7]?.performBy
+                  manufacturingStepsArray[7]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 !== "NA"
+                  manufacturingStepsArray[7]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[7]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[7]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -17369,17 +17118,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 !== "NA"
+                  manufacturingStepsArray[7]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[7]?.cleanedBy
+                  manufacturingStepsArray[7]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 !== "NA"
+                  manufacturingStepsArray[7]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[7]?.date2
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[7]?.date2
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -17403,12 +17152,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[7]?.observation1 == "Not Completed"
+                  manufacturingStepsArray[7]?.observation1 == "Not Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[7]?.observation1 == "Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -17455,12 +17204,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 == "Completed"
+                  manufacturingStepsArray[8]?.observation1 == "Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[8]?.observation1 == "Not Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colSpan="4"
@@ -17472,17 +17221,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 !== "NA"
+                  manufacturingStepsArray[8]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[8]?.performBy
+                  manufacturingStepsArray[8]?.performBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 !== "NA"
+                  manufacturingStepsArray[8]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[8]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[8]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
               <td
@@ -17495,17 +17244,17 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 !== "NA"
+                  manufacturingStepsArray[8]?.observation1 !== "NA"
                   ? manufacturingStepsArray &&
-                    manufacturingStepsArray[8]?.cleanedBy
+                  manufacturingStepsArray[8]?.cleanedBy
                   : "NA"}
                 <br />
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 !== "NA"
+                  manufacturingStepsArray[8]?.observation1 !== "NA"
                   ? moment(
-                      manufacturingStepsArray &&
-                        manufacturingStepsArray[8]?.date1
-                    ).format("DD/MM/YYYY - HH:mm")
+                    manufacturingStepsArray &&
+                    manufacturingStepsArray[8]?.date1
+                  ).format("DD/MM/YYYY - HH:mm")
                   : ""}
               </td>
             </tr>
@@ -17529,12 +17278,12 @@ isHouse
                 }}
               >
                 {manufacturingStepsArray &&
-                manufacturingStepsArray[8]?.observation1 == "Not Completed"
+                  manufacturingStepsArray[8]?.observation1 == "Not Completed"
                   ? "✓"
                   : manufacturingStepsArray &&
                     manufacturingStepsArray[8]?.observation1 == "Completed"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <br />
@@ -19130,12 +18879,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[0].remark1 == "ATTACHED"
+                  listOfEnclosureStore[0].remark1 == "ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[0].remark1 == "NOT ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19159,12 +18908,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[0].remark1 == "NOT ATTACHED"
+                  listOfEnclosureStore[0].remark1 == "NOT ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[0].remark1 == "ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19210,12 +18959,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[1].remark1 == "ATTACHED"
+                  listOfEnclosureStore[1].remark1 == "ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[1].remark1 == "NOT ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19239,12 +18988,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[1].remark1 == "NOT ATTACHED"
+                  listOfEnclosureStore[1].remark1 == "NOT ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[1].remark1 == "ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19290,12 +19039,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[2].remark1 == "ATTACHED"
+                  listOfEnclosureStore[2].remark1 == "ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[2].remark1 == "NOT ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19319,12 +19068,12 @@ isHouse
                 }}
               >
                 {listOfEnclosureStore &&
-                listOfEnclosureStore[2].remark1 == "NOT ATTACHED"
+                  listOfEnclosureStore[2].remark1 == "NOT ATTACHED"
                   ? "✓"
                   : listOfEnclosureStore &&
                     listOfEnclosureStore[2].remark1 == "ATTACHED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -19576,12 +19325,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[0]?.status1 == "REVIEWED"
+                  qualityReleaseStore[0]?.status1 == "REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[0]?.status1 == "NOT REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colspan="3"
@@ -19620,12 +19369,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[0]?.status1 == "NOT REVIEWED"
+                  qualityReleaseStore[0]?.status1 == "NOT REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[0]?.status1 == "REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -19671,12 +19420,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[1]?.status1 == "REVIEWED"
+                  qualityReleaseStore[1]?.status1 == "REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[1]?.status1 == "NOT REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colspan="3"
@@ -19715,12 +19464,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[1]?.status1 == "NOT REVIEWED"
+                  qualityReleaseStore[1]?.status1 == "NOT REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[1]?.status1 == "REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -19766,12 +19515,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[2]?.status1 == "REVIEWED"
+                  qualityReleaseStore[2]?.status1 == "REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[2]?.status1 == "NOT REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colspan="3"
@@ -19809,12 +19558,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[2]?.status1 == "NOT REVIEWED"
+                  qualityReleaseStore[2]?.status1 == "NOT REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[2]?.status1 == "REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -19859,12 +19608,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[3]?.status1 == "REVIEWED"
+                  qualityReleaseStore[3]?.status1 == "REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[3]?.status1 == "NOT REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colspan="3"
@@ -19903,12 +19652,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[3]?.status1 == "NOT REVIEWED"
+                  qualityReleaseStore[3]?.status1 == "NOT REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[3]?.status1 == "REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
             <tr>
@@ -19953,12 +19702,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[4]?.status1 == "REVIEWED"
+                  qualityReleaseStore[4]?.status1 == "REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[4]?.status1 == "NOT REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
               <td
                 colspan="3"
@@ -19997,12 +19746,12 @@ isHouse
                 }}
               >
                 {qualityReleaseStore &&
-                qualityReleaseStore[4]?.status1 == "NOT REVIEWED"
+                  qualityReleaseStore[4]?.status1 == "NOT REVIEWED"
                   ? "✓"
                   : qualityReleaseStore &&
                     qualityReleaseStore[4]?.status1 == "REVIEWED"
-                  ? "✕"
-                  : "NA"}
+                    ? "✕"
+                    : "NA"}
               </td>
             </tr>
 
@@ -20164,7 +19913,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bmr}
+                    {bmr}
                   </td>
                   <td
                     colSpan="5"
@@ -20174,7 +19923,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    M/c No​
+                    M/c No
                   </td>
                   <td
                     colSpan="5"
@@ -20184,7 +19933,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.mc_no}
+                    {bleachingJobCard && bleachingJobCard[0]?.mc_no}
                   </td>
                 </tr>
                 <tr>
@@ -20207,7 +19956,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​​{bleachingJobCard && bleachingJobCard[0]?.date}
+                    {bleachingJobCard && bleachingJobCard[0]?.date}
                   </td>
                   <td
                     colSpan="5"
@@ -20217,7 +19966,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Batch No​
+                    Batch No
                   </td>
                   <td colSpan="5">{batchNoNew}​</td>
                 </tr>
@@ -20240,7 +19989,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​​{bleachingJobCard && bleachingJobCard[0]?.shift}
+                    {bleachingJobCard && bleachingJobCard[0]?.shift}
                   </td>
                   <td
                     colSpan="5"
@@ -20250,10 +19999,10 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Start Time​
+                    Start Time
                   </td>
                   <td colSpan="5">
-                    ​ ​{bleachingJobCard && bleachingJobCard[0]?.start_time}
+                    {bleachingJobCard && bleachingJobCard[0]?.start_time}
                   </td>
                 </tr>
                 <tr>
@@ -20275,7 +20024,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​​{bleachingJobCard && bleachingJobCard[0]?.finish}
+                    {bleachingJobCard && bleachingJobCard[0]?.finish}
                   </td>
                   <td
                     colSpan="5"
@@ -20285,7 +20034,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    End Time​
+                    End Time
                   </td>
                   <td
                     colSpan="5"
@@ -20295,7 +20044,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​​{bleachingJobCard && bleachingJobCard[0]?.end_time}
+                    {bleachingJobCard && bleachingJobCard[0]?.end_time}
                   </td>
                 </tr>
                 <tr>
@@ -20367,7 +20116,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Observations​
+                    Observations
                   </td>
                 </tr>
                 <tr>
@@ -20422,7 +20171,7 @@ isHouse
                     24 +/-5
                   </td>
                   <td colSpan="3">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.wetting}
+                    {bleachingJobCard && bleachingJobCard[0]?.wetting}
                   </td>
                   <td
                     colSpan="2"
@@ -20432,9 +20181,9 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Actual temperature during circulation :​
+                    Actual temperature during circulation :
                     {bleachingJobCard && bleachingJobCard[0]?.wetting_act_temp}
-                    ℃​
+                    ℃
                   </td>
                 </tr>
 
@@ -20506,7 +20255,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.scouring}
+                    {bleachingJobCard && bleachingJobCard[0]?.scouring}
                   </td>
 
                   <td
@@ -20517,9 +20266,9 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Actual temperature during circulation :​
+                    Actual temperature during circulation :
                     {bleachingJobCard && bleachingJobCard[0]?.scouring_act_temp}
-                    ℃​
+                    ℃
                   </td>
                 </tr>
 
@@ -20574,13 +20323,13 @@ isHouse
                     24 +/-5
                   </td>
                   <td colSpan="3" contentEditable="False">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.hotwash_one}
+                    {bleachingJobCard && bleachingJobCard[0]?.hotwash_one}
                   </td>
                   <td colSpan="2" contentEditable="False">
-                    Actual temperature during circulation :​
+                    Actual temperature during circulation :
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.hotwash_one_act_temp}
-                    ℃​
+                    ℃
                   </td>
                 </tr>
 
@@ -20636,13 +20385,13 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.hotwash_two}
+                    {bleachingJobCard && bleachingJobCard[0]?.hotwash_two}
                   </td>
                   <td colSpan="2" contentEditable="False">
-                    Actual temperature during circulation :​
+                    Actual temperature during circulation :
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.hotwash_two_act_temp}
-                    ℃​
+                    ℃
                   </td>
                 </tr>
 
@@ -20712,7 +20461,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.newtralizing}
+                    {bleachingJobCard && bleachingJobCard[0]?.newtralizing}
                   </td>
                   <td
                     colSpan="2"
@@ -20722,10 +20471,10 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Actual temperature during circulation :​
+                    Actual temperature during circulation :
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.newtralizing_act_temp}
-                    ℃​
+                    ℃
                   </td>
                 </tr>
 
@@ -20789,7 +20538,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.final_process}
+                    {bleachingJobCard && bleachingJobCard[0]?.final_process}
                   </td>
                   <td
                     colSpan="2"
@@ -20799,14 +20548,14 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    pH Actual:​
+                    pH Actual:
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.final_process_ph_temp}
                     <br />
-                    Surface Activity Actual:​
+                    Surface Activity Actual:
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.final_process_act_temp}{" "}
-                    ​
+
                   </td>
                 </tr>
 
@@ -20837,7 +20586,7 @@ isHouse
                     28-42
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​
+
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.caustic_soda_flakes}
                   </td>
@@ -20851,7 +20600,7 @@ isHouse
                     10-12
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.haipolene}
+                    {bleachingJobCard && bleachingJobCard[0]?.haipolene}
                   </td>
                   <td colSpan="5" align="center">
                     kgs
@@ -20863,7 +20612,7 @@ isHouse
                     7.0-16.0
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.sarofom}
+                    {bleachingJobCard && bleachingJobCard[0]?.sarofom}
                   </td>
                   <td colSpan="5" align="center">
                     kgs
@@ -20875,7 +20624,7 @@ isHouse
                     50-70
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​
+
                     {bleachingJobCard && bleachingJobCard[0]?.hydrogen_peroxide}
                   </td>
                   <td colSpan="5" align="center">
@@ -20888,7 +20637,7 @@ isHouse
                     1.5-3.5
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.setilon_kn}
+                    {bleachingJobCard && bleachingJobCard[0]?.setilon_kn}
                   </td>
                   <td colSpan="5" align="center">
                     kgs
@@ -20900,7 +20649,7 @@ isHouse
                     6.5-9.5
                   </td>
                   <td colSpan="5" align="center" contentEditable="False">
-                    ​{bleachingJobCard && bleachingJobCard[0]?.citric_acid}
+                    {bleachingJobCard && bleachingJobCard[0]?.citric_acid}
                   </td>
                   <td colSpan="5" align="center">
                     kgs
@@ -20910,7 +20659,7 @@ isHouse
                 <tr>
                   <td colSpan="20">
                     Note: Setilon KN or Persoftal 9490 chemicals should be added
-                    only for Crispy finish.​
+                    only for Crispy finish.
                   </td>
                 </tr>
 
@@ -20927,7 +20676,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Production Supervisor​
+                    Production Supervisor
                   </td>
                   <td
                     colSpan="7"
@@ -20937,7 +20686,7 @@ isHouse
                       fontFamily: "Times New Roman, Times, serif",
                     }}
                   >
-                    Hod /Designee​
+                    Hod /Designee
                   </td>
                   <td
                     colSpan="6"
@@ -20960,10 +20709,10 @@ isHouse
                       verticalAlign: "bottom",
                     }}
                   >
-                    ​
+
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.supervisor_submit_by}
-                    <br />​
+                    <br />
                     {bleachingJobCard &&
                       bleachingJobCard[0]?.supervisor_submit_on}
                   </td>
@@ -20976,8 +20725,8 @@ isHouse
                       verticalAlign: "bottom",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.hod_submit_by}
-                    <br />​
+                    {bleachingJobCard && bleachingJobCard[0]?.hod_submit_by}
+                    <br />
                     {bleachingJobCard && bleachingJobCard[0]?.hod_submit_on}
                   </td>
 
@@ -20989,8 +20738,8 @@ isHouse
                       verticalAlign: "bottom",
                     }}
                   >
-                    ​{bleachingJobCard && bleachingJobCard[0]?.qa_submit_by}
-                    <br />​
+                    {bleachingJobCard && bleachingJobCard[0]?.qa_submit_by}
+                    <br />
                     {bleachingJobCard && bleachingJobCard[0]?.qa_submit_on}
                   </td>
                 </tr>
@@ -21216,145 +20965,145 @@ isHouse
             items={
               localStorage.getItem("role") == "ROLE_QA"
                 ? [
-                    {
-                      key: "1",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Form Browser
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/choosenScreen"),
-                    },
-                    {
-                      key: "2",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Generation
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Generate"),
-                    },
-                    {
-                      key: "3",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Mapping
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                    },
-                    {
-                      key: "4",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Closing
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Closing"),
-                    },
-                    {
-                      key: "5",
-                      icon: (
-                        <FaLock
-                          color="#151718"
-                          onClick={() => navigate("/Precot")}
-                        />
-                      ),
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Logout
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot"),
-                    },
-                  ]
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Generation
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Generate"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "4",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "5",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
                 : [
-                    {
-                      key: "1",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Form Browser
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/choosenScreen"),
-                    },
-                    {
-                      key: "2",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Mapping
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                    },
-                    {
-                      key: "3",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Closing
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Closing"),
-                    },
-                    {
-                      key: "4",
-                      icon: (
-                        <FaLock
-                          color="#151718"
-                          onClick={() => navigate("/Precot")}
-                        />
-                      ),
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Logout
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot"),
-                    },
-                  ]
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "4",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
             }
           />
         </Drawer>

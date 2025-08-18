@@ -212,14 +212,6 @@ const QA_F020_Summary = () => {
     setIsModalPrint(true);
   };
 
-  const handleBlur = () => {
-    const pattern = /^\d{2}-\d{2}\/NCR \d{3,}$/;
-    if (!pattern.test(selectedNc)) {
-      message.warning("Invalid format. Expected format is XX-XX/NCR XXX.");
-      setSelectedNc();
-    }
-  };
-
   const handleSelectChange = (name, e) => {
     handleKeyDown(e);
 
@@ -229,7 +221,8 @@ const QA_F020_Summary = () => {
   };
 
   const handleGo = () => {
-    if (selectedNc === undefined) {
+    console.log("selectedNc", selectedNc);
+    if (!selectedNc) {
       message.warning("Please select Nc before proceeding");
       return;
     } else {
@@ -553,11 +546,14 @@ const QA_F020_Summary = () => {
       const token = localStorage.getItem("token"); // Get the token from localStorage
 
       axios
-        .get(`${API.prodUrl}/Precot/api/QA/Service/NonConformityReport/NcrLov`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // Attach the token in the Authorization header
-          },
-        })
+        .get(
+          `${API.prodUrl}/Precot/api/QA/Service/NonConformityReport/NcrLov`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Attach the token in the Authorization header
+            },
+          }
+        )
         .then((response) => {
           setNcrList(response.data);
         })
@@ -681,17 +677,17 @@ const QA_F020_Summary = () => {
             margin: 5,
           }}
           options={ncrList}
-          onChange={(value) => setSelectedNc(value)}
+          onChange={(value) => {
+            console.log("value", value);
+            setSelectedNc(value);
+          }}
           value={selectedNc}
-          onInputKeyDown={(e) => handleSelectChange("ncr", e)}
-          onKeyDown={(e) => handleSelectChange("ncr", e)}
-          onBlur={handleBlur}
           showSearch
         />
         <Button style={{ margin: "5px" }} onClick={handleGo}>
           GO
         </Button>
-        {(role ===  "ROLE_QA" || role === "ROLE_CHEMIST") && (
+        {(role === "ROLE_QA" || role === "ROLE_CHEMIST") && (
           <Button style={{ margin: "5px" }} onClick={handleCreateModalOpen}>
             Create
           </Button>

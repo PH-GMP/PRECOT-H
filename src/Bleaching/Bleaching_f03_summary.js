@@ -125,7 +125,7 @@ const Bleaching_f03_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -152,57 +152,7 @@ const Bleaching_f03_summary = () => {
   }, [printData, API.prodUrl, token]);
 
   const [printButtonLoading, setPrintButtonLoading] = useState(false);
-  // const handlePrintSummary = () => {
-  //   setPrintButtonLoading(true);
-  //   // console.log(selectMonth, selectYear, selectSection)
-  //   if (selectMonth == "" || selectMonth == null) {
-  //     message.warning("Please Select Month!");
-  //     setPrintButtonLoading(false);
-  //     return;
-  //   } else if (selectYear == "" || selectYear == null) {
-  //     message.warning("Please Select Year!");
-  //     setPrintButtonLoading(false);
-  //     return;
-  //   } else if (selectSection == "" || selectSection == null) {
-  //     message.warning("Please Select Section!");
-  //     setPrintButtonLoading(false);
-  //     return;
-  //   }
 
-  //   // console.log('month', selectMonth);
-  //   // console.log('year', selectYear);
-  //   // console.log('section', selectSection);
-  //   const monthDates = generateDatesForMonth(selectMonth, selectYear);
-  //   setSelectMonthDates(monthDates);
-  //   // console.log('selectedMonthDates', selectMonthDates);
-  //   const token = localStorage.getItem("token");
-
-  //   // Configure the request
-  //   const config = {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   };
-
-  //   const apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getByMonthMetalDetectorList?month=${selectMonth}&year=${selectYear}&section=${selectSection}`;
-
-  //   axios
-  //     .get(apiUrl, config)
-  //     .then((response) => {
-  //       // console.log('API response', response.data);
-  //       if (response.data.length > 0) {
-  //         setPrintData(response.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error calling API:", error);
-  //     });
-
-  //   setTimeout(() => {
-  //     window.print();
-  //     setPrintButtonLoading(false);
-  //   }, 1000);
-  // };
 
   const handlePrintSummary = () => {
     setPrintButtonLoading(true);
@@ -233,7 +183,7 @@ const Bleaching_f03_summary = () => {
       },
     };
 
-    const apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getByMonthMetalDetectorList?month=${selectMonth}&year=${selectYear}&section=${selectSection}`;
+    const apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getByMonthMetalDetectorList?month=${selectMonth}&year=${selectYear}&section=${selectSection}`;
 
     axios
       .get(apiUrl, config)
@@ -306,9 +256,10 @@ const Bleaching_f03_summary = () => {
         day = "0" + day;
       }
       const date = `${day}/${month}/${year}`;
-      // console.log('date', date);
+      console.log('date  generateDatesForMonth =', date);
       dates.push(date);
     }
+    console.log('dates  generateDatesForMonth =', dates);
 
     return dates;
   };
@@ -426,22 +377,12 @@ const Bleaching_f03_summary = () => {
   }
 
   const handleDateChange = (e) => {
-    // const actualDate = new Date(date);
-    // // console.log("actualDate", actualDate);
-    // const localDate = new Date(actualDate.getTime() - actualDate.getTimezoneOffset() * 60000);
-    // const formattedDate = localDate.toISOString().split('T')[0];
-    // date in this format yyyy-mm-dd
-    // // console.log('formattedDate', formattedDate);
-    // setFormattedDate(formattedDate);
 
-    // // console.log("selectedDate", date);
     const date = e.target.value;
     const formattedDate = formatedDate(date);
     const month = getMonthFromDate(formattedDate);
     const year = getYearFromDate(formattedDate);
-    // console.log('current Month Dates', month);
-    // const currentMonthDates = generateDatesForMonth(month, year);
-    // initialValues.date = e.target.value;
+
     setInitialValues((prevValues) => ({
       ...prevValues,
       date: formattedDate,
@@ -488,59 +429,7 @@ const Bleaching_f03_summary = () => {
       navigate("/Precot/Bleaching/F-03", { state: { initialValues } });
     }
   };
-  // const fetchPrintData = (date) => {
-  //   // console.log('dateinFetch', date);
-  //   const transformValue = (value) => {
-  //     switch (value) {
-  //       case "yes":
-  //         return "✓";
-  //       case "no":
-  //         return "X";
-  //       case "NA":
-  //         return "-";
-  //       default:
-  //         return value;
-  //     }
-  //   };
-  //   // // console.log('machineDatadate', date);
-  //   // // console.log('print data machine', printData);
 
-  //   const record = printData.find(record => record.date == date);
-  //   // console.log('fetchedRecord', record);
-  //   let result = {
-  //     metalContaminatedMaterials: '',
-  //     noOfMetalContaminants: '',
-  //     functionCheck: '',
-  //     checkedBy: '',
-  //     cleanedBy: '',
-  //     hod_submit_by: ''
-  //   };
-
-  //   if (record) {
-
-  //     result = {
-  //       metalContaminatedMaterials: transformValue(record.metalContaminatedMaterials),
-  //       noOfMetalContaminants: transformValue(record.noOfMetalContaminants),
-  //       functionCheck: transformValue(record.functionCheck),
-  //       checkedBy: transformValue(record.supervisor_submit_by),
-  //       cleanedBy: record.cleanedBy,
-  //       hod_submit_by: transformValue(record.hod_submit_by)
-  //     }
-  //   } else {
-  //     result = {
-  //       metalContaminatedMaterials: 'NA',
-  //       noOfMetalContaminants: '-',
-  //       functionCheck: 'NA',
-  //       checkedBy: '',
-  //       cleanedBy: '',
-  //       hod_submit_by: ''
-  //     }
-  //   }
-
-  //   // // console.log('result', result);
-  //   // setRecentPrintData(true);
-  //   return result;
-  // };
 
   const fetchPrintData = (date) => {
     const transformValue = (value) => {
@@ -643,9 +532,9 @@ const Bleaching_f03_summary = () => {
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-    let url = `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getAllSupervisorNotSubmitted`;
+    let url = `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getAllSupervisorNotSubmitted`;
     if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-      url = `${ API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getAllHodNotSubmitted`;
+      url = `${API.prodUrl}/Precot/api/bleaching/Service/MetalDetectorList/getAllHodNotSubmitted`;
     }
     const fetchData = () => {
       const token = localStorage.getItem("token");
@@ -799,22 +688,7 @@ const Bleaching_f03_summary = () => {
                         <p>Daily</p>
                       </td>
 
-                      {/* {selectMonthDates.map((row, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "70px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                           
-                            {fetchPrintData(row).metalContaminatedMaterials}
-                          </p>
-                        </td>
-                      ))} */}
+
 
                       {processedData.map((value, rowIndex) => (
                         <td className="data-border">
@@ -827,7 +701,24 @@ const Bleaching_f03_summary = () => {
                               justifyContent: "center",
                             }}
                           >
-                            {value}
+                            {/* {value} */}
+                            {
+                              value == "NA" ? (
+                                <div style={{
+                                  writingMode: "vertical-rl",
+                                  transform: "rotate(180deg)",
+                                  textAlign: "center",
+                                  height: "50px", // adjust height as needed
+                                  display: "flex",
+                                  alignItems: "flex-end", // align text at the bottom
+                                  justifyContent: "center"
+                                }}>
+                                  NA
+                                </div>
+                              ) : (
+                                "✓"
+                              )
+                            }
                           </p>
                         </td>
                       ))}
@@ -859,8 +750,23 @@ const Bleaching_f03_summary = () => {
                               justifyContent: "center",
                             }}
                           >
-                            {/* {printData[0].metalContaminatedMaterials} */}
-                            {fetchPrintData(row).noOfMetalContaminants}
+                            {
+                              fetchPrintData(row).noOfMetalContaminants === "-" ? (
+                                <div style={{
+                                  writingMode: "vertical-rl",
+                                  transform: "rotate(180deg)",
+                                  textAlign: "center",
+                                  height: "50px", // adjust height as needed
+                                  display: "flex",
+                                  alignItems: "flex-end", // align text at the bottom
+                                  justifyContent: "center"
+                                }}>
+                                  NA
+                                </div>
+                              ) : (
+                                fetchPrintData(row).noOfMetalContaminants
+                              )
+                            }
                           </p>
                         </td>
                       ))}
@@ -882,7 +788,7 @@ const Bleaching_f03_summary = () => {
                             }}
                           >
                             {/* {printData[0].metalContaminatedMaterials} */}
-                            {fetchPrintData(row).cleanedBy}
+                            {fetchPrintData(row).cleanedBy || "NA"}
                           </p>
                         </td>
                       ))}
@@ -962,8 +868,7 @@ const Bleaching_f03_summary = () => {
                               transform: "rotate(270deg)",
                             }}
                           >
-                            {/* {printData[0].metalContaminatedMaterials} */}
-                            {fetchPrintData(row).checkedBy}
+                            {fetchPrintData(row).checkedBy || "NA"}
                           </p>
                         </td>
                       ))}
@@ -1002,34 +907,34 @@ const Bleaching_f03_summary = () => {
                        Sign&date */}
                           {(printData[0].hod_status === "HOD_REJECTED" ||
                             printData[0].hod_status === "HOD_APPROVED") && (
-                            <>
-                              {/* <div
+                              <>
+                                {/* <div
                         style={{
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                         }}
                       >*/}
-                              <div>
-                                {" "}
-                                {printData.length > 0
-                                  ? printData[0].hod_submit_by
-                                  : ""}
-                                <br></br>
-                                {formattedHodSubmitOn}
-                                <br></br>
-                              </div>
-                              {getImage !== "" && (
-                                <img
-                                  className="signature"
-                                  src={getImage}
-                                  alt="HOD"
-                                />
-                              )}
-                              {/* </div> */}
-                              {/* <span style={{fontSize:'11px',marginLeft:"0px"}}>Signature & Date</span> */}
-                            </>
-                          )}
+                                <div>
+                                  {" "}
+                                  {printData.length > 0
+                                    ? printData[0].hod_submit_by
+                                    : ""}
+                                  <br></br>
+                                  {formattedHodSubmitOn}
+                                  <br></br>
+                                </div>
+                                {getImage !== "" && (
+                                  <img
+                                    className="signature"
+                                    src={getImage}
+                                    alt="HOD"
+                                  />
+                                )}
+                                {/* </div> */}
+                                {/* <span style={{fontSize:'11px',marginLeft:"0px"}}>Signature & Date</span> */}
+                              </>
+                            )}
                         </p>
                       </td>
                     </tr>
@@ -1090,159 +995,159 @@ const Bleaching_f03_summary = () => {
             items={
               localStorage.getItem("role") == "ROLE_QA"
                 ? [
-                    {
-                      key: "1",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Form Browser
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/choosenScreen"),
-                    },
-                    {
-                      key: "2",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Generation
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Generate"),
-                    },
-                    {
-                      key: "3",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Mapping
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                    },
-                    {
-                      key: "4",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Closing
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Closing"),
-                    },
-                    {
-                      key: "5",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Raw Material Isuue
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/RawMaterialIssue"),
-                    },
-                    {
-                      key: "6",
-                      icon: (
-                        <FaLock
-                          color="#151718"
-                          onClick={() => navigate("/Precot")}
-                        />
-                      ),
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Logout
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot"),
-                    },
-                  ]
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Generation
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Generate"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "4",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "5",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Raw Material Isuue
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/RawMaterialIssue"),
+                  },
+                  {
+                    key: "6",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
                 : [
-                    {
-                      key: "1",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Form Browser
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/choosenScreen"),
-                    },
-                    {
-                      key: "2",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Mapping
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                    },
-                    {
-                      key: "3",
-                      icon: <IoCreate color="#151718" />,
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Closing
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot/Closing"),
-                    },
-                    {
-                      key: "4",
-                      icon: (
-                        <FaLock
-                          color="#151718"
-                          onClick={() => navigate("/Precot")}
-                        />
-                      ),
-                      label: (
-                        <b
-                          style={{
-                            color: "#151718",
-                          }}
-                        >
-                          Logout
-                        </b>
-                      ),
-                      onClick: () => navigate("/Precot"),
-                    },
-                  ]
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "4",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => navigate("/Precot")}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
             }
           />
         </Drawer>
@@ -1471,7 +1376,7 @@ const Bleaching_f03_summary = () => {
           shape="round"
           icon={<BiNavigation />}
           onClick={handleClick}
-          // disabled={gotobtn}
+        // disabled={gotobtn}
         >
           Go To
         </Button>

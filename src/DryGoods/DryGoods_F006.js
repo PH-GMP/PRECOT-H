@@ -9,12 +9,12 @@ import {
   Radio,
   Select,
   Tabs,
-  Tooltip
+  Tooltip,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from "axios";
 import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiLock } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
@@ -43,36 +43,27 @@ const DryGoods_f06 = () => {
   // console.log("date from smmary",date)
   const [selectedRow, setSelectedRow] = useState(null);
   const [planingDetailsByDate, setPlaningDetailsByDate] = useState("");
-  const [splInstruction, setSplInstruction] = useState("");
   const [planId, setplanId] = useState("");
-  const [orderNumber, setOrderNumber] = useState("");
   const [orderNumberLov, setOrderNumberLov] = useState([]);
-  const [orderDetails, setOrderDetails] = useState("");
   const [stoppagedata, setstoppagedata] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [selectedOrderNumbers, setSelectedOrderNumbers] = useState({});
   const [emptyarraycheck, setemptyarraycheck] = useState("");
   const [rejectRemarks, setRejectRemarks] = useState("");
   const [getImage1, setGetImage1] = useState("");
   const [getImage2, setGetImage2] = useState("");
   const [getImage3, setGetImage3] = useState("");
-  const [Product, setProduct] = useState("");
+
   const [waste_kg, setwaste_kg] = useState("");
   const [customer_Name, setcustomer_Name] = useState("");
-  const [Ball_Bag, setBall_Bag] = useState("");
-  const [Sale_Order_No, setSale_Order_No] = useState("");
+
   const [Brand, setBrand] = useState("");
   const [Grams, setGrams] = useState("");
   const [Width, setWidth] = useState("");
   const [Height, setHeight] = useState("");
   const [Bag_Box, setBag_Box] = useState("");
   const [count_Bags, setcount_Bags] = useState("");
-  const [Ball_weight, setBall_weight] = useState("");
-  const [Sliver_Weight, setSliver_Weight] = useState("");
-  const [Cutting_Roller, setCutting_Roller] = useState("");
-  const [Feed_Roller_percentage, setFeed_Roller_percentage] = useState("");
-  const [Cutting_Length_in_mm, setGrams_in_mm] = useState("");
+
   const [Bags1, setBags1] = useState("");
   const [id, setId] = useState("");
   const [fleecedetails, setfleecedetails] = useState("");
@@ -94,13 +85,10 @@ const DryGoods_f06 = () => {
   const [Box8, setBox8] = useState("");
   const [Perforate_Type, setPerforate_Type] = useState("");
   const [BoxTotal, setBoxTotal] = useState("");
-  const [drygoodsdetails, setdrygoodsdetails] = useState("");
-  const [stoppage, setstoppage] = useState("");
-  const [Orderdetails, setOrderdetails] = useState("");
-  const [silver_weight_kg, setsilver_weight_kg] = useState("");
-  const [Ball_weight_kg, setBall_weight_kg] = useState("");
+
   const [Not_Perforate_Type, setNot_Perforate_Type] = useState("");
-  const [customerNameFields, setCustomerNameFields] = useState("");
+
+  const [selectedProductName, setSelectedProductName] = useState("");
   const { date, shift, order_no, machineName } = state || {};
 
   const datefomrat = moment(date).format("DD/MM/YYYY");
@@ -113,12 +101,35 @@ const DryGoods_f06 = () => {
       order_no,
       machineName
     );
-
+    fetchBagByBox(order_no, date, shift);
     fetchData_drygoodsdetailsDetails(order_no);
     fetchData_StoppageDetails(order_no);
     // fetchCustomerName(order_no);
     fetchDetailsByFleecetDetails(order_no);
   }, []);
+
+  const fetchBagByBox = async (order_no, date, shift) => {
+    let shiftValue =
+      shift == "I" ? 1 : shift == "II" ? 2 : shift == "III" ? 3 : "";
+
+    try {
+      const token = localStorage.getItem("token");
+      let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getHeaderDetailsbyOrderNoF006Bag?orderNo=${order_no}&date=${date}&shift=${shiftValue}`;
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log("datavaluesgetHeaderDetailsbyOrderNoF006Bag", data);
+      setBag_Box(data[0].Bag);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+    }
+  };
 
   const calculateTotal = () => {
     const isValidNumber = (value) => {
@@ -156,19 +167,15 @@ const DryGoods_f06 = () => {
     );
   };
 
+  // Function to handle changes in any of the bag inputs
   const handleBagChange = (value, setBagState) => {
     setBagState(value); // Update the state of the specific bag input
   };
+  // Function to handle changes in any of the bag inputs
   const handleBoxChange = (value, setBagState) => {
     setBagState(value); // Update the state of the specific bag input
   };
 
-  const machineNameLov = [
-    { value: "TC10-1", label: "TC10-1 " },
-    { value: "TC10-2", label: "TC10-2" },
-  ];
-  const [rows, setRows] = useState([{}]);
-  const { Option } = Select;
   const handleChange = (event) => {
     setPerforate_Type(event.target.value);
   };
@@ -190,17 +197,9 @@ const DryGoods_f06 = () => {
     }
   };
   const roleBase = localStorage.getItem("role");
-  const handleOrderNumberChange = (value, index) => {
-    const updatedRows = [...rows];
-    updatedRows[index].orderNumber = value;
-    setRows(updatedRows);
 
-    setSelectedOrderNumbers((prevSelectedOrderNumbers) => ({
-      ...prevSelectedOrderNumbers,
-      [index]: value,
-    }));
-  };
   const handleKeyDown = (e) => {
+    // Allow numbers, underscore, dot, backspace, delete, arrow keys, and tab
     if (
       !/[0-9._]/.test(e.key) && // Check if the key is not a digit, underscore, or dot
       e.key !== "Backspace" &&
@@ -218,6 +217,8 @@ const DryGoods_f06 = () => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.supervisor_sign;
     if (username) {
+      // console.log("usernameparams", username);
+
       axios
         .get(
           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
@@ -250,6 +251,8 @@ const DryGoods_f06 = () => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.operator_sign;
     if (username) {
+      // console.log("usernameparams", username);
+
       axios
         .get(
           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
@@ -262,6 +265,7 @@ const DryGoods_f06 = () => {
           }
         )
         .then((res) => {
+          // console.log("Response:", res.data);
           const base64 = btoa(
             new Uint8Array(res.data).reduce(
               (data, byte) => data + String.fromCharCode(byte),
@@ -271,13 +275,17 @@ const DryGoods_f06 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage3(url);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          // console.log("Error in fetching image:", err);
+        });
     }
   }, [planingDetailsByDate, API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
     if (username) {
+      // console.log("usernameparams", username);
+
       axios
         .get(
           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
@@ -290,6 +298,7 @@ const DryGoods_f06 = () => {
           }
         )
         .then((res) => {
+          // console.log("Response:", res.data);
           const base64 = btoa(
             new Uint8Array(res.data).reduce(
               (data, byte) => data + String.fromCharCode(byte),
@@ -299,13 +308,13 @@ const DryGoods_f06 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          // console.log("Error in fetching image:", err);
+        });
     }
   }, [planingDetailsByDate, API.prodUrl, token]);
 
   const [showModal, setShowModal] = useState(false);
-
-  const roleauth = localStorage.getItem("role");
 
   useEffect(() => {
     const fetchOrderNumberOptions = async () => {
@@ -355,7 +364,9 @@ const DryGoods_f06 = () => {
       const data = await response.json();
       console.log("datavalues", data);
 
+      // console.log("Summary Get List",data)
       if (data && data.length >= 0) {
+        // setOrderdetails(data);
         setbatchno(data);
       } else {
         message.error(data.message);
@@ -369,13 +380,11 @@ const DryGoods_f06 = () => {
     } finally {
     }
   };
+
   const fetchData_drygoodsdetailsDetails = async (value) => {
     try {
       const token = localStorage.getItem("token");
-      const role = localStorage.getItem("role");
-      const numberShift = convertShiftValue(shift);
       let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getHeaderDetailsbyOrderNoF006?order_no=${value}`;
-
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -386,11 +395,10 @@ const DryGoods_f06 = () => {
       const data = await response.json();
       console.log("datavalues", data);
 
+      // console.log("Summary Get List",data)
       if (data && data.length >= 0) {
-        setdrygoodsdetails(data);
-
-        setBag_Box(data[0]?.bagByBox);
-
+        // setdrygoodsdetails(data);
+        setSelectedProductName(data[0].Product);
         console.log("setstoppage", data);
       } else {
         message.error(data.message);
@@ -413,6 +421,7 @@ const DryGoods_f06 = () => {
     }
     return "";
   };
+
   const formattedDate_operator = () => {
     if (planingDetailsByDate?.operator_submitted_on) {
       const date = moment(planingDetailsByDate?.operator_submitted_on);
@@ -422,6 +431,7 @@ const DryGoods_f06 = () => {
     }
     return "";
   };
+
   const formattedDatesupervisor = () => {
     if (planingDetailsByDate?.supervisor_submit_on) {
       const date = moment(planingDetailsByDate?.supervisor_submit_on);
@@ -461,6 +471,7 @@ const DryGoods_f06 = () => {
   const onClose = () => {
     setOpen(false);
   };
+
   // Display Button Based on Role Status
   const canDisplayButtons = () => {
     if (roleBase === "ROLE_OPERATOR") {
@@ -510,6 +521,7 @@ const DryGoods_f06 = () => {
       return "block";
     }
   };
+
   const canDisplayButton2 = () => {
     if (roleBase == "ROLE_OPERATOR") {
       if (selectedRow?.operator_status == "OPERATOR_APPROVED") {
@@ -555,6 +567,7 @@ const DryGoods_f06 = () => {
       return "block";
     }
   };
+
   const canEdit = () => {
     if (roleBase === "ROLE_OPERATOR") {
       return !(
@@ -583,12 +596,8 @@ const DryGoods_f06 = () => {
       return false;
     }
   };
+
   const isEditable = canEdit();
-  const canDisplayAddDelete = () => {
-    if (roleauth == "ROLE_HOD" || roleauth == "ROLE_DESIGNEE") {
-      return "none";
-    }
-  };
 
   const handleRejectModal = () => {
     setShowModal(true);
@@ -656,10 +665,6 @@ const DryGoods_f06 = () => {
         setSaveLoading(false);
       });
   };
-  const containerStyle = {
-    position: "relative",
-    // marginLeft:'60px',
-  };
 
   const handleSave = async () => {
     try {
@@ -706,7 +711,8 @@ const DryGoods_f06 = () => {
         date: date,
         pleate_id: id,
         shift: shift,
-        product_name: machineName,
+        product_name: selectedProductName,
+        machine_name: machineName,
         order_no: batchNolist || order_no,
         coustomer_name: customer_Name,
         perforate_type: Perforate_Type || "NA",
@@ -809,7 +815,8 @@ const DryGoods_f06 = () => {
         date: date,
         pleate_id: id,
         shift: shift,
-        product_name: machineName,
+        product_name: selectedProductName,
+        machine_name: machineName,
         order_no: batchNolist || order_no,
         coustomer_name: customer_Name,
         perforate_type: Perforate_Type,
@@ -884,9 +891,6 @@ const DryGoods_f06 = () => {
 
   const fetchDetailsByDate = async () => {
     try {
-      // const dateapi =moment(date).format('DD/MM/YYYY');
-      // console.log("stored Date inside Api", date);
-
       const response = await axios.get(
         `${API.prodUrl}/Precot/api/drygoods/getdetailsbyParamF006?date=${date}&shift=${shift}&machine_name=${machineName}&order_no=${order_no} `,
         {
@@ -942,7 +946,7 @@ const DryGoods_f06 = () => {
         setcustomer_Name(response.data?.coustomer_name);
         setBrand(response.data?.brand);
         setBag_Box(response.data?.bag_or_box);
-
+        setSelectedProductName(response.data?.product_name);
         console.log("Supervisor Status data", response.data);
         console.log("Supervisor Status", response.data?.supervisor_status);
 
@@ -977,9 +981,11 @@ const DryGoods_f06 = () => {
         }
       }
 
+      // console.log("seted planing response",planingDetailsByDate);
+
       if (response.data) {
         const data = response.data;
-
+        // console.log("set response date for all fields", data)
         setplanId(data.planId);
       } else {
       }
@@ -989,6 +995,7 @@ const DryGoods_f06 = () => {
     } finally {
     }
   };
+
   const fetchData_StoppageDetails = async (value) => {
     if (value) {
       try {
@@ -1008,10 +1015,15 @@ const DryGoods_f06 = () => {
         const data = await response.json();
         console.log("datavalues", data);
 
+        // console.log("Summary Get List",data)
         if (data && data.length >= 0) {
           setstoppagedata(data);
           console.log("setstoppage", data);
         } else {
+          // message.error(data.message)
+          // setTimeout(() => {
+          //   navigate("/Precot/choosenScreen");
+          // }, 1500)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -1020,6 +1032,7 @@ const DryGoods_f06 = () => {
       }
     }
   };
+
   const fetchData_StoppageDetails_edit = async (value) => {
     if (value) {
       try {
@@ -1073,12 +1086,18 @@ order_no=${e}`,
           },
         }
       );
+      console.log("responsedata", response);
+      // console.log("response (details based on date)", response.data);
+
+      // console.log("seted planing response",planingDetailsByDate);
 
       if (response.data) {
         const data = response.data;
-
+        console.log("FleecetDetails", response.data);
+        // console.log("set response date for all fields", data)
         setplanId(data.planId);
         setfleecedetails(response.data);
+        // setWidth(response.data[2]?.width_in_mm);
       } else {
       }
     } catch (error) {
@@ -1087,6 +1106,7 @@ order_no=${e}`,
     } finally {
     }
   };
+
   const fetchDetailsByFleecetDetails_edit = async (value) => {
     if (value) {
       try {
@@ -1101,6 +1121,10 @@ order_no=${e}`,
             },
           }
         );
+        console.log("responsedata", response);
+        // console.log("response (details based on date)", response.data);
+
+        // console.log("seted planing response",planingDetailsByDate);
 
         if (response.data) {
           const data = response.data;
@@ -1149,6 +1173,7 @@ order_no=${e}`,
                   }}
                   value={Grams}
                   onChange={(e) => setGrams(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                   disabled={!isEditable}
                 />
@@ -1166,9 +1191,27 @@ order_no=${e}`,
                   value={Width}
                   min="0"
                   onChange={(e) => setWidth(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
+              {/* <td colSpan={30}>
+                <input
+                  type="number"
+                  className="inp-new"
+                  style={{
+                    width: "98%",
+                    border: "none",
+                    height: "35px",
+                    paddingLeft: "2px",
+                  }}
+                  value={Height}
+                  min="0"
+                  onChange={(e) => setHeight(e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(e)}
+                  disabled={!isEditable}
+                />
+              </td> */}
             </tr>
           </table>
         </div>
@@ -1261,6 +1304,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box1}
                   onChange={(e) => handleBoxChange(e.target.value, setBox1)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1272,6 +1316,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box2}
                   onChange={(e) => handleBoxChange(e.target.value, setBox2)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1283,6 +1328,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box3}
                   onChange={(e) => handleBoxChange(e.target.value, setBox3)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1294,6 +1340,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box4}
                   onChange={(e) => handleBoxChange(e.target.value, setBox4)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1305,6 +1352,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box5}
                   min="0"
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   onChange={(e) => handleBoxChange(e.target.value, setBox5)}
                 />
@@ -1316,6 +1364,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box6}
                   onChange={(e) => handleBoxChange(e.target.value, setBox6)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1327,6 +1376,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box7}
                   onChange={(e) => handleBoxChange(e.target.value, setBox7)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1338,6 +1388,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Box8}
                   onChange={(e) => handleBoxChange(e.target.value, setBox8)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                   disabled={!isEditable}
                 />
@@ -1367,6 +1418,7 @@ order_no=${e}`,
                   value={Bags1}
                   min="0"
                   onChange={(e) => handleBagChange(e.target.value, setBags1)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                 />
               </td>
@@ -1377,6 +1429,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags2}
                   onChange={(e) => handleBagChange(e.target.value, setBags2)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                   disabled={!isEditable}
                 />
@@ -1388,6 +1441,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags3}
                   onChange={(e) => handleBagChange(e.target.value, setBags3)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1399,6 +1453,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags4}
                   onChange={(e) => handleBagChange(e.target.value, setBags4)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1410,6 +1465,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags5}
                   onChange={(e) => handleBagChange(e.target.value, setBags5)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1421,6 +1477,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags6}
                   onChange={(e) => handleBagChange(e.target.value, setBags6)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1432,6 +1489,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags7}
                   onChange={(e) => handleBagChange(e.target.value, setBags7)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1443,6 +1501,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={Bags8}
                   onChange={(e) => handleBagChange(e.target.value, setBags8)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   disabled={!isEditable}
                   min="0"
                 />
@@ -1454,6 +1513,7 @@ order_no=${e}`,
                   style={{ width: "90%", height: "35px", paddingLeft: "2px" }}
                   value={calculateTotal()}
                   onChange={(e) => setBagsTotal(e.target.value)}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                   min="0"
                   disabled={!isEditable}
                 />
@@ -1475,6 +1535,7 @@ order_no=${e}`,
                   value={waste_kg}
                   onChange={(e) => setwaste_kg(e.target.value)}
                   disabled={!isEditable}
+                  // onKeyDown={(e) => handleKeyDown(e)}
                 />
               </th>
             </tr>
@@ -1518,7 +1579,7 @@ order_no=${e}`,
                     {item.TotHrs}
                   </td>
                   <td colSpan={25} style={{ textAlign: "center" }}>
-                    {item.remarks}
+                    {item.Remarks}
                   </td>
                 </tr>
               ))}
@@ -1585,6 +1646,7 @@ order_no=${e}`,
                         />
                       )}
                     </div>
+                    {/* <div>Signature & Date</div> */}
                   </>
                 )}
               </td>
@@ -1594,6 +1656,7 @@ order_no=${e}`,
                   height: "80px",
                   textAlign: "center",
                   marginBottom: "auto",
+                  // verticalAlign: "bottom",
                 }}
               >
                 {(planingDetailsByDate?.supervisor_status ===
@@ -1630,14 +1693,17 @@ order_no=${e}`,
                         />
                       )}
                     </div>
+                    {/* <div>Signature & Date</div> */}
                   </>
                 )}
               </td>
-
+              {/* <td colSpan="50" style={{ textAlign: "center"}}>{planingDetailsByDate.hod_sign}<br/>{formattedDate()}
+              </td> */}
               <td
                 colSpan="35"
                 style={{
                   textAlign: "center",
+                  // verticalAlign: "bottom"
                 }}
               >
                 {(planingDetailsByDate?.hod_status === "HOD_REJECTED" ||
@@ -1892,8 +1958,8 @@ order_no=${e}`,
         }}
       >
         <Input
-          addonBefore="Product Name:"
-          placeholder="Product Name"
+          addonBefore="Machine Name:"
+          placeholder="Machine Name"
           type="text"
           value={machineName}
           readOnly
@@ -1919,6 +1985,7 @@ order_no=${e}`,
           style={{ width: "30%", height: "35px" }}
         />
       </div>
+
       <div
         style={{
           display: "flex",
@@ -1956,14 +2023,22 @@ order_no=${e}`,
             style={{ width: "180px", height: "100%" }}
             placeholder="Select Order No"
             value={batchNolist || order_no}
+            // onChange={handleChangeOrderNo}
             showSearch
             disabled
           />
+          {/* {batchno.map((MacLOV, index) => (
+              <Option key={index} value={MacLOV}>
+                {MacLOV}
+              </Option>
+            ))}
+          </Select> */}
         </div>
         <Input
           addonBefore="Customer Name:"
           placeholder="Customer Name"
           type="text"
+          // max ={ formattedToday }
           value={customer_Name}
           onChange={(e) => {
             setcustomer_Name(e.target.value);
@@ -2027,6 +2102,14 @@ order_no=${e}`,
           type="text"
           // max ={ formattedToday }
           value={Bag_Box}
+          readOnly
+          style={{ width: "30%", height: "35px" }}
+        />
+        <Input
+          addonBefore="Product Name:"
+          placeholder="Product Name"
+          type="text"
+          value={selectedProductName}
           readOnly
           style={{ width: "30%", height: "35px" }}
         />

@@ -1,37 +1,29 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useEffect, useState } from "react";
 import {
-  Alert,
   Avatar,
   Button,
-  Card,
   Col,
   Drawer,
-  Flex,
-  Form,
-  Input,
   Layout,
   Menu,
   message,
   Row,
-  Select,
   Space,
   Table,
-  Tag,
+  Tag
 } from "antd";
-import { CiBoxList } from "react-icons/ci";
-import { FaLock, FaRectangleList, FaTableList } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
-import { IoCreate, IoDownload } from "react-icons/io5";
-import { IoIosApps } from "react-icons/io";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaEdit } from "react-icons/fa";
 import axios from "axios";
-import API from "../baseUrl.json";
-import { BiLock } from "react-icons/bi";
+import { useEffect, useState } from "react";
 import { AiOutlineSignature } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
+import { FaEdit } from "react-icons/fa";
+import { FaLock, FaRectangleList } from "react-icons/fa6";
+import { IoCreate, IoDownload } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { Link, useNavigate } from "react-router-dom";
 import groupIcon from "../Assests/group.png";
+import API from "../baseUrl.json";
 
 const { Header, Footer, Sider, Content } = Layout;
 const contentStyle = {
@@ -49,8 +41,6 @@ const layoutStyle = {
 const UserList = () => {
   const [role, setRole] = useState("");
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("left");
-  const [openalert, setopenalert] = useState(false);
   const [department, setDepartment] = useState();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -223,46 +213,6 @@ const UserList = () => {
         </p>
       ),
     },
-    // {
-    //   title: (
-    //     <h2
-    //       style={{
-    //         textAlign: "center",
-    //       }}
-    //     >
-    //       Department
-    //     </h2>
-    //   ),
-    //   key: "departmentId",
-    //   dataIndex: "departmentId",
-    //   filters: [
-    //     { text: "BLEACHING", value: 1 },
-    //     { text: "SPUNLACE", value: 2 },
-    //     { text: "PAD_PUNCHING", value: 3 },
-    //     { text: "DRY_GOODS", value: 4 },
-    //     { text: "QUALITY_CONTROL", value: 5 },
-    //     { text: "QUALITY_ASSURANCE", value: 6 },
-    //     { text: "PPC", value: 7 },
-    //     { text: "STORE", value: 8 },
-    //     { text: "DISPATCH", value: 9 },
-    //     { text: "PRODUCT_DEVELOPMENT", value: 10 },
-    //     { text: "ENGINEERING", value: 11 },
-    //     { text: "COTTON_BUDS", value: 12 },
-    //     { text: "MARKETTING", value: 13 },
-    //   ],
-    //   onFilter: (value, record) => record.departmentId === value,
-    //   render: (text) => (
-    //     <p
-    //       style={{
-    //         fontSize: "16px",
-    //         fontWeight: "bold",
-    //         textAlign: "center",
-    //       }}
-    //     >
-    //       {getDepartmentName(text)}
-    //     </p>
-    //   ),
-    // },
     {
       title: <h2 style={{ textAlign: "center" }}>Department</h2>,
       key: "departments",
@@ -288,7 +238,6 @@ const UserList = () => {
         const departmentName = record.departmentId
           ? getDepartmentName(record.departmentId)
           : null;
-
         // Check if departmentId matches OR if departments array contains the value
         return (
           departmentName === value ||
@@ -296,8 +245,8 @@ const UserList = () => {
         );
       },
       render: (departments, record) => {
-        // If departmentId is present, use getDepartmentName function
-        if (record.departmentId) {
+        // If departmentId is null, show all department names from the array
+        if (record.departments && record.departments.length > 0) {
           return (
             <p
               style={{
@@ -306,12 +255,12 @@ const UserList = () => {
                 textAlign: "center",
               }}
             >
-              {getDepartmentName(record.departmentId)}
+              {departments.map((dept) => dept.department).join(", ")}
             </p>
           );
         }
 
-        // If departmentId is null, show all department names from the array
+        // If departmentId is present, use getDepartmentName function
         return (
           <p
             style={{
@@ -320,9 +269,9 @@ const UserList = () => {
               textAlign: "center",
             }}
           >
-            {departments.map((dept) => dept.department).join(", ")}
+            {getDepartmentName(record.departmentId)}
           </p>
-        );
+        )
       },
     },
     {

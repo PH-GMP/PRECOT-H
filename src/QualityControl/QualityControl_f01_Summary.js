@@ -116,7 +116,7 @@ const QualityControl_f01_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const QualityControl_f01_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
+          `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -180,7 +180,7 @@ const QualityControl_f01_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
+          `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -244,7 +244,7 @@ const QualityControl_f01_Summary = () => {
   const fetchData_getBleachingJobSupervisorSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetAll`,
+        `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -289,7 +289,7 @@ const QualityControl_f01_Summary = () => {
   const fetchData_geBleachingJobtHodSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetAll`,
+        `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -334,7 +334,7 @@ const QualityControl_f01_Summary = () => {
   const geBleachingJobQaSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/getAllQcNotSubmitted`,
+        `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/getAllQcNotSubmitted`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -471,7 +471,7 @@ const QualityControl_f01_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetReportForPrint?millBatchNo=${formParams.printSubBatchNo}`,
+        `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetReportForPrint?millBatchNo=${formParams.printSubBatchNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -2140,7 +2140,7 @@ const QualityControl_f01_Summary = () => {
                   padding: "10px",
                 }}
               >
-                Gram negative bacteria or Coliform 
+                Gram negative bacteria or Coliform
               </td>
               <td
                 style={{

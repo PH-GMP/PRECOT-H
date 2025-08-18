@@ -1,52 +1,37 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import API from "../baseUrl.json";
+import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 import {
-  Table,
-  Button,
-  Modal,
-  Select,
-  Tooltip,
-  Menu,
-  Input,
-  Row,
   Avatar,
+  Button,
   Col,
   Drawer,
+  Input,
+  Menu,
   message,
-  Form,
-  notification,
+  Modal,
+  Row,
+  Select,
+  Table,
+  Tooltip,
 } from "antd";
-import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
-} from "@ant-design/icons";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import BleachingEdit from "./rawCottomAnalysisForm";
+import API from "../baseUrl.json";
 import { BiLock, BiNavigation } from "react-icons/bi";
-import BleachingHeader from "../Components/BleachingHeader";
 import { FaUserCircle } from "react-icons/fa";
+import { FaLock } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { IoCreate, IoPrint } from "react-icons/io5";
-import { FaLock } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
-import logo from "../Assests/logo.png";
-import moment from "moment";
 import { createGlobalStyle } from "styled-components";
+import logo from "../Assests/logo.png";
+import BleachingHeader from "../Components/BleachingHeader";
 
 const { Option } = Select;
 
 const QualityControl_ARF011_Summary = () => {
-  //Signature Images
-  const [getImage, setGetImage] = useState("");
-  const [getImage1, setGetImage1] = useState("");
-  const [getImage2, setGetImage2] = useState("");
-  //
-
   const [availableBMRno, setAvailableBMRno] = useState([]);
   const [reason, setReason] = useState(false);
   const [fumigationDate, setFumigationDate] = useState(null);
@@ -123,7 +108,7 @@ const QualityControl_ARF011_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -158,7 +143,7 @@ const QualityControl_ARF011_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
+          `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -182,7 +167,7 @@ const QualityControl_ARF011_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
+          `${API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetPdeBatchNo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -246,7 +231,7 @@ const QualityControl_ARF011_Summary = () => {
   const fetchData_getBleachingJobSupervisorSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
+        `${API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -292,7 +277,7 @@ const QualityControl_ARF011_Summary = () => {
   const fetchData_geBleachingJobtHodSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
+        `${API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -338,7 +323,7 @@ const QualityControl_ARF011_Summary = () => {
   const geBleachingJobQaSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
+        `${API.prodUrl}/Precot/api/chemicaltest/ARF011/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -478,7 +463,7 @@ const QualityControl_ARF011_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/print/?date=${formParams.printSubBatchNo}`,
+        `${API.prodUrl}/Precot/api/chemicaltest/ARF011/print/?date=${formParams.printSubBatchNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -637,91 +622,91 @@ const QualityControl_ARF011_Summary = () => {
           items={
             role === "ROLE_QA"
               ? [
-                  {
-                    key: "1",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Form Browser
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/choosenScreen"),
-                  },
-                  {
-                    key: "2",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Generation
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Generate"),
-                  },
-                  {
-                    key: "3",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Mapping
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Mapping"),
-                  },
-                  {
-                    key: "4",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Closing
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Closing"),
-                  },
-                  {
-                    key: "5",
-                    icon: (
-                      <FaLock
-                        color="#151718"
-                        onClick={() => {
-                          if (confirm("Are you sure want to logout")) {
-                            localStorage.removeItem("token");
-                            navigate("/Precot");
-                          }
-                        }}
-                      />
-                    ),
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Logout
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot"),
-                  },
-                ]
+                {
+                  key: "1",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Form Browser
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/choosenScreen"),
+                },
+                {
+                  key: "2",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Generation
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Generate"),
+                },
+                {
+                  key: "3",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Mapping
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Mapping"),
+                },
+                {
+                  key: "4",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Closing
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Closing"),
+                },
+                {
+                  key: "5",
+                  icon: (
+                    <FaLock
+                      color="#151718"
+                      onClick={() => {
+                        if (confirm("Are you sure want to logout")) {
+                          localStorage.removeItem("token");
+                          navigate("/Precot");
+                        }
+                      }}
+                    />
+                  ),
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Logout
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot"),
+                },
+              ]
               : role === "ROLE_SUPERVISOR" ||
                 role === "ROLE_HOD" ||
                 role === "ROLE_DESIGNEE"
-              ? [
+                ? [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -803,7 +788,7 @@ const QualityControl_ARF011_Summary = () => {
                     onClick: () => navigate("/Precot"),
                   },
                 ]
-              : [
+                : [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -1079,9 +1064,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.analytical_request_number
                   ? printData?.obser[0]?.analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1150,9 +1136,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.bl_analytical_request_number
                   ? printData?.obser[0]?.bl_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1220,9 +1207,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.bl_blrc_analytical_request_number
                   ? printData?.obser[0]?.bl_blrc_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1290,9 +1278,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.bl_wbp_analytical_request_number
                   ? printData?.obser[0]?.bl_wbp_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1360,9 +1349,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.bl_ba_analytical_request_number
                   ? printData?.obser[0]?.bl_ba_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1525,22 +1515,23 @@ const QualityControl_ARF011_Summary = () => {
                   ? printData?.obser[0]?.fg_total
                   : ""}
               </td>
-              <td style={{ textAlign: "center" }}>
+              <td style={{ textAlign: "center" }} rowSpan={7}>
                 {printData.obser?.length > 0
                   ? printData?.obser[0]?.before_fumigation
                   : ""}
               </td>
-              <td style={{ textAlign: "center" }}>
+              <td style={{ textAlign: "center" }} rowSpan={7}>
                 {printData.obser?.length > 0
                   ? printData?.obser[0]?.after_fumigation
                   : ""}
               </td>
-              <td style={{ textAlign: "center" }} rowSpan={8}>
-                {printData.obser?.length > 0
+              <td style={{ textAlign: "center" }}>
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.fg_analytical_request_number
                   ? printData?.obser[0]?.fg_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
-              <td style={{ textAlign: "center" }} rowSpan={8}>
+              <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
                   ? printData?.obser[0]?.fg_total_viable_before
                   : ""}
@@ -1612,9 +1603,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.vmi_analytical_request_number
                   ? printData?.obser[0]?.vmi_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1682,9 +1674,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.vmi_bmop_analytical_request_number
                   ? printData?.obser[0]?.vmi_bmop_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1752,9 +1745,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
-                  ? printData?.obser[0]?.vmi_ace2pa_analytical_request_number
-                  : ""}
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.vmi_ace2pa_analytical_request_number
+                  ? printData?.obser[0]?.vmi_ace2pa_analytical_request_numbers
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1825,9 +1819,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.jet_analytical_request_number
                   ? printData?.obser[0]?.jet_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1896,9 +1891,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.jet_rw_analytical_request_number
                   ? printData?.obser[0]?.jet_rw_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -1968,9 +1964,10 @@ const QualityControl_ARF011_Summary = () => {
                   : ""}
               </td>
               <td style={{ textAlign: "center" }}>
-                {printData.obser?.length > 0
+                {printData.obser?.length > 0 &&
+                  printData?.obser[0]?.jet_bma_analytical_request_number
                   ? printData?.obser[0]?.jet_bma_analytical_request_number
-                  : ""}
+                  : "NA"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printData.obser?.length > 0
@@ -2143,9 +2140,10 @@ const QualityControl_ARF011_Summary = () => {
                 </td>
 
                 <td style={{ textAlign: "center" }}>
-                  {printData.obser?.length > 0
+                  {printData.obser?.length > 0 &&
+                    printData?.obser[0]?.spun_analytical_request_number
                     ? printData?.obser[0]?.spun_analytical_request_number
-                    : ""}
+                    : "NA"}
                 </td>
                 <td style={{ textAlign: "center" }}>
                   {printData.obser?.length > 0
@@ -2214,9 +2212,10 @@ const QualityControl_ARF011_Summary = () => {
                     : ""}
                 </td>
                 <td style={{ textAlign: "center" }}>
-                  {printData.obser?.length > 0
+                  {printData.obser?.length > 0 &&
+                    printData?.obser[0]?.spl_rb_analytical_request_number
                     ? printData?.obser[0]?.spl_rb_analytical_request_number
-                    : ""}
+                    : "NA"}
                 </td>
                 <td style={{ textAlign: "center" }}>
                   {printData.obser?.length > 0
@@ -2289,9 +2288,10 @@ const QualityControl_ARF011_Summary = () => {
                     : ""}
                 </td>
                 <td style={{ textAlign: "center" }}>
-                  {printData.obser?.length > 0
+                  {printData.obser?.length > 0 &&
+                    printData?.obser[0]?.lab_analytical_request_number
                     ? printData?.obser[0]?.lab_analytical_request_number
-                    : ""}
+                    : "NA"}
                 </td>
                 <td style={{ textAlign: "center" }}>
                   {printData.obser?.length > 0
@@ -2362,9 +2362,10 @@ const QualityControl_ARF011_Summary = () => {
                     : ""}
                 </td>
                 <td style={{ textAlign: "center" }}>
-                  {printData.obser?.length > 0
+                  {printData.obser?.length > 0 &&
+                    printData?.obser[0]?.chan_analytical_request_number
                     ? printData?.obser[0]?.chan_analytical_request_number
-                    : ""}
+                    : "NA"}
                 </td>
                 <td style={{ textAlign: "center" }}>
                   {printData.obser?.length > 0
@@ -2432,9 +2433,10 @@ const QualityControl_ARF011_Summary = () => {
                     : ""}
                 </td>
                 <td style={{ textAlign: "center" }}>
-                  {printData.obser?.length > 0
+                  {printData.obser?.length > 0 &&
+                    printData?.obser[0]?.chn_lcr_analytical_request_number
                     ? printData?.obser[0]?.chn_lcr_analytical_request_number
-                    : ""}
+                    : "NA"}
                 </td>
                 <td style={{ textAlign: "center" }}>
                   {printData.obser?.length > 0
@@ -2823,20 +2825,7 @@ const QualityControl_ARF011_Summary = () => {
           >
             Select Date :
           </div>
-          {/* <Select
-            style={{ width: "150px" }}
-            placeholder="Select Mill Batch No"
-            showSearch
-            value={availableBMRnoLov}
-            onChange={handleAvailableBMRnoLovChange}
-            // onBlur={fetchDatabatchByBleach}
-          >
-            {availableBMRno.map((Bmrnolist, index) => (
-              <Option key={index} value={Bmrnolist.value}>
-                {Bmrnolist.value}
-              </Option>
-            ))}
-          </Select> */}
+
           <Input
             type="date"
             max={formattedToday}
@@ -2897,21 +2886,7 @@ const QualityControl_ARF011_Summary = () => {
             }}
           >
             <label style={{ marginRight: "8px" }}>Fumigation Date:</label>
-            {/* <Select
-              style={{ width: "200px" }}
-              placeholder="Select Fumigation Date"
-              value={formParams.printSubBatchNo}
-              onChange={(e) => {
-                handleFormParams(e, "printSubBatchNo");
-              }}
-              showSearch
-            >
-              {batchnoprint.map((MacLOV, index) => (
-                <Option key={index} value={MacLOV.value}>
-                  {MacLOV.value}
-                </Option>
-              ))}
-            </Select> */}
+
             <Input
               type="date"
               max={formattedToday}

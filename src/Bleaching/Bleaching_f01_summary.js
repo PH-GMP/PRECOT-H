@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BleachingHeader from "../Components/BleachingHeader";
 
@@ -11,27 +11,24 @@ import {
   Drawer,
   Form,
   Menu,
+  message,
+  Modal,
   Row,
   Select,
   Table,
   Tooltip,
-  Modal,
-  Input,
-  message,
 } from "antd";
-import { FaUserCircle } from "react-icons/fa";
-import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
 import axios from "axios";
-import { GoArrowLeft } from "react-icons/go";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock } from "react-icons/fa6";
-import { IoCreate } from "react-icons/io5";
 import { jwtDecode } from "jwt-decode";
+import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { FaLock, FaPrint } from "react-icons/fa6";
+import { GoArrowLeft } from "react-icons/go";
+import { IoCreate } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { createGlobalStyle } from "styled-components";
 import logo from "../Assests/logo.png";
 import API from "../baseUrl.json";
-import { FaPrint } from "react-icons/fa6";
-import { createGlobalStyle } from "styled-components";
-import { render } from "@testing-library/react";
 const Bleaching_f01_summary = () => {
   const navigate = useNavigate();
   const [summary, setSummary] = useState([]);
@@ -40,18 +37,16 @@ const Bleaching_f01_summary = () => {
   const [week, setweek] = useState("");
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState(false);
-  const [placement, setPlacement] = useState("left");
+
   const [showModal, setShowModal] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [printresponseData, setPrintResponseData] = useState([]);
   const [role, setRole] = useState("");
-  const [printMonth, setPrintMonth] = useState("");
-  const [printYear, setPrintYear] = useState("");
+
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
-  const userRole = decodedToken.role;
-  const [messageApi, contextHolder] = message.useMessage();
+
   const showDrawer = () => {
     setOpen(true);
   };
@@ -68,7 +63,7 @@ const Bleaching_f01_summary = () => {
 
       axios
         .get(
-          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -92,7 +87,7 @@ const Bleaching_f01_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData,    API.prodUrl, token]);
+  }, [printresponseData, API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -104,7 +99,7 @@ const Bleaching_f01_summary = () => {
 
       axios
         .get(
-          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -128,7 +123,7 @@ const Bleaching_f01_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData,    API.prodUrl, token]);
+  }, [printresponseData, API.prodUrl, token]);
 
   const formatDates = (dateString) => {
     if (!dateString) return "";
@@ -284,17 +279,17 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
     switch (userRole) {
       case "ROLE_SUPERVISOR":
         fetchSummary(
-          `${   API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForSupervisor`
+          `${API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForSupervisor`
         );
         break;
       case "ROLE_HOD":
         fetchSummary(
-          `${   API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForHod`
+          `${API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForHod`
         );
         break;
       case "ROLE_DESIGNEE":
         fetchSummary(
-          `${   API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForHod`
+          `${API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForHod`
         );
         break;
       default:
@@ -392,7 +387,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
     setLoading(true);
     try {
       const response = await fetch(
-        `${   API.prodUrl}/Precot/api/bleach/findSanitizationMechineAndSurfaceByMonthYear`,
+        `${API.prodUrl}/Precot/api/bleach/findSanitizationMechineAndSurfaceByMonthYear`,
         {
           method: "POST",
           headers: {
@@ -412,7 +407,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
       } else {
         setPrintResponseData([]);
       }
- 
+
       console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);

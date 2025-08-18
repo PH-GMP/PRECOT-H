@@ -161,6 +161,7 @@ const QualityAssurance_f43 = () => {
       },
     ],
   });
+
   const token = localStorage.getItem("token");
   const [eSign, setESign] = useState({
     qa_inspector_sign: "",
@@ -226,7 +227,7 @@ const QualityAssurance_f43 = () => {
               [key]: url,
             }));
           })
-          .catch((err) => {});
+          .catch((err) => { });
       }
     });
   }, [token, formData.qa_inspector_sign, formData.qa_mr_sign]);
@@ -260,7 +261,7 @@ const QualityAssurance_f43 = () => {
               [value]: url,
             }));
           })
-          .catch((err) => {});
+          .catch((err) => { });
       });
     };
     fetchUserDataAndImages();
@@ -754,7 +755,7 @@ const QualityAssurance_f43 = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-    } catch (err) {}
+    } catch (err) { }
   };
   useEffect(() => {
     if (formData.startTime > formData.endTime && formData.endTime !== "") {
@@ -1099,7 +1100,7 @@ const QualityAssurance_f43 = () => {
                         handleDeleteRow(index, row.attendanceId, "attendence");
                       }}
                       disabled={status.fieldStatus || statusLoader}
-                      loading={statusLoader}
+
                     >
                       {" "}
                       <DeleteOutlined />
@@ -1218,11 +1219,13 @@ const QualityAssurance_f43 = () => {
                   </td>
                   <td>
                     <Select
-                      value={row.responsibility}
+                      mode="multiple"
+                      value={row.responsibility ? row.responsibility === "NA" ? [] : row.responsibility.split(",") : []}
                       options={hodLov}
-                      onChange={(e) => {
+                      onChange={(selectedValues) => {
+                        // Convert array -> comma separated string
                         handleArrayInput(
-                          e,
+                          selectedValues.join(", "),
                           "responsibility",
                           index,
                           "discussion"
@@ -1232,7 +1235,7 @@ const QualityAssurance_f43 = () => {
                       dropdownStyle={{ textAlign: "center" }}
                       disabled={status.fieldStatus}
                       showSearch
-                    ></Select>
+                    />
                   </td>
                   <td>
                     <Input
@@ -1278,7 +1281,7 @@ const QualityAssurance_f43 = () => {
                         handleDeleteRow(index, row.discussionId, "discussion");
                       }}
                       disabled={status.fieldStatus || statusLoader}
-                      loading={statusLoader}
+
                     >
                       {" "}
                       <DeleteOutlined />

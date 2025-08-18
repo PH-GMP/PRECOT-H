@@ -70,7 +70,6 @@ const Metal_detector_checklist_Summary = () => {
   })
   const [initialValues, setInitialValues] = useState(
     {
-
       "date": "",
       "selectSection": "",
       'currentMonthDates': [],
@@ -93,13 +92,14 @@ const Metal_detector_checklist_Summary = () => {
     }
   }
 `;
+
   let formNumber = formNo;
   const localUrl = location.pathname;
   if (localUrl == "/Precot/Spunlace/F-20/Summary") {
     formNumber = "PH-PRD02/F-020";
   }
   else if (localUrl == "/Precot/PadPunching/F-17/Summary") {
-    formNumber = "PH-PRD02/F-019";
+    formNumber = "PH-PRD03-F-006";
   }
 
 
@@ -107,17 +107,17 @@ const Metal_detector_checklist_Summary = () => {
   // console.log("Form Number", formNo)
   useEffect(() => {
     switch (formNumber) {
-      case "PH-PRD02/F-019":
+      case "PH-PRD03-F-006":
         setHeader(prevState => ({
           ...prevState,
           formName: "Argus Metal Detector - Check List",
-          formatNo: "PH-PRD02/F-019",
+          formatNo: "PH-PRD03-F-006",
           refSopNo: "PRD03-D-",
           revisionNo: "01",
         }))
         setInitialValues(prevState => ({
           ...prevState,
-          "formNumber": "PH-PRD02/F-019",
+          "formNumber": "PH-PRD03-F-006",
           "routePath": "/Precot/PadPunching/F-17"
         }))
         setPrintSpan(prevState => ({
@@ -192,26 +192,7 @@ const Metal_detector_checklist_Summary = () => {
 
   const [printButtonLoading, setPrintButtonLoading] = useState(false);
 
-  const getEquipmentName = () => {
-    let equipName = ""
-    if (formNumber === "PH-PRD02/F-019") {
-      equipName = "Argus Metal Detector"
-    }
-    else if (formNumber === "PH-PRD02/F-020") {
-      equipName = "VETAL"
-    }
 
-  }
-
-  const getHodOrHead = () => {
-    let isHod = ""
-    if (formNumber === "PH-PRD02/F-019") {
-      isHod = "Reviewed by Head of the Department / Designee sign & Date"
-    }
-    else if (formNumber === "PH-PRD02/F-020") {
-      isHod = "Reviewed by Ho"
-    }
-  }
 
   const handlePrintSummary = () => {
     setPrintButtonLoading(true);
@@ -245,13 +226,13 @@ const Metal_detector_checklist_Summary = () => {
     };
 
     let apiUrl;
-    if (formNumber == "PH-PRD02/F-019") {
+    if (formNumber == "PH-PRD03-F-006") {
       const selectedMonth = getMonthName(selectMonth);
-      apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/findByMonthPrintApi?month=${selectedMonth}&year=${selectYear}`;
+      apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/findByMonthPrintApi?month=${selectedMonth}&year=${selectYear}`;
     }
     else if (formNumber == "PH-PRD02/F-020") {
       const selectedMonth = getMonthName(selectMonth);
-      apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/findByMonthYearPrintApi?month=${selectedMonth}&year=${selectYear}`;
+      apiUrl = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/findByMonthYearPrintApi?month=${selectedMonth}&year=${selectYear}`;
     }
 
 
@@ -365,7 +346,7 @@ const Metal_detector_checklist_Summary = () => {
       ...prevState,
       date: record.date,
       formNumber: formNumber,
-      ...(formNumber === "PH-PRD02/F-019" && { selectSection: record.section })
+      ...(formNumber === "PH-PRD03-F-006" && { selectSection: record.section })
     }));
 
     setInitialValues(prevState => {
@@ -373,7 +354,7 @@ const Metal_detector_checklist_Summary = () => {
         ...prevState,
         date: record.date,
         formNumber: formNumber,
-        ...(formNumber === "PH-PRD02/F-019" && { selectSection: record.section })
+        ...(formNumber === "PH-PRD03-F-006" && { selectSection: record.section })
       };
 
       // console.log("Updated Initial Values", newState.date);
@@ -478,7 +459,7 @@ const Metal_detector_checklist_Summary = () => {
     key: 'section',
     align: "center"
   }
-  if (formNumber == "PH-PRD02/F-019") {
+  if (formNumber == "PH-PRD03-F-006") {
     columns = [
       ...baseColumns.slice(0, 1),
       equipColumn, sectioColumn,
@@ -567,7 +548,7 @@ const Metal_detector_checklist_Summary = () => {
     if (initialValues.date == '') {
       notificationMessage('warning', 'please select Date!');
     }
-    // else if (formNumber == "PH-PRD02/F-019" && (initialValues.selectSection == '' || initialValues.selectSection == null)) {
+    // else if (formNumber == "PH-PRD03-F-006" && (initialValues.selectSection == '' || initialValues.selectSection == null)) {
     //   notificationMessage('warning', 'please select Section!');
     // }
     else {
@@ -608,7 +589,7 @@ const Metal_detector_checklist_Summary = () => {
     };
 
     if (record) {
-      if (formNumber == "PH-PRD02/F-019") {
+      if (formNumber == "PH-PRD03-F-006") {
         result = {
           metalContaminatedMaterials: transformValue(record.metalContaminatedMaterials),
           noOfMetalContaminants: transformValue(record.noOfMetalContaminants),
@@ -635,7 +616,7 @@ const Metal_detector_checklist_Summary = () => {
       }
       // ---------------- form 03 validation ----------------------------
     } else {
-      if (formNumber == "PH-PRD02/F-019") {
+      if (formNumber == "PH-PRD03-F-006") {
         result = {
           metalContaminatedMaterials: 'NA',
           noOfMetalContaminants: '-',
@@ -672,14 +653,14 @@ const Metal_detector_checklist_Summary = () => {
       initialized.current = true
       const role = localStorage.getItem('role');
       let url;
-      if (formNumber == "PH-PRD02/F-019") {
-        url = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
+      if (formNumber == "PH-PRD03-F-006") {
+        url = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
         if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          url = `${ API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
+          url = `${API.prodUrl}/Precot/api/PadPunching/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
         }
       }
       else if (formNumber == "PH-PRD02/F-020") {
-        url = `${ API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
+        url = `${API.prodUrl}/Precot/api/spunlace/Service/MetalDetectorCheckList/getMetalDetectorSummary`;
       }
       const fetchData = () => {
         const token = localStorage.getItem('token');
@@ -736,7 +717,7 @@ const Metal_detector_checklist_Summary = () => {
 
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -790,14 +771,14 @@ const Metal_detector_checklist_Summary = () => {
                 formatNo={header.formatNo}
                 revisionNo={header.revisionNo}
                 refSopNo={header.refSopNo}
-                pageNo={formNumber == "PH-PRD02/F-019" ? '01 of 02' : '01 of 03'}
+                pageNo={formNumber == "PH-PRD03-F-006" ? '01 of 02' : '01 of 03'}
               />
             </div>
             <br></br>
             <div style={{ marginTop: '7px' }}>
               <table style={{ borderCollapse: 'collapse', width: '97%' }}>
                 <thead>
-                  {formNumber == "PH-PRD02/F-019" && (
+                  {formNumber == "PH-PRD03-F-006" && (
                     <>
                       <tr>
                         <td className='data-border' colSpan={34}>
@@ -946,7 +927,7 @@ const Metal_detector_checklist_Summary = () => {
                       ))}
                     </tr>
                   )}
-                  {formNumber == "PH-PRD02/F-019" && (
+                  {formNumber == "PH-PRD03-F-006" && (
                     <tr>
                       <td className='data-border' colSpan={printSpan.cleanedBy}>
                         Cleaned by :
@@ -1076,12 +1057,12 @@ const Metal_detector_checklist_Summary = () => {
                 formatNo={header.formatNo}
                 revisionNo={header.revisionNo}
                 refSopNo={header.refSopNo}
-                pageNo={formNumber == "PH-PRD02/F-019" ? '02 of 02' : '03 of 03'}
+                pageNo={formNumber == "PH-PRD03-F-006" ? '02 of 02' : '03 of 03'}
               />
             </div>
             <div style={{ marginTop: '20px' }}>
               <table style={{ borderCollapse: 'collapse', width: '97%' }}>
-                {formNumber == "PH-PRD02/F-019" && (
+                {formNumber == "PH-PRD03-F-006" && (
 
                   <>
                     <thead>
@@ -1136,7 +1117,7 @@ const Metal_detector_checklist_Summary = () => {
                           </td>
                         ))}
                       </tr>
-                      {formNumber == "PH-PRD02/F-019" && (
+                      {formNumber == "PH-PRD03-F-006" && (
                         <>
                           <tr>
                             <td className='data-border' style={{ width: '100%' }} colSpan={printSpan.cleaningOfEquip}>
@@ -1329,7 +1310,6 @@ const Metal_detector_checklist_Summary = () => {
         </Modal>
 
         <BleachingHeader
-
           formName={header.formName}
           formatNo={header.formatNo}
           unit={"UNIT H"}
@@ -1426,7 +1406,7 @@ const Metal_detector_checklist_Summary = () => {
         {/* <DatePicker style={{ margin: '10px' }} format={dateFormat} onChange={(date, dateString) => handleDateChange(date)} className='no-print' /> */}
         <label>Date :</label>
         <input type='date' style={{ margin: '10px', padding: '5px', borderRadius: '10px', border: '1px solid black' }} onChange={handleDateChange} className='no-print' max={formattedToday} />
-        {/* {formNumber == "PH-PRD02/F-019" && (
+        {/* {formNumber == "PH-PRD03-F-006" && (
           <Select
             // defaultValue="Blow room (CCP - 02A)"
             placeholder="Please select section"

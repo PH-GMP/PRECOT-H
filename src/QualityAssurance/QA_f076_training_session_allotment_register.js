@@ -220,7 +220,7 @@ const QA_f076_training_session_register = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage3(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [selectedRow, API.prodUrl]);
 
@@ -251,7 +251,7 @@ const QA_f076_training_session_register = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [selectedRow, API.prodUrl]);
 
@@ -427,6 +427,7 @@ const QA_f076_training_session_register = () => {
         navigate(
           "/Precot/QualityAssurance/F-076/QA_f076_training_session_allotment_register_summary"
         );
+
       }, 2000);
     } catch (error) {
       console.error("Error saving data:", error);

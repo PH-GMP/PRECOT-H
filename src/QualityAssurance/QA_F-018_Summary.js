@@ -37,7 +37,7 @@ const QA_F018_Summary = () => {
   const [ccfno_number, setccfno_number] = useState("");
   const [showSaveSubmitButtons, setShowSaveSubmitButtons] = useState(false);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState(true);
-  const [printResponseData, setPrintResponseData] = useState(null);
+  const [printResponseData, setPrintResponseData] = useState([]);
   const [availableshift, setAvailableShifts] = useState([]);
   const [availableshiftlov, setAvailableShiftslov] = useState("Select CCFNo");
   const [availableshift2, setAvailableShifts2] = useState([]);
@@ -77,80 +77,70 @@ const QA_F018_Summary = () => {
   for (let i = 0; i <= 20; i++) {
     years.push(currentYear - i);
   }
+  
   useEffect(() => {
+    fetchData_dep_by_id()
     if (!initial.current) {
       initial.current = true;
       fetchDataOrderNumber();
       fetchDataCCRNO();
-      fetchdata_departmentid();
     }
   }, []);
 
-  const fetchdata_departmentid = async () => {
-    try {
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      let dep_id = localStorage.getItem("departmentId");
 
-      const foundDepartment = response.data?.find((dept) => {
-        // Log each department ID
-        const numericDepId = Number(dep_id);
-        if (dept.id === numericDepId) {
-          // Log if ID is found
-          return true; // Return true to indicate a match
-        } else {
-          // Log if ID is not found
-          return false; // Return false to continue searching
-        }
-      });
-
-      if (foundDepartment) {
-        setdepartment(foundDepartment.department);
-        fetchData_dep_by_id(foundDepartment.department);
-      } else {
-        setdepartment("Department not found");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTON_BUDS",
+    13: "MARKETING",
+    14: "HR",
   };
+  const storedIds = localStorage.getItem("departmentId");
 
-  const fetchData_dep_by_id = async (department) => {
+  const getDepartmentName = storedIds
+    ?.split(",")
+    .map((id) => departmentMap[parseInt(id)])
+    .filter(Boolean)
+    .join(",");
+
+  const Desginee_access = getDepartmentName?.includes("QUALITY_ASSURANCE");
+
+  const fetchData_dep_by_id = async () => {
     if (
       roleBase === "ROLE_HOD" ||
-      (roleBase === "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_DESIGNEE" && !Desginee_access)
     ) {
+      console.log("(roleBase === ROLE_DESIGNEE && !Desginee_access)")
       try {
         setLoading(true);
-
         const response = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/CustomerComplaintRegisterForm/getSummaryHod?department=${department}`,
+          `${API.prodUrl}/Precot/api/QA/Service/CustomerComplaintRegisterForm/getSummaryHod`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            params: { department: getDepartmentName },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
-        // If the request is successful, handle the response data
         if (
           response.data &&
-          (response.data?.length > 0 || response.data?.length == undefined)
+          (response.data?.length > 0 || response.data?.length === undefined)
         ) {
           setmodalData(response.data);
         }
       } catch (error) {
-        // Check if the error is a 403 Forbidden error
         if (error.response && error.response.status === 403) {
           message.warning("You do not have permission to access this form.");
           setTimeout(() => {
-            navigate("/Precot/choosenScreen"); // Redirect to the summary page
+            navigate("/Precot/choosenScreen");
           }, 1500);
         } else {
           console.error("Error fetching data:", error);
@@ -158,11 +148,13 @@ const QA_F018_Summary = () => {
       } finally {
         setLoading(false);
       }
-    } else if (
+    }
+    else if (
       roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_DESIGNEE" && Desginee_access)
     ) {
       try {
+        console.log("      (roleBase === ROLE_DESIGNEE && Desginee_access")
         setLoading(true);
 
         const response = await axios.get(
@@ -197,9 +189,7 @@ const QA_F018_Summary = () => {
     }
   };
 
-  const handleChange_getbatch = (event) => {
-    setAvailableBMRnoLov(event.target.value);
-  };
+
   const handleSelectChange = (type, value) => {
     let updatedMonth = selectedMonth;
     let updatedYear = selectedYear;
@@ -222,10 +212,8 @@ const QA_F018_Summary = () => {
   const handleprint_section = async (month, year, department) => {
     axios
       .get(
-        `${
-          API.prodUrl
-        }/Precot/api/QA/Service/CustomerComplaintRegisterForm/print?month=${
-          month || ""
+        `${API.prodUrl
+        }/Precot/api/QA/Service/CustomerComplaintRegisterForm/print?month=${month || ""
         }&year=${year || ""}&department=${department || ""}`,
         {
           headers: {
@@ -461,7 +449,7 @@ const QA_F018_Summary = () => {
     },
 
     {
-      title: "QA Status",
+      title: "QA Manager / Designee Status",
       dataIndex: "qa_mr_status",
       key: "qa_mr_status",
       render: (text) => <div style={{ padding: "8px" }}>{text}</div>,
@@ -503,7 +491,7 @@ const QA_F018_Summary = () => {
     setSelectedMonth(null);
     setBatchNolist2(null);
   };
-  const handleDatePrintChange = (event) => {};
+  const handleDatePrintChange = (event) => { };
   const printDateSubmit = () => {
     window.print();
   };
@@ -674,8 +662,8 @@ const QA_F018_Summary = () => {
               fontWeight: "bold",
               display:
                 localStorage.getItem("role") === "QA_MANAGER" ||
-                (localStorage.getItem("role") === "ROLE_DESIGNEE" &&
-                  deaprtment === "QUALITY_ASSURANCE")
+                  (localStorage.getItem("role") === "ROLE_DESIGNEE" &&
+                    Desginee_access)
                   ? "block"
                   : "none",
             }}

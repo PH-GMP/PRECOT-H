@@ -1,40 +1,36 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import API from "../baseUrl.json";
 import {
-  Table,
-  Button,
-  Modal,
-  Select,
-  Tooltip,
-  Menu,
-  Row,
+  EditOutlined,
+  PlusOutlined
+} from "@ant-design/icons";
+import {
   Avatar,
+  Button,
   Col,
   Drawer,
+  Menu,
   message,
-  Form,
+  Modal,
   notification,
+  Row,
+  Select,
+  Table,
+  Tooltip
 } from "antd";
-import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
-} from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import BleachingEdit from "./BleachingEdit";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import { BiLock, BiNavigation } from "react-icons/bi";
-import BleachingHeader from "../Components/BleachingHeader";
 import { FaUserCircle } from "react-icons/fa";
+import { FaLock } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
 import { IoCreate, IoPrint } from "react-icons/io5";
-import { FaLock } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 import logo from "../Assests/logo.png";
-import moment from "moment";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 
 const { Option } = Select;
 
@@ -258,8 +254,6 @@ const Bleaching_f13_Summary = () => {
   };
 
   const fetchDatabatchByBleach = async () => {
-    ///Precot/api/bleaching/summary/batchByBleach/bleachjobcard?bmr_no=(New Api)
-    ///Precot/api/bleaching/summary/batchByBleach?bmr_no=(Old Api)
     try {
       setLoading(true);
       const response = await axios.get(
@@ -278,6 +272,7 @@ const Bleaching_f13_Summary = () => {
       setLoading(false);
     }
   };
+
   const fetchDatabatchByBleachPrint = async (value) => {
     try {
       setLoading(true);
@@ -367,7 +362,6 @@ const Bleaching_f13_Summary = () => {
           if (res.data && res.data.length > 0) {
             setPrintResponseData(res.data);
             console.log("laydown print value", printResponseData);
-            // setPrintLaydown(value);
           } else {
             setPrintResponseData([]);
             message.error("no data found...!");
@@ -462,9 +456,7 @@ const Bleaching_f13_Summary = () => {
     }
   };
 
-  const handleChange_getbatch = (event) => {
-    setAvailableBMRnoLov(event.target.value);
-  };
+
 
   const fetchDataLOV_BMRNO = async () => {
     try {
@@ -509,13 +501,7 @@ const Bleaching_f13_Summary = () => {
     });
   };
 
-  const handleViewDetails = (record) => {
-    const x = newData.filter((x, i) => {
-      return record.headerID === x.header_id;
-    });
-    setSelectedRow(x);
-    setIsModalVisible(true);
-  };
+
 
   const handleEdit = (record) => {
     console.log("wer", record);
@@ -797,8 +783,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-                  // paddingLeft: "1em",
-                  // paddingRight: "1em",
+                
                 }}
               >
                 Activity
@@ -808,8 +793,7 @@ const Bleaching_f13_Summary = () => {
                 style={{
                   border: "1px solid",
                   fontWeight: "bold",
-                  // paddingLeft: "1em",
-                  // paddingRight: "1em",
+             
                   textAlign: "center",
                 }}
               >
@@ -821,8 +805,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-                  // paddingLeft: "1em",
-                  // paddingRight: "1em",
+                
                 }}
               >
                 Actual Time in Minutes
@@ -833,8 +816,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-                  // paddingLeft: "1em",
-                  // paddingRight: "1em",
+             
                 }}
               >
                 Observations
@@ -1965,11 +1947,9 @@ const Bleaching_f13_Summary = () => {
               </td>
               <td
                 colSpan="3"
-                //contentEditable="false"
-                style={{
+                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+       
                 }}
               >
                 {printResponseData?.[0]?.citric_acid}
@@ -2190,8 +2170,7 @@ const Bleaching_f13_Summary = () => {
         <Menu
           theme="dark"
           mode="inline"
-          // defaultSelectedKeys={["1"]}
-          style={{
+           style={{
             backgroundColor: "transparent",
             display: "flex",
             flexDirection: "column",
@@ -2202,91 +2181,91 @@ const Bleaching_f13_Summary = () => {
           items={
             role === "ROLE_QA"
               ? [
-                  {
-                    key: "1",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Form Browser
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/choosenScreen"),
-                  },
-                  {
-                    key: "2",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Generation
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Generate"),
-                  },
-                  {
-                    key: "3",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Mapping
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                  },
-                  {
-                    key: "4",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Closing
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Closing"),
-                  },
-                  {
-                    key: "5",
-                    icon: (
-                      <FaLock
-                        color="#151718"
-                        onClick={() => {
-                          if (confirm("Are you sure want to logout")) {
-                            localStorage.removeItem("token");
-                            navigate("/Precot");
-                          }
-                        }}
-                      />
-                    ),
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Logout
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot"),
-                  },
-                ]
+                {
+                  key: "1",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Form Browser
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/choosenScreen"),
+                },
+                {
+                  key: "2",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Generation
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Generate"),
+                },
+                {
+                  key: "3",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Mapping
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                },
+                {
+                  key: "4",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Closing
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Closing"),
+                },
+                {
+                  key: "5",
+                  icon: (
+                    <FaLock
+                      color="#151718"
+                      onClick={() => {
+                        if (confirm("Are you sure want to logout")) {
+                          localStorage.removeItem("token");
+                          navigate("/Precot");
+                        }
+                      }}
+                    />
+                  ),
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Logout
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot"),
+                },
+              ]
               : role === "ROLE_SUPERVISOR" ||
                 role === "ROLE_HOD" ||
                 role === "ROLE_DESIGNEE"
-              ? [
+                ? [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -2368,7 +2347,7 @@ const Bleaching_f13_Summary = () => {
                     onClick: () => navigate("/Precot"),
                   },
                 ]
-              : [
+                : [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -2478,8 +2457,7 @@ const Bleaching_f13_Summary = () => {
           </Button>,
           <Button
             key="back"
-            // icon={<LeftOutlined />}
-            onClick={handleBack}
+             onClick={handleBack}
             style={{
               backgroundColor: "#E5EEF9",
               color: "#00308F",

@@ -1,47 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  Button,
-  Col,
-  Input,
-  Row,
-  Tabs,
-  message,
-  Select,
-  Form,
-  Menu,
-  Avatar,
-  Drawer,
-  Modal,
-} from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
 import axios from "axios";
-import BleachingHeader from "../Components/BleachingHeader.js";
-import API from "../baseUrl.json";
-import { Tooltip } from "antd";
-import { FaUserCircle } from "react-icons/fa";
-import {
-  IoPrint,
-  IoSave,
-  IoLockClosedOutline,
-  IoCreate,
-} from "react-icons/io5";
-import PrecotSidebar from "../Components/PrecotSidebar.js";
-import { MdLockOutline } from "react-icons/md";
-import { BiLock } from "react-icons/bi";
-import { GrDocumentStore } from "react-icons/gr";
-import { GoArrowLeft } from "react-icons/go";
-import { IoIosArrowBack } from "react-icons/io";
-import logo from "../Assests/logo.png";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock } from "react-icons/fa6";
 import moment from "moment";
-import { DeleteOutlined } from "@ant-design/icons";
-import { FaTrash } from "react-icons/fa";
-import { AiOutlinePlus, AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
+import { useEffect, useRef, useState } from "react";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { GrDocumentStore } from "react-icons/gr";
+import { IoSave } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
+import BleachingHeader from "../Components/BleachingHeader.js";
+import PrecotSidebar from "../Components/PrecotSidebar.js";
+import API from "../baseUrl.json";
 
+import TextArea from "antd/es/input/TextArea";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
-import TextArea from "antd/es/input/TextArea";
 const { Option } = Select;
 
 const QualityControl_f04 = (props) => {
@@ -110,7 +84,7 @@ const QualityControl_f04 = (props) => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -134,7 +108,7 @@ const QualityControl_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData,      API.prodUrl]);
+  }, [apiData, API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -146,7 +120,7 @@ const QualityControl_f04 = (props) => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -170,7 +144,7 @@ const QualityControl_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData,      API.prodUrl]);
+  }, [apiData, API.prodUrl]);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -194,12 +168,15 @@ const QualityControl_f04 = (props) => {
     // const fetchBMR = async () => {
     // try {
     axios
-      .get(`${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/batch-numbers`, {
-        headers,
-        params: {
-          bmrNo: bmr,
-        },
-      })
+      .get(
+        `${API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/batch-numbers`,
+        {
+          headers,
+          params: {
+            bmrNo: bmr,
+          },
+        }
+      )
       .then((response) => {
         // setShiftOptions(response.data);
         setRawDetails(response.data);
@@ -224,7 +201,7 @@ const QualityControl_f04 = (props) => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           // id: OverallID,
           status: "Approve",
@@ -264,7 +241,7 @@ const QualityControl_f04 = (props) => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           // id: OverallID,
           status: "Reject",
@@ -297,7 +274,7 @@ const QualityControl_f04 = (props) => {
   };
 
   const { state } = useLocation();
-  const [availableShifts, setAvailableShifts] = useState([]);
+
   const [idNumbers, setIdNumbers] = useState(Array(1).fill(""));
   const [remarks, setRemarks] = useState(Array(1).fill(""));
   const navigate = useNavigate();
@@ -305,19 +282,6 @@ const QualityControl_f04 = (props) => {
   const [hourSelections, setHourSelections] = useState(
     Array(rows.length).fill(Array(22).fill(""))
   );
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Number of items per page
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = rows.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(rows.length / itemsPerPage);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
 
   useEffect(() => {
     const role = localStorage.getItem("role");
@@ -365,9 +329,13 @@ const QualityControl_f04 = (props) => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/qc/SaveRawCottonConsolidatedF004`, payload, {
-        headers,
-      })
+      .post(
+        `${API.prodUrl}/Precot/api/qc/SaveRawCottonConsolidatedF004`,
+        payload,
+        {
+          headers,
+        }
+      )
       .then((response) => {
         message.success("Raw Cotton Save Successfully");
         setSaveLoading(false);
@@ -411,7 +379,7 @@ const QualityControl_f04 = (props) => {
     setShift(shiftvalue);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${date}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${date}&shift=${shiftvalue}`,
 
         {
           headers: {
@@ -983,135 +951,12 @@ const QualityControl_f04 = (props) => {
         </div>
       ),
     },
-
-    // {
-    //   key: "2",
-    //   label: <p>Reviews</p>,
-    //   children: (
-    //     <div>
-    //       <table
-    //         style={{
-    //           borderCollapse: "collapse",
-    //           border: "1px solid black",
-    //           width: "70%",
-    //            tableLayout:"fixed"
-    //         }}
-    //       >
-    //         <tr>
-    //           <td
-    //             colSpan="4"
-    //             style={{
-    //               height: "35px",
-    //               textAlign: "center",
-    //               borderRight: "1px solid black",
-
-    //             }}
-    //           >
-    //             <b>Production Supervisor Sign & Date</b>
-    //           </td>
-    //           <td colSpan="4" style={{ textAlign: "center" }}>
-    //             <div style={{ marginRight: "20px" }}>
-    //               <b>HOD/ Designee Sign & Date</b>
-    //             </div>
-    //           </td>
-    //         </tr>
-    //         <tr>
-
-    //           <td
-    //             colSpan="4"
-    //             style={{
-    //               height: "80px",
-    //               textAlign: "center",
-    //               verticalAlign: "bottom",
-    //               borderRight: "1px solid black",
-
-    //             }}
-    //           >
-    //             {apiData && apiData.supervisor_status === "SUPERVISOR_APPROVED" && (
-    //              <div>
-    //             {apiData && apiData.supervisor_sign && <span>{apiData.supervisor_sign}</span>}
-    //             <br/>
-    //             {formattedSupervisorDate}
-    //             <br/>
-    //             <br/>
-    //                   <img
-    //               src={getImage}
-    //               alt="Supervisor Sign"
-    //               style={{
-    //                 width: "70px",
-    //                 height: "50px",
-    //                 marginLeft: "20px",
-    //                 objectFit: "contain",
-    //                 mixBlendMode: "multiply",
-    //                 justifyContent: "space-evenly",
-    //               }}
-    //             />
-    //             </div>
-    //              )}
-    //             {/* Signature & Date */}
-    //           </td>
-
-    //           <td
-    //             colSpan="4"
-    //             style={{ textAlign: "center", verticalAlign: "bottom" }}
-    //           >
-    //              {(apiData && apiData?.hod_status === "HOD_REJECTED" ||
-    //             apiData && apiData?.hod_status === "HOD_APPROVED") && (
-    //               <div>
-    //             {apiData && apiData.hod_sign && <span>{apiData.hod_sign}</span>}
-    //             <br/>
-    //             {formattedHODDate}
-    //            <br/>
-    //            <br/>
-    //                   <img
-    //               src={getImage1}
-    //               alt="Hod Sign"
-    //               style={{
-    //                 width: "70px",
-    //                 height: "50px",
-    //                 marginLeft: "20px",
-    //                 objectFit: "contain",
-    //                 mixBlendMode: "multiply",
-    //                 justifyContent: "space-evenly",
-    //               }}
-    //             />
-
-    //             </div>
-    //               )}
-    //             {/* Signature & Date */}
-    //           </td>
-
-    //         </tr>
-    //       </table>
-    //     </div>
-    //   ),
-    // },
   ];
 
-  const shouldShowSaveButton = () => {
-    const role = localStorage.getItem("role");
-    const supervisorStatus = localStorage.getItem("ROLE_SUPERVISOR");
-    const hodStatus = localStorage.getItem("HOD_STATUS");
-
-    return (
-      role === "ROLE_SUPERVISOR" &&
-      supervisorStatus !== "SUPERVISOR_APPROVED" &&
-      hodStatus !== "HOD_APPROVED"
-    );
-  };
-  const handleLogout = () => {
-    navigate("/Precot");
-  };
   useEffect(() => {
     const storedRole = localStorage.getItem("role");
     setRole(storedRole);
   }, []);
-
-  const isHOD = () => {
-    return (
-      localStorage.getItem("role") === "ROLE_HOD" || role === "ROLE_DESIGNEE"
-    );
-  };
 
   const handleBack = () => {
     navigate("/Precot/QualityControl/F-004/Summary");

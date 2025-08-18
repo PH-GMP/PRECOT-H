@@ -37,7 +37,7 @@ import PrecotSidebar from "../Components/PrecotSidebar.js";
 import { createGlobalStyle } from "styled-components";
 
 const PadPunchingSummary = () => {
-  const [formatNo, setFormatNo] = useState("PH-PRD03/F-001");
+  const [formatNo, setFormatNo] = useState("PH-QAD01-F-054");
   const [formName, setFormName] = useState("Production Details - Log Book");
   const [reason, setReason] = useState(false);
   const [isModalPrint, setIsModalPrint] = useState(false);

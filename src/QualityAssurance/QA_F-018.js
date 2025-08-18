@@ -108,30 +108,57 @@ const QA_F018 = () => {
   const onClose = () => {
     setOpen(false);
   };
-  const canDisplayButtons_reject = () => {};
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTON_BUDS",
+    13: "MARKETING",
+    14: "HR",
+  };
+  const storedIds = localStorage.getItem("departmentId");
+
+  const getDepartmentName = storedIds
+    ?.split(",")
+    .map((id) => departmentMap[parseInt(id)])
+    .filter(Boolean)
+    .join(",");
+
+  const Desginee_access = getDepartmentName?.includes("QUALITY_ASSURANCE");
+  const canDisplayButtons_reject = () => { };
   const canDisplayButtons = () => {
     if (
       roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_DESIGNEE" && Desginee_access)
     ) {
+      console.log("(roleBase === ROLE_DESIGNEE && Desginee_access)")
       if (
-        selectedRow?.qa_mr_status == "QA_MR_SUBMITTED" && // Not submitted
+        selectedRow?.qa_mr_status == "QA_MR_SUBMITTED" &&
         (selectedRow?.hod_status == "WAITING_FOR_APPROVAL" ||
           selectedRow?.hod_status == "HOD_APPROVED")
       ) {
-        return "none"; // Hide button if operator has approved and neither supervisor nor HOD has rejected
+        return "none";
       } else if (
-        selectedRow?.qa_mr_status == "QA_MR_APPROVED" && // Not submitted
+        selectedRow?.qa_mr_status == "QA_MR_APPROVED" &&
         selectedRow?.hod_status == "HOD_APPROVED"
       ) {
         return "none";
       }
     } else if (
       roleBase == "ROLE_HOD" ||
-      (roleBase == "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+      (roleBase == "ROLE_DESIGNEE" && !Desginee_access)
     ) {
+      console.log("")
       if (
-        selectedRow?.qa_mr_status == "QA_MR_SUBMITTED" && // Not submitted
+        selectedRow?.qa_mr_status == "QA_MR_SUBMITTED" &&
         selectedRow?.hod_status == "HOD_APPROVED"
       ) {
         return "none";
@@ -143,12 +170,12 @@ const QA_F018 = () => {
   const canDisplayButton2 = () => {
     if (
       roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_DESIGNEE" && Desginee_access)
     ) {
       if (
         selectedRow &&
-        selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" && // Not submitted
-        selectedRow?.hod_status === "WAITING_FOR_APPROVAL" // HOD not waiting for approval
+        selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
+        selectedRow?.hod_status === "WAITING_FOR_APPROVAL"
       ) {
         return "none";
       } else if (
@@ -160,12 +187,12 @@ const QA_F018 = () => {
         selectedRow?.qa_mr_status === "QA_MR_APPROVED" &&
         selectedRow?.hod_status === "HOD_APPROVED"
       ) {
-        return "none"; // Added condition to check for HOD_APPROVED
+        return "none";
       } else if (
         selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
         selectedRow?.hod_status === "HOD_REJECTED"
       ) {
-        return "none"; // Added condition to check for HOD_APPROVED
+        return "none";
       } else if (
         selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
         selectedRow?.hod_status === "HOD_APPROVED"
@@ -173,10 +200,9 @@ const QA_F018 = () => {
         return "none"; // Added condition to check for HOD_APPROVED
       }
     }
-
     if (
       roleBase === "ROLE_HOD" ||
-      (roleBase == "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+      (roleBase == "ROLE_DESIGNEE" && !Desginee_access)
     ) {
       if (selectedRow?.hod_status === "HOD_APPROVED") {
         return "none";
@@ -186,7 +212,7 @@ const QA_F018 = () => {
   const canEdit = () => {
     if (
       roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_DESIGNEE" && Desginee_access)
     ) {
       if (
         selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
@@ -211,7 +237,7 @@ const QA_F018 = () => {
       }
     } else if (
       roleBase === "ROLE_HOD" ||
-      (roleBase == "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+      (roleBase == "ROLE_DESIGNEE" && !Desginee_access)
     ) {
       return !(
         selectedRow &&
@@ -338,7 +364,7 @@ const QA_F018 = () => {
             if (
               roleBase === "ROLE_HOD" ||
               (roleBase == "ROLE_DESIGNEE" &&
-                department !== "QUALITY_ASSURANCE")
+                !Desginee_access)
             ) {
               if (res.data?.hod_status === "HOD_REJECTED") {
                 message.warning(
@@ -360,7 +386,7 @@ const QA_F018 = () => {
                 "The current user role does not have access to the form."
               );
               setTimeout(() => {
-                navigate("/Precot/QA/F-18/Summary"); // Redirect to the summary page
+                navigate("/Precot/QA/F-18/Summary");
               }, 1500);
             }
 
@@ -639,6 +665,8 @@ const QA_F018 = () => {
   //SAve API
 
   const customercomplaint_submit = () => {
+
+
     const isValid = () => {
       if (!date) return " Date is required";
       if (!complaint_Reeived_date) return "Complaint Received Date is required";
@@ -654,7 +682,12 @@ const QA_F018 = () => {
       if (!Batch_No) return "Batch No is required";
       if (!Container_No) return "Container No is required";
       if (!production_date) return "Production Date is required";
-      if (!sample_received_on) return "Sample received is required";
+
+
+      if (Complaint_Sample_Received === "YES") {
+        console.log("yes")
+        if (!sample_received_on) return "Sample received is required";
+      }
       if (!Complaint_Sample_Received)
         return "Complaint Sample Received  is required";
       if (!complaint_Reeived_date) return "Complaint Reeived Date  is required";
@@ -855,6 +888,14 @@ const QA_F018 = () => {
     }
   }, [token]);
 
+  const allowedDepartments = [
+    "BLEACHING",
+    "SPUNLACE",
+    "COTTON_BUDS",
+    "DRY_GOODS",
+    "PAD_PUNCHING"
+  ];
+
   const items = [
     {
       key: "1",
@@ -914,11 +955,16 @@ const QA_F018 = () => {
                     onChange={setAvailableShiftslov}
                     disabled={isEditable}
                   >
-                    {availableshift.map((shiftvalue, index) => (
-                      <Option key={index} value={shiftvalue}>
-                        {shiftvalue}
-                      </Option>
-                    ))}
+                    {availableshift
+                      .filter((shiftvalue => allowedDepartments.includes(shiftvalue)))
+                      .map((shiftvalue, index) => {
+
+                        return (
+                          <Option key={index} value={shiftvalue}>
+                            {shiftvalue}
+                          </Option>
+                        )
+                      })}
                   </Select>
                 </td>
 
@@ -1571,22 +1617,22 @@ const QA_F018 = () => {
                   Responsibility
                   {(selectedRow?.hod_status === "HOD_APPROVED" ||
                     selectedRow?.hod_status === "HOD_REJECTED") && (
-                    <>
-                      <div>{selectedRow?.hod_sign}</div>
-                      <div>{hodsign}</div>
+                      <>
+                        <div>{selectedRow?.hod_sign}</div>
+                        <div>{hodsign}</div>
 
-                      {getImageHOD && (
-                        <>
-                          <br />
-                          <img
-                            src={getImageHOD}
-                            alt="logo"
-                            className="signature"
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
+                        {getImageHOD && (
+                          <>
+                            <br />
+                            <img
+                              src={getImageHOD}
+                              alt="logo"
+                              className="signature"
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
                 </td>
               </tr>
               <tr>
@@ -1656,6 +1702,8 @@ const QA_F018 = () => {
       ),
     },
   ];
+
+
   return (
     <div>
       <PrecotSidebar
@@ -1690,8 +1738,53 @@ const QA_F018 = () => {
             Back
           </Button>,
           roleBase === "ROLE_HOD" ||
-          (roleBase === "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+            (roleBase === "ROLE_DESIGNEE" && !Desginee_access)
             ? [
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
+
+              // Only render the Reject button if the roleBase is "ROLE_HOD"
+              roleBase === "ROLE_HOD" ||
+                (roleBase === "ROLE_DESIGNEE" &&
+                  !Desginee_access) ? (
+                <Button
+                  key="reject"
+                  loading={saveLoading}
+                  type="primary"
+                  style={{
+                    backgroundColor: "#E5EEF9",
+                    color: "#00308F",
+                    fontWeight: "bold",
+                    display: canDisplayButtons(),
+                  }}
+                  icon={<img src={approveIcon} alt="Approve Icon" />}
+                  onClick={handleRejectModal}
+                  shape="round"
+                >
+                  &nbsp;Reject
+                </Button>
+              ) : null,
+            ]
+            : [
+              (roleBase === "QA_MANAGER" ||
+                (roleBase === "ROLE_DESIGNEE" &&
+                  Desginee_access)) &&
+                selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
+                selectedRow?.hod_status === "HOD_APPROVED" ? (
                 <Button
                   key="approve"
                   loading={saveLoading}
@@ -1700,93 +1793,48 @@ const QA_F018 = () => {
                     backgroundColor: "#E5EEF9",
                     color: "#00308F",
                     fontWeight: "bold",
-                    display: canDisplayButtons(),
+                    display: canDisplayButtons_reject(),
                   }}
+                  icon={<img src={rejectIcon} alt="Reject Icon" />}
                   onClick={handleApprove}
                   shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
                 >
                   &nbsp;Approve
-                </Button>,
-
-                // Only render the Reject button if the roleBase is "ROLE_HOD"
-                roleBase === "ROLE_HOD" ||
-                (roleBase === "ROLE_DESIGNEE" &&
-                  department !== "QUALITY_ASSURANCE") ? (
-                  <Button
-                    key="reject"
-                    loading={saveLoading}
-                    type="primary"
-                    style={{
-                      backgroundColor: "#E5EEF9",
-                      color: "#00308F",
-                      fontWeight: "bold",
-                      display: canDisplayButtons(),
-                    }}
-                    icon={<img src={approveIcon} alt="Approve Icon" />}
-                    onClick={handleRejectModal}
-                    shape="round"
-                  >
-                    &nbsp;Reject
-                  </Button>
-                ) : null,
-              ]
-            : [
-                (roleBase === "QA_MANAGER" ||
-                  (roleBase === "ROLE_DESIGNEE" &&
-                    department === "QUALITY_ASSURANCE")) &&
-                selectedRow?.qa_mr_status === "QA_MR_SUBMITTED" &&
-                selectedRow?.hod_status === "HOD_APPROVED" ? (
-                  <Button
-                    key="approve"
-                    loading={saveLoading}
-                    type="primary"
-                    style={{
-                      backgroundColor: "#E5EEF9",
-                      color: "#00308F",
-                      fontWeight: "bold",
-                      display: canDisplayButtons_reject(),
-                    }}
-                    icon={<img src={rejectIcon} alt="Reject Icon" />}
-                    onClick={handleApprove}
-                    shape="round"
-                  >
-                    &nbsp;Approve
-                  </Button>
-                ) : null,
-                <Button
-                  key="save"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButton2(),
-                  }}
-                  shape="round"
-                  icon={<IoSave color="#00308F" />}
-                >
-                  Save
-                </Button>,
-                <Button
-                  key="submit"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ],
+                </Button>
+              ) : null,
+              <Button
+                key="save"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButton2(),
+                }}
+                shape="round"
+                icon={<IoSave color="#00308F" />}
+              >
+                Save
+              </Button>,
+              <Button
+                key="submit"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ],
           <Button
             key="logout"
             type="primary"

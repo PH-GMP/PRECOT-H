@@ -1,43 +1,36 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
 import {
+  Avatar,
   Button,
   Col,
-  Input,
-  Row,
-  Tabs,
-  Select,
+  Drawer,
   Form,
+  Input,
+  Menu,
   message,
+  Modal,
+  Radio,
+  Row,
+  Table,
   Tooltip,
   Typography,
-  Table,
-  Radio,
-  DatePicker,
 } from "antd";
-import axios from "axios";
-import BleachingHeader from "../Components/BleachingHeader";
-import { useNavigate, useLocation } from "react-router-dom";
-import API from "../baseUrl.json";
-import { BiLock } from "react-icons/bi";
-import { IoMdPrint } from "react-icons/io";
-import { IoPrint, IoSave } from "react-icons/io5";
-import { GrDocumentStore } from "react-icons/gr";
-import { FaBackward, FaUserCircle } from "react-icons/fa";
-import { IoCaretBackCircleSharp } from "react-icons/io5";
-import logo from "../Assests/logo.png";
-import moment from "moment";
-import BleachingPrintHeader from "../Components/BleachingPrintHeader";
-import BleachingTail from "../Components/BleachingTail";
-import { Modal, Drawer, Menu, Avatar } from "antd";
-import { IoCreate } from "react-icons/io5";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock } from "react-icons/fa6";
-import { GoArrowLeft } from "react-icons/go";
 import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { FaLock } from "react-icons/fa6";
+import { GrDocumentStore } from "react-icons/gr";
+import { IoCaretBackCircleSharp, IoCreate } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 const { Paragraph } = Typography;
 
 function Bleaching_f02() {
@@ -96,37 +89,14 @@ function Bleaching_f02() {
   const [rejectRemarks, setRejectRemarks] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [cleanedBySign, setCleanedBySign] = useState("");
-
-  const [summary, setSummary] = useState();
   const [messageApi, contextHolder] = message.useMessage();
-
   const [submitBtnStatus, setSubmitBtnStatus] = useState(true);
   const [printBtnStatus, setPrintBtnStatus] = useState(true);
-
   const navigate = useNavigate();
-
   const role = localStorage.getItem("role");
   const token = localStorage.getItem("token");
-
-  const { Option } = Select;
-
-  const shiftOption = [
-    { id: 1, value: "Once in a day" },
-    { id: 2, value: "Twice in a week" },
-    { id: 3, value: "Quarterly" },
-  ];
-
   const { state } = useLocation();
-
-  // Get the current date
-  const currentDate = new Date();
-  const currentDay = currentDate.getDate();
-  const currentMonth = currentDate.getMonth() + 1; // Months are 0-indexed
-  const currentYear = currentDate.getFullYear();
-  // const formattedDate = `${currentDay.toString().padStart(2, "0")}/${currentMonth.toString().padStart(2, "0")}/${currentYear}`;
-
   const formattedDate = moment(newDate).format("DD/MM/YYYY");
-  // const [isChecked, setIsChecked] = useState(false);
 
   // Function to transform the value based on conditions
   const transformValue = (value) => {
@@ -141,7 +111,6 @@ function Bleaching_f02() {
         return value;
     }
   };
-
   const handleApprove = async () => {
     setSaveLoading(true);
 
@@ -152,7 +121,7 @@ function Bleaching_f02() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: clean_id,
           status: "Approve",
@@ -161,8 +130,7 @@ function Bleaching_f02() {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res);
-        // window.location.reload();
+
         message.success(res.data.message);
         navigate("/Precot/Bleaching/F-02/Summary");
       })
@@ -175,12 +143,8 @@ function Bleaching_f02() {
         setSaveLoading(false);
       });
   };
-
   const handleRejectModal = () => {
     setShowModal(true);
-    // window.print()
-    // console.log("print screen works");
-    // Add any other print-related logic here
   };
   const handleReject = async () => {
     setSaveLoading(true);
@@ -198,7 +162,7 @@ function Bleaching_f02() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: clean_id,
           status: "Reject",
@@ -270,56 +234,18 @@ function Bleaching_f02() {
   const handleroofCleaningChange = (e) => {
     setRoofCleaning(e.target.value);
   };
-  const generateDatesForMonth = (month, year) => {
-    const dates = [];
 
-    const daysInMonth = new Date(year, month, 0).getDate();
-
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = `${day}/${month}/${year}`;
-      // console.log("date", date);
-      dates.push(date);
-    }
-
-    return dates;
-  };
-  const getMonthFromDate = (dateStr) => {
-    const dateParts = dateStr.split("/");
-    return dateParts[1]; // Extracting the month part
-  };
-  const getMonthFrom_Date = (dateStr) => {
-    const dateParts = dateStr.split("-");
-    return dateParts[1]; // Extracting the month part
-  };
-  // let datesForMonth = ["2024-07-01", "2024-06-02", "2024-06-03", "2024-06-04", "2024-06-05", "2024-06-06", "2024-06-07", "2024-06-08", "2024-06-09", "2024-06-10", "2024-06-11", "2024-06-12", "2024-06-13", "2024-06-14", "2024-06-15", "2024-06-16", "2024-06-17", "2024-06-18", "2024-06-19", "2024-06-20", "2024-06-21", "2024-06-22", "2024-06-23", "2024-06-24", "2024-06-25", "2024-06-26", "2024-06-27", "2024-06-28", "2024-06-29", "2024-06-30"]
-  const newmonth = getMonthFrom_Date(state.date);
-
-  // const datesForMonth = generateDatesForMonth(newmonth, 2024);
-
-  // const datesForMonth = state.monthSummary;
   const [datesForMonth, setDatesForMonth] = useState([]);
 
   useEffect(() => {
     setDatesForMonth(state.monthSummary);
-    // console.log("dates from navigatr", state.monthSummary);
-    // console.log("dates for Month in f02", datesForMonth);
     fetchData();
-
-    const date = new Date();
-    // const month = date.toLocaleString("default", { month: "long" });
-
-    // const year = date.toLocaleString("default", { year: "numeric" });
     const dateParts = state.date.split("-");
     const month = dateParts[1];
     const year = dateParts[0];
     // const monthSummary = generateDatesForMonth(month, year);
     setMonth(month);
     setYear(year);
-    // const month1 = getMonthFromDate('23/06/2024');
-    // datesForMonth = generateDatesForMonth(month1, 2024);
-    // // console.log('dates for a month', datesForMonth);
-    // console.log("month", month);
-    // console.log("year", year);
 
     setTimeout(() => {
       const headers = {
@@ -328,7 +254,7 @@ function Bleaching_f02() {
       };
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02`,
           {
             headers,
             params: {
@@ -338,23 +264,15 @@ function Bleaching_f02() {
           }
         )
         .then((res) => {
-          // console.log("Month&Year Details", res.data);
-          res.data.forEach((item) => {
-            // // console.log(
-            //   `Date At: ${item.date}, Floor Cleaning ID: ${item.floor_cleaninh}`
-            // );
-          });
-
+          res.data.forEach((item) => {});
           setPrintData(res.data);
         })
-        .catch((err) => {
-          // console.log("Error", err);
-        });
+        .catch((err) => {});
     }, 1000);
   }, []);
 
   const handleBack = () => {
-    if (role == "ROLE_SUPERVISOR") {
+    if (role == "ROLE_HR") {
       navigate("/Precot/Bleaching/F-02/Summary");
     } else {
       navigate("/Precot/Bleaching/F-02/Summary");
@@ -363,34 +281,34 @@ function Bleaching_f02() {
 
   const fetchData = async () => {
     const { date, clean_id } = state || {};
-
-    // console.log("Date", date);
     setNewDate(date);
-    // if (localStorage.getItem("role") == "ROLE_SUPERVISOR") {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02/`, {
-        headers,
-        params: {
-          date: date,
-        },
-      })
+      .get(
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02/`,
+        {
+          headers,
+          params: {
+            date: date,
+          },
+        }
+      )
       .then((res) => {
         // console.log("post", res.data);
         if (res.data.length == 0) {
           // console.log(" Length", res.data.length);
           if (
-            localStorage.getItem("role") == "ROLE_SUPERVISOR" &&
+            localStorage.getItem("role") == "ROLE_HR" &&
             res.data.length == 0
           ) {
             // setSaveBtnStatus(true);
             setSubmitBtnStatus(true);
             setPrintBtnStatus(false);
           } else if (
-            localStorage.getItem("role") == "ROLE_HR" &&
+            localStorage.getItem("role") == "ROLE_SUPERVISOR" &&
             res.data.length == 0
           ) {
             setSubmitBtnStatus(false);
@@ -447,16 +365,16 @@ function Bleaching_f02() {
           setDisable(true);
           setRemarkDisable(false);
 
-          if (isRole("ROLE_SUPERVISOR")) {
+          if (isRole("ROLE_HR")) {
             if (
-              isStatus("hr_status", "WAITING_FOR_APPROVAL") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "WAITING_FOR_APPROVAL") &&
               isStatus("hod_status", "")
             ) {
               setDisable(true);
             } else if (
-              isStatus("hr_status", "HR_REJECTED") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "SUPERVISOR_REJECTED") &&
               isStatus("hod_status", "")
             ) {
               setSubmitBtnStatus(true);
@@ -475,30 +393,30 @@ function Bleaching_f02() {
             ) {
               setSubmitBtnStatus(true);
               setDisable(false);
-            } else if (isStatus("hr_status", "HR_REJECTED")) {
+            } else if (isStatus("supervisor_status", "SUPERVISOR_REJECTED")) {
               setSubmitBtnStatus(true);
               setDisable(false);
             }
-          } else if (isRole("ROLE_HR")) {
+          } else if (isRole("ROLE_SUPERVISOR")) {
             if (
-              isStatus("hr_status", "WAITING_FOR_APPROVAL") &&
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              isStatus("supervisor_status", "WAITING_FOR_APPROVAL") &&
               isStatus("hod_status", "")
             ) {
               setSubmitBtnStatus(true);
               setRemarkDisable(true);
             } else if (
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
-              (isStatus("hr_status", "HR_APPROVED") ||
-                isStatus("hr_status", "HR_REJECTED")) &&
+              isStatus("hr_status", "HR_APPROVED") &&
+              (isStatus("supervisor_status", "SUPERVISOR_APPROVED") ||
+                isStatus("supervisor_status", "SUPERVISOR_REJECTED")) &&
               (isStatus("hod_status", "HOD_REJECTED") ||
                 isStatus("hod_status", "HOD_APPROVED"))
             ) {
               setRemarkDisable(true);
               setSubmitBtnStatus(false);
             } else if (
-              isStatus("supervisor_status", "SUPERVISOR_APPROVED") &&
-              isStatus("hr_status", "HR_REJECTED") &&
+              isStatus("supervisor_status", "SUPERVISOR_REJECTED") &&
+              isStatus("hr_status", "HR_APPROVED") &&
               isStatus("hod_status", "WAITING_FOR_APPROVAL")
             ) {
               setRemarkDisable(false);
@@ -579,7 +497,7 @@ function Bleaching_f02() {
   const handleSubmit = async () => {
     setSubmitLoading(true);
 
-    if(cleanedBySign =="null" || cleanedBySign==""){
+    if (cleanedBySign == "null" || cleanedBySign == "") {
       message.warning("Cleaned By Name Required");
       setSubmitLoading(false);
       return;
@@ -626,7 +544,7 @@ function Bleaching_f02() {
       hr_submit_id: hrSubmitId,
       hr_sign: hrSign,
       hr_status: hrStatus,
-      cleaned_by:cleanedBySign
+      cleaned_by: cleanedBySign,
     };
     const token = localStorage.getItem("token");
 
@@ -637,7 +555,7 @@ function Bleaching_f02() {
 
     const response = await axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02`,
         payload,
         { headers }
       )
@@ -710,8 +628,6 @@ function Bleaching_f02() {
               <Radio value="NA">NA</Radio>
             </Radio.Group>
           );
-          // return <input type="checkbox" className="large-checkbox" checked={isChecked}
-          // onChange={handleChange}/>;
         }
         if (record.key === "2") {
           return (
@@ -942,7 +858,7 @@ function Bleaching_f02() {
     // console.log("finded Data", record);
     let result = {
       floor_cleaninh: "",
-      roof_cleaning:"",
+      roof_cleaning: "",
       removel_unwanted_meterials: "",
       side_wall_corners: "",
       windows: "",
@@ -979,7 +895,7 @@ function Bleaching_f02() {
     } else {
       result = {
         floor_cleaninh: "",
-        roof_cleaning:"",
+        roof_cleaning: "",
         removel_unwanted_meterials: "",
         side_wall_corners: "",
         windows: "",
@@ -1253,7 +1169,7 @@ function Bleaching_f02() {
           }
           buttonsArray={[
             role === "ROLE_HOD" ||
-            role === "ROLE_HR" ||
+            role === "ROLE_SUPERVISOR" ||
             role === "ROLE_QA" ||
             role === "ROLE_QC" ||
             role === "ROLE_DESIGNEE" ? (
@@ -1418,9 +1334,7 @@ function Bleaching_f02() {
             </p>
           </Form.Item>
           <Form.Item style={{ marginBottom: 0 }}>
-            <p style={{ fontWeight: "bold" }}>
-            Bleaching & AB Cotton Godown{" "}
-            </p>
+            <p style={{ fontWeight: "bold" }}>Bleaching & AB Cotton Godown </p>
           </Form.Item>
         </Form>
 
@@ -1452,34 +1366,29 @@ function Bleaching_f02() {
             onChange={(e) => setRemark(e.target.value)}
             disabled={disable}
           />
-            <Input
-          addonBefore="Cleaned by (Trained person) : "
-          // placeholder="Date"
-          type="text"
-          size="small"
-          value={`${cleanedBySign}`}
-          style={{ fontWeight: "bold" }}
-          onChange={(e) => setCleanedBySign(e.target.value)}
-          disabled={disable}
-        />
+          <Input
+            addonBefore="Cleaned by (Trained person) : "
+            type="text"
+            size="small"
+            value={`${cleanedBySign}`}
+            style={{ fontWeight: "bold" }}
+            onChange={(e) => setCleanedBySign(e.target.value)}
+            disabled={disable}
+          />
           <Input
             addonBefore="Verified by (Production Supervisor): "
-            // placeholder="Date"
             type="text"
             size="small"
             value={`${supervisorSign}   ${formatDate(supervisorSubmitOn)}`}
             style={{ fontWeight: "bold" }}
-            // onChange={(e) => setVerifiedbySupervisor(e.target.value)}
             disabled="none"
           ></Input>
           <Input
             addonBefore="Verified by (HR): "
-            // placeholder="Date"
             type="text"
             size="small"
             value={`${hrSign}   ${formatDate(hrSubmitOn)}`}
             style={{ fontWeight: "bold" }}
-            // onChange={(e) => setVerifiedbyHR(e.target.value)}
             disabled="none"
           />
           <Input

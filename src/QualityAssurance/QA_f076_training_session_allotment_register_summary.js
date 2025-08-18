@@ -8,7 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { IoPrint } from "react-icons/io5";
 import { TbMenuDeep } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../Assests/logo.png";
 import BleachingHeader from "../Components/BleachingHeader";
 import PrecotSidebar from "../Components/PrecotSidebar";
@@ -16,14 +16,16 @@ import API from "../baseUrl.json";
 
 const QA_f076_training_session_register_summary = () => {
   const navigate = useNavigate();
+  const [department_list, setdepartment_list] = useState([]);
 
-  const [selectedDep, setSelectedDepartment] = useState(null);
+  const [selectedDep, setSelectedDepartment] = useState("");
   // New state for eqno
   const [selectedDate, setSelectedDate] = useState("");
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     date: "", // Default empty value for date
   });
+  const { getDepartmentName } = useLocation().state || {}
   const [showModal, setShowModal] = useState(false);
   const [printResponseData, setPrintResponseData] = useState([]);
   const [selectedPrintYear, setSelectedPrintYear] = useState(null);
@@ -48,45 +50,7 @@ const QA_f076_training_session_register_summary = () => {
     return `${day}-${month}-${year}`;
   };
   const today = new Date().toISOString().split("T")[0];
-  const [departmentName, setDepartmentName] = useState("");
-  useEffect(() => {
-    const departmentID = localStorage.getItem("departmentId");
-    if (departmentID && departmentMap[departmentID]) {
-      setDepartmentName(departmentMap[departmentID]);
-    } else {
-      setDepartmentName("Unknown Department");
-    }
-  }, []);
 
-  const departmentMap = {
-    1: "BLEACHING",
-    2: "SPUNLACE",
-    3: "PAD_PUNCHING",
-    4: "DRY_GOODS",
-    5: "QUALITY_CONTROL",
-    6: "QUALITY_ASSURANCE",
-    7: "PPC",
-    8: "STORE",
-    9: "DISPATCH",
-    10: "PRODUCT_DEVELOPMENT",
-    11: "ENGINEERING",
-    12: "COTTEN_BUDS",
-    13: "MARKETING",
-  };
-
-  useEffect(() => {
-    const initializeDepartmentName = async () => {
-      const departmentID = localStorage.getItem("departmentId");
-
-      if (departmentID && departmentMap[departmentID]) {
-        setDepartmentName(departmentMap[departmentID]);
-      } else {
-        setDepartmentName("Unknown Department");
-      }
-    };
-
-    initializeDepartmentName();
-  }, []);
 
   const months = [
     { value: "January", label: "January" },
@@ -116,28 +80,59 @@ const QA_f076_training_session_register_summary = () => {
     }
   };
 
+
   useEffect(() => {
-    if (departmentName) {
-      setLoading(true);
-      axios
-        .get(
-          `${API.prodUrl}/Precot/api/QA/Service/TrainingSessionAllotmentRegister/Summary`,
-          {
-            params: { department: departmentName },
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        )
-        .then((response) => {
-          setSummary(response.data); // Set the summary data
-        })
-        .catch((error) => {
-          console.error("Error fetching training session data:", error);
-        })
-        .finally(() => {
-          setLoading(false); // Stop loading indicator
-        });
-    }
-  }, [departmentName, token]);
+
+    fetchDataCCRNO();
+
+  }, [])
+
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTEN_BUDS",
+    13: "MARKETING",
+  };
+
+  useEffect(() => {
+    setLoading(true);
+
+    const storedIds = localStorage.getItem("departmentId");
+
+    const getDepartmentName = storedIds
+      ?.split(",")
+      .map((id) => departmentMap[parseInt(id)])
+      .filter(Boolean)
+      .join(",");
+
+    axios
+      .get(
+        `${API.prodUrl}/Precot/api/QA/Service/TrainingSessionAllotmentRegister/Summary`,
+        {
+          params: { department: getDepartmentName },
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        setSummary(response.data); // Set the summary data
+      })
+      .catch((error) => {
+        console.error("Error fetching training session data:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Stop loading indicator
+      });
+  }, []);
+
 
   const baseColumns = [
     {
@@ -188,9 +183,7 @@ const QA_f076_training_session_register_summary = () => {
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
-  const handleDepChange = (e) => {
-    setSelectedDepartment(e.target.value);
-  };
+
 
   const printSubmit = () => {
     if (!selectedPrintDepart) {
@@ -234,14 +227,51 @@ const QA_f076_training_session_register_summary = () => {
     }
   };
 
+  const fetchDataCCRNO = async () => {
+    try {
+      setLoading(true);
+      axios
+        .get(`${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          if (res.data.length > 0) {
+            const data = res.data?.map((item) => {
+              return {
+                label: item.department,
+                value: item.department,
+                id: item.id
+              }
+            })
+            setdepartment_list(data)
+          }
+        });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleGoToChange = () => {
-    // Check if no fields are selected
-    if (selectedDep !== departmentName) {
-      message.error(
-        "The selected department cannot be the same as the current department."
-      );
+
+    // Get departmentId list from localStorage and convert to array of numbers
+    const departmentIdListString = localStorage.getItem("departmentId");
+    const departmentIdList = departmentIdListString
+      ?.split(",")
+      .map((id) => parseInt(id.trim()));
+
+    console.log("departmentIdList", departmentIdList)
+
+    // Check if selected department id is in the list
+    if (!departmentIdList?.includes(selectedDep.id)) {
+      message.warning("Selected department is not in your department list");
       return;
     }
+
 
     if (!selectedDate) {
       message.error("Please select a Date.");
@@ -251,14 +281,14 @@ const QA_f076_training_session_register_summary = () => {
       message.error("Please select a Department.");
       return;
     }
-
+    console.log("selectedDep.value selectedDate, ", selectedDate, selectedDep.value)
     if (selectedDate) {
       navigate(
         "/Precot/QualityAssurance/F-076/QA_f076_training_session_allotment_register",
         {
           state: {
             uniqueDate: selectedDate,
-            uniqueDep: selectedDep,
+            uniqueDep: selectedDep.value,
           },
         }
       );
@@ -683,25 +713,15 @@ const QA_f076_training_session_register_summary = () => {
         />
 
         <Select
-          placeholder="Select Department Name"
-          style={{ width: "200px", marginLeft: "20px", height: "28px" }}
-          onChange={(value) => setSelectedDepartment(value)} // Set the selected equipment number
-        >
-          <Select.Option value="BLEACHING">BLEACHING</Select.Option>
-          <Select.Option value="SPUNLACE">SPUNLACE</Select.Option>
-          <Select.Option value="PAD_PUNCHING">PAD PUNCHING</Select.Option>
-          <Select.Option value="DRY_GOODS">DRY GOODS</Select.Option>
-          <Select.Option value="QUALITY_CONTROL">QUALITY CONTROL</Select.Option>
-          <Select.Option value="QUALITY_ASSURANCE">
-            QUALITY ASSURANCE
-          </Select.Option>
-          <Select.Option value="PPC">PPC</Select.Option>
-          <Select.Option value="STORE">STORE</Select.Option>
-          <Select.Option value="DISPATCH">DISPATCH</Select.Option>
-          <Select.Option value="PRODUCT_DEVELOPMENT">
-            PRODUCT_DEVELOPMENT
-          </Select.Option>
-        </Select>
+          options={department_list}
+          value={selectedDep}
+          onChange={(value, option) => {
+            setSelectedDepartment(option);
+          }}
+          size="small"
+          style={{ width: "10%", height: "30px" }}
+        />
+
 
         <Button
           key="Create"

@@ -112,12 +112,14 @@ const QA_F21_Summary = () => {
   for (let i = 0; i <= 50; i++) {
     years.push(currentYear + i);
   }
+
   const years_fin = [];
   for (let i = 0; i <= 50; i++) {
     const startYear = currentYear + i;
     const endYear = startYear + 1;
     years_fin.push(`${startYear}-${endYear}`);
   }
+
   useEffect(() => {
     if (!initial.current) {
       initial.current = true;
@@ -125,6 +127,7 @@ const QA_F21_Summary = () => {
       fetchDataCCRNO();
     }
   }, []);
+
   const handlego_chart = async () => {
     fetchchartapi();
   };
@@ -523,7 +526,7 @@ const QA_F21_Summary = () => {
     setdate1(null);
     setIsFetchSuccessful(true);
   };
-  const handleDatePrintChange = (event) => {};
+  const handleDatePrintChange = (event) => { };
   const printDateSubmit = () => {
     window.print();
     setavailablemonths_chart(null);
@@ -975,9 +978,8 @@ const QA_F21_Summary = () => {
                       <tr>
                         <td colSpan="100%">
                           <div
-                            className={`chart-container ${
-                              isPrinting ? "printing" : ""
-                            }`}
+                            className={`chart-container ${isPrinting ? "printing" : ""
+                              }`}
                           >
                             <BarChart
                               width={800}

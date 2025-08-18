@@ -46,8 +46,8 @@ const PadPunching_f03 = () => {
   const role = localStorage.getItem("role");
   const location = useLocation();
   const { state } = location;
-  const { date, shift, machineName } = state || {};
-  console.log("878", shift);
+  const { date, shift, machineName, firstOrderNumber, secondOrderNumber } = state || {};
+  console.log("date, shift, machineName, firstOrderNumber, secondOrderNumber ", date, shift, machineName, firstOrderNumber, secondOrderNumber)
   const token = localStorage.getItem("token");
   const [saveLoading, setSaveLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -106,26 +106,19 @@ const PadPunching_f03 = () => {
       return "block";
     } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
       if (
-        productChangeOverRecord?.hod_status == "HOD_APPROVED" &&
-        productChangeOverRecord?.qa_status == "QA_REJECTED"
-      ) {
-        return "block";
-      } else if (
-        (productChangeOverRecord?.hod_status == "HOD_APPROVED" &&
-          productChangeOverRecord?.qa_status == "WAITING_FOR_APPROVAL") ||
-        productChangeOverRecord?.qa_status == "QA_APPROVED"
-      ) {
-        return "none";
-      }
-    } else if (role == "ROLE_QA") {
-      if (
-        productChangeOverRecord?.qa_status == "QA_APPROVED" ||
-        productChangeOverRecord?.qa_status == "QA_REJECTED"
+        productChangeOverRecord?.hod_status == "HOD_APPROVED" ||
+        productChangeOverRecord?.hod_status == "HOD_REJECTED"
       ) {
         return "none";
       }
       return "block";
-    } else {
+    } else if (role == "ROLE_QA") {
+      if (
+        productChangeOverRecord?.hod_status == "HOD_REJECTED" &&
+        productChangeOverRecord?.qa_status == "QA_APPROVED"
+      ) {
+        return "block";
+      }
       if (
         productChangeOverRecord?.qa_status == "QA_APPROVED" ||
         productChangeOverRecord?.qa_status == "QA_REJECTED"
@@ -134,6 +127,15 @@ const PadPunching_f03 = () => {
       }
       return "block";
     }
+    // else {
+    //   if (
+    //     productChangeOverRecord?.qa_status == "QA_APPROVED" ||
+    //     productChangeOverRecord?.qa_status == "QA_REJECTED"
+    //   ) {
+    //     return "none";
+    //   }
+    //   return "block";
+    // }
   };
   const canDisplayButton2 = () => {
     if (role == "ROLE_SUPERVISOR") {
@@ -148,6 +150,7 @@ const PadPunching_f03 = () => {
       return "none";
     }
   };
+
   const formattedDate = (dateString) => {
     if (dateString) {
       const date = moment(dateString);
@@ -166,8 +169,8 @@ const PadPunching_f03 = () => {
     }
     return "";
   };
-  const handleBulkYes = () => {};
-  const handleBulkNo = () => {};
+  const handleBulkYes = () => { };
+  const handleBulkNo = () => { };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -177,7 +180,7 @@ const PadPunching_f03 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -211,7 +214,7 @@ const PadPunching_f03 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -245,7 +248,7 @@ const PadPunching_f03 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -450,7 +453,7 @@ const PadPunching_f03 = () => {
     const fetchOrderNumberOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/orderNoList`,
+          `${API.prodUrl}/Precot/api/padpunching/orderNoList`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -488,13 +491,16 @@ const PadPunching_f03 = () => {
         return null;
     }
   }
-
+  useEffect(() => {
+    ScreenOneApi(firstOrderNumber)
+    ScreenOneApi2(secondOrderNumber)
+  }, [])
   const ScreenOneApi = async (value) => {
     try {
       setorderProductDetails(value);
       const formattedShift = convertShift(shift);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/packingDetailsRunning?date=${date}&shift=${formattedShift}&orderNo=${value}&machineName=${machineName}`,
+        `${API.prodUrl}/Precot/api/padpunching/packingDetailsRunning?date=${date}&shift=${formattedShift}&orderNo=${value}&machineName=${machineName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -514,16 +520,17 @@ const PadPunching_f03 = () => {
       console.log("screen tow details", response.data[0].ShaftNo);
     } catch (error) {
       console.error("Error checking BMR existence:", error);
-      message.error(error.response.data.message);
+      // message.error(error.response.data.message);
     } finally {
     }
   };
+
   const ScreenOneApi2 = async (value) => {
     try {
       setorderProductDetails2(value);
       const formattedShift = convertShift(shift);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/packingDetailsRunning?date=${date}&shift=${formattedShift}&orderNo=${value}&machineName=${machineName}`,
+        `${API.prodUrl}/Precot/api/padpunching/packingDetailsRunning?date=${date}&shift=${formattedShift}&orderNo=${value}&machineName=${machineName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -543,7 +550,7 @@ const PadPunching_f03 = () => {
       console.log("screen tow details", response.data[0].ShaftNo);
     } catch (error) {
       console.error("Error checking BMR existence:", error);
-      message.error(error.response.data.message);
+      // message.error(error.response.data.message);
     } finally {
     }
   };
@@ -630,7 +637,7 @@ const PadPunching_f03 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/saveProductChangeOverF03`,
+        `${API.prodUrl}/Precot/api/punching/saveProductChangeOverF03`,
         payload,
         { headers }
       );
@@ -729,7 +736,7 @@ const PadPunching_f03 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/submitProductChangeOverF03`,
+        `${API.prodUrl}/Precot/api/punching/submitProductChangeOverF03`,
         payload,
         { headers }
       );
@@ -773,7 +780,7 @@ const PadPunching_f03 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveProductChangeOverF03`,
+        `${API.prodUrl}/Precot/api/punching/approveProductChangeOverF03`,
         {
           id: ProductId,
           status: "Approve",
@@ -808,7 +815,7 @@ const PadPunching_f03 = () => {
     }
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveProductChangeOverF03`,
+        `${API.prodUrl}/Precot/api/punching/approveProductChangeOverF03`,
         {
           id: ProductId,
           status: "Reject",
@@ -833,7 +840,7 @@ const PadPunching_f03 = () => {
   const fetchDetailsByParams = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/punching/getproductChangeOverF03?date=${date}&shift=${shift}&machine=${machineName}
+        `${API.prodUrl}/Precot/api/punching/getproductChangeOverF03?date=${date}&shift=${shift}&machine=${machineName}&order1=${firstOrderNumber}&order2=${secondOrderNumber}
 `,
         {
           headers: {
@@ -912,9 +919,7 @@ const PadPunching_f03 = () => {
 
         if (
           ((role == "ROLE_HOD" || role == "ROLE_DESIGNEE") &&
-            response.data.hod_status !== "QA_APPROVED") ||
-          ((role == "ROLE_HOD" || role == "ROLE_DESIGNEE") &&
-            response.data.qa_status == "HOD_REJECTED")
+            response.data.qa_status !== "QA_APPROVED")
         ) {
           message.error("QA Yet Not Approved");
           setTimeout(() => {
@@ -923,18 +928,15 @@ const PadPunching_f03 = () => {
         }
         if (
           (role == "ROLE_QA" &&
-            response.data.supervisor_status !== "SUPERVISOR_APPROVED") ||
-          (role == "ROLE_QA" &&
-            (response.data.hod_status == "HOD_REJECTED" ||
-              response.data.qa_status == "QA_REJECTED"))
+            response.data.supervisor_status !== "SUPERVISOR_APPROVED")
+
         ) {
           message.error("Supervisor Yet Not Approved");
           setTimeout(() => {
             navigate("/Precot/PadPunching/F-03/Summary");
           }, 1500);
         }
-        ``;
-      } else {
+
       }
     } catch (error) {
       // message.error(error.message);
@@ -992,57 +994,13 @@ const PadPunching_f03 = () => {
                 3
               </td>
               <td colSpan="40" style={{ textAlign: "center" }}>
-                Order No./BMR No.{" "}
+                Order No./BMR No.
               </td>
-              <td colSpan="30">
-                <Select
-                  showSearch
-                  value={orderProductDetails}
-                  onChange={(value) => {
-                    ScreenOneApi(value);
-                  }}
-                  style={{ width: "100%", marginBottom: "20px" }}
-                  placeholder="Search Order Number"
-                  disabled={disable}
-                >
-                  <Select.Option value="" disabled selected>
-                    Select Order Number
-                  </Select.Option>
-                  {orderNumberLov.map((order) => (
-                    <Select.Option key={order.value} value={order.value}>
-                      {order.value}
-                    </Select.Option>
-                  ))}
-                </Select>
-                {/* <Input
-             className="inp-new"
-            value={orderProductDetails}
-        /> */}
+              <td colSpan="30" style={{ height: "30px", textAlign: "center" }}>
+                <span style={{ fontSize: "15px" }}>{firstOrderNumber}</span>
               </td>
-              <td colSpan="25">
-                {/* <Input
-             className="inp-new"
-            value={orderProductDetails}
-        /> */}
-                <Select
-                  showSearch
-                  value={orderProductDetails2}
-                  onChange={(value) => {
-                    ScreenOneApi2(value);
-                  }}
-                  style={{ width: "100%", marginBottom: "20px" }}
-                  placeholder="Search Order Number"
-                  disabled={disable}
-                >
-                  <Select.Option value="" disabled selected>
-                    Select Order Number
-                  </Select.Option>
-                  {orderNumberLov.map((order) => (
-                    <Select.Option key={order.value} value={order.value}>
-                      {order.value}
-                    </Select.Option>
-                  ))}
-                </Select>
+              <td colSpan="25" style={{ height: "30px", textAlign: "center" }}>
+                <span style={{ fontSize: "15px" }}> {secondOrderNumber}</span>
               </td>
             </tr>
             <tr>
@@ -1057,7 +1015,7 @@ const PadPunching_f03 = () => {
                   className="inp-new"
                   value={JulianRP}
                   onChange={(e) => setJulianRP(e.target.value)}
-                />
+                  disabled={disable} />
               </td>
               <td colSpan="25">
                 <input
@@ -1172,7 +1130,7 @@ const PadPunching_f03 = () => {
               </td>
             </tr>
           </table>
-        </div>
+        </div >
       ),
     },
     {
@@ -1728,41 +1686,41 @@ const PadPunching_f03 = () => {
               >
                 {productChangeOverRecord?.supervisor_status ===
                   "SUPERVISOR_APPROVED" && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{productChangeOverRecord?.supervisor_sign}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <div>
-                          {formattedDate(
-                            productChangeOverRecord?.supervisor_submit_on
-                          )}
+                          {" "}
+                          <div>{productChangeOverRecord?.supervisor_sign}</div>
+                          <div>
+                            {formattedDate(
+                              productChangeOverRecord?.supervisor_submit_on
+                            )}
+                          </div>
                         </div>
+                        {getImage1 && (
+                          <img
+                            src={getImage1}
+                            alt="Supervisor Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "center",
+                            }}
+                          />
+                        )}
                       </div>
-                      {getImage1 && (
-                        <img
-                          src={getImage1}
-                          alt="Supervisor Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                    {/* <div>Signature & Date</div> */}
-                  </>
-                )}
+                      {/* <div>Signature & Date</div> */}
+                    </>
+                  )}
               </td>
               <td
                 colSpan="50"
@@ -1773,38 +1731,38 @@ const PadPunching_f03 = () => {
               >
                 {(productChangeOverRecord?.qa_status === "QA_REJECTED" ||
                   productChangeOverRecord?.qa_status === "QA_APPROVED") && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{productChangeOverRecord?.qa_sign}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <div>
-                          {formattedDate(productChangeOverRecord?.qa_submit_on)}
+                          {" "}
+                          <div>{productChangeOverRecord?.qa_sign}</div>
+                          <div>
+                            {formattedDate(productChangeOverRecord?.qa_submit_on)}
+                          </div>
                         </div>
-                      </div>
-                      {getImage3 && (
-                        <img
-                          src={getImage3}
-                          alt="HOD Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "space-evenly",
-                          }}
-                        />
-                      )}
-                    </div>{" "}
-                  </>
-                )}
+                        {getImage3 && (
+                          <img
+                            src={getImage3}
+                            alt="HOD Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "space-evenly",
+                            }}
+                          />
+                        )}
+                      </div>{" "}
+                    </>
+                  )}
               </td>
               <td
                 colSpan="50"
@@ -1815,40 +1773,40 @@ const PadPunching_f03 = () => {
               >
                 {(productChangeOverRecord?.hod_status === "HOD_REJECTED" ||
                   productChangeOverRecord?.hod_status === "HOD_APPROVED") && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{productChangeOverRecord?.hod_sign}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <div>
-                          {formattedDate(
-                            productChangeOverRecord?.hod_submit_on
-                          )}
+                          {" "}
+                          <div>{productChangeOverRecord?.hod_sign}</div>
+                          <div>
+                            {formattedDate(
+                              productChangeOverRecord?.hod_submit_on
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      {getImage2 && (
-                        <img
-                          src={getImage2}
-                          alt="HOD Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "space-evenly",
-                          }}
-                        />
-                      )}
-                    </div>{" "}
-                  </>
-                )}
+                        {getImage2 && (
+                          <img
+                            src={getImage2}
+                            alt="HOD Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "space-evenly",
+                            }}
+                          />
+                        )}
+                      </div>{" "}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
@@ -1892,9 +1850,9 @@ const PadPunching_f03 = () => {
           </Button>,
 
           role === "ROLE_HOD" ||
-          role === "ROLE_QA" ||
-          role === "ROLE_QC" ||
-          role === "ROLE_DESIGNEE" ? (
+            role === "ROLE_QA" ||
+            role === "ROLE_QC" ||
+            role === "ROLE_DESIGNEE" ? (
             <>
               <Button
                 loading={saveLoading}

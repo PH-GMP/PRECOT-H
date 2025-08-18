@@ -66,6 +66,7 @@ const QA_f034_Inprocess_Inspection_Report = () => {
   const editShown = useRef(false);
   const alertShown = useRef(false);
   const [selectedPoNo, setSelectedPoNo] = useState("");
+  const [customers, setCustomers] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
   const [isEditable, setIsEditable] = useState();
@@ -189,13 +190,18 @@ const QA_f034_Inprocess_Inspection_Report = () => {
   const roleauth = localStorage.getItem("role");
   const departmentChange = (value) => setSelectedDepartment(value);
   const machineChange = (value) => setSelectedMachine(value);
-  const materialChange = (value) => setSelectedMat(value);
+  const materialChange = (value) => {
+    fetchCustomer(value);
+    setSelectedMat(value);
+  };
 
   const bmrChange = (value) => {
+    fetchPdeValues(value);
     setSelectedpOrder(null);
     setSelectedMat(null);
     setSelectedBMR(value);
   };
+
   const pOrderChange = (value) => {
     setSelectedMat(null);
     setSelectedpOrder(value);
@@ -904,25 +910,12 @@ const QA_f034_Inprocess_Inspection_Report = () => {
 
   useEffect(() => {
     fetchDepartmentsLov();
-    fetchMachinesLov();
     fetchInspectionEditDate();
   }, []);
 
   useEffect(() => {
     fetchBMRLov();
   }, [selectedDepartment]);
-
-  useEffect(() => {
-    fetchpOderLov();
-  }, [selectedDepartment, selectedBMr]);
-
-  useEffect(() => {
-    fetchPoNoLov();
-  }, [selectedpOrder]);
-
-  useEffect(() => {
-    fetchCustNameAndProdDesc();
-  }, [selectedMaterial]);
 
   const canDisplayButtonSave = () => {
     if (roleauth === "ROLE_QA") {
@@ -1061,32 +1054,6 @@ const QA_f034_Inprocess_Inspection_Report = () => {
     }
   };
 
-  const fetchMachinesLov = async () => {
-    try {
-      setLoading(true); // Show loading spinner while fetching data
-      const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/machineLov?department=${editDepartment}`, // Replace with your actual API base URL
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Add token in Authorization header
-          },
-        }
-      );
-      const machineOptions = response.data.map((mach) => ({
-        label: mach.MCN, // Each element is the label itself
-        value: mach.MCN, // Each element is also the value itself
-      }));
-
-      setMachines(machineOptions); // Set fetched departments as options
-    } catch (error) {
-      console.error("Error fetching department LOV:", error);
-    } finally {
-      setLoading(false); // Stop loading spinner
-    }
-  };
-
   const fetchBMRLov = async () => {
     try {
       setLoading(true); // Show loading spinner while fetching data
@@ -1112,82 +1079,108 @@ const QA_f034_Inprocess_Inspection_Report = () => {
     }
   };
 
-  const fetchpOderLov = async () => {
+  const fetchPdeValues = async (value) => {
     try {
-      setLoading(true); // Show loading spinner while fetching data
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/pOderLov?department=${selectedDepartment}&batchNo=${selectedBMr}`, // Replace with your actual API base URL
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Add token in Authorization header
-          },
-        }
-      );
-      const pOrderOptions = response.data.map((dept) => ({
-        label: dept, // Each element is the label itself
-        value: dept, // Each element is also the value itself
-      }));
-      setPOrder(pOrderOptions); // Set fetched departments as options
+      await axios
+        .get(
+          `${API.prodUrl}/Precot/api/QA/Service/getDataByBatchNo?batchNo=${value}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log("res", res);
+          if (res.data) {
+            setSelectedMachine(res.data.machineName);
+            setSelectedpOrder(res.data.orderNo);
+            setLotNo(res.data.lotNumber);
+            setPoNo(res.data.poNumber);
+            setProductDescription(res.data.productDescription);
+            //Get itemcode api call
+            fetchItemCodes(res.data.poNumber);
+          }
+        })
+        .catch((err) => {
+          message.error(err.response.data.message);
+        });
     } catch (error) {
-      console.error("Error fetching department LOV:", error);
-    } finally {
-      setLoading(false); // Stop loading spinner
+      message.error(error);
     }
   };
 
-  const fetchPoNoLov = async () => {
+  const fetchItemCodes = async (pOrder) => {
     try {
-      setLoading(true); // Show loading spinner while fetching data
-      const token = localStorage.getItem("token");
-      const res = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/poNoAndMaterial?pOrder=${selectedpOrder}`, // Replace with your actual API base URL
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Add token in Authorization header
-          },
-        }
-      );
-      if (!editShown.current) {
-        setPoNo(res.data.pono);
-
-        const materialOptions = [
-          { label: res.data.itemcode, value: res.data.itemcode },
-        ];
-        setMaterial(materialOptions);
-      } // Set fetched departments as options
+      await axios
+        .get(
+          `${API.prodUrl}/Precot/api/QA/Service/getItemCode?porder=${pOrder}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data && res.data.length > 0) {
+            if (res.data.length == 1) {
+              setSelectedMat(res.data[0]);
+              console.log("fetchCustomer(res.data[0]);", res.data[0]);
+              fetchCustomer(res.data[0]);
+            } else {
+              setMaterial(
+                res.data.map((item) => ({
+                  label: item,
+                  value: item,
+                }))
+              );
+            }
+          }
+        })
+        .catch((err) => {
+          message.error(err.response.data.message);
+        });
     } catch (error) {
-      console.error("Error fetching department LOV:", error);
-    } finally {
-      setLoading(false); // Stop loading spinner
+      message.error(error);
     }
   };
 
-  const fetchCustNameAndProdDesc = async () => {
+  const fetchCustomer = async (itemCode) => {
     try {
-      setLoading(true); // Show loading spinner while fetching data
-
-      const token = localStorage.getItem("token");
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/CustomerNameANdProductDesc?material=${selectedMaterial}`, // Replace with your actual API base URL
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Add token in Authorization header
-          },
-        }
-      );
-      if (!editShown.current) {
-        setCustomerName(response.data.customerName);
-        setProductDescription(response.data.productDesc);
-      }
-      // Set fetched departments as options
+      await axios
+        .get(
+          `${API.prodUrl}/Precot/api/QA/Service/getCustomerName?material=${itemCode}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Add token in Authorization header
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data && res.data.length > 0) {
+            if (res.data.length == 1) {
+              setCustomerName(res.data[0]);
+            } else {
+              setCustomers(
+                res.data.map((item) => {
+                  return {
+                    label: item,
+                    value: item,
+                  };
+                })
+              );
+            }
+          }
+        })
+        .catch((err) => {
+          message.error(err.response.data.message);
+        });
     } catch (error) {
-      console.error("Error fetching department LOV:", error);
-    } finally {
-      setLoading(false); // Stop loading spinner
+      message.error(error);
     }
   };
 
@@ -1825,14 +1818,11 @@ const QA_f034_Inprocess_Inspection_Report = () => {
 
           <Col xs={24} sm={12} md={6} lg={3} style={{ marginRight: "5%" }}>
             <Form.Item label="P Order">
-              <Select
+              <Input
                 showSearch
                 value={selectedpOrder}
-                disabled={!isEditable}
-                placeholder="Choose POrder"
+                disabled
                 style={{ width: "150%" }}
-                onChange={pOrderChange}
-                options={pOrder}
               />
             </Form.Item>
           </Col>
@@ -1862,26 +1852,13 @@ const QA_f034_Inprocess_Inspection_Report = () => {
               />
             </Form.Item>
           </Col>
-          <Col xs={24} sm={12} md={6} lg={5}>
-            <Form.Item label="Customer Name">
-              <Input
-                value={customerName}
-                disabled
-                onChange={(e) => setCustomerName(e.target.value)}
-                style={{ width: "100%" }}
-              />
-            </Form.Item>
-          </Col>
 
           <Col xs={24} sm={12} md={6} lg={4}>
             <Form.Item label="Machine Name">
-              <Select
+              <Input
                 value={selectedMachine}
-                disabled={!isEditable}
-                placeholder="Choose Department"
+                disabled
                 style={{ width: "100%" }}
-                onChange={machineChange}
-                options={machines}
               />
             </Form.Item>
           </Col>
@@ -1895,6 +1872,22 @@ const QA_f034_Inprocess_Inspection_Report = () => {
               />
             </Form.Item>
           </Col>
+
+          <Col xs={24} sm={12} md={6} lg={5}>
+            <Form.Item label="Customer Name">
+              <Select
+                showSearch
+                value={customerName}
+                disabled={!isEditable}
+                options={customers}
+                onChange={(value) => setCustomerName(value)}
+                style={{ width: "250px" }}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} md={6} lg={3}>
             <Form.Item label="Shift">
               <Select
@@ -1909,9 +1902,6 @@ const QA_f034_Inprocess_Inspection_Report = () => {
               </Select>
             </Form.Item>
           </Col>
-        </Row>
-
-        <Row gutter={[16, 16]}>
           <Col>
             <Form.Item label="Po. No.">
               <Input value={poNo} disabled style={{ width: "100%" }} />

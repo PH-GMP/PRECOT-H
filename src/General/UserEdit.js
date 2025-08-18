@@ -1,40 +1,34 @@
-import React, { useRef, useEffect, useState } from "react";
-import qs from "qs";
 import {
-  Button,
-  Drawer,
-  Layout,
-  Space,
-  Breadcrumb,
-  Input,
-  Col,
-  Row,
-  notification,
-  Select,
-  Card,
-  Modal,
-  Switch,
-  Menu,
   Avatar,
-  Form,
+  Button,
+  Card,
+  Col,
+  Drawer,
+  Input,
+  Layout,
+  Menu,
   message,
-  Checkbox,
+  Modal,
+  notification,
+  Row,
+  Select,
+  Space,
+  Switch
 } from "antd";
+import { useEffect, useState } from "react";
 
-import {
-  Link as RouterLink,
-  useNavigate,
-  Link,
-  useParams,
-} from "react-router-dom";
 import axios from "axios";
-import { IoCreate, IoDownload } from "react-icons/io5";
-import { FaLock, FaRectangleList } from "react-icons/fa6";
-import { TbMenuDeep } from "react-icons/tb";
-import API from "../baseUrl.json";
-import { BiLock } from "react-icons/bi";
 import { AiOutlineSignature } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
+import { FaLock, FaRectangleList } from "react-icons/fa6";
+import { IoCreate, IoDownload } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import {
+  useNavigate,
+  useParams
+} from "react-router-dom";
 import editIcon from "../Assests/edit-icon.png";
+import API from "../baseUrl.json";
 
 ////////////////////////////////////////////////////////////////////////////////
 const { Header, Footer, Sider, Content } = Layout;
@@ -51,6 +45,7 @@ const layoutStyle = {
 };
 
 export default function UserEdit() {
+  const { Option } = Select;
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -78,57 +73,8 @@ export default function UserEdit() {
   const [department, setDepartment] = useState("");
   const [departmentId, setDepartmentId] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
-  // const [departmentName, setdepartmentName] = useState([]);
-  // const [departmentList, setDepartmentList] = useState();
-  const [departmentList, setDepartmentList] = useState();
+  const [departmentList, setDepartmentList] = useState([]);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    const regex = /^[a-zA-Z0-9]+$/;
-
-    if (name === "name" || name === "username") {
-      if (!regex.test(e.key)) {
-        e.preventDefault();
-        openNotification(
-          "error",
-          `Special characters are not allowed in ${name}`
-        );
-        return;
-      }
-    }
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handlePaste = (e) => {
-    const pastedText = e.clipboardData.getData("text");
-    const regex = /^[a-zA-Z0-9]+$/;
-
-    if (!regex.test(pastedText)) {
-      e.preventDefault();
-      openNotification("error", "Pasting special characters is not allowed");
-      return;
-    }
-  };
-
-  // const onChangeDepartment = (values) => {
-  //   // console.log("Department Values :", values);
-  //   setDepartmentId(values);
-  // };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const anchorRef = useRef(null);
-  const opens = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     function handleWindowResize() {
@@ -221,11 +167,9 @@ export default function UserEdit() {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
-        // setDepartmentList(response.data);
-        // console.log("Shift Lov ", response.data);
         const a = response.data.map((x, i) => {
           return {
             value: x.id,
@@ -233,8 +177,6 @@ export default function UserEdit() {
           };
         });
         setDepartmentList(a);
-
-        // console.log("Aaaa", a);
       } catch (error) {
         console.error("Error fetching shifts:", error);
       }
@@ -247,12 +189,13 @@ export default function UserEdit() {
       const foundDept = departmentList.find((dept) => dept.label === val);
       return foundDept ? foundDept.value : val;
     });
+    console.log("validDepartmentIds", validDepartmentIds);
     // Basic form validation
     setLoading(true);
     // API endpoint for sign-up
     axios
       .put(
-        `${ API.prodUrl}/Precot/api/Users/Service/updateUserDetails`,
+        `${API.prodUrl}/Precot/api/Users/Service/updateUserDetails`,
         {
           id: id,
           name: name,
@@ -334,7 +277,7 @@ export default function UserEdit() {
 
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
 
@@ -350,22 +293,6 @@ export default function UserEdit() {
 
     fetchDepartments();
   }, [token]);
-
-  const onChangeDepartment = (value) => {
-    setSelectedDepartments(value);
-    setDepartmentId(value);
-    console.log("Selected Department IDs: ", value);
-  };
-
-  // const getDepartmentName = (departmentIds) => {
-  //   // Check if departmentIds is an array, if not return an empty array
-  //   const ids = Array.isArray(departmentIds) ? departmentIds : [];
-
-  //   return ids.map((id) => {
-  //     const department = departmentList.find((dept) => dept.value === id);
-  //     return department ? department.label : null;
-  //   });
-  // };
 
   const generateRandomPassword = () => {
     const randomPassword = Math.random().toString(36).substring(7); // Generate a random alphanumeric string
@@ -388,7 +315,10 @@ export default function UserEdit() {
     13: "MARKETING",
     14: "HR",
   };
-
+  const departmentOptions = Object.keys(departmentMapping).map((id) => ({
+    value: Number(id),
+    label: departmentMapping[id],
+  }));
   // Function to get department names from an array of IDs
   const getDepartmentName = (deptIDs) => {
     if (!deptIDs || deptIDs.length === 0) return [];
@@ -397,10 +327,34 @@ export default function UserEdit() {
       .filter((name) => name);
   };
 
-  const departmentOptions = Object.keys(departmentMapping).map((id) => ({
-    value: Number(id),
-    label: departmentMapping[id],
-  }));
+  const handleChange = (selectedValues) => {
+    if (selectedValues.includes("ALL")) {
+      // Select all departments
+      const allIds = departmentList.map((item) => item.value);
+      const allNames = departmentList.map((item) => item.label);
+      console.log("allIds", allIds);
+      console.log("allNames", allNames);
+      setDepartmentId(allIds);
+      setSelectedDepartments(allNames);
+    } else {
+      // Filter out "ALL" if it was accidentally left in selected
+      const validIds = selectedValues.filter((val) => val !== "ALL");
+      const selectedNames = departmentList
+        .filter((item) => validIds.includes(item.value))
+        .map((item) => item.label);
+      console.log("validIds", validIds);
+      console.log("selectedNames", selectedNames);
+      setDepartmentId(validIds);
+      setSelectedDepartments(selectedNames);
+    }
+  };
+
+  const getSelectedValues = () => {
+    // Convert current departmentId state to match <Select> value
+    return departmentId;
+  };
+
+  console.log("departmentOptions", departmentOptions);
 
   useEffect(() => {
     // console.log("token", token);
@@ -408,7 +362,7 @@ export default function UserEdit() {
       try {
         // console.log("g", localStorage.getItem("token"));
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Users/Service/getListOfUsers`,
+          `${API.prodUrl}/Precot/api/Users/Service/getListOfUsers`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -420,7 +374,6 @@ export default function UserEdit() {
           return value.id == params.id;
         });
 
-        // console.log("This Is NewArray", newArray);
         setId(newArray[0].id);
         setName(newArray[0].name);
         setUserName(newArray[0].username);
@@ -428,18 +381,16 @@ export default function UserEdit() {
         setPassword(randomPassword);
         setEmail(newArray[0].email);
         setRole(newArray[0].roles[0].name);
-        // setDepartmentId(newArray[0].departmentId);
         let departmentIds = [];
-        if (newArray[0].departmentId) {
-          departmentIds = [newArray[0].departmentId];
-        } else if (newArray[0].departments?.length > 0) {
+        if (newArray[0].departments?.length > 0) {
           departmentIds = newArray[0].departments.map((dept) => dept.id);
+        } else if (newArray[0].departmentId) {
+          departmentIds = [newArray[0].departmentId];
         }
         setSelectedDepartments(getDepartmentName(departmentIds));
         setDepartmentId(departmentIds);
         console.log("departmentIds", departmentIds);
         const fetchedUserActive = newArray[0].is_Active;
-        // console.log("Fetched User Active:", fetchedUserActive);
         setUserActive(fetchedUserActive);
         setData(response.data);
       } catch (error) {
@@ -449,44 +400,11 @@ export default function UserEdit() {
     fetchData();
   }, [token]);
 
-  // const getDepartmentName = (deptID) => {
-  //   switch (Number(deptID)) {
-  //     case 1:
-  //       return "BLEACHING";
-  //     case 2:
-  //       return "SPUNLACE";
-  //     case 3:
-  //       return "PAD_PUNCHING";
-  //     case 4:
-  //       return "DRY_GOODS";
-  //     case 5:
-  //       return "QUALITY_CONTROL";
-  //     case 6:
-  //       return "QUALITY_ASSURANCE";
-  //     case 7:
-  //       return "PPC";
-  //     case 8:
-  //       return "STORE";
-  //     case 9:
-  //       return "DISPATCH";
-  //     case 10:
-  //       return "PRODUCT_DEVELOPMENT";
-  //     case 11:
-  //       return "ENGINEERING";
-  //     case 12:
-  //       return "COTTON_BUDS";
-  //     case 13:
-  //       return "MARKETTING";
-  //     default:
-  //       return "";
-  //   }
-  // };
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     // console.log(" sdf", token);
     axios
-      .get(`${ API.prodUrl}/Precot/api/Users/Service/getListOfRoles`, {
+      .get(`${API.prodUrl}/Precot/api/Users/Service/getListOfRoles`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -505,7 +423,7 @@ export default function UserEdit() {
     const token = localStorage.getItem("token");
     // console.log(" sdf", token);
     axios
-      .get(`${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
+      .get(`${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -857,199 +775,26 @@ export default function UserEdit() {
                 }}
               >
                 <label htmlFor="E-mail">Department</label>
-                {/* <Select
-                  mode="multiple"
-                  style={{ width: "100%" }}
-                  placeholder="Select departments"
-                  value={getDepartmentName(departmentId) || selectedDepartments}
-                  onChange={onChangeDepartment}
-                  options={departmentList}
-                  dropdownRender={(menu) => (
-                    <div>
-                      {menu}
-                      <div
-                        style={{
-                          padding: "8px",
-                          textAlign: "center",
-                          borderTop: "1px solid #e8e8e8",
-                        }}
-                      >
-                        <Checkbox
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedDepartments(
-                                departmentList.map((d) => d.value)
-                              );
-                              setDepartmentId(
-                                departmentList.map((d) => d.value)
-                              );
-                            } else {
-                              setSelectedDepartments([]);
-                              setDepartmentId([]);
-                            }
-                          }}
-                          checked={
-                            (departmentList?.length || 0) > 0 &&
-                            (selectedDepartments?.length || 0) ===
-                              (departmentList?.length || 0)
-                          }
-                        >
-                          Select All
-                        </Checkbox>
-                      </div>
-                    </div>
-                  )}
-                  optionRender={(option) => (
-                    <Space>
-                      <Checkbox
-                        checked={selectedDepartments.includes(option.value)}
-                        onChange={() => {}}
-                      />
-                      <span>{option.label}</span>
-                    </Space>
-                  )}
-                /> */}
-                {/* <Select
-                  mode="multiple"
-                  style={{ width: "100%" }}
-                  placeholder="Select departments"
-                  value={selectedDepartments}
-                  onChange={(values) => {
-                    setSelectedDepartments(values);
-                    console.log("values", values);
-                    setDepartmentId(
-                      values.map((name) =>
-                        Number(
-                          Object.keys(departmentMapping).find(
-                            (key) => departmentMapping[key] === name
-                          )
-                        )
-                      )
-                    );
-                  }}
-                  options={departmentOptions} // Using renamed variable
-                  dropdownRender={(menu) => (
-                    <div>
-                      {menu}
-                      <div
-                        style={{
-                          padding: "8px",
-                          textAlign: "center",
-                          borderTop: "1px solid #e8e8e8",
-                        }}
-                      >
-                        <Checkbox
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedDepartments(
-                                departmentOptions.map((d) => d.label)
-                              );
-                              setDepartmentId(
-                                departmentOptions.map((d) => d.value)
-                              );
-                            } else {
-                              setSelectedDepartments([]);
-                              setDepartmentId([]);
-                            }
-                          }}
-                          checked={
-                            departmentOptions.length > 0 &&
-                            selectedDepartments.length ===
-                              departmentOptions.length
-                          }
-                        >
-                          Select All
-                        </Checkbox>
-                      </div>
-                    </div>
-                  )}
-                  optionRender={(option) => (
-                    <Space>
-                      <Checkbox
-                        checked={selectedDepartments.includes(option.label)}
-                        onChange={() => {}}
-                      />
-                      <span>{option.label}</span>
-                    </Space>
-                  )}
-                /> */}
+
                 <Select
                   mode="multiple"
-                  style={{ width: "100%" }}
+                  allowClear
                   placeholder="Select departments"
-                  value={selectedDepartments}
-                  onChange={(values) => {
-                    console.log("Selected values:", values);
-
-                    // Ensure all selected values are department names
-                    const updatedNames = values.map((val) => {
-                      // If val is an ID, find the corresponding name
-                      return departmentMapping[val] || val;
-                    });
-
-                    setSelectedDepartments(updatedNames);
-
-                    // Convert names back to IDs for API submission
-                    const updatedIds = updatedNames.map((name) =>
-                      Number(
-                        Object.keys(departmentMapping).find(
-                          (key) => departmentMapping[key] === name
-                        )
-                      )
-                    );
-
-                    setDepartmentId(updatedIds);
-                  }}
-                  options={departmentOptions}
-                  dropdownRender={(menu) => (
-                    <div>
-                      {menu}
-                      <div
-                        style={{
-                          padding: "8px",
-                          textAlign: "center",
-                          borderTop: "1px solid #e8e8e8",
-                        }}
-                      >
-                        <Checkbox
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              const allNames = departmentOptions.map(
-                                (d) => d.label
-                              );
-                              const allIds = departmentOptions.map(
-                                (d) => d.value
-                              );
-
-                              setSelectedDepartments(allNames);
-                              setDepartmentId(allIds);
-                            } else {
-                              setSelectedDepartments([]);
-                              setDepartmentId([]);
-                            }
-                          }}
-                          checked={
-                            departmentOptions.length > 0 &&
-                            selectedDepartments.length ===
-                              departmentOptions.length
-                          }
-                        >
-                          Select All
-                        </Checkbox>
-                      </div>
-                    </div>
-                  )}
-                  optionRender={(option) => (
-                    <Space>
-                      <Checkbox
-                        checked={selectedDepartments.includes(option.label)}
-                        onChange={() => {}}
-                      />
-                      <span>{option.label}</span>
-                    </Space>
-                  )}
-                />
-                
+                  value={getSelectedValues()}
+                  onChange={handleChange}
+                  style={{ width: "100%" }}
+                >
+                  <Option key="ALL" value="ALL">
+                    Select All
+                  </Option>
+                  {departmentList.map((dept) => (
+                    <Option key={dept.value} value={dept.value}>
+                      {dept.label}
+                    </Option>
+                  ))}
+                </Select>
+                {/* Display selected names below */}
+                <div style={{ marginTop: 10 }}></div>
               </Col>
 
               <Col

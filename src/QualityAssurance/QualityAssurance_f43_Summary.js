@@ -1,37 +1,26 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { Button, Select, Table, Tooltip, message, Input, Modal } from "antd";
 import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
+  EditOutlined
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Button, Input, Modal, Select, Table, Tooltip, message } from "antd";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import {
-  BiBorderLeft,
-  BiBorderNone,
-  BiBorderRight,
   BiLock,
-  BiNavigation,
+  BiNavigation
 } from "react-icons/bi";
-import BleachingTail from "../Components/BleachingTail.js";
-import BleachingHeader from "../Components/BleachingHeader.js";
 import { FaUserCircle } from "react-icons/fa";
-import { jwtDecode } from "jwt-decode";
-import { GrAdd } from "react-icons/gr";
 import { FaPrint } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import logo from "../Assests/logo.png";
 import API from "../baseUrl.json";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock } from "react-icons/fa6";
-import { IoCreate } from "react-icons/io5";
-import "../index.css";
+import BleachingHeader from "../Components/BleachingHeader.js";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
-import { createGlobalStyle } from "styled-components";
+import "../index.css";
 
 const QualityAssurance_f43_Summary = () => {
   const [open, setOpen] = useState(false);
@@ -112,12 +101,9 @@ const QualityAssurance_f43_Summary = () => {
   useEffect(() => {
     const fetchUserDataAndImages = () => {
       hodLov.forEach((user) => {
-        
         const { value } = user;
-        
-
         axios
-          .get(`${ API.prodUrl}/Precot/api/Format/Service/image?username=${value}`, {
+          .get(`${API.prodUrl}/Precot/api/Format/Service/image?username=${value}`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token,
@@ -138,7 +124,7 @@ const QualityAssurance_f43_Summary = () => {
             }));
           })
           .catch((err) => {
-            
+
           });
       });
     };
@@ -149,7 +135,7 @@ const QualityAssurance_f43_Summary = () => {
     const hodLovApi = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Users/Service/getListOfUsers`,
+          `${API.prodUrl}/Precot/api/Users/Service/getListOfUsers`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -174,7 +160,7 @@ const QualityAssurance_f43_Summary = () => {
   const fetchSignature = async (sign, key) => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${sign}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${sign}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -195,7 +181,7 @@ const QualityAssurance_f43_Summary = () => {
         [key]: url,
       }));
     } catch (err) {
-      
+
     }
   };
 
@@ -205,11 +191,11 @@ const QualityAssurance_f43_Summary = () => {
     signatureKeys.forEach((key) => {
       const username = printData[key];
       if (username) {
-        
+
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -219,7 +205,7 @@ const QualityAssurance_f43_Summary = () => {
             }
           )
           .then((res) => {
-            
+
             const base64 = btoa(
               new Uint8Array(res.data).reduce(
                 (data, byte) => data + String.fromCharCode(byte),
@@ -233,7 +219,7 @@ const QualityAssurance_f43_Summary = () => {
             }));
           })
           .catch((err) => {
-            
+
           });
       }
     });
@@ -245,7 +231,7 @@ const QualityAssurance_f43_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/getQualityReviewMeetingsSummary`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/getQualityReviewMeetingsSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -375,7 +361,7 @@ const QualityAssurance_f43_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/api/getQualityReviewMeetingsPrint?month=${printParams.month}&year=${printParams.year}`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getQualityReviewMeetingsPrint?month=${printParams.month}&year=${printParams.year}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -410,7 +396,7 @@ const QualityAssurance_f43_Summary = () => {
 
       setPrintData(response.data);
     } catch (error) {
-      
+
       setPrintButtonLoading(false);
       message.error(error.response.data.message);
     }

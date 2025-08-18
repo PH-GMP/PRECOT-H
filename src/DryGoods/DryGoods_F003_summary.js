@@ -1,16 +1,16 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
+import { EditOutlined } from "@ant-design/icons";
 import {
-  EditOutlined
-} from "@ant-design/icons";
-import {
-  Button, Col, Input,
+  Button,
+  Col,
+  Input,
   message,
   Modal,
   Row,
   Select,
   Table,
-  Tooltip
+  Tooltip,
 } from "antd";
 import axios from "axios";
 import moment from "moment";
@@ -98,7 +98,7 @@ const Drygoods_f03_Summary = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
 
-        let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`;
+        let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -139,7 +139,7 @@ const Drygoods_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -183,18 +183,17 @@ const Drygoods_f03_Summary = () => {
     setBatchNolistLabel2(selectedMachine?.label || ""); // Set the label
   };
   const roleBase = localStorage.getItem("role");
- 
+
   const fetchDataShift = async () => {
     try {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
         .then((res) => {
-        
           const shifts = res.data.map((shift) => shift.value);
           setAvailableShifts(shifts);
           setAvailableShifts2(shifts);
@@ -214,7 +213,7 @@ const Drygoods_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -248,7 +247,7 @@ const Drygoods_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -369,7 +368,7 @@ const Drygoods_f03_Summary = () => {
     }
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF003?date=${datePrint}&shift=${availableshiftlov2}&machine_name=${mac}&order_no=${orderNoPrint}`,
+        `${API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF003?date=${datePrint}&shift=${availableshiftlov2}&machine_name=${mac}&order_no=${orderNoPrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -396,7 +395,7 @@ const Drygoods_f03_Summary = () => {
           //api image for operator
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.operator_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.operator_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -422,7 +421,7 @@ const Drygoods_f03_Summary = () => {
           //api image for supervisor
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.supervisor_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.supervisor_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -448,7 +447,7 @@ const Drygoods_f03_Summary = () => {
           //api image for hod
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.hod_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.hod_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -494,7 +493,7 @@ const Drygoods_f03_Summary = () => {
           machinename = "BL2";
         }
         const numberShift = convertShiftValue(value[0].shift);
-        let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getDrygoodsStoppageDetailsF003?date=${value[0].date}&shift=${numberShift}&order_no=${value[0].order_no}&machine_name=${machinename}`;
+        let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getDrygoodsStoppageDetailsF003?date=${value[0].date}&shift=${numberShift}&order_no=${value[0].order_no}&machine_name=${machinename}`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -526,7 +525,7 @@ const Drygoods_f03_Summary = () => {
   //   handle edit
   const handleEdit = (record) => {
     console.log("record", record);
- 
+
     navigate("/Precot/DryGoods/F-03", {
       state: {
         date: record.date,
@@ -535,24 +534,24 @@ const Drygoods_f03_Summary = () => {
         machineName: record.machine_name,
       },
     });
-   };
+  };
 
   const handleDateChange = (event) => {
     const value = event.target.value;
     setDate(value);
-   };
+  };
   useEffect(() => {
     if (token) {
       fetchData();
     }
   }, [token]);
 
-   const fetchData = async () => {
+  const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getSummarydetailsF003`;
+      let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getSummarydetailsF003`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -567,10 +566,8 @@ const Drygoods_f03_Summary = () => {
         role === "ROLE_SUPERVISOR" ||
         role === "ROLE_HOD"
       ) {
- 
       }
 
- 
       if (data && data.length >= 0) {
         setContaminationData(data);
       } else {
@@ -654,7 +651,7 @@ const Drygoods_f03_Summary = () => {
             icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             style={{ width: "100%", textAlign: "center" }}
-          //   disabled={record.status == "SUBMIT" ? true : false}
+            //   disabled={record.status == "SUBMIT" ? true : false}
           >
             Review
           </Button>
@@ -720,8 +717,9 @@ const Drygoods_f03_Summary = () => {
     const pageElements = document.querySelectorAll(".page");
 
     pageNumberElements.forEach((pageNumberElement, index) => {
-      pageNumberElement.textContent = `Page ${index + 1} of ${pageElements.length
-        }`;
+      pageNumberElement.textContent = `Page ${index + 1} of ${
+        pageElements.length
+      }`;
     });
   }
 
@@ -745,13 +743,19 @@ const Drygoods_f03_Summary = () => {
           { label: "Date", value: formattedDateheader() },
           { label: "Shift", value: printResponseData?.shift },
           { label: "Product", value: "Cotton Ball" },
-          { label: "Customer Name", value: printResponseData?.coustomer_name || "NA" },
+          {
+            label: "Customer Name",
+            value: printResponseData?.coustomer_name || "NA",
+          },
           { label: "Ball/Bag", value: printResponseData?.ball_or_bag || "NA" },
-          { label: "Sale Order No.", value: printResponseData?.sale_order_no || "NA" },
+          {
+            label: "Sale Order No.",
+            value: printResponseData?.sale_order_no || "NA",
+          },
           { label: "Brand", value: printResponseData?.brand || "NA" },
           { label: "Bag/Box", value: printResponseData?.bag_or_box || "NA" },
-        ]
-      }
+        ],
+      },
     ];
 
     // Add static content to the first page
@@ -787,7 +791,6 @@ const Drygoods_f03_Summary = () => {
 
     currentPage.push({ type: "parameterheading", content: parameterHeadings });
     rowCount++;
-
 
     currentPage.push({
       type: "parameters",
@@ -833,7 +836,10 @@ const Drygoods_f03_Summary = () => {
     let sliverIndex = 1;
 
     // 3. Add Sliver Receipt Data
-    if (printResponseData?.sliverreceiptdetails && printResponseData?.sliverreceiptdetails.length > 0) {
+    if (
+      printResponseData?.sliverreceiptdetails &&
+      printResponseData?.sliverreceiptdetails.length > 0
+    ) {
       for (let detail of printResponseData?.sliverreceiptdetails) {
         if (rowCount >= rowsPerPage) {
           pages.push(currentPage); // Push to next page if row count exceeds
@@ -845,7 +851,11 @@ const Drygoods_f03_Summary = () => {
           rowCount++;
         }
 
-        currentPage.push({ type: "sliver", index: sliverIndex++, data: detail });
+        currentPage.push({
+          type: "sliver",
+          index: sliverIndex++,
+          data: detail,
+        });
         rowCount++;
       }
     }
@@ -929,7 +939,10 @@ const Drygoods_f03_Summary = () => {
     rowCount++;
 
     // 6. Add Stoppage Data
-    if (Array.isArray(printResponseData?.printPdeRes) && printResponseData?.printPdeRes.length > 0) {
+    if (
+      Array.isArray(printResponseData?.printPdeRes) &&
+      printResponseData?.printPdeRes.length > 0
+    ) {
       for (let row of printResponseData.printPdeRes) {
         if (rowCount >= rowsPerPage) {
           pages.push(currentPage); // Push to next page if row count exceeds
@@ -945,8 +958,6 @@ const Drygoods_f03_Summary = () => {
       currentPage.push({ type: "stoppage", data: null });
     }
 
-
-
     // Add the last page if it has data
     if (currentPage.length > 0) {
       pages.push(currentPage);
@@ -959,9 +970,6 @@ const Drygoods_f03_Summary = () => {
   const pages = preparePaginatedData();
   const totalPages = pages.length;
 
-
-
-
   return (
     // print section
     <div>
@@ -973,7 +981,11 @@ const Drygoods_f03_Summary = () => {
               <thead>
                 <tr>
                   <td colSpan="1" rowSpan="4" style={{ textAlign: "center" }}>
-                    <img src={logo} alt="Logo" style={{ width: "80px", height: "auto" }} />
+                    <img
+                      src={logo}
+                      alt="Logo"
+                      style={{ width: "80px", height: "auto" }}
+                    />
                     <br />
                     Unit H
                   </td>
@@ -993,7 +1005,9 @@ const Drygoods_f03_Summary = () => {
                 </tr>
                 <tr>
                   <td colSpan="2">Page No.:</td>
-                  <td colSpan="3">{index + 1} of {totalPages}</td>
+                  <td colSpan="3">
+                    {index + 1} of {totalPages}
+                  </td>
                 </tr>
                 <tr style={{ border: "none" }}>
                   <td style={{ border: "none" }} colSpan="100"></td>
@@ -1006,41 +1020,67 @@ const Drygoods_f03_Summary = () => {
                     if (row.label === "Machine Name") {
                       return (
                         <tr key={rowIndex}>
-                          <td colSpan="2" style={{ textAlign: "left" }}>Machine Name</td>
-                          <td colSpan="10" style={{ textAlign: "left" }}>{printResponseData?.machine_name}</td>
+                          <td colSpan="2" style={{ textAlign: "left" }}>
+                            Machine Name
+                          </td>
+                          <td colSpan="10" style={{ textAlign: "left" }}>
+                            {printResponseData?.machine_name}
+                          </td>
                         </tr>
                       );
                     }
                     if (row.label === "Order No.") {
                       return (
                         <tr key={rowIndex}>
-                          <td colSpan="4" style={{ textAlign: "left" }}>Order No.:{printResponseData?.order_no}</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}> Date:{formattedDateheader()}</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}>Shift: {printResponseData?.shift}</td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            Order No.:{printResponseData?.order_no}
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            {" "}
+                            Date:{formattedDateheader()}
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            Shift: {printResponseData?.shift}
+                          </td>
                         </tr>
                       );
                     }
                     if (row.label === "Product") {
                       return (
                         <tr key={rowIndex}>
-                          <td colSpan="4" style={{ textAlign: "left" }}>Product:Cotton Ball</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}> Customer Name:{printResponseData?.customer_name}</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}> Ball/Bag: {printResponseData?.ball_or_bag || "NA"}</td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            Product:Cotton Ball
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            {" "}
+                            Customer Name:{printResponseData?.customer_name}
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            {" "}
+                            Ball/Bag: {printResponseData?.ball_or_bag || "NA"}
+                          </td>
                         </tr>
                       );
                     }
                     if (row.label === "Sale Order No.") {
                       return (
                         <tr key={rowIndex}>
-                          <td colSpan="4" style={{ textAlign: "left" }}> Sale Order No:{printResponseData?.sale_order_no || "NA"}</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}>Brand:{printResponseData?.brand || "NA"}</td>
-                          <td colSpan="4" style={{ textAlign: "left" }}> Bag/Box: {printResponseData?.bag_or_box || "NA"}
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            {" "}
+                            Sale Order No:
+                            {printResponseData?.sale_order_no || "NA"}
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            Brand:{printResponseData?.brand || "NA"}
+                          </td>
+                          <td colSpan="4" style={{ textAlign: "left" }}>
+                            {" "}
+                            Bag/Box: {printResponseData?.bag_or_box || "NA"}
                           </td>
                         </tr>
                       );
                     }
-                  }
-                  else if (row.type === "parameter") {
+                  } else if (row.type === "parameter") {
                     return (
                       <tr key={rowIndex}>
                         <td colSpan="11" style={{ textAlign: "left" }}>
@@ -1052,28 +1092,43 @@ const Drygoods_f03_Summary = () => {
                     return (
                       <tr key={rowIndex}>
                         {row.content.map((heading, idx) => (
-                          <td key={idx} colSpan={heading.colSpan} style={{ textAlign: "center" }}>
+                          <td
+                            key={idx}
+                            colSpan={heading.colSpan}
+                            style={{ textAlign: "center" }}
+                          >
                             {heading.title}
                           </td>
                         ))}
                       </tr>
                     );
-                  }
-                  else if (row.type === "parameters") {
+                  } else if (row.type === "parameters") {
                     return (
-
                       <tr key={rowIndex}>
-                        <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.cutting_length}</td>
-                        <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.feed_roller}</td>
-                        <td colSpan="2" style={{ textAlign: "center" }}>{printResponseData?.cutting_roller}</td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>{printResponseData?.sliver_weight_grams}</td>
-                        <td colSpan="2" style={{ textAlign: "center" }}>{printResponseData?.ball_weight_grams}</td>
-                        <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_counts}</td>
-                        <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.std_bags_per_hr}</td>
+                        <td colSpan="1" style={{ textAlign: "center" }}>
+                          {printResponseData?.cutting_length}
+                        </td>
+                        <td colSpan="1" style={{ textAlign: "center" }}>
+                          {printResponseData?.feed_roller}
+                        </td>
+                        <td colSpan="2" style={{ textAlign: "center" }}>
+                          {printResponseData?.cutting_roller}
+                        </td>
+                        <td colSpan="3" style={{ textAlign: "center" }}>
+                          {printResponseData?.sliver_weight_grams}
+                        </td>
+                        <td colSpan="2" style={{ textAlign: "center" }}>
+                          {printResponseData?.ball_weight_grams}
+                        </td>
+                        <td colSpan="1" style={{ textAlign: "center" }}>
+                          {printResponseData?.bag_counts}
+                        </td>
+                        <td colSpan="1" style={{ textAlign: "center" }}>
+                          {printResponseData?.std_bags_per_hr}
+                        </td>
                       </tr>
                     );
-                  }
-                  else if (row.type === "header") {
+                  } else if (row.type === "header") {
                     return (
                       <tr key={rowIndex}>
                         <td colSpan="11" style={{ textAlign: "left" }}>
@@ -1085,21 +1140,34 @@ const Drygoods_f03_Summary = () => {
                     return (
                       <tr key={rowIndex}>
                         {row.content.map((heading, idx) => (
-                          <td key={idx} colSpan={heading.colSpan} style={{ textAlign: "center" }}>
+                          <td
+                            key={idx}
+                            colSpan={heading.colSpan}
+                            style={{ textAlign: "center" }}
+                          >
                             {heading.title}
                           </td>
                         ))}
                       </tr>
                     );
-
                   } else if (row.type === "sliver") {
                     return (
                       <tr key={rowIndex}>
-                        <td colSpan="1" style={{ textAlign: "center" }}>{row.index}</td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>{row.data.can_no}</td>
-                        <td colSpan="2" style={{ textAlign: "center" }}>{row.data.gram_or_mtrs}</td>
-                        <td colSpan="3" style={{ textAlign: "center" }}>{row.data.carding_mc_no}</td>
-                        <td colSpan="2" style={{ textAlign: "center" }}>{row.data.net_weight_kg}</td>
+                        <td colSpan="1" style={{ textAlign: "center" }}>
+                          {row.index}
+                        </td>
+                        <td colSpan="3" style={{ textAlign: "center" }}>
+                          {row.data.can_no}
+                        </td>
+                        <td colSpan="2" style={{ textAlign: "center" }}>
+                          {row.data.gram_or_mtrs}
+                        </td>
+                        <td colSpan="3" style={{ textAlign: "center" }}>
+                          {row.data.carding_mc_no}
+                        </td>
+                        <td colSpan="2" style={{ textAlign: "center" }}>
+                          {row.data.net_weight_kg}
+                        </td>
                       </tr>
                     );
                   }
@@ -1130,28 +1198,68 @@ const Drygoods_f03_Summary = () => {
                     return (
                       <>
                         <tr key={rowIndex}>
-                          <td colSpan="1" style={{ textAlign: "center" }}>Bag</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour1}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour2}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour3}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour4}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour5}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour6}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour7}</td>
-                          <td colSpan="1" style={{ textAlign: "center" }}>{printResponseData?.bag_hour8}</td>
-                          <td colSpan="2" style={{ textAlign: "center" }}>{printResponseData?.box_total_hour}</td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            Bag
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour1}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour2}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour3}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour4}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour5}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour6}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour7}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.bag_hour8}
+                          </td>
+                          <td colSpan="2" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_total_hour}
+                          </td>
                         </tr>
                         <tr>
-                          <td colSpan='1' style={{ textAlign: "center" }}>Box</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour1}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour2}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour3}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour4}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour5}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour6}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour7}</td>
-                          <td colSpan='1' style={{ textAlign: "center" }}>{printResponseData?.box_hour8}</td>
-                          <td colSpan='2' style={{ textAlign: "center" }}>{printResponseData?.box_total_hour}</td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            Box
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour1}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour2}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour3}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour4}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour5}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour6}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour7}
+                          </td>
+                          <td colSpan="1" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_hour8}
+                          </td>
+                          <td colSpan="2" style={{ textAlign: "center" }}>
+                            {printResponseData?.box_total_hour}
+                          </td>
                         </tr>
                       </>
                     );
@@ -1182,7 +1290,8 @@ const Drygoods_f03_Summary = () => {
                         </td>
                       </tr>
                     );
-                  } if (row.type === "stoppageheading") {
+                  }
+                  if (row.type === "stoppageheading") {
                     return (
                       <tr key={rowIndex}>
                         {row.content.map((heading, index) => (
@@ -1197,8 +1306,7 @@ const Drygoods_f03_Summary = () => {
                         ))}
                       </tr>
                     );
-                  }
-                  else if (row.type === "stoppage") {
+                  } else if (row.type === "stoppage") {
                     if (!row.data) {
                       return (
                         <tr key={rowIndex}>
@@ -1214,7 +1322,7 @@ const Drygoods_f03_Summary = () => {
                         <td colSpan="2">{row.data.FTime}</td>
                         <td colSpan="2">{row.data.TTime}</td>
                         <td colSpan="2">{row.data.TotHrs}</td>
-                        <td colSpan="2">{row.data.remarks}</td>
+                        <td colSpan="2">{row.data.Remarks}</td>
                       </tr>
                     );
                   }
@@ -1248,7 +1356,11 @@ const Drygoods_f03_Summary = () => {
                           <br />
 
                           {getImage3 && (
-                            <img src={getImage3} alt="logo" className="signature" />
+                            <img
+                              src={getImage3}
+                              alt="logo"
+                              className="signature"
+                            />
                           )}
                         </div>
                       </td>
@@ -1312,7 +1424,6 @@ const Drygoods_f03_Summary = () => {
                     </tr>
                   </>
                 )}
-
               </tbody>
               <br />
 

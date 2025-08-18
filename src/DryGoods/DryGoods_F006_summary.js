@@ -1,31 +1,38 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import logo from "../Assests/logo.png";
 import {
-  EditOutlined
-} from "@ant-design/icons";
-import {
-  message,
+  Table,
   Modal,
   Select,
-  Table,
-  Tooltip
+  InputGroup,
+  message,
+  Tooltip,
+  Menu,
+  Avatar,
+  Drawer,
 } from "antd";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { BiLock, BiNavigation } from "react-icons/bi";
+import {
+  EyeOutlined,
+  EditOutlined,
+  PlusOutlined,
+  LeftOutlined,
+} from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import logo from "../Assests/logo.png";
 import BleachingHeader from "../Components/BleachingHeader.js";
+import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
 
-import { CheckOutlined } from "@ant-design/icons"; // Import the tick icon
-import { Button, Col, Input, Row } from "antd";
-import moment from "moment";
-import { FaUserCircle } from "react-icons/fa";
-import { GoArrowLeft } from "react-icons/go";
-import { IoPrint } from "react-icons/io5";
-import { TbMenuDeep } from "react-icons/tb";
-import { createGlobalStyle } from "styled-components";
+import { FaLock, FaUserCircle } from "react-icons/fa";
 import API from "../baseUrl.json";
+import { GoArrowLeft } from "react-icons/go";
+import { CheckOutlined } from "@ant-design/icons"; // Import the tick icon
+import { Tabs, Button, Col, Input, Row } from "antd";
+import { IoCreate, IoPrint } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import moment from "moment";
+import { createGlobalStyle } from "styled-components";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const Drygoods_f06_Summary = () => {
@@ -77,7 +84,7 @@ const Drygoods_f06_Summary = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
 
-        let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/OrderLovForF006`;
+        let apiUrl = `${API.prodUrl}/Precot/api/drygoods/OrderLovForF006`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -117,16 +124,19 @@ const Drygoods_f06_Summary = () => {
         return shift; // Return the original value if it doesn't match any case
     }
   };
+
   const machineNameLov = [
     { value: "PL1", label: "PL1" },
     { value: "PL2", label: "PL2" },
     { value: "RL1", label: "RL1" },
   ];
+
   const machineNameLov2 = [
     { value: "PL1", label: "PL1" },
     { value: "PL2", label: "PL2" },
     { value: "RL1", label: "RL1" },
   ];
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetchDataOrderNumber();
@@ -137,7 +147,7 @@ const Drygoods_f06_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -162,11 +172,12 @@ const Drygoods_f06_Summary = () => {
         });
     }
   }, [printResponseData, API.prodUrl, token]);
+
   const fetchDataOrderNumber = async () => {
     try {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`, {
+        .get(`${API.prodUrl}/Precot/api/drygoods/getDrygoodsOrderNoLov`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -192,18 +203,15 @@ const Drygoods_f06_Summary = () => {
     let day = today.getDate();
     month = month < 10 ? `0${month}` : month;
     day = day < 10 ? `0${day}` : day;
-
     return `${year}-${month}-${day}`;
   };
+
   const fetchDetailsByFleecetDetails = async (e) => {
     if (e) {
       try {
-        // const dateapi =moment(date).format('DD/MM/YYYY');
-        // console.log("stored Date inside Api", date);
-
         const numberShift = convertShiftValue(e.shift);
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/drygoods/FleecetDetailsF006?date=${e.date}&shift=${numberShift}&order_no=${e.order_no}`,
+          `${API.prodUrl}/Precot/api/drygoods/FleecetDetailsF006?date=${e.date}&shift=${numberShift}&order_no=${e.order_no}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -245,6 +253,7 @@ const Drygoods_f06_Summary = () => {
       }
     }
   };
+
   const fetchData_StoppageDetails = async (value) => {
     if (value) {
       try {
@@ -252,8 +261,7 @@ const Drygoods_f06_Summary = () => {
         const role = localStorage.getItem("role");
         const numberShift = convertShiftValue(value.shift);
 
-        let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${value.date}&shift=${numberShift}&order_no=${value.order_no}`;
-        // let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${date}&shift=${numberShift}&order_no=${'800005272'}`;
+        let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${value.date}&shift=${numberShift}&order_no=${value.order_no}`;
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
@@ -264,15 +272,10 @@ const Drygoods_f06_Summary = () => {
         const data = await response.json();
         console.log("datavalues", data);
 
-        // console.log("Summary Get List",data)
         if (data && data.length >= 0) {
           setstoppagedata(data);
           console.log("setstoppage", data);
         } else {
-          // message.error(data.message)
-          // setTimeout(() => {
-          //   navigate("/Precot/choosenScreen");
-          // }, 1500)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -281,11 +284,12 @@ const Drygoods_f06_Summary = () => {
       }
     }
   };
+
   const fetchDataShift = async () => {
     try {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -304,6 +308,7 @@ const Drygoods_f06_Summary = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = printResponseData?.operator_sign;
@@ -312,7 +317,7 @@ const Drygoods_f06_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -345,7 +350,7 @@ const Drygoods_f06_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -388,15 +393,7 @@ const Drygoods_f06_Summary = () => {
     }
     return "";
   };
-  const formattedDate = () => {
-    if (printResponseData?.hod_submit_on) {
-      const date = moment(printResponseData.hod_submit_on);
-      if (date.isValid()) {
-        return date.format("DD/MM/YYYY HH:mm");
-      }
-    }
-    return "";
-  };
+
   const formattedDatesupervisor = () => {
     if (printResponseData?.supervisor_submit_on) {
       const date = moment(printResponseData.supervisor_submit_on);
@@ -438,6 +435,7 @@ const Drygoods_f06_Summary = () => {
     setAvailableShiftslov2(null);
     setBatchNolistValue2(null);
   };
+
   useEffect(() => {
     const findReason = () => {
       for (const data of cakingData) {
@@ -454,7 +452,7 @@ const Drygoods_f06_Summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF006?date=${datePrint}&shift=${availableshiftlov2}&machine_name=${batchNolistValue2}&order_no=${orderNoPrint}`,
+          `${API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF006?date=${datePrint}&shift=${availableshiftlov2}&machine_name=${batchNolistValue2}&order_no=${orderNoPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -477,19 +475,14 @@ const Drygoods_f06_Summary = () => {
             fetchDetailsByFleecetDetails(res.data[0]);
 
             setIsFetchSuccessful(true);
-            // console.log("print response",printResponseData.date);
-            // setPrintValue(value);
           } else {
             setPrintResponseData([]);
             message.error(res.data.message);
           }
         })
-        .catch((err) => {
-          // console.log("Error", err);
-        });
+        .catch((err) => {});
     } catch (error) {
       console.error("Error in handleDatePrintChange:", error);
-      // Handle the error, e.g., display an error message to the user
     }
   };
 
@@ -497,24 +490,21 @@ const Drygoods_f06_Summary = () => {
   const handleEdit = (record) => {
     console.log("record", record);
     console.log("record.orderNo", record.order_no);
-    // const{date}=record;
-    // const formattedDate = moment(date).format('YYYY-MM-DD');
     navigate("/Precot/DryGoods/F-06", {
       state: {
         date: record.date,
         shift: record.shift,
         order_no: record.order_no,
-        machineName: record.product_name,
+        machineName: record.machine_name,
       },
     });
-    // console.log("selected Date edit",date);
   };
 
   const handleDateChange = (event) => {
     const value = event.target.value;
     setDate(value);
-    // console.log("date value", value);
   };
+
   useEffect(() => {
     if (token) {
       fetchData();
@@ -527,7 +517,7 @@ const Drygoods_f06_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getSummarydetailsF006`;
+      let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getSummarydetailsF006`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -559,7 +549,6 @@ const Drygoods_f06_Summary = () => {
     } finally {
     }
   };
-  //   summary table Get api
 
   // Table Summary
   const baseColumns = [
@@ -636,6 +625,7 @@ const Drygoods_f06_Summary = () => {
       ),
     },
   ];
+
   const Reason = {
     title: "Reason",
     dataIndex: "reason",
@@ -660,7 +650,7 @@ const Drygoods_f06_Summary = () => {
       axios
         .get(
           `${
-          API.prodUrl
+            API.prodUrl
           }/Precot/api/spulance/fetchBaleConsumption?order=${12}&date=${datePrint}&shift=${value}`,
           // `${ API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=ORD5678&date=2024-07-10&shift=III`,
           {
@@ -1008,13 +998,13 @@ const Drygoods_f06_Summary = () => {
               <th colSpan="10" style={{ textAlign: "center" }}>
                 S.No.
               </th>
-              <th colSpan={20} style={{ textAlign: "center" }}>
+              <th colSpan={10} style={{ textAlign: "center" }}>
                 Nature Of Problem
               </th>
               <th colSpan={20} style={{ textAlign: "center" }}>
                 Stop. Time
               </th>
-              <th colSpan={30} style={{ textAlign: "center" }}>
+              <th colSpan={20} style={{ textAlign: "center" }}>
                 Restart Time
               </th>
               <th colSpan={20} style={{ textAlign: "center" }}>
@@ -1029,20 +1019,20 @@ const Drygoods_f06_Summary = () => {
                 <td colSpan="10" style={{ textAlign: "center" }}>
                   {index + 1}
                 </td>
-                <td colSpan={20} style={{ textAlign: "center" }}>
+                <td colSpan={10} style={{ textAlign: "center" }}>
                   {item.SCAUSE}
                 </td>
                 <td colSpan={20} style={{ textAlign: "center" }}>
                   {item.FTime}
                 </td>
-                <td colSpan={30} style={{ textAlign: "center" }}>
+                <td colSpan={20} style={{ textAlign: "center" }}>
                   {item.TTime}
                 </td>
                 <td colSpan={20} style={{ textAlign: "center" }}>
                   {item.TotHrs}
                 </td>
                 <td colSpan={20} style={{ textAlign: "center" }}>
-                  {item.remarks}
+                  {item.Remarks}
                 </td>
               </tr>
             ))}
