@@ -1,4 +1,4 @@
-	package com.focusr.Precot.mssql.database.service.Qc;
+package com.focusr.Precot.mssql.database.service.Qc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.focusr.Precot.mssql.database.model.Qc.DisposalRecord;
 import com.focusr.Precot.mssql.database.model.Qc.MicrobilogyTestF004;
 import com.focusr.Precot.mssql.database.model.Qc.MicrobilogyTestF006;
+import com.focusr.Precot.mssql.database.model.Qc.NonWovenF005Lines;
 import com.focusr.Precot.mssql.database.model.Qc.QAqcObservations;
 import com.focusr.Precot.mssql.database.model.Qc.RequistionF029;
 import com.focusr.Precot.mssql.database.model.Qc.absorbentbleachedcottonreportCLF005;
@@ -57,6 +58,7 @@ import com.focusr.Precot.mssql.database.model.Qc.weighingscalecalibrationreportC
 import com.focusr.Precot.mssql.database.model.QcAudit.DisposalRecordHistory;
 import com.focusr.Precot.mssql.database.model.QcAudit.MicrobilogyTestF004History;
 import com.focusr.Precot.mssql.database.model.QcAudit.MicrobilogyTestF006History;
+import com.focusr.Precot.mssql.database.model.QcAudit.NonWovenF005LinesHistory;
 import com.focusr.Precot.mssql.database.model.QcAudit.PHYSICALANDCHEMICALTESTHistory;
 import com.focusr.Precot.mssql.database.model.QcAudit.QAqcObservationsHistory;
 import com.focusr.Precot.mssql.database.model.QcAudit.RequistionHistoryF029;
@@ -86,6 +88,7 @@ import com.focusr.Precot.mssql.database.model.bleaching.BleachBmrLaydownMapping;
 import com.focusr.Precot.mssql.database.repository.UserRepository;
 import com.focusr.Precot.mssql.database.repository.Qc.DisposalRecordRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.MicrobilogyTestRepoF004;
+import com.focusr.Precot.mssql.database.repository.Qc.NonWovenF005LinesRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.RequistionF029Repo;
 import com.focusr.Precot.mssql.database.repository.Qc.absorbentbleachedcottonreportCLF005ParentRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.absorbentbleachedcottonreportCLF005Repo;
@@ -115,6 +118,7 @@ import com.focusr.Precot.mssql.database.repository.Qc.validationAutoclaveRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.weighingscalecalibrationreportCLF007Repo;
 import com.focusr.Precot.mssql.database.repository.Qc.audit.DisposalRecordHistoryRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.audit.MicrobilogyTestRepoHistoryF004;
+import com.focusr.Precot.mssql.database.repository.Qc.audit.NonWovenF005LinesHistoryRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.audit.RequistionHistoryF029Repo;
 import com.focusr.Precot.mssql.database.repository.Qc.audit.absorbentbleachedcottonreportCLF005ParenthistoryRepo;
 import com.focusr.Precot.mssql.database.repository.Qc.audit.absorbentbleachedcottonreportHistoryCLF005Repo;
@@ -205,9 +209,15 @@ public class qcService8 {
 
 	@Autowired
 	private non_woven_F005Repo non_woven_F005Repo;
+	
+	@Autowired
+	private NonWovenF005LinesRepo nonWovenF005LinesRepo;
 
 	@Autowired
 	private non_woven_F005HistoryRepo non_woven_F005HistoryRepo;
+	
+	@Autowired
+	private NonWovenF005LinesHistoryRepo nonWovenF005LinesHistoryRepo;
 	
 	@Autowired
 	exfoliatingfabricanalysisreportRepo exfoRepo;
@@ -1069,6 +1079,52 @@ public ResponseEntity<?> getTestByBatchIdPDE(@Valid String id) {
 
 	}
 
+public ResponseEntity<?> getTestByBatchIdPDE2(@Valid String id) {
+	
+	List<aboserbentDTO> aboserbentDTO = new ArrayList<>();
+
+	List<physicalandchemicaltest> physicalandchemicaltest = new ArrayList<>();	
+	
+	List<String> batchNos = qcphysicalTestRepo.getByBatchBmr(id);
+	
+
+	for (String batchNo : batchNos) {
+		physicalandchemicaltest = qcphysicalTestRepo.findByBatch(id) != null
+				? qcphysicalTestRepo.findByBatch(batchNo)
+				: physicalandchemicaltest;
+
+		if (!physicalandchemicaltest.isEmpty()) {
+			for (physicalandchemicaltest phy : physicalandchemicaltest) {
+				if (!phy.getQaqc().isEmpty()) {
+					for (QAqcObservations js : phy.getQaqc()) {
+						aboserbentDTO absDTO = new aboserbentDTO();
+						aboserbentDTOfrom(js, absDTO);
+						aboserbentDTO.add(absDTO);
+					}
+				}
+
+				if (!phy.getMicro().isEmpty()) {
+					for (microbiologicalTestF002 micro : phy.getMicro()) {
+
+						aboserbentDTOfrom(micro, aboserbentDTO);
+					}
+				}
+				aboserbentDTOfrom(phy, aboserbentDTO);
+
+			}
+		}
+
+	}
+
+	try {
+		return new ResponseEntity(aboserbentDTO, HttpStatus.OK);
+	} catch (Exception e) {
+		return new ResponseEntity(new ApiResponse(false, "Failed to Test for this Batch No." + e.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+
+}
+
 	private void aboserbentDTOfrom(microbiologicalTestF002 micro, List<aboserbentDTO> aboserbentDTO) {
 		
 		for(aboserbentDTO js : aboserbentDTO) {
@@ -1513,23 +1569,37 @@ public ResponseEntity<?> saveNonWoven(non_woven_F005 nonwoven, HttpServletReques
 
 		Long id = nonwoven.getTest_id();
 
+		String[] ignoreProps = { "test_id", "createdBy", "createdAt", "qa_inspector_status",
+				"qa_inspector_saved_on", "qa_inspector_saved_by", "qa_inspector_saved_id", "qa_manager_status",
+				"qa_manager_saved_on", "qa_manager_saved_by", "qa_manager_saved_id", "qa_inspector_sign",
+				" qa_mng_status", "qa_mng_submit_on", "qa_mng_submit_by", "qa_mng_submit_id", "qa_mng_sign",
+				"line1" };
+
 		if (id != null) {
-			nwn = non_woven_F005Repo.findById(id)
-					.orElseThrow(() -> new EntityNotFoundException("Test not found"));
+			nwn = non_woven_F005Repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Test not found"));
+
 		}
 
-		BeanUtils.copyProperties(nonwoven, nwn, IgnoreProps);
-		if (id != null ) {
+		BeanUtils.copyProperties(nonwoven, nwn, ignoreProps);
+
+		if (id != null) {
 			if (userRole.equalsIgnoreCase("ROLE_QA")) {
 
 				nwn.setQa_inspector_saved_on(date);
 				nwn.setQa_inspector_saved_id(userId);
+				nwn.setQa_inspector_saved_by(userName);
 				nwn.setQa_inspector_sign(userName);
-
 				nwn.setQa_inspector_status(AppConstantsQc.QainspecterSAVED);
-
 				non_woven_F005Repo.save(nwn);
 
+				List<NonWovenF005Lines> line1 = nonwoven.getLine1();
+
+				for (NonWovenF005Lines line : line1) {
+
+					line.setTest_id(nonwoven.getTest_id());
+
+					nonWovenF005LinesRepo.save(line);
+				}
 
 			}
 
@@ -1537,22 +1607,27 @@ public ResponseEntity<?> saveNonWoven(non_woven_F005 nonwoven, HttpServletReques
 				return new ResponseEntity(new ApiResponse(false, userRole + "can not submit Details"),
 						HttpStatus.BAD_REQUEST);
 			}
-		}  
-			
-		
+		}
+
 		else {
 			if (userRole.equalsIgnoreCase("ROLE_QA")) {
 
-				
-
 				nonwoven.setQa_inspector_saved_on(date);
 				nonwoven.setQa_inspector_saved_id(userId);
+				nonwoven.setQa_inspector_saved_by(userName);
 				nonwoven.setQa_inspector_sign(userName);
-
 				nonwoven.setQa_inspector_status(AppConstantsQc.QainspecterSAVED);
 
 				non_woven_F005Repo.save(nonwoven);
 
+				List<NonWovenF005Lines> line1 = nonwoven.getLine1();
+
+				for (NonWovenF005Lines line : line1) {
+
+					line.setTest_id(nwn.getTest_id());
+
+					nonWovenF005LinesRepo.save(line);
+				}
 
 			}
 		}
@@ -1588,32 +1663,63 @@ public ResponseEntity<?> submitNonwoven(@Valid non_woven_F005 nonwoven, HttpServ
 			nwn = non_woven_F005Repo.findById(id).orElseThrow(() -> new EntityNotFoundException("Test not found"));
 		}
 
-//		nonwoven.setCreatedAt(nwn.getCreatedAt());
+		String[] ignoreProps = { "test_id", "createdBy", "createdAt", "qa_inspector_status",
+				"qa_inspector_saved_on", "qa_inspector_saved_by", "qa_inspector_saved_id", "qa_manager_status",
+				"qa_manager_saved_on", "qa_manager_saved_by", "qa_manager_saved_id", "qa_inspector_sign",
+				" qa_mng_status", "qa_mng_submit_on", "qa_mng_submit_by", "qa_mng_submit_id", "qa_mng_sign",
+				"line1" };
 
-		BeanUtils.copyProperties(nonwoven, nwn, IgnoreProps);
+		BeanUtils.copyProperties(nonwoven, nwn, ignoreProps);
 
 		if (id != null) {
 			if (userRole.equalsIgnoreCase("ROLE_QA")) {
 
 				nwn.setQa_mng_status(AppConstantsQc.waitingStatus);
-
 				nwn.setQa_inspector_submit_on(date);
-				nwn.setS_no(id);	
+				nwn.setS_no(id);
 				nwn.setQa_inspector_submit_id(userId);
 				nwn.setQa_inspector_sign(userName);
-				nwn.setQa_inspector_submit_by(userName);	
+				nwn.setQa_inspector_submit_by(userName);
 				nwn.setQa_inspector_status(AppConstantsQc.QainspecterAPPROVED);
-				nwn.setTested_by(userName);	
+				nwn.setTested_by(userName);
 				non_woven_F005Repo.save(nwn);
+
+				List<NonWovenF005Lines> line1 = nonwoven.getLine1();
+
+				for (NonWovenF005Lines line : line1) {
+
+					line.setTest_id(nwn.getTest_id());
+
+					nonWovenF005LinesRepo.save(line);
+				}
+
+				// HISTORY
+
 				non_woven_F005_history non_woven_F005_history = new non_woven_F005_history();
-				BeanUtils.copyProperties(nwn, non_woven_F005_history);
-				
+
+				String[] ignoreLine = { "line1", "history_id" };
+
+				BeanUtils.copyProperties(nwn, non_woven_F005_history, ignoreLine);
 
 				int version = non_woven_F005HistoryRepo.getMaximumVersiongetMaximumVersion(nonwoven.getBmr_no())
 						.map(temp -> temp + 1).orElse(1);
+
 				non_woven_F005_history.setVersion(version);
+
 				non_woven_F005HistoryRepo.save(non_woven_F005_history);
 
+				List<NonWovenF005Lines> historyline1 = nwn.getLine1();
+
+				for (NonWovenF005Lines line : historyline1) {
+
+					NonWovenF005LinesHistory objHistory = new NonWovenF005LinesHistory();
+
+					BeanUtils.copyProperties(line, objHistory);
+
+					objHistory.setHistory_id(non_woven_F005_history.getHistory_id());
+
+					nonWovenF005LinesHistoryRepo.save(objHistory);
+				}
 
 			}
 
@@ -1630,26 +1736,70 @@ public ResponseEntity<?> submitNonwoven(@Valid non_woven_F005 nonwoven, HttpServ
 				nonwoven.setS_no(id);
 				nonwoven.setQa_inspector_submit_id(userId);
 				nonwoven.setQa_inspector_sign(userName);
-				nonwoven.setQa_inspector_submit_by(userName);	
+				nonwoven.setQa_inspector_submit_by(userName);
 				nonwoven.setQa_inspector_status(AppConstantsQc.QainspecterAPPROVED);
 				nonwoven.setTested_by(userName);
 				non_woven_F005Repo.save(nonwoven);
-				nonwoven.setS_no(nonwoven.getTest_id());
-				non_woven_F005Repo.save(nonwoven);
+//				nonwoven.setS_no(nonwoven.getTest_id());
+//				non_woven_F005Repo.save(nonwoven);
+
+				List<NonWovenF005Lines> line1 = nonwoven.getLine1();
+
+				for (NonWovenF005Lines line : line1) {
+
+					line.setTest_id(nonwoven.getTest_id());
+
+					nonWovenF005LinesRepo.save(line);
+				}
+
+				// HISTORY
+
 				non_woven_F005_history non_woven_F005_history = new non_woven_F005_history();
-				BeanUtils.copyProperties(nonwoven, non_woven_F005_history);
-				
+
+				String[] ignoreLine = { "line1", "history_id" };
+
+				BeanUtils.copyProperties(nonwoven, non_woven_F005_history, ignoreLine);
 
 				int version = non_woven_F005HistoryRepo.getMaximumVersiongetMaximumVersion(nonwoven.getBmr_no())
 						.map(temp -> temp + 1).orElse(1);
+
 				non_woven_F005_history.setVersion(version);
+
 				non_woven_F005HistoryRepo.save(non_woven_F005_history);
+
+//				List<NonWovenF005Lines> historyline1 = nonwoven.getLine1();
+//
+//				for (NonWovenF005Lines line : historyline1) {
+//
+//					NonWovenF005LinesHistory objHistory = new NonWovenF005LinesHistory();
+//
+//					BeanUtils.copyProperties(line, objHistory);
+//
+//					objHistory.setHistory_id(non_woven_F005_history.getHistory_id());
+//
+//					nonWovenF005LinesHistoryRepo.save(objHistory);
+//				}
+				
+				// List<NonWovenF005Lines> historyline1 = nonwoven.getLine1();
+
+				// Do this:
+				List<NonWovenF005LinesHistory> historyLines = new ArrayList<>();
+				
+				for (NonWovenF005Lines originalLine : nonwoven.getLine1()) {
+					
+				    NonWovenF005LinesHistory historyLine = new NonWovenF005LinesHistory();
+				    
+				    BeanUtils.copyProperties(originalLine, historyLine);
+				    historyLine.setHistory_id(non_woven_F005_history.getHistory_id());
+				    historyLines.add(historyLine);
+				}
+				nonWovenF005LinesHistoryRepo.saveAll(historyLines);
 
 
 			}
-			
+
 		}
-		
+
 		try {
 
 			qcmailfunction.sendEmailToARF005(nonwoven);
@@ -1657,7 +1807,6 @@ public ResponseEntity<?> submitNonwoven(@Valid non_woven_F005 nonwoven, HttpServ
 			return new ResponseEntity<>(new ApiResponse(false, "Approved but Unable to send mail ! "),
 					HttpStatus.OK);
 		}
-		
 
 	} catch (Exception ex) {
 
@@ -1912,12 +2061,42 @@ public ResponseEntity<?> pdeDataARF005(String bmr) {
 
         // Convert each Object[] to a Map<String, Object>
         for (Object[] record : orderResponse) {
+        	
             Map<String, Object> map = new HashMap<>();
-            map.put("product_name", record[0]);
-            map.put("mixing", record[1]);
-            map.put("gsm", record[2]);
-            map.put("pattern", record[3]);
-            map.put("shaftNo", record[3]);
+            
+            map.put("shaftNo", record[0]);
+			map.put("product_name", record[1]);
+			map.put("mixing", record[2]);
+			map.put("gsm", record[3]);
+			map.put("pattern", record[4]);
+          
+            responseList.add(map);
+        }
+		return new ResponseEntity(responseList, HttpStatus.OK);
+	} catch (Exception e) {
+		return new ResponseEntity(new ApiResponse(false, "Failed to get all test" + e.getMessage()),
+				HttpStatus.BAD_REQUEST);
+	}
+}
+
+
+public ResponseEntity<?> nonWovenPde(String bmr) {
+	
+	List<Map<String, Object>> responseList = new ArrayList<>();
+
+    try {
+        List<Object[]> orderResponse = non_woven_F005Repo.nonWovenPde(bmr);
+
+        // Convert each Object[] to a Map<String, Object>
+        for (Object[] record : orderResponse) {
+        	
+            Map<String, Object> map = new HashMap<>();
+            
+            map.put("shaftNo", record[0]);
+			map.put("product_name", record[1]);
+			map.put("mixing", record[2]);
+			map.put("gsm", record[3]);
+			map.put("pattern", record[4]);
           
             responseList.add(map);
         }

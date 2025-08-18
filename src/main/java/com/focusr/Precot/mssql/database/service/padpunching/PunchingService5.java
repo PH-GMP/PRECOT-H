@@ -21,8 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.focusr.Precot.mssql.database.model.UserImageDetails;
-import com.focusr.Precot.mssql.database.model.bleaching.BleachHandSanitizationABPressF41;
-import com.focusr.Precot.mssql.database.model.bleaching.audit.BleachHandSanitizationABPressHistoryF41;
 import com.focusr.Precot.mssql.database.model.padpunching.PunchingHandSanitationF24;
 import com.focusr.Precot.mssql.database.model.padpunching.PunchingProductChangeOverF03;
 import com.focusr.Precot.mssql.database.model.padpunching.PunchingSanitationListF24;
@@ -37,7 +35,6 @@ import com.focusr.Precot.mssql.database.repository.padpunching.PunchingSanitatio
 import com.focusr.Precot.mssql.database.repository.padpunching.audit.PunchingHandSanitationHistoryRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.audit.PunchingProductChangeOverRepositoryHistoryF03;
 import com.focusr.Precot.mssql.database.repository.padpunching.audit.PunchingSanitationListHistoryRepository;
-import com.focusr.Precot.mssql.database.service.splunance.SpulanceService5;
 import com.focusr.Precot.payload.ApiResponse;
 import com.focusr.Precot.payload.ApproveResponse;
 import com.focusr.Precot.security.JwtTokenProvider;
@@ -46,9 +43,7 @@ import com.focusr.Precot.util.SCAUtil;
 import com.focusr.Precot.util.padpunching.PadPunchingMailFunction;
 
 /**
- * @author Jawahar.M
- * F03 - Product Change Over,
- * F24 - Hand Sanitation List
+ * @author Jawahar.M F03 - Product Change Over, F24 - Hand Sanitation List
  */
 
 @Service
@@ -63,70 +58,70 @@ public class PunchingService5 {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private UserImageDetailsRepository imageRepository;
-	
+
 	@Autowired
 	private PunchingProductChangeOverRepositoryF03 productChangeOverRepositoryF03;
-	
+
 	@Autowired
 	private PunchingProductChangeOverRepositoryHistoryF03 productChangeOverRepositoryHistoryF03;
-	
+
 	@Autowired
 	private PunchingHandSanitationRepositoryF24 handSanitationRepository;
-	
+
 	@Autowired
 	private PunchingSanitationListRepositoryF24 sanitationListRepository;
-	
+
 	@Autowired
 	private PunchingHandSanitationHistoryRepository handSanitationRepositoryHistory;
-	
+
 	@Autowired
 	private PunchingSanitationListHistoryRepository sanitationListHistoyRepository;
-	
+
 	@Autowired
 	private PadPunchingMailFunction padPunchingMailFunction;
-	
-	
-			// ****** F03 --> PRODUCT CHANGE OVER *********** 
-	
-	public ResponseEntity<?> saveProductChangeOver(PunchingProductChangeOverF03 productChangeOver, HttpServletRequest http) {
-		
+
+	// ****** F03 --> PRODUCT CHANGE OVER ***********
+
+	public ResponseEntity<?> saveProductChangeOver(PunchingProductChangeOverF03 productChangeOver,
+			HttpServletRequest http) {
+
 		PunchingProductChangeOverF03 punchingExistingObj;
-		
+
 		try {
-			
+
 			String userRole = getUserRole();
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			String userName = userRepository.getUserName(userId);
 			LocalDateTime currentDate = LocalDateTime.now();
 			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-			
 			Long id = productChangeOver.getProductId();
-			
-			if(userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-				
-				if(id != null) {
+
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
+				if (id != null) {
 					punchingExistingObj = productChangeOverRepositoryF03.productChangeoverDetailsById(id);
-					
+
 					productChangeOver.setCreatedAt(punchingExistingObj.getCreatedAt());
 					productChangeOver.setCreatedBy(punchingExistingObj.getCreatedBy());
-				} 
-				
+				}
+
 				productChangeOver.setSupervisor_status(AppConstants.supervisorSave);
 				productChangeOver.setSupervisor_sign(userName);
 				productChangeOver.setSupervisor_save_id(userId);
 				productChangeOver.setSupervisor_save_on(date);
-				
+
 				productChangeOverRepositoryF03.save(productChangeOver);
-				
+
 			} else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save product change over form !!!"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to save product change over form !!!"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-			
+
 		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
@@ -136,93 +131,97 @@ public class PunchingService5 {
 			return new ResponseEntity(new ApiResponse(false, "Failed to Save Product Change over" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
-		
+
 		return new ResponseEntity(productChangeOver, HttpStatus.OK);
-		
+
 	}
-	
-	
-	public ResponseEntity<?> submitProductChangeOver(PunchingProductChangeOverF03 productChangeOver, HttpServletRequest http) {
-		
+
+	public ResponseEntity<?> submitProductChangeOver(PunchingProductChangeOverF03 productChangeOver,
+			HttpServletRequest http) {
+
 		PunchingProductChangeOverF03 punchingExistingObj;
-		
+
 		try {
-			
+
 			String userRole = getUserRole();
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			String userName = userRepository.getUserName(userId);
 			LocalDateTime currentDate = LocalDateTime.now();
 			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-			
 			Long id = productChangeOver.getProductId();
-			
-			if(userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-				
-				if(id != null) {
+
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
+				if (id != null) {
 					punchingExistingObj = productChangeOverRepositoryF03.productChangeoverDetailsById(id);
-					
+
 					productChangeOver.setCreatedAt(punchingExistingObj.getCreatedAt());
 					productChangeOver.setCreatedBy(punchingExistingObj.getCreatedBy());
-					
+
 					productChangeOver.setSupervisor_save_by(punchingExistingObj.getSupervisor_save_by());
 					productChangeOver.setSupervisor_save_id(punchingExistingObj.getSupervisor_save_id());
 					productChangeOver.setSupervisor_save_on(punchingExistingObj.getSupervisor_save_on());
-				} 
-				
+				}
+
 				productChangeOver.setSupervisor_status(AppConstants.supervisorApprovedStatus);
 				productChangeOver.setSupervisor_sign(userName);
 				productChangeOver.setSupervisor_submit_id(userId);
 				productChangeOver.setSupervisor_submit_by(userName);
 				productChangeOver.setSupervisor_submit_on(date);
-				
-				productChangeOver.setHod_status(AppConstants.waitingStatus);
-				productChangeOver.setQa_status("");
-				
-					// SAVE IMAGE
-				
+
+				productChangeOver.setQa_status(AppConstants.waitingStatus);
+				productChangeOver.setHod_status("");
+
+				// SAVE IMAGE
+
 				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 				productChangeOver.setSupervisor_signature_image(signature);
-				
+
 				productChangeOverRepositoryF03.save(productChangeOver);
-				
-						// SAVE HISTORY 
-				
+
+				// SAVE HISTORY
+
 				PunchingProductChangeOverHistoryF03 productChangeOverHistoryF03 = new PunchingProductChangeOverHistoryF03();
 				BeanUtils.copyProperties(productChangeOver, productChangeOverHistoryF03, "productId");
-				
-					// SET VERSION BASED ON UNIQUE FIELDS
-				
+
+				// SET VERSION BASED ON UNIQUE FIELDS
+
 				String historyDate = productChangeOverHistoryF03.getDate();
 				String historyShift = productChangeOverHistoryF03.getShift();
 				String historyMachine = productChangeOverHistoryF03.getMachineName();
-				
-				int version = productChangeOverRepositoryHistoryF03.getMaximumVersion(historyDate, historyShift, historyMachine).map(temp -> temp + 1).orElse(1);
-				
+
+				String order1 = productChangeOverHistoryF03.getOrderNo1();
+				String order2 = productChangeOverHistoryF03.getOrderNo2();
+
+				int version = productChangeOverRepositoryHistoryF03
+						.getMaximumVersion(historyDate, historyShift, historyMachine, order1, order2)
+						.map(temp -> temp + 1).orElse(1);
+
 				System.out.println("Version" + version);
-				
+
 				productChangeOverHistoryF03.setVersion(version);
-				
+
 				productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
-				
-						// SEND MAIL 
-				
+
+				// SEND MAIL
+
 				try {
 
 					padPunchingMailFunction.sendEmailToHodF003(productChangeOver);
+
 				} catch (Exception ex) {
-					return new ResponseEntity<>(new ApiResponse(false, "Approved but Unable to send mail ! "),
+					return new ResponseEntity<>(new ApiResponse(false, "Supervisior Submitted Succesfully"),
 							HttpStatus.OK);
 				}
-				
-				
+
 			} else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to Submit product change over form !!!"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to Submit product change over form !!!"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-			
+
 		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
@@ -232,25 +231,25 @@ public class PunchingService5 {
 			return new ResponseEntity(new ApiResponse(false, "Failed to Submit Product Change over" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
-		
+
 		return new ResponseEntity(new ApiResponse(true, "Supervisior Submitted Successfully"), HttpStatus.OK);
-		
+
 	}
-	
-	public ResponseEntity<?> getProductDetailsbyUniquefIELD(String date, String shift, String machine) {
-		
+
+	public ResponseEntity<?> getProductDetailsbyUniquefIELD(String date, String shift, String machine, String order1,
+			String order2) {
+
 		PunchingProductChangeOverF03 punchingProductChangeOverF03;
-		
+
 		try {
-			punchingProductChangeOverF03 = productChangeOverRepositoryF03.productChangeoverDetailsByDateMachineShift(date, shift, machine);
-			
-			if(punchingProductChangeOverF03 == null) {
-				return new ResponseEntity(new ApiResponse(false, "No Records Found"),
-						HttpStatus.BAD_REQUEST);
+			punchingProductChangeOverF03 = productChangeOverRepositoryF03
+					.productChangeoverDetailsByDateMachineShift(date, shift, machine, order1, order2);
+
+			if (punchingProductChangeOverF03 == null) {
+				return new ResponseEntity(new ApiResponse(false, "No Records Found"), HttpStatus.BAD_REQUEST);
 			}
-			
-		}  catch (Exception ex) {
+
+		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
 			logger.error("Unable to Get Product Change over Details" + msg);
@@ -259,23 +258,24 @@ public class PunchingService5 {
 			return new ResponseEntity(new ApiResponse(false, "Failed to Get Product Change over Details" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(punchingProductChangeOverF03, HttpStatus.OK);
-		
+
 	}
-	
+
 	public ResponseEntity<?> getSummaryRoles() {
-		
+
 		List<PunchingProductChangeOverF03> productChangeOverF03List = new ArrayList<>();
-		
+
 		try {
 			String userRole = getUserRole();
-			
-			if(userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-				
+
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
 				productChangeOverF03List = productChangeOverRepositoryF03.getPunchingSupervisorSummary();
-				
-			} else if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE") || userRole.equalsIgnoreCase("ROLE_QA"))  {
+
+			} else if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")
+					|| userRole.equalsIgnoreCase("ROLE_QA")) {
 				productChangeOverF03List = productChangeOverRepositoryF03.getPunchingHodQASummary();
 			} else {
 				return new ResponseEntity(new ApiResponse(false, userRole + " not authorized to access form !!!"),
@@ -287,14 +287,14 @@ public class PunchingService5 {
 			logger.error("Unable to Get Product Change over Summary Details" + msg);
 			ex.printStackTrace();
 
-			return new ResponseEntity(new ApiResponse(false, "Failed to Get Product Change over  Summary Details" + msg),
+			return new ResponseEntity(
+					new ApiResponse(false, "Failed to Get Product Change over  Summary Details" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(productChangeOverF03List, HttpStatus.OK);
 	}
-	
-	
+
 //	public ResponseEntity<?> approveRejectProductChangeOver(ApproveResponse approveResponse, HttpServletRequest http) {
 //
 //		String userRole = getUserRole();
@@ -481,278 +481,310 @@ public class PunchingService5 {
 //					HttpStatus.BAD_REQUEST);
 //		}
 //	}
-	
+
 	public ResponseEntity<?> approveRejectProductChangeOver(ApproveResponse approveResponse, HttpServletRequest http) {
-	    String userRole = getUserRole();
-	    Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-	    String userName = userRepository.getUserName(userId);
-	    LocalDateTime currentDate = LocalDateTime.now();
-	    Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+		String userRole = getUserRole();
+		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+		String userName = userRepository.getUserName(userId);
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-	    try {
-	        PunchingProductChangeOverF03 productChangeOverF03 = productChangeOverRepositoryF03.productChangeoverDetailsById(approveResponse.getId());
+		try {
+			PunchingProductChangeOverF03 productChangeOverF03 = productChangeOverRepositoryF03
+					.productChangeoverDetailsById(approveResponse.getId());
 
-	        PunchingProductChangeOverHistoryF03 productChangeOverHistoryF03 = new PunchingProductChangeOverHistoryF03();
+			PunchingProductChangeOverHistoryF03 productChangeOverHistoryF03 = new PunchingProductChangeOverHistoryF03();
 
-	        String supervisorStatus = productChangeOverF03.getSupervisor_status();
-	        String hodStatus = productChangeOverF03.getHod_status();
+			String supervisorStatus = productChangeOverF03.getSupervisor_status();
+			String hodStatus = productChangeOverF03.getHod_status();
+			String qaStatus = productChangeOverF03.getQa_status();
 
-	        if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+			if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
 
-	            if (supervisorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+//	            if (supervisorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
 
-	                if (approveResponse.getStatus().equalsIgnoreCase("Approve")) {
-	                    productChangeOverF03.setHod_status(AppConstants.hodApprovedStatus);
-	                    productChangeOverF03.setHod_submit_by(userName);
-	                    productChangeOverF03.setHod_submit_id(userId);
-	                    productChangeOverF03.setHod_submit_on(date);
-	                    productChangeOverF03.setQa_status(AppConstants.waitingStatus);
+				if (qaStatus.equalsIgnoreCase(AppConstants.qaApprovedStatus)
+						&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
 
-	                    Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-	                    byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-	                    productChangeOverF03.setHod_signature_image(signature);
-	                    productChangeOverF03.setHod_sign(userName);
+					if (approveResponse.getStatus().equalsIgnoreCase("Approve")) {
+						productChangeOverF03.setHod_status(AppConstants.hodApprovedStatus);
+						productChangeOverF03.setHod_submit_by(userName);
+						productChangeOverF03.setHod_submit_id(userId);
+						productChangeOverF03.setHod_submit_on(date);
+//	                    productChangeOverF03.setQa_status(AppConstants.waitingStatus);
 
-	                    productChangeOverRepositoryF03.save(productChangeOverF03);
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
+						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+						productChangeOverF03.setHod_signature_image(signature);
+						productChangeOverF03.setHod_sign(userName);
 
-	                    // HISTORY
-	                    productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(productChangeOverF03.getDate(), productChangeOverF03.getShift(), productChangeOverF03.getMachineName());
-	                    productChangeOverHistoryF03.setHod_status(AppConstants.hodApprovedStatus);
-	                    productChangeOverHistoryF03.setHod_submit_on(date);
-	                    productChangeOverHistoryF03.setHod_submit_by(userName);
-	                    productChangeOverHistoryF03.setHod_submit_id(userId);
-	                    productChangeOverHistoryF03.setHod_sign(userName);
+						productChangeOverRepositoryF03.save(productChangeOverF03);
 
-	                    productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
-	                    
-	                    try {
+						// HISTORY
+						productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(
+								productChangeOverF03.getDate(), productChangeOverF03.getShift(),
+								productChangeOverF03.getMachineName(), productChangeOverF03.getOrderNo1(),
+								productChangeOverF03.getOrderNo2());
+						productChangeOverHistoryF03.setHod_status(AppConstants.hodApprovedStatus);
+						productChangeOverHistoryF03.setHod_submit_on(date);
+						productChangeOverHistoryF03.setHod_submit_by(userName);
+						productChangeOverHistoryF03.setHod_submit_id(userId);
+						productChangeOverHistoryF03.setHod_sign(userName);
 
-	    					padPunchingMailFunction.sendEmailToQAF003(productChangeOverF03);
-	    				} catch (Exception ex) {
-	    					return new ResponseEntity<>(new ApiResponse(false, "Approved but Unable to send mail ! "),
-	    							HttpStatus.OK);
-	    				}
+						productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
 
-	                    return new ResponseEntity<>(new ApiResponse(true, "HOD Approved Successfully"), HttpStatus.OK);
+						try {
 
-	                } else if (approveResponse.getStatus().equalsIgnoreCase("Reject")) {
-	                    productChangeOverF03.setHod_status(AppConstants.hodRejectedStatus);
-	                    productChangeOverF03.setHod_submit_by(userName);
-	                    productChangeOverF03.setHod_submit_id(userId);
-	                    productChangeOverF03.setHod_submit_on(date);
+							padPunchingMailFunction.sendEmailToQAF003(productChangeOverF03);
+						} catch (Exception ex) {
+							return new ResponseEntity<>(new ApiResponse(false, "Approved but Unable to send mail ! "),
+									HttpStatus.OK);
+						}
 
-	                    Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-	                    byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-	                    productChangeOverF03.setHod_signature_image(signature);
-	                    productChangeOverF03.setHod_sign(userName);
-	                    
-	                    productChangeOverF03.setReason(approveResponse.getRemarks());
+						return new ResponseEntity<>(new ApiResponse(true, "HOD Approved Successfully"), HttpStatus.OK);
 
-	                    productChangeOverRepositoryF03.save(productChangeOverF03);
+					} else if (approveResponse.getStatus().equalsIgnoreCase("Reject")) {
+						productChangeOverF03.setHod_status(AppConstants.hodRejectedStatus);
+						productChangeOverF03.setHod_submit_by(userName);
+						productChangeOverF03.setHod_submit_id(userId);
+						productChangeOverF03.setHod_submit_on(date);
 
-	                    // HISTORY
-	                    productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(productChangeOverF03.getDate(), productChangeOverF03.getShift(), productChangeOverF03.getMachineName());
-	                    productChangeOverHistoryF03.setHod_status(AppConstants.hodRejectedStatus);
-	                    productChangeOverHistoryF03.setHod_submit_on(date);
-	                    productChangeOverHistoryF03.setHod_submit_by(userName);
-	                    productChangeOverHistoryF03.setHod_submit_id(userId);
-	                    productChangeOverHistoryF03.setHod_sign(userName);
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
+						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+						productChangeOverF03.setHod_signature_image(signature);
+						productChangeOverF03.setHod_sign(userName);
 
-	                    productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
+						productChangeOverF03.setReason(approveResponse.getRemarks());
 
-	                    return new ResponseEntity<>(new ApiResponse(true, "HOD Rejected Successfully"), HttpStatus.OK);
-	                }
+						productChangeOverRepositoryF03.save(productChangeOverF03);
 
-	            } else {
-	                return new ResponseEntity<>(new ApiResponse(false, "please check Supervisor is Approved or not"), HttpStatus.BAD_REQUEST);
-	            }
+						// HISTORY
+						productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(
+								productChangeOverF03.getDate(), productChangeOverF03.getShift(),
+								productChangeOverF03.getMachineName(), productChangeOverF03.getOrderNo1(),
+								productChangeOverF03.getOrderNo2());
+						productChangeOverHistoryF03.setHod_status(AppConstants.hodRejectedStatus);
+						productChangeOverHistoryF03.setHod_submit_on(date);
+						productChangeOverHistoryF03.setHod_submit_by(userName);
+						productChangeOverHistoryF03.setHod_submit_id(userId);
+						productChangeOverHistoryF03.setHod_sign(userName);
 
-	        } else if (userRole.equalsIgnoreCase("ROLE_QA")) {
+						productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
 
-	            if (supervisorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus) && productChangeOverF03.getQa_status().equalsIgnoreCase(AppConstants.waitingStatus)) {
+						return new ResponseEntity<>(new ApiResponse(true, "HOD Rejected Successfully"), HttpStatus.OK);
+					}
 
-	                if (approveResponse.getStatus().equalsIgnoreCase("Approve")) {
-	                    productChangeOverF03.setQa_status(AppConstants.qaApprovedStatus);
-	                    productChangeOverF03.setQa_submit_by(userName);
-	                    productChangeOverF03.setQa_submit_id(userId);
-	                    productChangeOverF03.setQa_submit_on(date);
+				} else {
+					return new ResponseEntity<>(new ApiResponse(false, "please check Supervisor is Approved or not"),
+							HttpStatus.BAD_REQUEST);
+				}
 
-	                    Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-	                    byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-	                    productChangeOverF03.setQa_signature_image(signature);
-	                    productChangeOverF03.setQa_sign(userName);
+			} else if (userRole.equalsIgnoreCase("ROLE_QA")) {
 
-	                    productChangeOverRepositoryF03.save(productChangeOverF03);
+				if (supervisorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+						&& productChangeOverF03.getQa_status().equalsIgnoreCase(AppConstants.waitingStatus)) {
 
-	                    // HISTORY
-	                    productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(productChangeOverF03.getDate(), productChangeOverF03.getShift(), productChangeOverF03.getMachineName());
-	                    productChangeOverHistoryF03.setQa_status(AppConstants.qaApprovedStatus);
-	                    productChangeOverHistoryF03.setQa_submit_on(date);
-	                    productChangeOverHistoryF03.setQa_submit_by(userName);
-	                    productChangeOverHistoryF03.setQa_submit_id(userId);
-	                    productChangeOverHistoryF03.setQa_sign(userName);
+					if (approveResponse.getStatus().equalsIgnoreCase("Approve")) {
+						productChangeOverF03.setQa_status(AppConstants.qaApprovedStatus);
+						productChangeOverF03.setQa_submit_by(userName);
+						productChangeOverF03.setQa_submit_id(userId);
+						productChangeOverF03.setQa_submit_on(date);
+						productChangeOverF03.setHod_status(AppConstants.waitingStatus);
 
-	                    productChangeOverHistoryF03.setReason(approveResponse.getRemarks());
-	                    
-	                    productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
+						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+						productChangeOverF03.setQa_signature_image(signature);
+						productChangeOverF03.setQa_sign(userName);
 
-	                    return new ResponseEntity<>(new ApiResponse(true, "QA Approved Successfully"), HttpStatus.OK);
+						productChangeOverRepositoryF03.save(productChangeOverF03);
 
-	                } else if (approveResponse.getStatus().equalsIgnoreCase("Reject")) {
-	                    productChangeOverF03.setQa_status(AppConstants.qaRejectedStatus);
-	                    productChangeOverF03.setQa_submit_by(userName);
-	                    productChangeOverF03.setQa_submit_id(userId);
-	                    productChangeOverF03.setQa_submit_on(date);
+						// HISTORY
+						productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(
+								productChangeOverF03.getDate(), productChangeOverF03.getShift(),
+								productChangeOverF03.getMachineName(), productChangeOverF03.getOrderNo1(),
+								productChangeOverF03.getOrderNo2());
+						productChangeOverHistoryF03.setQa_status(AppConstants.qaApprovedStatus);
+						productChangeOverHistoryF03.setQa_submit_on(date);
+						productChangeOverHistoryF03.setQa_submit_by(userName);
+						productChangeOverHistoryF03.setQa_submit_id(userId);
+						productChangeOverHistoryF03.setQa_sign(userName);
 
-	                    Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-	                    byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-	                    productChangeOverF03.setQa_signature_image(signature);
-	                    productChangeOverF03.setQa_sign(userName);
+						productChangeOverHistoryF03.setReason(approveResponse.getRemarks());
 
-	                    productChangeOverF03.setReason(approveResponse.getRemarks());
-	                    
-	                    productChangeOverRepositoryF03.save(productChangeOverF03);
+						productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
 
-	                    // HISTORY
-	                    productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(productChangeOverF03.getDate(), productChangeOverF03.getShift(), productChangeOverF03.getMachineName());
-	                    productChangeOverHistoryF03.setQa_status(AppConstants.qaRejectedStatus);
-	                    productChangeOverHistoryF03.setQa_submit_on(date);
-	                    productChangeOverHistoryF03.setQa_submit_by(userName);
-	                    productChangeOverHistoryF03.setQa_submit_id(userId);
-	                    productChangeOverHistoryF03.setQa_sign(userName);
-	                    
-	                    productChangeOverHistoryF03.setReason(approveResponse.getRemarks());
+						return new ResponseEntity<>(new ApiResponse(true, "QA Approved Successfully"), HttpStatus.OK);
 
-	                    productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
+					} else if (approveResponse.getStatus().equalsIgnoreCase("Reject")) {
+						productChangeOverF03.setQa_status(AppConstants.qaRejectedStatus);
+						productChangeOverF03.setQa_submit_by(userName);
+						productChangeOverF03.setQa_submit_id(userId);
+						productChangeOverF03.setQa_submit_on(date);
 
-	                    return new ResponseEntity<>(new ApiResponse(true, "QA Rejected Successfully"), HttpStatus.OK);
-	                }
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
+						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+						productChangeOverF03.setQa_signature_image(signature);
+						productChangeOverF03.setQa_sign(userName);
 
-	            } else {
-	                return new ResponseEntity<>(new ApiResponse(false, "please check Hod Approvals !!!"), HttpStatus.BAD_REQUEST);
-	            }
-	        } else {
-	            return new ResponseEntity<>(new ApiResponse(false, userRole + " not authorized to approve form !!!"), HttpStatus.BAD_REQUEST);
-	        }
+						productChangeOverF03.setReason(approveResponse.getRemarks());
 
-	    } catch (Exception ex) {
-	        String msg = ex.getMessage();
-	        logger.error("Unable to Get Product Change over Summary Details" + msg);
-	        ex.printStackTrace();
+						productChangeOverRepositoryF03.save(productChangeOverF03);
 
-	        return new ResponseEntity<>(new ApiResponse(false, "Failed to Get Product Change over Summary Details: " + msg), HttpStatus.BAD_REQUEST);
-	    }
-	    
-	    return null;
+						// HISTORY
+						productChangeOverHistoryF03 = productChangeOverRepositoryHistoryF03.findLastSubmittedRecord(
+								productChangeOverF03.getDate(), productChangeOverF03.getShift(),
+								productChangeOverF03.getMachineName(), productChangeOverF03.getOrderNo1(),
+								productChangeOverF03.getOrderNo2());
+						productChangeOverHistoryF03.setQa_status(AppConstants.qaRejectedStatus);
+						productChangeOverHistoryF03.setQa_submit_on(date);
+						productChangeOverHistoryF03.setQa_submit_by(userName);
+						productChangeOverHistoryF03.setQa_submit_id(userId);
+						productChangeOverHistoryF03.setQa_sign(userName);
+
+						productChangeOverHistoryF03.setReason(approveResponse.getRemarks());
+
+						productChangeOverRepositoryHistoryF03.save(productChangeOverHistoryF03);
+
+						return new ResponseEntity<>(new ApiResponse(true, "QA Rejected Successfully"), HttpStatus.OK);
+					}
+
+				} else {
+					return new ResponseEntity<>(new ApiResponse(false, "please check Hod Approvals !!!"),
+							HttpStatus.BAD_REQUEST);
+				}
+			} else {
+				return new ResponseEntity<>(new ApiResponse(false, userRole + " not authorized to approve form !!!"),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			logger.error("Unable to Get Product Change over Summary Details" + msg);
+			ex.printStackTrace();
+
+			return new ResponseEntity<>(
+					new ApiResponse(false, "Failed to Get Product Change over Summary Details: " + msg),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		return null;
 	}
 
-	
-		// FOR PRINT 
-	public ResponseEntity<?> fetchPunchingPrintParameters(String date, String shift, String machine) {
-		
+	// FOR PRINT
+	public ResponseEntity<?> fetchPunchingPrintParameters(String date, String shift, String machine, String order1,
+			String order2) {
+
 		List<PunchingProductChangeOverF03> productChangeOverF03List = new ArrayList<>();
-		
+
 		try {
-			
-			System.out.println("Date" + date + "Shuft" + shift + "Machine" + machine);
-			
-			productChangeOverF03List = productChangeOverRepositoryF03.productChangeoverDetailsPrint(date, shift, machine);
-			
+
+			System.out.println("Date" + date + "Shift" + shift + "Machine" + machine);
+
+			productChangeOverF03List = productChangeOverRepositoryF03.productChangeoverDetailsPrint(date, shift,
+					machine, order1, order2);
+
 		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
 			logger.error("Unable to Get Product Change over Summary Details" + msg);
 			ex.printStackTrace();
 
-			return new ResponseEntity(new ApiResponse(false, "Failed to Get Product Change over  Summary Details" + msg),
+			return new ResponseEntity(
+					new ApiResponse(false, "Failed to Get Product Change over  Summary Details" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(productChangeOverF03List, HttpStatus.OK);
 	}
-	
-	
-		// SAVE HAND SANITATION REPORT
-	
+
+	// SAVE HAND SANITATION REPORT
+
 	@SuppressWarnings("null")
 	public ResponseEntity<?> saveHandSanitation(PunchingHandSanitationF24 productChangeOver, HttpServletRequest http) {
-		
+
 		PunchingHandSanitationF24 punchingExistingObj;
-		
+
 		try {
-			
+
 			String userRole = getUserRole();
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			String userName = userRepository.getUserName(userId);
 			LocalDateTime currentDate = LocalDateTime.now();
 			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-			
 			Long id = productChangeOver.getHandSanitizationId();
-			
-			if(userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-				
-				if(id != null) {
+
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
+				if (id != null) {
 					punchingExistingObj = handSanitationRepository.fetchHandSanitizationABPressF41ById(id);
-					
+
 					productChangeOver.setCreatedAt(punchingExistingObj.getCreatedAt());
 					productChangeOver.setCreatedBy(punchingExistingObj.getCreatedBy());
-					
+
 					List<PunchingSanitationListF24> sanitationListF24 = productChangeOver.getSanitizationList();
-					
-					if(sanitationListF24 != null || !sanitationListF24.isEmpty()) {
-						
-						for(PunchingSanitationListF24 punchSanitationList : sanitationListF24) {
-							
+
+					if (sanitationListF24 != null || !sanitationListF24.isEmpty()) {
+
+						for (PunchingSanitationListF24 punchSanitationList : sanitationListF24) {
+
 							Long sanitationId = punchSanitationList.getId();
-							
-							if(sanitationId != null) {
-								PunchingSanitationListF24 existingSanitationObj = sanitationListRepository.getSanitationListById(sanitationId);
-								
-								punchSanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
+
+							if (sanitationId != null) {
+								PunchingSanitationListF24 existingSanitationObj = sanitationListRepository
+										.getSanitationListById(sanitationId);
+
+								punchSanitationList
+										.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
 								punchSanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
 								punchSanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
-								punchSanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
+								punchSanitationList
+										.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
 							}
-							
+
 							sanitationListRepository.save(punchSanitationList);
 						}
-						
+
 					}
-					
-				} 
-				
+
+				}
+
 				productChangeOver.setSupervisor_status(AppConstants.supervisorSave);
 				productChangeOver.setSupervisor_sign(userName);
 				productChangeOver.setSupervisor_save_id(userId);
 				productChangeOver.setSupervisor_save_on(date);
-				
+
 				handSanitationRepository.save(productChangeOver);
-				
+
 				List<PunchingSanitationListF24> sanitationListF24 = productChangeOver.getSanitizationList();
-				
-				for(PunchingSanitationListF24 punchSanitationList : sanitationListF24) {
-					
+
+				for (PunchingSanitationListF24 punchSanitationList : sanitationListF24) {
+
 					Long sanitationId = punchSanitationList.getId();
-					
-					if(sanitationId != null) {
-						PunchingSanitationListF24 existingSanitationObj = sanitationListRepository.getSanitationListById(sanitationId);
-						
+
+					if (sanitationId != null) {
+						PunchingSanitationListF24 existingSanitationObj = sanitationListRepository
+								.getSanitationListById(sanitationId);
+
 						punchSanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
 						punchSanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
 						punchSanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
 						punchSanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
 					}
-					
+
 					sanitationListRepository.save(punchSanitationList);
 				}
-				
-				
+
 			} else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save hand sanitation form !!!"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to save hand sanitation form !!!"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-			
+
 		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
@@ -762,15 +794,13 @@ public class PunchingService5 {
 			return new ResponseEntity(new ApiResponse(false, "Failed to Save hand sanitation form" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
-		
+
 		return new ResponseEntity(productChangeOver, HttpStatus.OK);
-		
+
 	}
-	
-	
+
 	// SUBMIT HAND SANITATION REPORT
-	
+
 //	public ResponseEntity<?> submitHandSanitationReport(PunchingHandSanitationF24 productChangeOver, HttpServletRequest http) {
 //		
 //		PunchingHandSanitationF24 punchingExistingObj;
@@ -938,38 +968,39 @@ public class PunchingService5 {
 //		return new ResponseEntity(new ApiResponse(true,"Supervisior Submitted Successfully"), HttpStatus.OK);
 //		
 //	}
-	
-	
-	public ResponseEntity<?> submitHandSanitationReport(PunchingHandSanitationF24 productChangeOver, HttpServletRequest http) {
-	    PunchingHandSanitationF24 punchingExistingObj;
 
-	    try {
-	        String userRole = getUserRole();
-	        Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-	        String userName = userRepository.getUserName(userId);
-	        LocalDateTime currentDate = LocalDateTime.now();
-	        Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+	public ResponseEntity<?> submitHandSanitationReport(PunchingHandSanitationF24 productChangeOver,
+			HttpServletRequest http) {
+		PunchingHandSanitationF24 punchingExistingObj;
 
-	        if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-	            Long id = productChangeOver.getHandSanitizationId();
+		try {
+			String userRole = getUserRole();
+			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			String userName = userRepository.getUserName(userId);
+			LocalDateTime currentDate = LocalDateTime.now();
+			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-	            if (id != null) {
-	                punchingExistingObj = handSanitationRepository.fetchHandSanitizationABPressF41ById(id);
-	                if (punchingExistingObj == null) {
-	                    return new ResponseEntity<>(new ApiResponse(false, "Record not found for update"), HttpStatus.NOT_FOUND);
-	                }
-	                updateExistingRecord(productChangeOver, punchingExistingObj);
-	            }
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+				Long id = productChangeOver.getHandSanitizationId();
 
-	            saveSupervisorDetails(productChangeOver, userId, userName, date);
-	            handSanitationRepository.save(productChangeOver);
+				if (id != null) {
+					punchingExistingObj = handSanitationRepository.fetchHandSanitizationABPressF41ById(id);
+					if (punchingExistingObj == null) {
+						return new ResponseEntity<>(new ApiResponse(false, "Record not found for update"),
+								HttpStatus.NOT_FOUND);
+					}
+					updateExistingRecord(productChangeOver, punchingExistingObj);
+				}
 
-	            processSanitizationList(productChangeOver.getSanitizationList());
+				saveSupervisorDetails(productChangeOver, userId, userName, date);
+				handSanitationRepository.save(productChangeOver);
 
-	            saveHistory(productChangeOver, date);
+				processSanitizationList(productChangeOver.getSanitizationList());
+
+				saveHistory(productChangeOver, date);
 
 //	             SEND MAIL 
-	            try {
+				try {
 
 					padPunchingMailFunction.sendEmailToHodF006(productChangeOver);
 				} catch (Exception ex) {
@@ -977,310 +1008,308 @@ public class PunchingService5 {
 							HttpStatus.OK);
 				}
 
-	        } else {
-	            return new ResponseEntity<>(new ApiResponse(false, userRole + " not authorized to Submit hand Sanitation form !!!"), HttpStatus.BAD_REQUEST);
-	        }
+			} else {
+				return new ResponseEntity<>(
+						new ApiResponse(false, userRole + " not authorized to Submit hand Sanitation form !!!"),
+						HttpStatus.BAD_REQUEST);
+			}
 
-	    } catch (Exception ex) {
-	        String msg = ex.getMessage();
-	        logger.error("Unable to Submit hand Sanitation form: " + msg);
-	        ex.printStackTrace();
-	        return new ResponseEntity<>(new ApiResponse(false, "Failed to Submit hand Sanitation form: " + msg), HttpStatus.BAD_REQUEST);
-	    }
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			logger.error("Unable to Submit hand Sanitation form: " + msg);
+			ex.printStackTrace();
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to Submit hand Sanitation form: " + msg),
+					HttpStatus.BAD_REQUEST);
+		}
 
-	    return new ResponseEntity<>(new ApiResponse(true, "Supervisor Submitted Successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ApiResponse(true, "Supervisor Submitted Successfully"), HttpStatus.OK);
 	}
 
 	private void updateExistingRecord(PunchingHandSanitationF24 newRecord, PunchingHandSanitationF24 existingRecord) {
-	    newRecord.setCreatedAt(existingRecord.getCreatedAt());
-	    newRecord.setCreatedBy(existingRecord.getCreatedBy());
-	    newRecord.setSupervisor_save_by(existingRecord.getSupervisor_save_by());
-	    newRecord.setSupervisor_save_id(existingRecord.getSupervisor_save_id());
-	    newRecord.setSupervisor_save_on(existingRecord.getSupervisor_save_on());
+		newRecord.setCreatedAt(existingRecord.getCreatedAt());
+		newRecord.setCreatedBy(existingRecord.getCreatedBy());
+		newRecord.setSupervisor_save_by(existingRecord.getSupervisor_save_by());
+		newRecord.setSupervisor_save_id(existingRecord.getSupervisor_save_id());
+		newRecord.setSupervisor_save_on(existingRecord.getSupervisor_save_on());
 	}
 
 	private void saveSupervisorDetails(PunchingHandSanitationF24 record, Long userId, String userName, Date date) {
-	    record.setSupervisor_status(AppConstants.supervisorApprovedStatus);
-	    record.setSupervisor_sign(userName);
-	    record.setSupervisor_submit_id(userId);
-	    record.setSupervisor_submit_by(userName);
-	    record.setSupervisor_submit_on(date);
-	    record.setHod_status(AppConstants.waitingStatus);
+		record.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+		record.setSupervisor_sign(userName);
+		record.setSupervisor_submit_id(userId);
+		record.setSupervisor_submit_by(userName);
+		record.setSupervisor_submit_on(date);
+		record.setHod_status(AppConstants.waitingStatus);
 	}
 
 	private void processSanitizationList(List<PunchingSanitationListF24> sanitationListF24s) {
-	    for (PunchingSanitationListF24 sanitationList : sanitationListF24s) {
-	        Long sanitationId = sanitationList.getId();
+		for (PunchingSanitationListF24 sanitationList : sanitationListF24s) {
+			Long sanitationId = sanitationList.getId();
 
-	        if (sanitationId != null) {
-	            PunchingSanitationListF24 existingSanitationObj = sanitationListRepository.getSanitationListById(sanitationId);
-	            sanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
-	            sanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
-	            sanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
+			if (sanitationId != null) {
+				PunchingSanitationListF24 existingSanitationObj = sanitationListRepository
+						.getSanitationListById(sanitationId);
+				sanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
+				sanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
+				sanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
 //	            sanitationList.setHandSanitizationId(existingSanitationObj.getHandSanitizationId());
-	        }
+			}
 
-	        sanitationListRepository.save(sanitationList);
-	    }
+			sanitationListRepository.save(sanitationList);
+		}
 	}
 
 	private void saveHistory(PunchingHandSanitationF24 productChangeOver, Date date) {
-	    PunchingHandSanitationHistoryF24 productChangeOverHistory = new PunchingHandSanitationHistoryF24();
-	    copyDetailsToHistory(productChangeOver, productChangeOverHistory);
+		PunchingHandSanitationHistoryF24 productChangeOverHistory = new PunchingHandSanitationHistoryF24();
+		copyDetailsToHistory(productChangeOver, productChangeOverHistory);
 
-	    String historyDate = productChangeOverHistory.getDate();
-	    String historyShift = productChangeOverHistory.getShift();
+		String historyDate = productChangeOverHistory.getDate();
+		String historyShift = productChangeOverHistory.getShift();
 
-	    int version = handSanitationRepositoryHistory.getMaximumVersion(historyDate, historyShift)
-	                    .map(temp -> temp + 1).orElse(1);
-	    productChangeOverHistory.setVersion(version);
-	    handSanitationRepositoryHistory.save(productChangeOverHistory);
+		int version = handSanitationRepositoryHistory.getMaximumVersion(historyDate, historyShift).map(temp -> temp + 1)
+				.orElse(1);
+		productChangeOverHistory.setVersion(version);
+		handSanitationRepositoryHistory.save(productChangeOverHistory);
 
-	    saveHistorySanitizationList(productChangeOver, productChangeOverHistory);
+		saveHistorySanitizationList(productChangeOver, productChangeOverHistory);
 	}
 
 	private void copyDetailsToHistory(PunchingHandSanitationF24 source, PunchingHandSanitationHistoryF24 target) {
-	    target.setUnit(source.getUnit());
-	    target.setFormatName(source.getFormatName());
-	    target.setFormatNo(source.getFormatNo());
-	    target.setRevisionNo(source.getRevisionNo());
-	    target.setSopNumber(source.getSopNumber());
-	    target.setDate(source.getDate());
-	    target.setShift(source.getShift());
-	    target.setSupervisor_status(source.getSupervisor_status());
-	    target.setSupervisor_sign(source.getSupervisor_sign());
-	    target.setSupervisor_submit_by(source.getSupervisor_submit_by());
-	    target.setSupervisor_submit_id(source.getSupervisor_submit_id());
-	    target.setSupervisor_submit_on(source.getSupervisor_submit_on());
-	    target.setHod_status(source.getHod_status());
+		target.setUnit(source.getUnit());
+		target.setFormatName(source.getFormatName());
+		target.setFormatNo(source.getFormatNo());
+		target.setRevisionNo(source.getRevisionNo());
+		target.setSopNumber(source.getSopNumber());
+		target.setDate(source.getDate());
+		target.setShift(source.getShift());
+		target.setSupervisor_status(source.getSupervisor_status());
+		target.setSupervisor_sign(source.getSupervisor_sign());
+		target.setSupervisor_submit_by(source.getSupervisor_submit_by());
+		target.setSupervisor_submit_id(source.getSupervisor_submit_id());
+		target.setSupervisor_submit_on(source.getSupervisor_submit_on());
+		target.setHod_status(source.getHod_status());
 	}
 
-	private void saveHistorySanitizationList(PunchingHandSanitationF24 productChangeOver, PunchingHandSanitationHistoryF24 historyRecord) {
-	    for (PunchingSanitationListF24 sanitationList : productChangeOver.getSanitizationList()) {
-	        PunchingSanitationListHistoryF24 history = new PunchingSanitationListHistoryF24();
-	        history.setHandSanitizationId(historyRecord.getHandSanitizationId());
-	        history.setHour1(sanitationList.getHour1());
-	        history.setHour2(sanitationList.getHour2());
-	        history.setHour3(sanitationList.getHour3());
-	        history.setHour4(sanitationList.getHour4());
-	        history.setHour5(sanitationList.getHour5());
-	        history.setHour6(sanitationList.getHour6());
-	        history.setHour7(sanitationList.getHour7());
-	        history.setHour8(sanitationList.getHour8());
-	        history.setIdNumber(sanitationList.getIdNumber());
-	        history.setRemarks(sanitationList.getRemarks());
-	        history.setSerialNumber(sanitationList.getSerialNumber());
-	        history.setName(sanitationList.getName());
-	        sanitationListHistoyRepository.save(history);
-	    }
+	private void saveHistorySanitizationList(PunchingHandSanitationF24 productChangeOver,
+			PunchingHandSanitationHistoryF24 historyRecord) {
+		for (PunchingSanitationListF24 sanitationList : productChangeOver.getSanitizationList()) {
+			PunchingSanitationListHistoryF24 history = new PunchingSanitationListHistoryF24();
+			history.setHandSanitizationId(historyRecord.getHandSanitizationId());
+			history.setHour1(sanitationList.getHour1());
+			history.setHour2(sanitationList.getHour2());
+			history.setHour3(sanitationList.getHour3());
+			history.setHour4(sanitationList.getHour4());
+			history.setHour5(sanitationList.getHour5());
+			history.setHour6(sanitationList.getHour6());
+			history.setHour7(sanitationList.getHour7());
+			history.setHour8(sanitationList.getHour8());
+			history.setIdNumber(sanitationList.getIdNumber());
+			history.setRemarks(sanitationList.getRemarks());
+			history.setSerialNumber(sanitationList.getSerialNumber());
+			history.setName(sanitationList.getName());
+			sanitationListHistoyRepository.save(history);
+		}
 	}
 
-	
-		// APPROVE OR REJECT
-	
+	// APPROVE OR REJECT
+
 	public ResponseEntity<?> approveOrRejectHandSanitation(ApproveResponse approveResponse, HttpServletRequest http) {
-		
+
 		SCAUtil sca = new SCAUtil();
-		
+
 		PunchingHandSanitationF24 bleachCheckListF42 = new PunchingHandSanitationF24();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userRepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
+
 			bleachCheckListF42 = handSanitationRepository.fetchHandSanitizationABPressF41ById(approveResponse.getId());
-			
+
 			PunchingHandSanitationHistoryF24 bleachLayDownCheckListF42History = new PunchingHandSanitationHistoryF24();
-			
+
 			String supervisiorStatus = bleachCheckListF42.getSupervisor_status();
-			
+
 			String hodStatus = bleachCheckListF42.getHod_status();
-			
-			if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-				
-				if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-					
-					if(approveResponse.getStatus().equals("Approve")) {
-						
+
+			if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+					&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+					if (approveResponse.getStatus().equals("Approve")) {
+
 						bleachCheckListF42.setHod_status(AppConstants.hodApprovedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						handSanitationRepository.save(bleachCheckListF42);
-						
-						bleachLayDownCheckListF42History = handSanitationRepositoryHistory.findLastSubmittedRecord(bleachCheckListF42.getDate(), bleachCheckListF42.getShift());
-						
+
+						bleachLayDownCheckListF42History = handSanitationRepositoryHistory
+								.findLastSubmittedRecord(bleachCheckListF42.getDate(), bleachCheckListF42.getShift());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
-					
-						
+
 						handSanitationRepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						bleachCheckListF42 = null;
 						bleachLayDownCheckListF42History = null;
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Approved Successfully"), HttpStatus.OK);
-						
+
 					}
-					
-					else if(approveResponse.getStatus().equals("Reject")) {
-						
+
+					else if (approveResponse.getStatus().equals("Reject")) {
+
 						String reason = approveResponse.getRemarks();
 						bleachCheckListF42.setReason(reason);
 						bleachCheckListF42.setHod_status(AppConstants.hodRejectedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_id(userId);
 						bleachCheckListF42.setHod_submit_by(userName);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						handSanitationRepository.save(bleachCheckListF42);
 
-						
-						bleachLayDownCheckListF42History = handSanitationRepositoryHistory.findLastSubmittedRecord(bleachCheckListF42.getDate(), bleachCheckListF42.getShift());
-						
+						bleachLayDownCheckListF42History = handSanitationRepositoryHistory
+								.findLastSubmittedRecord(bleachCheckListF42.getDate(), bleachCheckListF42.getShift());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-						
+
 						handSanitationRepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						bleachCheckListF42 = null;
 						bleachLayDownCheckListF42History = null;
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Rejected Successfully"), HttpStatus.OK);
-						
-					} 
-					
+
+					}
+
 					else {
 						return new ResponseEntity(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 					}
-					
+
 				} else {
-					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"), HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),
+							HttpStatus.BAD_REQUEST);
 				}
-				
+
 			}
-			
+
 			else {
-				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			logger.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/reject Hand Sanitation " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/reject Hand Sanitation " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
+
 	}
-	
-	
+
 	public ResponseEntity<?> getHandSanitationByDateShift(String date, String shift) {
-		
+
 		PunchingHandSanitationF24 handSanitationF24;
-		
+
 		try {
 			handSanitationF24 = handSanitationRepository.handSanitationDetailsByDate(date, shift);
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			e.printStackTrace();
 			logger.error("Unable to get record" + msg);
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to get record" + msg),
-					HttpStatus.BAD_REQUEST);
-			
-			
+			return new ResponseEntity(new ApiResponse(false, "Failed to get record" + msg), HttpStatus.BAD_REQUEST);
+
 		}
-		
+
 		return new ResponseEntity(handSanitationF24, HttpStatus.OK);
 	}
-	
-	
+
 	public ResponseEntity<?> getHandSanitationSummary() {
-		
+
 		String userRole = getUserRole();
-		
+
 		List<PunchingHandSanitationF24> handSanitationF24s = new ArrayList<>();
-		
+
 		try {
-			
-			if(userRole.equals("ROLE_SUPERVISOR")) {
-				
+
+			if (userRole.equals("ROLE_SUPERVISOR")) {
+
 				handSanitationF24s = handSanitationRepository.getPunchingSupervisorSummary();
-				
-			} else if(userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
-				
+
+			} else if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
+
 				handSanitationF24s = handSanitationRepository.getPunchingHodSummary();
-				
+
 			} else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authorized to access Hand Sanitation form"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authorized to access Hand Sanitation form"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
+
 			return new ResponseEntity(handSanitationF24s, HttpStatus.OK);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			String msg = ex.getMessage();
 			ex.printStackTrace();
 			logger.error("Unable to get summary record" + msg);
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to get summary record" + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to get summary record" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 	}
-	
-		// HAND SANITATION - PRINTING PARAMETERS
-	
+
+	// HAND SANITATION - PRINTING PARAMETERS
+
 	public ResponseEntity<?> handSanitationPrint(String date, String shift) {
-		
+
 		List<PunchingHandSanitationF24> handSanitationList = new ArrayList<>();
-		
+
 		try {
-			
+
 			handSanitationList = handSanitationRepository.getHandSanitationPrint(date, shift);
-			
-		} catch(Exception ex) {
+
+		} catch (Exception ex) {
 			String msg = ex.getMessage();
 			ex.printStackTrace();
 			logger.error("Unable to get hand Sanitation List" + msg);
-			return new ResponseEntity(
-					new ApiResponse(false, "Unable to get hand Sanitation List" + msg),
+			return new ResponseEntity(new ApiResponse(false, "Unable to get hand Sanitation List" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(handSanitationList, HttpStatus.OK);
-		
+
 	}
-	
-	
+
 	// GET USER ROLE
-		private String getUserRole() {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (authentication != null && authentication.isAuthenticated()) {
-				return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
-						.orElse(null);
-			}
-			return null;
+	private String getUserRole() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
+					.orElse(null);
 		}
-	
-	
+		return null;
+	}
+
 }

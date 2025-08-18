@@ -372,6 +372,18 @@ public class PunchingBmrController {
 		ResponseEntity<?> resp = bmrService.getStoppageOrders(fromdate, todate, machine);
 		return resp;
 	}
+	
+	@GetMapping("/stoppageReportsMultiple")
+	public ResponseEntity<?> getStoppageReportsMultiple(@RequestParam Map<String, String> requestParams, Principal principal) {
+
+		String fromdate = requestParams.get("fromdate");
+		String todate = requestParams.get("todate");
+		String machine = requestParams.get("machine");
+
+		ResponseEntity<?> resp = bmrService.getStoppageReportsMultiple(fromdate, todate, machine);
+		return resp;
+	}
+
 
 	@PostMapping("/saveStoppage")
 	public ResponseEntity<?> saveStoppage(@Valid @RequestBody PunchingBmrStoppageHeader stoppageHeader,
@@ -544,6 +556,20 @@ public class PunchingBmrController {
 		String todate = requestParams.get("todate");
 
 		ResponseEntity<?> resp = bmrService.GetPackingMeterialPde(batch_no, fromdate, todate);
+		return resp;
+	}
+	
+	@PostMapping("/saveEquipmentAnnexure2")
+	public ResponseEntity<?> saveEquipmentAnnexure2(@Valid @RequestBody PunchingBmrEquipmentDetails equipmentDetails,
+			HttpServletRequest http) {
+		ResponseEntity<?> resp = bmrService.saveEquipmentAnnexure2(equipmentDetails, http);
+		return resp;
+	}
+	
+	@PostMapping("/submitEquipmentAnnexure2")
+	public ResponseEntity<?> submitEquipmentAnnexure2(@Valid @RequestBody PunchingBmrEquipmentDetails equipmentDetails,
+			HttpServletRequest http) {
+		ResponseEntity<?> resp = bmrService.submitEquipmentAnnexure2(equipmentDetails, http);
 		return resp;
 	}
 

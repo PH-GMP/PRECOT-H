@@ -18,7 +18,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "DRYGOODS_DAILY_PRODUCTION_PLEATE_AND_WOOL_ROLL_F006", schema = AppConstants.schema, uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"PRODUCT_NAME", "DATE", "SHIFT","ORDER_NO"})})
+		@UniqueConstraint(columnNames = {"MACHINE_NAME", "DATE", "SHIFT","ORDER_NO"})})
 public class DailyProductionDetailsPleateAndWoolRollF006 extends SpulanceSaveSubmitOperator  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +48,9 @@ public class DailyProductionDetailsPleateAndWoolRollF006 extends SpulanceSaveSub
 	
 	@Column(name = "PRODUCT_NAME")
 	private String product_name;
+	
+	@Column(name = "MACHINE_NAME")
+	private String machine_name;
 	
 	@Column(name = "ORDER_NO")
 	private String order_no;

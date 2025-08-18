@@ -329,6 +329,24 @@ public class UserService {
 					return new ResponseEntity<>(new ApiResponse(false, "Unable to get " + msg), HttpStatus.BAD_REQUEST);
 				}
 			}
+			
+			public ResponseEntity<?> getQA() {
+
+				List<User> qualityList = new ArrayList<>();
+
+				try {
+
+					qualityList = userRepository.getQA();
+
+				} catch (Exception e) {
+					SCAUtil sca = new SCAUtil();
+					String msg = sca.getErrorMessage(e);
+					return new ResponseEntity(new ApiResponse(false, "Unable to get " + msg), HttpStatus.BAD_REQUEST);
+				}
+
+				return new ResponseEntity(qualityList, HttpStatus.OK);
+
+			}
 		 
 		 
 }

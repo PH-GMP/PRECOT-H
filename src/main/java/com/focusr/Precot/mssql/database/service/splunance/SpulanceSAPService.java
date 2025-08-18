@@ -1465,12 +1465,63 @@ public class SpulanceSAPService {
 		return new ResponseEntity<>(responseList, HttpStatus.OK);
 	}
 
-	// F18
+//	// F18 - M
+//	public ResponseEntity<?> getStoppageDetailsF18(String date) {
+//		List<Object[]> queryResult;
+//		List<Map<String, Object>> responseList = new ArrayList<>();
+//		String[] headers = { "ShiftID", "ProductName", "OrderNo", "ProdInKg", "LC", "MR", "ER", "GR", "Other",
+//				"TotalDowntime", "TotalBreakdown", "TotalTimeInMin" };
+//
+//		try {
+//			queryResult = departmentRepository.getStoppageDetailsF18(date);
+//
+//			for (Object[] row : queryResult) {
+//				Map<String, Object> map = new HashMap<>();
+//				for (int i = 0; i < headers.length; i++) {
+//					map.put(headers[i], row[i]);
+//				}
+//				responseList.add(map);
+//			}
+//		} catch (Exception ex) {
+//			String msg = ex.getMessage();
+//			return new ResponseEntity<>(
+//					new ApiResponse(false, "Failed to get stoppage details for date: " + date + ". " + msg),
+//					HttpStatus.BAD_REQUEST);
+//		}
+//		return new ResponseEntity<>(responseList, HttpStatus.OK);
+//	}
+	
+	// F18 
 	public ResponseEntity<?> getStoppageDetailsF18(String date) {
+		
 		List<Object[]> queryResult;
+		
 		List<Map<String, Object>> responseList = new ArrayList<>();
-		String[] headers = { "ShiftID", "ProductName", "OrderNo", "ProdInKg", "LC", "MR", "ER", "GR", "Other",
-				"TotalDowntime", "TotalBreakdown", "TotalTimeInMin" };
+		
+//		String[] headers = { "ShiftID", "ProductName", "OrderNo", "ProdInKg", "LC", "MR", "ER", "GR", "Other",
+//				"TotalDowntime", "TotalBreakdown", "TotalTimeInMin" };
+		
+		String[] headers = {
+			    "OrderNo",         // R.POrder
+			    "ProdInKg",        // R.TotalRNwt
+			    "ProductName",     // R.Brand
+			    "ShiftID",         // R.ShiftID
+			    "LC_TotalHours",        // S.LC_TotalHours
+			    "SCL_TotalHours",       // S.SCL_TotalHours
+			    "CL_TotalHours",        // S.CL_TotalHours
+			    "MI_TotalHours",        // S.MI_TotalHours
+			    "ER_TotalHours",        // S.ER_TotalHours
+			    "MR_TotalHours",        // S.MR_TotalHours
+			    "Others_TotalHours",     // S.Others_TotalHours
+			    "LC_Count",        // S.LC_Count
+			    "SCL_Count",       // S.SCL_Count
+			    "CL_Count",        // S.CL_Count
+			    "MI_Count",        // S.MI_Count
+			    "ER_Count",        // S.ER_Count
+			    "MR_Count",        // S.MR_Count
+			    "Others_Count"      // S.Others_Count
+			};
+
 
 		try {
 			queryResult = departmentRepository.getStoppageDetailsF18(date);

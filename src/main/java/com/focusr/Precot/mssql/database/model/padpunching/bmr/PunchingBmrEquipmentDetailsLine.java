@@ -27,6 +27,9 @@ public class PunchingBmrEquipmentDetailsLine extends UserDateAudit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
+	
+	@Column(name = "CALIBRATION")
+	private String calibration;
 
 	@Column(name = "EQUIPMENT_NAME")
 	private String equipmentName;

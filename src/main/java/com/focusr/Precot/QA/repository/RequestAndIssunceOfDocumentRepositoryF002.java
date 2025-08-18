@@ -7,31 +7,35 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.focusr.Precot.QA.model.QaContainerInspectionReport;
 import com.focusr.Precot.QA.model.RequestAndIssunceOfDocumentF002;
 
 @Repository
-public interface RequestAndIssunceOfDocumentRepositoryF002 extends JpaRepository<RequestAndIssunceOfDocumentF002, Long>{
+public interface RequestAndIssunceOfDocumentRepositoryF002
+		extends JpaRepository<RequestAndIssunceOfDocumentF002, Long> {
 
-	
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE REQUEST_ID = :containerId ", nativeQuery = true)
 	RequestAndIssunceOfDocumentF002 findFormById(@Param("containerId") long containerId);
-	
+
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE DATE=:date AND MONTH=:month AND YEAR=:year", nativeQuery = true)
-	List<RequestAndIssunceOfDocumentF002> getDetailsBaseParam(@Param("date") String date,@Param("month") String month,@Param("year") String year);
+	List<RequestAndIssunceOfDocumentF002> getDetailsBaseParam(@Param("date") String date, @Param("month") String month,
+			@Param("year") String year);
+
+	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE DATE=:date AND MONTH=:month AND YEAR=:year AND DEPARTMENT = :department", nativeQuery = true)
+	List<RequestAndIssunceOfDocumentF002> getDetailsByDepartment(@Param("date") String date,
+			@Param("month") String month, @Param("year") String year, @Param("department") String department);
 
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE QA_HOD_DESIGNEE_STATUS = 'HOD_DESIGNEE_SAVED' OR QA_MR_STATUS != 'QA_MR_APPROVED' ORDER BY REQUEST_ID DESC", nativeQuery = true)
-    List<RequestAndIssunceOfDocumentF002> qaHodDesigneeSummary();
+	List<RequestAndIssunceOfDocumentF002> qaHodDesigneeSummary();
 
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE QA_HOD_DESIGNEE_STATUS = 'HOD_DESIGNEE_APPROVED' AND QA_MR_STATUS != 'QA_MR_APPROVED' ORDER BY REQUEST_ID DESC", nativeQuery = true)
-    List<RequestAndIssunceOfDocumentF002> qaManagerAndMrSummmary();
-	
+	List<RequestAndIssunceOfDocumentF002> qaManagerAndMrSummmary();
+
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE MONTH =:month AND YEAR =:year", nativeQuery = true)
 	List<RequestAndIssunceOfDocumentF002> getMonthandYear(@Param("month") String month, @Param("year") String year);
-	
+
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 WHERE QA_MR_STATUS = 'QA_MR_APPROVED' ORDER BY REQUEST_ID DESC", nativeQuery = true)
-    List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistruction();
-	
+	List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistruction();
+
 //	@Query(value = " SELECT \r\n"
 //			+ "    req.REQUEST_ID, \r\n"
 //			+ "    req.createdAt, \r\n"
@@ -86,7 +90,7 @@ public interface RequestAndIssunceOfDocumentRepositoryF002 extends JpaRepository
 //			+ "", 
 //    nativeQuery = true)
 //List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistructions();
-	
+
 //	@Query(value = " SELECT \r\n"
 //			+ "    req.REQUEST_ID, \r\n"
 //			+ "    req.createdAt, \r\n"
@@ -142,38 +146,25 @@ public interface RequestAndIssunceOfDocumentRepositoryF002 extends JpaRepository
 //			+ "", 
 //    nativeQuery = true)
 //List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistructions();
-	
-	@Query(value = "SELECT qh.*, qd.*\r\n"
-			+ "FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 qh\r\n"
-			+ "JOIN precot.QA_REQUEST_AND_ISSUNCE_OF_LINE_DOCUMENT_F002 qd\r\n"
-			+ "ON qh.REQUEST_ID = qd.REQUEST_ID\r\n"
-			+ "WHERE qh.QA_MR_STATUS = 'QA_MR_APPROVED'\r\n"
-			+ "AND qd.STATUS IS DISTINCT FROM 'YES'\r\n"
-			+ "ORDER BY qh.REQUEST_ID DESC;\r\n"
-			+ "", 
-    nativeQuery = true)
-List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistructions();
 
+	@Query(value = "SELECT qh.*, qd.*\r\n" + "FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 qh\r\n"
+			+ "JOIN precot.QA_REQUEST_AND_ISSUNCE_OF_LINE_DOCUMENT_F002 qd\r\n" + "ON qh.REQUEST_ID = qd.REQUEST_ID\r\n"
+			+ "WHERE qh.QA_MR_STATUS = 'QA_MR_APPROVED'\r\n" + "AND qd.STATUS IS DISTINCT FROM 'YES'\r\n"
+			+ "ORDER BY qh.REQUEST_ID DESC;\r\n" + "", nativeQuery = true)
+	List<RequestAndIssunceOfDocumentF002> getAllIfApproveForDistributionAndDistructions();
 
-	
-	
-	@Query(value = "SELECT req.REQUEST_ID, req.createdAt, req.updatedAt, req.createdBy, req.updatedBy, " +
-            "req.COMMENTS, req.[DATE], req.FORMAT_NAME, req.FORMAT_NO, req.QA_MR_STATUS, " +
-            "line.LINE_ID, line.DOCUMENT_NAME, line.DOCUMENT_NO " +
-            "FROM PDE.precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 req " +
-            "JOIN PDE.precot.QA_REQUEST_AND_ISSUNCE_OF_LINE_DOCUMENT_F002 line " +
-            "ON req.REQUEST_ID = line.REQUEST_ID " +
-            "WHERE req.QA_MR_STATUS = 'QA_MR_APPROVED' " +
-            "ORDER BY req.REQUEST_ID DESC", 
-    nativeQuery = true)
-List<Object[]> getAllManagerApprovedRecords();
+	@Query(value = "SELECT req.REQUEST_ID, req.createdAt, req.updatedAt, req.createdBy, req.updatedBy, "
+			+ "req.COMMENTS, req.[DATE], req.FORMAT_NAME, req.FORMAT_NO, req.QA_MR_STATUS, "
+			+ "line.LINE_ID, line.DOCUMENT_NAME, line.DOCUMENT_NO "
+			+ "FROM PDE.precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 req "
+			+ "JOIN PDE.precot.QA_REQUEST_AND_ISSUNCE_OF_LINE_DOCUMENT_F002 line "
+			+ "ON req.REQUEST_ID = line.REQUEST_ID " + "WHERE req.QA_MR_STATUS = 'QA_MR_APPROVED' "
+			+ "ORDER BY req.REQUEST_ID DESC", nativeQuery = true)
+	List<Object[]> getAllManagerApprovedRecords();
 
-
-	
-	
 //	@Query(value = "SELECT * FROM precot.PADPUNCHING_HOUSE_KEEP_CLEAN_CHECK_LIST_F010 WHERE date IS NULL OR DATE = :date AND (HOD_STATUS = 'HOD_APPROVED')", nativeQuery = true)
 //	List<PadPunchingHouseKeepingCheckListF010> printRPProdReport(@Param("date") String date);
-	
+
 //	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 " +
 //            "WHERE (:date IS NULL OR :date='' OR DATE=:date) " +           
 //            "AND QA_MR_STATUS = 'QA_MR_APPROVED'", nativeQuery = true)
@@ -183,18 +174,22 @@ List<Object[]> getAllManagerApprovedRecords();
 //     @Param("year") String year
 //    
 //);
-	
-	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 " +
-            "WHERE (:date IS NULL OR :date='' OR DATE = :date) " +           
-            "AND (:month IS NULL OR :month='' OR MONTH = :month) " +
-            "AND (:year IS NULL OR :year='' OR YEAR= :year) " +
-            "AND QA_MR_STATUS = 'QA_MR_APPROVED'", nativeQuery = true)
-List<RequestAndIssunceOfDocumentF002> printContainerInspectionReport(
-     @Param("date") String date,
-     @Param("month") String month,
-     @Param("year") String year
-);
 
-	
+	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 "
+			+ "WHERE (:date IS NULL OR :date='' OR DATE = :date) "
+			+ "AND (:month IS NULL OR :month='' OR MONTH = :month) " 
+			+ "AND (:year IS NULL OR :year='' OR YEAR= :year) "
+			+ "AND QA_MR_STATUS = 'QA_MR_APPROVED'", nativeQuery = true)
+	List<RequestAndIssunceOfDocumentF002> printContainerInspectionReport(@Param("date") String date,
+			@Param("month") String month, @Param("year") String year);
+
+	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_F002 "
+			+ "WHERE (:date IS NULL OR :date='' OR DATE = :date) "
+			+ "AND (:month IS NULL OR :month='' OR MONTH = :month) " 
+			+ "AND (:year IS NULL OR :year='' OR YEAR= :year) "
+			+ "AND (:department IS NULL OR :department='' OR DEPARTMENT= :department) "
+			+ "AND QA_MR_STATUS = 'QA_MR_APPROVED'", nativeQuery = true)
+	List<RequestAndIssunceOfDocumentF002> printF002Report(@Param("date") String date, @Param("month") String month,
+			@Param("year") String year, @Param("department") String department);
 
 }

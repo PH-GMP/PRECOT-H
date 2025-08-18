@@ -25,10 +25,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.focusr.Precot.mssql.database.model.PPC.ContractReviewMeetingExcel;
 import com.focusr.Precot.mssql.database.model.PPC.ContractReviewMeetingF003;
+import com.focusr.Precot.mssql.database.model.PPC.MonthlyPlanExcel;
 import com.focusr.Precot.mssql.database.model.PPC.MonthlyplanSummaryF002;
 import com.focusr.Precot.mssql.database.model.PPC.PreProductionMeetingF004;
 import com.focusr.Precot.mssql.database.model.PPC.PreProductionParticipant;
 import com.focusr.Precot.mssql.database.repository.ppc.ContractReviewMeetingExcelRepo;
+import com.focusr.Precot.mssql.database.repository.ppc.MonthlyPlanExcelRepo;
 import com.focusr.Precot.mssql.database.service.MapValidationErrorService;
 import com.focusr.Precot.mssql.database.service.ppc.PpcAuditService;
 //import com.focusr.Precot.mssql.database.service.ppc.PpcAuditService;
@@ -47,12 +49,15 @@ public class PpcController9 {
 
 	@Autowired
 	private PpcAuditService AuditService;
-	
+
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
 
 	@Autowired
 	private ContractReviewMeetingExcelRepo contractReviewMeetingExcelRepo;
+	
+	@Autowired
+	private MonthlyPlanExcelRepo monthlyPlanExcelRepo;
 
 	@PostMapping("/Monthlyplan/save")
 	public ResponseEntity<?> saveMonthlyPlan(HttpServletRequest http,
@@ -281,11 +286,10 @@ public class PpcController9 {
 	}
 
 	@GetMapping("/downloadexcel")
-	public ResponseEntity<byte[]> downloadExcelFilesByDate(@RequestParam("date") String date
-			, String customer) {
+	public ResponseEntity<byte[]> downloadExcelFilesByDate(@RequestParam("date") String date, String customer) {
 		try {
 			// Retrieve all entities by date
-			List<ContractReviewMeetingExcel> meetings = contractReviewMeetingExcelRepo.findAllByDate(date,customer);
+			List<ContractReviewMeetingExcel> meetings = contractReviewMeetingExcelRepo.findAllByDate(date, customer);
 
 			if (meetings.isEmpty()) {
 				throw new Exception("No records found for date: " + date);
@@ -313,8 +317,8 @@ public class PpcController9 {
 	}
 
 	@GetMapping("/getbydate")
-	public ResponseEntity<?> getIdAndDetailsByDate(@RequestParam String date,String customer) {
-		List<IdAndValuePair> idAndValuePairs = PpcService.getIdAndDetailsByDate(date,customer);
+	public ResponseEntity<?> getIdAndDetailsByDate(@RequestParam String date, String customer) {
+		List<IdAndValuePair> idAndValuePairs = PpcService.getIdAndDetailsByDate(date, customer);
 		if (!idAndValuePairs.isEmpty()) {
 			return ResponseEntity.ok(idAndValuePairs);
 		} else {
@@ -399,5 +403,81 @@ public class PpcController9 {
 		ResponseEntity<?> responseList = PpcService.getCustomerName();
 		return responseList;
 	}
+	
+	// AMC - 16-05-2025
+
+		@PostMapping("/monthlyPlanUpload")
+		public ResponseEntity<String> uploadExcel(@RequestParam("files") MultipartFile[] files,
+				@RequestParam("monthYear") String monthYear) {
+			try {
+				// Validate that files are uploaded
+				if (files == null || files.length == 0) {
+					return ResponseEntity.badRequest().body("No files were uploaded. Please upload at least one file.");
+				}
+
+				// Process the uploaded files
+				PpcService.uploadExcel(files, monthYear);
+
+				return ResponseEntity.ok("Excel files uploaded and processed successfully.");
+			} catch (Exception e) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+						.body("Failed to upload Excel files: " + e.getMessage());
+			}
+		}
+
+		@GetMapping("/monthlyPlanDownloadexcel")
+		public ResponseEntity<byte[]> downloadExcel(@RequestParam("monthYear") String monthYear) {
+			try {
+				// Retrieve all entities by date
+
+				List<MonthlyPlanExcel> meetings = monthlyPlanExcelRepo.findAllByDate(monthYear);
+
+				if (meetings.isEmpty()) {
+					throw new Exception("No records found for Month & Year " + monthYear);
+				}
+
+				// Create a ZIP file in memory
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+				try (ZipOutputStream zipOut = new ZipOutputStream(baos)) {
+
+					for (MonthlyPlanExcel meeting : meetings) {
+						// Create a ZIP entry for each file
+						ZipEntry entry = new ZipEntry(meeting.getDetails()); // Use the original file name
+						zipOut.putNextEntry(entry);
+						zipOut.write(meeting.getExcelFile()); // Write the file content to the ZIP
+						zipOut.closeEntry();
+					}
+				}
+
+				// Prepare the response
+				return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=ExcelFiles_" + monthYear + ".zip")
+						.contentType(org.springframework.http.MediaType.APPLICATION_OCTET_STREAM).body(baos.toByteArray());
+
+			} catch (Exception e) {
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+			}
+		}
+
+		@GetMapping("/monthlyPlanGetbyMonthYear")
+		public ResponseEntity<?> getByMonthYear(@RequestParam String monthYear) {
+
+			List<IdAndValuePair> idAndValuePairs = PpcService.getByMonthYear(monthYear);
+			if (!idAndValuePairs.isEmpty()) {
+				return ResponseEntity.ok(idAndValuePairs);
+			} else {
+				return ResponseEntity.ok("No records found for the given Month & Year: " + monthYear);
+			}
+		}
+
+		@DeleteMapping("/deleteMonthlyPlanById")
+		public ResponseEntity<?> deleteMonthlyPlanById(@RequestParam Long id) {
+			String result = PpcService.deleteMonthlyPlanById(id);
+			if (result.contains("successfully")) {
+				return ResponseEntity.ok(result);
+			} else {
+				return ResponseEntity.status(404).body(result);
+			}
+		}
 
 }

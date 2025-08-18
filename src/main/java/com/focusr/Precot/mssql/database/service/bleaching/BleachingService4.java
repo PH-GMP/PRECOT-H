@@ -90,16 +90,16 @@ public class BleachingService4 {
 
 	@Autowired
 	private BleachAppliedContAbCottonTypesF08Repository bleachappliedcontabcottontypesf08repository;
-	
+
 	@Autowired
 	BleachAppliedContAbCottonF08RepositoryHistory appliedCottonF08RepositoryHistory;
-	
+
 	@Autowired
 	BleachAppliedContAbCottonTypesF08RepositoryHistory typesF08RepositoryHistory;
 
 	@Autowired
 	BleachJobCard13Repository bleachjobcard13repository;
-	
+
 	@Autowired
 	BleachJobCard13RepositoryHistory jobCard13RepositoryHistory;
 
@@ -108,19 +108,19 @@ public class BleachingService4 {
 
 	@Autowired
 	private BleachHouseKeepingCheckListF02RepositoryHistory houseKeepingCheckListF02RepositoryHistory;
-	
+
 	@Autowired
 	BleachHouseKeepingCheckListF02ARepository bleachhousekeepingchecklistf02arepository;
-	
+
 	@Autowired
 	BleachHouseKeepingCheckListHistoryRepositoryF02A houseKeepingCheckListF02ARepositoryHistory;
 
 	@Autowired
 	BleachMixingChangeMachineCleaningF38RepositoryHistory mixingHistoryRepo;
-	
+
 	@Autowired
 	BleachMailFunction bleachmailfunction;
-	
+
 	@Autowired
 	private UserImageDetailsRepository imageRepository;
 
@@ -199,31 +199,30 @@ public class BleachingService4 {
 				details.setHod_status(AppConstants.waitingStatus);
 				details.setMail_status(AppConstants.waitingStatus);
 
-					// IMAGE 
-				
+				// IMAGE
+
 				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 				details.setSupervisisorSignature(signature);
-				
+
 				bleachmixingchangemachinecleaningf38repository.save(details);
-				
-					// HISTORY
+
+				// HISTORY
 				BleachMixingChangeMachineCleaningHistoryF38 mixingChangeMachineCleaningHistoryF38 = new BleachMixingChangeMachineCleaningHistoryF38();
-				
+
 				BeanUtils.copyProperties(details, mixingChangeMachineCleaningHistoryF38);
-				
+
 				String frombmr = mixingChangeMachineCleaningHistoryF38.getBmr_no_from();
 				String tobmr = mixingChangeMachineCleaningHistoryF38.getBmr_no_to();
 				String dateB = mixingChangeMachineCleaningHistoryF38.getDate();
-				
-				int version = mixingHistoryRepo.getMaximumVersion(frombmr, tobmr, dateB).map(temp -> temp + 1).orElse(1);
-				
-				mixingChangeMachineCleaningHistoryF38.setVersion(version);
-				
-				mixingHistoryRepo.save(mixingChangeMachineCleaningHistoryF38);
-				
 
-				
+				int version = mixingHistoryRepo.getMaximumVersion(frombmr, tobmr, dateB).map(temp -> temp + 1)
+						.orElse(1);
+
+				mixingChangeMachineCleaningHistoryF38.setVersion(version);
+
+				mixingHistoryRepo.save(mixingChangeMachineCleaningHistoryF38);
+
 				// mail
 				try {
 
@@ -276,133 +275,132 @@ public class BleachingService4 {
 	}
 
 	// Approve
-	
-	public ResponseEntity<?> approveRejectF38(ApproveResponse approvalResponse, HttpServletRequest http) {
-		
 
-		
+	public ResponseEntity<?> approveRejectF38(ApproveResponse approvalResponse, HttpServletRequest http) {
+
 		SCAUtil sca = new SCAUtil();
-		
+
 		BleachMixingChangeMachineCleaningF38 bleachCheckListF42 = new BleachMixingChangeMachineCleaningF38();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userrepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
-			bleachCheckListF42 = bleachmixingchangemachinecleaningf38repository.getMachineCleanF38(approvalResponse.getId());
-			
+
+			bleachCheckListF42 = bleachmixingchangemachinecleaningf38repository
+					.getMachineCleanF38(approvalResponse.getId());
+
 			BleachMixingChangeMachineCleaningHistoryF38 bleachLayDownCheckListF42History = new BleachMixingChangeMachineCleaningHistoryF38();
-			
+
 			String supervisiorStatus = bleachCheckListF42.getSupervisor_status();
-			
+
 			String hodStatus = bleachCheckListF42.getHod_status();
-			
+
 			UserImageDetails imageDetails = new UserImageDetails();
-			
-			if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-				
-				if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+					&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachCheckListF42.setHod_status(AppConstants.hodApprovedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setSupervisisorSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						bleachmixingchangemachinecleaningf38repository.save(bleachCheckListF42);
-						
-						bleachLayDownCheckListF42History = mixingHistoryRepo.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no_from(), bleachCheckListF42.getBmr_no_to(),bleachCheckListF42.getDate());
-						
+
+						bleachLayDownCheckListF42History = mixingHistoryRepo.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no_from(), bleachCheckListF42.getBmr_no_to(),
+								bleachCheckListF42.getDate());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-						
-					
-						
+
 						mixingHistoryRepo.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Approved Successfully"), HttpStatus.OK);
-						
+
 					}
-					
-					else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachCheckListF42.setReason(reason);
 						bleachCheckListF42.setHod_status(AppConstants.hodRejectedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setHodSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						bleachmixingchangemachinecleaningf38repository.save(bleachCheckListF42);
 
-						
-						bleachLayDownCheckListF42History = mixingHistoryRepo.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no_from(), bleachCheckListF42.getBmr_no_to(),bleachCheckListF42.getDate());
-						
+						bleachLayDownCheckListF42History = mixingHistoryRepo.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no_from(), bleachCheckListF42.getBmr_no_to(),
+								bleachCheckListF42.getDate());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-						
+
 						mixingHistoryRepo.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Rejected Successfully"), HttpStatus.OK);
-						
-					} 
-					
+
+					}
+
 					else {
 						return new ResponseEntity(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 					}
-					
+
 				} else {
-					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"), HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),
+							HttpStatus.BAD_REQUEST);
 				}
-				
+
 			}
-			
+
 			else {
-				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			log.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
-	
-		
-	
-		
+
 	}
-	
+
 	// Caking List......
 	public ResponseEntity<?> getSuperviserF38(HttpServletRequest http) {
 
@@ -556,22 +554,21 @@ public class BleachingService4 {
 //					HttpStatus.INTERNAL_SERVER_ERROR);
 //		}
 //	}
-	
+
 	public ResponseEntity<?> getBmrFromToSummeryF38(String date, String bmrFrom, String bmrTo,
 			HttpServletRequest http) {
 		List<BleachMixingChangeMachineCleaningF38> details = null;
 		try {
 			String userRole = getUserRole();
- 
+
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
- 
+
 			details = bleachmixingchangemachinecleaningf38repository.getDetailsbmrFromTo(date, bmrFrom, bmrTo);
- 
-			if(details == null || details.isEmpty()) {
-				return new ResponseEntity<>("No Data Found !!!",
-						HttpStatus.OK);
+
+			if (details == null || details.isEmpty()) {
+				return new ResponseEntity<>("No Data Found !!!", HttpStatus.OK);
 			}
-			
+
 			return new ResponseEntity<>(details, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(" Unable to  get Details Mix Machine F38 F38 Form Details! " + e.getMessage(),
@@ -715,31 +712,31 @@ public class BleachingService4 {
 				details.setSupervisor_sign(userName);
 				details.setQa_status(AppConstants.waitingStatus);
 				details.setQa_mail_status(AppConstants.waitingStatus);
-				
+
 				details.setHod_status("");
-				
-					// IMAGE
+
+				// IMAGE
 				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 				details.setSupervisisorSignature(signature);
 
 				bleachingheaderrepository.save(details);
-				
-					// HISTORY
+
+				// HISTORY
 				BleachingJobcard13History jobcard13History = new BleachingJobcard13History();
-				
+
 				BeanUtils.copyProperties(details, jobcard13History);
-				
+
 				String bmr = jobcard13History.getBmr_no();
-				
+
 				String bat = jobcard13History.getSub_batch_no();
-				
+
 				int version = jobCard13RepositoryHistory.getMaximumVersion(bmr, bat).map(temp -> temp + 1).orElse(1);
-				
+
 				jobcard13History.setVersion(version);
-				
+
 				jobCard13RepositoryHistory.save(jobcard13History);
-				
+
 				try {
 
 					bleachmailfunction.sendEmailToHODF13(details);
@@ -821,215 +818,215 @@ public class BleachingService4 {
 
 	public ResponseEntity<?> approveRejectF13(ApproveResponse approvalResponse, HttpServletRequest http) {
 
-		
 		SCAUtil sca = new SCAUtil();
-		
+
 		BleachJobCardF13 bleachCheckListF42 = new BleachJobCardF13();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userrepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
+
 			bleachCheckListF42 = bleachjobcard13repository.getBleachJobcardById(approvalResponse.getId());
-			
+
 			BleachingJobcard13History bleachLayDownCheckListF42History = new BleachingJobcard13History();
-			
+
 			String supervisiorStatus = bleachCheckListF42.getSupervisor_status();
-			
+
 			String hodStatus = bleachCheckListF42.getHod_status();
-			
+
 			String qaStatus = bleachCheckListF42.getQa_status();
-			
+
 			UserImageDetails imageDetails = new UserImageDetails();
-			
-			if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && qaStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-				
-				if(userRole.equalsIgnoreCase("ROLE_QA") || userRole.equalsIgnoreCase("QA_INSPECTOR")) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+					&& qaStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("ROLE_QA") || userRole.equalsIgnoreCase("QA_INSPECTOR")) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachCheckListF42.setQa_status(AppConstants.qaApprovedStatus);
 						bleachCheckListF42.setQa_submit_on(date);
 						bleachCheckListF42.setQa_submit_by(userName);
 						bleachCheckListF42.setQa_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setQaSignature(signature);
-						
-						bleachCheckListF42.setQa_sign(userName);		
-						
+
+						bleachCheckListF42.setQa_sign(userName);
+
 						bleachCheckListF42.setHod_status(AppConstants.waitingStatus);
-						
+
 						bleachjobcard13repository.save(bleachCheckListF42);
-						
-						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
-						
+
+						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
+
 						bleachLayDownCheckListF42History.setQa_status(AppConstants.qaApprovedStatus);
 						bleachLayDownCheckListF42History.setQa_submit_on(date);
 						bleachLayDownCheckListF42History.setQa_submit_by(userName);
 						bleachLayDownCheckListF42History.setQa_submit_id(userId);
 						bleachLayDownCheckListF42History.setQa_sign(userName);
-											
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.waitingStatus);
-						
+
 						jobCard13RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "QA Approved Successfully"), HttpStatus.OK);
-						
+
 					}
-					
-					else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachCheckListF42.setReason(reason);
 						bleachCheckListF42.setQa_status(AppConstants.qaRejectedStatus);
 						bleachCheckListF42.setQa_submit_on(date);
 						bleachLayDownCheckListF42History.setQa_submit_id(userId);
 						bleachCheckListF42.setQa_submit_by(userName);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setQaSignature(signature);
-						
+
 						bleachCheckListF42.setQa_sign(userName);
-						
+
 						bleachjobcard13repository.save(bleachCheckListF42);
 
-						
-						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
-						
+						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
+
 						bleachLayDownCheckListF42History.setQa_status(AppConstants.qaRejectedStatus);
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setQa_submit_on(date);
 						bleachLayDownCheckListF42History.setQa_submit_by(userName);
 						bleachLayDownCheckListF42History.setQa_submit_id(userId);
 						bleachLayDownCheckListF42History.setQa_sign(userName);
-						
+
 						jobCard13RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "QA Rejected Successfully"), HttpStatus.OK);
-						
-					} 
-					
+
+					}
+
 					else {
 						return new ResponseEntity(new ApiResponse(false, "Invalid"), HttpStatus.BAD_REQUEST);
 					}
-					
-				} 
-				
-				else {
-					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"), HttpStatus.BAD_REQUEST);
+
 				}
-				
+
+				else {
+					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),
+							HttpStatus.BAD_REQUEST);
+				}
+
 			}
-			
-			else if(qaStatus.equalsIgnoreCase(AppConstants.qaApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-				
-				if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			else if (qaStatus.equalsIgnoreCase(AppConstants.qaApprovedStatus)
+					&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachCheckListF42.setHod_status(AppConstants.hodApprovedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setSupervisisorSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-												
+
 						bleachjobcard13repository.save(bleachCheckListF42);
-						
-						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
-						
+
+						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-										
-						
+
 						jobCard13RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Approved Successfully"), HttpStatus.OK);
-						
+
 					}
-					
-					else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachCheckListF42.setReason(reason);
 						bleachCheckListF42.setHod_status(AppConstants.hodRejectedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachCheckListF42.setHod_submit_by(userName);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setHodSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						bleachjobcard13repository.save(bleachCheckListF42);
 
-						
-						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
-						
+						bleachLayDownCheckListF42History = jobCard13RepositoryHistory.fetchLastSubmittedRecordLaydown(
+								bleachCheckListF42.getBmr_no(), bleachCheckListF42.getSub_batch_no());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-						
+
 						jobCard13RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Rejected Successfully"), HttpStatus.OK);
-						
-					} 
-					
+
+					}
+
 					else {
 						return new ResponseEntity(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 					}
-					
-				
-					
-					
+
 				} else {
-					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"), HttpStatus.BAD_REQUEST);	
+					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),
+							HttpStatus.BAD_REQUEST);
 				}
-				
+
 			}
-			
+
 			else {
-				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			log.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
-	
-		
-	
+
 	}
-	
-	
+
 	public ResponseEntity<?> getBmrDetails13(String bmr_no) {
 
 		try {
@@ -1185,30 +1182,29 @@ public class BleachingService4 {
 		}
 
 	}
-	
-	
+
 	public ResponseEntity<?> getLastSubbatchNo13() {
-		 
+
 		List<Map<String, Object>> getLastSubbatchNo;
- 
+
 		try {
- 
+
 			getLastSubbatchNo = bleachingheaderrepository.getLastSubbatchNo();
- 
+
 		} catch (Exception ex) {
- 
+
 			String msg = ex.getMessage();
- 
+
 			log.error("Unable to get Ladt Sub Batch Details" + msg);
- 
+
 			return new ResponseEntity(new ApiResponse(false, "Unable to get Ladt Sub Batch Details" + msg),
- 
+
 					HttpStatus.BAD_REQUEST);
- 
+
 		}
- 
+
 		return new ResponseEntity(getLastSubbatchNo, HttpStatus.OK);
- 
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1284,96 +1280,107 @@ public class BleachingService4 {
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> submitAppliedRawCottonF04(BleachAppliedContAbCottonF08 bleachappliedcontabcottonf08,
 			HttpServletRequest http) {
-		
+
 		try {
-		    String userRole = getUserRole();
-		    Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-		    String userName = userrepository.getUserName(userId);
-		    Date date = new Date();
+			String userRole = getUserRole();
+			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			String userName = userrepository.getUserName(userId);
+			Date date = new Date();
 
-		    if (userRole.equals("ROLE_SUPERVISOR")) {
-		        bleachappliedcontabcottonf08.setSupervisor_status(AppConstants.supervisorApprovedStatus);
-		        bleachappliedcontabcottonf08.setSupervisor_submit_on(date);
-		        bleachappliedcontabcottonf08.setSupervisor_submit_by(userName);
-		        bleachappliedcontabcottonf08.setSupervisor_submit_id(userId);
-		        bleachappliedcontabcottonf08.setSupervisor_sign(userName);
-		        bleachappliedcontabcottonf08.setHod_status(AppConstants.waitingStatus);
-		        bleachappliedcontabcottonf08.setMail_status(AppConstants.waitingStatus);
+			if (userRole.equals("ROLE_SUPERVISOR")) {
+				bleachappliedcontabcottonf08.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+				bleachappliedcontabcottonf08.setSupervisor_submit_on(date);
+				bleachappliedcontabcottonf08.setSupervisor_submit_by(userName);
+				bleachappliedcontabcottonf08.setSupervisor_submit_id(userId);
+				bleachappliedcontabcottonf08.setSupervisor_sign(userName);
+				bleachappliedcontabcottonf08.setHod_status(AppConstants.waitingStatus);
+				bleachappliedcontabcottonf08.setMail_status(AppConstants.waitingStatus);
 
-		        // IMAGE
-		        Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-		        byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-		        bleachappliedcontabcottonf08.setSupervisisorSignature(signature);
+				// IMAGE
+				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+				bleachappliedcontabcottonf08.setSupervisisorSignature(signature);
 
-		        bleachappliedcontabcottonf08repository.save(bleachappliedcontabcottonf08);
+				bleachappliedcontabcottonf08repository.save(bleachappliedcontabcottonf08);
 
-		        for (BleachAppliedContAbCottonTypesF08 lineDetails : bleachappliedcontabcottonf08.getDetailsAbCottonF04()) {
-		            Long abId = bleachappliedcontabcottonf08.getAb_id();
-		            lineDetails.setAb_id(abId);
-		            bleachappliedcontabcottontypesf08repository.save(lineDetails);
-		        }
+				for (BleachAppliedContAbCottonTypesF08 lineDetails : bleachappliedcontabcottonf08
+						.getDetailsAbCottonF04()) {
+					Long abId = bleachappliedcontabcottonf08.getAb_id();
+					lineDetails.setAb_id(abId);
+					bleachappliedcontabcottontypesf08repository.save(lineDetails);
+				}
 
-		        // HISTORY
-		        log.info("Processing history for BMR Number: {} and AB ID: {}", bleachappliedcontabcottonf08.getBmrNumber(), bleachappliedcontabcottonf08.getAb_id());
-		        BleachAppliedContAbCottonHistoryF08 appliedContAbCottonHistoryF08 = new BleachAppliedContAbCottonHistoryF08();
-		        appliedContAbCottonHistoryF08.setBmrNumber(bleachappliedcontabcottonf08.getBmrNumber());
-		        appliedContAbCottonHistoryF08.setDate(bleachappliedcontabcottonf08.getDate());
-		        appliedContAbCottonHistoryF08.setFormatName(bleachappliedcontabcottonf08.getFormatName());
-		        appliedContAbCottonHistoryF08.setFormatNo(bleachappliedcontabcottonf08.getFormatNo());
-		        appliedContAbCottonHistoryF08.setSopNumber(bleachappliedcontabcottonf08.getSopNumber());
-		        appliedContAbCottonHistoryF08.setRevisionNo(bleachappliedcontabcottonf08.getRevisionNo());
-		        appliedContAbCottonHistoryF08.setTotal_01(bleachappliedcontabcottonf08.getTotal_01());
-		        appliedContAbCottonHistoryF08.setTotal_02(bleachappliedcontabcottonf08.getTotal_02());
+				// HISTORY
+				log.info("Processing history for BMR Number: {} and AB ID: {}",
+						bleachappliedcontabcottonf08.getBmrNumber(), bleachappliedcontabcottonf08.getAb_id());
+				BleachAppliedContAbCottonHistoryF08 appliedContAbCottonHistoryF08 = new BleachAppliedContAbCottonHistoryF08();
+				appliedContAbCottonHistoryF08.setBmrNumber(bleachappliedcontabcottonf08.getBmrNumber());
+				appliedContAbCottonHistoryF08.setDate(bleachappliedcontabcottonf08.getDate());
+				appliedContAbCottonHistoryF08.setFormatName(bleachappliedcontabcottonf08.getFormatName());
+				appliedContAbCottonHistoryF08.setFormatNo(bleachappliedcontabcottonf08.getFormatNo());
+				appliedContAbCottonHistoryF08.setSopNumber(bleachappliedcontabcottonf08.getSopNumber());
+				appliedContAbCottonHistoryF08.setRevisionNo(bleachappliedcontabcottonf08.getRevisionNo());
+				appliedContAbCottonHistoryF08.setTotal_01(bleachappliedcontabcottonf08.getTotal_01());
+				appliedContAbCottonHistoryF08.setTotal_02(bleachappliedcontabcottonf08.getTotal_02());
 
-		        // STATUS
-		        appliedContAbCottonHistoryF08.setSupervisor_status(bleachappliedcontabcottonf08.getSupervisor_status());		        
-		        appliedContAbCottonHistoryF08.setSupervisor_sign(bleachappliedcontabcottonf08.getSupervisor_sign());
-		        appliedContAbCottonHistoryF08.setSupervisor_submit_on(bleachappliedcontabcottonf08.getSupervisor_submit_on());
-		        appliedContAbCottonHistoryF08.setSupervisor_submit_by(bleachappliedcontabcottonf08.getSupervisor_submit_by());
-		        appliedContAbCottonHistoryF08.setSupervisor_submit_id(bleachappliedcontabcottonf08.getSupervisor_submit_id());
-		        appliedContAbCottonHistoryF08.setHod_status(bleachappliedcontabcottonf08.getHod_status());
+				// STATUS
+				appliedContAbCottonHistoryF08.setSupervisor_status(bleachappliedcontabcottonf08.getSupervisor_status());
+				appliedContAbCottonHistoryF08.setSupervisor_sign(bleachappliedcontabcottonf08.getSupervisor_sign());
+				appliedContAbCottonHistoryF08
+						.setSupervisor_submit_on(bleachappliedcontabcottonf08.getSupervisor_submit_on());
+				appliedContAbCottonHistoryF08
+						.setSupervisor_submit_by(bleachappliedcontabcottonf08.getSupervisor_submit_by());
+				appliedContAbCottonHistoryF08
+						.setSupervisor_submit_id(bleachappliedcontabcottonf08.getSupervisor_submit_id());
+				appliedContAbCottonHistoryF08.setHod_status(bleachappliedcontabcottonf08.getHod_status());
 
-		        int version = appliedCottonF08RepositoryHistory.getMaximumVersion(appliedContAbCottonHistoryF08.getBmrNumber()).map(temp -> temp + 1).orElse(1);
-		        log.info("Setting version: {}", version);
-		        appliedContAbCottonHistoryF08.setVersion(version);
+				int version = appliedCottonF08RepositoryHistory
+						.getMaximumVersion(appliedContAbCottonHistoryF08.getBmrNumber()).map(temp -> temp + 1)
+						.orElse(1);
+				log.info("Setting version: {}", version);
+				appliedContAbCottonHistoryF08.setVersion(version);
 
-		        appliedCottonF08RepositoryHistory.save(appliedContAbCottonHistoryF08);
+				appliedCottonF08RepositoryHistory.save(appliedContAbCottonHistoryF08);
 
-		        // Save history details
-		        for (BleachAppliedContAbCottonTypesF08 lineDetails : bleachappliedcontabcottonf08.getDetailsAbCottonF04()) {
-		        	
-		            log.info("Processing history for line detail AB ID: {}", appliedContAbCottonHistoryF08.getAb_id());
-		            BleachAppliedContAbCottonTypesHistoryF08 types = new BleachAppliedContAbCottonTypesHistoryF08();
-		            
-		            types.setBw1Contamination(lineDetails.getBw1Contamination());
-		            types.setBw2Contamination(lineDetails.getBw2Contamination());
-		            types.setBw3Sample(lineDetails.getBw3Sample());
-		            types.setBw4Sample(lineDetails.getBw4Sample());
-		            types.setType(lineDetails.getType());
-		            Long abId = appliedContAbCottonHistoryF08.getAb_id();
-		            types.setAb_id(abId);
+				// Save history details
+				for (BleachAppliedContAbCottonTypesF08 lineDetails : bleachappliedcontabcottonf08
+						.getDetailsAbCottonF04()) {
 
-		            typesF08RepositoryHistory.save(types);
-		        }
+					log.info("Processing history for line detail AB ID: {}", appliedContAbCottonHistoryF08.getAb_id());
+					BleachAppliedContAbCottonTypesHistoryF08 types = new BleachAppliedContAbCottonTypesHistoryF08();
 
-		        try {
-		            bleachmailfunction.sendEmailToHODF08(bleachappliedcontabcottonf08);
-		        } catch (Exception ex) {
-		            log.error("Supervisor approved but unable to send mail to HOD!", ex);
-		            return new ResponseEntity<>(new ApiResponse(false, "Supervisor Approved but Unable to send mail to HOD!"), HttpStatus.OK);
-		        }
-		    } else {
-		        return new ResponseEntity<>(new ApiResponse(false, "Please Login with the Correct Role"), HttpStatus.FORBIDDEN);
-		    }
+					types.setBw1Contamination(lineDetails.getBw1Contamination());
+					types.setBw2Contamination(lineDetails.getBw2Contamination());
+					types.setBw3Sample(lineDetails.getBw3Sample());
+					types.setBw4Sample(lineDetails.getBw4Sample());
+					types.setType(lineDetails.getType());
+					Long abId = appliedContAbCottonHistoryF08.getAb_id();
+					types.setAb_id(abId);
 
-		    return new ResponseEntity<>(new ApiResponse(true, "Approved Successfully"), HttpStatus.OK);
+					typesF08RepositoryHistory.save(types);
+				}
+
+				try {
+					bleachmailfunction.sendEmailToHODF08(bleachappliedcontabcottonf08);
+				} catch (Exception ex) {
+					log.error("Supervisor approved but unable to send mail to HOD!", ex);
+					return new ResponseEntity<>(
+							new ApiResponse(false, "Supervisor Approved but Unable to send mail to HOD!"),
+							HttpStatus.OK);
+				}
+			} else {
+				return new ResponseEntity<>(new ApiResponse(false, "Please Login with the Correct Role"),
+						HttpStatus.FORBIDDEN);
+			}
+
+			return new ResponseEntity<>(new ApiResponse(true, "Approved Successfully"), HttpStatus.OK);
 		} catch (Exception e) {
-		    log.error("Unable to Submit Applied Cont AB F08 Details!", e);
-		    String msg = sca.getErrorMessage(e);
-		    return new ResponseEntity<>(new ApiResponse(false, "Unable to Submit Applied Cont AB F08 Details! " + msg), HttpStatus.BAD_REQUEST);
+			log.error("Unable to Submit Applied Cont AB F08 Details!", e);
+			String msg = sca.getErrorMessage(e);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to Submit Applied Cont AB F08 Details! " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
 
-		
 	}
 
 	// GET BY BMR NUMBER
@@ -1387,7 +1394,7 @@ public class BleachingService4 {
 		try {
 //			Details = bleachappliedcontabcottonf08repository.appliedRawCottonByBMR(bmrNumber, userId);
 			Details = bleachappliedcontabcottonf08repository.appliedRawCottonByBMR(bmrNumber);
-			
+
 			if (Details == null) {
 				return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
 			}
@@ -1469,134 +1476,130 @@ public class BleachingService4 {
 		return new ResponseEntity(Details, HttpStatus.OK);
 
 	}
-	
-	// Approve Or rEJECT
-	
-	public ResponseEntity<?> approveRejectF08(ApproveResponse approvalResponse, HttpServletRequest http) {
-		
 
-		
+	// Approve Or rEJECT
+
+	public ResponseEntity<?> approveRejectF08(ApproveResponse approvalResponse, HttpServletRequest http) {
+
 		SCAUtil sca = new SCAUtil();
-		
+
 		BleachAppliedContAbCottonF08 bleachCheckListF42 = new BleachAppliedContAbCottonF08();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userrepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
+
 			bleachCheckListF42 = bleachappliedcontabcottonf08repository.getdetailsById(approvalResponse.getId());
-			
+
 			BleachAppliedContAbCottonHistoryF08 bleachLayDownCheckListF42History = new BleachAppliedContAbCottonHistoryF08();
-			
+
 			String supervisiorStatus = bleachCheckListF42.getSupervisor_status();
-			
+
 			String hodStatus = bleachCheckListF42.getHod_status();
-			
+
 			UserImageDetails imageDetails = new UserImageDetails();
-			
-			if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-				
-				if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+					&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachCheckListF42.setHod_status(AppConstants.hodApprovedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setHodSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						bleachappliedcontabcottonf08repository.save(bleachCheckListF42);
-						
-						bleachLayDownCheckListF42History = appliedCottonF08RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmrNumber());
-						
+
+						bleachLayDownCheckListF42History = appliedCottonF08RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmrNumber());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-					
-						
+
 						appliedCottonF08RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Approved Successfully"), HttpStatus.OK);
-						
+
 					}
-					
-					else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachCheckListF42.setReason(reason);
 						bleachCheckListF42.setHod_status(AppConstants.hodRejectedStatus);
 						bleachCheckListF42.setHod_submit_on(date);
 						bleachCheckListF42.setHod_submit_by(userName);
 						bleachCheckListF42.setHod_submit_id(userId);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachCheckListF42.setHodSignature(signature);
-						
+
 						bleachCheckListF42.setHod_sign(userName);
-						
+
 						bleachappliedcontabcottonf08repository.save(bleachCheckListF42);
 
-						
-						bleachLayDownCheckListF42History = appliedCottonF08RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmrNumber());
-						
+						bleachLayDownCheckListF42History = appliedCottonF08RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachCheckListF42.getBmrNumber());
+
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
-						
+
 						appliedCottonF08RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Rejected Successfully"), HttpStatus.OK);
-						
-					} 
-					
+
+					}
+
 					else {
 						return new ResponseEntity(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 					}
-					
+
 				} else {
-					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"), HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),
+							HttpStatus.BAD_REQUEST);
 				}
-				
+
 			}
-			
+
 			else {
-				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(new ApiResponse(false, "Supervisior Not yet Submitted"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			log.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/reject Hydro Extractor Record " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
-	
-		
-	
-		
+
 	}
-	
 
 //	public ResponseEntity<?> SubmitHouseKeepingF02(BleachHouseKeepingCheckListF02 details, HttpServletRequest http) {
 //
@@ -1668,42 +1671,51 @@ public class BleachingService4 {
 
 		try {
 			switch (userRole) {
-			
-			case "ROLE_SUPERVISOR":
 
-				details.setSupervisor_status(AppConstants.supervisorApprovedStatus);
-				details.setSupervisor_submit_on(date);
-				details.setSupervisor_submit_by(userName);
-				details.setSupervisor_submit_id(userId);
-				details.setSupervisor_sign(userName);
-				details.setHr_status(AppConstants.waitingStatus);
-				details.setHr_mail_status(AppConstants.waitingStatus);
+			case "ROLE_HR":
+
+//				details.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+//				details.setSupervisor_submit_on(date);
+//				details.setSupervisor_submit_by(userName);
+//				details.setSupervisor_submit_id(userId);
+//				details.setSupervisor_sign(userName);
+//				details.setHr_status(AppConstants.waitingStatus);
+//				details.setHr_mail_status(AppConstants.waitingStatus);
+//				details.setHod_status("");
+
+				details.setHr_status(AppConstants.hrApprovedStatus);
+				details.setHr_submit_on(date);
+				details.setHr_submit_by(userName);
+				details.setHr_submit_id(userId);
+				details.setHr_sign(userName);
+				details.setSupervisor_status(AppConstants.waitingStatus);
 				details.setHod_status("");
-				
-					// IMAGE
-					
+
+				// IMAGE
+
 				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-				
+
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-				
-				details.setSupervisisorSignature(signature);
-				
+
+				details.setHrSignature(signature);
+
 				bleachhousekeepingchecklistf02repository.save(details);
-				
-					// AUDIT
-				
+
+				// AUDIT
+
 				BleachHouseKeepingCheckListHistoryF02 houseKeepingCheckListHistoryF02 = new BleachHouseKeepingCheckListHistoryF02();
-				
+
 				BeanUtils.copyProperties(details, houseKeepingCheckListHistoryF02);
 
 				String historyDate = houseKeepingCheckListHistoryF02.getDate();
-				
-				int version = houseKeepingCheckListF02RepositoryHistory.getMaximumVersion(historyDate).map(temp -> temp + 1).orElse(1);
-				
+
+				int version = houseKeepingCheckListF02RepositoryHistory.getMaximumVersion(historyDate)
+						.map(temp -> temp + 1).orElse(1);
+
 				houseKeepingCheckListHistoryF02.setVersion(version);
-				
+
 				houseKeepingCheckListF02RepositoryHistory.save(houseKeepingCheckListHistoryF02);
-				
+
 				try {
 
 					bleachmailfunction.sendEmailToHRF02(details);
@@ -1761,7 +1773,9 @@ public class BleachingService4 {
 //				break;
 
 			default:
-				return new ResponseEntity<>(new ApiResponse(false, userRole + " cannot submit House keeping forms. please login as Supervisor to submit form"),
+				return new ResponseEntity<>(
+						new ApiResponse(false, userRole
+								+ " cannot submit House keeping forms. please login as Supervisor to submit form"),
 						HttpStatus.FORBIDDEN);
 			}
 
@@ -1812,8 +1826,7 @@ public class BleachingService4 {
 
 				details = bleachhousekeepingchecklistf02repository.getHRSummeryDetails();
 			}
-			
-			
+
 			else {
 				return new ResponseEntity<>(new ApiResponse(false, "Please log in with the correct role"),
 						HttpStatus.FORBIDDEN);
@@ -1838,140 +1851,385 @@ public class BleachingService4 {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
-	public ResponseEntity<?> approveRejectHouseKeepingRecordF02(ApproveResponse approvalResponse, HttpServletRequest http) {
-		
+
+//	public ResponseEntity<?> approveRejectHouseKeepingRecordF02(ApproveResponse approvalResponse, HttpServletRequest http) {
+//		
+//		SCAUtil sca = new SCAUtil();
+//		
+//		BleachHouseKeepingCheckListF02 bleachContRawCottonF05 = new BleachHouseKeepingCheckListF02();
+//		
+//		String userRole = getUserRole();
+//		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+//		String userName = userrepository.getUserName(userId);
+//		LocalDateTime currentDate = LocalDateTime.now();
+//		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+//		
+//		try {
+//			
+//			bleachContRawCottonF05 = bleachhousekeepingchecklistf02repository.getHousekeepingRecordById(approvalResponse.getId());
+//			
+//			BleachHouseKeepingCheckListHistoryF02 bleachLayDownCheckListF42History = new BleachHouseKeepingCheckListHistoryF02();
+//			
+//			String supervisiorStatus = bleachContRawCottonF05.getSupervisor_status();
+//			
+//			String hrStatus = bleachContRawCottonF05.getHr_status();
+//			
+//			String hodStatus = bleachContRawCottonF05.getHod_status();
+//			
+//			UserImageDetails imageDetails = new UserImageDetails();
+//			
+//			if(userRole.equalsIgnoreCase("ROLE_HR")) {
+//				
+//				if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hrStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+//					
+//					if(approvalResponse.getStatus().equals("Approve")) {
+//						
+//						bleachContRawCottonF05.setHr_sign(userName);
+//						bleachContRawCottonF05.setHr_status(AppConstants.hrApprovedStatus);
+//						bleachContRawCottonF05.setHr_submit_by(userName);
+//						bleachContRawCottonF05.setHr_submit_id(userId);
+//						bleachContRawCottonF05.setHr_submit_on(date);
+//						bleachContRawCottonF05.setHod_status(AppConstants.waitingStatus);
+//						
+//						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+//						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+//						bleachContRawCottonF05.setHrSignature(signature);
+//						
+//						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
+//						
+//						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+//						
+//						bleachLayDownCheckListF42History.setHr_sign(userName);
+//						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrApprovedStatus);
+//						bleachLayDownCheckListF42History.setHr_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHr_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHr_submit_on(date);
+//						bleachLayDownCheckListF42History.setHod_status(AppConstants.waitingStatus);
+//						
+//						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
+//						
+//						return new ResponseEntity<>(new ApiResponse(true, "HR Approved Successfully"), HttpStatus.OK);
+//						
+//					} else if(approvalResponse.getStatus().equals("Reject")) {
+//						
+//						String reason = approvalResponse.getRemarks();
+//						bleachContRawCottonF05.setReason(reason);
+//						bleachContRawCottonF05.setHr_sign(userName);
+//						bleachContRawCottonF05.setHr_status(AppConstants.hrRejectedStatus);
+//						bleachContRawCottonF05.setHr_submit_by(userName);
+//						bleachContRawCottonF05.setHr_submit_id(userId);
+//						bleachContRawCottonF05.setHr_submit_on(date);
+//						
+//						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+//						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+//						bleachContRawCottonF05.setHrSignature(signature);
+//						
+//						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
+//						
+//						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+//						
+//						bleachLayDownCheckListF42History.setReason(reason);
+//						bleachLayDownCheckListF42History.setHr_sign(userName);
+//						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrRejectedStatus);
+//						bleachLayDownCheckListF42History.setHr_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHr_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHr_submit_on(date);
+//						
+//						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
+//						
+//						return new ResponseEntity<>(new ApiResponse(true, "HR Rejected Successfully"), HttpStatus.OK);
+//						
+//					} else {
+//						return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
+//					}
+//					
+//				} 
+//				else if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) || hrStatus.equalsIgnoreCase(AppConstants.hrRejectedStatus)) {
+//					
+//					return new ResponseEntity(new ApiResponse(false, "Already HR Approved or Rejected"), HttpStatus.BAD_REQUEST);
+//				}
+//				else {
+//					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
+//				}
+//				
+//			} else if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+//				
+//				if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+//					
+//					if(approvalResponse.getStatus().equals("Approve")) {
+//						
+//						bleachContRawCottonF05.setHod_sign(userName);
+//						bleachContRawCottonF05.setHod_status(AppConstants.hodApprovedStatus);
+//						bleachContRawCottonF05.setHod_submit_by(userName);
+//						bleachContRawCottonF05.setHod_submit_id(userId);
+//						bleachContRawCottonF05.setHod_submit_on(date);
+//						
+//						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+//						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+//						bleachContRawCottonF05.setHodSignature(signature);
+//						
+//						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
+//						
+//						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+//						
+//						bleachLayDownCheckListF42History.setHod_sign(userName);
+//						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
+//						bleachLayDownCheckListF42History.setHod_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHod_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHod_submit_on(date);
+//						
+//						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
+//						
+//						return new ResponseEntity<>(new ApiResponse(true, "Hod Approved Successfully"), HttpStatus.OK);
+//						
+//					} else if(approvalResponse.getStatus().equals("Reject")) {
+//						
+//						String reason = approvalResponse.getRemarks();
+//						bleachContRawCottonF05.setReason(reason);
+//						bleachContRawCottonF05.setHod_sign(userName);
+//						bleachContRawCottonF05.setHod_status(AppConstants.hodRejectedStatus);
+//						bleachContRawCottonF05.setHod_submit_by(userName);
+//						bleachContRawCottonF05.setHod_submit_id(userId);
+//						bleachContRawCottonF05.setHod_submit_on(date);
+//						
+//						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+//						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+//						bleachContRawCottonF05.setHrSignature(signature);
+//						
+//						bleachContRawCottonF05.setHod_sign(userName);
+//						
+//						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
+//						
+//						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+//						
+//						bleachLayDownCheckListF42History.setReason(reason);
+//						bleachLayDownCheckListF42History.setHod_sign(userName);
+//						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
+//						bleachLayDownCheckListF42History.setHod_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHod_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHod_submit_on(date);
+//						
+//						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
+//						
+//						return new ResponseEntity<>(new ApiResponse(true, "Hod Rejected Successfully"), HttpStatus.OK);
+//						
+//					} else {
+//						return new ResponseEntity(new ApiResponse(false, "Invalid Status for Hod Approval"), HttpStatus.BAD_REQUEST);
+//					}
+//					
+//				} 
+//				else if(hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus) || hodStatus.equalsIgnoreCase(AppConstants.hodRejectedStatus)) {
+//					
+//					return new ResponseEntity(new ApiResponse(false, "Already HOD Approved or Rejected"), HttpStatus.BAD_REQUEST);
+//				}
+//				else {
+//					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HOD Approval"), HttpStatus.BAD_REQUEST);
+//				}
+//				
+//			} else {
+//				
+//				return new ResponseEntity(new ApiResponse(false, hodStatus + "Login with Valid Role to Approve/Reject Form"), HttpStatus.BAD_REQUEST);
+//				
+//			}
+//			
+//			
+//		} catch(Exception e) {
+//			
+//			String msg = e.getMessage();
+//			log.error("Unable to Approve Record" + msg);
+//
+//			return new ResponseEntity(
+//					new ApiResponse(false, "Failed to approve/Reject Raw Cotton " + msg),
+//					HttpStatus.BAD_REQUEST);
+//			
+//			
+//		}
+//		
+//		
+//	
+//		
+//	}
+
+	// AMC
+
+	public ResponseEntity<?> approveRejectHouseKeepingRecordF02(ApproveResponse approvalResponse,
+			HttpServletRequest http) {
+
 		SCAUtil sca = new SCAUtil();
-		
+
 		BleachHouseKeepingCheckListF02 bleachContRawCottonF05 = new BleachHouseKeepingCheckListF02();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userrepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
-			bleachContRawCottonF05 = bleachhousekeepingchecklistf02repository.getHousekeepingRecordById(approvalResponse.getId());
-			
+
+			bleachContRawCottonF05 = bleachhousekeepingchecklistf02repository
+					.getHousekeepingRecordById(approvalResponse.getId());
+
 			BleachHouseKeepingCheckListHistoryF02 bleachLayDownCheckListF42History = new BleachHouseKeepingCheckListHistoryF02();
-			
+
 			String supervisiorStatus = bleachContRawCottonF05.getSupervisor_status();
-			
+
 			String hrStatus = bleachContRawCottonF05.getHr_status();
-			
+
 			String hodStatus = bleachContRawCottonF05.getHod_status();
-			
+
 			UserImageDetails imageDetails = new UserImageDetails();
-			
-			if(userRole.equalsIgnoreCase("ROLE_HR")) {
-				
-				if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hrStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
-						bleachContRawCottonF05.setHr_sign(userName);
-						bleachContRawCottonF05.setHr_status(AppConstants.hrApprovedStatus);
-						bleachContRawCottonF05.setHr_submit_by(userName);
-						bleachContRawCottonF05.setHr_submit_id(userId);
-						bleachContRawCottonF05.setHr_submit_on(date);
+
+//			if (userRole.equalsIgnoreCase("ROLE_HR")) {
+
+			if (userRole.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
+//				if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+//						&& hrStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus)
+						&& supervisiorStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
+//						bleachContRawCottonF05.setHr_sign(userName);
+//						bleachContRawCottonF05.setHr_status(AppConstants.hrApprovedStatus);
+//						bleachContRawCottonF05.setHr_submit_by(userName);
+//						bleachContRawCottonF05.setHr_submit_id(userId);
+//						bleachContRawCottonF05.setHr_submit_on(date);
+//						bleachContRawCottonF05.setHod_status(AppConstants.waitingStatus);
+
+						bleachContRawCottonF05.setSupervisor_sign(userName);
+						bleachContRawCottonF05.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+						bleachContRawCottonF05.setSupervisor_submit_by(userName);
+						bleachContRawCottonF05.setSupervisor_submit_id(userId);
+						bleachContRawCottonF05.setSupervisor_submit_on(date);
 						bleachContRawCottonF05.setHod_status(AppConstants.waitingStatus);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-						bleachContRawCottonF05.setHrSignature(signature);
-						
+						bleachContRawCottonF05.setSupervisisorSignature(signature);
+
 						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
-						bleachLayDownCheckListF42History.setHr_sign(userName);
-						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrApprovedStatus);
-						bleachLayDownCheckListF42History.setHr_submit_by(userName);
-						bleachLayDownCheckListF42History.setHr_submit_id(userId);
-						bleachLayDownCheckListF42History.setHr_submit_on(date);
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
+//						bleachLayDownCheckListF42History.setHr_sign(userName);
+//						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrApprovedStatus);
+//						bleachLayDownCheckListF42History.setHr_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHr_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHr_submit_on(date);
+//						bleachLayDownCheckListF42History.setHod_status(AppConstants.waitingStatus);
+
+						bleachLayDownCheckListF42History.setSupervisor_sign(userName);
+						bleachLayDownCheckListF42History.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+						bleachLayDownCheckListF42History.setSupervisor_submit_by(userName);
+						bleachLayDownCheckListF42History.setSupervisor_submit_id(userId);
+						bleachLayDownCheckListF42History.setSupervisor_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.waitingStatus);
-						
+
 						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "HR Approved Successfully"), HttpStatus.OK);
-						
-					} else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					} else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
+
+//						bleachContRawCottonF05.setReason(reason);
+//						bleachContRawCottonF05.setHr_sign(userName);
+//						bleachContRawCottonF05.setHr_status(AppConstants.hrRejectedStatus);
+//						bleachContRawCottonF05.setHr_submit_by(userName);
+//						bleachContRawCottonF05.setHr_submit_id(userId);
+//						bleachContRawCottonF05.setHr_submit_on(date);
+
 						bleachContRawCottonF05.setReason(reason);
-						bleachContRawCottonF05.setHr_sign(userName);
-						bleachContRawCottonF05.setHr_status(AppConstants.hrRejectedStatus);
-						bleachContRawCottonF05.setHr_submit_by(userName);
-						bleachContRawCottonF05.setHr_submit_id(userId);
-						bleachContRawCottonF05.setHr_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+						bleachContRawCottonF05.setSupervisor_sign(userName);
+						bleachContRawCottonF05.setSupervisor_status(AppConstants.supervisorRejectedStatus);
+						bleachContRawCottonF05.setSupervisor_submit_by(userName);
+						bleachContRawCottonF05.setSupervisor_submit_id(userId);
+						bleachContRawCottonF05.setSupervisor_submit_on(date);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-						bleachContRawCottonF05.setHrSignature(signature);
-						
+						bleachContRawCottonF05.setSupervisisorSignature(signature);
+
 						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
+//						bleachLayDownCheckListF42History.setReason(reason);
+//						bleachLayDownCheckListF42History.setHr_sign(userName);
+//						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrRejectedStatus);
+//						bleachLayDownCheckListF42History.setHr_submit_by(userName);
+//						bleachLayDownCheckListF42History.setHr_submit_id(userId);
+//						bleachLayDownCheckListF42History.setHr_submit_on(date);
+
 						bleachLayDownCheckListF42History.setReason(reason);
-						bleachLayDownCheckListF42History.setHr_sign(userName);
-						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrRejectedStatus);
-						bleachLayDownCheckListF42History.setHr_submit_by(userName);
-						bleachLayDownCheckListF42History.setHr_submit_id(userId);
-						bleachLayDownCheckListF42History.setHr_submit_on(date);
-						
+						bleachLayDownCheckListF42History.setSupervisor_sign(userName);
+						bleachLayDownCheckListF42History.setSupervisor_status(AppConstants.supervisorRejectedStatus);
+						bleachLayDownCheckListF42History.setSupervisor_submit_by(userName);
+						bleachLayDownCheckListF42History.setSupervisor_submit_id(userId);
+						bleachLayDownCheckListF42History.setSupervisor_submit_on(date);
+
 						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "HR Rejected Successfully"), HttpStatus.OK);
-						
+
 					} else {
-						return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
+						return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"),
+								HttpStatus.BAD_REQUEST);
 					}
-					
-				} 
-				else if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) || hrStatus.equalsIgnoreCase(AppConstants.hrRejectedStatus)) {
-					
-					return new ResponseEntity(new ApiResponse(false, "Already HR Approved or Rejected"), HttpStatus.BAD_REQUEST);
+
+				} else if (hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus)
+						|| hrStatus.equalsIgnoreCase(AppConstants.hrRejectedStatus)) {
+
+					return new ResponseEntity(new ApiResponse(false, "Already HR Approved or Rejected"),
+							HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"),
+							HttpStatus.BAD_REQUEST);
 				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
-				}
-				
-			} else if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-				
-				if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			} else if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+				if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+						&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachContRawCottonF05.setHod_sign(userName);
 						bleachContRawCottonF05.setHod_status(AppConstants.hodApprovedStatus);
 						bleachContRawCottonF05.setHod_submit_by(userName);
 						bleachContRawCottonF05.setHod_submit_id(userId);
 						bleachContRawCottonF05.setHod_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHodSignature(signature);
-						
+
 						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setHod_sign(userName);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
-						
+
 						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Approved Successfully"), HttpStatus.OK);
-						
-					} else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					} else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachContRawCottonF05.setReason(reason);
 						bleachContRawCottonF05.setHod_sign(userName);
@@ -1979,100 +2237,98 @@ public class BleachingService4 {
 						bleachContRawCottonF05.setHod_submit_by(userName);
 						bleachContRawCottonF05.setHod_submit_id(userId);
 						bleachContRawCottonF05.setHod_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHrSignature(signature);
-						
+
 						bleachContRawCottonF05.setHod_sign(userName);
-						
+
 						bleachhousekeepingchecklistf02repository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02RepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
-						
+
 						houseKeepingCheckListF02RepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Rejected Successfully"), HttpStatus.OK);
-						
+
 					} else {
-						return new ResponseEntity(new ApiResponse(false, "Invalid Status for Hod Approval"), HttpStatus.BAD_REQUEST);
+						return new ResponseEntity(new ApiResponse(false, "Invalid Status for Hod Approval"),
+								HttpStatus.BAD_REQUEST);
 					}
-					
-				} 
-				else if(hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus) || hodStatus.equalsIgnoreCase(AppConstants.hodRejectedStatus)) {
-					
-					return new ResponseEntity(new ApiResponse(false, "Already HOD Approved or Rejected"), HttpStatus.BAD_REQUEST);
+
+				} else if (hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus)
+						|| hodStatus.equalsIgnoreCase(AppConstants.hodRejectedStatus)) {
+
+					return new ResponseEntity(new ApiResponse(false, "Already HOD Approved or Rejected"),
+							HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HOD Approval"),
+							HttpStatus.BAD_REQUEST);
 				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HOD Approval"), HttpStatus.BAD_REQUEST);
-				}
-				
+
 			} else {
-				
-				return new ResponseEntity(new ApiResponse(false, hodStatus + "Login with Valid Role to Approve/Reject Form"), HttpStatus.BAD_REQUEST);
-				
+
+				return new ResponseEntity(
+						new ApiResponse(false, hodStatus + "Login with Valid Role to Approve/Reject Form"),
+						HttpStatus.BAD_REQUEST);
+
 			}
-			
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			log.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/Reject Raw Cotton " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/Reject Raw Cotton " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
-		
-	
-		
+
 	}
-	
-	
+
 	// DELETE MACHINE CLEANING RECORD
-	
-		public ResponseEntity<?> deleteMachineCleaningRecord(Long id) {
 
-			BleachMixingChangeMachineCleaningF38 productionDetailsLine = new BleachMixingChangeMachineCleaningF38();
+	public ResponseEntity<?> deleteMachineCleaningRecord(Long id) {
 
-			try {
+		BleachMixingChangeMachineCleaningF38 productionDetailsLine = new BleachMixingChangeMachineCleaningF38();
 
-				productionDetailsLine = bleachmixingchangemachinecleaningf38repository.getMachineCleanF38(id);
+		try {
 
-				if (productionDetailsLine != null) {
-					bleachmixingchangemachinecleaningf38repository.deleteMachineCleaningLineById(id);
-				} else {
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-							.body(new ApiResponse(false, " data not found !!!"));
-				}
+			productionDetailsLine = bleachmixingchangemachinecleaningf38repository.getMachineCleanF38(id);
 
-			} catch (Exception ex) {
-				String msg = ex.getMessage();
-
-				log.error(" *** !!! Unable to delete Machine Cleaning Record !!!*** " + msg);
-
+			if (productionDetailsLine != null) {
+				bleachmixingchangemachinecleaningf38repository.deleteMachineCleaningLineById(id);
+			} else {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-						.body(new ApiResponse(false, "Failed to delete Machine Cleaning Record !!!" + msg));
+						.body(new ApiResponse(false, " data not found !!!"));
 			}
 
-			return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true, "Machine Cleaning Line Deleted "));
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+
+			log.error(" *** !!! Unable to delete Machine Cleaning Record !!!*** " + msg);
+
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ApiResponse(false, "Failed to delete Machine Cleaning Record !!!" + msg));
 		}
-	
-	
-		/**
-		 * 
-		 * F-02A
-		 */
+
+		return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse(true, "Machine Cleaning Line Deleted "));
+	}
+
+	/**
+	 * 
+	 * F-02A
+	 */
 
 	public ResponseEntity<?> SubmitHouseKeepingF02A(BleachHouseKeepingCheckListF02A details, HttpServletRequest http) {
 		String userRole = getUserRole();
@@ -2092,33 +2348,34 @@ public class BleachingService4 {
 				details.setHr_status(AppConstants.waitingStatus);
 				details.setHr_mail_status(AppConstants.waitingStatus);
 				details.setHod_status("");
-				
+
 				bleachhousekeepingchecklistf02arepository.save(details);
-				
+
 				// IMAGE
-				
+
 				Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-				
+
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-				
+
 				details.setSupervisisorSignature(signature);
-				
+
 				bleachhousekeepingchecklistf02arepository.save(details);
-				
-					// AUDIT
-				
+
+				// AUDIT
+
 				BleachHouseKeepingCheckListHistoryF02A houseKeepingCheckListHistoryF02 = new BleachHouseKeepingCheckListHistoryF02A();
-				
+
 				BeanUtils.copyProperties(details, houseKeepingCheckListHistoryF02);
 
 				String historyDate = houseKeepingCheckListHistoryF02.getDate();
-				
-				int version = houseKeepingCheckListF02ARepositoryHistory.getMaximumVersion(historyDate).map(temp -> temp + 1).orElse(1);
-				
+
+				int version = houseKeepingCheckListF02ARepositoryHistory.getMaximumVersion(historyDate)
+						.map(temp -> temp + 1).orElse(1);
+
 				houseKeepingCheckListHistoryF02.setVersion(version);
-				
+
 				houseKeepingCheckListF02ARepositoryHistory.save(houseKeepingCheckListHistoryF02);
-				
+
 				try {
 
 					bleachmailfunction.sendEmailToHRF02A(details);
@@ -2203,83 +2460,86 @@ public class BleachingService4 {
 
 			details = bleachhousekeepingchecklistf02arepository.getDetailsBaseDate(date);
 
-			if(userRole.equalsIgnoreCase("ROLE_HR")) {
-				
-				
-				
+			if (userRole.equalsIgnoreCase("ROLE_HR")) {
+
 			} else {
 				System.out.println("ROLE");
 			}
-			
+
 			return new ResponseEntity<>(details, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Error Getting House KeepingF02A: " + e.getMessage(),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	// APPROVE 
-	
-public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse approvalResponse, HttpServletRequest http) {
-		
+
+	// APPROVE
+
+	public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse approvalResponse,
+			HttpServletRequest http) {
+
 		SCAUtil sca = new SCAUtil();
-		
+
 		BleachHouseKeepingCheckListF02A bleachContRawCottonF05 = new BleachHouseKeepingCheckListF02A();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userrepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
-			bleachContRawCottonF05 = bleachhousekeepingchecklistf02arepository.getHousekeepingRecordById(approvalResponse.getId());
-			
+
+			bleachContRawCottonF05 = bleachhousekeepingchecklistf02arepository
+					.getHousekeepingRecordById(approvalResponse.getId());
+
 			BleachHouseKeepingCheckListHistoryF02A bleachLayDownCheckListF42History = new BleachHouseKeepingCheckListHistoryF02A();
-			
+
 			String supervisiorStatus = bleachContRawCottonF05.getSupervisor_status();
-			
+
 			String hrStatus = bleachContRawCottonF05.getHr_status();
-			
+
 			String hodStatus = bleachContRawCottonF05.getHod_status();
-			
+
 			UserImageDetails imageDetails = new UserImageDetails();
-			
-			if(userRole.equalsIgnoreCase("ROLE_HR")) {
-				
-				if(supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus) && hrStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			if (userRole.equalsIgnoreCase("ROLE_HR")) {
+
+				if (supervisiorStatus.equalsIgnoreCase(AppConstants.supervisorApprovedStatus)
+						&& hrStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachContRawCottonF05.setHr_sign(userName);
 						bleachContRawCottonF05.setHr_status(AppConstants.hrApprovedStatus);
 						bleachContRawCottonF05.setHr_submit_by(userName);
 						bleachContRawCottonF05.setHr_submit_id(userId);
 						bleachContRawCottonF05.setHr_submit_on(date);
 						bleachContRawCottonF05.setHod_status(AppConstants.waitingStatus);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHrSignature(signature);
-						
+
 						bleachhousekeepingchecklistf02arepository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setHr_sign(userName);
 						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrApprovedStatus);
 						bleachLayDownCheckListF42History.setHr_submit_by(userName);
 						bleachLayDownCheckListF42History.setHr_submit_id(userId);
 						bleachLayDownCheckListF42History.setHr_submit_on(date);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.waitingStatus);
-						
+
 						houseKeepingCheckListF02ARepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "HR Approved Successfully"), HttpStatus.OK);
-						
-					} else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					} else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachContRawCottonF05.setReason(reason);
 						bleachContRawCottonF05.setHr_sign(userName);
@@ -2287,71 +2547,78 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 						bleachContRawCottonF05.setHr_submit_by(userName);
 						bleachContRawCottonF05.setHr_submit_id(userId);
 						bleachContRawCottonF05.setHr_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHrSignature(signature);
-						
+
 						bleachhousekeepingchecklistf02arepository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHr_sign(userName);
 						bleachLayDownCheckListF42History.setHr_status(AppConstants.hrRejectedStatus);
 						bleachLayDownCheckListF42History.setHr_submit_by(userName);
 						bleachLayDownCheckListF42History.setHr_submit_id(userId);
 						bleachLayDownCheckListF42History.setHr_submit_on(date);
-						
+
 						houseKeepingCheckListF02ARepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "HR Rejected Successfully"), HttpStatus.OK);
-						
+
 					} else {
-						return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
+						return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"),
+								HttpStatus.BAD_REQUEST);
 					}
-					
-				} 
-				else if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) || hrStatus.equalsIgnoreCase(AppConstants.hrRejectedStatus)) {
-					
-					return new ResponseEntity(new ApiResponse(false, "Already HR Approved or Rejected"), HttpStatus.BAD_REQUEST);
+
+				} else if (hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus)
+						|| hrStatus.equalsIgnoreCase(AppConstants.hrRejectedStatus)) {
+
+					return new ResponseEntity(new ApiResponse(false, "Already HR Approved or Rejected"),
+							HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"),
+							HttpStatus.BAD_REQUEST);
 				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HR Approval"), HttpStatus.BAD_REQUEST);
-				}
-				
-			} else if(userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
-				
-				if(hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus) && hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-					
-					if(approvalResponse.getStatus().equals("Approve")) {
-						
+
+			} else if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+
+				if (hrStatus.equalsIgnoreCase(AppConstants.hrApprovedStatus)
+						&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
 						bleachContRawCottonF05.setHod_sign(userName);
 						bleachContRawCottonF05.setHod_status(AppConstants.hodApprovedStatus);
 						bleachContRawCottonF05.setHod_submit_by(userName);
 						bleachContRawCottonF05.setHod_submit_id(userId);
 						bleachContRawCottonF05.setHod_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHodSignature(signature);
-						
+
 						bleachhousekeepingchecklistf02arepository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setHod_sign(userName);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodApprovedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
-						
+
 						houseKeepingCheckListF02ARepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Approved Successfully"), HttpStatus.OK);
-						
-					} else if(approvalResponse.getStatus().equals("Reject")) {
-						
+
+					} else if (approvalResponse.getStatus().equals("Reject")) {
+
 						String reason = approvalResponse.getRemarks();
 						bleachContRawCottonF05.setReason(reason);
 						bleachContRawCottonF05.setHod_sign(userName);
@@ -2359,63 +2626,63 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 						bleachContRawCottonF05.setHod_submit_by(userName);
 						bleachContRawCottonF05.setHod_submit_id(userId);
 						bleachContRawCottonF05.setHod_submit_on(date);
-						
-						Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+
+						Optional<UserImageDetails> imageDetailsOpt = imageRepository
+								.fetchItemDetailsByUsername(userName);
 						byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 						bleachContRawCottonF05.setHrSignature(signature);
-						
+
 						bleachContRawCottonF05.setHod_sign(userName);
-						
+
 						bleachhousekeepingchecklistf02arepository.save(bleachContRawCottonF05);
-						
-						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
-						
+
+						bleachLayDownCheckListF42History = houseKeepingCheckListF02ARepositoryHistory
+								.fetchLastSubmittedRecordLaydown(bleachContRawCottonF05.getDate());
+
 						bleachLayDownCheckListF42History.setReason(reason);
 						bleachLayDownCheckListF42History.setHod_sign(userName);
 						bleachLayDownCheckListF42History.setHod_status(AppConstants.hodRejectedStatus);
 						bleachLayDownCheckListF42History.setHod_submit_by(userName);
 						bleachLayDownCheckListF42History.setHod_submit_id(userId);
 						bleachLayDownCheckListF42History.setHod_submit_on(date);
-						
+
 						houseKeepingCheckListF02ARepositoryHistory.save(bleachLayDownCheckListF42History);
-						
+
 						return new ResponseEntity<>(new ApiResponse(true, "Hod Rejected Successfully"), HttpStatus.OK);
-						
+
 					} else {
-						return new ResponseEntity(new ApiResponse(false, "Invalid Status for Hod Approval"), HttpStatus.BAD_REQUEST);
+						return new ResponseEntity(new ApiResponse(false, "Invalid Status for Hod Approval"),
+								HttpStatus.BAD_REQUEST);
 					}
-					
-				} 
-				else if(hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus) || hodStatus.equalsIgnoreCase(AppConstants.hodRejectedStatus)) {
-					
-					return new ResponseEntity(new ApiResponse(false, "Already HOD Approved or Rejected"), HttpStatus.BAD_REQUEST);
+
+				} else if (hodStatus.equalsIgnoreCase(AppConstants.hodApprovedStatus)
+						|| hodStatus.equalsIgnoreCase(AppConstants.hodRejectedStatus)) {
+
+					return new ResponseEntity(new ApiResponse(false, "Already HOD Approved or Rejected"),
+							HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HOD Approval"),
+							HttpStatus.BAD_REQUEST);
 				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, "Invalid Status for HOD Approval"), HttpStatus.BAD_REQUEST);
-				}
-				
+
 			} else {
-				
-				return new ResponseEntity(new ApiResponse(false, hodStatus + "Login with Valid Role to Approve/Reject Form"), HttpStatus.BAD_REQUEST);
-				
+
+				return new ResponseEntity(
+						new ApiResponse(false, hodStatus + "Login with Valid Role to Approve/Reject Form"),
+						HttpStatus.BAD_REQUEST);
+
 			}
-			
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 			String msg = e.getMessage();
 			log.error("Unable to Approve Record" + msg);
 
-			return new ResponseEntity(
-					new ApiResponse(false, "Failed to approve/Reject Raw Cotton " + msg),
+			return new ResponseEntity(new ApiResponse(false, "Failed to approve/Reject Raw Cotton " + msg),
 					HttpStatus.BAD_REQUEST);
-			
-			
+
 		}
-		
-		
-	
-		
+
 	}
 
 	public ResponseEntity<?> getHouseKeepingSummeryF0A(HttpServletRequest http) {
@@ -2432,13 +2699,13 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 			} else if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
 
 				details = bleachhousekeepingchecklistf02arepository.getHodSummeryDetails();
-			} 
-			
+			}
+
 			else if (userRole.equals("ROLE_SUPERVISOR")) {
 
 				details = bleachhousekeepingchecklistf02arepository.getHodSummeryDetails();
 			}
-			
+
 			else {
 				return new ResponseEntity<>(new ApiResponse(false, "Please log in with the correct role"),
 						HttpStatus.FORBIDDEN);
@@ -2491,20 +2758,20 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	//---BMRLOV--Applied Contamination
+	// ---BMRLOV--Applied Contamination
 //	BMR LOV
-	
+
 	public ResponseEntity<?> bmrLovF08() {
 		List<LovResponse> responseList = new ArrayList<>();
- 
+
 		List<String> response = new ArrayList<>();
- 
+
 		try {
- 
+
 			response = bleachappliedcontabcottonf08repository.bmrLov();
-           if(!response.isEmpty()) {
+			if (!response.isEmpty()) {
 				Long id = (long) 1;
-				for(String obj : response) {
+				for (String obj : response) {
 					LovResponse res = new LovResponse();
 					res.setId(id);
 					res.setValue(obj);
@@ -2512,16 +2779,14 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 					responseList.add(res);
 					id++;
 				}
-            }
- 
+			}
+
 		} catch (Exception e) {
-			return new ResponseEntity<>("Error Getting Details : " + e.getMessage(),
-					HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("Error Getting Details : " + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
- 
+
 		return new ResponseEntity<>(responseList, HttpStatus.OK);
 	}
-	
 
 	private String getUserRole() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -2531,23 +2796,20 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 		}
 		return null;
 	}
-	
-	
-	
+
 	public ResponseEntity<?> getdetailsBsedonDateF38Print(String date, String month, String year) {
-	    List<BleachMixingChangeMachineCleaningF38> details = null;
-	    try {
-	        details = bleachmixingchangemachinecleaningf38repository.getDateBaseSummDetailsPrint(date, month, year);
-	        return new ResponseEntity<>(details, HttpStatus.OK);
-	    } catch (Exception e) {
-	        return new ResponseEntity<>("Error Getting Job Card Details: " + e.getMessage(),
-	                HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		List<BleachMixingChangeMachineCleaningF38> details = null;
+		try {
+			details = bleachmixingchangemachinecleaningf38repository.getDateBaseSummDetailsPrint(date, month, year);
+			return new ResponseEntity<>(details, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>("Error Getting Job Card Details: " + e.getMessage(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
-	
+
 	// CR
-	
+
 	public ResponseEntity<?> getSummaryF38(String date, String month, String year, String fromBmr, String toBmr) {
 		List<BleachMixingChangeMachineCleaningF38> details = null;
 		try {
@@ -2579,7 +2841,6 @@ public ResponseEntity<?> approveRejectHouseKeepingRecordF02A(ApproveResponse app
 			return new ResponseEntity<>("Error Getting Job Card Details: " + e.getMessage(),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-}
-	
+	}
 
 }

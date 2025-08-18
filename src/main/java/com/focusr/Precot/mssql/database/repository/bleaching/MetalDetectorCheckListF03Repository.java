@@ -40,6 +40,11 @@ public interface MetalDetectorCheckListF03Repository extends JpaRepository<Metal
 
 	@Query(value = "SELECT * FROM precot.METAL_DETECTOR_CHECK_LIST_F03 WHERE SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND HOD_STATUS != 'HOD_APPROVED' ORDER BY LIST_ID DESC", nativeQuery = true)
 	List<MetalDetectorCheckListF03> findBySupervisorStatusApprovedAndHodStatusNotApproved();
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' THEN 1 ELSE 0 END) AS supervisorCount,"
+            + " SUM(CASE WHEN HOD_STATUS != 'HOD_APPROVED' AND SUPERVISOR_STATUS != 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS hodCount"
+            + " FROM precot.METAL_DETECTOR_CHECK_LIST_F03", nativeQuery = true)
+    List<Object[]> getStatusCounts();
  
  
 }

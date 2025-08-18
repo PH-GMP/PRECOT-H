@@ -15,11 +15,11 @@ import com.focusr.Precot.QA.model.audit.RequestAndIssunceOfDocumentHistoryF002;
 public interface RequestAndIssunceOfDocumentHistoryRepository extends JpaRepository<RequestAndIssunceOfDocumentHistoryF002, Long>{
 
 	
-	@Query(value = "SELECT MAX(VERSION) FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year", nativeQuery = true)
-	Optional<Integer> getMaximumVersion(@Param("date") String date,@Param("month") String month,@Param("year") String year);
+	@Query(value = "SELECT MAX(VERSION) FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year AND DEPARTMENT = :dept", nativeQuery = true)
+	Optional<Integer> getMaximumVersion(@Param("date") String date,@Param("month") String month,@Param("year") String year,@Param("dept") String dept);
 		
-	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year AND VERSION IN (SELECT MAX(VERSION) FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year)", nativeQuery = true)
-	RequestAndIssunceOfDocumentHistoryF002 fetchLastSubmittedRecord(@Param("date") String date,@Param("month") String month,@Param("year") String year);
+	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year AND DEPARTMENT = :department AND VERSION IN (SELECT MAX(VERSION) FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE DATE =:date AND MONTH =:month AND YEAR =:year AND DEPARTMENT = :department)", nativeQuery = true)
+	RequestAndIssunceOfDocumentHistoryF002 fetchLastSubmittedRecord(@Param("date") String date,@Param("month") String month,@Param("year") String year,@Param("department") String department);
 
 	
 	@Query(value = "SELECT * FROM precot.QA_REQUEST_AND_ISSUNCE_OF_DOCUMENT_HISTORY_F002 WHERE "

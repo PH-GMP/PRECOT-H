@@ -1246,7 +1246,7 @@ public class SupulaceRpBmrSummaryService {
 				
 			}
 
-			else if (role.equals("ROLE_QA")) {
+			else if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 				
 				if(details.getStatus().equals(AppConstants.hodApprovedStatus)) {
 
@@ -1283,7 +1283,7 @@ public class SupulaceRpBmrSummaryService {
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			
-			if (role.equals("ROLE_QA")) {
+			if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 
 				details.setForm_no("PRD02/F-27");
 				details.setStatus(AppConstants.qaSave);
@@ -1328,7 +1328,7 @@ public class SupulaceRpBmrSummaryService {
 				String role = sca.getUserRoleFromRequest(http, tokenProvider);
 				Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 				
-				if (role.equals("ROLE_QA")) {
+				if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 
 					details.setForm_no("PRD02/F-27");
 					details.setStatus(AppConstants.qaApprovedStatus);

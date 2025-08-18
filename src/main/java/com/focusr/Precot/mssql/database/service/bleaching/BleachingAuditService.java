@@ -3,8 +3,11 @@ package com.focusr.Precot.mssql.database.service.bleaching;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.focusr.Precot.mssql.database.model.User;
 import com.focusr.Precot.mssql.database.model.bleaching.audit.BleachAppliedContAbCottonHistoryF08;
 import com.focusr.Precot.mssql.database.model.bleaching.audit.BleachAppliedContRawCottonHistoryF04;
@@ -38,9 +42,11 @@ import com.focusr.Precot.mssql.database.model.bleaching.audit.BleachShiftLogBook
 import com.focusr.Precot.mssql.database.model.bleaching.audit.BleachingJobcard13History;
 import com.focusr.Precot.mssql.database.model.bleaching.audit.EquipLogBookHydroExtractorHistoryF11;
 import com.focusr.Precot.mssql.database.repository.UserRepository;
+import com.focusr.Precot.mssql.database.repository.bleaching.BleachAppliedContRawCottonF04Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachLayDownCheckListF42Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachShiftLogBookF36Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.DepartmentRepository;
+import com.focusr.Precot.mssql.database.repository.bleaching.MetalDetectorCheckListF03Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.audit.ActivitiesF01RepositoryHistory;
 import com.focusr.Precot.mssql.database.repository.bleaching.audit.BleachAppliedContAbCottonF08RepositoryHistory;
 import com.focusr.Precot.mssql.database.repository.bleaching.audit.BleachAppliedContRawCottonF04RepositoryHistory;
@@ -144,10 +150,17 @@ public class BleachingAuditService {
 
 	@Autowired
 	private BleachHandSanitizationABPressF41RepositoryHistory bleachhandsanitizationabpressf41repositoryhistory;
-	
+
 	@Autowired
 	private BleachMachineCleaningRecordHistoryF16Repository bleachMachineCleaningRecordHistoryF16Repository;
 
+	// PENDING APPROVALS
+
+	@Autowired
+	private MetalDetectorCheckListF03Repository metalDetectorCheckListF03Repository;
+
+	@Autowired
+	private BleachAppliedContRawCottonF04Repository bleachAppliedContRawCottonF04Repository;
 
 	public ResponseEntity<?> generateLaydownChecklistF42Report(String laydownNo, String start, String end) {
 
@@ -383,56 +396,55 @@ public class BleachingAuditService {
 	}
 
 	// F-05 EXCEL DOWNLOAD
-	
-	
+
 	public ResponseEntity<?> generateRawCottonF05Report(String phNo, String start, String end) {
-		 
+
 		List<BleachContRawCottonF05History> layDownCheckListF42Histories = new ArrayList<>();
- 
+
 		try {
- 
+
 			if (phNo == null || "".equals(phNo)) {
 				phNo = "%";
 			} else {
- 
+
 				phNo = phNo;
 			}
- 
+
 			// Null value checking in FROM DATE
- 
+
 			if (start == null || "".equals(start)) {
 				start = rawCottonF05RepositoryHistory.findMinimumCreationDate();
- 
+
 			} else {
 				start = start;
 			}
- 
+
 			// Null value checking in TO DATE
- 
+
 			if (end == null || "".equals(end)) {
 				end = rawCottonF05RepositoryHistory.findMaximumCreationDate();
- 
+
 			} else {
 				end = end;
 			}
- 
+
 			layDownCheckListF42Histories = rawCottonF05RepositoryHistory.fetchRawCottonHistories(phNo, start, end);
- 
+
 			if (layDownCheckListF42Histories.isEmpty() || layDownCheckListF42Histories == null
 					|| layDownCheckListF42Histories.size() == 0) {
- 
+
 				return new ResponseEntity(new ApiResponse(false, "No Record Found for this Selection !"),
 						HttpStatus.BAD_REQUEST);
- 
+
 			} else {
- 
+
 				BleachingExcelUtil excelUtil = new BleachingExcelUtil();
- 
+
 				try {
- 
+
 					ResponseEntity<?> resp = excelUtil.RawCottonAuditReportF05(layDownCheckListF42Histories);
 					return resp;
- 
+
 				} catch (Exception e) {
 					SCAUtil sca = new SCAUtil();
 					logger.error("*** Unable to Generate Excel Report *** " + e);
@@ -440,9 +452,9 @@ public class BleachingAuditService {
 					return new ResponseEntity(new ApiResponse(false, "Unable to Generate Excel" + msg),
 							HttpStatus.BAD_REQUEST);
 				}
- 
+
 			}
- 
+
 		} catch (Exception e) {
 			SCAUtil sca = new SCAUtil();
 			logger.error("*** Unable to Get Audit History *** " + e);
@@ -451,7 +463,6 @@ public class BleachingAuditService {
 					HttpStatus.BAD_REQUEST);
 		}
 	}
-	
 
 //	public ResponseEntity<?> generateRawCottonF05Report(String phNo, String start, String end) {
 //
@@ -932,55 +943,55 @@ public class BleachingAuditService {
 	// EXCEL BLEACH JOB CARD F34
 
 	public ResponseEntity<?> generateBlowroomAndCardingF34Report(String bmr, String start, String end) {
-		 
+
 		List<BleachEquipmentUsageLogbookBlowroomAndCardingHistoryF34> layDownCheckListF42Histories = new ArrayList<>();
- 
+
 		try {
- 
+
 			if (bmr == null || "".equals(bmr)) {
 				bmr = "%";
 			} else {
- 
+
 				bmr = bmr;
 			}
- 
+
 			// Null value checking in FROM DATE
- 
+
 			if (start == null || "".equals(start)) {
 				start = blowroomAndCardingF34RepositoryHistory.findMinimumCreationDate();
- 
+
 			} else {
 				start = start;
 			}
- 
+
 			// Null value checking in TO DATE
- 
+
 			if (end == null || "".equals(end)) {
 				end = blowroomAndCardingF34RepositoryHistory.findMaximumCreationDate();
- 
+
 			} else {
 				end = end;
- 
+
 			}
- 
+
 			layDownCheckListF42Histories = blowroomAndCardingF34RepositoryHistory.fetchBlowroomAndCardingHistories(bmr,
 					start, end);
- 
+
 			if (layDownCheckListF42Histories.isEmpty() || layDownCheckListF42Histories == null
 					|| layDownCheckListF42Histories.size() == 0) {
- 
+
 				return new ResponseEntity(new ApiResponse(false, "No Record Found for this Selection !"),
 						HttpStatus.BAD_REQUEST);
- 
+
 			} else {
- 
+
 				BleachingExcelUtil excelUtil = new BleachingExcelUtil();
- 
+
 				try {
- 
+
 					ResponseEntity<?> resp = excelUtil.BlowroomAndCardingF34(layDownCheckListF42Histories);
 					return resp;
- 
+
 				} catch (Exception e) {
 					SCAUtil sca = new SCAUtil();
 					logger.error("*** Unable to Generate Excel Report *** " + e);
@@ -988,9 +999,9 @@ public class BleachingAuditService {
 					return new ResponseEntity(new ApiResponse(false, "Unable to Generate Excel" + msg),
 							HttpStatus.BAD_REQUEST);
 				}
- 
+
 			}
- 
+
 		} catch (Exception e) {
 			SCAUtil sca = new SCAUtil();
 			logger.error("*** Unable to Get Audit History *** " + e);
@@ -999,7 +1010,7 @@ public class BleachingAuditService {
 					HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 //	public ResponseEntity<?> generateBlowroomAndCardingF34Report(String bmr, String start, String end) {
 //
 //		List<BleachEquipmentUsageLogbookBlowroomAndCardingHistoryF34> layDownCheckListF42Histories = new ArrayList<>();
@@ -1312,37 +1323,36 @@ public class BleachingAuditService {
 		try {
 
 			if (bmr != null && bmr.isEmpty()) {
-	            bmr = null;
-	        }
-			
+				bmr = null;
+			}
+
 			if (start == null || "".equals(start)) {
 				start = "%";
 			} else {
 
 				start = start;
 			}
-			
+
 			if (end == null || "".equals(end)) {
 				end = "%";
 			} else {
 
 				end = end;
 			}
-			
 
 			// Null value checking in FROM DATE
 
 			if (start == null || "".equals(start)) {
 //				start = contRawCottonF04RepositoryHistory.findMinimumCreationDate();
 
-			} 
+			}
 
 			// Null value checking in TO DATE
 
 			if (end == null || "".equals(end)) {
 //				end = contRawCottonF04RepositoryHistory.findMaximumCreationDate();
 
-			} 
+			}
 
 			layDownCheckListF42Histories = contRawCottonF04RepositoryHistory.fetchRawCottonExcel(bmr, start, end);
 
@@ -1354,8 +1364,6 @@ public class BleachingAuditService {
 
 			} else {
 
-				
-				
 				BleachingExcelUtil excelUtil = new BleachingExcelUtil();
 
 				try {
@@ -1542,35 +1550,33 @@ public class BleachingAuditService {
 	}
 
 	public ResponseEntity<?> bleachingHandSanitation(String from_date, String to_date, String shift) {
-		
+
 		List<BleachHandSanitizationABPressHistoryF41> handSanitationSUmmary = new ArrayList<>();
-		
+
 		try {
-			
+
 			if (from_date == null || "".equals(from_date)) {
 				from_date = "%";
 			} else {
 
 				from_date = from_date;
 			}
-			
+
 			if (to_date == null || "".equals(to_date)) {
 				to_date = "%";
 			} else {
 
 				to_date = to_date;
 			}
-			
+
 			if (shift != null && shift.isEmpty()) {
-	            shift = null;
-	        }
-			
-			
-			
-			handSanitationSUmmary = bleachhandsanitizationabpressf41repositoryhistory.fetchHandSanitationHistory(from_date, to_date, shift);
-			
-			if (handSanitationSUmmary.isEmpty() || handSanitationSUmmary == null
-					|| handSanitationSUmmary.size() == 0) {
+				shift = null;
+			}
+
+			handSanitationSUmmary = bleachhandsanitizationabpressf41repositoryhistory
+					.fetchHandSanitationHistory(from_date, to_date, shift);
+
+			if (handSanitationSUmmary.isEmpty() || handSanitationSUmmary == null || handSanitationSUmmary.size() == 0) {
 
 				return new ResponseEntity(new ApiResponse(false, "No Record Found !"), HttpStatus.BAD_REQUEST);
 
@@ -1592,7 +1598,7 @@ public class BleachingAuditService {
 				}
 
 			}
-			
+
 		} catch (Exception e) {
 			SCAUtil sca = new SCAUtil();
 			logger.error("*** Unable to Get Hand Sanitation Report *** " + e);
@@ -1600,9 +1606,9 @@ public class BleachingAuditService {
 			return new ResponseEntity(new ApiResponse(false, "Unable to Get Hand Sanitation Report" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 	}
-	
+
 //	public ResponseEntity<?> handSanitizationF41(String from_date, String to_date, String shift) {
 //
 //		List<BleachHandSanitizationABPressHistoryF41> summaryF41;
@@ -1677,84 +1683,85 @@ public class BleachingAuditService {
 //					HttpStatus.BAD_REQUEST);
 //		}
 //	}
-	
-	//F16
-		public ResponseEntity<?> machineCleaningRecordF16(String from_date, String to_date, String month, String year) {
 
-			List<BleachMachineCleaningRecordHistoryF16> machineCleaningHistories = new ArrayList<>();
+	// F16
+	public ResponseEntity<?> machineCleaningRecordF16(String from_date, String to_date, String month, String year) {
 
-			try {
+		List<BleachMachineCleaningRecordHistoryF16> machineCleaningHistories = new ArrayList<>();
 
-				if (month == null || "".equals(month)) {
-					month = null;
-				} else {
+		try {
 
-					month = month;
-				}
+			if (month == null || "".equals(month)) {
+				month = null;
+			} else {
 
-				if (year == null || "".equals(year)) {
-					year = null;
-				} else {
-
-					year = year;
-				}
-
-				// Null value checking in FROM DATE
-
-				if (from_date == null || "".equals(from_date)) {
-
-					from_date = null;
-
-				} else {
-					from_date = from_date;
-				}
-
-				// Null value checking in TO DATE
-
-				if (to_date == null || "".equals(to_date)) {
-
-					to_date = null;
-
-				} else {
-					to_date = to_date;
-				}
-
-				machineCleaningHistories = bleachMachineCleaningRecordHistoryF16Repository.findByParams16(from_date,
-						to_date, month, year);
-
-				if (machineCleaningHistories.isEmpty() || machineCleaningHistories == null
-						|| machineCleaningHistories.size() == 0) {
-
-					return new ResponseEntity(new ApiResponse(false, "No Record Found !"), HttpStatus.BAD_REQUEST);
-
-				} else {
-
-					try {
-
-						BleachingExcelUtil excelUtil = new BleachingExcelUtil();
-
-						ResponseEntity<?> resp = excelUtil.MachineCleaningRecordF16(machineCleaningHistories);
-						return resp;
-
-					} catch (Exception e) {
-						SCAUtil sca = new SCAUtil();
-						logger.error("*** Unable to Generate Excel Report *** " + e);
-						String msg = sca.getErrorMessage(e);
-						return new ResponseEntity(new ApiResponse(false, "Unable to Generate Excel" + msg),
-								HttpStatus.BAD_REQUEST);
-					}
-
-				}
-
-			} catch (Exception e) {
-				SCAUtil sca = new SCAUtil();
-				logger.error("*** Unable to Get Audit History *** " + e);
-				String msg = sca.getErrorMessage(e);
-				return new ResponseEntity(new ApiResponse(false, "Unable to Get Audit History" + msg),
-						HttpStatus.BAD_REQUEST);
+				month = month;
 			}
-		}
 
+			if (year == null || "".equals(year)) {
+				year = null;
+			} else {
+
+				year = year;
+			}
+
+			// Null value checking in FROM DATE
+
+			if (from_date == null || "".equals(from_date)) {
+
+				from_date = null;
+
+			} else {
+				from_date = from_date;
+			}
+
+			// Null value checking in TO DATE
+
+			if (to_date == null || "".equals(to_date)) {
+
+				to_date = null;
+
+			} else {
+				to_date = to_date;
+			}
+
+			machineCleaningHistories = bleachMachineCleaningRecordHistoryF16Repository.findByParams16(from_date,
+					to_date, month, year);
+
+			if (machineCleaningHistories.isEmpty() || machineCleaningHistories == null
+					|| machineCleaningHistories.size() == 0) {
+
+				return new ResponseEntity(new ApiResponse(false, "No Record Found !"), HttpStatus.BAD_REQUEST);
+
+			} else {
+
+				try {
+
+					BleachingExcelUtil excelUtil = new BleachingExcelUtil();
+
+					ResponseEntity<?> resp = excelUtil.MachineCleaningRecordF16(machineCleaningHistories);
+					return resp;
+
+				} catch (Exception e) {
+					SCAUtil sca = new SCAUtil();
+					logger.error("*** Unable to Generate Excel Report *** " + e);
+					String msg = sca.getErrorMessage(e);
+					return new ResponseEntity(new ApiResponse(false, "Unable to Generate Excel" + msg),
+							HttpStatus.BAD_REQUEST);
+				}
+
+			}
+
+		} catch (Exception e) {
+			SCAUtil sca = new SCAUtil();
+			logger.error("*** Unable to Get Audit History *** " + e);
+			String msg = sca.getErrorMessage(e);
+			return new ResponseEntity(new ApiResponse(false, "Unable to Get Audit History" + msg),
+					HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	
 
 	private String getUserRole() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

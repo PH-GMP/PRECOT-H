@@ -834,7 +834,7 @@ public class QcEmailHtmlLoader {
                 "<p>Format Name: " + AppConstantsQc.ARF005 + "</p>" +
                 "<p>Format No : " + AppConstantsQc.ARF05No + "</p>" + 
 //                "<p>Date : " + physical.getDate() + "</p>" + 
-                "<p>Product: " + nonwoven.getProduct_name() + "</p>" + 
+//                "<p>Product: " + nonwoven.getProduct_name() + "</p>" + 
 //                "<p>Customer: " + physical.getCustomer() + "</p>" + 
                 "<p>Submitted by : " + nonwoven.getQa_inspector_submit_by() + "</p>" + 
                 "<p>ApprovedBy by (Executive): " + nonwoven.getQa_mng_status() + "</p>" + 

@@ -134,5 +134,13 @@ public interface BleachLayDownCheckListF42Repository extends JpaRepository<Bleac
 	@Query(value="SELECT DISTINCT TOOLS_FOR_CUTTING_STRAPS FROM precot.BLEACH_LAY_DOWN_CHECK_LIST_F42", nativeQuery = true)
 	List<String> cutterStarpTools();
 	
+//	PENDING APPROVALS 
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' THEN 1 ELSE 0 END) AS supervisorCount,"
+            + " SUM(CASE WHEN HOD_STATUS != 'HOD_APPROVED' AND SUPERVISOR_STATUS != 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS hodCount"
+            + " FROM precot.BLEACH_LAY_DOWN_CHECK_LIST_F42", nativeQuery = true)
+    List<Object[]> getStatusCounts();
+
+	
 	
 }

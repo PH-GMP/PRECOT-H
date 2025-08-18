@@ -63,8 +63,10 @@ public class PunchingController5 {
 		String date = requestParams.get("date");
 		String shift = requestParams.get("shift");
 		String machine = requestParams.get("machine");
+		String order1 = requestParams.get("order1");
+		String order2 = requestParams.get("order2");
 		
-		ResponseEntity<?> resp = punchingService5.getProductDetailsbyUniquefIELD(date, shift, machine);
+		ResponseEntity<?> resp = punchingService5.getProductDetailsbyUniquefIELD(date, shift, machine,order1,order2);
 		return resp;
 	}
 	
@@ -86,7 +88,11 @@ public class PunchingController5 {
 		String shift = requestParams.get("shift");
 		String machine = requestParams.get("machine");
 		
-		ResponseEntity<?> resp = punchingService5.fetchPunchingPrintParameters(date, shift, machine);
+		String order1 = requestParams.get("order1");
+		String order2 = requestParams.get("order2");
+
+		
+		ResponseEntity<?> resp = punchingService5.fetchPunchingPrintParameters(date, shift, machine,order1,order2);
 		return resp;
 	}
 	

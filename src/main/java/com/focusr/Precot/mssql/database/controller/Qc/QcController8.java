@@ -119,6 +119,14 @@ public class QcController8 {
 
 	}
 	
+	@GetMapping("/ARF002/getchemicalTestbyBatch/PDE2")
+	public ResponseEntity<?> getchemicalbyBatchPDE2(@RequestParam(required = false) String sub_batch_id) {
+
+		ResponseEntity<?> resp = chemicalTest.getTestByBatchIdPDE2(sub_batch_id);
+		return resp;
+
+	}
+	
 	@GetMapping("/ARF002/print/{sub_batch_id}")
 	public ResponseEntity<?> printARF002(@PathVariable String sub_batch_id) {
 
@@ -461,6 +469,15 @@ public class QcController8 {
 	public ResponseEntity<?> pdeF005(@PathVariable String bmr) {
 
 		ResponseEntity<?> resp = chemicalTest.pdeDataARF005(bmr);
+		return resp;
+
+	}
+	
+	
+	@GetMapping("/nonWoven/PDE/{bmr}")
+	public ResponseEntity<?> nonWovenPde(@PathVariable String bmr) {
+
+		ResponseEntity<?> resp = chemicalTest.nonWovenPde(bmr);
 		return resp;
 
 	}

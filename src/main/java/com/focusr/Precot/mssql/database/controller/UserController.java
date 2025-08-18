@@ -547,5 +547,12 @@ public class UserController {
 		List<String> usernames = userService.getUsernamesByDepartmentAndRole();
 		return ResponseEntity.ok(usernames);
 	}
+	
+	@GetMapping("/getQA")
+	public ResponseEntity<?> getQA() {
+
+		ResponseEntity<?> resp = userService.getQA();
+		return resp;
+	}
 
 }

@@ -462,7 +462,7 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     long countDisposalReport(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
     
-    @Query(value = "SELECT COUNT(*) FROM precot.NON_WOVEN_FLEECE_ANALYSIS_REPORT WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.NON_WOVEN_FLEECE_ANALYSIS_REPORT WHERE createdAt BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countWovenReport(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
     @Query(value = "SELECT COUNT(*) FROM precot.EXFOLIATING_FABRIC_ANALYSIS_REPORT WHERE createdAt BETWEEN :fromDate AND :toDate", nativeQuery = true)

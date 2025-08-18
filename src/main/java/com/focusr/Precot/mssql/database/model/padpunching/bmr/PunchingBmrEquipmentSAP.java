@@ -22,6 +22,9 @@ public class PunchingBmrEquipmentSAP extends UserDateAudit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "CALIBRATION")
+	private String calibration;
+	
 	@Column(name = "EQUIPMENT_NAME")
 	private String equipmentName;
 	

@@ -6,18 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.focusr.Precot.model.audit.UserDateAudit;
-import com.focusr.Precot.mssql.database.model.Qc.QcDistilledWaterAnlaysisDetails;
 import com.focusr.Precot.util.productDevelopment.AppConstantsproductdevelopment;
 
 import lombok.Data;
@@ -72,10 +68,10 @@ public class ProductDevelopmentSheetF001 extends UserDateAudit {
 	@Column(name = "COUNTRY")
 	private String country;
 
-	@Column(name = "MIXING_RATIO")
+	@Column(name = "MIXING_RATIO", columnDefinition = "VARCHAR(MAX)")
 	private String mixingRatio;
 
-	@Column(name = "SAMPLE_REQUISITION_NO")
+	@Column(name = "SAMPLE_REQUISITION_NO", columnDefinition = "VARCHAR(MAX)")
 	private String sampleRequisitionNo;
 
 	@Column(name = "CUSTOMER_COMMENTS")
@@ -458,13 +454,13 @@ public class ProductDevelopmentSheetF001 extends UserDateAudit {
 	@Column(name = "NOTES_FOR_REQURIMENT")
 	private String NotesofRequirment;
 
-	@Column(name = "NATURE_OF_CHANGE")
+	@Column(name = "NATURE_OF_CHANGE", columnDefinition = "VARCHAR(MAX)")
 	private String Natureofchange;
 
 	@Column(name = "REASON")
 	private String reason;
 
-	@Column(name = "NOMENCLATURE")
+	@Column(name = "NOMENCLATURE", columnDefinition = "VARCHAR(MAX)")
 	private String Nomenclature;
 
 	// Slipsheet

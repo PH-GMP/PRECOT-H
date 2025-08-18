@@ -378,6 +378,14 @@ public class QaController4 {
 			@RequestParam String year) {
 		return qaService4.getByDateRequestDocumentOfIssunce(date, month, year);
 	}
+	
+	// GET BY DATE MONTH YEAR AND DEPARTMENT
+	
+	@GetMapping("/api/findRequestAndIssunceOfDocument")
+	public ResponseEntity<?> findRequestAndIssunceOfDocument(@RequestParam String date, @RequestParam String month,
+			@RequestParam String year, @RequestParam String department) {
+		return qaService4.findRequestAndIssunceOfDocument(date, month, year,department);
+	}
 
 	// SUMMARY BASED GET
 
@@ -401,6 +409,22 @@ public class QaController4 {
 
 		ResponseEntity<?> resp = qaService4.getByRequestDocumentOfIssuncePrint(department,date, month, year);
 		return resp;
+	}
+	
+//	 GET BY DATE , MONTH , YEAR AND HEADERS DEPARTMENT 
+	
+	@GetMapping("/api/getF002Print")
+	public ResponseEntity<?> getF002Print(@RequestParam Map<String, String> requestParams,
+			Principal principal) {
+
+		String department=requestParams.get("department");
+		String date = requestParams.get("date");
+		String month = requestParams.get("month");
+		String year = requestParams.get("year");
+
+		ResponseEntity<?> resp = qaService4.getF002Print(department,date, month, year);
+		return resp;
+		
 	}
 
 //			===================================== DISTRIBUTION AND DESTRUCTION RECORD ========================================

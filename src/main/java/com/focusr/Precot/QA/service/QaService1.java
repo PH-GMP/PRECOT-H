@@ -3,6 +3,7 @@ package com.focusr.Precot.QA.service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -1358,14 +1359,16 @@ public class QaService1 {
 						object.setHod_status(AppConstants.hodApprovedStatus);
 						objHistory.setHod_status(AppConstants.hodApprovedStatus);
 						status = "Approved";
-						// MAIL
-						try {
 
-							qamailfunction.sendMailToQaManagerCustomerComplaint(object);
-						} catch (Exception ex) {
-							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
-									HttpStatus.OK);
-						}
+//						// MAIL
+//						try {
+//
+//							qamailfunction.sendMailToQaManagerCustomerComplaint(object);
+//						} catch (Exception ex) {
+//							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
+//									HttpStatus.OK);
+//						}
+
 					} else if (approvalResponse.getStatus().equals("Reject")) {
 						object.setReason(reason);
 						object.setHod_status(AppConstants.hodRejectedStatus);
@@ -1387,6 +1390,19 @@ public class QaService1 {
 					objHistory.setHod_sign(userName);
 
 					qaCustomerComplaintRegisterFormHistoryRepository.save(objHistory);
+
+					if (approvalResponse.getStatus().equals("Approve")) {
+
+						try {
+
+							qamailfunction.sendMailToQaManagerCustomerComplaint(object);
+						} catch (Exception ex) {
+							return new ResponseEntity<>(
+									new ApiResponse(false, "HOD / DESIGNEE " + status + " Successfully "),
+									HttpStatus.OK);
+						}
+
+					}
 
 					return new ResponseEntity<>(new ApiResponse(true, "HOD / DESIGNEE " + status + " Successfully"),
 							HttpStatus.OK);
@@ -1503,8 +1519,14 @@ public class QaService1 {
 			String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
 			if (userRole.equalsIgnoreCase("ROLE_HOD") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")) {
+				
+				List<String> departmentList = Arrays.asList(dpt.split(","));
+				
+				List<String> departments = departmentList ;
+				
+				System.out.println("Multiple Department :" + departments);
 
-				details = qaCustomerComplaintRegisterFormRepository.hodSummary(dpt);
+				details = qaCustomerComplaintRegisterFormRepository.hodSummary(departments);
 
 			} else {
 				return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
@@ -2068,10 +2090,9 @@ public class QaService1 {
 					BeanUtils.copyProperties(object, objHistory, IgnoreProps);
 
 					qaNonConformityReportHistoryRepository.save(objHistory);
-					
-					if(status.equals("Approved"))
-					{
-						
+
+					if (status.equals("Approved")) {
+
 						try {
 
 							qamailfunction.sendMailToProdHead(object);
@@ -2079,9 +2100,8 @@ public class QaService1 {
 							return new ResponseEntity<>(new ApiResponse(false, "Approved but Unable to send mail! "),
 									HttpStatus.OK);
 						}
-						
-					}
 
+					}
 
 					return new ResponseEntity<>(
 							new ApiResponse(true, "PRODUCTION SUPERVISOR " + status + " Successfully"), HttpStatus.OK);
@@ -2104,7 +2124,7 @@ public class QaService1 {
 						object.setQaManagerStatus(AppConstants.waitingStatus);
 						status = "Approved";
 						// MAIL
-						
+
 					} else if (approvalResponse.getStatus().equals("Reject")) {
 						object.setReason(reason);
 						object.setProductionHeadStatus(QaAppConstants.prodHeadReject);
@@ -2121,10 +2141,9 @@ public class QaService1 {
 					BeanUtils.copyProperties(object, objHistory, IgnoreProps);
 
 					qaNonConformityReportHistoryRepository.save(objHistory);
-					
-					if(status.equals("Approved"))
-					{
-						
+
+					if (status.equals("Approved")) {
+
 						try {
 
 							qamailfunction.sendMailToQaManager(object);
@@ -2132,10 +2151,8 @@ public class QaService1 {
 							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 									HttpStatus.OK);
 						}
-						
+
 					}
-					
-					
 
 					return new ResponseEntity<>(new ApiResponse(true, "PRODUCTION HEAD " + status + " Successfully"),
 							HttpStatus.OK);
@@ -3404,7 +3421,7 @@ public class QaService1 {
 
 						qamailfunction.sendMailToQaManagerF005(checkObj);
 						qamailfunction.sendMailToDesigneeF005(checkObj);
-						
+
 					} catch (Exception ex) {
 						return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 								HttpStatus.OK);
@@ -3496,9 +3513,7 @@ public class QaService1 {
 
 					qaTrainingNeedIdentificationFormHistoryRepository.save(objHistory);
 
-					return new ResponseEntity<>(
-							new ApiResponse(true, status + " Successfully"),
-							HttpStatus.OK);
+					return new ResponseEntity<>(new ApiResponse(true, status + " Successfully"), HttpStatus.OK);
 
 				} else {
 					return new ResponseEntity(new ApiResponse(false, "User not authroized to Approve/Reject"),

@@ -9,12 +9,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,8 +36,6 @@ import com.focusr.Precot.Buds.repository.bmr.BudsBmrReworkRepository;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummary;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssue;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssueLine;
-import com.focusr.Precot.mssql.database.model.padpunching.DailyProdPackingDetailsF004;
-import com.focusr.Precot.mssql.database.model.padpunching.PunchingSanitationListF24;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEnclosureList;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetails;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetailsLine;
@@ -60,7 +58,6 @@ import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrLaydownMap
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrSummaryRepository;
 import com.focusr.Precot.mssql.database.repository.drygoods.BMR03GoodsPackingMeterialIssueLineRepository;
 import com.focusr.Precot.mssql.database.repository.drygoods.BMR03GoodsPackingMeterialIssueRepository;
-import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrDeviationLineRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrDeviationRecordHeaderRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrEnclosureListRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrEquipmentDetailsLineRepository;
@@ -76,8 +73,6 @@ import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrSt
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrVerificationOfRecordsListRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrVerificationOfRecordsRepository;
 import com.focusr.Precot.payload.ApiResponse;
-import com.focusr.Precot.payload.BleachingProductionDetailsResponse;
-import com.focusr.Precot.payload.LovResponse;
 import com.focusr.Precot.payload.padpunching.DailyProductionDetailsBmrResponse;
 import com.focusr.Precot.payload.padpunching.DryGoodsTraceabilityResponse;
 import com.focusr.Precot.payload.padpunching.PadPunchingBmrProdResponse;
@@ -86,7 +81,6 @@ import com.focusr.Precot.payload.padpunching.PadPunchingMachineTraceResponse;
 import com.focusr.Precot.payload.padpunching.PadPunchingMachineTraceabilityResponse;
 import com.focusr.Precot.payload.padpunching.PadPunchingStoppageResponse;
 import com.focusr.Precot.payload.padpunching.PadPunchingTraceSpulanceDataResponse;
-import com.focusr.Precot.payload.padpunching.PadPunchingTraceabilityResponse;
 import com.focusr.Precot.payload.padpunching.PunchingBmrProductionDetailsResponse;
 import com.focusr.Precot.payload.padpunching.PunchingTraceabilityResponse;
 import com.focusr.Precot.payload.spulance.SplBaleTraceResponse;
@@ -151,7 +145,7 @@ public class PunchingBmrService {
 
 	@Autowired
 	private BleachBmrSummaryRepository bmrSummaryRepository;
-	
+
 	@Autowired
 	private BudsBmrReworkRepository reworkRepository;
 
@@ -160,10 +154,9 @@ public class PunchingBmrService {
 
 	@Autowired
 	private BMR03GoodsPackingMeterialIssueLineRepository bmr03goodspackingmeterialissuelinerepository;
-	
+
 	@Autowired
 	private PunchingBmrEquipmentSAPRepository equipmentSAPRepository;
-	
 
 	public ResponseEntity<?> saveProductRelease(PunchingBmrProductRelease productRelease, HttpServletRequest http) {
 
@@ -231,8 +224,8 @@ public class PunchingBmrService {
 
 		try {
 //			if (userRole.equals("ROLE_QA")) {
-			
-				productRelease = bmrProductReleaseRepository.productReleaseByOrder(order);
+
+			productRelease = bmrProductReleaseRepository.productReleaseByOrder(order);
 //			}
 
 		} catch (Exception ex) {
@@ -279,157 +272,157 @@ public class PunchingBmrService {
 
 	// SAVE VERIFICATION OF RECORDS
 
-	public ResponseEntity<?> saveVerificationOfRecords(PunchingBmrVerificationOfRecords verificationRecords,
-			HttpServletRequest http) {
-
-		Long id = verificationRecords.getVerificationId();
-
-		SCAUtil sca = new SCAUtil();
-
-		String userRole = getUserRole();
-		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-		String userName = userRepository.getUserName(userId);
-		LocalDateTime currentDate = LocalDateTime.now();
-		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-
-		String value = "";
-
-		try {
-
-			if (userRole.equals("ROLE_SUPERVISOR")) {
-
-				if (id != null) {
-					PunchingBmrVerificationOfRecords bmrVerificationRecords = verificationOfRecordsRepository
-							.getVerificationOfRecordsById(id);
-					verificationRecords.setCreatedAt(bmrVerificationRecords.getCreatedAt());
-					verificationRecords.setCreatedBy(bmrVerificationRecords.getCreatedBy());
-
-//					List<PunchingBmrVerificationOfRecordsLine> sanitationListF24 = bmrVerificationRecords.getDetails();
-//					
-//					if(sanitationListF24 != null || !sanitationListF24.isEmpty()) {
-//						
-//						for(PunchingBmrVerificationOfRecordsLine punchSanitationList : sanitationListF24) {
-//							
-//							Long sanitationId = punchSanitationList.getLineId();
-//							
-//							if(sanitationId != null) {
-//								PunchingBmrVerificationOfRecordsLine existingSanitationObj = verificationOfRecordListRepository.findById(sanitationId).orElse(null);
-//								
-//								punchSanitationList.setVerificationId(existingSanitationObj.getVerificationId());
-//								punchSanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
-//								punchSanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
-//								
-//							}
-//							
-//							verificationOfRecordListRepository.save(punchSanitationList);
-//						}
-//						
-//					}
-
-				}
-
-				verificationRecords.setSupervisor_save_by(userName);
-				verificationRecords.setSupervisor_save_id(userId);
-				verificationRecords.setSupervisor_save_on(date);
-				verificationRecords.setSupervisor_status(AppConstants.supervisorSave);
-
-				verificationOfRecordsRepository.save(verificationRecords);
-
-//				for(PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
-//					
-//					Long line_id = line.getLineId();
-//					Long verification_id = verificationRecords.getVerificationId();
-//					
-//					if (line_id != null) {
-//	                    // Check if the line already exists in the database
-//	                    PunchingBmrVerificationOfRecordsLine existingLine = verificationOfRecordListRepository.findById(line_id).orElse(null);
-//	                    if (existingLine != null) {
-//	                        line = existingLine;
-//	                    }
-//	                }
-//					
-////					if(line_id != null) {
-////						line.setVerificationId(verification_id);
-////					} else {
-////						line.setVerificationId(verification_id);
+//	public ResponseEntity<?> saveVerificationOfRecords(PunchingBmrVerificationOfRecords verificationRecords,
+//			HttpServletRequest http) {
+//
+//		Long id = verificationRecords.getVerificationId();
+//
+//		SCAUtil sca = new SCAUtil();
+//
+//		String userRole = getUserRole();
+//		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+//		String userName = userRepository.getUserName(userId);
+//		LocalDateTime currentDate = LocalDateTime.now();
+//		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+//
+//		String value = "";
+//
+//		try {
+//
+//			if (userRole.equals("ROLE_SUPERVISOR")) {
+//
+//				if (id != null) {
+//					PunchingBmrVerificationOfRecords bmrVerificationRecords = verificationOfRecordsRepository
+//							.getVerificationOfRecordsById(id);
+//					verificationRecords.setCreatedAt(bmrVerificationRecords.getCreatedAt());
+//					verificationRecords.setCreatedBy(bmrVerificationRecords.getCreatedBy());
+//
+////					List<PunchingBmrVerificationOfRecordsLine> sanitationListF24 = bmrVerificationRecords.getDetails();
+////					
+////					if(sanitationListF24 != null || !sanitationListF24.isEmpty()) {
+////						
+////						for(PunchingBmrVerificationOfRecordsLine punchSanitationList : sanitationListF24) {
+////							
+////							Long sanitationId = punchSanitationList.getLineId();
+////							
+////							if(sanitationId != null) {
+////								PunchingBmrVerificationOfRecordsLine existingSanitationObj = verificationOfRecordListRepository.findById(sanitationId).orElse(null);
+////								
+////								punchSanitationList.setVerificationId(existingSanitationObj.getVerificationId());
+////								punchSanitationList.setCreatedAt(existingSanitationObj.getCreatedAt());
+////								punchSanitationList.setCreatedBy(existingSanitationObj.getCreatedBy());
+////								
+////							}
+////							
+////							verificationOfRecordListRepository.save(punchSanitationList);
+////						}
+////						
 ////					}
-//					line.setVerificationId(verification_id);
-//					
+//
+//				}
+//
+//				verificationRecords.setSupervisor_save_by(userName);
+//				verificationRecords.setSupervisor_save_id(userId);
+//				verificationRecords.setSupervisor_save_on(date);
+//				verificationRecords.setSupervisor_status(AppConstants.supervisorSave);
+//
+//				verificationOfRecordsRepository.save(verificationRecords);
+//
+////				for(PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
+////					
+////					Long line_id = line.getLineId();
+////					Long verification_id = verificationRecords.getVerificationId();
+////					
+////					if (line_id != null) {
+////	                    // Check if the line already exists in the database
+////	                    PunchingBmrVerificationOfRecordsLine existingLine = verificationOfRecordListRepository.findById(line_id).orElse(null);
+////	                    if (existingLine != null) {
+////	                        line = existingLine;
+////	                    }
+////	                }
+////					
+//////					if(line_id != null) {
+//////						line.setVerificationId(verification_id);
+//////					} else {
+//////						line.setVerificationId(verification_id);
+//////					}
+////					line.setVerificationId(verification_id);
+////					
+////					line.setChecked_name(line.getChecked_name());
+////					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
+////					line.setChecked_id(lineUserId);
+////					line.setChecked_status(AppConstants.supervisorSave);
+////					line.setChecked_date(date);
+////					
+////					verificationOfRecordListRepository.save(line);
+////					
+////				}
+//
+//				for (PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
+//
+//					System.out.println("Verification of Records size ***" + verificationRecords.getDetails().size());
+//
 //					line.setChecked_name(line.getChecked_name());
 //					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
 //					line.setChecked_id(lineUserId);
 //					line.setChecked_status(AppConstants.supervisorSave);
 //					line.setChecked_date(date);
-//					
+//
 //					verificationOfRecordListRepository.save(line);
-//					
+//
 //				}
-
-				for (PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
-
-					System.out.println("Verification of Records size ***" + verificationRecords.getDetails().size());
-
-					line.setChecked_name(line.getChecked_name());
-					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
-					line.setChecked_id(lineUserId);
-					line.setChecked_status(AppConstants.supervisorSave);
-					line.setChecked_date(date);
-
-					verificationOfRecordListRepository.save(line);
-
-				}
-
-			} else if (userRole.equals("ROLE_QA")) {
-
-				if (verificationRecords.getSupervisor_status().equals(AppConstants.supervisorSave)) {
-
-					verificationRecords.setQa_status(AppConstants.qaSave);
-					verificationRecords.setQa_submit_by(userName);
-					verificationRecords.setQa_submit_id(userId);
-
-					for (PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
-
-						Long line_id = line.getLineId();
-						Long verification_id = verificationRecords.getVerificationId();
-
-//						if(line_id != null) {
-//							line.setVerificationId(verification_id);
-//						} else {
-//							line.setVerificationId(verification_id);
-//						}
-
-						line.setVerified_name(line.getVerified_name());
-						Long lineUserId = userRepository.getUsernameByUserId(line.getVerified_name());
-						line.setVerified_id(lineUserId);
-						line.setVerified_status(AppConstants.qaSave);
-						line.setVerified_date(date);
-
-						verificationOfRecordListRepository.save(line);
-
-					}
-
-				}
-
-			}
-
-			else {
-				return new ResponseEntity(
-						new ApiResponse(false, userRole + " not authorized to save verification of records"),
-						HttpStatus.BAD_REQUEST);
-			}
-
-			return new ResponseEntity(verificationRecords, HttpStatus.OK);
-
-		} catch (Exception ex) {
-
-			String msg = ex.getMessage();
-			logger.error("Unable to Save Verification of Records form" + msg);
-			ex.printStackTrace();
-
-			return new ResponseEntity(new ApiResponse(false, "Failed to Save Verification of Records form" + msg),
-					HttpStatus.BAD_REQUEST);
-		}
-	}
+//
+//			} else if (userRole.equals("ROLE_QA")) {
+//
+//				if (verificationRecords.getSupervisor_status().equals(AppConstants.supervisorSave)) {
+//
+//					verificationRecords.setQa_status(AppConstants.qaSave);
+//					verificationRecords.setQa_submit_by(userName);
+//					verificationRecords.setQa_submit_id(userId);
+//
+//					for (PunchingBmrVerificationOfRecordsLine line : verificationRecords.getDetails()) {
+//
+//						Long line_id = line.getLineId();
+//						Long verification_id = verificationRecords.getVerificationId();
+//
+////						if(line_id != null) {
+////							line.setVerificationId(verification_id);
+////						} else {
+////							line.setVerificationId(verification_id);
+////						}
+//
+//						line.setVerified_name(line.getVerified_name());
+//						Long lineUserId = userRepository.getUsernameByUserId(line.getVerified_name());
+//						line.setVerified_id(lineUserId);
+//						line.setVerified_status(AppConstants.qaSave);
+//						line.setVerified_date(date);
+//
+//						verificationOfRecordListRepository.save(line);
+//
+//					}
+//
+//				}
+//
+//			}
+//
+//			else {
+//				return new ResponseEntity(
+//						new ApiResponse(false, userRole + " not authorized to save verification of records"),
+//						HttpStatus.BAD_REQUEST);
+//			}
+//
+//			return new ResponseEntity(verificationRecords, HttpStatus.OK);
+//
+//		} catch (Exception ex) {
+//
+//			String msg = ex.getMessage();
+//			logger.error("Unable to Save Verification of Records form" + msg);
+//			ex.printStackTrace();
+//
+//			return new ResponseEntity(new ApiResponse(false, "Failed to Save Verification of Records form" + msg),
+//					HttpStatus.BAD_REQUEST);
+//		}
+//	}
 //	
 
 	public ResponseEntity<?> saveVerificationOfRecords1(PunchingBmrVerificationOfRecords verificationRecords,
@@ -534,7 +527,6 @@ public class PunchingBmrService {
 						line.setVerified_status(AppConstants.qaSave);
 						Long lineUserId = userRepository.getUsernameByUserId(line.getVerified_name());
 						line.setVerified_id(lineUserId);
-						line.setVerified_date(date);
 					}
 
 					verificationOfRecordsRepository.save(verificationRecords);
@@ -678,7 +670,7 @@ public class PunchingBmrService {
 					line.setChecked_status(AppConstants.supervisorApprovedStatus);
 					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
 					line.setChecked_id(lineUserId);
-					line.setChecked_date(date);
+					line.setChecked_date(line.getChecked_date());
 				}
 				verificationOfRecordsRepository.save(verificationRecords);
 
@@ -695,7 +687,7 @@ public class PunchingBmrService {
 						line.setVerified_status(AppConstants.qaApprovedStatus);
 						Long lineUserId = userRepository.getUsernameByUserId(line.getVerified_name());
 						line.setVerified_id(lineUserId);
-						line.setVerified_date(date);
+						line.setVerified_date(line.getVerified_date());
 					}
 					verificationOfRecordsRepository.save(verificationRecords);
 				} else {
@@ -889,38 +881,36 @@ public class PunchingBmrService {
 
 		return new ResponseEntity(productionDetailsList, HttpStatus.OK);
 	}
-	
-	
-		// FETCH PRODUCTION DETAILS BY BATCH NUMBER
-	
-	
+
+	// FETCH PRODUCTION DETAILS BY BATCH NUMBER
+
 	public ResponseEntity<?> fetchProductionDetailsByBatchNumber(String batchNumber) {
-		
+
 		List<PadPunchingBmrProdResponse> productionDetailsList = new ArrayList<PadPunchingBmrProdResponse>();
-		
+
 		Map<String, Object> productionDetailsMap = new HashMap();
-		
+
 		try {
-			
+
 			productionDetailsMap = productionDetailsRepository.productionDetailsByNumber(batchNumber);
-			
+
 			String orderNumber = (String) productionDetailsMap.get("orderNumber");
 			String batchNo = (String) productionDetailsMap.get("batchNumber");
 			String product = (String) productionDetailsMap.get("product");
 			Integer quantity = (Integer) productionDetailsMap.get("quantity");
-			
+
 			String edge = productionDetailsRepository.edgeByOrder(orderNumber);
-			
+
 			PadPunchingBmrProdResponse response = new PadPunchingBmrProdResponse();
-			
+
 			response.setBatchNumber(batchNumber);
 			response.setOrderNumber(orderNumber);
 			response.setProduct(product);
 			response.setEdge(edge);
 			response.setQuantity(quantity);
-			
+
 			productionDetailsList.add(response);
-			
+
 		} catch (Exception ex) {
 
 			String msg = ex.getMessage();
@@ -930,10 +920,9 @@ public class PunchingBmrService {
 			return new ResponseEntity(new ApiResponse(false, "Failed to Get Batch number Details" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.OK).body(productionDetailsList);
 	}
-	
 
 	public ResponseEntity<?> getProductionDetailsLoV() {
 		List<String> productionBatchDb = new ArrayList<>();
@@ -1062,14 +1051,13 @@ public class PunchingBmrService {
 //					BigDecimal packQtyBag = productionDetailsRepository.packedQtyInBags(orderNo);
 //					BigDecimal packQtyBox = productionDetailsRepository.packedQtyInBoxes(orderNo);
 				String productCode = productionDetailsRepository.getProductCode(response.getOrderNumber());
-				
 
 				response.setBagPackDate(nbagDate != null ? nbagDate.toString() : "--");
 				response.setBoxPackDate(nocDate != null ? nocDate.toString() : "--");
 				response.setBoxPackQty(farQuantityBox);
 				response.setBagPackQty(farQuantityBag);
 				response.setProductCode(productCode);
-				
+
 				// Add the response to the list
 				list.add(response);
 			}
@@ -1296,7 +1284,6 @@ public class PunchingBmrService {
 				batchCounterMap.put(key, suffix);
 
 				String batchNo = key + "-" + suffix;
-				
 
 				keyValueList.add(batchNo);
 
@@ -1449,48 +1436,48 @@ public class PunchingBmrService {
 		try {
 
 			if (userRole.equals("ROLE_SUPERVISOR")) {
-				 
+
 				postProductionReview.setSupervisorName(postProductionReview.getSupervisorName());
 				Long id1 = userRepository.getUsernameByUserId(postProductionReview.getSupervisorName());
 				postProductionReview.setSupervisorId(id1);
 //				postProductionReview.setSupervisiorSubmittedDate(postProductionReview.getSupervisiorSubmittedDate());
 				postProductionReview.setSupervisorStatus(AppConstants.supervisorSave);
- 
+
 				postProductionRepository.save(postProductionReview);
- 
+
 			} else if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
- 
+
 				if (postProductionReview.getSupervisorStatus().equals(AppConstants.supervisorApprovedStatus)) {
- 
+
 					postProductionReview.setHodName(postProductionReview.getHodName());
 					Long id1 = userRepository.getUsernameByUserId(postProductionReview.getHodName());
 					postProductionReview.setHodId(id1);
 //					postProductionReview.setHodSubmittedDate(postProductionReview.getHodSubmittedDate());
 					postProductionReview.setHodStatus(AppConstants.hodSave);
- 
+
 					postProductionRepository.save(postProductionReview);
- 
+
 				} else {
 					return new ResponseEntity(new ApiResponse(false, "Supervisior not yet Saved"),
 							HttpStatus.BAD_REQUEST);
 				}
- 
-			} else if (userRole.equals("ROLE_QA")) {
- 
+
+			} else if (userRole.equals("ROLE_QA") || userRole.equals("QA_MANAGER") || userRole.equals("QA_DESIGNEE")) {
+
 				if (postProductionReview.getHodStatus().equals(AppConstants.hodApprovedStatus)) {
- 
+
 					postProductionReview.setQaName(postProductionReview.getQaName());
 					Long id1 = userRepository.getUsernameByUserId(postProductionReview.getQaName());
 					postProductionReview.setQaId(id1);
 //					postProductionReview.setQaSubmittedDate(postProductionReview.getQaSubmittedDate());
 					postProductionReview.setQaStatus(AppConstants.qaSave);
- 
+
 					postProductionRepository.save(postProductionReview);
- 
+
 				} else {
 					return new ResponseEntity(new ApiResponse(false, "Hod not yet Saved"), HttpStatus.BAD_REQUEST);
 				}
- 
+
 			} else {
 				return new ResponseEntity(new ApiResponse(false, userRole + " not authorized to save form"),
 						HttpStatus.BAD_REQUEST);
@@ -1552,7 +1539,7 @@ public class PunchingBmrService {
 							HttpStatus.BAD_REQUEST);
 				}
 
-			} else if (userRole.equals("ROLE_QA")) {
+			} else if (userRole.equals("ROLE_QA") || userRole.equals("QA_MANAGER") || userRole.equals("QA_DESIGNEE")) {
 
 				if (postProductionReview.getHodStatus().equals(AppConstants.hodApprovedStatus)) {
 
@@ -1612,196 +1599,215 @@ public class PunchingBmrService {
 	}
 
 	// 5. SAVE EQUIPMENT - ANNEXURE
-	
+
 	public ResponseEntity<?> saveEquipmentAnnexure(PunchingBmrEquipmentDetails equipmentDetails,
-	        HttpServletRequest http) {
+			HttpServletRequest http) {
 
-	    SCAUtil sca = new SCAUtil();
+		SCAUtil sca = new SCAUtil();
 
-	    String userRole = getUserRole();
-	    Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-	    String userName = userRepository.getUserName(userId);
-	    LocalDateTime currentDate = LocalDateTime.now();
-	    Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+		String userRole = getUserRole();
+		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+		String userName = userRepository.getUserName(userId);
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-	    try {
+		try {
 
-	        Long id = equipmentDetails.getEquipmentId();
+			Long id = equipmentDetails.getEquipmentId();
 
-	        if (userRole.equals("ROLE_SUPERVISOR")) {
+			if (userRole.equals("ROLE_SUPERVISOR")) {
 
-	            if (id != null) {
-	                PunchingBmrEquipmentDetails existingVerification = equipmentDetailsRepository
-	                        .getEquipmentDetailsById(id);
-	                equipmentDetails.setCreatedAt(existingVerification.getCreatedAt());
-	                equipmentDetails.setCreatedBy(existingVerification.getCreatedBy());
-	            }
+				if (id != null) {
+					PunchingBmrEquipmentDetails existingVerification = equipmentDetailsRepository
+							.getEquipmentDetailsById(id);
+					equipmentDetails.setCreatedAt(existingVerification.getCreatedAt());
+					equipmentDetails.setCreatedBy(existingVerification.getCreatedBy());
+				}
 
-	            equipmentDetails.setSupervisor_save_by(userName);
-	            equipmentDetails.setSupervisor_save_id(userId);
-	            equipmentDetails.setSupervisor_save_on(date);
-	            equipmentDetails.setSupervisor_status(AppConstants.supervisorSave);
+				equipmentDetails.setSupervisor_save_by(userName);
+				equipmentDetails.setSupervisor_save_id(userId);
+				equipmentDetails.setSupervisor_save_on(date);
+				equipmentDetails.setSupervisor_status(AppConstants.supervisorSave);
 
-	            for (PunchingBmrEquipmentDetailsLine line : equipmentDetails.getDetails()) {
+				for (PunchingBmrEquipmentDetailsLine line : equipmentDetails.getDetails()) {
 
-	                line.setEquipmentRecord(equipmentDetails);
-	                line.setChecked_name(line.getChecked_name());
-	                line.setChecked_status(AppConstants.supervisorSave);
-	                Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
-	                line.setChecked_id(lineUserId);
-	                line.setChecked_date(date);
+					line.setEquipmentRecord(equipmentDetails);
+					line.setChecked_name(line.getChecked_name());
+					line.setChecked_status(AppConstants.supervisorSave);
+					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
+					line.setChecked_id(lineUserId);
+					line.setChecked_date(date);
 
-	                // SAP EQUIPMENT DETAILS
-	                PunchingBmrEquipmentSAP equipmentSAP = equipmentSAPRepository.fetchEquipmentByEquipmentName(line.getEquipmentName());
+					// SAP EQUIPMENT DETAILS
+					PunchingBmrEquipmentSAP equipmentSAP = equipmentSAPRepository
+							.fetchEquipmentByEquipmentName(line.getEquipmentName());
 
-	                if (equipmentSAP != null) {
-	                    // Define the date format that matches "yyyy-MM-dd" for database and "dd-MM-yyyy" for input
-	                    DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					if (equipmentSAP != null) {
+						// Define the date format that matches "yyyy-MM-dd" for database and
+						// "dd-MM-yyyy" for input
+						DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-	                    // Validate and update startDate
-	                    if (line.getDateOfCalibration() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
+						// Validate and update startDate
+						if (line.getDateOfCalibration() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
 
-	                            // Parse the existing startDate (from the database) using the "yyyy-MM-dd" format
-	                            if (equipmentSAP.getStartDate() != null) {
-	                                LocalDate existingStartDate = LocalDate.parse(equipmentSAP.getStartDate(), dbFormatter);
+								// Parse the existing startDate (from the database) using the "yyyy-MM-dd"
+								// format
+								if (equipmentSAP.getStartDate() != null) {
+									LocalDate existingStartDate = LocalDate.parse(equipmentSAP.getStartDate(),
+											dbFormatter);
 
-	                                // Compare the dates
-	                                if (existingStartDate.isBefore(newStartDate)) {
-	                                    // Convert the new date to "yyyy-MM-dd" format before saving
-	                                    equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing start date is null, set the new start date
-	                                equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+									// Compare the dates
+									if (existingStartDate.isBefore(newStartDate)) {
+										// Convert the new date to "yyyy-MM-dd" format before saving
+										equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																										// "yyyy-MM-dd"
+																										// format
+									}
+								} else {
+									// If the existing start date is null, set the new start date
+									equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																									// format
+								}
 
-	                            // Save the updated equipmentSAP record
-	                            equipmentSAPRepository.save(equipmentSAP);
+								// Save the updated equipmentSAP record
+								equipmentSAPRepository.save(equipmentSAP);
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
-	                        }
-	                    }
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
+							}
+						}
 
-	                    // Validate and update endDate
-	                    if (line.getCalibrationDueOn() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
+						// Validate and update endDate
+						if (line.getCalibrationDueOn() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
 
-	                            if (equipmentSAP.getEndDate() != null) {
-	                                LocalDate existingEndDate = LocalDate.parse(equipmentSAP.getEndDate(), dbFormatter);
+								if (equipmentSAP.getEndDate() != null) {
+									LocalDate existingEndDate = LocalDate.parse(equipmentSAP.getEndDate(), dbFormatter);
 
-	                                // Compare the dates
-	                                if (existingEndDate.isBefore(newEndDate)) {
-	                                    equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing end date is null, set the new end date
-	                                equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+									// Compare the dates
+									if (existingEndDate.isBefore(newEndDate)) {
+										equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																									// format
+									}
+								} else {
+									// If the existing end date is null, set the new end date
+									equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																								// format
+								}
 
-	                            // Save the updated equipmentSAP record
-	                            equipmentSAPRepository.save(equipmentSAP);
+								// Save the updated equipmentSAP record
+								equipmentSAPRepository.save(equipmentSAP);
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
-	                        }
-	                    }
-	                }
-	                
-	                // OBJECT 2
-	                
-	                PunchingBmrEquipmentSAP equipmentSAP1 = equipmentSAPRepository.fetchEquipmentByMachineName(line.getEquipmentName());
-	                
-	                if (equipmentSAP1 != null) {
-	                    // Define the date format that matches "yyyy-MM-dd" for database and "dd-MM-yyyy" for input
-	                    DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
+							}
+						}
+					}
 
-	                    // Validate and update startDate
-	                    if (line.getDateOfCalibration() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
+					// OBJECT 2
 
-	                            // Parse the existing startDate (from the database) using the "yyyy-MM-dd" format
-	                            if (equipmentSAP1.getStartDate() != null) {
-	                                LocalDate existingStartDate = LocalDate.parse(equipmentSAP1.getStartDate(), dbFormatter);
+					PunchingBmrEquipmentSAP equipmentSAP1 = equipmentSAPRepository
+							.fetchEquipmentByMachineName(line.getEquipmentName());
 
-	                                // Compare the dates
-	                                if (existingStartDate.isBefore(newStartDate)) {
-	                                    // Convert the new date to "yyyy-MM-dd" format before saving
-	                                    equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing start date is null, set the new start date
-	                                equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+					if (equipmentSAP1 != null) {
+						// Define the date format that matches "yyyy-MM-dd" for database and
+						// "dd-MM-yyyy" for input
+						DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-	                            // Save the updated equipmentSAP1 record
-	                            equipmentSAPRepository.save(equipmentSAP1);
+						// Validate and update startDate
+						if (line.getDateOfCalibration() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
-	                        }
-	                    }
+								// Parse the existing startDate (from the database) using the "yyyy-MM-dd"
+								// format
+								if (equipmentSAP1.getStartDate() != null) {
+									LocalDate existingStartDate = LocalDate.parse(equipmentSAP1.getStartDate(),
+											dbFormatter);
 
-	                    // Validate and update endDate
-	                    if (line.getCalibrationDueOn() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
+									// Compare the dates
+									if (existingStartDate.isBefore(newStartDate)) {
+										// Convert the new date to "yyyy-MM-dd" format before saving
+										equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																										// "yyyy-MM-dd"
+																										// format
+									}
+								} else {
+									// If the existing start date is null, set the new start date
+									equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																									// "yyyy-MM-dd"
+																									// format
+								}
 
-	                            if (equipmentSAP1.getEndDate() != null) {
-	                                LocalDate existingEndDate = LocalDate.parse(equipmentSAP1.getEndDate(), dbFormatter);
+								// Save the updated equipmentSAP1 record
+								equipmentSAPRepository.save(equipmentSAP1);
 
-	                                // Compare the dates
-	                                if (existingEndDate.isBefore(newEndDate)) {
-	                                    equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing end date is null, set the new end date
-	                                equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
+							}
+						}
 
-	                            // Save the updated equipmentSAP1 record
-	                            equipmentSAPRepository.save(equipmentSAP1);
+						// Validate and update endDate
+						if (line.getCalibrationDueOn() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
-	                        }
-	                    }
-	                }
-	                
-	            }
+								if (equipmentSAP1.getEndDate() != null) {
+									LocalDate existingEndDate = LocalDate.parse(equipmentSAP1.getEndDate(),
+											dbFormatter);
 
-	            equipmentDetailsRepository.save(equipmentDetails);
+									// Compare the dates
+									if (existingEndDate.isBefore(newEndDate)) {
+										equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in
+																									// "yyyy-MM-dd"
+																									// format
+									}
+								} else {
+									// If the existing end date is null, set the new end date
+									equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																								// format
+								}
 
-	        } else {
-	            return new ResponseEntity(
-	                    new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"),
-	                    HttpStatus.BAD_REQUEST);
-	        }
+								// Save the updated equipmentSAP1 record
+								equipmentSAPRepository.save(equipmentSAP1);
 
-	    } catch (Exception ex) {
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
+							}
+						}
+					}
 
-	        String msg = ex.getMessage();
-	        logger.error("Unable to Save Equipment Annexure Details" + msg);
-	        ex.printStackTrace();
+				}
 
-	        return new ResponseEntity(new ApiResponse(false, "Failed to Save Equipment Annexure Details" + msg),
-	                HttpStatus.BAD_REQUEST);
-	    }
+				equipmentDetailsRepository.save(equipmentDetails);
 
-	    return new ResponseEntity(equipmentDetails, HttpStatus.OK);
+			} else {
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception ex) {
+
+			String msg = ex.getMessage();
+			logger.error("Unable to Save Equipment Annexure Details" + msg);
+			ex.printStackTrace();
+
+			return new ResponseEntity(new ApiResponse(false, "Failed to Save Equipment Annexure Details" + msg),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity(equipmentDetails, HttpStatus.OK);
 	}
-
-	
 
 	// 5. SUBMIT EQUIPMENT - ANNEXURE
 
@@ -1842,135 +1848,155 @@ public class PunchingBmrService {
 					Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
 					line.setChecked_id(lineUserId);
 					line.setChecked_date(date);
-					
-					
-					 // SAP EQUIPMENT DETAILS
-	                PunchingBmrEquipmentSAP equipmentSAP = equipmentSAPRepository.fetchEquipmentByEquipmentName(line.getEquipmentName());
 
-	                if (equipmentSAP != null) {
-	                    // Define the date format that matches "yyyy-MM-dd" for database and "dd-MM-yyyy" for input
-	                    DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					// SAP EQUIPMENT DETAILS
+					PunchingBmrEquipmentSAP equipmentSAP = equipmentSAPRepository
+							.fetchEquipmentByEquipmentName(line.getEquipmentName());
 
-	                    // Validate and update startDate
-	                    if (line.getDateOfCalibration() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
+					if (equipmentSAP != null) {
+						// Define the date format that matches "yyyy-MM-dd" for database and
+						// "dd-MM-yyyy" for input
+						DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-	                            // Parse the existing startDate (from the database) using the "yyyy-MM-dd" format
-	                            if (equipmentSAP.getStartDate() != null) {
-	                                LocalDate existingStartDate = LocalDate.parse(equipmentSAP.getStartDate(), dbFormatter);
+						// Validate and update startDate
+						if (line.getDateOfCalibration() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
 
-	                                // Compare the dates
-	                                if (existingStartDate.isBefore(newStartDate)) {
-	                                    // Convert the new date to "yyyy-MM-dd" format before saving
-	                                    equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing start date is null, set the new start date
-	                                equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+								// Parse the existing startDate (from the database) using the "yyyy-MM-dd"
+								// format
+								if (equipmentSAP.getStartDate() != null) {
+									LocalDate existingStartDate = LocalDate.parse(equipmentSAP.getStartDate(),
+											dbFormatter);
 
-	                            // Save the updated equipmentSAP record
-	                            equipmentSAPRepository.save(equipmentSAP);
+									// Compare the dates
+									if (existingStartDate.isBefore(newStartDate)) {
+										// Convert the new date to "yyyy-MM-dd" format before saving
+										equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																										// "yyyy-MM-dd"
+																										// format
+									}
+								} else {
+									// If the existing start date is null, set the new start date
+									equipmentSAP.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																									// format
+								}
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
-	                        }
-	                    }
+								// Save the updated equipmentSAP record
+								equipmentSAPRepository.save(equipmentSAP);
 
-	                    // Validate and update endDate
-	                    if (line.getCalibrationDueOn() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
+							}
+						}
 
-	                            if (equipmentSAP.getEndDate() != null) {
-	                                LocalDate existingEndDate = LocalDate.parse(equipmentSAP.getEndDate(), dbFormatter);
+						// Validate and update endDate
+						if (line.getCalibrationDueOn() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
 
-	                                // Compare the dates
-	                                if (existingEndDate.isBefore(newEndDate)) {
-	                                    equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing end date is null, set the new end date
-	                                equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+								if (equipmentSAP.getEndDate() != null) {
+									LocalDate existingEndDate = LocalDate.parse(equipmentSAP.getEndDate(), dbFormatter);
 
-	                            // Save the updated equipmentSAP record
-	                            equipmentSAPRepository.save(equipmentSAP);
+									// Compare the dates
+									if (existingEndDate.isBefore(newEndDate)) {
+										equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																									// format
+									}
+								} else {
+									// If the existing end date is null, set the new end date
+									equipmentSAP.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																								// format
+								}
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
-	                        }
-	                    }
-	                }
-	                
-	                // OBJECT 2
-	                
-	                PunchingBmrEquipmentSAP equipmentSAP1 = equipmentSAPRepository.fetchEquipmentByMachineName(line.getEquipmentName());
-	                
-	                if (equipmentSAP1 != null) {
-	                    // Define the date format that matches "yyyy-MM-dd" for database and "dd-MM-yyyy" for input
-	                    DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+								// Save the updated equipmentSAP record
+								equipmentSAPRepository.save(equipmentSAP);
 
-	                    // Validate and update startDate
-	                    if (line.getDateOfCalibration() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
+							}
+						}
+					}
 
-	                            // Parse the existing startDate (from the database) using the "yyyy-MM-dd" format
-	                            if (equipmentSAP1.getStartDate() != null) {
-	                                LocalDate existingStartDate = LocalDate.parse(equipmentSAP1.getStartDate(), dbFormatter);
+					// OBJECT 2
 
-	                                // Compare the dates
-	                                if (existingStartDate.isBefore(newStartDate)) {
-	                                    // Convert the new date to "yyyy-MM-dd" format before saving
-	                                    equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing start date is null, set the new start date
-	                                equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+					PunchingBmrEquipmentSAP equipmentSAP1 = equipmentSAPRepository
+							.fetchEquipmentByMachineName(line.getEquipmentName());
 
-	                            // Save the updated equipmentSAP1 record
-	                            equipmentSAPRepository.save(equipmentSAP1);
+					if (equipmentSAP1 != null) {
+						// Define the date format that matches "yyyy-MM-dd" for database and
+						// "dd-MM-yyyy" for input
+						DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+						DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
-	                        }
-	                    }
+						// Validate and update startDate
+						if (line.getDateOfCalibration() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newStartDate = LocalDate.parse(line.getDateOfCalibration(), inputFormatter);
 
-	                    // Validate and update endDate
-	                    if (line.getCalibrationDueOn() != null) {
-	                        try {
-	                            // Parse the new date (entered by the user) using the "dd-MM-yyyy" format
-	                            LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
+								// Parse the existing startDate (from the database) using the "yyyy-MM-dd"
+								// format
+								if (equipmentSAP1.getStartDate() != null) {
+									LocalDate existingStartDate = LocalDate.parse(equipmentSAP1.getStartDate(),
+											dbFormatter);
 
-	                            if (equipmentSAP1.getEndDate() != null) {
-	                                LocalDate existingEndDate = LocalDate.parse(equipmentSAP1.getEndDate(), dbFormatter);
+									// Compare the dates
+									if (existingStartDate.isBefore(newStartDate)) {
+										// Convert the new date to "yyyy-MM-dd" format before saving
+										equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																										// "yyyy-MM-dd"
+																										// format
+									}
+								} else {
+									// If the existing start date is null, set the new start date
+									equipmentSAP1.setStartDate(newStartDate.format(dbFormatter)); // Save in
+																									// "yyyy-MM-dd"
+																									// format
+								}
 
-	                                // Compare the dates
-	                                if (existingEndDate.isBefore(newEndDate)) {
-	                                    equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                                }
-	                            } else {
-	                                // If the existing end date is null, set the new end date
-	                                equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd" format
-	                            }
+								// Save the updated equipmentSAP1 record
+								equipmentSAPRepository.save(equipmentSAP1);
 
-	                            // Save the updated equipmentSAP1 record
-	                            equipmentSAPRepository.save(equipmentSAP1);
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid DateOfCalibration format: " + line.getDateOfCalibration());
+							}
+						}
 
-	                        } catch (DateTimeParseException e) {
-	                            System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
-	                        }
-	                    }
-	                }
-					
+						// Validate and update endDate
+						if (line.getCalibrationDueOn() != null) {
+							try {
+								// Parse the new date (entered by the user) using the "dd-MM-yyyy" format
+								LocalDate newEndDate = LocalDate.parse(line.getCalibrationDueOn(), inputFormatter);
+
+								if (equipmentSAP1.getEndDate() != null) {
+									LocalDate existingEndDate = LocalDate.parse(equipmentSAP1.getEndDate(),
+											dbFormatter);
+
+									// Compare the dates
+									if (existingEndDate.isBefore(newEndDate)) {
+										equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in
+																									// "yyyy-MM-dd"
+																									// format
+									}
+								} else {
+									// If the existing end date is null, set the new end date
+									equipmentSAP1.setEndDate(newEndDate.format(dbFormatter)); // Save in "yyyy-MM-dd"
+																								// format
+								}
+
+								// Save the updated equipmentSAP1 record
+								equipmentSAPRepository.save(equipmentSAP1);
+
+							} catch (DateTimeParseException e) {
+								System.out.println("Invalid CalibrationDueOn format: " + line.getCalibrationDueOn());
+							}
+						}
+					}
+
 				}
 
 				equipmentDetailsRepository.save(equipmentDetails);
@@ -2034,20 +2060,20 @@ public class PunchingBmrService {
 			if (userRole.equals("ROLE_SUPERVISOR")) {
 				enclosureList.setSupervisiorStatus(AppConstants.supervisorApprovedStatus);
 				enclosureListRepository.save(enclosureList);
-			} 
-			
+			}
+
 			else if (userRole.equals("ROLE_QA")) {
-				
-				if(enclosureList.getSupervisiorStatus().equals(AppConstants.supervisorApprovedStatus)) {
-					
+
+				if (enclosureList.getSupervisiorStatus().equals(AppConstants.supervisorApprovedStatus)) {
+
 					enclosureList.setQaStatus(AppConstants.qaApprovedStatus);
 					enclosureListRepository.save(enclosureList);
-				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, "Supervisor not yet submitted"), HttpStatus.BAD_REQUEST);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, "Supervisor not yet submitted"),
+							HttpStatus.BAD_REQUEST);
 				}
 			}
-			
+
 			else {
 				return new ResponseEntity(new ApiResponse(false, userRole + "not authorized to submit "),
 						HttpStatus.BAD_REQUEST);
@@ -2104,8 +2130,8 @@ public class PunchingBmrService {
 
 		try {
 
-			if (userRole.equals("ROLE_QA")) {
-				
+			if (userRole.equals("ROLE_QA") || userRole.equals("QA_MANAGER") || userRole.equals("QA_DESIGNEE")) {
+
 				qualityRelease.setStatus(AppConstants.qaSave);
 
 				qualityRelease.setDepartment("Pad Punching");
@@ -2153,7 +2179,7 @@ public class PunchingBmrService {
 
 		try {
 
-			if (userRole.equals("ROLE_QA")) {
+			if (userRole.equals("ROLE_QA") || userRole.equals("QA_MANAGER") || userRole.equals("QA_DESIGNEE")) {
 
 				qualityRelease.setStatus(AppConstants.qaApprovedStatus);
 				qualityRelease.setDepartment("Pad Punching");
@@ -2163,7 +2189,7 @@ public class PunchingBmrService {
 					qualityLine.setQaName(qualityLine.getQaName());
 
 					Long qaId = userRepository.getUsernameByUserId(qualityLine.getQaName());
-					
+
 //					qualityLine.setQaDate(qualityLine.getQaDate());
 				}
 
@@ -2289,27 +2315,26 @@ public class PunchingBmrService {
 
 				deviationRecordHeaderRepository.save(deviationRecord);
 
-			} 
-			else if(userRole.equalsIgnoreCase("ROLE_QA")) {
-				
+			} else if (userRole.equalsIgnoreCase("ROLE_QA")) {
+
 				deviationRecord.setOrderNo(deviationRecord.getOrderNo());
 				deviationRecord.setStatus(AppConstants.qaSave);
-				
+
 				for (PunchingBmrProcessDeviationRecordLine deviationLine : deviationRecord.getDetails()) {
 
 					deviationLine.setDeviationRecord(deviationRecord);
 					deviationLine.setQaName(deviationLine.getQaName());
 
 					Long superId = userRepository.getUsernameByUserId(deviationLine.getQaName());
-					
+
 					deviationLine.setQaStatus(AppConstants.qaSave);
 					deviationLine.setQaDate(deviationLine.getQaDate());
 				}
 
 				deviationRecordHeaderRepository.save(deviationRecord);
-				
+
 			}
-			
+
 			else {
 				return new ResponseEntity(
 						new ApiResponse(false, userRole + "not authorized to save process deviation records"),
@@ -2472,6 +2497,39 @@ public class PunchingBmrService {
 
 		return new ResponseEntity<>(stoppageList, HttpStatus.OK);
 	}
+	
+	public ResponseEntity<?> getStoppageReportsMultiple(String fromdate, String todate, String machine) {
+	    List<PadPunchingStoppageResponse> stoppageList = new ArrayList<>();
+
+	    try {
+	        List<String> machines = Arrays.stream(machine.split(","))
+	                                      .map(String::trim)
+	                                      .collect(Collectors.toList());
+
+	        List<Object[]> results = deviationRecordHeaderRepository.stoppageResponseMultiple(fromdate, todate, machines);
+
+	        stoppageList = results.stream().map(record -> {
+	            PadPunchingStoppageResponse response = new PadPunchingStoppageResponse();
+	            response.setPackdate((Date) record[0]);
+	            response.setShift((BigDecimal) record[1]);
+	            response.setType((String) record[2]);
+	            response.setMachine((String) record[3]);
+	            response.setFromTime((String) record[4]);
+	            response.setToTime((String) record[5]);
+	            response.setTotalTime((BigDecimal) record[7]);
+	            response.setRemarks((String) record[6]);
+	            return response;
+	        }).collect(Collectors.toList());
+
+	    } catch (Exception ex) {
+	        logger.error("Unable to get Stoppage Details: " + ex.getMessage(), ex);
+	        return new ResponseEntity<>(new ApiResponse(false, "Failed to get stoppage records: " + ex.getMessage()),
+	                HttpStatus.BAD_REQUEST);
+	    }
+
+	    return new ResponseEntity<>(stoppageList, HttpStatus.OK);
+	}
+
 
 	// SAVE STOPPAGE
 
@@ -3865,103 +3923,103 @@ public class PunchingBmrService {
 	}
 
 	// GET PRINT API FOR BMR
-		public ResponseEntity<?> punchingPrint(String batchNo) {
-			List<PadPunchingBmrRequest> bmrPrintList = new ArrayList<>();
-			PadPunchingBmrRequest bmrPrintRequest = new PadPunchingBmrRequest();
-			try {
+	public ResponseEntity<?> punchingPrint(String batchNo) {
+		List<PadPunchingBmrRequest> bmrPrintList = new ArrayList<>();
+		PadPunchingBmrRequest bmrPrintRequest = new PadPunchingBmrRequest();
+		try {
 
-				List<BudsBmrRework> reworkList = reworkRepository.reworkListByBmrNumber(batchNo);
-				
-				// 1. PROD DETAILS
-				List<PunchingBmrProductionDetails> prodDetailsList = productionDetailsRepository
-						.productionDetailsByOrder(batchNo);
+			List<BudsBmrRework> reworkList = reworkRepository.reworkListByBmrNumber(batchNo);
+
+			// 1. PROD DETAILS
+			List<PunchingBmrProductionDetails> prodDetailsList = productionDetailsRepository
+					.productionDetailsByOrder(batchNo);
 //				printValidations(prodDetailsList, "Production Details");
-				// 3. PACKING MATERIAL LIST
-				List<BMR03GoodsPackingMeterialIssue> packingMaterialList = bmr03goodspackingmeterialissuerepository.getDetails25(batchNo);
+			// 3. PACKING MATERIAL LIST
+			List<BMR03GoodsPackingMeterialIssue> packingMaterialList = bmr03goodspackingmeterialissuerepository
+					.getDetails25(batchNo);
 //				printValidations(packingMaterialList, "Packing Material");
-				// 5. ANNEXURE
-				List<PunchingBmrEquipmentDetails> equipmentDetails = equipmentDetailsRepository
-						.getEquipmentDetailsByOrder(batchNo);
+			// 5. ANNEXURE
+			List<PunchingBmrEquipmentDetails> equipmentDetails = equipmentDetailsRepository
+					.getEquipmentDetailsByOrder(batchNo);
 //				printValidations(equipmentDetails, "Annexure");
-				// 6. VERIFICATION OF RECORDS
-				List<PunchingBmrVerificationOfRecords> verificationRecords = verificationOfRecordsRepository
-						.getVerificationOfRecordsByBatch(batchNo);
+			// 6. VERIFICATION OF RECORDS
+			List<PunchingBmrVerificationOfRecords> verificationRecords = verificationOfRecordsRepository
+					.getVerificationOfRecordsByBatch(batchNo);
 //				printValidations(verificationRecords, "Verification Of Records");
-				// 7. MAN STEPS
-				List<PunchingBmrManufacturingSteps> manufacturerSteps = manufacturingStepsRepository
-						.manufacturingStepsByBatchNo(batchNo);
+			// 7. MAN STEPS
+			List<PunchingBmrManufacturingSteps> manufacturerSteps = manufacturingStepsRepository
+					.manufacturingStepsByBatchNo(batchNo);
 //				printValidations(manufacturerSteps, "Manufacturer Steps");
-				// 9. STOPPAGE
-				List<PunchingBmrStoppageHeader> stoppage = stoppageHeaderRepository.fetchStoppageByBatchNo(batchNo);
+			// 9. STOPPAGE
+			List<PunchingBmrStoppageHeader> stoppage = stoppageHeaderRepository.fetchStoppageByBatchNo(batchNo);
 //				printValidations(stoppage, "Stoppage/Process Delay");
-				// 10. ENCLOSURE LIST
-				List<PunchingBmrEnclosureList> enclosureList = enclosureListRepository.getEnclosureListByOrder(batchNo);
+			// 10. ENCLOSURE LIST
+			List<PunchingBmrEnclosureList> enclosureList = enclosureListRepository.getEnclosureListByOrder(batchNo);
 //				printValidations(enclosureList, "Enclosure List");
-	 
-				// 11. PROCESS DEVIATION
-				List<PunchingBmrProcessDeviationRecordHeader> deviationRecord = deviationRecordHeaderRepository
-						.getDeviationRecordByOrder(batchNo);
-	 
+
+			// 11. PROCESS DEVIATION
+			List<PunchingBmrProcessDeviationRecordHeader> deviationRecord = deviationRecordHeaderRepository
+					.getDeviationRecordByOrder(batchNo);
+
 //				printValidations(deviationRecord, "Process Deviation Record");
-				// 12. POST PRODUCTION
-				List<PunchingBmrPostProductionReview> postProdList = postProductionRepository
-						.postproductionReviewByOrder(batchNo);
+			// 12. POST PRODUCTION
+			List<PunchingBmrPostProductionReview> postProdList = postProductionRepository
+					.postproductionReviewByOrder(batchNo);
 //				printValidations(postProdList, "Post Production Review");
-				// 13. QA RELEASE
-				List<PunchingBmrQualityReleaseHeader> qualityRelease = qualityReleaseHeadRepository
-						.getQualityReleaseHeaderByOrder(batchNo);
+			// 13. QA RELEASE
+			List<PunchingBmrQualityReleaseHeader> qualityRelease = qualityReleaseHeadRepository
+					.getQualityReleaseHeaderByOrder(batchNo);
 //				printValidations(qualityRelease, "Quality Release");
-				// 14. PRODUCT RELEASE
-				List<PunchingBmrProductRelease> productRelease = bmrProductReleaseRepository
-						.productReleaseListByBatchNo(batchNo);
+			// 14. PRODUCT RELEASE
+			List<PunchingBmrProductRelease> productRelease = bmrProductReleaseRepository
+					.productReleaseListByBatchNo(batchNo);
 //				printValidations(productRelease, "Product Release");
-				// 01. PRODUCTION DETAILS
-				PunchingBmrProductionDetails productionDetails = productionDetailsRepository
-						.fetchProductionByBatch(batchNo);
+			// 01. PRODUCTION DETAILS
+			PunchingBmrProductionDetails productionDetails = productionDetailsRepository
+					.fetchProductionByBatch(batchNo);
 
-				String manStartDate = "";
-				String manEndDate = "";
-				String orderNumber = "";
+			String manStartDate = "";
+			String manEndDate = "";
+			String orderNumber = "";
 
-				if(productionDetails == null) {
-					 return new ResponseEntity(new ApiResponse(false, "Production Details not yet submitted"), HttpStatus.BAD_REQUEST);
-				} else {
-					manStartDate = productionDetails.getManufactureStartDate();
-					manEndDate = productionDetails.getManufactureEndDate();
-					orderNumber = productionDetails.getOrderNumber();
-				}
-
-				Map<String, String> productRecMap = reconillation(batchNo, orderNumber, manStartDate, manEndDate);
-				List<DailyProductionDetailsBmrResponse> dailyprodResponse = productionDetailsDaily(orderNumber,
-						manStartDate, manEndDate);
-				bmrPrintRequest.setProductionDetails(prodDetailsList);
-				bmrPrintRequest.setPackingMaterial(packingMaterialList);
-				bmrPrintRequest.setDeviationRecord(deviationRecord);
-				bmrPrintRequest.setEnclosureList(enclosureList);
-				bmrPrintRequest.setEquipmentDetails(equipmentDetails);
-				bmrPrintRequest.setVerificationOfRecords(verificationRecords);
-				bmrPrintRequest.setManufactureSteps(manufacturerSteps);
-				bmrPrintRequest.setPostProductionReview(postProdList);
-				bmrPrintRequest.setStoppage(stoppage);
-				bmrPrintRequest.setQualityRelease(qualityRelease);
-				bmrPrintRequest.setProductRelease(productRelease);
-				bmrPrintRequest.setReconillation(productRecMap);
-				bmrPrintRequest.setDailyProductionDetailsBmrResponses(dailyprodResponse);
-				bmrPrintRequest.setReworkList(reworkList);
-				bmrPrintList.add(bmrPrintRequest);
-			} catch (Exception ex) {
-				String msg = ex.getMessage();
-				logger.error("Unable to get Punching Details for print : " + msg);
-				ex.printStackTrace();
-	 
-				return new ResponseEntity<>(new ApiResponse(false, "Failed to get Punching Details for print : " + msg),
+			if (productionDetails == null) {
+				return new ResponseEntity(new ApiResponse(false, "Production Details not yet submitted"),
 						HttpStatus.BAD_REQUEST);
+			} else {
+				manStartDate = productionDetails.getManufactureStartDate();
+				manEndDate = productionDetails.getManufactureEndDate();
+				orderNumber = productionDetails.getOrderNumber();
 			}
-			return new ResponseEntity(bmrPrintList, HttpStatus.OK);
+
+			Map<String, String> productRecMap = reconillation(batchNo, orderNumber, manStartDate, manEndDate);
+			List<DailyProductionDetailsBmrResponse> dailyprodResponse = productionDetailsDaily(orderNumber,
+					manStartDate, manEndDate);
+			bmrPrintRequest.setProductionDetails(prodDetailsList);
+			bmrPrintRequest.setPackingMaterial(packingMaterialList);
+			bmrPrintRequest.setDeviationRecord(deviationRecord);
+			bmrPrintRequest.setEnclosureList(enclosureList);
+			bmrPrintRequest.setEquipmentDetails(equipmentDetails);
+			bmrPrintRequest.setVerificationOfRecords(verificationRecords);
+			bmrPrintRequest.setManufactureSteps(manufacturerSteps);
+			bmrPrintRequest.setPostProductionReview(postProdList);
+			bmrPrintRequest.setStoppage(stoppage);
+			bmrPrintRequest.setQualityRelease(qualityRelease);
+			bmrPrintRequest.setProductRelease(productRelease);
+			bmrPrintRequest.setReconillation(productRecMap);
+			bmrPrintRequest.setDailyProductionDetailsBmrResponses(dailyprodResponse);
+			bmrPrintRequest.setReworkList(reworkList);
+			bmrPrintList.add(bmrPrintRequest);
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			logger.error("Unable to get Punching Details for print : " + msg);
+			ex.printStackTrace();
+
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to get Punching Details for print : " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		
+		return new ResponseEntity(bmrPrintList, HttpStatus.OK);
+	}
+
 	public Map<String, String> reconillation(String batchNo, String order, String from_date, String to_date) {
 		Map<String, String> productRecon = new HashMap<>();
 		try {
@@ -4008,15 +4066,13 @@ public class PunchingBmrService {
 		return productRecon;
 	}
 
-	
 	// CHECK PRINT VALIDATION - ALL TABS COMPLETED ONLY ABLE TO PRINT
 	public void printValidations(List<?> list, String listName) throws Exception {
 		if (list == null || list.isEmpty()) {
 			throw new Exception(listName + " not yet submitted. please check !!!");
 		}
 	}
-		
-		
+
 	public List<DailyProductionDetailsBmrResponse> productionDetailsDaily(String order, String fromDate,
 			String toDate) {
 		List<DailyProductionDetailsBmrResponse> productionDetailsList = new ArrayList<>();
@@ -4147,7 +4203,7 @@ public class PunchingBmrService {
 	}
 
 	public ResponseEntity<?> GetPackingMeterialPde(String batch_no, String fromdate, String todate) {
-		
+
 		List<Map<String, Object>> GetPackingMeterialPde;
 
 		try {
@@ -4166,54 +4222,183 @@ public class PunchingBmrService {
 		}
 	}
 
-	
-	
-		// EQUIPMENT ANNEXURE - PDE
-	
+	// EQUIPMENT ANNEXURE - PDE
+
 	public ResponseEntity<?> saveEquipmentAnnexureSAP(PunchingBmrEquipmentSAP punchingBmrEquipments) {
-		
+
 		SCAUtil scaUtil = new SCAUtil();
-		
+
 		try {
-			
+
 //			if(punchingBmrEquipments.getEquipmentName() != null || "".equals(punchingBmrEquipments.getEquipmentName())) {
 //				
 //				return new ResponseEntity(new ApiResponse(false, "Equipment Name should be mandatory !!!"), HttpStatus.BAD_REQUEST);
 //				
 //			}
-			
+
 			equipmentSAPRepository.save(punchingBmrEquipments);
-			
+
 		} catch (Exception ex) {
 			SCAUtil sca = new SCAUtil();
 			logger.error("*** Unable to save Equipment Annexure *** " + ex);
 			String msg = sca.getErrorMessage(ex);
-			return new ResponseEntity<>(new ApiResponse(false, "Unable to save equipment annexure " + msg), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to save equipment annexure " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(punchingBmrEquipments, HttpStatus.OK);
 	}
-	
-	
+
 	public ResponseEntity<?> getEquipmentAnnexureByEquipmentName(String equipmentName) {
-		
+
 		List<PunchingBmrEquipmentSAP> equipmentList = new ArrayList<PunchingBmrEquipmentSAP>();
-		
+
 		try {
-			
+
 			equipmentList = equipmentSAPRepository.fetchEquipmentByEquipCode(equipmentName);
-			
+
 		} catch (Exception ex) {
 			SCAUtil sca = new SCAUtil();
 			logger.error("*** Unable to get Equipment Annexure Master *** " + ex);
 			String msg = sca.getErrorMessage(ex);
-			return new ResponseEntity<>(new ApiResponse(false, "Unable to get equipment annexure master !!!" + msg), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to get equipment annexure master !!!" + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(equipmentList, HttpStatus.OK);
 	}
 	
+	// EQUIPMENT TAB SAVE & SUBMIT
 	
+	   public ResponseEntity<?> submitEquipmentAnnexure2(PunchingBmrEquipmentDetails equipmentDetails,
+				HttpServletRequest http) {
+
+			SCAUtil sca = new SCAUtil();
+
+			String userRole = getUserRole();
+			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			String userName = userRepository.getUserName(userId);
+			LocalDateTime currentDate = LocalDateTime.now();
+			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+
+			try {
+
+				Long id = equipmentDetails.getEquipmentId();
+
+				if (userRole.equals("ROLE_SUPERVISOR")) {
+
+					if (id != null) {
+						PunchingBmrEquipmentDetails existingVerification = equipmentDetailsRepository.getEquipmentDetailsById(id);
+						equipmentDetails.setCreatedAt(existingVerification.getCreatedAt());
+						equipmentDetails.setCreatedBy(existingVerification.getCreatedBy());
+						
+						equipmentDetails.setSupervisor_save_by(existingVerification.getSupervisor_save_by());
+						equipmentDetails.setSupervisor_save_id(existingVerification.getSupervisor_save_id());
+						equipmentDetails.setSupervisor_save_on(existingVerification.getSupervisor_save_on());
+					}
+
+					equipmentDetails.setSupervisor_submit_by(userName);
+					equipmentDetails.setSupervisor_submit_id(userId);
+					equipmentDetails.setSupervisor_submit_on(date);
+					
+					
+					equipmentDetails.setSupervisor_status(AppConstants.supervisorApprovedStatus);
+
+					for (PunchingBmrEquipmentDetailsLine line : equipmentDetails.getDetails()) {
+
+						line.setEquipmentRecord(equipmentDetails);
+						line.setChecked_name(line.getChecked_name());
+						line.setChecked_status(AppConstants.supervisorApprovedStatus);
+						Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
+						line.setChecked_id(lineUserId);
+						line.setChecked_date(date);
+						
+					}
+
+					equipmentDetailsRepository.save(equipmentDetails);
+
+				} else {
+					return new ResponseEntity(
+							new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"),
+							HttpStatus.BAD_REQUEST);
+				}
+
+			} catch (Exception ex) {
+
+				String msg = ex.getMessage();
+				logger.error("Unable to Submit Equipment Annexure Details" + msg);
+				ex.printStackTrace();
+
+				return new ResponseEntity(new ApiResponse(false, "Failed to Submit Equipment Annexure Details" + msg),
+						HttpStatus.BAD_REQUEST);
+			}
+
+			return new ResponseEntity(equipmentDetails, HttpStatus.OK);
+
+		}
+	        
+	        public ResponseEntity<?> saveEquipmentAnnexure2(PunchingBmrEquipmentDetails equipmentDetails,
+	    	        HttpServletRequest http) {
+
+	    	    SCAUtil sca = new SCAUtil();
+
+	    	    String userRole = getUserRole();
+	    	    Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+	    	    String userName = userRepository.getUserName(userId);
+	    	    LocalDateTime currentDate = LocalDateTime.now();
+	    	    Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+
+	    	    try {
+
+	    	        Long id = equipmentDetails.getEquipmentId();
+
+	    	        if (userRole.equals("ROLE_SUPERVISOR")) {
+
+	    	            if (id != null) {
+	    	                PunchingBmrEquipmentDetails existingVerification = equipmentDetailsRepository
+	    	                        .getEquipmentDetailsById(id);
+	    	                equipmentDetails.setCreatedAt(existingVerification.getCreatedAt());
+	    	                equipmentDetails.setCreatedBy(existingVerification.getCreatedBy());
+	    	                
+	    	            }
+
+	    	            equipmentDetails.setSupervisor_save_by(userName);
+	    	            equipmentDetails.setSupervisor_save_id(userId);
+	    	            equipmentDetails.setSupervisor_save_on(date);
+	    	            equipmentDetails.setSupervisor_status(AppConstants.supervisorSave);
+
+	    	            for (PunchingBmrEquipmentDetailsLine line : equipmentDetails.getDetails()) {
+
+	    	                line.setEquipmentRecord(equipmentDetails);
+	    	                line.setChecked_name(line.getChecked_name());
+	    	                line.setChecked_status(AppConstants.supervisorSave);
+	    	                Long lineUserId = userRepository.getUsernameByUserId(line.getChecked_name());
+	    	                line.setChecked_id(lineUserId);
+	    	                line.setChecked_date(date);
+
+	    	            }
+
+	    	            equipmentDetailsRepository.save(equipmentDetails);
+
+	    	        } else {
+	    	            return new ResponseEntity(
+	    	                    new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"),
+	    	                    HttpStatus.BAD_REQUEST);
+	    	        }
+
+	    	    } catch (Exception ex) {
+
+	    	        String msg = ex.getMessage();
+	    	        logger.error("Unable to Save Equipment Annexure Details" + msg);
+	    	        ex.printStackTrace();
+
+	    	        return new ResponseEntity(new ApiResponse(false, "Failed to Save Equipment Annexure Details" + msg),
+	    	                HttpStatus.BAD_REQUEST);
+	    	    }
+
+	    	    return new ResponseEntity(equipmentDetails, HttpStatus.OK);
+	    	}
+
 	// GET USER ROLE
 	private String getUserRole() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

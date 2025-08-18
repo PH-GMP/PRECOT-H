@@ -2,7 +2,6 @@ package com.focusr.Precot.mssql.database.model.bleaching;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,46 +13,48 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.focusr.Precot.model.audit.UserDateAudit;
 import com.focusr.Precot.util.AppConstants;
 
-import lombok.Data;
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "BMR_PROCESS_DELAY_EQUP_LINE", schema = AppConstants.schema)
 public class BMR_ProcessDelayEqupmentLine extends UserDateAudit {
-	
+
 	@Column(name = "ID")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
- 
+
 	@Column(name = "DATE")
 	private String date;
- 
+
 	@Column(name = "MACHINE")
 	private String machine;
- 
+
 	@Column(name = "FROM_HOUR")
 	private String from_hour;
- 
+
 	@Column(name = "TO_HOUR")
 	private String to_hour;
- 
+
 	@Column(name = "TOTAL_HOUR")
 	private String total_hour;
- 
+
 	@Column(name = "SHIFT")
 	private String shift;
+
 	@Column(name = "REMARKS")
 	private String remarks;
- 
+
+	@Column(name = "REASON")
+	private String reason;
+
 	@Column(name = "SIGN")
 	private String sign;
- 
+
 	@Column(name = "SIGN_DATE")
 	private String sign_date;
 
 	@ManyToOne
-	@JoinColumn(name = "PROCESS_ID",  nullable = false)
+	@JoinColumn(name = "PROCESS_ID", nullable = false)
 	@JsonIgnore
 	private BMR_ProcessDelayEqupment delayDetails;
 
@@ -144,8 +145,13 @@ public class BMR_ProcessDelayEqupmentLine extends UserDateAudit {
 	public void setDelayDetails(BMR_ProcessDelayEqupment delayDetails) {
 		this.delayDetails = delayDetails;
 	}
-	
-	
-	
-	
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
 }

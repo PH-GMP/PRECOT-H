@@ -30,6 +30,7 @@ import com.focusr.Precot.mssql.database.model.PPC.ContractReviewMeetingDepartmen
 import com.focusr.Precot.mssql.database.model.PPC.ContractReviewMeetingExcel;
 import com.focusr.Precot.mssql.database.model.PPC.ContractReviewMeetingF003;
 import com.focusr.Precot.mssql.database.model.PPC.ContractReviewProductDetailF003;
+import com.focusr.Precot.mssql.database.model.PPC.MonthlyPlanExcel;
 import com.focusr.Precot.mssql.database.model.PPC.MonthlyplanSummaryF002;
 import com.focusr.Precot.mssql.database.model.PPC.MonthlyplanSummary_ProductionData_F_002;
 import com.focusr.Precot.mssql.database.model.PPC.PreProductionMeetingF004;
@@ -43,6 +44,7 @@ import com.focusr.Precot.mssql.database.repository.ppc.ContractReviewDepartmentM
 import com.focusr.Precot.mssql.database.repository.ppc.ContractReviewMeetingExcelRepo;
 import com.focusr.Precot.mssql.database.repository.ppc.ContractReviewMeetingRepositoryF003;
 import com.focusr.Precot.mssql.database.repository.ppc.ContractReviewProductDetailRepositoryF003;
+import com.focusr.Precot.mssql.database.repository.ppc.MonthlyPlanExcelRepo;
 import com.focusr.Precot.mssql.database.repository.ppc.MonthlyplanSummaryF002Repository;
 import com.focusr.Precot.mssql.database.repository.ppc.MonthlyplanSummaryProductionDataF002Repository;
 import com.focusr.Precot.mssql.database.repository.ppc.PreProductionMeetingF004Repository;
@@ -100,6 +102,9 @@ public class PpcService9 {
 
 	@Autowired
 	private ContractReviewDepartmentMemberRepositoryF003 departmentMemberRepository;
+
+	@Autowired
+	private MonthlyPlanExcelRepo monthlyPlanExcelRepo;
 
 	@Autowired
 	private ContractReviewProductDetailRepositoryF003 productDetailRepository;
@@ -1167,7 +1172,7 @@ public class PpcService9 {
 //	    contractReviewMeetingExcelRepo.save(meeting);
 //	}
 
-	public void processExcelFiles(MultipartFile[] files, String date,String customerName) throws Exception {
+	public void processExcelFiles(MultipartFile[] files, String date, String customerName) throws Exception {
 		// Parse the date parameter
 		Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
 
@@ -1401,6 +1406,59 @@ public class PpcService9 {
 		}
 
 		return new ResponseEntity<>(responseList, HttpStatus.OK);
+	}
+
+	// AMC - 16-05-2025
+
+	public void uploadExcel(MultipartFile[] files, String monthYear) throws Exception {
+		// Parse the date parameter
+
+//		Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(monthYear);
+
+		for (MultipartFile file : files) {
+			if (file.isEmpty()) {
+				throw new Exception("One of the files is empty!");
+			}
+
+			// Create a new entity instance for each file
+			MonthlyPlanExcel meeting = new MonthlyPlanExcel();
+
+			// Set the necessary fields
+			meeting.setMonthyear(monthYear);
+			meeting.setExcelFile(file.getBytes());
+			meeting.setDetails(file.getOriginalFilename());
+
+			// Save the record in the database
+			monthlyPlanExcelRepo.save(meeting);
+		}
+	}
+
+	public List<IdAndValuePair> getByMonthYear(String monthYear) {
+
+		List<Object[]> results = monthlyPlanExcelRepo.findIdAndDetailsByDate(monthYear);
+
+		List<IdAndValuePair> idAndValuePairs = new ArrayList<>();
+
+		for (Object[] result : results) {
+			IdAndValuePair pair = new IdAndValuePair();
+			pair.setId(((Number) result[0]).longValue());
+			pair.setValue((String) result[1]);
+			idAndValuePairs.add(pair);
+		}
+		return idAndValuePairs;
+	}
+
+	@Transactional
+	public String deleteMonthlyPlanById(Long id) {
+
+		Optional<MonthlyPlanExcel> record = monthlyPlanExcelRepo.findById(id);
+
+		if (record.isPresent()) {
+			monthlyPlanExcelRepo.deleteById(id);
+			return "Record with ID " + id + " deleted successfully.";
+		} else {
+			return "Record with ID " + id + " not found.";
+		}
 	}
 
 }

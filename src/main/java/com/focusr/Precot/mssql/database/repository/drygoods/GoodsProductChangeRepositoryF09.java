@@ -133,6 +133,7 @@ public interface GoodsProductChangeRepositoryF09 extends JpaRepository<GoodsProd
 				+ ") \r\n"
 				+ "SELECT  \r\n"
 				+ "    sm.SCAUSE,  \r\n"
+				+ "    sm.SRemarks,  \r\n"
 				+ "    sm.FTime,  \r\n"
 				+ "    sm.TTime,  \r\n"
 				+ "    sm.TotHrs \r\n"

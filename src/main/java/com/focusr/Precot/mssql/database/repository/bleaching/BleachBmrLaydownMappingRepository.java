@@ -100,7 +100,7 @@ public interface BleachBmrLaydownMappingRepository extends JpaRepository<BleachB
 			+ "ORDER BY PackYear DESC, BatchNo ASC;", nativeQuery = true)
 	List<String> fetchBatchwithYear();
 
-	@Query(value = "SELECT DISTINCT bmr_no FROM tblBalePack WHERE BatchNo=:batchNumber AND PackYear IN (2024, 2025)", nativeQuery = true)
+	@Query(value = "SELECT DISTINCT bmr_no FROM tblBalePack WHERE BatchNo=:batchNumber AND PackYear IN (2024, 2025) AND bmr_no IS NOT NULL", nativeQuery = true)
 	Set<String> fetchBmrByBatchNumber(Long batchNumber);
 
 //	@Query(value = "SELECT DISTINCT BaleNo FROM tblBalePack tbp WHERE PackYear = YEAR(GETDATE()) AND BMR_NO IS NOT NULL", nativeQuery = true)
@@ -130,7 +130,7 @@ public interface BleachBmrLaydownMappingRepository extends JpaRepository<BleachB
 			+ "AND TRY_CONVERT(DATE, Date, 103) <= CAST(GETDATE() AS DATE)", nativeQuery = true)
 	List<TableRMResponse> rmDataList();
 
-	@Query(value = "SELECT Batchno AS batchNo, Weight AS weight, Noofbales AS balesCount FROM tblrm WHERE mvt_type = 101 AND laydownno=:laydown_no", nativeQuery = true)
+	@Query(value = "SELECT Batchno AS batchNo, Weight AS weight, Noofbales AS balesCount FROM tblrm WHERE mvt_type = 261 AND laydownno=:laydown_no", nativeQuery = true)
 	List<RawCottonIssueResponse> rawCottonResponse(@Param("laydown_no") String laydown_no);
 
 //	@Query(value = "SELECT Batchno AS batchNo, Weight AS weight, Noofbales AS balesCount FROM tblrm WHERE mvt_type = 261 AND laydownno=:laydown_no", nativeQuery = true)

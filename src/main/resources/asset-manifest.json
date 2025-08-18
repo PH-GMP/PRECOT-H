@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Precot/static/css/main.f57673d5.css",
-    "main.js": "/Precot/static/js/main.a88f7aff.js",
+    "main.js": "/Precot/static/js/main.7c89ec0e.js",
     "static/js/206.e14dbd35.chunk.js": "/Precot/static/js/206.e14dbd35.chunk.js",
     "static/media/bg.png": "/Precot/static/media/bg.fe7a50dde221aeed82b6.png",
     "static/media/Banner-Changed.jpg": "/Precot/static/media/Banner-Changed.186b32d38598d289d6ef.jpg",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.f57673d5.css",
-    "static/js/main.a88f7aff.js"
+    "static/js/main.7c89ec0e.js"
   ]
 }

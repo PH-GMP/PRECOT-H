@@ -85,5 +85,8 @@ public interface qcphysicalTestRepo extends JpaRepository<physicalandchemicaltes
 //			, nativeQuery = true)
 //
 //	chemistHod getChemistDepartHOD();
+	
+	@Query(value = "SELECT DISTINCT SUB_BATCH_NO FROM precot.PHYSICAL_AND_CHEMCAL_TEST WHERE BMR_NO = :bmr_no",nativeQuery = true)
+	   List<String> getByBatchBmr(@Param("bmr_no") String bmr_no);
 
 }

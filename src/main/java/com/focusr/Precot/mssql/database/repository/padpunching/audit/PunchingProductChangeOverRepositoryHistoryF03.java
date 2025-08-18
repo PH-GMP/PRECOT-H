@@ -15,12 +15,16 @@ import com.focusr.Precot.mssql.database.model.padpunching.audit.PunchingProductC
 @Repository
 public interface PunchingProductChangeOverRepositoryHistoryF03 extends JpaRepository<PunchingProductChangeOverHistoryF03, Long> {
 
-	@Query(value = "SELECT MAX(VERSION) FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE=:date AND SHIFT=:shift AND MACHINE_NAME=:machine", nativeQuery = true)
-	Optional<Integer> getMaximumVersion(@Param("date") String date, @Param("shift") String shift, @Param("machine") String machine);
+	@Query(value = "SELECT MAX(VERSION) FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE=:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND ORDER_NO_1 = :order1 AND ORDER_NO_2 = :order2", nativeQuery = true)
+	Optional<Integer> getMaximumVersion(@Param("date") String date, @Param("shift") String shift, @Param("machine") String machine, @Param("order1") String order1 , @Param("order2") String order2);
 	
 	
-	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND VERSION IN (SELECT MAX(VERSION) FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine)", nativeQuery = true)
-	PunchingProductChangeOverHistoryF03 findLastSubmittedRecord(@Param("date") String date,@Param("shift") String shift,@Param("machine") String machine);
+//	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND VERSION IN (SELECT MAX(VERSION) FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine)", nativeQuery = true)
+//	PunchingProductChangeOverHistoryF03 findLastSubmittedRecord(@Param("date") String date,@Param("shift") String shift,@Param("machine") String machine);
+	
+	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND ORDER_NO_1 = :order1 AND ORDER_NO_2 = :order2 AND VERSION IN (SELECT MAX(VERSION) FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE DATE =:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND ORDER_NO_1 = :order1 AND ORDER_NO_2 = :order2)", nativeQuery = true)
+	PunchingProductChangeOverHistoryF03 findLastSubmittedRecord(@Param("date") String date,@Param("shift") String shift,@Param("machine") String machine, @Param("order1") String order1 , @Param("order2") String order2);
+	
 	
 	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_HISTORY_F03 WHERE "
 			+ "(:from_date IS NULL OR :to_date IS NULL OR DATE BETWEEN :from_date AND :to_date) "

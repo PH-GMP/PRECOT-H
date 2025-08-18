@@ -17,20 +17,38 @@ public interface PunchingProductChangeOverRepositoryF03  extends JpaRepository<P
 	PunchingProductChangeOverF03 productChangeoverDetailsById(@Param("id") Long id);
 	
 	
-	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE DATE=:date AND SHIFT=:shift AND MACHINE_NAME=:machine", nativeQuery = true)
-	PunchingProductChangeOverF03 productChangeoverDetailsByDateMachineShift(@Param("date") String date, @Param("shift") String shift, @Param("machine") String machine);
+//	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE DATE=:date AND SHIFT=:shift AND MACHINE_NAME=:machine", nativeQuery = true)
+//	PunchingProductChangeOverF03 productChangeoverDetailsByDateMachineShift(@Param("date") String date, @Param("shift") String shift, @Param("machine") String machine);
 	
+	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE DATE=:date AND SHIFT=:shift AND MACHINE_NAME=:machine AND ORDER_NO_1 = :order1 AND ORDER_NO_2 = :order2", nativeQuery = true)
+	PunchingProductChangeOverF03 productChangeoverDetailsByDateMachineShift(@Param("date") String date, @Param("shift") String shift, @Param("machine") String machine, @Param("order1") String order1 , @Param("order2") String order2);
+
 	
 	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE SUPERVISOR_STATUS='SUPERVISOR_SAVED' OR QA_STATUS != 'QA_APPROVED' ORDER BY PRODUCT_ID DESC", nativeQuery = true)
 	List<PunchingProductChangeOverF03> getPunchingSupervisorSummary();
 	
-	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE QA_STATUS != 'QA_APPROVED' ORDER BY PRODUCT_ID DESC", nativeQuery = true)
+//	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE QA_STATUS != 'QA_APPROVED' ORDER BY PRODUCT_ID DESC", nativeQuery = true)
+//	List<PunchingProductChangeOverF03> getPunchingHodQASummary();
+	
+	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 WHERE HOD_STATUS != 'HOD_APPROVED' ORDER BY PRODUCT_ID DESC", nativeQuery = true)
 	List<PunchingProductChangeOverF03> getPunchingHodQASummary();
 	
+//	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 " +
+//            "WHERE (:date IS NULL OR :date='' OR DATE = :date) " +
+//            "AND (:shift IS NULL OR :shift='' OR SHIFT = :shift) " +
+//            "AND (:machine IS NULL OR :machine='' OR MACHINE_NAME = :machine)"
+//            + "AND QA_STATUS='QA_APPROVED'", nativeQuery = true)
+//	List<PunchingProductChangeOverF03> productChangeoverDetailsPrint(@Param("date") String date,@Param("shift") String shift, @Param("machine") String machine);
+
+
 	@Query(value = "SELECT * FROM precot.PUNCHING_PROD_CHANGE_OVER_F03 " +
             "WHERE (:date IS NULL OR :date='' OR DATE = :date) " +
             "AND (:shift IS NULL OR :shift='' OR SHIFT = :shift) " +
-            "AND (:machine IS NULL OR :machine='' OR MACHINE_NAME = :machine)"
-            + "AND QA_STATUS='QA_APPROVED'", nativeQuery = true)
-	List<PunchingProductChangeOverF03> productChangeoverDetailsPrint(@Param("date") String date,@Param("shift") String shift, @Param("machine") String machine);
+            "AND (:machine IS NULL OR :machine='' OR MACHINE_NAME = :machine)" +
+            "AND (:order1 IS NULL OR :order1='' OR ORDER_NO_1 = :order1)" +
+            "AND (:order2 IS NULL OR :order2='' OR ORDER_NO_2 = :order2)" +
+            "AND HOD_STATUS='HOD_APPROVED'", nativeQuery = true)
+	List<PunchingProductChangeOverF03> productChangeoverDetailsPrint(@Param("date") String date,@Param("shift") String shift,
+			@Param("machine") String machine,@Param("order1") String order1 , @Param("order2") String order2);
+
 }

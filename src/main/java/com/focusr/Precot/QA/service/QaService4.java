@@ -202,25 +202,25 @@ public class QaService4 {
 
 	@Autowired
 	private BmrIssueRegisterLineHistoryRepositoryF045 bmrIssueRegisterLineHistoryRepositoryF045;
-	
+
 	@Autowired
 	private QualityReviewMeetingsRepository qualityReviewMeetingsRepository;
-	
+
 	@Autowired
 	private QualityReviewMeetingAttendanceRepository qualityReviewMeetingAttendanceRepository;
-	
+
 	@Autowired
-	private QualityReviewMeetingsDiscussionRepository qualityReviewMeetingsDiscussionRepository;	
-	
+	private QualityReviewMeetingsDiscussionRepository qualityReviewMeetingsDiscussionRepository;
+
 	@Autowired
 	private QualityReviewMeetingsHisotoryRepository qualityReviewMeetingsHisotoryRepository;
-	
+
 	@Autowired
 	private QualityReviewMeetingsAttendanceHistoryRepository QualityReviewMeetingsAttendanceHistoryRepository;
-	
+
 	@Autowired
 	private QualityReviewMeetingDiscussionHistoryRepository qualityReviewMeetingDiscussionHistoryRepository;
-	
+
 	@Autowired
 	private QaQualityReviewMeetingDiscussionPointsRepository qaQualityReviewMeetingDiscussionPointsRepository;
 
@@ -235,24 +235,22 @@ public class QaService4 {
 		List<Map<String, Object>> MachineNameLov;
 		try {
 
-			if(department.equalsIgnoreCase("pad punching")){
+			if (department.equalsIgnoreCase("pad punching")) {
 
 				MachineNameLov = qaOnlineInspectionReportRepository.getMachineNameForPadPunching();
 
-			}else if (department.equalsIgnoreCase("cotton buds")) {
+			} else if (department.equalsIgnoreCase("cotton buds")) {
 
 				MachineNameLov = qaOnlineInspectionReportRepository.getMachineNameForBuds();
 
+			} else if (department.equalsIgnoreCase("balls")) {
 
-			}else if (department.equalsIgnoreCase("balls")) {
+				MachineNameLov = qaOnlineInspectionReportRepository.getMachineNameForBalls();
 
-				MachineNameLov = qaOnlineInspectionReportRepository.getMachineNameForBalls();				
-
-			}else {
+			} else {
 				return new ResponseEntity<>(new ApiResponse(false, "Invalid department specified."),
 						HttpStatus.BAD_REQUEST);
 			}
-
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -277,11 +275,10 @@ public class QaService4 {
 			} else if ("dry goods".equalsIgnoreCase(department)) {
 
 				records = qaOnlineInspectionReportRepository.getBmrLovDryGoods(department);
-			}else if ("cotton buds".equalsIgnoreCase(department)) {
+			} else if ("cotton buds".equalsIgnoreCase(department)) {
 
 				records = qaOnlineInspectionReportRepository.getBmrLovCottonBuds(department);
-			}
-			else {
+			} else {
 
 				return new ResponseEntity<>(new ApiResponse(false, "Invalid department specified."),
 						HttpStatus.BAD_REQUEST);
@@ -1249,20 +1246,20 @@ public class QaService4 {
 //	}
 //06-11-2024	
 	public ResponseEntity<?> getByDateShiftMachineNoBmrPOrder(String date, String shift, String machineNo,
-			String pOrder, String bmrNo,String formatNo) {
+			String pOrder, String bmrNo, String formatNo) {
 		try {
- 
+
 			List<QaOnlineInspectionReport> list = qaOnlineInspectionReportRepository.getDetailsBaseParam(date, shift,
 					machineNo, pOrder, bmrNo, formatNo);
- 
+
 			if (list == null) {
 				return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
 			}
- 
+
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			log.error("Unable to get Details!", e);
- 
+
 			return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -1390,9 +1387,6 @@ public class QaService4 {
 			return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-	
 
 //	public ResponseEntity<?> getByOnlineInspectionReportPrint(String date, String shift, String machineNo,
 //			String pOrder, String bmrNo, String formatNo) {
@@ -1414,7 +1408,7 @@ public class QaService4 {
 //	}
 
 	public List<String> getDepartments() {
-		return Arrays.asList("pad punching", "dry goods","cotton buds");
+		return Arrays.asList("pad punching", "dry goods", "cotton buds");
 	}
 
 //	========================================== CONTAINER INSPECTION REPORT ===============================================
@@ -1466,11 +1460,12 @@ public class QaService4 {
 						"qa_inspector_sign", "prod_supervisor_status", "prod_supervisor_save_on",
 						"prod_supervisor_save_by", "prod_supervisor_save_id", "prod_supervisor_submit_on",
 						"prod_supervisor_submit_by", "prod_supervisor_submit_id", "prod_supervisor_sign",
-						"qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by", "qa_mr_submit_id", "qa_mr_sign","security_status",
-						"security_saved_on","security_saved_by","security_saved_id","security_submit_on","security_submit_by",
-						"security_submit_id","security_sign","dispatch_supervisor_status","dispatch_supervisor_save_on",
-						"dispatch_supervisor_save_by","dispatch_supervisor_save_id","dispatch_supervisor_submit_on",
-						"dispatch_supervisor_submit_by","dispatch_supervisor_submit_id","dispatch_supervisor_sign"};
+						"qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by", "qa_mr_submit_id", "qa_mr_sign",
+						"security_status", "security_saved_on", "security_saved_by", "security_saved_id",
+						"security_submit_on", "security_submit_by", "security_submit_id", "security_sign",
+						"dispatch_supervisor_status", "dispatch_supervisor_save_on", "dispatch_supervisor_save_by",
+						"dispatch_supervisor_save_id", "dispatch_supervisor_submit_on", "dispatch_supervisor_submit_by",
+						"dispatch_supervisor_submit_id", "dispatch_supervisor_sign" };
 
 				BeanUtils.copyProperties(details, listObj, IgnoreProps);
 
@@ -1499,9 +1494,10 @@ public class QaService4 {
 
 					qaContainerInspectionReportRepository.save(listObj);
 
-				}else if (role.equals("DISPATCH_SUPERVISOR")&&listObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
+				} else if (role.equals("DISPATCH_SUPERVISOR")
+						&& listObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
 
-					if (listObj.getQa_inspector_status().equals(AppConstants.supervisorApprovedStatus)){
+					if (listObj.getQa_inspector_status().equals(AppConstants.supervisorApprovedStatus)) {
 						return new ResponseEntity(new ApiResponse(false, "No access to save details."),
 								HttpStatus.BAD_REQUEST);
 					}
@@ -1523,7 +1519,8 @@ public class QaService4 {
 					listObj.setDispatch_supervisor_status(AppConstants.supervisorSave);
 					qaContainerInspectionReportRepository.save(listObj);
 
-				}else if (role.equals("SECURITY")&& listObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)) {
+				} else if (role.equals("SECURITY")
+						&& listObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)) {
 
 					if (listObj.getQa_inspector_status().equals(QaAppConstants.securityApproveStatus)) {
 						return new ResponseEntity(new ApiResponse(false, "No access to save details."),
@@ -1548,8 +1545,7 @@ public class QaService4 {
 
 					qaContainerInspectionReportRepository.save(listObj);
 
-				}
-				else {
+				} else {
 					return new ResponseEntity(new ApiResponse(false, role + "cannot save details"),
 							HttpStatus.BAD_REQUEST);
 				}
@@ -1678,8 +1674,8 @@ public class QaService4 {
 						|| !checkObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)
 						|| !checkObj.getSecurity_status().equals(QaAppConstants.securityApproveStatus)
 						|| checkObj.getQa_mr_status().equals(AppConstants.qaMrRejectedStatus)) {
-					
-					if (role.equals("ROLE_QA")||role.equals("DISPATCH_SUPERVISOR")||role.equals("SECURITY")) {
+
+					if (role.equals("ROLE_QA") || role.equals("DISPATCH_SUPERVISOR") || role.equals("SECURITY")) {
 
 						qaContainerInspectionReportRepository.save(checkObj);
 
@@ -1701,8 +1697,8 @@ public class QaService4 {
 //						checkObj.setSecurity_status(AppConstants.waitingStatus);
 //						checkObj.setDispatch_supervisor_status("");
 //						checkObj.setQa_mr_status("");
-						
-						if(role.equals("ROLE_QA")) {
+
+						if (role.equals("ROLE_QA")) {
 							checkObj.setQa_inspector_submit_by(userName);
 							checkObj.setQa_inspector_submit_on(date);
 							checkObj.setQa_inspector_submit_id(userId);
@@ -1712,27 +1708,32 @@ public class QaService4 {
 							checkObj.setSecurity_status("");
 							checkObj.setDispatch_supervisor_status(AppConstants.waitingStatus);
 							checkObj.setQa_mr_status("");
-							
-						}else if(role.equals("DISPATCH_SUPERVISOR")&&checkObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
-							
+
+						} else if (role.equals("DISPATCH_SUPERVISOR")
+								&& checkObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
+
 							checkObj.setDispatch_supervisor_submit_by(userName);
 							checkObj.setDispatch_supervisor_submit_on(date);
 							checkObj.setDispatch_supervisor_submit_id(userId);
 							checkObj.setDispatch_supervisor_status(QaAppConstants.SupervisorApprove);
 							checkObj.setDispatch_supervisor_sign(userName);
 							checkObj.setSecurity_status(AppConstants.waitingStatus);
-							
-						}else if(role.equals("SECURITY")&&checkObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)){
-							
+
+						} else if (role.equals("SECURITY") && checkObj.getDispatch_supervisor_status()
+								.equals(AppConstants.supervisorApprovedStatus)) {
+
 							checkObj.setSecurity_submit_by(userName);
 							checkObj.setSecurity_submit_on(date);
 							checkObj.setSecurity_submit_id(userId);
 							checkObj.setSecurity_status(QaAppConstants.securityApproveStatus);
 							checkObj.setSecurity_sign(userName);
 							checkObj.setQa_mr_status(AppConstants.waitingStatus);
-							
-						}else {
-							return new ResponseEntity<>(new ApiResponse(false,"For the role "+role+"the previous has not yet been approved"),HttpStatus.BAD_REQUEST);
+
+						} else {
+							return new ResponseEntity<>(
+									new ApiResponse(false,
+											"For the role " + role + "the previous has not yet been approved"),
+									HttpStatus.BAD_REQUEST);
 						}
 
 						qaContainerInspectionReportRepository.save(checkObj);
@@ -1842,13 +1843,13 @@ public class QaService4 {
 						rejectionReportHistory.setSecurity_submit_id(checkObj.getSecurity_submit_id());
 						rejectionReportHistory.setSecurity_submit_on(checkObj.getSecurity_submit_on());
 						rejectionReportHistory.setSecurity_sign(checkObj.getSecurity_sign());
-						
+
 						rejectionReportHistory.setDispatch_supervisor_status(checkObj.getDispatch_supervisor_status());
 						rejectionReportHistory.setDispatch_supervisor_submit_by(checkObj.getSecurity_submit_by());
 						rejectionReportHistory.setDispatch_supervisor_submit_id(checkObj.getSecurity_submit_id());
 						rejectionReportHistory.setDispatch_supervisor_submit_on(checkObj.getSecurity_submit_on());
 						rejectionReportHistory.setDispatch_supervisor_sign(checkObj.getSecurity_sign());
-						
+
 						rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
 
 						// version
@@ -1891,7 +1892,9 @@ public class QaService4 {
 								HttpStatus.BAD_REQUEST);
 					}
 				} else {
-					return new ResponseEntity(new ApiResponse(false, " Invalid status. Sent to manager for final approval"), HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(
+							new ApiResponse(false, " Invalid status. Sent to manager for final approval"),
+							HttpStatus.BAD_REQUEST);
 				}
 			} else {
 
@@ -1912,7 +1915,7 @@ public class QaService4 {
 
 				checkObj.setDetails(list);
 
-				if(role.equals("ROLE_QA")) {
+				if (role.equals("ROLE_QA")) {
 					checkObj.setQa_inspector_submit_by(userName);
 					checkObj.setQa_inspector_submit_on(date);
 					checkObj.setQa_inspector_submit_id(userId);
@@ -1922,30 +1925,32 @@ public class QaService4 {
 					checkObj.setSecurity_status("");
 					checkObj.setDispatch_supervisor_status(AppConstants.waitingStatus);
 					checkObj.setQa_mr_status("");
-					
-				}else if(role.equals("DISPATCH_SUPERVISOR")&&checkObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
-					
+
+				} else if (role.equals("DISPATCH_SUPERVISOR")
+						&& checkObj.getQa_inspector_status().equals(AppConstants.qaInsApprovedStatus)) {
+
 					checkObj.setDispatch_supervisor_submit_by(userName);
 					checkObj.setDispatch_supervisor_submit_on(date);
 					checkObj.setDispatch_supervisor_submit_id(userId);
 					checkObj.setDispatch_supervisor_status(QaAppConstants.SupervisorApprove);
 					checkObj.setDispatch_supervisor_sign(userName);
 					checkObj.setSecurity_status(AppConstants.waitingStatus);
-					
-				}else if(role.equals("SECURITY")&&checkObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)){
-					
+
+				} else if (role.equals("SECURITY")
+						&& checkObj.getDispatch_supervisor_status().equals(AppConstants.supervisorApprovedStatus)) {
+
 					checkObj.setSecurity_submit_by(userName);
 					checkObj.setSecurity_submit_on(date);
 					checkObj.setSecurity_submit_id(userId);
 					checkObj.setSecurity_status(QaAppConstants.securityApproveStatus);
 					checkObj.setSecurity_sign(userName);
 					checkObj.setQa_mr_status(AppConstants.waitingStatus);
-					
-				}else {
-					return new ResponseEntity<>(new ApiResponse(false,"For the role "+role+"the previous has not yet been approved"),HttpStatus.BAD_REQUEST);
-				}
-				
 
+				} else {
+					return new ResponseEntity<>(
+							new ApiResponse(false, "For the role " + role + "the previous has not yet been approved"),
+							HttpStatus.BAD_REQUEST);
+				}
 
 				qaContainerInspectionReportRepository.save(checkObj);
 
@@ -2051,14 +2056,13 @@ public class QaService4 {
 				rejectionReportHistory.setSecurity_submit_id(checkObj.getSecurity_submit_id());
 				rejectionReportHistory.setSecurity_submit_on(checkObj.getSecurity_submit_on());
 				rejectionReportHistory.setSecurity_sign(checkObj.getSecurity_sign());
-				
+
 				rejectionReportHistory.setDispatch_supervisor_status(checkObj.getDispatch_supervisor_status());
 				rejectionReportHistory.setDispatch_supervisor_submit_by(checkObj.getSecurity_submit_by());
 				rejectionReportHistory.setDispatch_supervisor_submit_id(checkObj.getSecurity_submit_id());
 				rejectionReportHistory.setDispatch_supervisor_submit_on(checkObj.getSecurity_submit_on());
 				rejectionReportHistory.setDispatch_supervisor_sign(checkObj.getSecurity_sign());
-				
-				
+
 				rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
 
 				// version
@@ -2118,7 +2122,7 @@ public class QaService4 {
 
 //		return new ResponseEntity(new ApiResponse(true, role + "Submitted Sucessfully"), HttpStatus.OK);
 
-			return new ResponseEntity(checkObj, HttpStatus.CREATED);
+		return new ResponseEntity(checkObj, HttpStatus.CREATED);
 
 	}
 
@@ -2150,7 +2154,6 @@ public class QaService4 {
 			String hodStatus = object.getQa_mr_status();
 
 			UserImageDetails imageDetails = new UserImageDetails();
-
 
 			if (securityStatus.equalsIgnoreCase(QaAppConstants.securityApproveStatus)
 					&& hodStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
@@ -2193,8 +2196,6 @@ public class QaService4 {
 						object.setQa_mr_submit_on(date);
 						object.setQa_mr_submit_by(userName);
 						object.setQa_mr_submit_id(userId);
-
-
 
 						object.setQa_mr_sign(userName);
 						// Handle Final Conclusion
@@ -2251,8 +2252,6 @@ public class QaService4 {
 				}
 
 			}
-
-
 
 			else {
 				return new ResponseEntity(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
@@ -2428,7 +2427,7 @@ public class QaService4 {
 			} else {
 				savedRequest = details;
 			}
-			if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
+			if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE") || role.equals("ROLE_SUPERVISOR")) {
 				// Save the main tool details
 				savedRequest = requestAndIssunceOfDocumentRepositoryF002.save(savedRequest);
 
@@ -2475,7 +2474,6 @@ public class QaService4 {
 
 		try {
 			String value = "";
-
 			String createdBy = "";
 			Date createdAt = null;
 
@@ -2501,9 +2499,7 @@ public class QaService4 {
 			}
 
 			Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
-
 			String userName = userRepository.getUserName(userId);
-
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
 			if (id != null) {
@@ -2520,7 +2516,7 @@ public class QaService4 {
 
 				if (!checkObj.getQa_hod_designee_status().equals(QaAppConstants.hodDesigneeApproved)
 						|| checkObj.getQa_mr_status().equals(AppConstants.qaMrRejectedStatus)) {
-					if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
+					if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE") || role.equals("ROLE_SUPERVISOR")) {
 
 						requestAndIssunceOfDocumentRepositoryF002.save(checkObj);
 
@@ -2539,16 +2535,16 @@ public class QaService4 {
 //							}
 //						}
 						if (checkObj != null && AppConstants.qaMrRejectedStatus.equals(checkObj.getQa_mr_status())) {
-						    if (list != null) { // Ensure list is not null before iterating
-						        for (RequestAndIssunceOfLineDocumentsF002 rejectedResetList : list) {
-						            if (rejectedResetList != null) { // Ensure each item is not null
-						                rejectedResetList.setDocumentGivenBy("");
-						                rejectedResetList.setDocumentCollectedBy("");
-						                rejectedResetList.setRemark("");
-						                rejectedResetList.setReason("");
-						            }
-						        }
-						    }
+							if (list != null) { // Ensure list is not null before iterating
+								for (RequestAndIssunceOfLineDocumentsF002 rejectedResetList : list) {
+									if (rejectedResetList != null) { // Ensure each item is not null
+										rejectedResetList.setDocumentGivenBy("");
+										rejectedResetList.setDocumentCollectedBy("");
+										rejectedResetList.setRemark("");
+										rejectedResetList.setReason("");
+									}
+								}
+							}
 						}
 						checkObj.setDetails(list);
 
@@ -2587,7 +2583,7 @@ public class QaService4 {
 						rejectionReportHistory.setDate(checkObj.getDate());
 						rejectionReportHistory.setMonth(checkObj.getMonth()); // Set date
 						rejectionReportHistory.setYear(checkObj.getYear());
-//		  							rejectionReportHistory.setDepartment(checkObj.getDepartment());   
+						rejectionReportHistory.setDepartment(checkObj.getDepartment());
 						rejectionReportHistory.setComments(checkObj.getComments()); // Set comments
 
 						// status
@@ -2611,8 +2607,10 @@ public class QaService4 {
 
 						String year = rejectionReportHistory.getYear();
 
-						int version = requestAndIssunceOfDocumentHistoryRepository.getMaximumVersion(date1, month, year)
-								.map(temp -> temp + 1).orElse(1);
+						String dept = rejectionReportHistory.getDepartment();
+
+						int version = requestAndIssunceOfDocumentHistoryRepository
+								.getMaximumVersion(date1, month, year, dept).map(temp -> temp + 1).orElse(1);
 
 						rejectionReportHistory.setVersion(version);
 
@@ -2650,7 +2648,7 @@ public class QaService4 {
 				}
 			} else {
 
-				if (!role.equals("ROLE_HOD") && !role.equals("ROLE_DESIGNEE")) {
+				if (!role.equals("ROLE_HOD") && !role.equals("ROLE_DESIGNEE") || role.equals("ROLE_SUPERVISOR")) {
 					return new ResponseEntity(new ApiResponse(false, role + "cannot submit details"),
 							HttpStatus.BAD_REQUEST);
 				}
@@ -2672,26 +2670,22 @@ public class QaService4 {
 				checkObj.setQa_hod_designee_submit_id(userId);
 				checkObj.setQa_hod_designee_status(QaAppConstants.hodDesigneeApproved);
 				checkObj.setQa_hod_designee_sign(userName);
-
-//		  					checkObj.setSecurity_status(AppConstants.waitingStatus);
-//		  					checkObj.setDispatch_supervisor_status("");
+//		  		checkObj.setSecurity_status(AppConstants.waitingStatus);
+//		  		checkObj.setDispatch_supervisor_status("");
 				checkObj.setQa_mr_status(AppConstants.waitingStatus);
 
 				requestAndIssunceOfDocumentRepositoryF002.save(checkObj);
 
 				// IMAGE
 
-//		  					Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-				//
-//		  					byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-				//
-//		  					checkObj.setOperator_signature_image(signature);
-				//
-//		  					bagMakingSpecificationDetailsF014Repository.save(checkObj); // ONE TABLE
+//		  		Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
+//		  		byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
+//		  		checkObj.setOperator_signature_image(signature);
+//		  		bagMakingSpecificationDetailsF014Repository.save(checkObj); // ONE TABLE
 
 				RequestAndIssunceOfDocumentHistoryF002 rejectionReportHistory = new RequestAndIssunceOfDocumentHistoryF002();
 
-				// getter setters fields & status
+				// Getter setters fields & status
 
 				rejectionReportHistory.setUnit(checkObj.getUnit()); // Set unit
 				rejectionReportHistory.setFormatNo(checkObj.getFormatNo()); // Set format number
@@ -2701,7 +2695,7 @@ public class QaService4 {
 				rejectionReportHistory.setDate(checkObj.getDate());
 				rejectionReportHistory.setMonth(checkObj.getMonth()); // Set date
 				rejectionReportHistory.setYear(checkObj.getYear());
-//  							rejectionReportHistory.setDepartment(checkObj.getDepartment());   
+				rejectionReportHistory.setDepartment(checkObj.getDepartment());
 				rejectionReportHistory.setComments(checkObj.getComments()); // Set comments
 
 				// status
@@ -2713,18 +2707,17 @@ public class QaService4 {
 				rejectionReportHistory.setHod_designee_signature_image(checkObj.getHod_designee_signature_image());
 
 //		  					
-//		  					rejectionReportHistory.setSecurity_status(checkObj.getSecurity_status());
-//		  					rejectionReportHistory.setDispatch_supervisor_status(checkObj.getDispatch_supervisor_status());
+//		  		rejectionReportHistory.setSecurity_status(checkObj.getSecurity_status());
+//		  		rejectionReportHistory.setDispatch_supervisor_status(checkObj.getDispatch_supervisor_status());
 				rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
 
 				// version
-				// version
 				String date1 = rejectionReportHistory.getDate();
 				String month = rejectionReportHistory.getMonth();
-
 				String year = rejectionReportHistory.getYear();
+				String dept = rejectionReportHistory.getDepartment();
 
-				int version = requestAndIssunceOfDocumentHistoryRepository.getMaximumVersion(date1, month, year)
+				int version = requestAndIssunceOfDocumentHistoryRepository.getMaximumVersion(date1, month, year, dept)
 						.map(temp -> temp + 1).orElse(1);
 
 //		  					
@@ -2775,7 +2768,7 @@ public class QaService4 {
 
 //		return new ResponseEntity(new ApiResponse(true, " Submitted Sucessfully"), HttpStatus.OK);
 
-		  			return new ResponseEntity(checkObj, HttpStatus.CREATED);
+		return new ResponseEntity(checkObj, HttpStatus.CREATED);
 
 	}
 
@@ -2801,8 +2794,8 @@ public class QaService4 {
 			Obj = requestAndIssunceOfDocumentRepositoryF002.findById(approvalResponse.getId())
 					.orElseThrow(() -> new RuntimeException("Report not found with id " + approvalResponse.getId()));
 			;
-			List<RequestAndIssunceOfLineDocumentsF002> details=Obj.getDetails();
-			List<RequestAndIssuenceOfDocChild> approvalDetails=approvalResponse.getQaF002Details();
+			List<RequestAndIssunceOfLineDocumentsF002> details = Obj.getDetails();
+			List<RequestAndIssuenceOfDocChild> approvalDetails = approvalResponse.getQaF002Details();
 			// Fetching the current status of the HOD and QA Manager
 			String qaInspectorStatus = Obj.getQa_hod_designee_status();
 
@@ -2819,101 +2812,101 @@ public class QaService4 {
 
 					String reason = approvalResponse.getRemarks();
 					objHistory = requestAndIssunceOfDocumentHistoryRepository.fetchLastSubmittedRecord(Obj.getDate(),
-							Obj.getMonth(), Obj.getYear());
+							Obj.getMonth(), Obj.getYear(), Obj.getDepartment());
 					if (approvalResponse.getStatus().equals("Approve")) {
 						Obj.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
-						//saving the child entries saved by the Qa manger/mr 					
+						// saving the child entries saved by the Qa manger/mr
 						for (RequestAndIssuenceOfDocChild approvalDetailsObj : approvalDetails) {
-						    Long lineId = approvalDetailsObj.getLineId();
-						    
-						    // Find matching line document by lineId
-						    matchingLineDocument = details.stream()
-						        .filter(lineDoc -> lineDoc.getLineId().equals(lineId))
-						        .findFirst()
-						        .orElse(null);
-						    
+							Long lineId = approvalDetailsObj.getLineId();
 
-						    if (matchingLineDocument != null) {
-						        // Update the fields in the matching line document
-						        matchingLineDocument.setDocumentGivenBy(approvalDetailsObj.getDocumentGivenBy());
-						        matchingLineDocument.setDocumentCollectedBy(approvalDetailsObj.getDocumentCollectedBy());
-						        matchingLineDocument.setRemark(approvalDetailsObj.getRemark());
-						        matchingLineDocument.setStatus(approvalResponse.getStatus());
-						        matchingLineDocument.setReason(approvalDetailsObj.getComments()); // Assuming comments is mapped to reason
-						    }
-						    
-						 }
+							// Find matching line document by lineId
+							matchingLineDocument = details.stream()
+									.filter(lineDoc -> lineDoc.getLineId().equals(lineId)).findFirst().orElse(null);
+
+							if (matchingLineDocument != null) {
+								// Update the fields in the matching line document
+								matchingLineDocument.setDocumentGivenBy(approvalDetailsObj.getDocumentGivenBy());
+								matchingLineDocument
+										.setDocumentCollectedBy(approvalDetailsObj.getDocumentCollectedBy());
+								matchingLineDocument.setRemark(approvalDetailsObj.getRemark());
+								matchingLineDocument.setStatus(approvalResponse.getStatus());
+								matchingLineDocument.setReason(approvalDetailsObj.getComments()); // Assuming comments
+																									// is mapped to
+																									// reason
+							}
+
+						}
 						List<RequestAndIssunceOfDocumentLinesHisotryF002> historyDetails = objHistory.getDetails();
 						List<RequestAndIssunceOfLineDocumentsF002> sourceDetails = Obj.getDetails();
 
 						// Check if historyDetails is null or empty (initialize if needed)
 						if (historyDetails == null) {
-						    historyDetails = new ArrayList<>();
-						    objHistory.setDetails(historyDetails);
+							historyDetails = new ArrayList<>();
+							objHistory.setDetails(historyDetails);
 						}
 
 						// Update existing history details with source details
 						for (int i = 0; i < sourceDetails.size(); i++) {
-						    RequestAndIssunceOfLineDocumentsF002 sourceDetail = sourceDetails.get(i);
+							RequestAndIssunceOfLineDocumentsF002 sourceDetail = sourceDetails.get(i);
 
-						    RequestAndIssunceOfDocumentLinesHisotryF002 historyDetail;
+							RequestAndIssunceOfDocumentLinesHisotryF002 historyDetail;
 
-						    // Check if there’s an existing entry in the historyDetails list
-						    if (i < historyDetails.size()) {
-						        historyDetail = historyDetails.get(i);
-						    } else {
-						        // If no matching history entry exists, create a new one and add to the list
-						        historyDetail = new RequestAndIssunceOfDocumentLinesHisotryF002();
-						        historyDetails.add(historyDetail);
-						    }
+							// Check if there’s an existing entry in the historyDetails list
+							if (i < historyDetails.size()) {
+								historyDetail = historyDetails.get(i);
+							} else {
+								// If no matching history entry exists, create a new one and add to the list
+								historyDetail = new RequestAndIssunceOfDocumentLinesHisotryF002();
+								historyDetails.add(historyDetail);
+							}
 
-						    // Update fields from sourceDetail to historyDetail
-						    historyDetail.setDepartment(sourceDetail.getDepartment());
-						    historyDetail.setDocumentName(sourceDetail.getDocumentName());
-						    historyDetail.setDocumentNo(sourceDetail.getDocumentNo());
-						    historyDetail.setRevisionNo(sourceDetail.getRevisionNo());
-						    historyDetail.setTypeOfCopy(sourceDetail.getTypeOfCopy());
-						    historyDetail.setNumberOfCopies(sourceDetail.getNumberOfCopies());
-						    historyDetail.setDocumentGivenBy(sourceDetail.getDocumentGivenBy());
-						    historyDetail.setDocumentCollectedBy(sourceDetail.getDocumentCollectedBy());
-						    historyDetail.setRemark(sourceDetail.getRemark());
-						    historyDetail.setReasonLine(sourceDetail.getReason());
+							// Update fields from sourceDetail to historyDetail
+							historyDetail.setDepartment(sourceDetail.getDepartment());
+							historyDetail.setDocumentName(sourceDetail.getDocumentName());
+							historyDetail.setDocumentNo(sourceDetail.getDocumentNo());
+							historyDetail.setRevisionNo(sourceDetail.getRevisionNo());
+							historyDetail.setTypeOfCopy(sourceDetail.getTypeOfCopy());
+							historyDetail.setNumberOfCopies(sourceDetail.getNumberOfCopies());
+							historyDetail.setDocumentGivenBy(sourceDetail.getDocumentGivenBy());
+							historyDetail.setDocumentCollectedBy(sourceDetail.getDocumentCollectedBy());
+							historyDetail.setRemark(sourceDetail.getRemark());
+							historyDetail.setReasonLine(sourceDetail.getReason());
 
-						    // Do not set the `id` field as it may mismatch
-						    // Optionally, if `id` exists, you can log it for tracking
-						    // Example: log.info("Skipping id field: " + sourceDetail.getId());
+							// Do not set the `id` field as it may mismatch
+							// Optionally, if `id` exists, you can log it for tracking
+							// Example: log.info("Skipping id field: " + sourceDetail.getId());
 						}
 
 						// Ensure the updated list is set in the history object
 						objHistory.setDetails(historyDetails);
-				    
+
 //						requestAndIssunceOfDocumentRepositoryF002.save(Obj);
-						
+
 						objHistory.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
 						status = "Approved";
 					} else if (approvalResponse.getStatus().equals("Reject")) {
 						Obj.setReason(reason);
 						Obj.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
-						
-						for (RequestAndIssuenceOfDocChild approvalDetailsObj : approvalDetails) {
-						    Long lineId = approvalDetailsObj.getLineId();
-						    
-						    // Find matching line document by lineId
-						     matchingLineDocument = details.stream()
-						        .filter(lineDoc -> lineDoc.getLineId().equals(lineId))
-						        .findFirst()
-						        .orElse(null);
 
-						    if (matchingLineDocument != null) {
-						        // Update the fields in the matching line document
-						        matchingLineDocument.setDocumentGivenBy(approvalDetailsObj.getDocumentGivenBy());
-						        matchingLineDocument.setDocumentCollectedBy(approvalDetailsObj.getDocumentCollectedBy());
-						        matchingLineDocument.setRemark(approvalDetailsObj.getRemark());
-						        matchingLineDocument.setStatus(approvalResponse.getStatus());
-						        matchingLineDocument.setReason(approvalDetailsObj.getComments()); // Assuming comments is mapped to reason
-						    }
-						    
-						    
+						for (RequestAndIssuenceOfDocChild approvalDetailsObj : approvalDetails) {
+							Long lineId = approvalDetailsObj.getLineId();
+
+							// Find matching line document by lineId
+							matchingLineDocument = details.stream()
+									.filter(lineDoc -> lineDoc.getLineId().equals(lineId)).findFirst().orElse(null);
+
+							if (matchingLineDocument != null) {
+								// Update the fields in the matching line document
+								matchingLineDocument.setDocumentGivenBy(approvalDetailsObj.getDocumentGivenBy());
+								matchingLineDocument
+										.setDocumentCollectedBy(approvalDetailsObj.getDocumentCollectedBy());
+								matchingLineDocument.setRemark(approvalDetailsObj.getRemark());
+								matchingLineDocument.setStatus(approvalResponse.getStatus());
+								matchingLineDocument.setReason(approvalDetailsObj.getComments()); // Assuming comments
+																									// is mapped to
+																									// reason
+							}
+
 						}
 //						objHistory.setReason(reason);
 						List<RequestAndIssunceOfDocumentLinesHisotryF002> historyDetails = objHistory.getDetails();
@@ -2921,46 +2914,45 @@ public class QaService4 {
 
 						// Check if historyDetails is null or empty (initialize if needed)
 						if (historyDetails == null) {
-						    historyDetails = new ArrayList<>();
-						    objHistory.setDetails(historyDetails);
+							historyDetails = new ArrayList<>();
+							objHistory.setDetails(historyDetails);
 						}
 
 						// Update existing history details with source details
 						for (int i = 0; i < sourceDetails.size(); i++) {
-						    RequestAndIssunceOfLineDocumentsF002 sourceDetail = sourceDetails.get(i);
+							RequestAndIssunceOfLineDocumentsF002 sourceDetail = sourceDetails.get(i);
 
-						    RequestAndIssunceOfDocumentLinesHisotryF002 historyDetail;
+							RequestAndIssunceOfDocumentLinesHisotryF002 historyDetail;
 
-						    // Check if there’s an existing entry in the historyDetails list
-						    if (i < historyDetails.size()) {
-						        historyDetail = historyDetails.get(i);
-						    } else {
-						        // If no matching history entry exists, create a new one and add to the list
-						        historyDetail = new RequestAndIssunceOfDocumentLinesHisotryF002();
-						        historyDetails.add(historyDetail);
-						    }
+							// Check if there’s an existing entry in the historyDetails list
+							if (i < historyDetails.size()) {
+								historyDetail = historyDetails.get(i);
+							} else {
+								// If no matching history entry exists, create a new one and add to the list
+								historyDetail = new RequestAndIssunceOfDocumentLinesHisotryF002();
+								historyDetails.add(historyDetail);
+							}
 
-						    // Update fields from sourceDetail to historyDetail
-						    historyDetail.setDepartment(sourceDetail.getDepartment());
-						    historyDetail.setDocumentName(sourceDetail.getDocumentName());
-						    historyDetail.setDocumentNo(sourceDetail.getDocumentNo());
-						    historyDetail.setRevisionNo(sourceDetail.getRevisionNo());
-						    historyDetail.setTypeOfCopy(sourceDetail.getTypeOfCopy());
-						    historyDetail.setNumberOfCopies(sourceDetail.getNumberOfCopies());
-						    historyDetail.setDocumentGivenBy(sourceDetail.getDocumentGivenBy());
-						    historyDetail.setDocumentCollectedBy(sourceDetail.getDocumentCollectedBy());
-						    historyDetail.setRemark(sourceDetail.getRemark());
-						    historyDetail.setReasonLine(sourceDetail.getReason());
+							// Update fields from sourceDetail to historyDetail
+							historyDetail.setDepartment(sourceDetail.getDepartment());
+							historyDetail.setDocumentName(sourceDetail.getDocumentName());
+							historyDetail.setDocumentNo(sourceDetail.getDocumentNo());
+							historyDetail.setRevisionNo(sourceDetail.getRevisionNo());
+							historyDetail.setTypeOfCopy(sourceDetail.getTypeOfCopy());
+							historyDetail.setNumberOfCopies(sourceDetail.getNumberOfCopies());
+							historyDetail.setDocumentGivenBy(sourceDetail.getDocumentGivenBy());
+							historyDetail.setDocumentCollectedBy(sourceDetail.getDocumentCollectedBy());
+							historyDetail.setRemark(sourceDetail.getRemark());
+							historyDetail.setReasonLine(sourceDetail.getReason());
 
-						    // Do not set the `id` field as it may mismatch
-						    // Optionally, if `id` exists, you can log it for tracking
-						    // Example: log.info("Skipping id field: " + sourceDetail.getId());
+							// Do not set the `id` field as it may mismatch
+							// Optionally, if `id` exists, you can log it for tracking
+							// Example: log.info("Skipping id field: " + sourceDetail.getId());
 						}
 
 						// Ensure the updated list is set in the history object
 						objHistory.setDetails(historyDetails);
 
-					    
 						objHistory.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
 						status = "Rejected";
 					}
@@ -3001,9 +2993,6 @@ public class QaService4 {
 		}
 	}
 
-
-
-	
 //			PRINT API
 
 //	public ResponseEntity<?> getByRequestDocumentOfIssuncePrint(String date, String month, String year) {
@@ -3023,35 +3012,56 @@ public class QaService4 {
 //			return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
 //		}
 //	}
+
+	public ResponseEntity<?> getByRequestDocumentOfIssuncePrint(String department, String date, String month,
+			String year) {
+		try {
+			// Fetch all data from the repository without filtering by department
+			List<RequestAndIssunceOfDocumentF002> list = requestAndIssunceOfDocumentRepositoryF002
+					.printContainerInspectionReport(date, month, year);
+
+			if (list == null || list.isEmpty()) {
+				return new ResponseEntity<>(new ApiResponse(true, "No data"), HttpStatus.OK);
+			}
+
+			// If department is provided, filter the list based on the department
+			if (department != null && !department.isEmpty()) {
+				list = list.stream()
+						.filter(doc -> doc.getDetails().stream().anyMatch(
+								line -> line.getDepartment() != null && line.getDepartment().equals(department)))
+						.collect(Collectors.toList());
+			}
+
+			if (list.isEmpty()) {
+				return new ResponseEntity<>(new ApiResponse(true, "No data matching the department filter"),
+						HttpStatus.OK);
+			}
+
+			return new ResponseEntity<>(list, HttpStatus.OK);
+
+		} catch (Exception e) {
+			log.error("Unable to get Details!", e);
+			return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
 	
-	public ResponseEntity<?> getByRequestDocumentOfIssuncePrint(String department, String date, String month, String year) { 
-	    try {
-	        // Fetch all data from the repository without filtering by department
-	        List<RequestAndIssunceOfDocumentF002> list = requestAndIssunceOfDocumentRepositoryF002
-	                .printContainerInspectionReport(date, month, year);
+	public ResponseEntity<?> getF002Print(String department, String date, String month,
+			String year) {
+		try {
+			// Fetch all data from the repository without filtering by department
+			List<RequestAndIssunceOfDocumentF002> list = requestAndIssunceOfDocumentRepositoryF002
+					.printF002Report(date, month, year,department);
 
-	        if (list == null || list.isEmpty()) {
-	            return new ResponseEntity<>(new ApiResponse(true, "No data"), HttpStatus.OK);
-	        }
+			if (list == null || list.isEmpty()) {
+				return new ResponseEntity<>(new ApiResponse(true, "No data"), HttpStatus.OK);
+			}
 
-	        // If department is provided, filter the list based on the department
-	        if (department != null && !department.isEmpty()) {
-	            list = list.stream()
-	                    .filter(doc -> doc.getDetails().stream()
-	                            .anyMatch(line -> line.getDepartment() != null && line.getDepartment().equals(department)))
-	                    .collect(Collectors.toList());
-	        }
+			return new ResponseEntity<>(list, HttpStatus.OK);
 
-	        if (list.isEmpty()) {
-	            return new ResponseEntity<>(new ApiResponse(true, "No data matching the department filter"), HttpStatus.OK);
-	        }
-
-	        return new ResponseEntity<>(list, HttpStatus.OK);
-
-	    } catch (Exception e) {
-	        log.error("Unable to get Details!", e);
-	        return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
-	    }
+		} catch (Exception e) {
+			log.error("Unable to get Details!", e);
+			return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 
@@ -3074,6 +3084,25 @@ public class QaService4 {
 			return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	public ResponseEntity<?> findRequestAndIssunceOfDocument(String date, String month, String year, String department) {
+		try {
+
+			List<RequestAndIssunceOfDocumentF002> list = requestAndIssunceOfDocumentRepositoryF002
+					.getDetailsByDepartment(date, month, year,department);
+
+			if (list == null) {
+				return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
+			}
+
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Unable to get Details!", e);
+
+			return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 
 	// SUMMARY API
 
@@ -3083,7 +3112,7 @@ public class QaService4 {
 		try {
 			String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
-			if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
+			if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE") || userRole.equals("ROLE_SUPERVISOR")) {
 
 				details = requestAndIssunceOfDocumentRepositoryF002.qaHodDesigneeSummary();
 			}
@@ -3807,19 +3836,19 @@ public class QaService4 {
 			Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
 			String userName = userRepository.getUserName(userId);
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-			
+
 			User user = userRepository.findUserByIdToActiveOrInactive(userId);
-			
+
 			String deptName = "";
-			
-			if(details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
-				
+
+			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
+
 				deptName = "QUALITY_ASSURANCE";
-				
-			} else if(details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
-				
+
+			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
+
 				deptName = "COTTON_BUDS";
-				
+
 			} else {
 				deptName = "NA";
 			}
@@ -3927,7 +3956,7 @@ public class QaService4 {
 		}
 
 		Long id = details.getFinalInspectionId();
-		
+
 //		User user = userRepository.findUserByIdToActiveOrInactive(userId);
 //		Long deptId = user.getDepartmentId();
 //		
@@ -3971,17 +4000,17 @@ public class QaService4 {
 			String userName = userRepository.getUserName(userId);
 
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-			
+
 			String deptName = "";
-			
-			if(details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
-				
+
+			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
+
 				deptName = "QUALITY_ASSURANCE";
-				
-			} else if(details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
-				
+
+			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
+
 				deptName = "COTTON_BUDS";
-				
+
 			} else {
 				deptName = "NA";
 			}
@@ -4049,7 +4078,7 @@ public class QaService4 {
 						rejectionReportHistory.setShift(checkObj.getShift());
 						rejectionReportHistory.setCustomerName(checkObj.getCustomerName());
 						rejectionReportHistory.setPOrder(checkObj.getPOrder());
-						rejectionReportHistory.setTotalQantity(checkObj.getTotalQantity());	
+						rejectionReportHistory.setTotalQantity(checkObj.getTotalQantity());
 						rejectionReportHistory.setFirNo(checkObj.getFirNo());
 						rejectionReportHistory.setDate(checkObj.getDate());
 						rejectionReportHistory.setItemCode(checkObj.getItemCode());
@@ -4242,7 +4271,7 @@ public class QaService4 {
 				rejectionReportHistory.setShift(checkObj.getShift());
 				rejectionReportHistory.setCustomerName(checkObj.getCustomerName());
 				rejectionReportHistory.setPOrder(checkObj.getPOrder());
-				rejectionReportHistory.setTotalQantity(checkObj.getTotalQantity());	
+				rejectionReportHistory.setTotalQantity(checkObj.getTotalQantity());
 				rejectionReportHistory.setDate(checkObj.getDate());
 				rejectionReportHistory.setItemCode(checkObj.getItemCode());
 				rejectionReportHistory.setFirNo(checkObj.getFirNo());
@@ -4475,31 +4504,31 @@ public class QaService4 {
 		}
 	}
 
-			
-			// FOR PRINT API 
-	
-		public ResponseEntity<?> getByFinalInspectionReportPrint(String date, String shift, String bmrNo, String pOrder, String formatNo, HttpServletRequest http) {
-		
+	// FOR PRINT API
+
+	public ResponseEntity<?> getByFinalInspectionReportPrint(String date, String shift, String bmrNo, String pOrder,
+			String formatNo, HttpServletRequest http) {
+
 		Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
 
 		String userName = userRepository.getUserName(userId);
 
 		String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-		
+
 		String deptName = "";
-		
-		if(formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
-			
+
+		if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+
 			deptName = "QUALITY_ASSURANCE";
-			
-		} else if(formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
-			
+
+		} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+
 			deptName = "COTTON_BUDS";
-			
+
 		} else {
 			deptName = "NA";
 		}
-		
+
 		try {
 
 			List<FinalInspectionReportF037> list = finalInspectionReportRepositoryF037.printFinalInspectionReport(date,
@@ -4517,106 +4546,103 @@ public class QaService4 {
 		}
 	}
 
-
 	// Param Based Get
 
-		public ResponseEntity<?> getByParamFinalInspectionRecord(String date, String shift, String pOrder, String bmrNo, String formatNo,HttpServletRequest http) {
-			
+	public ResponseEntity<?> getByParamFinalInspectionRecord(String date, String shift, String pOrder, String bmrNo,
+			String formatNo, HttpServletRequest http) {
+
+		Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
+
+		String userName = userRepository.getUserName(userId);
+
+		String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
+
+		String deptName = "";
+
+		if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+
+			deptName = "QUALITY_ASSURANCE";
+
+		} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+
+			deptName = "COTTON_BUDS";
+
+		} else {
+			deptName = "NA";
+		}
+
+		try {
+
+			List<FinalInspectionReportF037> list = finalInspectionReportRepositoryF037.getDetailsBaseParam(date, shift,
+					pOrder, bmrNo, deptName);
+
+			if (list == null) {
+				return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
+			}
+
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Unable to get Details!", e);
+
+			return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	// SUMMARY
+
+	// SUMMARY API
+
+	public ResponseEntity<?> getFinalInspectionReportSummary(String formatNo, HttpServletRequest http) {
+
+		List<FinalInspectionReportSummaryDto> details = null;
+
+		try {
+
 			Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
 
 			String userName = userRepository.getUserName(userId);
 
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-			
-			
+
+			User user = userRepository.findUserByIdToActiveOrInactive(userId);
+
 			String deptName = "";
-			
-			if(formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
-				
+
+			if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+
 				deptName = "QUALITY_ASSURANCE";
-				
-			} else if(formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
-				
+
+			} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+
 				deptName = "COTTON_BUDS";
-				
+
 			} else {
 				deptName = "NA";
 			}
-			
-			
-			try {
 
-				List<FinalInspectionReportF037> list = finalInspectionReportRepositoryF037.getDetailsBaseParam(date, shift,
-						pOrder, bmrNo, deptName);
+			String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
-				if (list == null) {
-					return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
-				}
+			if (userRole.equals("ROLE_QA")) {
 
-				return new ResponseEntity<>(list, HttpStatus.OK);
-			} catch (Exception e) {
-				log.error("Unable to get Details!", e);
-
-				return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
+				details = finalInspectionReportRepositoryF037.getFinalInspectionSummary(deptName);
 			}
-		}
 
-	// SUMMARY
+			else if (userRole.equals("QA_MANAGER") || userRole.equals("ROLE_DESIGNEE")) {
 
-		// SUMMARY API
-
-		public ResponseEntity<?> getFinalInspectionReportSummary(String formatNo, HttpServletRequest http) {
-
-			List<FinalInspectionReportSummaryDto> details = null;
-			
-			try {
-				
-				Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
-
-				String userName = userRepository.getUserName(userId);
-
-				String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-				
-				User user = userRepository.findUserByIdToActiveOrInactive(userId);
-				
-				String deptName = "";
-				
-				if(formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
-					
-					deptName = "QUALITY_ASSURANCE";
-					
-				} else if(formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
-					
-					deptName = "COTTON_BUDS";
-					
-				} else {
-					deptName = "NA";
-				}
-				
-				
-				String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-
-				if (userRole.equals("ROLE_QA")) {
-
-					details = finalInspectionReportRepositoryF037.getFinalInspectionSummary(deptName);
-				}
-
-				else if (userRole.equals("QA_MANAGER") || userRole.equals("ROLE_DESIGNEE")) {
-
-					details = finalInspectionReportRepositoryF037.getMrSummary(deptName);
-				} else {
-					return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
-							HttpStatus.FORBIDDEN);
-				}
-
-				return new ResponseEntity<>(details, HttpStatus.OK);
-			} catch (Exception e) {
-
-				log.error("Unable to get Details!", e);
-
-				return new ResponseEntity<>("Unable to get Details! ", HttpStatus.BAD_REQUEST);
+				details = finalInspectionReportRepositoryF037.getMrSummary(deptName);
+			} else {
+				return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
+						HttpStatus.FORBIDDEN);
 			}
+
+			return new ResponseEntity<>(details, HttpStatus.OK);
+		} catch (Exception e) {
+
+			log.error("Unable to get Details!", e);
+
+			return new ResponseEntity<>("Unable to get Details! ", HttpStatus.BAD_REQUEST);
 		}
+	}
 
 //	========================================== PRODUCT DISPOSITION LOG BOOK ===============================================
 
@@ -4897,7 +4923,7 @@ public class QaService4 {
 						// MAIL
 						try {
 
-								  qamailfunction.sendMailToQaManagerRoleDesigneeProductDisposition(checkObj);
+							qamailfunction.sendMailToQaManagerRoleDesigneeProductDisposition(checkObj);
 						} catch (Exception ex) {
 							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 									HttpStatus.OK);
@@ -5007,7 +5033,7 @@ public class QaService4 {
 				// MAIL
 				try {
 
-						  qamailfunction.sendMailToQaManagerRoleDesigneeProductDisposition(checkObj);
+					qamailfunction.sendMailToQaManagerRoleDesigneeProductDisposition(checkObj);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 							HttpStatus.OK);
@@ -5470,7 +5496,7 @@ public class QaService4 {
 						// MAIL
 						try {
 
-									  qamailfunction.sendMailToRoleSupervisorBmrIssueRegister(checkObj);
+							qamailfunction.sendMailToRoleSupervisorBmrIssueRegister(checkObj);
 						} catch (Exception ex) {
 							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 									HttpStatus.OK);
@@ -5581,7 +5607,7 @@ public class QaService4 {
 				// MAIL
 				try {
 
-							  qamailfunction.sendMailToRoleSupervisorBmrIssueRegister(checkObj);
+					qamailfunction.sendMailToRoleSupervisorBmrIssueRegister(checkObj);
 				} catch (Exception ex) {
 					return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
 							HttpStatus.OK);
@@ -5748,13 +5774,13 @@ public class QaService4 {
 //
 //				details = bmrIssueRegisterRepositoryF045.qaProdSupervisorSummary();
 //			} 
-			
-			else if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_MR")|| userRole.equals("QA_MANAGER")) {
+
+			else if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_MR")
+					|| userRole.equals("QA_MANAGER")) {
 
 				details = bmrIssueRegisterRepositoryF045.qaProdSupervisorSummary();
 			}
-			
-			
+
 			else {
 				return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
 						HttpStatus.FORBIDDEN);
@@ -5824,8 +5850,8 @@ public class QaService4 {
 				String[] IgnoreProps = { "meetingId", "createdBy", "createdAt", "qa_inspector_status",
 						"qa_inspector_save_on", "qa_inspector_save_by", "qa_inspector_save_id",
 						"qa_inspector_submit_on", "qa_inspector_submit_by", "qa_inspector_submit_id",
-						"qa_inspector_sign", "qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by",
-						"qa_mr_submit_id", "qa_mr_sign" };
+						"qa_inspector_sign", "qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by", "qa_mr_submit_id",
+						"qa_mr_sign" };
 
 				BeanUtils.copyProperties(details, listObj, IgnoreProps);
 
@@ -5837,7 +5863,7 @@ public class QaService4 {
 //					}
 
 					qualityReviewMeetingsRepository.save(listObj);
-					
+
 					// Save line items for Line1
 					List<QaQualityReviewMeetingAttendanceSheet> line1 = details.getDetails();
 					for (QaQualityReviewMeetingAttendanceSheet line : line1) {
@@ -5855,23 +5881,23 @@ public class QaService4 {
 					// Set QA Inspector save details
 					listObj.setDetails(line1);
 					listObj.setDetail(line2);
-					
+
 					listObj.setQa_inspector_save_by(userName);
 					listObj.setQa_inspector_save_on(date);
 					listObj.setQa_inspector_save_id(userId);
 					listObj.setQa_inspector_status(QaAppConstants.qaInspectorSave);
 
 //					List<QaQualityReviewMeetingAttendanceSheet> list = details.getDetails();
-	//
+					//
 //					for (QaQualityReviewMeetingAttendanceSheet detail : list) {
 //						detail.setMeetingId(listObj.getMeetingId());
 //						qualityReviewMeetingAttendanceRepository.save(detail);
 //					}
 //					
 //				
-	//
+					//
 //					listObj.setDetails(list);
-	//
+					//
 //					listObj.setQa_inspector_save_by(userName);
 //					listObj.setQa_inspector_save_on(date);
 //					listObj.setQa_inspector_save_id(userId);
@@ -5907,7 +5933,7 @@ public class QaService4 {
 					// Set QA Inspector save details
 					listObj.setDetails(line1);
 					listObj.setDetail(line2);
-					
+
 					listObj.setQa_inspector_save_by(userName);
 					listObj.setQa_inspector_save_on(date);
 					listObj.setQa_inspector_save_id(userId);
@@ -5937,273 +5963,268 @@ public class QaService4 {
 
 		return new ResponseEntity(listObj, HttpStatus.CREATED);
 	}
-		
 
-	//Submit
+	// Submit
 
-		public ResponseEntity<?> submitQualityReviewMeetings(QaQualityReviewMeetings details, HttpServletRequest http) {
-			SCAUtil scaUtil = new SCAUtil();
+	public ResponseEntity<?> submitQualityReviewMeetings(QaQualityReviewMeetings details, HttpServletRequest http) {
+		SCAUtil scaUtil = new SCAUtil();
 
-			if (details == null) {
-				return new ResponseEntity(new ApiResponse(false, "Please send mandatory fields !"), HttpStatus.BAD_REQUEST);
+		if (details == null) {
+			return new ResponseEntity(new ApiResponse(false, "Please send mandatory fields !"), HttpStatus.BAD_REQUEST);
+		}
+
+		Long id = details.getMeetingId();
+
+		QaQualityReviewMeetings checkObj = new QaQualityReviewMeetings();
+
+		Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
+
+		String userName = userRepository.getUserName(userId);
+
+		String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
+
+		try {
+			String value = "";
+
+			String createdBy = "";
+			Date createdAt = null;
+
+			LocalDateTime currentDate = LocalDateTime.now();
+
+			// Convert LocalDateTime to Date
+			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+
+			if (!"".equals(value)) {
+				return new ResponseEntity<>(new ApiResponse(false, "Should Fill mandatory Fields ! " + value),
+						HttpStatus.BAD_REQUEST);
 			}
 
-			Long id = details.getMeetingId();
-
-			QaQualityReviewMeetings checkObj = new QaQualityReviewMeetings();
-
-			Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
-
-			String userName = userRepository.getUserName(userId);
-
-			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-
-			try {
-				String value = "";
-
-				String createdBy = "";
-				Date createdAt = null;
-
-				LocalDateTime currentDate = LocalDateTime.now();
-
-				// Convert LocalDateTime to Date
-				Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-
-				if (!"".equals(value)) {
-					return new ResponseEntity<>(new ApiResponse(false, "Should Fill mandatory Fields ! " + value),
-							HttpStatus.BAD_REQUEST);
-				}
-
 //							Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
-				//
+			//
 //							String userName = userRepository.getUserName(userId);
-				//
+			//
 //							String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
-				if (id != null) {
+			if (id != null) {
 
-					checkObj = qualityReviewMeetingsRepository.findFormById(id);
+				checkObj = qualityReviewMeetingsRepository.findFormById(id);
 
-					String[] IgnoreProps = {"meetingId", "createdBy", "createdAt", "qa_inspector_status",
-							"qa_inspector_save_on", "qa_inspector_save_by", "qa_inspector_save_id",
-							"qa_inspector_submit_on", "qa_inspector_submit_by", "qa_inspector_submit_id",
-							"qa_inspector_sign", "qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by",
-							"qa_mr_submit_id", "qa_mr_sign"  };
+				String[] IgnoreProps = { "meetingId", "createdBy", "createdAt", "qa_inspector_status",
+						"qa_inspector_save_on", "qa_inspector_save_by", "qa_inspector_save_id",
+						"qa_inspector_submit_on", "qa_inspector_submit_by", "qa_inspector_submit_id",
+						"qa_inspector_sign", "qa_mr_status", "qa_mr_submit_on", "qa_mr_submit_by", "qa_mr_submit_id",
+						"qa_mr_sign" };
 
-					BeanUtils.copyProperties(details, checkObj, IgnoreProps);
+				BeanUtils.copyProperties(details, checkObj, IgnoreProps);
 
-					if (!checkObj.getQa_inspector_status().equals(QaAppConstants.qaInspectorApprove)
-							|| checkObj.getQa_mr_status().equals(QaAppConstants.qaMrRejectedStatus)) {
-						if (role.equals("ROLE_QA")) {
+				if (!checkObj.getQa_inspector_status().equals(QaAppConstants.qaInspectorApprove)
+						|| checkObj.getQa_mr_status().equals(QaAppConstants.qaMrRejectedStatus)) {
+					if (role.equals("ROLE_QA")) {
 
-							qualityReviewMeetingsRepository.save(checkObj);
+						qualityReviewMeetingsRepository.save(checkObj);
 
 //							List<BmrIssueRegisterLineF045> list = details.getDetails();
-	//
+						//
 //							for (BmrIssueRegisterLineF045 detail : list) {
 //								detail.setBmrIssueId(checkObj.getBmrIssueId());
 //								bmrIssueRegisterLineRepositoryF045.save(detail);
 //							}
-	//
+						//
 //							checkObj.setDetails(list);
 
-							// Save line items for Line1
-							List<QaQualityReviewMeetingAttendanceSheet> line1 = details.getDetails();
-							for (QaQualityReviewMeetingAttendanceSheet line : line1) {
-								line.setMeetingId(checkObj.getMeetingId());
-								qualityReviewMeetingAttendanceRepository.save(line);
-							}
+						// Save line items for Line1
+						List<QaQualityReviewMeetingAttendanceSheet> line1 = details.getDetails();
+						for (QaQualityReviewMeetingAttendanceSheet line : line1) {
+							line.setMeetingId(checkObj.getMeetingId());
+							qualityReviewMeetingAttendanceRepository.save(line);
+						}
 
-							// Save line items for Line2
-							List<QaQualityReviewMeetingsDiscussion> line2 = details.getDetail();
-							for (QaQualityReviewMeetingsDiscussion line : line2) {
-								line.setMeetingId(checkObj.getMeetingId());
-								qualityReviewMeetingsDiscussionRepository.save(line);
-							}
+						// Save line items for Line2
+						List<QaQualityReviewMeetingsDiscussion> line2 = details.getDetail();
+						for (QaQualityReviewMeetingsDiscussion line : line2) {
+							line.setMeetingId(checkObj.getMeetingId());
+							qualityReviewMeetingsDiscussionRepository.save(line);
+						}
 
-							// Set QA Inspector save details
-							checkObj.setDetails(line1);
-							checkObj.setDetail(line2);
-							
-							
-							checkObj.setQa_inspector_submit_by(userName);
-							checkObj.setQa_inspector_submit_on(date);
-							checkObj.setQa_inspector_submit_id(userId);
-							checkObj.setQa_inspector_status(QaAppConstants.qaInspectorApprove);
-							checkObj.setQa_inspector_sign(userName);
+						// Set QA Inspector save details
+						checkObj.setDetails(line1);
+						checkObj.setDetail(line2);
 
-							checkObj.setQa_mr_status(AppConstants.waitingStatus);
+						checkObj.setQa_inspector_submit_by(userName);
+						checkObj.setQa_inspector_submit_on(date);
+						checkObj.setQa_inspector_submit_id(userId);
+						checkObj.setQa_inspector_status(QaAppConstants.qaInspectorApprove);
+						checkObj.setQa_inspector_sign(userName);
 
-							qualityReviewMeetingsRepository.save(checkObj);
+						checkObj.setQa_mr_status(AppConstants.waitingStatus);
 
-							// IMAGE
+						qualityReviewMeetingsRepository.save(checkObj);
+
+						// IMAGE
 
 //										Optional<UserImageDetails> imageDetailsOpt = imageRepository
 //												.fetchItemDetailsByUsername(userName);
-							//
+						//
 //										byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-							//
+						//
 //										checkObj.setOperator_signature_image(signature);
-							//
+						//
 //										bagMakingSpecificationDetailsF014Repository.save(checkObj); // ONE TABLE
 
-							QualityReviewMeetingHistory rejectionReportHistory = new QualityReviewMeetingHistory();
+						QualityReviewMeetingHistory rejectionReportHistory = new QualityReviewMeetingHistory();
 
-							// getter setters fields & status
+						// getter setters fields & status
 
-							rejectionReportHistory.setUnit(checkObj.getUnit());
-							rejectionReportHistory.setFormatName(checkObj.getFormatName());
-							rejectionReportHistory.setFormatNo(checkObj.getFormatNo());
-							rejectionReportHistory.setSopNumber(checkObj.getSopNumber());
-							rejectionReportHistory.setRevisionNumber(checkObj.getRevisionNumber());
-							rejectionReportHistory.setDate(checkObj.getDate());
-							rejectionReportHistory.setMonth(checkObj.getMonth());
-							rejectionReportHistory.setYear(checkObj.getYear());
-							rejectionReportHistory.setReason(checkObj.getReason());
-							rejectionReportHistory.setStartTime(checkObj.getStartTime());
-							rejectionReportHistory.setEndTime(checkObj.getEndTime());
-							rejectionReportHistory.setVenue(checkObj.getVenue());
+						rejectionReportHistory.setUnit(checkObj.getUnit());
+						rejectionReportHistory.setFormatName(checkObj.getFormatName());
+						rejectionReportHistory.setFormatNo(checkObj.getFormatNo());
+						rejectionReportHistory.setSopNumber(checkObj.getSopNumber());
+						rejectionReportHistory.setRevisionNumber(checkObj.getRevisionNumber());
+						rejectionReportHistory.setDate(checkObj.getDate());
+						rejectionReportHistory.setMonth(checkObj.getMonth());
+						rejectionReportHistory.setYear(checkObj.getYear());
+						rejectionReportHistory.setReason(checkObj.getReason());
+						rejectionReportHistory.setStartTime(checkObj.getStartTime());
+						rejectionReportHistory.setEndTime(checkObj.getEndTime());
+						rejectionReportHistory.setVenue(checkObj.getVenue());
 
-							// status
-							rejectionReportHistory.setQa_inspector_submit_by(checkObj.getQa_inspector_submit_by());
-							rejectionReportHistory.setQa_inspector_submit_id(checkObj.getQa_inspector_submit_id());
-							rejectionReportHistory.setQa_inspector_submit_on(checkObj.getQa_inspector_submit_on());
-							rejectionReportHistory.setQa_inspector_status(checkObj.getQa_inspector_status());
-							rejectionReportHistory.setQa_inspector_sign(checkObj.getQa_inspector_sign());
-							rejectionReportHistory
-									.setQa_inspector_signature_image(checkObj.getQa_inspector_signature_image());
+						// status
+						rejectionReportHistory.setQa_inspector_submit_by(checkObj.getQa_inspector_submit_by());
+						rejectionReportHistory.setQa_inspector_submit_id(checkObj.getQa_inspector_submit_id());
+						rejectionReportHistory.setQa_inspector_submit_on(checkObj.getQa_inspector_submit_on());
+						rejectionReportHistory.setQa_inspector_status(checkObj.getQa_inspector_status());
+						rejectionReportHistory.setQa_inspector_sign(checkObj.getQa_inspector_sign());
+						rejectionReportHistory
+								.setQa_inspector_signature_image(checkObj.getQa_inspector_signature_image());
 
-							rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
+						rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
 
-							// version
-							String date1 = rejectionReportHistory.getDate();
+						// version
+						String date1 = rejectionReportHistory.getDate();
 
-							int version = qualityReviewMeetingsHisotoryRepository.getMaximumVersion(date1)
-									.map(temp -> temp + 1).orElse(1);
+						int version = qualityReviewMeetingsHisotoryRepository.getMaximumVersion(date1)
+								.map(temp -> temp + 1).orElse(1);
 
-							rejectionReportHistory.setVersion(version);
+						rejectionReportHistory.setVersion(version);
 
-							qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory); // ONE HISTORY
+						qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory); // ONE HISTORY
 
-							// Save line items for 
+						// Save line items for
 
-							
-							List<QaQualityReviewMeetingAttendanceSheet> line3 = details.getDetails();
-							for (QaQualityReviewMeetingAttendanceSheet line : line1) {
-								line.setMeetingId(checkObj.getMeetingId());
-								qualityReviewMeetingAttendanceRepository.save(line);
-							}
-
-							// Save line items for Line2
-							List<QaQualityReviewMeetingsDiscussion> line4 = details.getDetail();
-							for (QaQualityReviewMeetingsDiscussion line : line2) {
-								line.setMeetingId(checkObj.getMeetingId());
-								qualityReviewMeetingsDiscussionRepository.save(line);
-							}
-
-							// Set QA Inspector save details
-							checkObj.setDetails(line3);
-							checkObj.setDetail(line4);
-							qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory);
-
-							// MAIL
-							try {
-
-										  qamailfunction.sendMailToQaManagerQualityReviewMeeting(checkObj);
-							} catch (Exception ex) {
-								return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
-										HttpStatus.OK);
-							}
-
-						} else {
-							return new ResponseEntity(new ApiResponse(false, role + "cannot submit details"),
-									HttpStatus.BAD_REQUEST);
+						List<QaQualityReviewMeetingAttendanceSheet> line3 = details.getDetails();
+						for (QaQualityReviewMeetingAttendanceSheet line : line1) {
+							line.setMeetingId(checkObj.getMeetingId());
+							qualityReviewMeetingAttendanceRepository.save(line);
 						}
-					} else {
-						return new ResponseEntity(new ApiResponse(false, " Invalid status."), HttpStatus.BAD_REQUEST);
-					}
-				} else {
 
-					if (!role.equals("ROLE_QA")) {
+						// Save line items for Line2
+						List<QaQualityReviewMeetingsDiscussion> line4 = details.getDetail();
+						for (QaQualityReviewMeetingsDiscussion line : line2) {
+							line.setMeetingId(checkObj.getMeetingId());
+							qualityReviewMeetingsDiscussionRepository.save(line);
+						}
+
+						// Set QA Inspector save details
+						checkObj.setDetails(line3);
+						checkObj.setDetail(line4);
+						qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory);
+
+						// MAIL
+						try {
+
+							qamailfunction.sendMailToQaManagerQualityReviewMeeting(checkObj);
+						} catch (Exception ex) {
+							return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
+									HttpStatus.OK);
+						}
+
+					} else {
 						return new ResponseEntity(new ApiResponse(false, role + "cannot submit details"),
 								HttpStatus.BAD_REQUEST);
 					}
-					checkObj = details;
+				} else {
+					return new ResponseEntity(new ApiResponse(false, " Invalid status."), HttpStatus.BAD_REQUEST);
+				}
+			} else {
 
-					qualityReviewMeetingsRepository.save(checkObj);
+				if (!role.equals("ROLE_QA")) {
+					return new ResponseEntity(new ApiResponse(false, role + "cannot submit details"),
+							HttpStatus.BAD_REQUEST);
+				}
+				checkObj = details;
 
-					// Save line items for Line1
-					List<QaQualityReviewMeetingAttendanceSheet> line1 = details.getDetails();
-					for (QaQualityReviewMeetingAttendanceSheet line : line1) {
-						line.setMeetingId(checkObj.getMeetingId());
-						qualityReviewMeetingAttendanceRepository.save(line);
-					}
+				qualityReviewMeetingsRepository.save(checkObj);
 
-					// Save line items for Line2
-					List<QaQualityReviewMeetingsDiscussion> line2 = details.getDetail();
-					for (QaQualityReviewMeetingsDiscussion line : line2) {
-						line.setMeetingId(checkObj.getMeetingId());
-						qualityReviewMeetingsDiscussionRepository.save(line);
-					}
+				// Save line items for Line1
+				List<QaQualityReviewMeetingAttendanceSheet> line1 = details.getDetails();
+				for (QaQualityReviewMeetingAttendanceSheet line : line1) {
+					line.setMeetingId(checkObj.getMeetingId());
+					qualityReviewMeetingAttendanceRepository.save(line);
+				}
 
-					// Set QA Inspector save details
-					checkObj.setDetails(line1);
-					checkObj.setDetail(line2);
-					
+				// Save line items for Line2
+				List<QaQualityReviewMeetingsDiscussion> line2 = details.getDetail();
+				for (QaQualityReviewMeetingsDiscussion line : line2) {
+					line.setMeetingId(checkObj.getMeetingId());
+					qualityReviewMeetingsDiscussionRepository.save(line);
+				}
 
-					checkObj.setQa_inspector_submit_by(userName);
-					checkObj.setQa_inspector_submit_on(date);
-					checkObj.setQa_inspector_submit_id(userId);
-					checkObj.setQa_inspector_status(QaAppConstants.qaInspectorApprove);
-					checkObj.setQa_inspector_sign(userName);
+				// Set QA Inspector save details
+				checkObj.setDetails(line1);
+				checkObj.setDetail(line2);
 
-					checkObj.setQa_mr_status(AppConstants.waitingStatus);
+				checkObj.setQa_inspector_submit_by(userName);
+				checkObj.setQa_inspector_submit_on(date);
+				checkObj.setQa_inspector_submit_id(userId);
+				checkObj.setQa_inspector_status(QaAppConstants.qaInspectorApprove);
+				checkObj.setQa_inspector_sign(userName);
 
-					qualityReviewMeetingsRepository.save(checkObj);
+				checkObj.setQa_mr_status(AppConstants.waitingStatus);
 
-					// IMAGE
+				qualityReviewMeetingsRepository.save(checkObj);
+
+				// IMAGE
 
 //								Optional<UserImageDetails> imageDetailsOpt = imageRepository.fetchItemDetailsByUsername(userName);
-					//
+				//
 //								byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
-					//
+				//
 //								checkObj.setOperator_signature_image(signature);
-					//
+				//
 //								bagMakingSpecificationDetailsF014Repository.save(checkObj); // ONE TABLE
 
-					QualityReviewMeetingHistory rejectionReportHistory = new QualityReviewMeetingHistory();
+				QualityReviewMeetingHistory rejectionReportHistory = new QualityReviewMeetingHistory();
 
-					// getter setters fields & status
+				// getter setters fields & status
 
-					rejectionReportHistory.setUnit(checkObj.getUnit());
-					rejectionReportHistory.setFormatName(checkObj.getFormatName());
-					rejectionReportHistory.setFormatNo(checkObj.getFormatNo());
-					rejectionReportHistory.setSopNumber(checkObj.getSopNumber());
-					rejectionReportHistory.setRevisionNumber(checkObj.getRevisionNumber());
-					rejectionReportHistory.setDate(checkObj.getDate());
-					rejectionReportHistory.setMonth(checkObj.getMonth());
-					rejectionReportHistory.setYear(checkObj.getYear());
-					rejectionReportHistory.setReason(checkObj.getReason());
-					rejectionReportHistory.setStartTime(checkObj.getStartTime());
-					rejectionReportHistory.setEndTime(checkObj.getEndTime());
-					rejectionReportHistory.setVenue(checkObj.getVenue());
+				rejectionReportHistory.setUnit(checkObj.getUnit());
+				rejectionReportHistory.setFormatName(checkObj.getFormatName());
+				rejectionReportHistory.setFormatNo(checkObj.getFormatNo());
+				rejectionReportHistory.setSopNumber(checkObj.getSopNumber());
+				rejectionReportHistory.setRevisionNumber(checkObj.getRevisionNumber());
+				rejectionReportHistory.setDate(checkObj.getDate());
+				rejectionReportHistory.setMonth(checkObj.getMonth());
+				rejectionReportHistory.setYear(checkObj.getYear());
+				rejectionReportHistory.setReason(checkObj.getReason());
+				rejectionReportHistory.setStartTime(checkObj.getStartTime());
+				rejectionReportHistory.setEndTime(checkObj.getEndTime());
+				rejectionReportHistory.setVenue(checkObj.getVenue());
 
+				// status
+				rejectionReportHistory.setQa_inspector_submit_by(checkObj.getQa_inspector_submit_by());
+				rejectionReportHistory.setQa_inspector_submit_id(checkObj.getQa_inspector_submit_id());
+				rejectionReportHistory.setQa_inspector_submit_on(checkObj.getQa_inspector_submit_on());
+				rejectionReportHistory.setQa_inspector_status(checkObj.getQa_inspector_status());
+				rejectionReportHistory.setQa_inspector_sign(checkObj.getQa_inspector_sign());
+				rejectionReportHistory.setQa_inspector_signature_image(checkObj.getQa_inspector_signature_image());
 
-					// status
-					rejectionReportHistory.setQa_inspector_submit_by(checkObj.getQa_inspector_submit_by());
-					rejectionReportHistory.setQa_inspector_submit_id(checkObj.getQa_inspector_submit_id());
-					rejectionReportHistory.setQa_inspector_submit_on(checkObj.getQa_inspector_submit_on());
-					rejectionReportHistory.setQa_inspector_status(checkObj.getQa_inspector_status());
-					rejectionReportHistory.setQa_inspector_sign(checkObj.getQa_inspector_sign());
-					rejectionReportHistory.setQa_inspector_signature_image(checkObj.getQa_inspector_signature_image());
+				rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
 
-					rejectionReportHistory.setQa_mr_status(checkObj.getQa_mr_status());
+				// version
+				String date1 = rejectionReportHistory.getDate();
 
-					// version
-					String date1 = rejectionReportHistory.getDate();
-
-					int version = qualityReviewMeetingsHisotoryRepository.getMaximumVersion(date1).map(temp -> temp + 1)
-							.orElse(1);
+				int version = qualityReviewMeetingsHisotoryRepository.getMaximumVersion(date1).map(temp -> temp + 1)
+						.orElse(1);
 
 //								
 //								int version = qaOnlineInspectionReportHistoryRepository
@@ -6211,255 +6232,248 @@ public class QaService4 {
 //									    .map(maxVersion -> maxVersion + 1) // Increment the version by 1
 //									    .orElse(1); // If no maximum version is found, start with version 1
 
-					rejectionReportHistory.setVersion(version);
+				rejectionReportHistory.setVersion(version);
 
-					qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory); // ONE HISTORY
+				qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory); // ONE HISTORY
 
-					// Save line items for Line1
-					List<QaQualityReviewMeetingAttendanceSheet> line3 = details.getDetails();
-					for (QaQualityReviewMeetingAttendanceSheet line : line1) {
-						
-						QualityReviewMeetingAttendanceSheetHistory objHistory = new QualityReviewMeetingAttendanceSheetHistory();
-						
-						BeanUtils.copyProperties(line, objHistory);
-						objHistory.setMeetingId(rejectionReportHistory.getMeetingId());
-						QualityReviewMeetingsAttendanceHistoryRepository.save(objHistory);
-					}
+				// Save line items for Line1
+				List<QaQualityReviewMeetingAttendanceSheet> line3 = details.getDetails();
+				for (QaQualityReviewMeetingAttendanceSheet line : line1) {
 
-					// Save line items for Line2
-					List<QaQualityReviewMeetingsDiscussion> line4 = details.getDetail();
-					for (QaQualityReviewMeetingsDiscussion line : line2) {
-						
-						QualityReviewMeetingDiscussionHistory objHistory = new QualityReviewMeetingDiscussionHistory();
-						
-						BeanUtils.copyProperties(line, objHistory);
-						objHistory.setMeetingId(rejectionReportHistory.getMeetingId());
-						qualityReviewMeetingDiscussionHistoryRepository.save(objHistory);
-					}
-					
-					
+					QualityReviewMeetingAttendanceSheetHistory objHistory = new QualityReviewMeetingAttendanceSheetHistory();
+
+					BeanUtils.copyProperties(line, objHistory);
+					objHistory.setMeetingId(rejectionReportHistory.getMeetingId());
+					QualityReviewMeetingsAttendanceHistoryRepository.save(objHistory);
+				}
+
+				// Save line items for Line2
+				List<QaQualityReviewMeetingsDiscussion> line4 = details.getDetail();
+				for (QaQualityReviewMeetingsDiscussion line : line2) {
+
+					QualityReviewMeetingDiscussionHistory objHistory = new QualityReviewMeetingDiscussionHistory();
+
+					BeanUtils.copyProperties(line, objHistory);
+					objHistory.setMeetingId(rejectionReportHistory.getMeetingId());
+					qualityReviewMeetingDiscussionHistoryRepository.save(objHistory);
+				}
+
 //					List<BmrIssueRegisterLineF045> historyMapList = checkObj.getDetails();
-	//
+				//
 //					for (BmrIssueRegisterLineF045 obj : historyMapList) {
-	//
+				//
 //						BmrIssueRegisterLineHistoryF045 objHistory = new BmrIssueRegisterLineHistoryF045();
-	//
+				//
 //						BeanUtils.copyProperties(obj, objHistory);
 //						objHistory.setHistoryId(rejectionReportHistory.getHistoryId());
 //						bmrIssueRegisterLineHistoryRepositoryF045.save(objHistory);
-	//
+				//
 //					}
-					
+
 //					
-					qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory);
+				qualityReviewMeetingsHisotoryRepository.save(rejectionReportHistory);
 
 //					List<BmrIssueRegisterLineF045> historyMapList = checkObj.getDetails();
-	//
+				//
 //					for (BmrIssueRegisterLineF045 obj : historyMapList) {
-	//
+				//
 //						BmrIssueRegisterLineHistoryF045 objHistory = new BmrIssueRegisterLineHistoryF045();
-	//
+				//
 //						BeanUtils.copyProperties(obj, objHistory);
 //						objHistory.setHistoryId(rejectionReportHistory.getHistoryId());
 //						bmrIssueRegisterLineHistoryRepositoryF045.save(objHistory);
-	//
+				//
 //					}
-	//
+				//
 //					bmrIssueRegisterHistoryRepositoryF045.save(rejectionReportHistory);
 
-					
-					// MAIL
-					try {
+				// MAIL
+				try {
 
-								  qamailfunction.sendMailToQaManagerQualityReviewMeeting(checkObj);
-					} catch (Exception ex) {
-						return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
-								HttpStatus.OK);
-					}
-
+					qamailfunction.sendMailToQaManagerQualityReviewMeeting(checkObj);
+				} catch (Exception ex) {
+					return new ResponseEntity<>(new ApiResponse(false, "Submitted but Unable to send mail! "),
+							HttpStatus.OK);
 				}
-			}
-
-			catch (Exception ex) {
-
-				log.error(" **** Unable to Submit Details **** " + ex);
-
-				String msg = ex.getMessage();
-
-				return new ResponseEntity(new ApiResponse(false, "Unable to Submit Details"), HttpStatus.BAD_REQUEST);
 
 			}
+		}
 
-			return new ResponseEntity(new ApiResponse(true, role + "Submitted Sucessfully"), HttpStatus.OK);
+		catch (Exception ex) {
+
+			log.error(" **** Unable to Submit Details **** " + ex);
+
+			String msg = ex.getMessage();
+
+			return new ResponseEntity(new ApiResponse(false, "Unable to Submit Details"), HttpStatus.BAD_REQUEST);
+
+		}
+
+		return new ResponseEntity(new ApiResponse(true, role + "Submitted Sucessfully"), HttpStatus.OK);
 
 //						return new ResponseEntity(checkObj, HttpStatus.CREATED);
 
+	}
+
+	// APPROVE OR REJECT
+
+	public ResponseEntity<?> approveOrRejectQualityReviewMeeting(ApproveResponse approvalResponse,
+			HttpServletRequest http) {
+
+		SCAUtil sca = new SCAUtil();
+
+		QaQualityReviewMeetings Obj = null;
+
+		String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
+		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+		String userName = userRepository.getUserName(userId);
+
+		// Fetching current date
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = QAUtil.convertLocalDateTimeToDate(currentDate);
+
+		try {
+			// Fetching the incidence object by ID
+			Obj = qualityReviewMeetingsRepository.findById(approvalResponse.getId())
+					.orElseThrow(() -> new RuntimeException("Report not found with id " + approvalResponse.getId()));
+			;
+
+			// Fetching the current status of the HOD and QA Manager
+			String qaInspectorStatus = Obj.getQa_inspector_status();
+
+			String qaManagerStatus = Obj.getQa_mr_status();
+
+			String status = "";
+			QualityReviewMeetingHistory objHistory = new QualityReviewMeetingHistory();
+			// First level of approval/rejection by QA Manager
+			if (qaInspectorStatus.equalsIgnoreCase(QaAppConstants.qaInspectorApprove)
+					&& qaManagerStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
+
+				if (userRole.equalsIgnoreCase("QA_MANAGER") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")
+						|| userRole.equalsIgnoreCase("ROLE_MR")) {
+
+					String reason = approvalResponse.getRemarks();
+					objHistory = qualityReviewMeetingsHisotoryRepository.fetchLastSubmittedRecord(Obj.getDate());
+					if (approvalResponse.getStatus().equals("Approve")) {
+						Obj.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
+						objHistory.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
+						status = "Approved";
+					} else if (approvalResponse.getStatus().equals("Reject")) {
+						Obj.setReason(reason);
+						Obj.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
+						objHistory.setReason(reason);
+						objHistory.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
+						status = "Rejected";
+					}
+
+					Obj.setQa_mr_submit_on(date);
+					Obj.setQa_mr_submit_by(userName);
+					Obj.setQa_mr_submit_id(userId);
+					Obj.setQa_mr_sign(userName);
+					// Save the updated incidence object
+					qualityReviewMeetingsRepository.save(Obj);
+					// History
+					objHistory.setQa_mr_submit_on(date);
+					objHistory.setQa_mr_submit_by(userName);
+					objHistory.setQa_mr_submit_id(userId);
+					objHistory.setQa_mr_sign(userName);
+
+					// Save the updated incidence object
+					qualityReviewMeetingsHisotoryRepository.save(objHistory);
+
+					return new ResponseEntity<>(new ApiResponse(true, "QA Manager " + status + " successfully"),
+							HttpStatus.OK);
+
+				} else {
+					return new ResponseEntity<>(new ApiResponse(false, "User not authorized to approve/reject"),
+							HttpStatus.FORBIDDEN);
+				}
+
+			} else {
+				return new ResponseEntity<>(
+						new ApiResponse(false, "Invalid status or no pending approval for this user"),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception e) {
+			log.error("Unable to approve/reject", e);
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to approve/reject: " + e.getMessage()),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		
-		// APPROVE OR REJECT
+	}
 
-			public ResponseEntity<?> approveOrRejectQualityReviewMeeting(ApproveResponse approvalResponse, HttpServletRequest http) {
+	// DiscussionPoints Lotv
 
-				SCAUtil sca = new SCAUtil();
+	public ResponseEntity<List<QaQualityReviewMeetingDiscussionPoints>> getQualityReviewMeetingDiscussionPoints() {
+		List<QaQualityReviewMeetingDiscussionPoints> records;
 
-				QaQualityReviewMeetings Obj = null;
+		try {
+			records = qaQualityReviewMeetingDiscussionPointsRepository.getDiscussionPointsLov();
 
-				String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
-				Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-				String userName = userRepository.getUserName(userId);
-
-				// Fetching current date
-				LocalDateTime currentDate = LocalDateTime.now();
-				Date date = QAUtil.convertLocalDateTimeToDate(currentDate);
-
-				try {
-					// Fetching the incidence object by ID
-					Obj = qualityReviewMeetingsRepository.findById(approvalResponse.getId())
-							.orElseThrow(() -> new RuntimeException("Report not found with id " + approvalResponse.getId()));
-					;
-
-					// Fetching the current status of the HOD and QA Manager
-					String qaInspectorStatus = Obj.getQa_inspector_status();
-
-					String qaManagerStatus = Obj.getQa_mr_status();
-
-					String status = "";
-					QualityReviewMeetingHistory objHistory = new QualityReviewMeetingHistory();
-					// First level of approval/rejection by QA Manager
-					if (qaInspectorStatus.equalsIgnoreCase(QaAppConstants.qaInspectorApprove)
-							&& qaManagerStatus.equalsIgnoreCase(AppConstants.waitingStatus)) {
-
-						if (userRole.equalsIgnoreCase("QA_MANAGER") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")|| userRole.equalsIgnoreCase("ROLE_MR")) {
-
-							String reason = approvalResponse.getRemarks();
-							objHistory = qualityReviewMeetingsHisotoryRepository.fetchLastSubmittedRecord(Obj.getDate());
-							if (approvalResponse.getStatus().equals("Approve")) {
-								Obj.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
-								objHistory.setQa_mr_status(QaAppConstants.qaMrApprovedStatus);
-								status = "Approved";
-							} else if (approvalResponse.getStatus().equals("Reject")) {
-								Obj.setReason(reason);
-								Obj.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
-								objHistory.setReason(reason);
-								objHistory.setQa_mr_status(QaAppConstants.qaMrRejectedStatus);
-								status = "Rejected";
-							}
-
-							Obj.setQa_mr_submit_on(date);
-							Obj.setQa_mr_submit_by(userName);
-							Obj.setQa_mr_submit_id(userId);
-							Obj.setQa_mr_sign(userName);
-							// Save the updated incidence object
-							qualityReviewMeetingsRepository.save(Obj);
-							// History
-							objHistory.setQa_mr_submit_on(date);
-							objHistory.setQa_mr_submit_by(userName);
-							objHistory.setQa_mr_submit_id(userId);
-							objHistory.setQa_mr_sign(userName);
-							
-							// Save the updated incidence object
-							qualityReviewMeetingsHisotoryRepository.save(objHistory);
-
-							return new ResponseEntity<>(new ApiResponse(true, "QA Manager " + status + " successfully"),
-									HttpStatus.OK);
-
-						} else {
-							return new ResponseEntity<>(new ApiResponse(false, "User not authorized to approve/reject"),
-									HttpStatus.FORBIDDEN);
-						}
-
-					} else {
-						return new ResponseEntity<>(
-								new ApiResponse(false, "Invalid status or no pending approval for this user"),
-								HttpStatus.BAD_REQUEST);
-					}
-
-				} catch (Exception e) {
-					log.error("Unable to approve/reject", e);
-					return new ResponseEntity<>(new ApiResponse(false, "Failed to approve/reject: " + e.getMessage()),
-							HttpStatus.BAD_REQUEST);
-				}
+			if (records == null || records.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // or return an empty list:
+																				// Collections.emptyList();
 			}
-		
-		
-		
-	//DiscussionPoints Lotv
-			
-		public ResponseEntity<List<QaQualityReviewMeetingDiscussionPoints>> getQualityReviewMeetingDiscussionPoints() {
-		    List<QaQualityReviewMeetingDiscussionPoints> records;
 
-		    try {
-		        records = qaQualityReviewMeetingDiscussionPointsRepository.getDiscussionPointsLov();
+			return ResponseEntity.ok(records);
 
-		        if (records == null || records.isEmpty()) {
-		            return ResponseEntity
-		                    .status(HttpStatus.NOT_FOUND)
-		                    .body(null); // or return an empty list: Collections.emptyList();
-		        }
-
-		        return ResponseEntity.ok(records);
-
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Error fetching discussion points: {}", msg);
-		        return ResponseEntity
-		                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-		                .body(null); // or an empty list if preferred
-		    }
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Error fetching discussion points: {}", msg);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); // or an empty list if preferred
 		}
-		
-		// Param Based Get
+	}
 
-			public ResponseEntity<?> getByParamQaQualityReviewMeetings(String date) {
-				try {
+	// Param Based Get
 
-					List<QaQualityReviewMeetings> list = qualityReviewMeetingsRepository.getDetailsBaseParam(date);
+	public ResponseEntity<?> getByParamQaQualityReviewMeetings(String date) {
+		try {
 
-					if (list == null) {
-						return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
-					}
+			List<QaQualityReviewMeetings> list = qualityReviewMeetingsRepository.getDetailsBaseParam(date);
 
-					return new ResponseEntity<>(list, HttpStatus.OK);
-				} catch (Exception e) {
-					log.error("Unable to get Details!", e);
-
-					return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
-				}
+			if (list == null) {
+				return new ResponseEntity(new ApiResponse(true, "No data"), HttpStatus.OK);
 			}
 
-			// SUMMARY API
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			log.error("Unable to get Details!", e);
 
-			public ResponseEntity<?> getQaQualityReviewMeetingsSummary(HttpServletRequest http) {
+			return new ResponseEntity<>("Error Getting Details.", HttpStatus.BAD_REQUEST);
+		}
+	}
 
-				List<QaQualityReviewMeetings> details = null;
-				try {
-					String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
+	// SUMMARY API
 
-					if (userRole.equals("ROLE_QA")) {
+	public ResponseEntity<?> getQaQualityReviewMeetingsSummary(HttpServletRequest http) {
 
-						details = qualityReviewMeetingsRepository.qaInspectorSummary();
-					}
+		List<QaQualityReviewMeetings> details = null;
+		try {
+			String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
-					else if (userRole.equalsIgnoreCase("QA_MANAGER") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")|| userRole.equalsIgnoreCase("ROLE_MR")) {
+			if (userRole.equals("ROLE_QA")) {
 
-						details = qualityReviewMeetingsRepository.qaManagerMrSummary();
-					} else {
-						return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
-								HttpStatus.FORBIDDEN);
-					}
-
-					return new ResponseEntity<>(details, HttpStatus.OK);
-				} catch (Exception e) {
-
-					log.error("Unable to get Details!", e);
-
-					return new ResponseEntity<>("Unable to get Details! ", HttpStatus.BAD_REQUEST);
-				}
+				details = qualityReviewMeetingsRepository.qaInspectorSummary();
 			}
-			
-			
+
+			else if (userRole.equalsIgnoreCase("QA_MANAGER") || userRole.equalsIgnoreCase("ROLE_DESIGNEE")
+					|| userRole.equalsIgnoreCase("ROLE_MR")) {
+
+				details = qualityReviewMeetingsRepository.qaManagerMrSummary();
+			} else {
+				return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
+						HttpStatus.FORBIDDEN);
+			}
+
+			return new ResponseEntity<>(details, HttpStatus.OK);
+		} catch (Exception e) {
+
+			log.error("Unable to get Details!", e);
+
+			return new ResponseEntity<>("Unable to get Details! ", HttpStatus.BAD_REQUEST);
+		}
+	}
+
 //			PRINT API
 
 	public ResponseEntity<?> getByQualityReviewMeetingsPrint(String date, String month, String year) {
@@ -6480,67 +6494,67 @@ public class QaService4 {
 		}
 	}
 
-	//delete api for AttendanceSheet
+	// delete api for AttendanceSheet
 
-		public ResponseEntity<?> deleteQualityReviewMeetingsAttendanceSheet(Long id) {
-			try {
+	public ResponseEntity<?> deleteQualityReviewMeetingsAttendanceSheet(Long id) {
+		try {
 
-				Optional<QaQualityReviewMeetingAttendanceSheet> details = qualityReviewMeetingAttendanceRepository.findById(id);
+			Optional<QaQualityReviewMeetingAttendanceSheet> details = qualityReviewMeetingAttendanceRepository
+					.findById(id);
 
-				if (details == null) {
-					return new ResponseEntity(new ApiResponse(false, "No data for the id : " + id), HttpStatus.BAD_REQUEST);
-				}
-
-				qualityReviewMeetingAttendanceRepository.deleteById(id);
-
-			} catch (Exception ex) {
-
-				log.error(" **** Unable to delete details! **** " + ex);
-
-				String msg = ex.getMessage();
-
-				return new ResponseEntity(new ApiResponse(false, "Unable to delete details!"), HttpStatus.BAD_REQUEST);
+			if (details == null) {
+				return new ResponseEntity(new ApiResponse(false, "No data for the id : " + id), HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity(new ApiResponse(true, "Deleted successfully"), HttpStatus.OK);
+			qualityReviewMeetingAttendanceRepository.deleteById(id);
+
+		} catch (Exception ex) {
+
+			log.error(" **** Unable to delete details! **** " + ex);
+
+			String msg = ex.getMessage();
+
+			return new ResponseEntity(new ApiResponse(false, "Unable to delete details!"), HttpStatus.BAD_REQUEST);
 		}
-		
-	//delete api for Discussion
 
-		public ResponseEntity<?> deleteQualityReviewMeetingsDiscussion(Long id) {
-			try {
+		return new ResponseEntity(new ApiResponse(true, "Deleted successfully"), HttpStatus.OK);
+	}
 
-				Optional<QaQualityReviewMeetingsDiscussion> details = qualityReviewMeetingsDiscussionRepository.findById(id);
+	// delete api for Discussion
 
-				if (details == null) {
-					return new ResponseEntity(new ApiResponse(false, "No data for the id : " + id), HttpStatus.BAD_REQUEST);
-				}
+	public ResponseEntity<?> deleteQualityReviewMeetingsDiscussion(Long id) {
+		try {
 
-				qualityReviewMeetingsDiscussionRepository.deleteById(id);
+			Optional<QaQualityReviewMeetingsDiscussion> details = qualityReviewMeetingsDiscussionRepository
+					.findById(id);
 
-			} catch (Exception ex) {
-
-				log.error(" **** Unable to delete details! **** " + ex);
-
-				String msg = ex.getMessage();
-
-				return new ResponseEntity(new ApiResponse(false, "Unable to delete details!"), HttpStatus.BAD_REQUEST);
+			if (details == null) {
+				return new ResponseEntity(new ApiResponse(false, "No data for the id : " + id), HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity(new ApiResponse(true, "Deleted successfully"), HttpStatus.OK);
-		}
-		
+			qualityReviewMeetingsDiscussionRepository.deleteById(id);
 
+		} catch (Exception ex) {
+
+			log.error(" **** Unable to delete details! **** " + ex);
+
+			String msg = ex.getMessage();
+
+			return new ResponseEntity(new ApiResponse(false, "Unable to delete details!"), HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity(new ApiResponse(true, "Deleted successfully"), HttpStatus.OK);
+	}
 
 //		=======================================================================================================================
 
-		private String getUserRole() {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (authentication != null && authentication.isAuthenticated()) {
-				return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
-						.orElse(null);
-			}
-			return null;
+	private String getUserRole() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
+					.orElse(null);
 		}
-
+		return null;
 	}
+
+}

@@ -1,7 +1,5 @@
 package com.focusr.Precot.mssql.database.model.padpunching.bmr;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,34 +21,34 @@ public class PunchingBmrProcessDeviationRecordLine extends UserDateAudit {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "DEVIATION_LOG_NO")
 	private String deviationLogNo;
-	
+
 	@Column(name = "QA_REMARKS")
 	private String qaRemarks;
-	
+
 	@Column(name = "SUPERVISOR_NAME")
 	private String supervisorName;
-	
+
 	@Column(name = "SUPERVISOR_STATUS")
 	private String supervisorStatus;
-	
+
 	@Column(name = "SUPERVISOR_ID")
 	private Long supervisorId;
-	
+
 	@Column(name = "SUPERVISOR_DATE")
-	private Date supervisorDate;
-	
+	private String supervisorDate;
+
 	@Column(name = "QA_NAME")
 	private String qaName;
-	
+
 	@Column(name = "QA_STATUS")
 	private String qaStatus;
-	
+
 	@Column(name = "QA_DATE")
-	private Date qaDate;
-	
+	private String qaDate;
+
 	@Column(name = "QA_ID")
 	private Long qaId;
 
@@ -58,7 +56,7 @@ public class PunchingBmrProcessDeviationRecordLine extends UserDateAudit {
 	@JoinColumn(name = "DEVIATION_ID", nullable = false)
 	@JsonIgnore
 	private PunchingBmrProcessDeviationRecordHeader deviationRecord;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -107,11 +105,11 @@ public class PunchingBmrProcessDeviationRecordLine extends UserDateAudit {
 		this.supervisorId = supervisorId;
 	}
 
-	public Date getSupervisorDate() {
+	public String getSupervisorDate() {
 		return supervisorDate;
 	}
 
-	public void setSupervisorDate(Date supervisorDate) {
+	public void setSupervisorDate(String supervisorDate) {
 		this.supervisorDate = supervisorDate;
 	}
 
@@ -131,11 +129,11 @@ public class PunchingBmrProcessDeviationRecordLine extends UserDateAudit {
 		this.qaStatus = qaStatus;
 	}
 
-	public Date getQaDate() {
+	public String getQaDate() {
 		return qaDate;
 	}
 
-	public void setQaDate(Date qaDate) {
+	public void setQaDate(String qaDate) {
 		this.qaDate = qaDate;
 	}
 
@@ -160,8 +158,4 @@ public class PunchingBmrProcessDeviationRecordLine extends UserDateAudit {
 		this.deviationRecord = deviationRecord;
 	}
 
-	
-	
-	
-	
 }

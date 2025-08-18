@@ -1,8 +1,5 @@
 package com.focusr.Precot.mssql.database.model.padpunching.bmr;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.focusr.Precot.model.audit.UserDateAudit;
 import com.focusr.Precot.util.AppConstants;
 
-import lombok.Data;
-
-
 @Entity
 @Table(name = "PADPUNCHING_BMR_VERIFICATION_OF_RECORDS_LINE", schema = AppConstants.schema)
 public class PunchingBmrVerificationOfRecordsLine extends UserDateAudit {
@@ -30,57 +24,57 @@ public class PunchingBmrVerificationOfRecordsLine extends UserDateAudit {
 
 	@Column(name = "RECORD_NAME")
 	private String recordName;
-	
+
 	@Column(name = "CHECKED_DATE")
-	private Date checked_date;
+	private String checked_date;
 
 	@Column(name = "CHECKED_TIME")
 	private String checked_time;
 
 	@Column(name = "CHECKED_NAME")
 	private String checked_name;
-	
+
 	@Column(name = "CHECKED_ID")
 	private Long checked_id;
 
 	@Column(name = "CHECKED_SIGN")
 	private String checked_sign;
-	
+
 	@Column(name = "CHECKED_STATUS")
 	private String checked_status;
 
 	@Column(name = "VERIFIED_DATE")
-	private Date verified_date;
+	private String verified_date;
 
 	@Column(name = "VERIFIED_TIME")
 	private String verified_time;
 
 	@Column(name = "VERIFIED_NAME")
 	private String verified_name;
-	
+
 	@Column(name = "VERIFIED_ID")
 	private Long verified_id;
-	
+
 	@Column(name = "VERIFIED_STATUS")
 	private String verified_status;
 
 	@Column(name = "VERIFIED_SIGN")
 	private String verified_sign;
-	
+
 	@Column(name = "SATISFACTORY")
 	private String satisfactory;
 
 	@Column(name = "NON_SATISFACTORY")
 	private String non_satisfactory;
-	
+
 //	@Column(name = "VERIFICATION_ID")
 //	private Long verificationId;
 
 	@ManyToOne
-    @JoinColumn(name = "VERIFICATION_ID", nullable = false)
+	@JoinColumn(name = "VERIFICATION_ID", nullable = false)
 	@JsonIgnore
-    private PunchingBmrVerificationOfRecords verificationRecord;
-	
+	private PunchingBmrVerificationOfRecords verificationRecord;
+
 	public Long getLineId() {
 		return lineId;
 	}
@@ -97,11 +91,11 @@ public class PunchingBmrVerificationOfRecordsLine extends UserDateAudit {
 		this.recordName = recordName;
 	}
 
-	public Date getChecked_date() {
+	public String getChecked_date() {
 		return checked_date;
 	}
 
-	public void setChecked_date(Date checked_date) {
+	public void setChecked_date(String checked_date) {
 		this.checked_date = checked_date;
 	}
 
@@ -145,11 +139,11 @@ public class PunchingBmrVerificationOfRecordsLine extends UserDateAudit {
 		this.checked_status = checked_status;
 	}
 
-	public Date getVerified_date() {
+	public String getVerified_date() {
 		return verified_date;
 	}
 
-	public void setVerified_date(Date verified_date) {
+	public void setVerified_date(String verified_date) {
 		this.verified_date = verified_date;
 	}
 
@@ -221,8 +215,5 @@ public class PunchingBmrVerificationOfRecordsLine extends UserDateAudit {
 	public void setVerificationRecord(PunchingBmrVerificationOfRecords verificationRecord) {
 		this.verificationRecord = verificationRecord;
 	}
-	
-	
-	
-	
+
 }

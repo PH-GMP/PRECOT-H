@@ -57,6 +57,9 @@ public class RequestAndIssunceOfDocumentHistoryF002 extends UserDateAudit{
 	@Column(name = "YEAR")
 	private String year;	
 	
+	@Column(name = "DEPARTMENT")
+	private String department;
+	
 	@Column(name = "COMMENTS")
 	private String comments;
 	

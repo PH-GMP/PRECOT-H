@@ -15,52 +15,52 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "PUNCHING_PROD_CHANGE_OVER_F03",schema=AppConstants.schema, uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "DATE", "SHIFT", "MACHINE_NAME"})})
-public class PunchingProductChangeOverF03 extends SpunlaceSaveSubmitQA{
+@Table(name = "PUNCHING_PROD_CHANGE_OVER_F03", schema = AppConstants.schema, uniqueConstraints = {
+		@UniqueConstraint(columnNames = { "DATE", "SHIFT", "MACHINE_NAME", "ORDER_NO_1", "ORDER_NO_2" }) })
+public class PunchingProductChangeOverF03 extends SpunlaceSaveSubmitQA {
 
 	@Id
 	@Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productId;
-	
-		// COMMON FIELDS
-	
+
+	// COMMON FIELDS
+
 	@Column(name = "DATE")
 	private String date;
-	
+
 	@Column(name = "SHIFT")
 	private String shift;
-	
+
 	@Column(name = "TIME")
 	private String time;
-	
+
 	@Column(name = "MACHINE_NAME")
 	private String machineName;
-	
+
 	@Column(name = "CCP_MAINTAINED_BY")
 	private String ccpMaintainedBy;
-	
+
 	@Column(name = "CCP_MAINTAINED_DATE")
 	private String ccpMaintainedDate;
-	
+
 	@Column(name = "FORMAT_NO")
 	private String formatNo;
-	
+
 	@Column(name = "FORMAT_NAME")
 	private String formatName;
-	
+
 	@Column(name = "REVISION_NUMBER")
 	private String revisionNumber;
-	
+
 	@Column(name = "SOP_NUMBER")
 	private String sopNumber;
-	
+
 	@Column(name = "REJECT_REASON")
 	private String reason;
-	
-		// A. PRODUCT DETAILS - RUNNING PRODUCTION
-	
+
+	// A. PRODUCT DETAILS - RUNNING PRODUCTION
+
 	@Column(name = "PRODUCT_NAME_1")
 	private String productName1;
 
@@ -87,8 +87,8 @@ public class PunchingProductChangeOverF03 extends SpunlaceSaveSubmitQA{
 
 	@Column(name = "PDS_NUMBER_1")
 	private String pdsNumber1;
-	
-		// A. PRODUCT DETAILS - CHANGE OVER
+
+	// A. PRODUCT DETAILS - CHANGE OVER
 
 	@Column(name = "PRODUCT_NAME_2")
 	private String productName2;
@@ -117,95 +117,92 @@ public class PunchingProductChangeOverF03 extends SpunlaceSaveSubmitQA{
 	@Column(name = "PDS_NUMBER_2")
 	private String pdsNumber2;
 
-	
-		// B. REMOVAL OF PACKAGING MATERIAL - REMOVED (Y OR N)
-	
+	// B. REMOVAL OF PACKAGING MATERIAL - REMOVED (Y OR N)
+
 	@Column(name = "INNER_BAG")
 	private String innerBag;
-	
+
 	@Column(name = "OUTER_BAG")
 	private String outerBag;
-	
+
 	@Column(name = "INNER_CARTON")
 	private String innerCarton;
-	
+
 	@Column(name = "OUTER_CARTON")
 	private String outerCarton;
-	
+
 	@Column(name = "FLEEZE_ROLL")
 	private String fleezeRoll;
-	
-		//B.  REMOVAL OF PACKAGING MATERIAL - REMARKS
-	
+
+	// B. REMOVAL OF PACKAGING MATERIAL - REMARKS
+
 	@Column(name = "INNER_BAG_REMARKS")
 	private String innerBagRemarks;
-	
+
 	@Column(name = "OUTER_BAG_REMARKS")
 	private String outerBagRemarks;
-	
+
 	@Column(name = "INNER_CARTON_REMARKS")
 	private String innerCartonRemarks;
-	
+
 	@Column(name = "OUTER_CARTON_REMARKS")
 	private String outerCartonRemarks;
-	
+
 	@Column(name = "FLEEZE_ROLL_REMARKS")
 	private String fleezeRollRemarks;
-	
-	
-		// C. MACHINE SETTINGS
-	
+
+	// C. MACHINE SETTINGS
+
 	@Column(name = "TOOL_CHANGE_REQUIRED")
 	private String toolChangeRequired;
-	
+
 	@Column(name = "TOOL_CHANGE_DONE")
 	private String toolChangeDone;
-	
+
 	@Column(name = "MACHINE_SETTING")
 	private String machineSetting;
-	
-		// C. MACHINE SETTINGS - REMARKS
-	
+
+	// C. MACHINE SETTINGS - REMARKS
+
 	@Column(name = "TOOL_CHANGE_REQUIRED_REMARKS")
 	private String toolChangeRequiredRemarks;
-	
+
 	@Column(name = "TOOL_CHANGE_DONE_REMARKS")
 	private String toolChangeDoneRemarks;
-	
+
 	@Column(name = "MACHINE_SETTING_REMARKS")
 	private String machineSettingRemarks;
-	
-	
-		// D. CCP SETTINGS
-	
+
+	// D. CCP SETTINGS
+
 	@Column(name = "METAL_DETECTOR_TEACH")
 	private String metalDetectorTeach;
-	
+
 	@Column(name = "METAL_DETECTOR_CHECK")
 	private String metalDetectorCheck;
-	
-		// D. CCP SETTINGS - REMARKS
-	
+
+	// D. CCP SETTINGS - REMARKS
+
 	@Column(name = "METAL_DETECTOR_TEACH_REMARKS")
 	private String metalDetectorTeachRemarks;
-	
+
 	@Column(name = "METAL_DETECTOR_CHECK_REMARKS")
 	private String metalDetectorCheckRemarks;
-	
-		// E.  PRODUCTION START
-	
+
+	// E. PRODUCTION START
+
 	@Column(name = "PRODUCTION_CHECK")
 	private String productionCheck;
-	
+
 	@Column(name = "QUALITY_VERIFICATION")
 	private String qualityVerification;
-	
-		// E.  PRODUCTION START - REMARKS
-	
+
+	// E. PRODUCTION START - REMARKS
+
 	@Column(name = "PRODUCTION_CHECK_REMARKS")
 	private String productionCheckRemarks;
-	
+
 	@Column(name = "QUALITY_VERIFICATION_REMARKS")
 	private String qualityVerificationRemarks;
-	
+
 }

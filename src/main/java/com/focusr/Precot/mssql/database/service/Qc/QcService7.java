@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -838,46 +839,135 @@ public class QcService7 {
 
 
 
+//	public ResponseEntity<?> getBatchNumbersForLast45Days() {
+//		List<IdAndValuePair> response = new ArrayList<>();
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+//
+//		try {
+//			// Fetch all batch numbers and their dates
+//			List<Object[]> records = rawCottenAnalysisRepo.fetchAllBatchNumbersAndDates();
+//
+//			// Filter records based on the last 45 days
+//			LocalDate now = LocalDate.now();
+//			LocalDate date45DaysAgo = now.minusDays(45);
+//
+//			// Counter for IDs starting from 1
+//			final int[] counter = {1}; // Start the counter at 1
+//
+//			// Fetch only batch numbers from the last 45 days
+//			response = records.stream()
+//					.filter(record -> {
+//						String dateString = (String) record[1]; // Assuming the second column is the date
+//						LocalDate recordDate = LocalDate.parse(dateString, formatter);
+//						return !recordDate.isBefore(date45DaysAgo) && !recordDate.isAfter(now); // Ensure the date is within the last 45 days
+//					})
+//					.map(record -> {
+//						IdAndValuePair pair = new IdAndValuePair();
+//						pair.setValue((String) record[0]); // Assuming the first column is the batch number
+//						pair.setId((long) counter[0]++); // Incrementing ID for each entry
+//						return pair;
+//					})
+//					.distinct() // Optional: to ensure unique pairs
+//					.collect(Collectors.toList());
+//
+//		} catch (Exception ex) {
+//			String msg = ex.getMessage();
+//			log.error("Unable to get Batch Numbers for the last 45 days: ", ex);
+//
+//			return new ResponseEntity<>(new ApiResponse(false, "Failed to fetch Batch Numbers: " + msg), HttpStatus.BAD_REQUEST);
+//		}
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+	
+	// NEW
+	
+	public ResponseEntity<?> getBatchNumbersForLast45Days1() {
+		
+		List<String> orderProductResponse = new ArrayList<>();
+		List<IdAndValuePair> responseList = new ArrayList<>();
+
+	    try {
+	    	
+	    	
+	    	orderProductResponse = rawCottenAnalysisRepo.fetchAllBatchNumbersAndDates();
+
+			if (orderProductResponse.isEmpty() || orderProductResponse == null) {
+
+			} else {
+
+				Long id = (long) 1;
+
+				for (String order : orderProductResponse) {
+					IdAndValuePair values = new IdAndValuePair();
+					values.setId(id);
+					values.setType(order);
+					values.setValue(order);
+
+					responseList.add(values);
+					id++;
+				}
+			}
+			
+			
+
+	    } catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to get Batch Numbers for the last 45 days: ", ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to fetch Batch Numbers: " + msg), HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(responseList, HttpStatus.OK);
+	}
+	
 	public ResponseEntity<?> getBatchNumbersForLast45Days() {
 		List<IdAndValuePair> response = new ArrayList<>();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 		try {
 			// Fetch all batch numbers and their dates
-			List<Object[]> records = rawCottenAnalysisRepo.fetchAllBatchNumbersAndDates();
+			List<Object[]> records = rawCottenAnalysisRepo.fetchAllBatchNumbersAndDatesOld();
 
 			// Filter records based on the last 45 days
 			LocalDate now = LocalDate.now();
 			LocalDate date45DaysAgo = now.minusDays(45);
 
 			// Counter for IDs starting from 1
-			final int[] counter = {1}; // Start the counter at 1
+			final int[] counter = { 1 }; // Start the counter at 1
 
 			// Fetch only batch numbers from the last 45 days
-			response = records.stream()
-					.filter(record -> {
-						String dateString = (String) record[1]; // Assuming the second column is the date
-						LocalDate recordDate = LocalDate.parse(dateString, formatter);
-						return !recordDate.isBefore(date45DaysAgo) && !recordDate.isAfter(now); // Ensure the date is within the last 45 days
-					})
-					.map(record -> {
-						IdAndValuePair pair = new IdAndValuePair();
-						pair.setValue((String) record[0]); // Assuming the first column is the batch number
-						pair.setId((long) counter[0]++); // Incrementing ID for each entry
-						return pair;
-					})
-					.distinct() // Optional: to ensure unique pairs
+			response = records.stream().filter(record -> {
+				String dateString = (String) record[1]; // Assuming the second column is the date
+
+				try {
+
+					LocalDate recordDate = LocalDate.parse(dateString, formatter);
+					return !recordDate.isBefore(date45DaysAgo) && !recordDate.isAfter(now); 
+
+				} catch (DateTimeParseException e) {
+					log.warn("Skipping unparsable date: " + dateString);
+					return false;
+				}
+				// last 45 days
+			}).map(record -> {
+				IdAndValuePair pair = new IdAndValuePair();
+				pair.setValue((String) record[0]); // Assuming the first column is the batch number
+				pair.setId((long) counter[0]++); // Incrementing ID for each entry
+				return pair;
+			}).distinct() // Optional: to ensure unique pairs
 					.collect(Collectors.toList());
 
 		} catch (Exception ex) {
 			String msg = ex.getMessage();
 			log.error("Unable to get Batch Numbers for the last 45 days: ", ex);
 
-			return new ResponseEntity<>(new ApiResponse(false, "Failed to fetch Batch Numbers: " + msg), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to fetch Batch Numbers: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
 
 	public ResponseEntity<?> getRawCottonAnalysisReportByMillBatchNoCompleteApproval(String millBatchNo) {
 		try {

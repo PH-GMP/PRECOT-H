@@ -30,6 +30,8 @@ public interface AppConstantsBuds {
 	
 	String qaManager = "QA_MANAGER";
 	
+	String qaDesignee = "QA_DESIGNEE";
+	
 		// DEPARTMENT 
 	
 	String department = "COTTON_BUDS";

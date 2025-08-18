@@ -55,5 +55,10 @@ public interface BleachAppliedContRawCottonF04Repository extends JpaRepository<B
 	@Query(value = "SELECT DISTINCT BMR_NUMBER FROM precot.BLEACH_APPLIED_CONT_RAW_COTTON_F04 WHERE HOD_STATUS = 'HOD_APPROVED'", nativeQuery = true)
 	List<String> approvedBMRforAppliedRawCottonF04();
 	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' THEN 1 ELSE 0 END) AS supervisorCount,"
+            + " SUM(CASE WHEN HOD_STATUS != 'HOD_APPROVED' AND SUPERVISOR_STATUS != 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS hodCount"
+            + " FROM precot.BLEACH_APPLIED_CONT_RAW_COTTON_F04", nativeQuery = true)
+    List<Object[]> getStatusCounts();
+	
 
 }

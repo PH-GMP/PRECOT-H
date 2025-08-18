@@ -27,4 +27,12 @@ public interface PunchingBmrDeviationRecordHeaderRepository extends JpaRepositor
 	
 	@Query(value = "SELECT PackDt AS packdate, ShiftID AS shift, SType AS type, MCN AS machine, FTime AS fromTime, TTime AS toTime, SCause AS remarks, TotHrs AS totalTime FROM tblSFng WHERE SType = 'Stop' AND MCN=:machine AND PackDt BETWEEN :fromdate AND :todate", nativeQuery = true)
 	List<Object[]> stoppageResponse(@Param("fromdate") String fromdate, @Param("todate") String todate, @Param("machine") String machine);
+
+	// GET MULTIPLE MACHINE
+	
+	@Query(value = "SELECT PackDt AS packdate, ShiftID AS shift, SType AS type, MCN AS machine, FTime AS fromTime, TTime AS toTime, SCause AS remarks, TotHrs AS totalTime FROM tblSFng WHERE SType = 'Stop' AND MCN IN (:machines) AND PackDt BETWEEN :fromdate AND :todate", nativeQuery = true)
+	List<Object[]> stoppageResponseMultiple(@Param("fromdate") String fromdate, @Param("todate") String todate, @Param("machines") List<String> machines);
+
+
 }
+

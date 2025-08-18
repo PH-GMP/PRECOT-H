@@ -1272,7 +1272,7 @@ public class BmrCottonPleatService {
 			}
 
 
-			else if (role.equals("ROLE_QA")) {
+			else if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 				
 				if(details.getStatus().equals(AppConstantDryGoods.hodApprovedStatus)) {
 
@@ -1332,7 +1332,7 @@ public class BmrCottonPleatService {
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			
-			if (role.equals("ROLE_QA")) {
+			if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 			
 
 			details.setForm_no("PH-PRD04/F-007");
@@ -1385,7 +1385,7 @@ public class BmrCottonPleatService {
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 			
-			if (role.equals("ROLE_QA")) {
+			if (role.equals("ROLE_QA")||role.equals("QA_MANAGER") ||role.equals("QA_DESIGNEE")) {
 			
 
 			details.setForm_no("PH-PRD04/F-007");

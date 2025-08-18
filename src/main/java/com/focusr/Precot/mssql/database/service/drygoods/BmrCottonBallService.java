@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -148,16 +146,14 @@ public class BmrCottonBallService {
 
 	@Autowired
 	private BMR03GoodsPackingMeterialIssueLineRepository bmr03goodspackingmeterialissuelinerepository;
-	
+
 	@Autowired
 	private BudsBmrReworkRepository reworkRepository;
-	
-	
-		// FOR PRODUCT RECONILLATION
-	
+
+	// FOR PRODUCT RECONILLATION
+
 	@Autowired
 	private BMR10ReconillationRepository reconillationRepository;
-	
 
 	// Save
 
@@ -222,8 +218,8 @@ public class BmrCottonBallService {
 				details.setStatus(AppConstantDryGoods.supervisorApprovedStatus);
 				details.setForm_no("PH-PRD04/F-004");
 				details.setSupervisor_id(userId);
-				
-					// GENERATE NEXT BATCH
+
+				// GENERATE NEXT BATCH
 				if (details.getPo_comp_status().equalsIgnoreCase("OPEN")) {
 					String[] batchNoParts = details.getBatch_no().split("-");
 					int number = Integer.parseInt(batchNoParts[1]);
@@ -233,8 +229,7 @@ public class BmrCottonBallService {
 					log.info("*** !!! Current Batch No !!!***" + details.getBatch_no());
 					log.info("*** !!! Next Batch No !!!***" + details.getNextBatch());
 				}
-				
-				
+
 				bmr001goodsproductiondetailsrepository.save(details);
 
 			}
@@ -329,7 +324,7 @@ public class BmrCottonBallService {
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 
 			if (role.equals("ROLE_SUPERVISOR")) {
-				
+
 				details.setForm_no("PH-PRD04/F-004");
 				details.setStatus(AppConstantDryGoods.supervisorApprovedStatus);
 
@@ -344,8 +339,6 @@ public class BmrCottonBallService {
 				}
 			}
 
-			
-
 			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
@@ -359,8 +352,7 @@ public class BmrCottonBallService {
 		}
 		return new ResponseEntity(details, HttpStatus.CREATED);
 	}
-	
-	
+
 	public ResponseEntity<?> GetPackingMeterial(String batch_no) {
 		List<BMR03GoodsPackingMeterialIssue> bmrSummaryDateList;
 
@@ -379,12 +371,12 @@ public class BmrCottonBallService {
 		}
 	}
 
-	
 	public ResponseEntity<?> GetPackingMeterialPde(String batch_no, String fromdate, String todate) {
 		List<Map<String, Object>> GetPackingMeterialPde;
 
 		try {
-			GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository.getpackingmeterialpde(batch_no,fromdate ,todate);
+			GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository.getpackingmeterialpde(batch_no, fromdate,
+					todate);
 
 			return new ResponseEntity<>(GetPackingMeterialPde, HttpStatus.OK);
 
@@ -397,7 +389,6 @@ public class BmrCottonBallService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get " + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-
 
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> SaveProcessingEquipments(BMR05GoodsEquipmentUsed details, HttpServletRequest http) {
@@ -1079,9 +1070,7 @@ public class BmrCottonBallService {
 
 			}
 
-			
-
-			 else {
+			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
@@ -1256,40 +1245,34 @@ public class BmrCottonBallService {
 				details.setSupervisor_id(userId);
 				bmr12goodspostprodreviewrepository.save(details);
 
-			}
-			else if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
+			} else if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
 
-				if(details.getStatus().equals(AppConstantDryGoods.supervisorApprovedStatus)) {
-				
-				details.setForm_no("PH-PRD04/F-004");
-				details.setHod_id(userId);
-				details.setStatus(AppConstantDryGoods.hodApprovedStatus);
-				bmr12goodspostprodreviewrepository.save(details);
-				
-				}
-				else {
+				if (details.getStatus().equals(AppConstantDryGoods.supervisorApprovedStatus)) {
+
+					details.setForm_no("PH-PRD04/F-004");
+					details.setHod_id(userId);
+					details.setStatus(AppConstantDryGoods.hodApprovedStatus);
+					bmr12goodspostprodreviewrepository.save(details);
+
+				} else {
 					return new ResponseEntity(new ApiResponse(false, "Supervisior not yet Submitted"),
 							HttpStatus.BAD_REQUEST);
 				}
-				
-				
+
 			}
 
+			else if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			else if (role.equals("ROLE_QA")) {
-				
-				if(details.getStatus().equals(AppConstantDryGoods.hodApprovedStatus)) {
+				if (details.getStatus().equals(AppConstantDryGoods.hodApprovedStatus)) {
 
-				details.setForm_no("PH-PRD04/F-004");
-				details.setQa_id(userId);
-				details.setStatus(AppConstantDryGoods.qaApprovedStatus);
-				bmr12goodspostprodreviewrepository.save(details);
-			}
-				
-				
+					details.setForm_no("PH-PRD04/F-004");
+					details.setQa_id(userId);
+					details.setStatus(AppConstantDryGoods.qaApprovedStatus);
+					bmr12goodspostprodreviewrepository.save(details);
+				}
+
 				else {
-					return new ResponseEntity(new ApiResponse(false, "HOD not yet Submitted"),
-							HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, "HOD not yet Submitted"), HttpStatus.BAD_REQUEST);
 				}
 			}
 
@@ -1329,50 +1312,42 @@ public class BmrCottonBallService {
 	public ResponseEntity<?> SaveQaRelease(BMR13GoodsQaRelease details, HttpServletRequest http) {
 		SCAUtil sca = new SCAUtil();
 		try {
-			
-			
-			
-			
+
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
-			if (role.equals("ROLE_QA")) {
-			
 
-			details.setForm_no("PH-PRD04/F-004");
-			details.setQa_id(userId);
-			details.setStatus(AppConstants.qaSave);
-			bmr13goodsqareleaserrepository.save(details);
+			if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
-				lineDetails.setRls_id(details.getRls_id());
-				bmr13goodsqareleaselinerepository.save(lineDetails);
+				details.setForm_no("PH-PRD04/F-004");
+				details.setQa_id(userId);
+				details.setStatus(AppConstants.qaSave);
+				bmr13goodsqareleaserrepository.save(details);
+
+				for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
+					lineDetails.setRls_id(details.getRls_id());
+					bmr13goodsqareleaselinerepository.save(lineDetails);
+				}
 			}
-			}
-			
+
 			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Save *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Save " + msg), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity(details, HttpStatus.CREATED);
 	}
-	
-	
-	
 
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> SubmitQaRelease(BMR13GoodsQaRelease details, HttpServletRequest http) {
 		SCAUtil sca = new SCAUtil();
 		try {
-			
-			
+
 			String value = "";
 			if (details.getBatch_no() == null) {
 				value = "BatchNo";
@@ -1385,31 +1360,30 @@ public class BmrCottonBallService {
 				return new ResponseEntity(new ApiResponse(false, "Should Fill Mandatory Fields" + value),
 						HttpStatus.BAD_REQUEST);
 			}
-			
+
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
-			if (role.equals("ROLE_QA")) {
-			
 
-			details.setForm_no("PH-PRD04/F-004");
-			details.setQa_id(userId);
-			details.setStatus(AppConstants.qaApprovedStatus);
-			bmr13goodsqareleaserrepository.save(details);
+			if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
-				lineDetails.setRls_id(details.getRls_id());
-				bmr13goodsqareleaselinerepository.save(lineDetails);
+				details.setForm_no("PH-PRD04/F-004");
+				details.setQa_id(userId);
+				details.setStatus(AppConstants.qaApprovedStatus);
+				bmr13goodsqareleaserrepository.save(details);
+
+				for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
+					lineDetails.setRls_id(details.getRls_id());
+					bmr13goodsqareleaselinerepository.save(lineDetails);
+				}
 			}
-			}
-			
+
 			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Save *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Save " + msg), HttpStatus.BAD_REQUEST);
@@ -1465,8 +1439,7 @@ public class BmrCottonBallService {
 	public ResponseEntity<?> SubmitProductRelease(BMR14GoodsProductRelease details, HttpServletRequest http) {
 		SCAUtil sca = new SCAUtil();
 		try {
-			
-			
+
 			String value = "";
 			if (details.getBatch_no() == null) {
 				value = "BatchNo";
@@ -1482,9 +1455,8 @@ public class BmrCottonBallService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
 
-			 if (role.equals("ROLE_QA")) {
+			if (role.equals("ROLE_QA")) {
 
 				details.setForm_no("PH-PRD04/F-004");
 				details.setQa_id(userId);
@@ -1522,7 +1494,6 @@ public class BmrCottonBallService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get " + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-
 
 	//
 
@@ -1617,10 +1588,8 @@ public class BmrCottonBallService {
 //		}
 //	}
 
-	
-	//new
-	
-	
+	// new
+
 	public ResponseEntity<?> getProductionLOV() {
 		List<String> productionBatchDb = new ArrayList<>();
 		List<String> productionnextBatch = new ArrayList<>();
@@ -1672,12 +1641,7 @@ public class BmrCottonBallService {
 		}
 		return new ResponseEntity(productionDetailsLov, HttpStatus.OK);
 	}
-	
-	
-	
-	
-	
-	
+
 	public ResponseEntity<?> getOrderLovOnBatchNo(String batchNo) {
 
 		List<String> orderList = new ArrayList<>();
@@ -1719,8 +1683,7 @@ public class BmrCottonBallService {
 		List<DrygoodsBmrProductionDetailsResponse> list = new ArrayList<>();
 
 		try {
-			
-			
+
 			String[] batchNoParts = batchNo.split("-");
 			String genNumber = "";
 			String batchNumber = "";
@@ -1781,7 +1744,7 @@ public class BmrCottonBallService {
 				}
 
 				// Fetch data for the given date range
-				
+
 				// SPLIT BATCH_NO
 
 				BigDecimal farQuantityBag = BigDecimal.ZERO;
@@ -1795,8 +1758,6 @@ public class BmrCottonBallService {
 					farQuantityBox = bmr001goodsproductiondetailsrepository.soFarPackQtyBoxCottonBall(batchNumber);
 				}
 
-				
-				
 				BigDecimal nbagDate = bmr001goodsproductiondetailsrepository.productionBagsOnDate(orderNo,
 						fromLocalDate, toLocalDate);
 				BigDecimal nocDate = bmr001goodsproductiondetailsrepository.productionBagNocOnDate(orderNo,
@@ -1812,10 +1773,7 @@ public class BmrCottonBallService {
 				response.setBagPackQty(farQuantityBag);
 
 				list.add(response);
-				
-				
-				
-				
+
 			}
 
 		} catch (Exception ex) {
@@ -1862,10 +1820,11 @@ public class BmrCottonBallService {
 			bmrReconillation = reconillationRepository.fetchReconillationBalls(batch_no);
 			reworkList = reworkRepository.reworkListByBmrNumber(batch_no);
 
-			BMRCottonBallResponsePrint response = new BMRCottonBallResponsePrint(bmr001goodsproductiondetails,bmr03goodspackingmeterialissue,
-					bmr05goodsequipmentused, bmr06goodsverificationofrecords, bmr07goodsmanufacturingstepscottonballs,
-					bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment, bmr11goodslistofenclouser,
-					bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease, bmrReconillation,reworkList);
+			BMRCottonBallResponsePrint response = new BMRCottonBallResponsePrint(bmr001goodsproductiondetails,
+					bmr03goodspackingmeterialissue, bmr05goodsequipmentused, bmr06goodsverificationofrecords,
+					bmr07goodsmanufacturingstepscottonballs, bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment,
+					bmr11goodslistofenclouser, bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease,
+					bmrReconillation, reworkList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -2056,22 +2015,20 @@ public class BmrCottonBallService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get " + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-	
-		/**
-		 * CR - PRODUCT RECONILLATION
-		 */
-	
-	
-	public ResponseEntity<?> submitProductReconillation(BMR10GoodsProductReconillation productReconillation, HttpServletRequest http) {
-		
+
+	/**
+	 * CR - PRODUCT RECONILLATION
+	 */
+
+	public ResponseEntity<?> submitProductReconillation(BMR10GoodsProductReconillation productReconillation,
+			HttpServletRequest http) {
+
 		SCAUtil scaUtil = new SCAUtil();
-		
+
 		try {
-			
+
 //			Long id = productReconillation.getId();
-			
+
 //			if(id == null) {
 //				
 //				String value = "";
@@ -2083,41 +2040,45 @@ public class BmrCottonBallService {
 //				return new ResponseEntity(new ApiResponse(false, "Should Fill Mandaory Fields !!!" + value), HttpStatus.BAD_REQUEST);
 //				
 //			}
-			
+
 			productReconillation.setForm_no("Balls");
-			
+
 			reconillationRepository.save(productReconillation);
-			
-		} catch(Exception ex) {
-			
+
+		} catch (Exception ex) {
+
 			log.error("***!!! Unable to Submit Product Reconillation !!! ***" + ex.getMessage());
-			ex.printStackTrace();;
-			
-			return new ResponseEntity(new ApiResponse(false, "Unable to submit product Reconillation" + ex.getMessage()), HttpStatus.BAD_REQUEST);
-			
+			ex.printStackTrace();
+			;
+
+			return new ResponseEntity(
+					new ApiResponse(false, "Unable to submit product Reconillation" + ex.getMessage()),
+					HttpStatus.BAD_REQUEST);
+
 		}
-		
+
 		return new ResponseEntity(productReconillation, HttpStatus.OK);
 	}
-	
-	
-		// Fecth reconillation details by Batch Number
-	
+
+	// Fecth reconillation details by Batch Number
+
 	public ResponseEntity<?> getProductReconillationForBallsByBatchNumber(String batchNo) {
-		
+
 		List<BMR10GoodsProductReconillation> reconillationList = new ArrayList<BMR10GoodsProductReconillation>();
-		
+
 		try {
-			
+
 			reconillationList = reconillationRepository.fetchReconillationBalls(batchNo);
-			
-		} catch(Exception ex) {
+
+		} catch (Exception ex) {
 			log.error("***!!! Unable to get Product Reconillation !!! ***" + ex.getMessage());
-			ex.printStackTrace();;
-			
-			return new ResponseEntity(new ApiResponse(false, "Unable to get product Reconillation" + ex.getMessage()), HttpStatus.BAD_REQUEST);
+			ex.printStackTrace();
+			;
+
+			return new ResponseEntity(new ApiResponse(false, "Unable to get product Reconillation" + ex.getMessage()),
+					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(reconillationList, HttpStatus.OK);
 	}
 

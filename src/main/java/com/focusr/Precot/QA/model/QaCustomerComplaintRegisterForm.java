@@ -129,19 +129,19 @@ public class QaCustomerComplaintRegisterForm extends UserDateAudit {
 	@Column(name = "NATURE_OF_NON_CONFORMITY")
 	private String nature_of_non_conformity;
 	
-	@Column(name = "WHY1")
+	@Column(name = "WHY1", columnDefinition = "VARCHAR(MAX)")
 	private String why1;
 	
-	@Column(name = "WHY2")
+	@Column(name = "WHY2", columnDefinition = "VARCHAR(MAX)")
 	private String why2;
 	
-	@Column(name = "WHY3")
+	@Column(name = "WHY3", columnDefinition = "VARCHAR(MAX)")
 	private String why3;
 	
-	@Column(name = "WHY4")
+	@Column(name = "WHY4", columnDefinition = "VARCHAR(MAX)")
 	private String why4;
 	
-	@Column(name = "WHY5")
+	@Column(name = "WHY5", columnDefinition = "VARCHAR(MAX)")
 	private String why5;
 	
 	@Column(name = "CORRECTIVE_ACTION")

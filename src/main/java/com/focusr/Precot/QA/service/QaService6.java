@@ -31,6 +31,7 @@ import com.focusr.Precot.QA.model.audit.MetalDetectorCalibrationRecordLinesHisto
 import com.focusr.Precot.QA.model.audit.MetalDetectorPassReportHistory;
 import com.focusr.Precot.QA.model.audit.MetalDetectorPassReportLinesHistory;
 import com.focusr.Precot.QA.model.audit.TemplateForRecallHistory;
+import com.focusr.Precot.QA.payload.OnlineInspectionPadsPleatsRolls;
 import com.focusr.Precot.QA.repository.MetalDetectorCalibrationRecordLinesRepository;
 import com.focusr.Precot.QA.repository.MetalDetectorCalibrationRecordRepository;
 import com.focusr.Precot.QA.repository.MetalDetectorPassReportLinesRepo;
@@ -2230,6 +2231,62 @@ public class QaService6 {
 
 		return new ResponseEntity(new ApiResponse(true, "Deleted successfully"), HttpStatus.OK);
 	}
+	
+	// AMC
+
+		public ResponseEntity<?> getDataByBatchNo(String batchNo) {
+			try {
+
+				OnlineInspectionPadsPleatsRolls list = trainingRecordLineRepo.getDataByBatchNo(batchNo);
+
+				if (list == null) {
+					return new ResponseEntity<>(new ApiResponse(true, "No data found for this Batch No: " + batchNo),
+							HttpStatus.OK);
+				}
+
+				return new ResponseEntity<>(list, HttpStatus.OK);
+
+			} catch (Exception e) {
+				log.error("Unable to get Details!", e);
+				return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		public ResponseEntity<?> getItemCode(String porder) {
+			try {
+
+				List<String> list = trainingRecordLineRepo.getItemCode(porder);
+
+				if (list == null) {
+					return new ResponseEntity<>(new ApiResponse(true, "No data found for this OrderNo: " + porder),
+							HttpStatus.OK);
+				}
+
+				return new ResponseEntity<>(list, HttpStatus.OK);
+
+			} catch (Exception e) {
+				log.error("Unable to get Details!", e);
+				return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		public ResponseEntity<?> getCustomerName(String material) {
+			try {
+
+				List<String> list = trainingRecordLineRepo.getCustomerName(material);
+
+				if (list == null) {
+					return new ResponseEntity<>(new ApiResponse(true, "No data found for this Material: " + material),
+							HttpStatus.OK);
+				}
+
+				return new ResponseEntity<>(list, HttpStatus.OK);
+
+			} catch (Exception e) {
+				log.error("Unable to get Details!", e);
+				return new ResponseEntity<>("Error Getting Details: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+		}
 
 //	================================== USER ROLE =====================================
 

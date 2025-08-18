@@ -59,7 +59,11 @@ public interface RawCottenAnalysisReportARF001Repository extends JpaRepository<R
 	
 	
 	@Query(value = "SELECT Batchno AS batchNo, [Date] FROM tblrm", nativeQuery = true)
-	List<Object[]> fetchAllBatchNumbersAndDates();
+	List<Object[]> fetchAllBatchNumbersAndDatesOld();
+	
+	@Query(value = "SELECT Batchno AS batchNo FROM tblrm\r\n"
+			+ "WHERE TRY_CAST([Date] AS DATE) >= DATEADD(DAY, -45, GETDATE());", nativeQuery = true)
+	List<String> fetchAllBatchNumbersAndDates();
 
 
 

@@ -108,9 +108,20 @@ List<BaleConsumptionReportDryGoodsF001> hodSummary();
 		+ "O.sts = 1 AND (P.Cat = 'Pleats' OR P.Cat = 'Wool roll') AND  P.Product NOT LIKE 'AB%'; ", nativeQuery = true)
 List<String> fetchOrderForF006();
 
-@Query(value = "SELECT P.Brand, O.Material, P.bags,P.bwgt FROM [PDE].[dbo].[TblOrderInfo] O JOIN \r\n"
+//@Query(value = "SELECT P.Brand, O.Material, P.bags,P.bwgt FROM [PDE].[dbo].[TblOrderInfo] O JOIN \r\n"
+//		+ "[PDE].[dbo].[TblProduct] P ON O.Material = P.Product WHERE O.POrder = :order_no ", nativeQuery = true)
+//List<Object[]> fetchheaderdetailsForF006(@Param("order_no") String order_no);
+
+//AMC - UPDATE QUERY
+
+@Query(value = "SELECT P.Brand, O.Material, P.bags,P.bwgt,P.ProdDesc,P.Product,O.POrder FROM [PDE].[dbo].[TblOrderInfo] O JOIN \r\n"
 		+ "[PDE].[dbo].[TblProduct] P ON O.Material = P.Product WHERE O.POrder = :order_no ", nativeQuery = true)
 List<Object[]> fetchheaderdetailsForF006(@Param("order_no") String order_no);
+
+//AMC - NEW QUERY
+
+@Query(value = "SELECT NBAG from tblFPPack tf WHERE POrder =:orderNo AND PackDt = :date AND ShiftID = :shift", nativeQuery = true)
+List<Object[]> fetchheaderdetailsForF006Bag(@Param("orderNo") String order_no,@Param("date") String date,@Param("shift") String shift);
 
 //@Query(value = "SELECT \r\n"
 //		+ "    R.BaleNo, \r\n"

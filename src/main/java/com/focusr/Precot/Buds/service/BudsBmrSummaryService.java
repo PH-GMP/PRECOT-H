@@ -186,7 +186,8 @@ public class BudsBmrSummaryService {
 				postProductionReview.setHodStatus(AppConstants.hodApprovedStatus);
 				postProductionReview.setHodId(userId);
 				postProductionReviewRepository.save(postProductionReview);
-			} else if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)) {
+			} else if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)
+					|| userRole.equalsIgnoreCase(AppConstantsBuds.qaDesignee)) {
 				postProductionReview.setQaStatus(AppConstants.qaApprovedStatus);
 				postProductionReview.setQaId(userId);
 				postProductionReviewRepository.save(postProductionReview);
@@ -1497,7 +1498,8 @@ public class BudsBmrSummaryService {
 
 			try {
 
-				if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)) {
+				if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)
+						|| userRole.equalsIgnoreCase(AppConstantsBuds.qaDesignee)) {
 					
 					qualityRelease.setStatus(AppConstants.qaSave);
 
@@ -1549,7 +1551,8 @@ public class BudsBmrSummaryService {
 
 			try {
 
-				if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)){
+				if(userRole.equalsIgnoreCase(AppConstantsBuds.qa) || userRole.equalsIgnoreCase(AppConstantsBuds.qaManager)
+						|| userRole.equalsIgnoreCase(AppConstantsBuds.qaDesignee)){
 
 					qualityRelease.setStatus(AppConstants.qaApprovedStatus);
 					qualityRelease.setDepartment("CottonBuds");

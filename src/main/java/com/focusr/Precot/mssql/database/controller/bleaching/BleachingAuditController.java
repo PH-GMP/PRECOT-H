@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.focusr.Precot.mssql.database.service.MapValidationErrorService;
 import com.focusr.Precot.mssql.database.service.bleaching.BleachingAuditService;
-import com.focusr.Precot.payload.BleacfF41Request;
 import com.focusr.Precot.util.bleaching.DashboardRequest;
 
 @RestController
@@ -224,8 +223,6 @@ public class BleachingAuditController {
 
 	}
 
-	//
-
 	// F-09
 
 	@GetMapping("/CakePressF09")
@@ -291,18 +288,17 @@ public class BleachingAuditController {
 	}
 
 	@GetMapping("/handSanitizationF41")
-	public ResponseEntity<?> handSanitizationF41(@RequestParam Map<String, String> requestParams,
-			Principal principal) {
+	public ResponseEntity<?> handSanitizationF41(@RequestParam Map<String, String> requestParams, Principal principal) {
 
 		String from_date = requestParams.get("from_date");
 		String to_date = requestParams.get("to_date");
 		String shift = requestParams.get("shift");
-		
+
 		ResponseEntity<?> message = bleachingAuditService.bleachingHandSanitation(from_date, to_date, shift);
 
 		return message;
 	}
-	
+
 	@GetMapping("/machineCleaningRecordF16")
 	public ResponseEntity<?> machineCleaningRecordF16(@RequestParam Map<String, String> requestParams,
 			Principal principal) {
@@ -311,8 +307,8 @@ public class BleachingAuditController {
 		String to_date = requestParams.get("to_date");
 		String month = requestParams.get("month");
 		String year = requestParams.get("year");
-		
-		ResponseEntity<?> message = bleachingAuditService.machineCleaningRecordF16(from_date, to_date, month,year);
+
+		ResponseEntity<?> message = bleachingAuditService.machineCleaningRecordF16(from_date, to_date, month, year);
 
 		return message;
 	}

@@ -29,11 +29,19 @@ public interface non_woven_F005Repo extends JpaRepository<non_woven_F005, Long> 
 	@Query(value="SELECT * FROM precot.NON_WOVEN_FLEECE_ANALYSIS_REPORT WHERE QA_MNG_STATUS = 'QA_MANAGER_APPROVED' AND BMR_NO = :bmr",nativeQuery = true)
 	List<non_woven_F005> print(@Param("bmr")String bmr);
 
-	@Query(value="SELECT Brand , MixDesc , PGSM, PatternDesc , ShaftNo FROM TblRgoods where nBaleNo = :bmr",nativeQuery = true)
+//	@Query(value="SELECT Brand , MixDesc , PGSM, PatternDesc , ShaftNo FROM TblRgoods where nBaleNo = :bmr",nativeQuery = true)
+//	List<Object[]> pdeData(String bmr);
+	
+	@Query(value = "SELECT DISTINCT ShaftNo ,Brand , MixDesc , PGSM, PatternDesc FROM TblRgoods where POrder = :bmr", nativeQuery = true)
 	List<Object[]> pdeData(String bmr);
 
 
 	@Query(value = "select POrder,CMon from tblOrderInfo;", nativeQuery = true)
 	List<Object[]> fetchAllBatchNumbersAndDates();
+	
+	
+	@Query(value="SELECT Brand , MixDesc , PGSM, PatternDesc , ShaftNo FROM TblRgoods where nBaleNo = :bmr",nativeQuery = true)
+	List<Object[]> nonWovenPde(String bmr);
+	
 
 }

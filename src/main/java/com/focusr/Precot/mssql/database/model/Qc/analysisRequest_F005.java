@@ -82,8 +82,8 @@ public class analysisRequest_F005 extends UserDateAudit{
     @Column(name = "APPEARANCE")
     private String appearance;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEST_ID", insertable = false, updatable = false)
-	@JsonIgnore
-	private non_woven_F005 non_woven_F005;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "TEST_ID", insertable = false, updatable = false)
+//	@JsonIgnore
+//	private non_woven_F005 non_woven_F005;
 }

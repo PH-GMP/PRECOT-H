@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -148,24 +147,21 @@ public class BmrCottonWoolRollService {
 
 	@Autowired
 	private BMR14GoodsProductReleaseRepository bmr14goodsproductreleaserepository;
-	
-	
+
 	@Autowired
 	private BMR03GoodsPackingMeterialIssueRepository bmr03goodspackingmeterialissuerepository;
 
 	@Autowired
 	private BMR03GoodsPackingMeterialIssueLineRepository bmr03goodspackingmeterialissuelinerepository;
 
-
 	@Autowired
 	private BudsBmrReworkRepository reworkRepository;
-	
-	
+
 	// FOR PRODUCT RECONILLATION
-	
+
 	@Autowired
 	private BMR10ReconillationRepository reconillationRepository;
-	
+
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> SaveProductionDetails(BMR001GoodsProductionDetails details, HttpServletRequest http) {
 
@@ -227,7 +223,7 @@ public class BmrCottonWoolRollService {
 				details.setStatus(AppConstantDryGoods.supervisorApprovedStatus);
 				details.setForm_no("PH-PRD04/F-008");
 				details.setSupervisor_id(userId);
-				
+
 				// GENERATE NEXT BATCH
 				if (details.getPo_comp_status().equalsIgnoreCase("OPEN")) {
 					String[] batchNoParts = details.getBatch_no().split("-");
@@ -238,7 +234,7 @@ public class BmrCottonWoolRollService {
 					log.info("*** !!! Current Batch No !!!***" + details.getBatch_no());
 					log.info("*** !!! Next Batch No !!!***" + details.getNextBatch());
 				}
-				
+
 				bmr001goodsproductiondetailsrepository.save(details);
 
 			}
@@ -286,7 +282,7 @@ public class BmrCottonWoolRollService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get " + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> SavePackingMeterialIssue(BMR03GoodsPackingMeterialIssue details, HttpServletRequest http) {
 
@@ -336,7 +332,7 @@ public class BmrCottonWoolRollService {
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 
 			if (role.equals("ROLE_SUPERVISOR")) {
-				
+
 				details.setForm_no("PH-PRD04/F-008");
 				details.setStatus(AppConstantDryGoods.supervisorApprovedStatus);
 
@@ -351,8 +347,6 @@ public class BmrCottonWoolRollService {
 				}
 			}
 
-			
-
 			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
@@ -366,8 +360,7 @@ public class BmrCottonWoolRollService {
 		}
 		return new ResponseEntity(details, HttpStatus.CREATED);
 	}
-	
-	
+
 	public ResponseEntity<?> GetPackingMeterial(String batch_no) {
 		List<BMR03GoodsPackingMeterialIssue> bmrSummaryDateList;
 
@@ -386,12 +379,12 @@ public class BmrCottonWoolRollService {
 		}
 	}
 
-	
 	public ResponseEntity<?> GetPackingMeterialPde(String batch_no, String fromdate, String todate) {
 		List<Map<String, Object>> GetPackingMeterialPde;
 
 		try {
-			GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository.getpackingmeterialpde(batch_no,fromdate ,todate);
+			GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository.getpackingmeterialpde(batch_no, fromdate,
+					todate);
 
 			return new ResponseEntity<>(GetPackingMeterialPde, HttpStatus.OK);
 
@@ -404,7 +397,6 @@ public class BmrCottonWoolRollService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get " + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-
 
 	// 5.0 EQUIPMENT PROCESS
 
@@ -1115,7 +1107,7 @@ public class BmrCottonWoolRollService {
 
 			}
 
-		 else {
+			else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
@@ -1302,40 +1294,34 @@ public class BmrCottonWoolRollService {
 				details.setSupervisor_id(userId);
 				bmr12goodspostprodreviewrepository.save(details);
 
-			}
-			else if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
+			} else if (role.equals("ROLE_HOD") || role.equals("ROLE_DESIGNEE")) {
 
-				if(details.getStatus().equals(AppConstantDryGoods.supervisorApprovedStatus)) {
-				
-				details.setForm_no("PH-PRD04/F-008");
-				details.setHod_id(userId);
-				details.setStatus(AppConstantDryGoods.hodApprovedStatus);
-				bmr12goodspostprodreviewrepository.save(details);
-				
-				}
-				else {
+				if (details.getStatus().equals(AppConstantDryGoods.supervisorApprovedStatus)) {
+
+					details.setForm_no("PH-PRD04/F-008");
+					details.setHod_id(userId);
+					details.setStatus(AppConstantDryGoods.hodApprovedStatus);
+					bmr12goodspostprodreviewrepository.save(details);
+
+				} else {
 					return new ResponseEntity(new ApiResponse(false, "Supervisior not yet Submitted"),
 							HttpStatus.BAD_REQUEST);
 				}
-				
-				
+
 			}
 
+			else if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			else if (role.equals("ROLE_QA")) {
-				
-				if(details.getStatus().equals(AppConstantDryGoods.hodApprovedStatus)) {
+				if (details.getStatus().equals(AppConstantDryGoods.hodApprovedStatus)) {
 
-				details.setForm_no("PH-PRD04/F-008");
-				details.setQa_id(userId);
-				details.setStatus(AppConstantDryGoods.qaApprovedStatus);
-				bmr12goodspostprodreviewrepository.save(details);
-			}
-				
-				
+					details.setForm_no("PH-PRD04/F-008");
+					details.setQa_id(userId);
+					details.setStatus(AppConstantDryGoods.qaApprovedStatus);
+					bmr12goodspostprodreviewrepository.save(details);
+				}
+
 				else {
-					return new ResponseEntity(new ApiResponse(false, "HOD not yet Submitted"),
-							HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, "HOD not yet Submitted"), HttpStatus.BAD_REQUEST);
 				}
 			}
 
@@ -1381,49 +1367,40 @@ public class BmrCottonWoolRollService {
 	public ResponseEntity<?> SaveQaRelease(BMR13GoodsQaRelease details, HttpServletRequest http) {
 		SCAUtil sca = new SCAUtil();
 		try {
-			
-			
-			
-			
+
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
-			if (role.equals("ROLE_QA")) {
-			
 
-			details.setForm_no("PH-PRD04/F-008");
-			details.setQa_id(userId);
-			details.setStatus(AppConstants.qaSave);
-			bmr13goodsqareleaserrepository.save(details);
+			if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
-				lineDetails.setRls_id(details.getRls_id());
-				bmr13goodsqareleaselinerepository.save(lineDetails);
-			}
-			}
-			else {
+				details.setForm_no("PH-PRD04/F-008");
+				details.setQa_id(userId);
+				details.setStatus(AppConstants.qaSave);
+				bmr13goodsqareleaserrepository.save(details);
+
+				for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
+					lineDetails.setRls_id(details.getRls_id());
+					bmr13goodsqareleaselinerepository.save(lineDetails);
+				}
+			} else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Save *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Save " + msg), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity(details, HttpStatus.CREATED);
 	}
-	
-	
-	
 
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> SubmitQaRelease(BMR13GoodsQaRelease details, HttpServletRequest http) {
 		SCAUtil sca = new SCAUtil();
 		try {
-			
-			
+
 			String value = "";
 			if (details.getBatch_no() == null) {
 				value = "BatchNo";
@@ -1436,30 +1413,28 @@ public class BmrCottonWoolRollService {
 				return new ResponseEntity(new ApiResponse(false, "Should Fill Mandatory Fields" + value),
 						HttpStatus.BAD_REQUEST);
 			}
-			
+
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
-			if (role.equals("ROLE_QA")) {
-			
 
-			details.setForm_no("PH-PRD04/F-008");
-			details.setQa_id(userId);
-			details.setStatus(AppConstants.qaApprovedStatus);
-			bmr13goodsqareleaserrepository.save(details);
+			if (role.equals("ROLE_QA") || role.equals("QA_MANAGER") || role.equals("QA_DESIGNEE")) {
 
-			for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
-				lineDetails.setRls_id(details.getRls_id());
-				bmr13goodsqareleaselinerepository.save(lineDetails);
-			}
-			}
-			else {
+				details.setForm_no("PH-PRD04/F-008");
+				details.setQa_id(userId);
+				details.setStatus(AppConstants.qaApprovedStatus);
+				bmr13goodsqareleaserrepository.save(details);
+
+				for (BMR13GoodsQaReleaseLine lineDetails : details.getDetails()) {
+					lineDetails.setRls_id(details.getRls_id());
+					bmr13goodsqareleaselinerepository.save(lineDetails);
+				}
+			} else {
 				return new ResponseEntity(new ApiResponse(false, role + "can not Submit  Details"),
 						HttpStatus.BAD_REQUEST);
 			}
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Save *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Save " + msg), HttpStatus.BAD_REQUEST);
@@ -1522,9 +1497,8 @@ public class BmrCottonWoolRollService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
-			
 
-			 if (role.equals("ROLE_QA")) {
+			if (role.equals("ROLE_QA")) {
 
 				details.setForm_no("PH-PRD04/F-008");
 				details.setQa_id(userId);
@@ -1573,7 +1547,7 @@ public class BmrCottonWoolRollService {
 		List<BMR001GoodsProductionDetails> bmr001goodsproductiondetails;
 
 		List<BMR03GoodsPackingMeterialIssue> bmr03goodspackingmeterialissue;
-		
+
 		List<BMR05GoodsEquipmentUsed> bmr05goodsequipmentused;
 
 		List<BMR06GoodsVerificationOfRecords> bmr06goodsverificationofrecords;
@@ -1593,11 +1567,11 @@ public class BmrCottonWoolRollService {
 		List<BMR14GoodsProductRelease> bmr14goodsproductrelease;
 
 		List<BudsBmrRework> reworkList;
-		
+
 		try {
 
 			bmr001goodsproductiondetails = bmr001goodsproductiondetailsrepository.GetProductionDetailsWool(batch_no);
-			bmr03goodspackingmeterialissue=bmr03goodspackingmeterialissuerepository.getDetails08(batch_no);
+			bmr03goodspackingmeterialissue = bmr03goodspackingmeterialissuerepository.getDetails08(batch_no);
 
 			bmr05goodsequipmentused = bmr05equipmentusedrepository.getProcessingEquipmentsWool(batch_no);
 
@@ -1621,11 +1595,12 @@ public class BmrCottonWoolRollService {
 			bmr14goodsproductrelease = bmr14goodsproductreleaserepository.GetProductReleaseWool(batch_no);
 
 			reworkList = reworkRepository.reworkListByBmrNumber(batch_no);
-			
-			BMRCottonWollRollResponcePrint response = new BMRCottonWollRollResponcePrint(bmr001goodsproductiondetails,bmr03goodspackingmeterialissue,
-					bmr05goodsequipmentused, bmr06goodsverificationofrecords, bmr07manufacturingstepscottonwoolroll,
-					bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment, bmr11goodslistofenclouser,
-					bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease, reworkList);
+
+			BMRCottonWollRollResponcePrint response = new BMRCottonWollRollResponcePrint(bmr001goodsproductiondetails,
+					bmr03goodspackingmeterialissue, bmr05goodsequipmentused, bmr06goodsverificationofrecords,
+					bmr07manufacturingstepscottonwoolroll, bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment,
+					bmr11goodslistofenclouser, bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease,
+					reworkList);
 
 //			
 
@@ -1640,10 +1615,8 @@ public class BmrCottonWoolRollService {
 		}
 	}
 
+	// New
 
-	
-	//New
-	
 //	public ResponseEntity<?> getProductionLOV() {
 //	    List<IdAndValuePair> valuePairList = new ArrayList<>();
 //	    List<String> productionDetailsList = new ArrayList<>();
@@ -1726,7 +1699,6 @@ public class BmrCottonWoolRollService {
 //	    }
 //	}
 
-	
 	public ResponseEntity<?> getProductionLOV() {
 		List<String> productionBatchDb = new ArrayList<>();
 		List<String> productionnextBatch = new ArrayList<>();
@@ -1778,8 +1750,7 @@ public class BmrCottonWoolRollService {
 		}
 		return new ResponseEntity(productionDetailsLov, HttpStatus.OK);
 	}
-	
-	
+
 	public ResponseEntity<?> getOrderLovOnBatchNo(String batchNo) {
 
 		List<String> orderList = new ArrayList<>();
@@ -1811,9 +1782,8 @@ public class BmrCottonWoolRollService {
 		return new ResponseEntity(valueList, HttpStatus.OK);
 	}
 
-
-
-	public ResponseEntity<?> getProductionResponseByBatchOrder(String batchNo, String orderNo, String fromDate, String toDate) {
+	public ResponseEntity<?> getProductionResponseByBatchOrder(String batchNo, String orderNo, String fromDate,
+			String toDate) {
 
 		List<Object[]> goodsDetailsResponse = new ArrayList<>();
 
@@ -1830,9 +1800,9 @@ public class BmrCottonWoolRollService {
 				System.out.println("Generated Number" + genNumber);
 				System.out.println(batchNumber);
 			}
-			
-			goodsDetailsResponse = bmr001goodsproductiondetailsrepository.productionResponseByBatchOrderWool(batchNumber,
-					orderNo);
+
+			goodsDetailsResponse = bmr001goodsproductiondetailsrepository
+					.productionResponseByBatchOrderWool(batchNumber, orderNo);
 
 			for (Object[] result : goodsDetailsResponse) {
 
@@ -1881,33 +1851,36 @@ public class BmrCottonWoolRollService {
 //					response.setPoQtyBox((BigDecimal) qty[1]);
 //
 //				}
-				
+
 				// Validate and parse fromDate and toDate
-	            LocalDate fromLocalDate = null;
-	            LocalDate toLocalDate = null;
+				LocalDate fromLocalDate = null;
+				LocalDate toLocalDate = null;
 
-	            if (fromDate != null && !fromDate.isEmpty()) {
-	                try {
-	                    fromLocalDate = LocalDate.parse(fromDate);
-	                } catch (DateTimeParseException e) {
-	                    return new ResponseEntity<>(new ApiResponse(false, "Invalid fromDate format: " + fromDate), HttpStatus.BAD_REQUEST);
-	                }
-	            } else {
-	                return new ResponseEntity<>(new ApiResponse(false, "fromDate cannot be null or empty"), HttpStatus.BAD_REQUEST);
-	            }
+				if (fromDate != null && !fromDate.isEmpty()) {
+					try {
+						fromLocalDate = LocalDate.parse(fromDate);
+					} catch (DateTimeParseException e) {
+						return new ResponseEntity<>(new ApiResponse(false, "Invalid fromDate format: " + fromDate),
+								HttpStatus.BAD_REQUEST);
+					}
+				} else {
+					return new ResponseEntity<>(new ApiResponse(false, "fromDate cannot be null or empty"),
+							HttpStatus.BAD_REQUEST);
+				}
 
-	            if (toDate != null && !toDate.isEmpty()) {
-	                try {
-	                    toLocalDate = LocalDate.parse(toDate);
-	                } catch (DateTimeParseException e) {
-	                    return new ResponseEntity<>(new ApiResponse(false, "Invalid toDate format: " + toDate), HttpStatus.BAD_REQUEST);
-	                }
-	            } else {
-	                return new ResponseEntity<>(new ApiResponse(false, "toDate cannot be null or empty"), HttpStatus.BAD_REQUEST);
-	            }
+				if (toDate != null && !toDate.isEmpty()) {
+					try {
+						toLocalDate = LocalDate.parse(toDate);
+					} catch (DateTimeParseException e) {
+						return new ResponseEntity<>(new ApiResponse(false, "Invalid toDate format: " + toDate),
+								HttpStatus.BAD_REQUEST);
+					}
+				} else {
+					return new ResponseEntity<>(new ApiResponse(false, "toDate cannot be null or empty"),
+							HttpStatus.BAD_REQUEST);
+				}
 
-	            
-	         // SPLIT BATCH_NO
+				// SPLIT BATCH_NO
 
 				BigDecimal farQuantityBag = BigDecimal.ZERO;
 				BigDecimal farQuantityBox = BigDecimal.ZERO;
@@ -1919,19 +1892,21 @@ public class BmrCottonWoolRollService {
 					farQuantityBag = bmr001goodsproductiondetailsrepository.soFarPackQtyBagWool(batchNumber);
 					farQuantityBox = bmr001goodsproductiondetailsrepository.soFarPackQtyBoxWool(batchNumber);
 				}
-	            
-	            // Fetch data for the given date range
-	            BigDecimal nbagDate = bmr001goodsproductiondetailsrepository.productionBagsOnDate(orderNo, fromLocalDate, toLocalDate);
-	            BigDecimal nocDate = bmr001goodsproductiondetailsrepository.productionBagNocOnDate(orderNo, fromLocalDate, toLocalDate);
-	            
-	            	// PACKED QTY IN BAGS AND BOXES
-	            BigDecimal packQtyBag = bmr001goodsproductiondetailsrepository.packedQtyInBags(orderNo);
-	            BigDecimal packQtyBox = bmr001goodsproductiondetailsrepository.packedQtyInBoxes(orderNo);
 
-	            response.setBagPackDate(nbagDate != null ? nbagDate.toString() : "--");
-	            response.setBoxPackDate(nocDate != null ? nocDate.toString() : "--");
-	            response.setBoxPackQty(packQtyBox);
-	            response.setBagPackQty(packQtyBag);
+				// Fetch data for the given date range
+				BigDecimal nbagDate = bmr001goodsproductiondetailsrepository.productionBagsOnDate(orderNo,
+						fromLocalDate, toLocalDate);
+				BigDecimal nocDate = bmr001goodsproductiondetailsrepository.productionBagNocOnDate(orderNo,
+						fromLocalDate, toLocalDate);
+
+				// PACKED QTY IN BAGS AND BOXES
+				BigDecimal packQtyBag = bmr001goodsproductiondetailsrepository.packedQtyInBags(orderNo);
+				BigDecimal packQtyBox = bmr001goodsproductiondetailsrepository.packedQtyInBoxes(orderNo);
+
+				response.setBagPackDate(nbagDate != null ? nbagDate.toString() : "--");
+				response.setBoxPackDate(nocDate != null ? nocDate.toString() : "--");
+				response.setBoxPackQty(packQtyBox);
+				response.setBagPackQty(packQtyBag);
 
 				list.add(response);
 			}
@@ -1949,190 +1924,191 @@ public class BmrCottonWoolRollService {
 		return new ResponseEntity(list, HttpStatus.OK);
 	}
 
-	
-	
 	// RECON
 
-		public ResponseEntity<?> productReconillation(String order, String fromdate, String todate) {
-		    Map<String, BigDecimal> productRecon = new HashMap<>();
-		    try {
-		        // Fetch input quantity
-		        BigDecimal inputQuantity = bmr001goodsproductiondetailsrepository.inputQuantity(order, fromdate, todate);
-		        
-		        // Fetch output rows
-		        List<Object[]> outputRows = bmr001goodsproductiondetailsrepository.outputQuantityQuery(order,fromdate, todate);
-		        
-		        BigDecimal outputString = BigDecimal.ZERO;
+	public ResponseEntity<?> productReconillation(String order, String fromdate, String todate) {
+		Map<String, BigDecimal> productRecon = new HashMap<>();
+		try {
+			// Fetch input quantity
+			BigDecimal inputQuantity = bmr001goodsproductiondetailsrepository.inputQuantity(order, fromdate, todate);
 
-		        // Calculate total output as sum of fbag * noc
-		        for (Object[] resp : outputRows) {
-		            BigDecimal fbag = (BigDecimal) resp[2];
-		            BigDecimal noc = (BigDecimal) resp[3];
-		            outputString = outputString.add(fbag.multiply(noc));
-		        }
+			// Fetch output rows
+			List<Object[]> outputRows = bmr001goodsproductiondetailsrepository.outputQuantityQuery(order, fromdate,
+					todate);
 
-		        log.info("**** !!!! Output Rows !!!! ****" + outputRows.size());
+			BigDecimal outputString = BigDecimal.ZERO;
 
-		        // Calculate yield (output/input * 100)
-		        BigDecimal yield = BigDecimal.ZERO;
-		        if (inputQuantity.compareTo(BigDecimal.ZERO) > 0) {  // Avoid division by zero
-		            yield = outputString.divide(inputQuantity, 4, RoundingMode.HALF_UP)
-		                                .multiply(BigDecimal.valueOf(100));
-		        }
+			// Calculate total output as sum of fbag * noc
+			for (Object[] resp : outputRows) {
+				BigDecimal fbag = (BigDecimal) resp[2];
+				BigDecimal noc = (BigDecimal) resp[3];
+				outputString = outputString.add(fbag.multiply(noc));
+			}
 
-		        // Store data in the map
-		        productRecon.put("input", inputQuantity);
-		        productRecon.put("output", outputString);
-		        productRecon.put("yield", yield);
+			log.info("**** !!!! Output Rows !!!! ****" + outputRows.size());
 
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Unable to Get Production Reconciliation Details: " + msg);
-		        ex.printStackTrace();
-		        return new ResponseEntity<>(new ApiResponse(false, "Failed to Get Production Reconciliation Details: " + msg),
-		                                    HttpStatus.BAD_REQUEST);
-		    }
+			// Calculate yield (output/input * 100)
+			BigDecimal yield = BigDecimal.ZERO;
+			if (inputQuantity.compareTo(BigDecimal.ZERO) > 0) { // Avoid division by zero
+				yield = outputString.divide(inputQuantity, 4, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
+			}
 
-		    // Return successful response
-		    return new ResponseEntity<>(productRecon, HttpStatus.OK);
+			// Store data in the map
+			productRecon.put("input", inputQuantity);
+			productRecon.put("output", outputString);
+			productRecon.put("yield", yield);
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to Get Production Reconciliation Details: " + msg);
+			ex.printStackTrace();
+			return new ResponseEntity<>(
+					new ApiResponse(false, "Failed to Get Production Reconciliation Details: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		public ResponseEntity<?> getStoppageOrders(String fromdate, String todate, String machine) {
-		    List<PadPunchingStoppageResponse> stoppageList = new ArrayList<>();
-		    
-		    try {
-		        List<Object[]> results = bmr001goodsproductiondetailsrepository.stoppageResponse(fromdate, todate, machine);
-		        
-		        stoppageList = results.stream().map(record -> {
-		            PadPunchingStoppageResponse response = new PadPunchingStoppageResponse();
-		            response.setPackdate((Date) record[0]);
-		            response.setShift((BigDecimal) record[1]);
-		            response.setType((String) record[2]);
-		            response.setMachine((String) record[3]);
-		            response.setFromTime((String) record[4]);
-		            response.setToTime((String) record[5]);
-		            response.setTotalTime((BigDecimal) record[7]);
-		            response.setRemarks((String) record[6]);
-		            return response;
-		        }).collect(Collectors.toList());
-		        
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Unable to get Stoppage Details: " + msg);
-		        ex.printStackTrace();
-		        
-		        return new ResponseEntity<>(new ApiResponse(false, "Failed to get stoppage records: " + msg), HttpStatus.BAD_REQUEST);
-		    }
-		    
-		    return new ResponseEntity<>(stoppageList, HttpStatus.OK);
+
+		// Return successful response
+		return new ResponseEntity<>(productRecon, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> getStoppageOrders(String fromdate, String todate, String machine) {
+		List<PadPunchingStoppageResponse> stoppageList = new ArrayList<>();
+
+		try {
+			List<Object[]> results = bmr001goodsproductiondetailsrepository.stoppageResponse(fromdate, todate, machine);
+
+			stoppageList = results.stream().map(record -> {
+				PadPunchingStoppageResponse response = new PadPunchingStoppageResponse();
+				response.setPackdate((Date) record[0]);
+				response.setShift((BigDecimal) record[1]);
+				response.setType((String) record[2]);
+				response.setMachine((String) record[3]);
+				response.setFromTime((String) record[4]);
+				response.setToTime((String) record[5]);
+				response.setTotalTime((BigDecimal) record[7]);
+				response.setRemarks((String) record[6]);
+				return response;
+			}).collect(Collectors.toList());
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to get Stoppage Details: " + msg);
+			ex.printStackTrace();
+
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to get stoppage records: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		
-		// STOPPAGE
-		
-		public ResponseEntity<?> dailyProductionDetails(String fromdate, String todate, String orderNo,String machine_name) {
-		    List<Map<String, Object>> stoppageResponse = new ArrayList<>();
 
-		    try {
-		        List<Object[]> results = bmr001goodsproductiondetailsrepository.fetchStoppagedetailsForF006(fromdate, todate, orderNo,machine_name);
+		return new ResponseEntity<>(stoppageList, HttpStatus.OK);
+	}
 
-		        for (Object[] result : results) {
-		            Map<String, Object> rowMap = new HashMap<>();
-		            rowMap.put("SCAUSE", result[0]);
-		            rowMap.put("FTime", result[1]);
-		            rowMap.put("TTime", result[2]);
-		            rowMap.put("TotHrs", result[3]);
-		            stoppageResponse.add(rowMap);
-		        }
+	// STOPPAGE
 
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Unable to get stoppage Details: " + msg);
-		        return new ResponseEntity<>(new ApiResponse(false, "Failed to get stoppage details: " + msg), HttpStatus.BAD_REQUEST);
-		    }
+	public ResponseEntity<?> dailyProductionDetails(String fromdate, String todate, String orderNo,
+			String machine_name) {
+		List<Map<String, Object>> stoppageResponse = new ArrayList<>();
 
-		    return new ResponseEntity<>(stoppageResponse, HttpStatus.OK);
+		try {
+			List<Object[]> results = bmr001goodsproductiondetailsrepository.fetchStoppagedetailsForF006(fromdate,
+					todate, orderNo, machine_name);
+
+			for (Object[] result : results) {
+				Map<String, Object> rowMap = new HashMap<>();
+				rowMap.put("SCAUSE", result[0]);
+				rowMap.put("FTime", result[1]);
+				rowMap.put("TTime", result[2]);
+				rowMap.put("TotHrs", result[3]);
+				stoppageResponse.add(rowMap);
+			}
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to get stoppage Details: " + msg);
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to get stoppage details: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		// FLEECE RECEIPT
-		
-		public ResponseEntity<?> getFleecetDetails(String fromdate, String todate, String orderNo) {
-	      
-			System.out.println("FORM "+ fromdate+todate+orderNo);
-			
-		    List<Map<String, Object>> responseList = new ArrayList<>();
 
-		    try {
-		        List<Object[]> orderResponse = bmr001goodsproductiondetailsrepository.fetchfleecetReceiptForF006(fromdate,todate,orderNo);
+		return new ResponseEntity<>(stoppageResponse, HttpStatus.OK);
+	}
 
-		        System.out.println("Call");
-		        
-		        // Convert each Object[] to a Map<String, Object>
-		        for (Object[] record : orderResponse) {
-		            Map<String, Object> map = new HashMap<>();
-		            map.put("rollNo", record[0]);
-		            map.put("width_in_mm", record[1]);
-		            map.put("gsm", record[2]);
-		            map.put("net_wt", record[3]);
-		          
-		            responseList.add(map);
-		        }
+	// FLEECE RECEIPT
 
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Unable to get Production Report: " + msg);
+	public ResponseEntity<?> getFleecetDetails(String fromdate, String todate, String orderNo) {
 
-		        return new ResponseEntity<>(new ApiResponse(false, "Failed to get Production Report: " + msg),
-		                HttpStatus.BAD_REQUEST);
-		    }
+		System.out.println("FORM " + fromdate + todate + orderNo);
 
-		    return new ResponseEntity<>(responseList, HttpStatus.OK);
+		List<Map<String, Object>> responseList = new ArrayList<>();
+
+		try {
+			List<Object[]> orderResponse = bmr001goodsproductiondetailsrepository.fetchfleecetReceiptForF006(fromdate,
+					todate, orderNo);
+
+			System.out.println("Call");
+
+			// Convert each Object[] to a Map<String, Object>
+			for (Object[] record : orderResponse) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("rollNo", record[0]);
+				map.put("width_in_mm", record[1]);
+				map.put("gsm", record[2]);
+				map.put("net_wt", record[3]);
+
+				responseList.add(map);
+			}
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to get Production Report: " + msg);
+
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to get Production Report: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		// HEADERS
-		
-		public ResponseEntity<?> getHeaderDetails(String orderNo) {
 
-		    List<Map<String, Object>> responseList = new ArrayList<>();
+		return new ResponseEntity<>(responseList, HttpStatus.OK);
+	}
 
-		    try {
-		        List<Object[]> orderResponse = bmr001goodsproductiondetailsrepository.fetchheaderdetailsForF006(orderNo);
+	// HEADERS
 
-		        // Convert each Object[] to a Map<String, Object>
-		        for (Object[] record : orderResponse) {
-		            Map<String, Object> map = new HashMap<>();
-		            map.put("customerName", record[0]);
-		            map.put("brand", record[1]);
-		            map.put("bagByBox", record[2]);
-		            map.put("grams", record[3]);
-		          
-		            responseList.add(map);
-		        }
+	public ResponseEntity<?> getHeaderDetails(String orderNo) {
 
-		    } catch (Exception ex) {
-		        String msg = ex.getMessage();
-		        log.error("Unable to get Production Report: " + msg);
+		List<Map<String, Object>> responseList = new ArrayList<>();
 
-		        return new ResponseEntity<>(new ApiResponse(false, "Failed to get Production Report: " + msg),
-		                HttpStatus.BAD_REQUEST);
-		    }
+		try {
+			List<Object[]> orderResponse = bmr001goodsproductiondetailsrepository.fetchheaderdetailsForF006(orderNo);
 
-		    return new ResponseEntity<>(responseList, HttpStatus.OK);
+			// Convert each Object[] to a Map<String, Object>
+			for (Object[] record : orderResponse) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("customerName", record[0]);
+				map.put("brand", record[1]);
+				map.put("bagByBox", record[2]);
+				map.put("grams", record[3]);
+
+				responseList.add(map);
+			}
+
+		} catch (Exception ex) {
+			String msg = ex.getMessage();
+			log.error("Unable to get Production Report: " + msg);
+
+			return new ResponseEntity<>(new ApiResponse(false, "Failed to get Production Report: " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		// CR 
-		
-		public ResponseEntity<?> submitProductReconillation(BMR10GoodsProductReconillation productReconillation, HttpServletRequest http) {
-			
-			SCAUtil scaUtil = new SCAUtil();
-			
-			try {
-				
+
+		return new ResponseEntity<>(responseList, HttpStatus.OK);
+	}
+
+	// CR
+
+	public ResponseEntity<?> submitProductReconillation(BMR10GoodsProductReconillation productReconillation,
+			HttpServletRequest http) {
+
+		SCAUtil scaUtil = new SCAUtil();
+
+		try {
+
 //				Long id = productReconillation.getId();
-				
+
 //				if(id == null) {
 //					
 //					String value = "";
@@ -2144,43 +2120,46 @@ public class BmrCottonWoolRollService {
 //					return new ResponseEntity(new ApiResponse(false, "Should Fill Mandaory Fields !!!" + value), HttpStatus.BAD_REQUEST);
 //					
 //				}
-				
-				productReconillation.setForm_no("WoolRoll");
-				
-				reconillationRepository.save(productReconillation);
-				
-			} catch(Exception ex) {
-				
-				log.error("***!!! Unable to Submit Product Reconillation !!! ***" + ex.getMessage());
-				ex.printStackTrace();;
-				
-				return new ResponseEntity(new ApiResponse(false, "Unable to submit product Reconillation" + ex.getMessage()), HttpStatus.BAD_REQUEST);
-				
-			}
-			
-			return new ResponseEntity(productReconillation, HttpStatus.OK);
-		}
-		
-		
-			// Fecth reconillation details by Batch Number
-		
-		public ResponseEntity<?> getProductReconillationForWoolRollByBatchNumber(String batchNo) {
-			
-			List<BMR10GoodsProductReconillation> reconillationList = new ArrayList<BMR10GoodsProductReconillation>();
-			
-			try {
-				
-				reconillationList = reconillationRepository.fetchReconillationRolls(batchNo);
-				
-			} catch(Exception ex) {
-				log.error("***!!! Unable to get Product Reconillation !!! ***" + ex.getMessage());
-				ex.printStackTrace();;
-				
-				return new ResponseEntity(new ApiResponse(false, "Unable to get product Reconillation" + ex.getMessage()), HttpStatus.BAD_REQUEST);
-			}
-			
-			return new ResponseEntity(reconillationList, HttpStatus.OK);
+
+			productReconillation.setForm_no("WoolRoll");
+
+			reconillationRepository.save(productReconillation);
+
+		} catch (Exception ex) {
+
+			log.error("***!!! Unable to Submit Product Reconillation !!! ***" + ex.getMessage());
+			ex.printStackTrace();
+			;
+
+			return new ResponseEntity(
+					new ApiResponse(false, "Unable to submit product Reconillation" + ex.getMessage()),
+					HttpStatus.BAD_REQUEST);
+
 		}
 
+		return new ResponseEntity(productReconillation, HttpStatus.OK);
+	}
+
+	// Fecth reconillation details by Batch Number
+
+	public ResponseEntity<?> getProductReconillationForWoolRollByBatchNumber(String batchNo) {
+
+		List<BMR10GoodsProductReconillation> reconillationList = new ArrayList<BMR10GoodsProductReconillation>();
+
+		try {
+
+			reconillationList = reconillationRepository.fetchReconillationRolls(batchNo);
+
+		} catch (Exception ex) {
+			log.error("***!!! Unable to get Product Reconillation !!! ***" + ex.getMessage());
+			ex.printStackTrace();
+			;
+
+			return new ResponseEntity(new ApiResponse(false, "Unable to get product Reconillation" + ex.getMessage()),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity(reconillationList, HttpStatus.OK);
+	}
 
 }
