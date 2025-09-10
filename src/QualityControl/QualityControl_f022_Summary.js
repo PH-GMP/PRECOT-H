@@ -44,7 +44,7 @@ const QualityControlF022Summary = () => {
   const getImage = (username, type) => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const QualityControlF022Summary = () => {
   useEffect(() => {
     const fetchData = async () => {
       // setLoading(true);
-      let url = `${ API.prodUrl}/Precot/api/chemicaltest/CLF022/getAll`;
+      let url = `${API.prodUrl}/Precot/api/chemicaltest/CLF022/getAll`;
 
       if (url) {
         try {
@@ -197,7 +197,7 @@ const QualityControlF022Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${ API.prodUrl}/Precot/api/chemicaltest/CLF022/print?`;
+    let apiUrl = `${API.prodUrl}/Precot/api/chemicaltest/CLF022/print?`;
 
     // Check if only selectedPrintDate is provided
     if (selectedPrintDate) {

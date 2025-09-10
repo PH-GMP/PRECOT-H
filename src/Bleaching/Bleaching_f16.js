@@ -108,7 +108,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -132,7 +132,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [cleaningRecordByDate, API.prodUrl, token]);
+}, [cleaningRecordByDate,API.prodUrl, token]);
 
 useEffect(() => {
   const token = localStorage.getItem("token");
@@ -142,7 +142,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -166,7 +166,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [cleaningRecordByDate, API.prodUrl, token]);
+}, [cleaningRecordByDate,API.prodUrl, token]);
 
 const formattedDate1 = `${day}/${month}/${year}`;
 
@@ -432,7 +432,7 @@ const canDisplayButton2 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/SaveMachineCleaningRecord`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/SaveMachineCleaningRecord`,
         payload,
         { headers }
       );
@@ -501,7 +501,7 @@ const canDisplayButton2 = () => {
 
 
     const response = await axios.post(
-      `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/SubmitMachineCleaningRecord`,
+      `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/SubmitMachineCleaningRecord`,
       payload,
       { headers }
     );
@@ -547,7 +547,7 @@ const canDisplayButton2 = () => {
       "Content-Type": "application/json", 
     };
 
-    const res = await axios.put(`${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/approveOrReject`,
+    const res = await axios.put(`${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/approveOrReject`,
       {
         id : recordId,
         status: "Approve"
@@ -582,7 +582,7 @@ const canDisplayButton2 = () => {
     }
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/approveOrReject`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/approveOrReject`,
         {
           id: recordId,
           status: "Reject",
@@ -610,7 +610,7 @@ const canDisplayButton2 = () => {
       console.log("stored Date inside Api", date);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/getByDate?date=${date}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/getByDate?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

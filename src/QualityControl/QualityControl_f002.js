@@ -174,7 +174,7 @@ const QCLF002 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/qc/SaveSampleInwardBookF1F2F3`,
+        `${   API.prodUrl}/Precot/api/qc/SaveSampleInwardBookF1F2F3`,
         payload,
         {
           headers: {
@@ -204,7 +204,7 @@ const QCLF002 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetByDateF002?dateF002=${date}`,
+          `${   API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetByDateF002?dateF002=${date}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -226,7 +226,7 @@ const QCLF002 = () => {
             //getImage
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -354,7 +354,7 @@ const QCLF002 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitSampleInwardBookF1F2F3`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitSampleInwardBookF1F2F3`,
         payload,
         {
           headers: {

@@ -121,7 +121,7 @@ const DryGoods_F011 = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -157,7 +157,7 @@ const DryGoods_F011 = () => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/drygoods/fetchRecordSignature`,
+        `${API.prodUrl}/Precot/api/drygoods/fetchRecordSignature`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -271,7 +271,7 @@ const DryGoods_F011 = () => {
 
     try {
       const response = await axios.delete(
-        `${ API.prodUrl}/Precot/api/drygoods/deleteGoodsTransferLine?id=${rowId}`,
+        `${API.prodUrl}/Precot/api/drygoods/deleteGoodsTransferLine?id=${rowId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -297,7 +297,7 @@ const DryGoods_F011 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -331,7 +331,7 @@ const DryGoods_F011 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/drygoods/getdetailsbyParamF011?date=${date}&shift=${shiftvalue}`,
+          `${API.prodUrl}/Precot/api/drygoods/getdetailsbyParamF011?date=${date}&shift=${shiftvalue}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -404,7 +404,7 @@ const DryGoods_F011 = () => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/drygoods/savefinishedgoodsDetailsF011`,
+        `${API.prodUrl}/Precot/api/drygoods/savefinishedgoodsDetailsF011`,
         payload,
         {
           headers: {
@@ -479,7 +479,7 @@ const DryGoods_F011 = () => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/drygoods/submitfinishedgoodsDetailsF011`,
+        `${API.prodUrl}/Precot/api/drygoods/submitfinishedgoodsDetailsF011`,
         payload,
         {
           headers: {

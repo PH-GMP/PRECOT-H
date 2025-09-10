@@ -78,7 +78,7 @@ const Spunlace_f19_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Spunlace_f19_Summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = printResponseData?.hod_sign;
@@ -111,7 +111,7 @@ const Spunlace_f19_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const Spunlace_f19_Summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const findReason = () => {
@@ -211,7 +211,7 @@ const Spunlace_f19_Summary = () => {
   //     try {
   //       setDatePrint(event.target.value);
   //       axios.get(
-  //         `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDatePrintApi?date=${event.target.value}`,
+  //         `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDatePrintApi?date=${event.target.value}`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,
@@ -270,7 +270,7 @@ const Spunlace_f19_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/getSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/getSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -421,7 +421,7 @@ const Spunlace_f19_Summary = () => {
       setSiftPrint(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/findByDateShiftPrintApi?date=${datePrint}&shift=${value}`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/findByDateShiftPrintApi?date=${datePrint}&shift=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -454,7 +454,7 @@ const Spunlace_f19_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",

@@ -130,7 +130,7 @@ const DryGoods_F002 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -331,7 +331,7 @@ const DryGoods_F002 = () => {
       const fetchDatas = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
+            `${API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -425,7 +425,7 @@ const DryGoods_F002 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Drygoods/Service/getSliverdetailsbyF02?date=${newdate}&shift=${shiftvalue}&machine_name=${machineName}&order_no=${order_no}`,
+            `${API.prodUrl}/Precot/api/Drygoods/Service/getSliverdetailsbyF02?date=${newdate}&shift=${shiftvalue}&machine_name=${machineName}&order_no=${order_no}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -530,7 +530,7 @@ const DryGoods_F002 = () => {
         }
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/api/sliverStoppage?date=${newdate}&shift=${pdeShift}&machine_name=${machineName}`,
+            `${API.prodUrl}/Precot/api/goods/api/sliverStoppage?date=${newdate}&shift=${pdeShift}&machine_name=${machineName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -555,7 +555,7 @@ const DryGoods_F002 = () => {
       const fetchPDEDataLOV = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/getSliver`,
+            `${API.prodUrl}/Precot/api/goods/getSliver`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -637,7 +637,7 @@ const DryGoods_F002 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/saveSliverDetails02`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/saveSliverDetails02`,
         payload,
         { headers }
       )
@@ -826,7 +826,7 @@ const DryGoods_F002 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/submitSliverDetails02`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/submitSliverDetails02`,
         payload,
         { headers }
       )
@@ -853,7 +853,7 @@ const DryGoods_F002 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject`,
         {
           id: sliverId,
           status: "Approve",
@@ -891,7 +891,7 @@ const DryGoods_F002 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrReject`,
         {
           id: sliverId,
           status: "Reject",

@@ -418,7 +418,7 @@ const QualityAssurance_f047_Summary = () => {
       <BleachingHeader
         unit="Unit H"
         formName="BATCH RELEASE CHECKLIST"
-        formatNo="PH-QAD01-F-047"
+        formatNo="PH-QAD01/F-047"
         MenuBtn={
           <Button
             type="primary"
@@ -779,7 +779,7 @@ const QualityAssurance_f047_Summary = () => {
                       Format No.:
                     </td>
                     <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                      PH-QAD01-F-047
+                      PH-QAD01/F-047
                     </td>
                   </tr>
                   <tr>

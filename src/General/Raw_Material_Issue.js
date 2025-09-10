@@ -140,7 +140,7 @@ const Raw_Material_Issue = () => {
       "Content-Type": "application/json", // Adjust content type if needed
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/summary/chemicalDetailsbyBmr`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/summary/chemicalDetailsbyBmr`, {
         headers,
         params: {
           bmr_no: values,
@@ -380,7 +380,7 @@ const Raw_Material_Issue = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleaching/summary/createChemicals`,
+        `${API.prodUrl}/Precot/api/bleaching/summary/createChemicals`,
         payload,
         { headers }
       )
@@ -563,7 +563,7 @@ const Raw_Material_Issue = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleaching/summary/SubmitChemicals`,
+        `${API.prodUrl}/Precot/api/bleaching/summary/SubmitChemicals`,
         payload,
         { headers }
       )
@@ -1026,7 +1026,7 @@ const Raw_Material_Issue = () => {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`, {
         headers,
       })
       .then((res) => {
@@ -1053,7 +1053,7 @@ const Raw_Material_Issue = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getSupervisor?departmentId=1`,
+        `${API.prodUrl}/Precot/api/Users/Service/getSupervisor?departmentId=1`,
         {
           headers,
         }
@@ -1084,7 +1084,7 @@ const Raw_Material_Issue = () => {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/bleachStorePersons/getAll`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/bleachStorePersons/getAll`, {
         headers,
       })
       .then((res) => {

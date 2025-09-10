@@ -30,7 +30,7 @@ const QA_F013_Summary = () => {
   const navigate = useNavigate();
   const navigateForward = "/Precot/QA/QA_F013";
   const formName = "INTERNAL AUDIT NC REPORT";
-  const formatNo = "PH-QAD01-F-013";
+  const formatNo = "PH-QAD01/F-013";
   const role = localStorage.getItem("role");
   const [open, setOpen] = useState(false);
   const pageSize = 9;
@@ -56,7 +56,7 @@ const QA_F013_Summary = () => {
     {
       unit: "UNIT H",
       formatName: "Internal Audit NC Report",
-      formatNo: "PH-QAD01-F-013",
+      formatNo: "PH-QAD01/F-013",
       revisionNo: 2,
       sopNumber: "PH-QAD01-D-17",
       auditYear: "",
@@ -854,7 +854,7 @@ const QA_F013_Summary = () => {
                     Internal Audit NC Report (Non-Confirmity Sheet)
                   </th>
                   <th style={{ width: "40px" }}>Format No:</th>
-                  <th>PH-QAD01-F-013</th>
+                  <th>PH-QAD01/F-013</th>
                 </tr>
                 <tr>
                   <th style={{ width: "40px" }}>Revision No:</th>

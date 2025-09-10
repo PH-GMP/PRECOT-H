@@ -249,7 +249,7 @@ const QA_f06 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage1(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [DetailsByParam, API.prodUrl, token]);
   useEffect(() => {
@@ -277,7 +277,7 @@ const QA_f06 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [DetailsByParam, API.prodUrl, token]);
 
@@ -315,10 +315,7 @@ const QA_f06 = () => {
   const roleauth = localStorage.getItem("role");
   const disabled =
     roleauth === "ROLE_MR" ||
-    roleauth === "QA_MANAGER" ||
-    (roleauth === "ROLE_DESIGNEE" &&
-      DetailsByParam?.qaDesigneeStatus === "QA_DESIGNIEE_SUBMITTED" &&
-      DetailsByParam?.qaManagerMrStatus !== "QA_MANAGER_MR_REJECTED");
+    roleauth === "QA_MANAGER";
 
   const showDrawer = () => {
     setOpen(true);
@@ -340,14 +337,14 @@ const QA_f06 = () => {
           DetailsByParam?.qaManagerMrStatus == "WAITING_FOR_APPROVAL") ||
         DetailsByParam?.qaManagerMrStatus == "QA_MANAGER_MR_APPROVED"
       ) {
-        return "none";
+        return "block";
       }
     } else if (role == "QA_MANAGER" || role == "ROLE_MR") {
       if (
         DetailsByParam?.qaManagerMrStatus == "QA_MANAGER_MR_APPROVED" ||
         DetailsByParam?.qaManagerMrStatus == "QA_MANAGER_MR_REJECTED"
       ) {
-        return "none";
+        return "block";
       }
       return "block";
     }
@@ -454,16 +451,7 @@ const QA_f06 = () => {
       console.error("Error submitting Record..", error);
     }
   };
-  const handleConfirmSubmit = () => {
-    Modal.confirm({
-      title: "Are you sure you want to submit?",
-      content:
-        "Once submitted, this cannot be edited again. Please confirm if you want to proceed.",
-      okText: "Yes, Submit",
-      cancelText: "Cancel",
-      onOk: handleSubmit,
-    });
-  };
+
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -527,7 +515,7 @@ const QA_f06 = () => {
     try {
       const payload = {
         formatName: "TRAINING CALENDAR",
-        formatNo: "PH-QAD01-F-006",
+        formatNo: "PH-QAD01/F-006",
         revisionNo: 1,
         sopNumber: "PH-QAD01-D-15",
         unit: "Unit H",
@@ -606,7 +594,7 @@ const QA_f06 = () => {
               await axios.post(
                 `${API.prodUrl}/Precot/api/QA/Service/trainingCalendar/addTrainingTopic`,
                 {
-                  formatNo: "PH-QAD01-F-006",
+                  formatNo: "PH-QAD01/F-006",
                   topic: topic,
                 },
                 { headers }
@@ -641,7 +629,7 @@ const QA_f06 = () => {
     try {
       const payload = {
         formatName: "TRAINING CALENDAR",
-        formatNo: "PH-QAD01-F-006",
+        formatNo: "PH-QAD01/F-006",
         revisionNo: 1,
         sopNumber: "PH-QAD01-D-15",
         unit: "Unit H",
@@ -720,7 +708,7 @@ const QA_f06 = () => {
               await axios.post(
                 `${API.prodUrl}/Precot/api/QA/Service/trainingCalendar/addTrainingTopic`,
                 {
-                  formatNo: "PH-QAD01-F-006",
+                  formatNo: "PH-QAD01/F-006",
                   topic: topic,
                 },
                 { headers }
@@ -1463,40 +1451,40 @@ const QA_f06 = () => {
               >
                 {DetailsByParam?.qaDesigneeStatus ===
                   "QA_DESIGNIEE_SUBMITTED" && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{DetailsByParam?.qaDesigneeSign}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <div>
-                          {formattedDateWithTime(
-                            DetailsByParam?.qaDesigneeSubmitOn
-                          )}
+                          {" "}
+                          <div>{DetailsByParam?.qaDesigneeSign}</div>
+                          <div>
+                            {formattedDateWithTime(
+                              DetailsByParam?.qaDesigneeSubmitOn
+                            )}
+                          </div>
                         </div>
+                        {getImage1 && (
+                          <img
+                            src={getImage1}
+                            alt="Designee Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "center",
+                            }}
+                          />
+                        )}
                       </div>
-                      {getImage1 && (
-                        <img
-                          src={getImage1}
-                          alt="Designee Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
               </td>
               <td
                 colSpan="50"
@@ -1509,41 +1497,41 @@ const QA_f06 = () => {
                 {(DetailsByParam?.qaManagerMrStatus ===
                   "QA_MANAGER_MR_APPROVED" ||
                   DetailsByParam?.qaManagerMrStatus ===
-                    "QA_MANAGER_MR_REJECTED") && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{DetailsByParam?.qaManagerMrSign}</div>
+                  "QA_MANAGER_MR_REJECTED") && (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
                         <div>
-                          {formattedDateWithTime(
-                            DetailsByParam?.qaManagerMrSubmitOn
-                          )}
+                          {" "}
+                          <div>{DetailsByParam?.qaManagerMrSign}</div>
+                          <div>
+                            {formattedDateWithTime(
+                              DetailsByParam?.qaManagerMrSubmitOn
+                            )}
+                          </div>
                         </div>
+                        {getImage2 && (
+                          <img
+                            src={getImage2}
+                            alt="MR/QA Manager Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "center",
+                            }}
+                          />
+                        )}
                       </div>
-                      {getImage2 && (
-                        <img
-                          src={getImage2}
-                          alt="MR/QA Manager Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
@@ -1563,7 +1551,7 @@ const QA_f06 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING CALENDAR"
-        formatNo="PH-QAD01-F-006"
+        formatNo="PH-QAD01/F-006"
         sopNo="PH-QAD01-D-15"
         MenuBtn={
           <Button
@@ -1633,7 +1621,7 @@ const QA_f06 = () => {
                   display: canDisplayButtons(),
                 }}
                 icon={<GrDocumentStore color="#00308F" />}
-                onClick={handleConfirmSubmit}
+                onClick={handleSubmit}
                 shape="round"
               >
                 &nbsp;Submit

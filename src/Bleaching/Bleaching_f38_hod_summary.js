@@ -138,7 +138,7 @@ const Bleaching_f38_hod_summary = () => {
     const fetchFromBmr = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getFromBmr?month=${monthNumber}&year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getFromBmr?month=${monthNumber}&year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -161,7 +161,7 @@ const Bleaching_f38_hod_summary = () => {
     const fetchToBmr = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getToBmr?month=${monthNumber}&year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getToBmr?month=${monthNumber}&year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -241,8 +241,8 @@ const Bleaching_f38_hod_summary = () => {
     try {
       axios
         .get(
-          // `${ API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38Print?month=${monthP}&year=${yearP}&date=${dateP}`,
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getPrintF38?month=${monthNumber}&year=${yearPrint}&fromBmr=${selectedFromBmr}&toBmr=${selectedToBmr}`,
+          // `${API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38Print?month=${monthP}&year=${yearP}&date=${dateP}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getPrintF38?month=${monthNumber}&year=${yearPrint}&fromBmr=${selectedFromBmr}&toBmr=${selectedToBmr}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -275,7 +275,7 @@ const Bleaching_f38_hod_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -299,7 +299,7 @@ const Bleaching_f38_hod_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage, setGetImage] = useState("");
 
@@ -311,7 +311,7 @@ const Bleaching_f38_hod_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -335,7 +335,7 @@ const Bleaching_f38_hod_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -349,7 +349,7 @@ const Bleaching_f38_hod_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -373,7 +373,7 @@ const Bleaching_f38_hod_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const handleYearChange = (value) => {
     setYearPrint(value);
@@ -398,7 +398,7 @@ const Bleaching_f38_hod_summary = () => {
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getAllMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getAllMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -418,7 +418,7 @@ const Bleaching_f38_hod_summary = () => {
     setPrintByDate(event.target.value);
     const a = String(event.target.value).split("-").reverse().join("/");
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38?date=${a}`, {
+      .get(`${API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38?date=${a}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -538,7 +538,7 @@ const Bleaching_f38_hod_summary = () => {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getHodSummeryF38`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getHodSummeryF38`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

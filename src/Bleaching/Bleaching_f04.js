@@ -292,7 +292,7 @@ const [rejectRemarks, setRejectRemarks] = useState("");
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -316,7 +316,7 @@ const [rejectRemarks, setRejectRemarks] = useState("");
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [supervisorSign, API.prodUrl, token]);
+  }, [supervisorSign,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -328,7 +328,7 @@ const [rejectRemarks, setRejectRemarks] = useState("");
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -352,7 +352,7 @@ const [rejectRemarks, setRejectRemarks] = useState("");
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [hodSign, API.prodUrl, token]);
+  }, [hodSign,API.prodUrl, token]);
 
   useEffect(() => {
     // console.log("routeState", state);
@@ -388,7 +388,7 @@ const [rejectRemarks, setRejectRemarks] = useState("");
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/getAppliedRawCottonByBmrNumberF04?bmrNumber=${state.bmrno}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/getAppliedRawCottonByBmrNumberF04?bmrNumber=${state.bmrno}`,
         { headers }
       )
       .then((res) => {
@@ -768,7 +768,7 @@ const handleApprove = async () => {
 
   const res = await axios
     .put(
-      `${ API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF04`,
+      `${API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF04`,
       {
         id: overallRawId,
         status: "Approve",
@@ -814,7 +814,7 @@ const handleReject = async () => {
 
   const res = await axios
     .put(
-      `${ API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF04`,
+      `${API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF04`,
       {
         id: overallRawId,
         status: "Reject",
@@ -1186,7 +1186,7 @@ selectedRow?.hod_status === "HOD_APPROVED";
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/saveAppliedRawCottonF04`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/saveAppliedRawCottonF04`,
           payload,
           { headers }
         )
@@ -1479,7 +1479,7 @@ selectedRow?.hod_status === "HOD_APPROVED";
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/saveAppliedRawCottonF04`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/saveAppliedRawCottonF04`,
           payload,
           { headers }
         )
@@ -1776,7 +1776,7 @@ selectedRow?.hod_status === "HOD_APPROVED";
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/submitAppliedRawCottonF04`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/submitAppliedRawCottonF04`,
         payload,
         { headers }
       )

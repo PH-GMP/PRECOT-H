@@ -42,8 +42,8 @@ const QAD01_005 = () => {
 `;
 
   const [selectedRow, setSelectedRow] = useState(null);
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [departments, setDepartments] = useState([]);
   const [newModal, setNewModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [opsignprint, setopsignprint] = useState("");
@@ -59,7 +59,6 @@ const QAD01_005 = () => {
   const [apiData, setApiData] = useState(null);
   const [selectedYear, setSelectedYear] = useState("Select Year");
   const [shift, setShift] = useState(null);
-  const [deaprtment, setdepartment] = useState([]);
   const initial = useRef(false);
   const [printDate, setPrintDate] = useState("");
   const [printShift, setPrintShift] = useState("");
@@ -102,7 +101,7 @@ const QAD01_005 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [printResponseData, API.prodUrl]);
 
@@ -133,16 +132,16 @@ const QAD01_005 = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage1(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [printResponseData, API.prodUrl]);
 
   const formattedDate = printResponseData?.date
     ? new Date(printResponseData.date).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      })
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
     : "";
   const formattedDateHod = () => {
     if (printResponseData?.hod_submit_on) {
@@ -191,13 +190,10 @@ const QAD01_005 = () => {
   };
 
   useEffect(() => {
-    if (!initial.current) {
-      initial.current = true;
+    departmentsObject()
+  }, [])
 
-      fetchdata_departmentid();
-    }
-  }, []);
-  const fetchdata_departmentid = async () => {
+  const departmentsObject = async () => {
     try {
       const response = await axios.get(
         `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
@@ -207,33 +203,20 @@ const QAD01_005 = () => {
           },
         }
       );
-      let dep_id = localStorage.getItem("departmentId");
-
-      const foundDepartment = response.data?.find((dept) => {
-        // Log each department ID
-
-        const numericDepId = Number(dep_id);
-
-        if (dept.id === numericDepId) {
-          // Log if ID is found
-
-          return true; // Return true to indicate a match
-        } else {
-          // Log if ID is not found
-          return false; // Return false to continue searching
-        }
-      });
-
-      if (foundDepartment) {
-        setdepartment(foundDepartment.department);
-        fetchData_dep_by_id(foundDepartment.department);
-      } else {
-        setdepartment("Department not found");
+      if (response.data) {
+        console.log("first")
+        const departmentMap = Object.fromEntries(
+          response.data.map(dept => [dept.id, dept.department])
+        );
+        console.log("departmentMap", departmentMap)
+        fetchData_dep_by_id(departmentMap);
+        setDepartments(response.data);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
   useEffect(() => {
     const findReason = () => {
       for (const data of filteredData) {
@@ -251,16 +234,26 @@ const QAD01_005 = () => {
     window.print();
     setShowModal(false);
   };
-  const fetchData_dep_by_id = async (department) => {
+
+  const fetchData_dep_by_id = async (departmentMap) => {
+    const storedIds = localStorage.getItem("departmentId");
+    const DepartmentName = storedIds
+      ?.split(",")
+      .map((id) => departmentMap[parseInt(id)])
+      .filter(Boolean)
+      .join(",");
+
+    const SUMMARY_ACCESS = DepartmentName?.includes("QUALITY_ASSURANCE");
+    console.log("const SUMMARY_ACCESS = DepartmentName?.includes(QUALITY_ASSURANCE);")
+    console.log("SUMMARY_ACCESS", SUMMARY_ACCESS)
     if (
-      (roleBase === "ROLE_HOD" && department !== "QUALITY_ASSURANCE") ||
-      (roleBase === "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
+      (roleBase === "ROLE_HOD" && !SUMMARY_ACCESS) ||
+      (roleBase === "ROLE_DESIGNEE" && !SUMMARY_ACCESS)
     ) {
       try {
         setLoading(true);
-
         const response = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/TrainingNeedIdentificationForm/HodSummary?department=${department}`,
+          `${API.prodUrl}/Precot/api/QA/Service/TrainingNeedIdentificationForm/HodSummary?department=${DepartmentName}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -268,7 +261,6 @@ const QAD01_005 = () => {
           }
         );
 
-        // If the request is successful, handle the response data
         if (
           response.data &&
           (response.data.length > 0 || response.data.length === undefined)
@@ -279,7 +271,7 @@ const QAD01_005 = () => {
         if (error.response && error.response.status === 403) {
           message.warning("You do not have permission to access this form.");
           setTimeout(() => {
-            navigate("/Precot/choosenScreen"); // Redirect to the summary page
+            navigate("/Precot/choosenScreen");
           }, 1500);
         } else {
           console.error("Error fetching data:", error);
@@ -288,12 +280,12 @@ const QAD01_005 = () => {
         setLoading(false);
       }
     } else if (
-      (roleBase === "QA_MANAGER" && department === "QUALITY_ASSURANCE") ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+      (roleBase === "QA_MANAGER" && SUMMARY_ACCESS) ||
+      (roleBase === "ROLE_DESIGNEE" && SUMMARY_ACCESS)
     ) {
+      console.log("(roleBase === QA_MANAGER && SUMMARY_ACCESS) ||  (roleBase === ROLE_DESIGNEE && SUMMARY_ACCESS)")
       try {
         setLoading(true);
-
         const response = await axios.get(
           `${API.prodUrl}/Precot/api/QA/Service/TrainingNeedIdentificationForm/QaManagerSummary`,
           {
@@ -343,8 +335,25 @@ const QAD01_005 = () => {
         const shifts = res.data.map((shift) => shift.value);
         setShiftOptions(res.data);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
+
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTEN_BUDS",
+    13: "MARKETING",
+    14: "HR",
+  };
 
   const handleGoToChange = () => {
     if (
@@ -356,36 +365,68 @@ const QAD01_005 = () => {
       return;
     }
 
+    if (
+      !selectedDepartment
+    ) {
+      message.warning("Please Select Department");
+      return;
+    }
+
+    //single department user conditon check
+    const storedIds = localStorage.getItem("departmentId");
+
+    let singleDepartmentId = null;
+
+    if (storedIds && !storedIds.includes(",")) {
+      singleDepartmentId = storedIds;
+    }
+
+    if (singleDepartmentId && selectedDepartment != departmentMap[singleDepartmentId]) {
+      message.warning("Please Select Your Current Department");
+      return;
+    }
+
+    //multiple department user check
+    const DepartmentName = storedIds
+      ?.split(",")
+      .map((id) => departmentMap[parseInt(id)])
+      .filter(Boolean)
+      .join(",");
+
+    console.log("DepartmentName", DepartmentName);
+    console.log("DepartmentName?.includes(selectedDepartment)", DepartmentName?.includes(selectedDepartment))
+
+    // Check if selected department id is in the list
+    if (!DepartmentName?.includes(selectedDepartment)) {
+      message.warning("Selected department is not in your department list");
+      return;
+    }
+
     navigate("/Precot/QualityAssurance/QA_F005", {
       state: {
-        departments: shift,
+        department: selectedDepartment,
         years: selectedYear,
       },
     });
   };
 
   const handleEdit = (record) => {
-    const { shift, date } = record;
+
     navigate("/Precot/QualityAssurance/QA_F005", {
       state: {
-        departments: record.department,
+        department: record.department,
         years: record.year,
       },
     });
 
     const x = cakingData.filter((x, i) => {
       return record.formatNo == formatNo;
-      navigate("/Precot/QA/F015");
     });
     setNewStatus(x);
     setModalData(record);
     setNewModal(true);
   };
 
-  const handleShiftChange = (value) => {
-    setShift(value);
-    setGotobtn(false);
-  };
 
   const handleYear = (value) => {
     setSelectedYear(value);
@@ -488,7 +529,7 @@ const QAD01_005 = () => {
                 [reportIndex]: url,
               }));
             })
-            .catch((err) => {});
+            .catch((err) => { });
         }
 
         // Similarly, fetch and set image for supervisor_sign
@@ -518,7 +559,7 @@ const QAD01_005 = () => {
                 [reportIndex]: url,
               }));
             })
-            .catch((err) => {});
+            .catch((err) => { });
         }
       });
   };
@@ -661,7 +702,7 @@ const QAD01_005 = () => {
                 TRAINING NEED IDENTIFICATION FORM
               </th>
               <td colSpan="15">Format No.:</td>
-              <td colSpan="40">PH-QAD01-F-005</td>
+              <td colSpan="40">PH-QAD01/F-005</td>
             </tr>
             <tr>
               <td colSpan="15">Revision No.:</td>
@@ -1163,7 +1204,7 @@ const QAD01_005 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING NEED IDENTIFICATION FORM"
-        formatNo="PH-QAD01-F-005"
+        formatNo="PH-QAD01/F-005"
         MenuBtn={
           <Button
             type="primary"
@@ -1276,24 +1317,23 @@ const QAD01_005 = () => {
             ))}
           </Select>
 
-          <label style={{ marginRight: "10px", display: "none" }}>
-            Department:
-          </label>
+          <label style={{ marginRight: "10px" }}>Select Department</label>
           <Select
             placeholder="Select Department"
-            value={shift}
-            onChange={handleShiftChange}
-            style={{
-              width: 200,
-              fontWeight: "bold",
-              marginRight: "30px",
-              display: "none",
+            value={selectedDepartment}
+            onChange={(value) => {
+              setSelectedDepartment(value);
             }}
+            style={{ width: "180px", textAlign: "center" }}
           >
-            {shiftOptions.map((shift) => (
-              <Option key={shift.id} value={shift.department}>
-                {shift.department}
-              </Option>
+            {departments.map((dept) => (
+              <Select.Option
+                key={dept.department}
+                value={dept.department}
+                style={{ textAlign: "center" }}
+              >
+                {dept.department}
+              </Select.Option>
             ))}
           </Select>
 

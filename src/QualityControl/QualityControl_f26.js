@@ -166,7 +166,7 @@ const QualityControl_f26 = () => {
 
         axios
           .get(
-            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -206,7 +206,7 @@ const QualityControl_f26 = () => {
     const baleLovApi = async () => {
       try {
         const response = await axios.get(
-          `${   API.prodUrl}/Precot/api/QcForm/BaleNo`,
+          `${  API.prodUrl}/Precot/api/QcForm/BaleNo`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -230,7 +230,7 @@ const QualityControl_f26 = () => {
   const prodDate = async (value) => {
     try {
       const response = await axios.get(
-        `${   API.prodUrl}/Precot/api/QcForm/PackDt?baleNo=${value}`,
+        `${  API.prodUrl}/Precot/api/QcForm/PackDt?baleNo=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -266,7 +266,7 @@ const QualityControl_f26 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${   API.prodUrl}/Precot/api/QcForm/getAbCottton?product=${productName}&customer=${customerName}`,
+            `${  API.prodUrl}/Precot/api/QcForm/getAbCottton?product=${productName}&customer=${customerName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -581,7 +581,7 @@ const QualityControl_f26 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SaveAbCottonF26`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/SaveAbCottonF26`;
       payload = {
         formatNo: "PH-QCL01-F-026",
         revisionNo: "01",
@@ -660,7 +660,7 @@ const QualityControl_f26 = () => {
       role == "QA_MANAGER" ||
       role == "QC_MANAGER"
     ) {
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.id,
@@ -803,7 +803,7 @@ const QualityControl_f26 = () => {
         return;
       }
 
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SubmitAbCottonF26`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/SubmitAbCottonF26`;
       payload = {
         formatNo: "PH-QCL01-F-026",
         revisionNo: "",
@@ -887,7 +887,7 @@ const QualityControl_f26 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26`;
       payload = {
         id: formData.id,
         status: "Reject",

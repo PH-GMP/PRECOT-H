@@ -125,7 +125,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-010",
+          formatNo: "PH-QAD01/F-010",
           formatName: "INTERNAL AUDIT SCHEDULE",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",
@@ -143,7 +143,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
         // Make the API call
         axios
           .post(
-            `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/submitAuditSchedule`,
+            `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/submitAuditSchedule`,
             payloadData,
             {
               headers: {
@@ -194,7 +194,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditSchedule?year=${editYear}&month=${editMonth}`,
+          `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditSchedule?year=${editYear}&month=${editMonth}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -258,7 +258,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
           const [DepartmentsResponse] = await Promise.all([
             axios.get(
-              `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditDepartments`,
+              `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditDepartments`,
               {
                 headers: { Authorization: `Bearer ${token}` },
               }
@@ -304,7 +304,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
   const fetchSignature = async (username, token) => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -362,8 +362,8 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
         // Make the API call to add the participant
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditParticipant`,
-          { participant: participantName, formatNo: "PH-QAD01-F-010" },
+          `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditParticipant`,
+          { participant: participantName, formatNo: "PH-QAD01/F-010" },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -379,7 +379,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
         // Re-fetch the updated participant list
         const participantResponse = await axios.get(
-          `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
+          `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -400,7 +400,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
     
     try {
       await axios.delete(
-        `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/deleteAuditType?id=${auditType.id}`,
+        `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/deleteAuditType?id=${auditType.id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -413,7 +413,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
       // Re-fetch auditees to refresh the list
       const auditTypeResponse = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
+        `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -431,7 +431,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
     
     try {
       await axios.delete(
-        `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/deleteAuditParticipant?id=${participants.id}`,
+        `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/deleteAuditParticipant?id=${participants.id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -444,7 +444,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
       // Re-fetch auditees to refresh the list
       const auditParticipantResponse = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
+        `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -480,7 +480,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-010",
+          formatNo: "PH-QAD01/F-010",
           formatName: "INTERNAL AUDIT SCHEDULE",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",
@@ -498,7 +498,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
         // Make the API call
         axios
           .post(
-            `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/saveAuditSchedule`,
+            `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/saveAuditSchedule`,
             payloadData,
             {
               headers: {
@@ -564,19 +564,19 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
           const [DepartmentsResponse, auditeesResponse, auditTypeResponse] =
             await Promise.all([
               axios.get(
-                `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditDepartments`,
+                `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditDepartments`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               ),
               axios.get(
-                `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
+                `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditParticipants`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               ),
               axios.get(
-                `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
+                `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
@@ -622,8 +622,8 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
       try {
         
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditType`,
-          { auditType: newAuditType, formatNo: "PH-QAD01-F-010" },
+          `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditType`,
+          { auditType: newAuditType, formatNo: "PH-QAD01/F-010" },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -635,7 +635,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
 
         // Re-fetch audit types to refresh the list
         const auditTypeResponse = await axios.get(
-          `${ API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
+          `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/getAuditTypes`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -974,7 +974,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INTERNAL AUDIT SCHEDULE "
-        formatNo="PH-QAD01-F-010 "
+        formatNo="PH-QAD01/F-010 "
         sopNo="PA-QAD01-D-17 "
         MenuBtn={
           <Button

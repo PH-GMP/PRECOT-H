@@ -204,7 +204,7 @@ const HouseKeeping = () => {
 
   //       axios
   //         .get(
-  //           `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+  //           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
   //           {
   //             headers: {
   //               "Content-Type": "application/json",
@@ -242,7 +242,7 @@ const HouseKeeping = () => {
         const token = localStorage.getItem('token');
 
         // Making the API call with axios
-        axios.get(`${ API.prodUrl}/Precot/api/PadPunching/Service/getDateHouseKeepingF26`, {
+        axios.get(`${API.prodUrl}/Precot/api/PadPunching/Service/getDateHouseKeepingF26`, {
           params: { date: state.date }, // Adding the date as a query parameter
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the Authorization header
@@ -314,7 +314,7 @@ const HouseKeeping = () => {
     };
     const token = localStorage.getItem('token');
     // Making the API call with axios
-    axios.post(`${ API.prodUrl}/Precot/api/PadPunching/Service/saveHouseKepping26`, updatedValues, {
+    axios.post(`${API.prodUrl}/Precot/api/PadPunching/Service/saveHouseKepping26`, updatedValues, {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the Authorization header
       }
@@ -344,7 +344,7 @@ const HouseKeeping = () => {
       "id": selectedValues['clean_id'],
       "status": "Approve"
     }
-    axios.put(`${ API.prodUrl}/Precot/api/PadPunching/Service/approveRejectF26`, payload, {
+    axios.put(`${API.prodUrl}/Precot/api/PadPunching/Service/approveRejectF26`, payload, {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the Authorization header
       }
@@ -374,7 +374,7 @@ const HouseKeeping = () => {
       "remarks": rejectReason
     }
     setStatusLoader(true);
-    axios.put(`${ API.prodUrl}/Precot/api/PadPunching/Service/approveRejectF26`, payload, {
+    axios.put(`${API.prodUrl}/Precot/api/PadPunching/Service/approveRejectF26`, payload, {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the Authorization header
       }
@@ -441,7 +441,7 @@ const HouseKeeping = () => {
     const token = localStorage.getItem('token');
 
     // Making the API call with axios
-    axios.post(`${ API.prodUrl}/Precot/api/PadPunching/Service/SubmitHouseKeepingF26`, updatedValues, {
+    axios.post(`${API.prodUrl}/Precot/api/PadPunching/Service/SubmitHouseKeepingF26`, updatedValues, {
       headers: {
         Authorization: `Bearer ${token}` // Include the token in the Authorization header
       }

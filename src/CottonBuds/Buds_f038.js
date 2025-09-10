@@ -44,7 +44,7 @@ const Buds_f038 = () => {
   };
 
   const formName = "FINAL INSPECTION REPORT (PRE - DISPATCH)";
-  const formatNo = "PH-QAD01-F-038";
+  const formatNo = "PH-QAD01/F-038";
   const role = localStorage.getItem("role");
 
   const [open, setOpen] = useState(false);
@@ -325,7 +325,7 @@ const Buds_f038 = () => {
      
         });
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     const username = response?.qa_mr_sign;
@@ -357,7 +357,7 @@ const Buds_f038 = () => {
  
         });
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     if (editBMR) {
@@ -374,7 +374,7 @@ const Buds_f038 = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01-F-038`,
+        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01/F-038`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -400,7 +400,7 @@ const Buds_f038 = () => {
 
     try {
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/findByParamFinalInspectionReport?date=${editDate}&shift=${editShift}&pOrder=${editpOrder}&bmrNo=${editBMR}&formatNo=PH-QAD01-F-038`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/findByParamFinalInspectionReport?date=${editDate}&shift=${editShift}&pOrder=${editpOrder}&bmrNo=${editBMR}&formatNo=PH-QAD01/F-038`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -706,7 +706,7 @@ const Buds_f038 = () => {
     const payload = {
       finalInspectionId: finalInspectionId,
       formatName: "FINAL INSPECTION REPORT (PRE - DISPATCH)",
-      formatNo: "PH-QAD01-F-038",
+      formatNo: "PH-QAD01/F-038",
       revisionNo: "01",
       refSopNo: "PH-QAD01-D-32",
       productDescription: productDescription,
@@ -821,7 +821,7 @@ const Buds_f038 = () => {
     const payload = {
       finalInspectionId: finalInspectionId,
       formatName: "FINAL INSPECTION REPORT (PRE - DISPATCH)",
-      formatNo: "PH-QAD01-F-038",
+      formatNo: "PH-QAD01/F-038",
       revisionNo: "01",
       refSopNo: "PH-QAD01-D-32",
       productDescription: productDescription === "" ? "NA" : productDescription,

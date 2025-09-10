@@ -30,7 +30,7 @@ const Packing_Material_Issue = (props) => {
   const fetchProcessDelayData = (batchNo) => {
     setLoading(true);
     axios
-      .get(`${ API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterial`, {
+      .get(`${API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterial`, {
         params: { batch_no: batchNo },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,7 +68,7 @@ const Packing_Material_Issue = (props) => {
       setLoading(true);
       axios
         .get(
-           `${ API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterialPde?batch_no=${props.orderNo}&fromdate=${moment(fromDate).format("DD.MM.YYYY")}&todate=${moment(toDate).format("DD.MM.YYYY")}`,
+           `${API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterialPde?batch_no=${props.orderNo}&fromdate=${moment(fromDate).format("DD.MM.YYYY")}&todate=${moment(toDate).format("DD.MM.YYYY")}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -108,7 +108,7 @@ const Packing_Material_Issue = (props) => {
  
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/buds/bmr/03.SubmitPackingMeterialIssue`,
+          `${API.prodUrl}/Precot/api/buds/bmr/03.SubmitPackingMeterialIssue`,
           payload,
           {
             headers: {
@@ -120,7 +120,7 @@ const Packing_Material_Issue = (props) => {
           message.success("Submitted successfully!");
           setLoading(true);
           axios
-            .get(`${ API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterial`, {
+            .get(`${API.prodUrl}/Precot/api/buds/bmr/03.GetPackingMeterial`, {
               params: { batch_no: props.batchNo },
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

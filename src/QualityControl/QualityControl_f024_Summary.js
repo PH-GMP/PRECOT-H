@@ -44,7 +44,7 @@ const QualityControlF024Summary = () => {
       try {
         if (roleauth === "LAB_ASSISTANT") {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/CLF024/getAll`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/CLF024/getAll`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const QualityControlF024Summary = () => {
 
   const fetchPrintData = () => {
     // Base URL for the API
-    const baseUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF024/print?`;
+    const baseUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF024/print?`;
     let query = [];
 
     // Construct the query based on selected fields

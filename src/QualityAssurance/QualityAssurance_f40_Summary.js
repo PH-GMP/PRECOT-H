@@ -511,7 +511,7 @@ const QualityAssurance_f40_Summary = () => {
                   Format No.:
                 </td>
                 <td style={{ padding: "0.5em" }} colSpan={3}>
-                  PH-QAD01-F-040
+                  PH-QAD01/F-040
                 </td>
               </tr>
               <tr>
@@ -741,7 +741,7 @@ const QualityAssurance_f40_Summary = () => {
       </div>
       <BleachingHeader
         formName={"PRODUCTION RETAINED SAMPLE REGISTER"}
-        formatNo={"PH-QAD01-F-040"}
+        formatNo={"PH-QAD01/F-040"}
         MenuBtn={
           <Button
             type="primary"

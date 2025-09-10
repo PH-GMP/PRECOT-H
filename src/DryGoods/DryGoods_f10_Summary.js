@@ -56,7 +56,7 @@ const DryGoods_f10_Summary = () => {
 
                 axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -91,10 +91,10 @@ const DryGoods_f10_Summary = () => {
             initialized.current = true
             let apiUrl;
             if(role == "ROLE_SUPERVISOR"){
-                apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getSupSummarydetailsF10`
+                apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getSupSummarydetailsF10`
             }
             else if(role == "ROLE_HOD" || "ROLE_DESIGNEE"){
-                apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF10`
+                apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF10`
             }
             const fetchData = async () => {
                 try{
@@ -249,7 +249,7 @@ const DryGoods_f10_Summary = () => {
         try {
             setPrintButtonLoading(true);
             const response = await axios.get(
-                `${ API.prodUrl}/Precot/api/Drygoods/Service/getDryForPrintF10?date=${printParams.date}&shift=${printParams.shift}`,
+                `${API.prodUrl}/Precot/api/Drygoods/Service/getDryForPrintF10?date=${printParams.date}&shift=${printParams.shift}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

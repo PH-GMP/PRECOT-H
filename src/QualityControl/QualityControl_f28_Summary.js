@@ -142,7 +142,7 @@ const QualityControl_f28_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -170,7 +170,7 @@ const QualityControl_f28_Summary = () => {
           });
       }
     });
-  }, [printData,      API.prodUrl, token]);
+  }, [printData,     API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -183,7 +183,7 @@ const QualityControl_f28_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -211,7 +211,7 @@ const QualityControl_f28_Summary = () => {
           });
       }
     });
-  }, [printData,      API.prodUrl, token]);
+  }, [printData,     API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -235,7 +235,7 @@ const QualityControl_f28_Summary = () => {
     };
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/GetAll`, {
+      .get(`${   API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/GetAll`, {
         headers,
       })
       .then((response) => {
@@ -278,7 +278,7 @@ const QualityControl_f28_Summary = () => {
     };
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/PrintForF028`, {
+      .get(`${   API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/PrintForF028`, {
         headers,
         params: {
           date: selectDate,
@@ -383,7 +383,7 @@ const QualityControl_f28_Summary = () => {
   //     axios
   //       .get(
   //         `${
-  //                API.prodUrl
+  //               API.prodUrl
   //         }/Precot/api/spulance/fetchBaleConsumption?order=${12}&date=${datePrint}&shift=${value}`,
   //         {
   //           headers: {

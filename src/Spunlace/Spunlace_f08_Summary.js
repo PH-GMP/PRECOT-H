@@ -89,7 +89,7 @@ const Spunlace_f08_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const Spunlace_f08_Summary = () => {
     const fetchBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -166,7 +166,7 @@ const Spunlace_f08_Summary = () => {
           let response;
 
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spulance/getSummarydetailsF008`,
+            `${API.prodUrl}/Precot/api/spulance/getSummarydetailsF008`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -225,7 +225,7 @@ const Spunlace_f08_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/getdetailsForPrintF008?date=${printDate}`,
+        `${API.prodUrl}/Precot/api/spulance/getdetailsForPrintF008?date=${printDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -334,7 +334,7 @@ const Spunlace_f08_Summary = () => {
   const fetchJob = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/splResponse1?date=${printDate}`,
+        `${API.prodUrl}/Precot/api/spulance/splResponse1?date=${printDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

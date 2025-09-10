@@ -291,7 +291,7 @@ const QA_F09 = () => {
   const [formData, setFormData] = useState({
     unit: "Unit H",
     formatName: "TRAINING QUESSIONNAIRE",
-    formatNo: "PH-QAD01-F-009",
+    formatNo: "PH-QAD01/F-009",
     revisionNo: 1,
     sopNumber: "PH-QAD01-D-15",
     year: "",
@@ -653,7 +653,7 @@ const QA_F09 = () => {
     const payload = {
       unit: "Unit H",
       formatName: "TRAINING QUESSIONNAIRE",
-      formatNo: "PH-QAD01-F-009",
+      formatNo: "PH-QAD01/F-009",
       revisionNo: 1,
       questionnaireId: id,
       sopNumber: "PH-QAD01-D-15",
@@ -754,7 +754,7 @@ const QA_F09 = () => {
     const payload = {
       unit: "Unit H",
       formatName: "TRAINING QUESSIONNAIRE",
-      formatNo: "PH-QAD01-F-009",
+      formatNo: "PH-QAD01/F-009",
       revisionNo: 1,
       questionnaireId: id,
       sopNumber: "PH-QAD01-D-15",
@@ -1914,7 +1914,7 @@ const QA_F09 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING QUESTIONNNAIRE"
-        formatNo="PH-QAD01-F-009"
+        formatNo="PH-QAD01/F-009"
         MenuBtn={
           <Button
             type="primary"

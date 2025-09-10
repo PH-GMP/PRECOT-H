@@ -206,7 +206,7 @@ const Spunlace_f24_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/getSMSSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/getSMSSummary`;
 
     if (
       [
@@ -317,7 +317,7 @@ const Spunlace_f24_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -341,7 +341,7 @@ const Spunlace_f24_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -353,7 +353,7 @@ const Spunlace_f24_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -377,11 +377,11 @@ const Spunlace_f24_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
   const fetchPrintData = async (selectedYear) => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/findByMonthYearPrintApi?month=${selectedMonth}&year=${selectedYear}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/findByMonthYearPrintApi?month=${selectedMonth}&year=${selectedYear}`,
         {
           method: "GET",
           headers: {
@@ -398,7 +398,7 @@ const Spunlace_f24_summary = () => {
         const hodsign = lastData?.hod_sign;
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${hodsign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${hodsign}`,
             {
               headers: {
                 "Content-Type": "application/json",

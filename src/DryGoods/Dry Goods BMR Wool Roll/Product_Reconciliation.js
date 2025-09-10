@@ -25,7 +25,7 @@ const Product_Reconciliation = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/SubmitProductReconillation`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/SubmitProductReconillation`,
         params,
         {
           headers: {
@@ -38,7 +38,7 @@ const Product_Reconciliation = (props) => {
         // const fetchSavedData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/CottonWoolRall/getReconillationByBatchNo`,
+              `${API.prodUrl}/Precot/api/CottonWoolRall/getReconillationByBatchNo`,
               {
                 params: {
                   batchNo: props.batchNo,
@@ -89,7 +89,7 @@ const Product_Reconciliation = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/cottonBall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/cottonBall/01.GetProductionDetails?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ const Product_Reconciliation = (props) => {
     const fetchSavedData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/getReconillationByBatchNo`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/getReconillationByBatchNo`,
           {
             params: {
               batchNo: props.batchNo,
@@ -158,7 +158,7 @@ const Product_Reconciliation = (props) => {
     if (orderNo && startDate && endDate) {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/cottonBall/productReconillation?order=${orderNo}&fromdate=${startDate}&todate=${endDate}`,
+          `${API.prodUrl}/Precot/api/cottonBall/productReconillation?order=${orderNo}&fromdate=${startDate}&todate=${endDate}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -218,7 +218,7 @@ const QualityControl_f027_Summary = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/CLF027/print`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/CLF027/print`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -245,7 +245,7 @@ const QualityControl_f027_Summary = () => {
   }, []);
 
   const fetchPrintData = () => {
-    let apiUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF027/print?eq_no=${selectedPrintEqNo}`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF027/print?eq_no=${selectedPrintEqNo}`;
 
     // Append the appropriate date parameters to the API URL
     if (selectedPrintDate) {
@@ -306,7 +306,7 @@ const QualityControl_f027_Summary = () => {
 
   useEffect(() => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/chemicaltest/CLF027/getAll`, {
+      .get(`${   API.prodUrl}/Precot/api/chemicaltest/CLF027/getAll`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -326,7 +326,7 @@ const QualityControl_f027_Summary = () => {
 
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,

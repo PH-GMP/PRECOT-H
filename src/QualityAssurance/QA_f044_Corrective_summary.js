@@ -388,7 +388,7 @@ const QA_f044_Corrective_summary = () => {
                         fontFamily: "'Times New Roman', Times, serif",
                       }}
                     >
-                      PH-QAD01-F-044
+                      PH-QAD01/F-044
                     </td>
                   </tr>
                   <tr>
@@ -609,7 +609,7 @@ const QA_f044_Corrective_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="CORRECTIVE ACTION REPORT"
-        formatNo="PH-QAD01-F-044"
+        formatNo="PH-QAD01/F-044"
         MenuBtn={
           <Button
             type="primary"

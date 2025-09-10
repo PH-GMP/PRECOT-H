@@ -22,7 +22,7 @@ const Product_Release = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getProductRelease?order=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/getProductRelease?order=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -68,7 +68,7 @@ const Product_Release = (props) => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/punching/bmr/saveProductRelease`, payload, {
+      .post(`${API.prodUrl}/Precot/api/punching/bmr/saveProductRelease`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -78,7 +78,7 @@ const Product_Release = (props) => {
         message.success("Product Release Submitted Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/14.GetProductRelease?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/14.GetProductRelease?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

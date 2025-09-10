@@ -181,7 +181,7 @@ const QA_F_046 = () => {
       payload = {
         id: formData.id,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-046",
+        formatNo: "PH-QAD01/F-046",
         formatName: "BATCH RELEASE NOTE",
         sopNumber: "PH-QAD01-D-43",
         revisionNo: "01",
@@ -260,7 +260,7 @@ const QA_F_046 = () => {
       payload = {
         id: formData.id,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-046",
+        formatNo: "PH-QAD01/F-046",
         formatName: "BATCH RELEASE NOTE",
         sopNumber: "PH-QAD01-D-43",
         revisionNo: "01",
@@ -429,7 +429,7 @@ const QA_F_046 = () => {
     <>
       <BleachingHeader
         formName={"BATCH RELEASE NOTE"}
-        formatNo={"PH-QAD01-F-046"}
+        formatNo={"PH-QAD01/F-046"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

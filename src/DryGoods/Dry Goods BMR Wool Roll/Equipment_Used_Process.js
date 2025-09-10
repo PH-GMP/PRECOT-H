@@ -107,7 +107,7 @@ const Equipment_Used_Process = (props) => {
     // Fetch role-based department names for dropdown
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=DRY_GOODS`,
+        `${API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=DRY_GOODS`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -165,7 +165,7 @@ const Equipment_Used_Process = (props) => {
     if (props.batchNo) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -305,7 +305,7 @@ const Equipment_Used_Process = (props) => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/05.SaveProcessingEquipments`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/05.SaveProcessingEquipments`,
         payload,
         {
           headers: {
@@ -317,7 +317,7 @@ const Equipment_Used_Process = (props) => {
       setIsSubmitted(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -377,7 +377,7 @@ const Equipment_Used_Process = (props) => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/05.SubmitProcessingEquipments`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/05.SubmitProcessingEquipments`,
         payload,
         {
           headers: {
@@ -389,7 +389,7 @@ const Equipment_Used_Process = (props) => {
       setIsSubmitted(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/05.GetProcessingEquipments?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

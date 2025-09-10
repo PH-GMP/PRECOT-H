@@ -88,7 +88,7 @@ const Spunlace_f15 = () => {
     
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -129,7 +129,7 @@ const Spunlace_f15 = () => {
             const fetchData = async () => {
 
                 try {
-                    const response = await axios.get(`${ API.prodUrl}/Precot/api/spulance/aggregatedResults?date=${date}`,{
+                    const response = await axios.get(`${API.prodUrl}/Precot/api/spulance/aggregatedResults?date=${date}`,{
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -144,7 +144,7 @@ const Spunlace_f15 = () => {
                         // console.log("If Entered");
                         const fetchJob = async () => {
                             try {
-                                const response = await axios.get(`${ API.prodUrl}/Precot/api/spulance/report/getByDateF015?date=${date}`,
+                                const response = await axios.get(`${API.prodUrl}/Precot/api/spulance/report/getByDateF015?date=${date}`,
                                     {
                                         headers: {
                                             'Authorization': `Bearer ${token}`
@@ -219,7 +219,7 @@ const Spunlace_f15 = () => {
             };
             fetchData();
         }
-    }, [date, token, API.prodUrl, navigate]);
+    }, [date, token,API.prodUrl, navigate]);
     const statusFunction = (responseData) => {
         if (role == "ROLE_SUPERVISOR" && responseData.supervisor_status == "SUPERVISOR_APPROVED" && (responseData.hod_status == "WAITING_FOR_APPROVAL" || responseData.hod_status == "HOD_APPROVED")) {
           // console.log("Condition 2")
@@ -259,7 +259,7 @@ const Spunlace_f15 = () => {
         }
         try {
           const response = await axios.put(
-            `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF015`,
+            `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF015`,
             payload,
             {
               headers: {
@@ -288,7 +288,7 @@ const Spunlace_f15 = () => {
         setStatusLoader(true);
         let apiurl,payload;
         if(role == "ROLE_SUPERVISOR"){
-        apiurl = `${ API.prodUrl}/Precot/api/spulance/report/submitRPBalePressStopage`;
+        apiurl = `${API.prodUrl}/Precot/api/spulance/report/submitRPBalePressStopage`;
         payload = {
             formatName: "RP BALE PRESS STOPPAGE REPORT",
             formatNo: "PH-PRD02/F-015",
@@ -314,7 +314,7 @@ const Spunlace_f15 = () => {
             setStatusLoader(false);
             return;
         }
-        apiurl = `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF015`;
+        apiurl = `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF015`;
         payload = {
             "id" : formData.id,
             "status": "Reject",

@@ -78,7 +78,7 @@ const Bleaching_f16_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -102,7 +102,7 @@ const Bleaching_f16_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username =
@@ -112,7 +112,7 @@ const Bleaching_f16_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const Bleaching_f16_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const months = [
     { value: "January", label: "January" },
@@ -240,7 +240,7 @@ const Bleaching_f16_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/getMachineCleaningSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/getMachineCleaningSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -375,7 +375,7 @@ const Bleaching_f16_Summary = () => {
       setmonthPrint(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/findByMonthYearPrintApi?month=${value}&year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/MachineCleaningRecord/findByMonthYearPrintApi?month=${value}&year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -303,7 +303,7 @@ const QualityControl_f01_Form = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -381,7 +381,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -408,7 +408,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -436,7 +436,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -628,7 +628,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/approveRawCottonAnalysisReport`,
+        `${   API.prodUrl}/Precot/api/qc/approveRawCottonAnalysisReport`,
         {
           id: payload.id,
           status: "Reject",
@@ -664,7 +664,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/approveRawCottonAnalysisReport`,
+        `${   API.prodUrl}/Precot/api/qc/approveRawCottonAnalysisReport`,
         {
           id: payload.id,
           status: "Approve",
@@ -778,7 +778,7 @@ const QualityControl_f01_Form = () => {
     if (bmrnos2) {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetByMillBatchNo`,
+          `${   API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetByMillBatchNo`,
           {
             headers,
             params: {
@@ -817,7 +817,7 @@ const QualityControl_f01_Form = () => {
 
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetRawCottonReportByPdeData?PH=${bmrnos2}`,
+                `${   API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetRawCottonReportByPdeData?PH=${bmrnos2}`,
                 {
                   headers,
                 }
@@ -873,7 +873,7 @@ const QualityControl_f01_Form = () => {
     } else {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetById/${formID}`,
+          `${   API.prodUrl}/Precot/api/qc/RawCottonAnalysisReport/GetById/${formID}`,
           {
             headers,
           }
@@ -918,7 +918,7 @@ const QualityControl_f01_Form = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/qc/saveRawCottonAnalysisReport`,
+        `${   API.prodUrl}/Precot/api/qc/saveRawCottonAnalysisReport`,
         role === "ROLE_CHEMIST"
           ? { ...payload, microbiologicalTests: [] }
           : { ...payload },
@@ -1136,7 +1136,7 @@ const QualityControl_f01_Form = () => {
 
       axios
         .post(
-          `${    API.prodUrl}/Precot/api/qc/SubmitRawCottonAnalysisReport`,
+          `${   API.prodUrl}/Precot/api/qc/SubmitRawCottonAnalysisReport`,
           finalPayload,
           { headers }
         )

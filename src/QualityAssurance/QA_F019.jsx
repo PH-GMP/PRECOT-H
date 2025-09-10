@@ -387,7 +387,7 @@ const CustomerComplaint = () => {
       {/*beginning of header part */}
       <BleachingHeader
         formName={"CUSTOMER COMPLAINT REGISTER"}
-        formatNo={"PH-QAD01-F-019"}
+        formatNo={"PH-QAD01/F-019"}
         unit={"UNIT H"}
         MenuBtn={<Button type="primary" icon={<TbMenuDeep />}></Button>}
         buttonsArray={[

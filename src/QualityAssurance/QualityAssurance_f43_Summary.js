@@ -513,7 +513,7 @@ const QualityAssurance_f43_Summary = () => {
                     QUALITY REVIEW MEETING
                   </td>
                   <td style={{ padding: "0.5em" }}>Format No.:</td>
-                  <td style={{ padding: "0.5em" }}>PH-QAD01-F-043</td>
+                  <td style={{ padding: "0.5em" }}>PH-QAD01/F-043</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -735,7 +735,7 @@ const QualityAssurance_f43_Summary = () => {
       </div>
       <BleachingHeader
         formName={"QUALITY REVIEW MEETING"}
-        formatNo={"PH-QAD01-F-043"}
+        formatNo={"PH-QAD01/F-043"}
         MenuBtn={
           <Button
             type="primary"

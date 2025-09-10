@@ -83,7 +83,7 @@ export default function MainComponent({
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function MainComponent({
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.qaSubmittedBy, API.prodUrl, token]);
+  }, [selectedRow?.qaSubmittedBy,API.prodUrl, token]);
 
   useEffect(() => {
     const fetchBaleOptions = async () => {
@@ -118,7 +118,7 @@ export default function MainComponent({
 
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${batchno}&bmr_no=${BMR}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${batchno}&bmr_no=${BMR}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -144,7 +144,7 @@ export default function MainComponent({
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportById?id=${id}`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportById?id=${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -232,7 +232,7 @@ export default function MainComponent({
 
     try {
       const response = await axios.put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveReprocessReport`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveReprocessReport`,
         payload,
         {
           headers: {
@@ -258,7 +258,7 @@ export default function MainComponent({
 
     try {
       const response = await axios.put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveReprocessReport`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveReprocessReport`,
         payload,
         {
           headers: {
@@ -320,7 +320,7 @@ export default function MainComponent({
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/saveReprocessReport`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/saveReprocessReport`,
         payload,
         {
           headers: {
@@ -376,7 +376,7 @@ export default function MainComponent({
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/submitReprocessReport`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/submitReprocessReport`,
         payload,
         {
           headers: {
@@ -404,7 +404,7 @@ export default function MainComponent({
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportByUnique?bmrNumber=${BMR}&batchNumber=${batchno}`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportByUnique?bmrNumber=${BMR}&batchNumber=${batchno}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -463,7 +463,7 @@ export default function MainComponent({
   //       const token = localStorage.getItem("token");
 
   //       const response = await axios.get(
-  //         `${ API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportByUnique?bmrNumber=${BMR}&batchNumber=${batchno}`,
+  //         `${API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportByUnique?bmrNumber=${BMR}&batchNumber=${batchno}`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`
@@ -562,7 +562,7 @@ export default function MainComponent({
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -586,7 +586,7 @@ export default function MainComponent({
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.supervisorSubmittedBy, API.prodUrl, token]);
+  }, [selectedRow?.supervisorSubmittedBy,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -596,7 +596,7 @@ export default function MainComponent({
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -620,7 +620,7 @@ export default function MainComponent({
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, selectedRow?.hodSubmittedBy, API.prodUrl, token]);
+  }, [selectedRow, selectedRow?.hodSubmittedBy,API.prodUrl, token]);
 
   const roleBase = localStorage.getItem("role");
 

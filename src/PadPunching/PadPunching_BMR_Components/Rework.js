@@ -52,7 +52,7 @@ const displayStyle =
 useEffect(() => {
     setLoading(true);
     axios
-      .get(`${ API.prodUrl}/Precot/api/buds/bmr/getReworkByBatch?batchNumber=${props.batchNo}`, {
+      .get(`${API.prodUrl}/Precot/api/buds/bmr/getReworkByBatch?batchNumber=${props.batchNo}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -93,7 +93,7 @@ const [isDisabled, setIsDisabled] = useState(false);
     }
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/saveReworkForm`,
+        `${API.prodUrl}/Precot/api/buds/bmr/saveReworkForm`,
        
         // formData,
         { ...formData ,bmrNumber:props.batchNo, departmentName:"PAD_PUNCHING", id:id,},
@@ -129,7 +129,7 @@ const submitData = async () => {
       if (role === "ROLE_HOD" || role === "ROLE_QA") {
       
         response = await axios.put(
-          `${ API.prodUrl}/Precot/api/buds/bmr/approveReworkForm`,
+          `${API.prodUrl}/Precot/api/buds/bmr/approveReworkForm`,
           {
             id: id,
             status: "Approve"
@@ -146,7 +146,7 @@ const submitData = async () => {
       } else {
         // Use POST request for submission if role is not HOD or QA
         response = await axios.post(
-          `${ API.prodUrl}/Precot/api/buds/bmr/submitReworkForm`,
+          `${API.prodUrl}/Precot/api/buds/bmr/submitReworkForm`,
           { ...formData, bmrNumber: props.batchNo, departmentName: "PAD_PUNCHING", id:id, },
           {
             headers: {
@@ -171,7 +171,7 @@ const submitData = async () => {
   useEffect(() => {
    
     axios
-      .get(`${ API.prodUrl}/Precot/api/padpunching/MachineLov`, {
+      .get(`${API.prodUrl}/Precot/api/padpunching/MachineLov`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

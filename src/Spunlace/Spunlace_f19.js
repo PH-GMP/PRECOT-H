@@ -69,7 +69,7 @@ const [open, setOpen] = useState(false);
   
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const [open, setOpen] = useState(false);
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [cottonWasteReport, API.prodUrl, token]);
+  }, [cottonWasteReport,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -103,7 +103,7 @@ const [open, setOpen] = useState(false);
   
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const [open, setOpen] = useState(false);
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [cottonWasteReport, API.prodUrl, token]);
+  }, [cottonWasteReport,API.prodUrl, token]);
 
   const [rows, setRows] = useState([
     { NoofBag1: '', netWeight1: '', NoofBag2: '', netWeight2: '', NoofBag3: '', netWeight3: '', netWeight4: '', microWasteTotalWt : '' , microWasteNoOfBags : '' }
@@ -377,7 +377,7 @@ const handleApprove = async () => {
     "Content-Type": "application/json", 
   };
 
-  const res = await axios.put(`${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/approveOrReject`,
+  const res = await axios.put(`${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/approveOrReject`,
     {
       id : reportId,
       status: "Approve"
@@ -460,7 +460,7 @@ const handleApprove = async () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/SaveShiftWiseWasteReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/SaveShiftWiseWasteReport`,
         payload,
         { headers }
       );
@@ -492,7 +492,7 @@ const handleApprove = async () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/approveOrReject`,
         {
           id: reportId,
           status: "Reject",
@@ -557,7 +557,7 @@ const handleApprove = async () => {
 
 
     const response = await axios.post(
-      `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/SubmitShiftWiseWasteReport`,
+      `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/SubmitShiftWiseWasteReport`,
       payload,
       { headers }
     );
@@ -592,7 +592,7 @@ const handleApprove = async () => {
  const fetchDetailsByDateAndShift = async () => {
     try {
         const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/findByDateShift?date=${date}&shift=${shift}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseWasteReportSpunlace/findByDateShift?date=${date}&shift=${shift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

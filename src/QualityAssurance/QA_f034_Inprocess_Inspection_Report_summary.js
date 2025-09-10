@@ -96,7 +96,7 @@ const QA_f034_Inprocess_Inspection_Report_summary = () => {
       ) {
         // QA Inspector can see all summary without filtering by department
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01-F-034`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01/F-034`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -116,7 +116,7 @@ const QA_f034_Inprocess_Inspection_Report_summary = () => {
         }
 
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01-F-034`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01/F-034`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -386,7 +386,7 @@ const QA_f034_Inprocess_Inspection_Report_summary = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01-F-034`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01/F-034`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -614,7 +614,7 @@ const QA_f034_Inprocess_Inspection_Report_summary = () => {
                     ONLINE-INSPECTION REPORT (for PADS / PLEATS / ROLLS)
                   </th>
                   <td colSpan="25">Format No:</td>
-                  <td colSpan="25">PH-QAD01-F-034</td>
+                  <td colSpan="25">PH-QAD01/F-034</td>
                 </tr>
                 <tr>
                   <td colSpan="25">Revision No:</td>
@@ -1211,7 +1211,7 @@ const QA_f034_Inprocess_Inspection_Report_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="ON-LINE INSPECTION REPORT(for PADS / PLEATS / ROLLS)"
-        formatNo="PH-QAD01-F-034"
+        formatNo="PH-QAD01/F-034"
         MenuBtn={
           <Button
             type="primary"

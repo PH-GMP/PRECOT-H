@@ -184,7 +184,7 @@ const QA_F013 = () => {
   const [formData, setFormData] = useState({
     unit: "UNIT H",
     formatName: "Internal Audit NC Report",
-    formatNo: "PH-QAD01-F-013",
+    formatNo: "PH-QAD01/F-013",
     revisionNo: 2,
     sopNumber: "PH-QAD01-D-17",
     auditYear: state === null ? "" : state.year,
@@ -857,7 +857,7 @@ const QA_F013 = () => {
 
   const [statusLoader, setStatusLoader] = useState(false);
   const formName = "INTERNAL AUDIT NC REPORT";
-  const formatNo = "PH-QAD01-F-013";
+  const formatNo = "PH-QAD01/F-013";
   const showDrawer = () => {
     setOpen(true);
   };

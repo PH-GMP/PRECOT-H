@@ -119,7 +119,7 @@ const PadPunching_f05_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -152,7 +152,7 @@ const PadPunching_f05_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = (dateString) => {
     if (dateString) {
@@ -195,7 +195,7 @@ const PadPunching_f05_Summary = () => {
     const fetchmachineNameOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/MachineLov`,
+          `${API.prodUrl}/Precot/api/padpunching/MachineLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -275,7 +275,7 @@ const PadPunching_f05_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/MachineCleaning/getMachineCleaningSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/MachineCleaning/getMachineCleaningSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -425,7 +425,7 @@ const PadPunching_f05_Summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/MachineCleaning/getByMonthPrint?month=${monthP}&year=${yearP}`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/MachineCleaning/getByMonthPrint?month=${monthP}&year=${yearP}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

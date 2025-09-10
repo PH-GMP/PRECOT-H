@@ -60,7 +60,7 @@ const Bleaching_f08_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Bleaching_f08_summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -93,7 +93,7 @@ const Bleaching_f08_summary = () => {
     //Filtered API Response
     axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F-011`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F-011`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const Bleaching_f08_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const Bleaching_f08_summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -209,7 +209,7 @@ const Bleaching_f08_summary = () => {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`, {
         headers,
       })
       .then((res) => {
@@ -235,7 +235,7 @@ const Bleaching_f08_summary = () => {
       };
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getAppliedAbCottonSupervisorSummeryF08`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getAppliedAbCottonSupervisorSummeryF08`,
           {
             headers,
           }
@@ -268,7 +268,7 @@ const Bleaching_f08_summary = () => {
       };
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/geAppliedAbCottontHodSummeryF08`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/geAppliedAbCottontHodSummeryF08`,
           {
             headers,
           }
@@ -409,7 +409,7 @@ const Bleaching_f08_summary = () => {
     const fetchBmrOptionsPrint = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -445,7 +445,7 @@ const Bleaching_f08_summary = () => {
       setPrintValue(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getBmrDetailsF08?bmr=${value}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getBmrDetailsF08?bmr=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

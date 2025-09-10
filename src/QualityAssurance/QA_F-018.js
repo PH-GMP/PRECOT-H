@@ -577,7 +577,7 @@ const QA_F018 = () => {
       const payload = {
         complaint_id: id,
         format_name: "Customer Complaint Register Form",
-        format_no: "PH-QAD01-F-018",
+        format_no: "PH-QAD01/F-018",
         revision_no: 3,
         sop_number: "PH-QAD01-D-19",
         unit: "Unit H",
@@ -718,7 +718,7 @@ const QA_F018 = () => {
       const payload = {
         complaint_id: id,
         format_name: "Customer Complaint Register Form",
-        format_no: "PH-QAD01-F-018",
+        format_no: "PH-QAD01/F-018",
         revision_no: 3,
         sop_number: "PH-QAD01-D-19",
         unit: "Unit H",
@@ -1714,7 +1714,7 @@ const QA_F018 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="CUSTOMER COMPLAINT REGISTER FORM"
-        formatNo="PH-QAD01-F-018"
+        formatNo="PH-QAD01/F-018"
         MenuBtn={
           <Button
             type="primary"

@@ -205,7 +205,7 @@ const Stores_f001_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Store/getMetarialInwardsSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Store/getMetarialInwardsSummary`;
 
     if (["STORE_INCHARGE"].includes(userRole)) {
       fetchSummary(summaryUrl);
@@ -285,7 +285,7 @@ const Stores_f001_summary = () => {
     return new Promise((resolve, reject) => {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -313,7 +313,7 @@ const Stores_f001_summary = () => {
 
   const fetchData = async () => {
     const token = localStorage.getItem("token");
-    const finalUrl = `${ API.prodUrl}/Precot/api/Store/getMetarialInwardsPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
+    const finalUrl = `${API.prodUrl}/Precot/api/Store/getMetarialInwardsPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
 
     try {
       const response = await axios.get(finalUrl, {

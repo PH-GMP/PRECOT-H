@@ -492,7 +492,7 @@ const QA_f60_Summary = () => {
                     MASTER LIST OF SHARP TOOLS
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="15">PH-QAD01-F-023</td>
+                  <td colSpan="15">PH-QAD01/F-023</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -669,7 +669,7 @@ const QA_f60_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="MASTER LIST OF SHARP TOOLS"
-          formatNo="PH-QAD01-F-060"
+          formatNo="PH-QAD01/F-060"
           MenuBtn={
             <Button
               type="primary"

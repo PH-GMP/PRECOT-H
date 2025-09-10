@@ -229,7 +229,7 @@ const DryGoods_F012 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -378,7 +378,7 @@ const DryGoods_F012 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Drygoods/Service/getSaniParamDetailsbyF12?year=${yearState}&month=${monthState}&week=${weekState}`,
+            `${API.prodUrl}/Precot/api/Drygoods/Service/getSaniParamDetailsbyF12?year=${yearState}&month=${monthState}&week=${weekState}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -499,7 +499,7 @@ const DryGoods_F012 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/saveSanitiziationF12`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/saveSanitiziationF12`,
         payload,
         { headers }
       )
@@ -580,7 +580,7 @@ const DryGoods_F012 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/submitSanitiziationF12`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/submitSanitiziationF12`,
         payload,
         { headers }
       )
@@ -607,7 +607,7 @@ const DryGoods_F012 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF12`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF12`,
         {
           id: mcId,
           status: "Approve",
@@ -645,7 +645,7 @@ const DryGoods_F012 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF12`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveOrRejectF12`,
         {
           id: mcId,
           status: "Reject",

@@ -115,7 +115,7 @@ const PadPunching_f02_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const PadPunching_f02_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -160,7 +160,7 @@ const PadPunching_f02_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -188,7 +188,7 @@ const PadPunching_f02_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -200,7 +200,7 @@ const PadPunching_f02_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -228,7 +228,7 @@ const PadPunching_f02_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const findReason = () => {
@@ -249,7 +249,7 @@ const PadPunching_f02_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -278,7 +278,7 @@ const PadPunching_f02_Summary = () => {
     const fetchmachineNameOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/MachineLov`,
+          `${API.prodUrl}/Precot/api/padpunching/MachineLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -372,7 +372,7 @@ const PadPunching_f02_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getDailyRollConsumptionSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getDailyRollConsumptionSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -528,7 +528,7 @@ const PadPunching_f02_Summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachinePrint?date=${dateP}&shift=${shiftP}&machineName=${machineP}`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachinePrint?date=${dateP}&shift=${shiftP}&machineName=${machineP}`,
 
           {
             headers: {
@@ -574,7 +574,7 @@ const PadPunching_f02_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",

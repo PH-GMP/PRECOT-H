@@ -47,8 +47,8 @@ const ChoosenScreen = () => {
 
   const qualityAssuranceAllOptions = [
     {
-      value: "PH-QAD01F-001",
-      label: "PH-QAD01F-001 MANAGEMENT OF INCIDENCE",
+      value: "PH-QAD01/F-001",
+      label: "PH-QAD01/F-001 MANAGEMENT OF INCIDENCE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -57,44 +57,44 @@ const ChoosenScreen = () => {
       roles: ["ROLE_HOD", "ROLE_DESIGNEE", "ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-005",
-      label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-007",
-      label: "PH-QAD01-F-007 TRAINING RECORD",
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-008",
-      label: "PH-QAD01-F-008 TRAINING CARD",
+      value: "PH-QAD01/F-008",
+      label: "PH-QAD01/F-008 TRAINING CARD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-009",
-      label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-012",
-      label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
+      value: "PH-QAD01/F-012",
+      label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-013",
-      label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-018",
-      label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+      value: "PH-QAD01/F-018",
+      label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-020",
+      value: "PH-QAD01/F-020",
       label:
-        "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+        "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
       roles: [
         "ROLE_SUPERVISOR",
         "ROLE_HOD",
@@ -104,50 +104,50 @@ const ChoosenScreen = () => {
       ],
     },
     {
-      value: "PH-QAD01-F023",
-      label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+      value: "PH-QAD01/F023",
+      label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
       roles: ["ROLE_HOD"],
     },
 
     {
-      value: "PH-QAD01-F-034",
+      value: "PH-QAD01/F-034",
       label:
-        "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+        "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-035",
-      label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+      value: "PH-QAD01/F-035",
+      label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-036",
-      label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+      value: "PH-QAD01/F-036",
+      label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-039",
-      label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
+      value: "PH-QAD01/F-039",
+      label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
       roles: ["DISPATCH_SUPERVISOR", "SECURITY"],
     },
     {
-      value: "PH-QAD01-F-041",
-      label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
+      value: "PH-QAD01/F-041",
+      label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
       roles: ["QA_MANAGER", "ROLE_DESIGNEE", "ROLE_HOD"],
     },
     {
-      value: "PH-QAD01-F-042",
-      label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
+      value: "PH-QAD01/F-042",
+      label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-045",
-      label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+      value: "PH-QAD01/F-045",
+      label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-047",
-      label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+      value: "PH-QAD01/F-047",
+      label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
       roles: ["ROLE_CHEMIST"],
     },
     {
@@ -156,23 +156,23 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-051",
-      label: "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+      value: "PH-QAD01/F-051",
+      label: "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-052",
-      label: "PH-QAD01-F-052 BREAKAGE REPORT",
+      value: "PH-QAD01/F-052",
+      label: "PH-QAD01/F-052 BREAKAGE REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-058",
-      label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+      value: "PH-QAD01/F-058",
+      label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
       roles: ["ROLE_SUPERVISOR", "ROLE_OPERATOR"],
     },
     {
-      value: "PH-QAD01-F-059",
-      label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+      value: "PH-QAD01/F-059",
+      label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
@@ -181,8 +181,8 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-076",
-      label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+      value: "PH-QAD01/F-076",
+      label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -194,24 +194,24 @@ const ChoosenScreen = () => {
 
   const qualityAssuranceAllOptionsHR = [
     {
-      value: "PH-QAD01-F-005",
-      label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-007",
-      label: "PH-QAD01-F-007 TRAINING RECORD",
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
       roles: ["ROLE_HOD", "HR_EXECUTIVE"],
     },
     {
-      value: "PH-QAD01-F-009",
-      label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
       roles: ["ROLE_HOD", "HR_EXECUTIVE"],
     },
 
     {
-      value: "PH-QAD01-F-013",
-      label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
       roles: ["ROLE_HOD"],
     },
 
@@ -219,8 +219,8 @@ const ChoosenScreen = () => {
 
   const qualityAssuranceAllOptionsSpunlace = [
     {
-      value: "PH-QAD01F-001",
-      label: "PH-QAD01F-001 MANAGEMENT OF INCIDENCE",
+      value: "PH-QAD01/F-001",
+      label: "PH-QAD01/F-001 MANAGEMENT OF INCIDENCE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -229,44 +229,44 @@ const ChoosenScreen = () => {
       roles: ["ROLE_HOD", "ROLE_DESIGNEE", "ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-005",
-      label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-007",
-      label: "PH-QAD01-F-007 TRAINING RECORD",
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-008",
-      label: "PH-QAD01-F-008 TRAINING CARD",
+      value: "PH-QAD01/F-008",
+      label: "PH-QAD01/F-008 TRAINING CARD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-009",
-      label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-012",
-      label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
+      value: "PH-QAD01/F-012",
+      label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-013",
-      label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-018",
-      label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+      value: "PH-QAD01/F-018",
+      label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-020",
+      value: "PH-QAD01/F-020",
       label:
-        "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+        "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
       roles: [
         "ROLE_SUPERVISOR",
         "ROLE_HOD",
@@ -276,35 +276,35 @@ const ChoosenScreen = () => {
       ],
     },
     {
-      value: "PH-QAD01-F023",
-      label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+      value: "PH-QAD01/F023",
+      label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
       roles: ["ROLE_HOD"],
     },
 
 
     {
-      value: "PH-QAD01-F-039",
-      label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
+      value: "PH-QAD01/F-039",
+      label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
       roles: ["DISPATCH_SUPERVISOR", "SECURITY"],
     },
     {
-      value: "PH-QAD01-F-041",
-      label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
+      value: "PH-QAD01/F-041",
+      label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
       roles: ["QA_MANAGER", "ROLE_DESIGNEE", "ROLE_HOD"],
     },
     {
-      value: "PH-QAD01-F-042",
-      label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
+      value: "PH-QAD01/F-042",
+      label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-045",
-      label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+      value: "PH-QAD01/F-045",
+      label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-047",
-      label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+      value: "PH-QAD01/F-047",
+      label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
       roles: ["ROLE_CHEMIST"],
     },
     {
@@ -313,23 +313,23 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-051",
-      label: "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+      value: "PH-QAD01/F-051",
+      label: "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-052",
-      label: "PH-QAD01-F-052 BREAKAGE REPORT",
+      value: "PH-QAD01/F-052",
+      label: "PH-QAD01/F-052 BREAKAGE REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-058",
-      label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+      value: "PH-QAD01/F-058",
+      label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
       roles: ["ROLE_SUPERVISOR", "ROLE_OPERATOR"],
     },
     {
-      value: "PH-QAD01-F-059",
-      label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+      value: "PH-QAD01/F-059",
+      label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
@@ -338,8 +338,8 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-076",
-      label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+      value: "PH-QAD01/F-076",
+      label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -351,8 +351,8 @@ const ChoosenScreen = () => {
 
   const qualityAssuranceAllOptionsPadpunching = [
     {
-      value: "PH-QAD01F-001",
-      label: "PH-QAD01F-001 MANAGEMENT OF INCIDENCE",
+      value: "PH-QAD01/F-001",
+      label: "PH-QAD01/F-001 MANAGEMENT OF INCIDENCE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -361,44 +361,44 @@ const ChoosenScreen = () => {
       roles: ["ROLE_HOD", "ROLE_DESIGNEE", "ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-005",
-      label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-007",
-      label: "PH-QAD01-F-007 TRAINING RECORD",
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-008",
-      label: "PH-QAD01-F-008 TRAINING CARD",
+      value: "PH-QAD01/F-008",
+      label: "PH-QAD01/F-008 TRAINING CARD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-009",
-      label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-012",
-      label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
+      value: "PH-QAD01/F-012",
+      label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-013",
-      label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-018",
-      label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+      value: "PH-QAD01/F-018",
+      label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-020",
+      value: "PH-QAD01/F-020",
       label:
-        "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+        "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
       roles: [
         "ROLE_SUPERVISOR",
         "ROLE_HOD",
@@ -408,50 +408,50 @@ const ChoosenScreen = () => {
       ],
     },
     {
-      value: "PH-QAD01-F023",
-      label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+      value: "PH-QAD01/F023",
+      label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
       roles: ["ROLE_HOD"],
     },
 
     {
-      value: "PH-QAD01-F-034",
+      value: "PH-QAD01/F-034",
       label:
-        "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+        "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-035",
-      label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+      value: "PH-QAD01/F-035",
+      label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-036",
-      label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+      value: "PH-QAD01/F-036",
+      label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-039",
-      label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
+      value: "PH-QAD01/F-039",
+      label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
       roles: ["DISPATCH_SUPERVISOR", "SECURITY"],
     },
     {
-      value: "PH-QAD01-F-041",
-      label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
+      value: "PH-QAD01/F-041",
+      label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
       roles: ["QA_MANAGER", "ROLE_DESIGNEE", "ROLE_HOD"],
     },
     {
-      value: "PH-QAD01-F-042",
-      label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
+      value: "PH-QAD01/F-042",
+      label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-045",
-      label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+      value: "PH-QAD01/F-045",
+      label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-047",
-      label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+      value: "PH-QAD01/F-047",
+      label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
       roles: ["ROLE_CHEMIST"],
     },
     {
@@ -460,23 +460,23 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-051",
-      label: "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+      value: "PH-QAD01/F-051",
+      label: "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-052",
-      label: "PH-QAD01-F-052 BREAKAGE REPORT",
+      value: "PH-QAD01/F-052",
+      label: "PH-QAD01/F-052 BREAKAGE REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-058",
-      label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+      value: "PH-QAD01/F-058",
+      label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
       roles: ["ROLE_OPERATOR", "ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-059",
-      label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+      value: "PH-QAD01/F-059",
+      label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
@@ -485,8 +485,8 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-076",
-      label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+      value: "PH-QAD01/F-076",
+      label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -498,8 +498,8 @@ const ChoosenScreen = () => {
 
   const qualityAssuranceAllOptionsDryGoods = [
     {
-      value: "PH-QAD01F-001",
-      label: "PH-QAD01F-001 MANAGEMENT OF INCIDENCE",
+      value: "PH-QAD01/F-001",
+      label: "PH-QAD01/F-001 MANAGEMENT OF INCIDENCE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -508,44 +508,44 @@ const ChoosenScreen = () => {
       roles: ["ROLE_HOD", "ROLE_DESIGNEE", "ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-005",
-      label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-007",
-      label: "PH-QAD01-F-007 TRAINING RECORD",
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-008",
-      label: "PH-QAD01-F-008 TRAINING CARD",
+      value: "PH-QAD01/F-008",
+      label: "PH-QAD01/F-008 TRAINING CARD",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-009",
-      label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-012",
-      label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
+      value: "PH-QAD01/F-012",
+      label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-013",
-      label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-018",
-      label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+      value: "PH-QAD01/F-018",
+      label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-020",
+      value: "PH-QAD01/F-020",
       label:
-        "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+        "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
       roles: [
         "ROLE_SUPERVISOR",
         "ROLE_HOD",
@@ -555,50 +555,50 @@ const ChoosenScreen = () => {
       ],
     },
     {
-      value: "PH-QAD01-F023",
-      label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+      value: "PH-QAD01/F023",
+      label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
       roles: ["ROLE_HOD"],
     },
 
     {
-      value: "PH-QAD01-F-034",
+      value: "PH-QAD01/F-034",
       label:
-        "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+        "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-035",
-      label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+      value: "PH-QAD01/F-035",
+      label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-036",
-      label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+      value: "PH-QAD01/F-036",
+      label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-039",
-      label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
+      value: "PH-QAD01/F-039",
+      label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
       roles: ["DISPATCH_SUPERVISOR", "SECURITY"],
     },
     {
-      value: "PH-QAD01-F-041",
-      label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
+      value: "PH-QAD01/F-041",
+      label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
       roles: ["QA_MANAGER", "ROLE_DESIGNEE", "ROLE_HOD"],
     },
     {
-      value: "PH-QAD01-F-042",
-      label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
+      value: "PH-QAD01/F-042",
+      label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-045",
-      label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+      value: "PH-QAD01/F-045",
+      label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-047",
-      label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+      value: "PH-QAD01/F-047",
+      label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
       roles: ["ROLE_CHEMIST"],
     },
     {
@@ -607,23 +607,23 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-051",
-      label: "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+      value: "PH-QAD01/F-051",
+      label: "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
       roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-052",
-      label: "PH-QAD01-F-052 BREAKAGE REPORT",
+      value: "PH-QAD01/F-052",
+      label: "PH-QAD01/F-052 BREAKAGE REPORT",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
-      value: "PH-QAD01-F-058",
-      label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+      value: "PH-QAD01/F-058",
+      label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
       roles: ["ROLE_SUPERVISOR", "ROLE_OPERATOR"],
     },
     {
-      value: "PH-QAD01-F-059",
-      label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+      value: "PH-QAD01/F-059",
+      label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
       roles: ["ROLE_SUPERVISOR"],
     },
     {
@@ -632,8 +632,8 @@ const ChoosenScreen = () => {
       roles: ["ROLE_SUPERVISOR"],
     },
     {
-      value: "PH-QAD01-F-076",
-      label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+      value: "PH-QAD01/F-076",
+      label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
       roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
     },
     {
@@ -1006,8 +1006,8 @@ const ChoosenScreen = () => {
               label: "PH-PRD03/F-005 MACHINE CLEANING CHECK LIST",
             },
             {
-              value: "PH-HRD01-F-023",
-              label: "PH-HRD01-F-023 HAND SANITISATION REPORT",
+              value: " PH-HRD01-F-023",
+              label: " PH-HRD01-F-023 HAND SANITISATION REPORT",
             },
             {
               value: "PH-PRD03-F-006",
@@ -2062,183 +2062,183 @@ const ChoosenScreen = () => {
               label: "PH-QAD01/F-003 DISTRIBUTION AND DESTRUCTION RECORD",
             },
             {
-              value: "PH-QAD01-F-005",
-              label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+              value: "PH-QAD01/F-005",
+              label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
             },
             {
-              value: "PH-QAD01-F-006",
-              label: "PH-QAD01-F-006 TRAINING CALENDAR",
+              value: "PH-QAD01/F-006",
+              label: "PH-QAD01/F-006 TRAINING CALENDAR",
             },
             {
-              value: "PH-QAD01-F-007",
-              label: "PH-QAD01-F-007 TRAINING RECORD",
+              value: "PH-QAD01/F-007",
+              label: "PH-QAD01/F-007 TRAINING RECORD",
             },
             {
-              value: "PH-QAD01-F-008",
-              label: "PH-QAD01-F-008 TRAINING CARD",
-            },
-
-            {
-              value: "PH-QAD01-F-009",
-              label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
-            },
-            {
-              value: "PH-QAD01-F-010",
-              label: "PH-QAD01-F-010 INTERNAL AUDIT SCHEDULE",
-            },
-            {
-              value: "PH-QAD01-F-012",
-              label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
-            },
-            {
-              value: "PH-QAD01-F-013",
-              label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
-            },
-            {
-              value: "PH-QAD01-F-014",
-              label: "PH-QAD01-F-014   SUMMARY OF INTERNAL AUDIT",
-            },
-            {
-              value: "PH-QAD01-F-015",
-              label: "PH-QAD01-F-015   ANNUAL PLAN",
-            },
-            {
-              value: "PH-QAD01-F-016",
-              label: "PH-QAD01-F-016   AGENDA FOR MANAGEMENT REVIEW MEETING",
-            },
-            {
-              value: "PH-QAD01-F-017",
-              label: "PH-QAD01-F-017 MINUTES OF MRM",
-            },
-            {
-              value: "PH-QAD01-F-018",
-              label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
-            },
-            {
-              value: "PH-QAD01-F-019",
-              label: "PH-QAD01-F-019 CUSTOMER COMPLAINT REGISTER",
+              value: "PH-QAD01/F-008",
+              label: "PH-QAD01/F-008 TRAINING CARD",
             },
 
             {
-              value: "PH-QAD01-F-020",
+              value: "PH-QAD01/F-009",
+              label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
+            },
+            {
+              value: "PH-QAD01/F-010",
+              label: "PH-QAD01/F-010 INTERNAL AUDIT SCHEDULE",
+            },
+            {
+              value: "PH-QAD01/F-012",
+              label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
+            },
+            {
+              value: "PH-QAD01/F-013",
+              label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
+            },
+            {
+              value: "PH-QAD01/F-014",
+              label: "PH-QAD01/F-014   SUMMARY OF INTERNAL AUDIT",
+            },
+            {
+              value: "PH-QAD01/F-015",
+              label: "PH-QAD01/F-015   ANNUAL PLAN",
+            },
+            {
+              value: "PH-QAD01/F-016",
+              label: "PH-QAD01/F-016   AGENDA FOR MANAGEMENT REVIEW MEETING",
+            },
+            {
+              value: "PH-QAD01/F-017",
+              label: "PH-QAD01/F-017 MINUTES OF MRM",
+            },
+            {
+              value: "PH-QAD01/F-018",
+              label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
+            },
+            {
+              value: "PH-QAD01/F-019",
+              label: "PH-QAD01/F-019 CUSTOMER COMPLAINT REGISTER",
+            },
+
+            {
+              value: "PH-QAD01/F-020",
               label:
-                "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+                "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
             },
 
             {
-              value: "PH-QAD01-F-021",
-              label: "PH-QAD01-F-021 NON-CONFORMITY LOG BOOK",
+              value: "PH-QAD01/F-021",
+              label: "PH-QAD01/F-021 NON-CONFORMITY LOG BOOK",
             },
             {
-              value: "PH-QAD01-F-022",
-              label: "PH-QAD01-F-022   SUPPLIER'S AUDIT PLAN",
+              value: "PH-QAD01/F-022",
+              label: "PH-QAD01/F-022   SUPPLIER'S AUDIT PLAN",
             },
             {
-              value: "PH-QAD01-F023",
-              label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+              value: "PH-QAD01/F023",
+              label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
             },
             {
-              value: "PH-QAD01-F-25",
-              label: "PH-QAD01-F-25  SUMMARY OF TRACEABILITY",
+              value: "PH-QAD01/F-25",
+              label: "PH-QAD01/F-25  SUMMARY OF TRACEABILITY",
             },
             {
-              value: "PH-QAD01-F-026",
-              label: "PH-QAD01-F-026 TEMPLATE FOR RECALL / MOCK RECALL",
+              value: "PH-QAD01/F-026",
+              label: "PH-QAD01/F-026 TEMPLATE FOR RECALL / MOCK RECALL",
             },
             {
-              value: "PH-QAD01-F-027",
-              label: "PH-QAD01-F-027 MINUTES OF MEETING - MOCK RECALL",
+              value: "PH-QAD01/F-027",
+              label: "PH-QAD01/F-027 MINUTES OF MEETING - MOCK RECALL",
             },
             {
-              value: "PH-QAD01-F-028",
-              label: "PH-QAD01-F-028 ANNUAL PRODUCT REVIEW",
+              value: "PH-QAD01/F-028",
+              label: "PH-QAD01/F-028 ANNUAL PRODUCT REVIEW",
             },
             {
               value: "PH-QCL01-F-029",
               label: "PH-QCL01-F-029 NEW SAMPLE REQUEST",
             },
             {
-              value: "PH-QAD01-F-029",
-              label: "PH-QAD01-F-029   INWARD(CARTON) INSPECTION REPORT",
+              value: "PH-QAD01/F-029",
+              label: "PH-QAD01/F-029   INWARD(CARTON) INSPECTION REPORT",
             },
             {
-              value: "PH-QAD01-F-030",
-              label: "PH-QAD01-F-030   INWARD (FILM)  INSPECTION REPORT",
+              value: "PH-QAD01/F-030",
+              label: "PH-QAD01/F-030   INWARD (FILM)  INSPECTION REPORT",
             },
 
             {
-              value: "PH-QAD01-F-031",
-              label: "PH-QAD01-F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
+              value: "PH-QAD01/F-031",
+              label: "PH-QAD01/F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
             },
             {
-              value: "PH-QAD01-F-032",
-              label: "PH-QAD01-F-032 INWARD (STICK) INSPECTION",
+              value: "PH-QAD01/F-032",
+              label: "PH-QAD01/F-032 INWARD (STICK) INSPECTION",
             },
             {
-              value: "PH-QAD01-F-033",
-              label: "PH-QAD01-F-033 INWARD INSPECTION JAR",
+              value: "PH-QAD01/F-033",
+              label: "PH-QAD01/F-033 INWARD INSPECTION JAR",
             },
             {
-              value: "PH-QAD01-F-034",
+              value: "PH-QAD01/F-034",
               label:
-                "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+                "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
             },
             {
-              value: "PH-QAD01-F-035",
-              label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+              value: "PH-QAD01/F-035",
+              label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
             },
             {
-              value: "PH-QAD01-F-036",
-              label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
-            },
-
-            {
-              value: "PH-QAD01-F-037",
-              label: "PH-QAD01-F-037 FINAL INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-038",
-              label: "PH-QAD01-F-038 FINAL INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-039",
-              label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-040",
-              label: "PH-QAD01-F-040 PRODUCTION RETAINED SAMPLE REGISTER",
-            },
-            {
-              value: "PH-QAD01-F-041",
-              label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
-            },
-            {
-              value: "PH-QAD01-F-042",
-              label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
-            },
-            {
-              value: "PH-QAD01-F-043",
-              label: "PH-QAD01-F-043 QUALITY REVIEW MEETING",
+              value: "PH-QAD01/F-036",
+              label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
             },
 
             {
-              value: "PH-QAD01-F-044",
-              label: "PH-QAD01-F-044 CORRECTIVE ACTION REPORT",
+              value: "PH-QAD01/F-037",
+              label: "PH-QAD01/F-037 FINAL INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-038",
+              label: "PH-QAD01/F-038 FINAL INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-039",
+              label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-040",
+              label: "PH-QAD01/F-040 PRODUCTION RETAINED SAMPLE REGISTER",
+            },
+            {
+              value: "PH-QAD01/F-041",
+              label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
+            },
+            {
+              value: "PH-QAD01/F-042",
+              label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
+            },
+            {
+              value: "PH-QAD01/F-043",
+              label: "PH-QAD01/F-043 QUALITY REVIEW MEETING",
             },
 
             {
-              value: "PH-QAD01-F-045",
-              label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+              value: "PH-QAD01/F-044",
+              label: "PH-QAD01/F-044 CORRECTIVE ACTION REPORT",
             },
 
             {
-              value: "PH-QAD01-F-046",
-              label: "PH-QAD01-F-046 BATCH RELEASE NOTE",
+              value: "PH-QAD01/F-045",
+              label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
             },
 
             {
-              value: "PH-QAD01-F-047",
-              label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+              value: "PH-QAD01/F-046",
+              label: "PH-QAD01/F-046 BATCH RELEASE NOTE",
+            },
+
+            {
+              value: "PH-QAD01/F-047",
+              label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
             },
 
             {
@@ -2246,89 +2246,88 @@ const ChoosenScreen = () => {
               label: "PH-QAD01/F-048 DEVIATION FORM",
             },
 
-            // PH-QAD01-F-049
+            // PH-QAD01/F-049
             {
-              value: "PH-QAD01-F-049",
-              label: "PH-QAD01-F-049 PRODUCTION DISPOSITION LOGBOOK",
+              value: "PH-QAD01/F-049",
+              label: "PH-QAD01/F-049 PRODUCTION DISPOSITION LOGBOOK",
             },
             {
-              value: "PH-QAD01-F-050",
+              value: "PH-QAD01/F-050",
               label:
-                "PH-QAD01-F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
+                "PH-QAD01/F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
             },
 
             {
-              value: "PH-QAD01-F-051",
+              value: "PH-QAD01/F-051",
               label:
-                "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+                "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
             },
 
             {
-              value: "PH-QAD01-F-052",
-              label: "PH-QAD01-F-052 BREAKAGE REPORT",
+              value: "PH-QAD01/F-052",
+              label: "PH-QAD01/F-052 BREAKAGE REPORT",
             },
             {
-              value: "PH-QAD01-F-058",
-              label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+              value: "PH-QAD01/F-058",
+              label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
             },
             {
-              value: "PH-QAD01-F-059",
-              label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+              value: "PH-QAD01/F-059",
+              label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
             },
             {
-              value: "PH-QAD01-F-060",
-              label: "PH-QAD01-F-060 MASTER LIST OF SHARP TOOLS",
-            },
-
-            {
-              value: "PH-QAD01-f-60",
-              label: "PH-QAD01-f-60 LIST OF SHARP TOOLS",
+              value: "PH-QAD01/F-060",
+              label: "PH-QAD01/F-060 MASTER LIST OF SHARP TOOLS",
             },
 
             {
-              value: "PH-QAD01-F-076",
-              label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+              value: "PH-QAD01/F-60",
+              label: "PH-QAD01/F-60 LIST OF SHARP TOOLS",
+            },
+
+            {
+              value: "PH-QAD01/F-076",
+              label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
             },
           ]
           : []),
         {
-          value: "PH-HRD01-F-013",
-          label: "PH-HRD01-F-013 RODENT BOX CHECK LIST",
+          value: "PH-HRD01/F-013",
+          label: "PH-HRD01/F-013 RODENT BOX CHECK LIST",
         },
 
         {
-          value: "PH-HRD01-F-014",
+          value: "PH-HRD01/F-014",
           label:
-            "PH-HRD01-F-014 PEST CONTROL SERVICE REPORT - IMM (INTEGRATED MOSQUITO MANAGEMENT) SERVICE FOR MOSQUITOES",
+            "PH-HRD01/F-014 PEST CONTROL SERVICE REPORT - IMM (INTEGRATED MOSQUITO MANAGEMENT) SERVICE FOR MOSQUITOES",
         },
         {
-          value: "PH-HRD01-F-015",
+          value: "PH-HRD01/F-015",
           label:
-            "PH-HRD01-F-015  PEST CONTROL SERVICE REPORT 1 -INTEGRATED FLYING INSECT MANAGEMENT FOR HOUSE FLIES, DRAIN FLIES, FLESH FLIES",
+            "PH-HRD01/F-015  PEST CONTROL SERVICE REPORT 1 -INTEGRATED FLYING INSECT MANAGEMENT FOR HOUSE FLIES, DRAIN FLIES, FLESH FLIES",
         },
         {
-          value: "PH-HRD01-F-016",
+          value: "PH-HRD01/F-016",
           label:
-            "PH-HRD01-F-016 PEST CONTROL SERVICE REPORT 2 -INTEGRATED LIZARD MANAGEMENT (ILM) SERVICE FOR HOUSE LIZARDS",
+            "PH-HRD01/F-016 PEST CONTROL SERVICE REPORT 2 -INTEGRATED LIZARD MANAGEMENT (ILM) SERVICE FOR HOUSE LIZARDS",
         },
         {
-          value: "PH-HRD01-F-017",
+          value: "PH-HRD01/F-017",
           label:
-            "PH-HRD01-F-017 PEST CONTROL SERVICE REPORT 3 -INTEGRATED SPIDER MANAGEMENT SERVICE FOR SPIDER & CRAWLING INSECTS",
+            "PH-HRD01/F-017 PEST CONTROL SERVICE REPORT 3 -INTEGRATED SPIDER MANAGEMENT SERVICE FOR SPIDER & CRAWLING INSECTS",
         },
         {
-          value: "PH-HRD01-F-018",
+          value: "PH-HRD01/F-018",
           label:
-            "PH-HRD01-F-018 PEST CONTROL SERVICE REPORT 4 -IPM (THERMAL FOGGING) FOR MOSQUITOES",
+            "PH-HRD01/F-018 PEST CONTROL SERVICE REPORT 4 -IPM (THERMAL FOGGING) FOR MOSQUITOES",
         },
         {
-          value: "PH-HRD01-F-019",
+          value: "PH-HRD01/F-019",
           label:
-            "PH-HRD01-F-019 PEST CONTROL SERVICE REPORT 5 -PRO-GUARD SERVICE FOR CRAWLING INSECTS",
+            "PH-HRD01/F-019 PEST CONTROL SERVICE REPORT 5 -PRO-GUARD SERVICE FOR CRAWLING INSECTS",
         },
       ],
     },
-
     {
       label: <span>Development</span>,
       title: "Development",
@@ -2494,7 +2493,6 @@ const ChoosenScreen = () => {
           : []),
       ]
     },
-
   ];
 
   const HRForm = [
@@ -2534,8 +2532,8 @@ const ChoosenScreen = () => {
           label: "PH-PRD06/F-004 BATCH MANUFACTURING RECORD",
         },
         {
-          value: "PH-QAD01-F-038",
-          label: "PH-QAD01-F-038 FINAL INSPECTION REPORT",
+          value: "PH-QAD01/F-038",
+          label: "PH-QAD01/F-038 FINAL INSPECTION REPORT",
         },
       ],
     },
@@ -2544,14 +2542,14 @@ const ChoosenScreen = () => {
       title: "Quality Assurance",
       options: [
         {
-          value: "PH-QAD01-F-036",
-          label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+          value: "PH-QAD01/F-036",
+          label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
         },
         ...(role === "ROLE_HOD" || role === "ROLE_DESIGNEE"
           ? [
             {
-              value: "PH-QAD01-F-018",
-              label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+              value: "PH-QAD01/F-018",
+              label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
             },
           ]
           : []),
@@ -2633,106 +2631,257 @@ const ChoosenScreen = () => {
       title: "Quality Assurance",
       options: [
         {
-          value: "PH-QAD01-F-020",
+          value: "PH-QAD01/F-020",
           label:
-            "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+            "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
         },
         {
-          value: "PH-QAD01-F-026",
-          label: "PH-QAD01-F-026 TEMPLATE FOR RECALL / MOCK RECALL",
+          value: "PH-QAD01/F-026",
+          label: "PH-QAD01/F-026 TEMPLATE FOR RECALL / MOCK RECALL",
         },
         {
-          value: "PH-QAD01-F-029",
-          label: "PH-QAD01-F-029   INWARD(CARTON) INSPECTION REPORT",
+          value: "PH-QAD01/F-029",
+          label: "PH-QAD01/F-029   INWARD(CARTON) INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-030",
-          label: "PH-QAD01-F-030   INWARD (FILM)  INSPECTION REPORT",
+          value: "PH-QAD01/F-030",
+          label: "PH-QAD01/F-030   INWARD (FILM)  INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-031",
-          label: "PH-QAD01-F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
+          value: "PH-QAD01/F-031",
+          label: "PH-QAD01/F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-032",
-          label: "PH-QAD01-F-032 INWARD (STICK) INSPECTION",
+          value: "PH-QAD01/F-032",
+          label: "PH-QAD01/F-032 INWARD (STICK) INSPECTION",
         },
         {
-          value: "PH-QAD01-F-033",
-          label: "PH-QAD01-F-033 INWARD INSPECTION JAR",
+          value: "PH-QAD01/F-033",
+          label: "PH-QAD01/F-033 INWARD INSPECTION JAR",
         },
         {
-          value: "PH-QAD01-F-034",
+          value: "PH-QAD01/F-034",
           label:
-            "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+            "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
         },
         {
-          value: "PH-QAD01-F-035",
-          label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+          value: "PH-QAD01/F-035",
+          label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
         },
         {
-          value: "PH-QAD01-F-036",
-          label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+          value: "PH-QAD01/F-036",
+          label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
         },
         {
-          value: "PH-QAD01-F-037",
-          label: "PH-QAD01-F-037 FINAL INSPECTION REPORT",
+          value: "PH-QAD01/F-037",
+          label: "PH-QAD01/F-037 FINAL INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-038",
-          label: "PH-QAD01-F-038 FINAL INSPECTION REPORT",
+          value: "PH-QAD01/F-038",
+          label: "PH-QAD01/F-038 FINAL INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-039",
-          label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
+          value: "PH-QAD01/F-039",
+          label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
         },
         {
-          value: "PH-QAD01-F-040",
-          label: "PH-QAD01-F-040 PRODUCTION RETAINED SAMPLE REGISTER",
+          value: "PH-QAD01/F-040",
+          label: "PH-QAD01/F-040 PRODUCTION RETAINED SAMPLE REGISTER",
         },
         {
-          value: "PH-QAD01-F-043",
-          label: "PH-QAD01-F-043 QUALITY REVIEW MEETING",
+          value: "PH-QAD01/F-043",
+          label: "PH-QAD01/F-043 QUALITY REVIEW MEETING",
         },
         {
-          value: "PH-QAD01-F-044",
-          label: "PH-QAD01-F-044 CORRECTIVE ACTION REPORT",
+          value: "PH-QAD01/F-044",
+          label: "PH-QAD01/F-044 CORRECTIVE ACTION REPORT",
         },
         {
-          value: "PH-QAD01-F-045",
-          label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+          value: "PH-QAD01/F-045",
+          label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
         },
         {
-          value: "PH-QAD01-F-047",
-          label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+          value: "PH-QAD01/F-047",
+          label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
         },
         {
-          value: "PH-QAD01-F-049",
-          label: "PH-QAD01-F-049 PRODUCTION DISPOSITION LOGBOOK",
+          value: "PH-QAD01/F-049",
+          label: "PH-QAD01/F-049 PRODUCTION DISPOSITION LOGBOOK",
         },
         {
-          value: "PH-QAD01-F-050",
-          label: "PH-QAD01-F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
+          value: "PH-QAD01/F-050",
+          label: "PH-QAD01/F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
         },
         {
-          value: "PH-QAD01-F-052",
-          label: "PH-QAD01-F-052 BREAKAGE REPORT",
+          value: "PH-QAD01/F-052",
+          label: "PH-QAD01/F-052 BREAKAGE REPORT",
         },
         {
-          value: "PH-QAD01-F-058",
-          label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+          value: "PH-QAD01/F-058",
+          label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
         },
         {
-          value: "PH-QAD01-F-059",
-          label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+          value: "PH-QAD01/F-059",
+          label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
         },
         {
-          value: "PH-QAD01-F-060",
-          label: "PH-QAD01-F-060 MASTER LIST OF SHARP TOOLS",
+          value: "PH-QAD01/F-060",
+          label: "PH-QAD01/F-060 MASTER LIST OF SHARP TOOLS",
         },
       ],
     },
   ];
+
+  const qualityAssuranceAllOptionsFiltered = [
+    {
+      value: "PH-QAD01/F-001",
+      label: "PH-QAD01/F-001 MANAGEMENT OF INCIDENCE",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-002",
+      label: "PH-QAD01/F-002 REQUEST & ISSUANCE OF DOCUMENT",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE", "ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-005",
+      label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-007",
+      label: "PH-QAD01/F-007 TRAINING RECORD",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE", "HR_EXECUTIVE"],
+    },
+    {
+      value: "PH-QAD01/F-008",
+      label: "PH-QAD01/F-008 TRAINING CARD",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-009",
+      label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE", "HR_EXECUTIVE"],
+    },
+    {
+      value: "PH-QAD01/F-012",
+      label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-013",
+      label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-018",
+      label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-020",
+      label:
+        "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+      roles: [
+        "ROLE_SUPERVISOR",
+        "ROLE_HOD",
+        "ROLE_DESIGNEE",
+        "QC_MANAGER",
+        "ROLE_CHEMIST",
+      ],
+    },
+    {
+      value: "PH-QAD01/F023",
+      label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
+      roles: ["ROLE_HOD"],
+    },
+    {
+      value: "PH-QAD01/F-034",
+      label:
+        "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-035",
+      label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-036",
+      label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-039",
+      label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
+      roles: ["DISPATCH_SUPERVISOR", "SECURITY"],
+    },
+    {
+      value: "PH-QAD01/F-041",
+      label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
+      roles: ["QA_MANAGER", "ROLE_DESIGNEE", "ROLE_HOD"],
+    },
+    {
+      value: "PH-QAD01/F-042",
+      label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-045",
+      label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-047",
+      label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
+      roles: ["ROLE_CHEMIST"],
+    },
+    {
+      value: "PH-QAD01/F-048",
+      label: "PH-QAD01/F-048 DEVIATION FORM",
+      roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-051",
+      label: "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+      roles: ["ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-052",
+      label: "PH-QAD01/F-052 BREAKAGE REPORT",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QAD01/F-058",
+      label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
+      roles: ["ROLE_OPERATOR", "ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-059",
+      label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-062",
+      label: "PH-QAD01/F-062 SHARP TOOLS ISSUE & VERIFICATION REGISTER",
+      roles: ["ROLE_SUPERVISOR"],
+    },
+    {
+      value: "PH-QAD01/F-076",
+      label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
+      roles: ["ROLE_HOD", "ROLE_DESIGNEE"],
+    },
+    {
+      value: "PH-QCL01-F-029",
+      label: "PH-QCL01-F-029 NEW SAMPLE REQUEST",
+      roles: ["QC_MANAGER", "MARKET_REPRESENTATIVE"],
+    }
+  ];
+
+  const qualityAssuranceAllOptionsMS = qualityAssuranceAllOptionsFiltered.filter((option) =>
+    option.roles.includes(role)
+  );
+
   // multiple departments selection section
   const BleachingFormMS = [
     {
@@ -2823,7 +2972,23 @@ const ChoosenScreen = () => {
         },
       ],
     },
-  ];
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+    {
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
+    },
+  ].filter(Boolean) || [];
+
   const SpunlaceFormMS = [
     {
       label: <span>Spunlace</span>,
@@ -2939,6 +3104,21 @@ const ChoosenScreen = () => {
         },
       ],
     },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+    {
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
+    },
   ];
 
   const PadPunchingFormMS = [
@@ -2973,8 +3153,8 @@ const ChoosenScreen = () => {
               label: "PH-PRD03/F-005 MACHINE CLEANING CHECK LIST",
             },
             {
-              value: "PH-HRD01-F-023",
-              label: "PH-HRD01-F-023 HAND SANITISATION REPORT",
+              value: " PH-HRD01-F-023",
+              label: " PH-HRD01-F-023 HAND SANITISATION REPORT",
             },
             {
               value: "PH-PRD03-F-006",
@@ -3023,6 +3203,21 @@ const ChoosenScreen = () => {
           ]
           : []),
       ],
+    },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+    {
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
     },
   ];
 
@@ -3119,6 +3314,21 @@ const ChoosenScreen = () => {
           ]
           : []),
       ],
+    },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+    {
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
     },
   ];
 
@@ -3959,6 +4169,21 @@ const ChoosenScreen = () => {
           : []),
       ],
     },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+    {
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
+    },
   ];
 
   const QAFormMS = [
@@ -3981,183 +4206,183 @@ const ChoosenScreen = () => {
               label: "PH-QAD01/F-003 DISTRIBUTION AND DESTRUCTION RECORD",
             },
             {
-              value: "PH-QAD01-F-005",
-              label: "PH-QAD01-F-005 TRAINING NEED IDENTIFICATION FORM",
+              value: "PH-QAD01/F-005",
+              label: "PH-QAD01/F-005 TRAINING NEED IDENTIFICATION FORM",
             },
             {
-              value: "PH-QAD01-F-006",
-              label: "PH-QAD01-F-006 TRAINING CALENDAR",
+              value: "PH-QAD01/F-006",
+              label: "PH-QAD01/F-006 TRAINING CALENDAR",
             },
             {
-              value: "PH-QAD01-F-007",
-              label: "PH-QAD01-F-007 TRAINING RECORD",
+              value: "PH-QAD01/F-007",
+              label: "PH-QAD01/F-007 TRAINING RECORD",
             },
             {
-              value: "PH-QAD01-F-008",
-              label: "PH-QAD01-F-008 TRAINING CARD",
-            },
-            {
-              value: "PH-QAD01-F-009",
-              label: "PH-QAD01-F-009 TRAINING QUESSIONNAIRE",
-            },
-            {
-              value: "PH-QAD01-F-010",
-              label: "PH-QAD01-F-010 INTERNAL AUDIT SCHEDULE",
-            },
-            {
-              value: "PH-QAD01-F-012",
-              label: "PH-QAD01-F-012 INTERNAL AUDIT REPORT",
-            },
-            {
-              value: "PH-QAD01-F-013",
-              label: "PH-QAD01-F-013 INTERNAL AUDIT NC REPORT",
-            },
-            {
-              value: "PH-QAD01-F-014",
-              label: "PH-QAD01-F-014   SUMMARY OF INTERNAL AUDIT",
-            },
-            {
-              value: "PH-QAD01-F-015",
-              label: "PH-QAD01-F-015   ANNUAL PLAN",
-            },
-            {
-              value: "PH-QAD01-F-016",
-              label: "PH-QAD01-F-016   AGENDA FOR MANAGEMENT REVIEW MEETING",
-            },
-            {
-              value: "PH-QAD01-F-017",
-              label: "PH-QAD01-F-017 MINUTES OF MRM",
-            },
-            {
-              value: "PH-QAD01-F-018",
-              label: "PH-QAD01-F-018 CUSTOMER COMPLAINT REGISTER FORM",
+              value: "PH-QAD01/F-008",
+              label: "PH-QAD01/F-008 TRAINING CARD",
             },
 
             {
-              value: "PH-QAD01-F-019",
-              label: "PH-QAD01-F-019 CUSTOMER COMPLAINT REGISTER",
+              value: "PH-QAD01/F-009",
+              label: "PH-QAD01/F-009 TRAINING QUESSIONNAIRE",
+            },
+            {
+              value: "PH-QAD01/F-010",
+              label: "PH-QAD01/F-010 INTERNAL AUDIT SCHEDULE",
+            },
+            {
+              value: "PH-QAD01/F-012",
+              label: "PH-QAD01/F-012 INTERNAL AUDIT REPORT",
+            },
+            {
+              value: "PH-QAD01/F-013",
+              label: "PH-QAD01/F-013 INTERNAL AUDIT NC REPORT",
+            },
+            {
+              value: "PH-QAD01/F-014",
+              label: "PH-QAD01/F-014   SUMMARY OF INTERNAL AUDIT",
+            },
+            {
+              value: "PH-QAD01/F-015",
+              label: "PH-QAD01/F-015   ANNUAL PLAN",
+            },
+            {
+              value: "PH-QAD01/F-016",
+              label: "PH-QAD01/F-016   AGENDA FOR MANAGEMENT REVIEW MEETING",
+            },
+            {
+              value: "PH-QAD01/F-017",
+              label: "PH-QAD01/F-017 MINUTES OF MRM",
+            },
+            {
+              value: "PH-QAD01/F-018",
+              label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
+            },
+            {
+              value: "PH-QAD01/F-019",
+              label: "PH-QAD01/F-019 CUSTOMER COMPLAINT REGISTER",
             },
 
             {
-              value: "PH-QAD01-F-020",
+              value: "PH-QAD01/F-020",
               label:
-                "PH-QAD01-F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
+                "PH-QAD01/F-020 NON CONFORMITY REPORT (FOR MACHINE PROCESS/ WIP/ FINISHED PRODUCTS)",
             },
 
             {
-              value: "PH-QAD01-F-021",
-              label: "PH-QAD01-F-021 NON-CONFORMITY LOG BOOK",
+              value: "PH-QAD01/F-021",
+              label: "PH-QAD01/F-021 NON-CONFORMITY LOG BOOK",
             },
             {
-              value: "PH-QAD01-F-022",
-              label: "PH-QAD01-F-022   SUPPLIER'S AUDIT PLAN",
+              value: "PH-QAD01/F-022",
+              label: "PH-QAD01/F-022   SUPPLIER'S AUDIT PLAN",
             },
             {
-              value: "PH-QAD01-F023",
-              label: "PH-QAD01-F023 SUPPLIER AUDIT REPORT",
+              value: "PH-QAD01/F023",
+              label: "PH-QAD01/F023 SUPPLIER AUDIT REPORT",
             },
             {
-              value: "PH-QAD01-F-25",
-              label: "PH-QAD01-F-25  SUMMARY OF TRACEABILITY",
+              value: "PH-QAD01/F-25",
+              label: "PH-QAD01/F-25  SUMMARY OF TRACEABILITY",
             },
             {
-              value: "PH-QAD01-F-026",
-              label: "PH-QAD01-F-026 TEMPLATE FOR RECALL / MOCK RECALL",
+              value: "PH-QAD01/F-026",
+              label: "PH-QAD01/F-026 TEMPLATE FOR RECALL / MOCK RECALL",
             },
             {
-              value: "PH-QAD01-F-027",
-              label: "PH-QAD01-F-027 MINUTES OF MEETING - MOCK RECALL",
+              value: "PH-QAD01/F-027",
+              label: "PH-QAD01/F-027 MINUTES OF MEETING - MOCK RECALL",
             },
             {
-              value: "PH-QAD01-F-028",
-              label: "PH-QAD01-F-028 ANNUAL PRODUCT REVIEW",
+              value: "PH-QAD01/F-028",
+              label: "PH-QAD01/F-028 ANNUAL PRODUCT REVIEW",
             },
             {
               value: "PH-QCL01-F-029",
               label: "PH-QCL01-F-029 NEW SAMPLE REQUEST",
             },
             {
-              value: "PH-QAD01-F-029",
-              label: "PH-QAD01-F-029   INWARD(CARTON) INSPECTION REPORT",
+              value: "PH-QAD01/F-029",
+              label: "PH-QAD01/F-029   INWARD(CARTON) INSPECTION REPORT",
             },
             {
-              value: "PH-QAD01-F-030",
-              label: "PH-QAD01-F-030   INWARD (FILM)  INSPECTION REPORT",
+              value: "PH-QAD01/F-030",
+              label: "PH-QAD01/F-030   INWARD (FILM)  INSPECTION REPORT",
             },
 
             {
-              value: "PH-QAD01-F-031",
-              label: "PH-QAD01-F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
+              value: "PH-QAD01/F-031",
+              label: "PH-QAD01/F-031   INWARD (ZIPLOCK) INSPECTION REPORT",
             },
             {
-              value: "PH-QAD01-F-032",
-              label: "PH-QAD01-F-032 INWARD (STICK) INSPECTION",
+              value: "PH-QAD01/F-032",
+              label: "PH-QAD01/F-032 INWARD (STICK) INSPECTION",
             },
             {
-              value: "PH-QAD01-F-033",
-              label: "PH-QAD01-F-033 INWARD INSPECTION JAR",
+              value: "PH-QAD01/F-033",
+              label: "PH-QAD01/F-033 INWARD INSPECTION JAR",
             },
             {
-              value: "PH-QAD01-F-034",
+              value: "PH-QAD01/F-034",
               label:
-                "PH-QAD01-F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
+                "PH-QAD01/F-034 INPROCESS INSPECTION REPORT(FOR PADS  PLEATS  ROLLS) ",
             },
             {
-              value: "PH-QAD01-F-035",
-              label: "PH-QAD01-F-035 ONLINE INSPECTION FOR BALLS",
+              value: "PH-QAD01/F-035",
+              label: "PH-QAD01/F-035 ONLINE INSPECTION FOR BALLS",
             },
             {
-              value: "PH-QAD01-F-036",
-              label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
-            },
-
-            {
-              value: "PH-QAD01-F-037",
-              label: "PH-QAD01-F-037 FINAL INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-038",
-              label: "PH-QAD01-F-038 FINAL INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-039",
-              label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
-            },
-            {
-              value: "PH-QAD01-F-040",
-              label: "PH-QAD01-F-040 PRODUCTION RETAINED SAMPLE REGISTER",
-            },
-            {
-              value: "PH-QAD01-F-041",
-              label: "PH-QAD01-F-041 CHANGE CONTROL FORM",
-            },
-            {
-              value: "PH-QAD01-F-042",
-              label: "PH-QAD01-F-042 CHANGE CONTROL LOG BOOK",
-            },
-            {
-              value: "PH-QAD01-F-043",
-              label: "PH-QAD01-F-043 QUALITY REVIEW MEETING",
+              value: "PH-QAD01/F-036",
+              label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
             },
 
             {
-              value: "PH-QAD01-F-044",
-              label: "PH-QAD01-F-044 CORRECTIVE ACTION REPORT",
+              value: "PH-QAD01/F-037",
+              label: "PH-QAD01/F-037 FINAL INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-038",
+              label: "PH-QAD01/F-038 FINAL INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-039",
+              label: "PH-QAD01/F-039 CONTAINER INSPECTION REPORT",
+            },
+            {
+              value: "PH-QAD01/F-040",
+              label: "PH-QAD01/F-040 PRODUCTION RETAINED SAMPLE REGISTER",
+            },
+            {
+              value: "PH-QAD01/F-041",
+              label: "PH-QAD01/F-041 CHANGE CONTROL FORM",
+            },
+            {
+              value: "PH-QAD01/F-042",
+              label: "PH-QAD01/F-042 CHANGE CONTROL LOG BOOK",
+            },
+            {
+              value: "PH-QAD01/F-043",
+              label: "PH-QAD01/F-043 QUALITY REVIEW MEETING",
             },
 
             {
-              value: "PH-QAD01-F-045",
-              label: "PH-QAD01-F-045 BMR - ISSUE REGISTER",
+              value: "PH-QAD01/F-044",
+              label: "PH-QAD01/F-044 CORRECTIVE ACTION REPORT",
             },
 
             {
-              value: "PH-QAD01-F-046",
-              label: "PH-QAD01-F-046 BATCH RELEASE NOTE",
+              value: "PH-QAD01/F-045",
+              label: "PH-QAD01/F-045 BMR - ISSUE REGISTER",
             },
 
             {
-              value: "PH-QAD01-F-047",
-              label: "PH-QAD01-F-047 BATCH RELEASE CHECKLIST",
+              value: "PH-QAD01/F-046",
+              label: "PH-QAD01/F-046 BATCH RELEASE NOTE",
+            },
+
+            {
+              value: "PH-QAD01/F-047",
+              label: "PH-QAD01/F-047 BATCH RELEASE CHECKLIST",
             },
 
             {
@@ -4165,89 +4390,88 @@ const ChoosenScreen = () => {
               label: "PH-QAD01/F-048 DEVIATION FORM",
             },
 
-            // PH-QAD01-F-049
+            // PH-QAD01/F-049
             {
-              value: "PH-QAD01-F-049",
-              label: "PH-QAD01-F-049 PRODUCTION DISPOSITION LOGBOOK",
+              value: "PH-QAD01/F-049",
+              label: "PH-QAD01/F-049 PRODUCTION DISPOSITION LOGBOOK",
             },
             {
-              value: "PH-QAD01-F-050",
+              value: "PH-QAD01/F-050",
               label:
-                "PH-QAD01-F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
+                "PH-QAD01/F-050 LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
             },
 
             {
-              value: "PH-QAD01-F-051",
+              value: "PH-QAD01/F-051",
               label:
-                "PH-QAD01-F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
+                "PH-QAD01/F-051 CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC",
             },
 
             {
-              value: "PH-QAD01-F-052",
-              label: "PH-QAD01-F-052 BREAKAGE REPORT",
+              value: "PH-QAD01/F-052",
+              label: "PH-QAD01/F-052 BREAKAGE REPORT",
             },
             {
-              value: "PH-QAD01-F-058",
-              label: "PH-QAD01-F-058 METAL DETECTOR CALIBRATION RECORD",
+              value: "PH-QAD01/F-058",
+              label: "PH-QAD01/F-058 METAL DETECTOR CALIBRATION RECORD",
             },
             {
-              value: "PH-QAD01-F-059",
-              label: "PH-QAD01-F-059 METAL DETECTOR PASS REPORT",
+              value: "PH-QAD01/F-059",
+              label: "PH-QAD01/F-059 METAL DETECTOR PASS REPORT",
             },
             {
-              value: "PH-QAD01-F-060",
-              label: "PH-QAD01-F-060 MASTER LIST OF SHARP TOOLS",
-            },
-
-            {
-              value: "PH-QAD01-f-60",
-              label: "PH-QAD01-f-60 LIST OF SHARP TOOLS",
+              value: "PH-QAD01/F-060",
+              label: "PH-QAD01/F-060 MASTER LIST OF SHARP TOOLS",
             },
 
             {
-              value: "PH-QAD01-F-076",
-              label: "PH-QAD01-F-076 TRAINING SESSION ALLOTMENT REGISTER",
+              value: "PH-QAD01/F-60",
+              label: "PH-QAD01/F-60 LIST OF SHARP TOOLS",
+            },
+
+            {
+              value: "PH-QAD01/F-076",
+              label: "PH-QAD01/F-076 TRAINING SESSION ALLOTMENT REGISTER",
             },
           ]
           : []),
         {
-          value: "PH-HRD01-F-013",
-          label: "PH-HRD01-F-013 RODENT BOX CHECK LIST",
+          value: "PH-HRD01/F-013",
+          label: "PH-HRD01/F-013 RODENT BOX CHECK LIST",
         },
 
         {
-          value: "PH-HRD01-F-014",
+          value: "PH-HRD01/F-014",
           label:
-            "PH-HRD01-F-014 PEST CONTROL SERVICE REPORT - IMM (INTEGRATED MOSQUITO MANAGEMENT) SERVICE FOR MOSQUITOES",
+            "PH-HRD01/F-014 PEST CONTROL SERVICE REPORT - IMM (INTEGRATED MOSQUITO MANAGEMENT) SERVICE FOR MOSQUITOES",
         },
         {
-          value: "PH-HRD01-F-015",
+          value: "PH-HRD01/F-015",
           label:
-            "PH-HRD01-F-015  PEST CONTROL SERVICE REPORT 1 -INTEGRATED FLYING INSECT MANAGEMENT FOR HOUSE FLIES, DRAIN FLIES, FLESH FLIES",
+            "PH-HRD01/F-015  PEST CONTROL SERVICE REPORT 1 -INTEGRATED FLYING INSECT MANAGEMENT FOR HOUSE FLIES, DRAIN FLIES, FLESH FLIES",
         },
         {
-          value: "PH-HRD01-F-016",
+          value: "PH-HRD01/F-016",
           label:
-            "PH-HRD01-F-016 PEST CONTROL SERVICE REPORT 2 -INTEGRATED LIZARD MANAGEMENT (ILM) SERVICE FOR HOUSE LIZARDS",
+            "PH-HRD01/F-016 PEST CONTROL SERVICE REPORT 2 -INTEGRATED LIZARD MANAGEMENT (ILM) SERVICE FOR HOUSE LIZARDS",
         },
         {
-          value: "PH-HRD01-F-017",
+          value: "PH-HRD01/F-017",
           label:
-            "PH-HRD01-F-017 PEST CONTROL SERVICE REPORT 3 -INTEGRATED SPIDER MANAGEMENT SERVICE FOR SPIDER & CRAWLING INSECTS",
+            "PH-HRD01/F-017 PEST CONTROL SERVICE REPORT 3 -INTEGRATED SPIDER MANAGEMENT SERVICE FOR SPIDER & CRAWLING INSECTS",
         },
         {
-          value: "PH-HRD01-F-018",
+          value: "PH-HRD01/F-018",
           label:
-            "PH-HRD01-F-018 PEST CONTROL SERVICE REPORT 4 -IPM (THERMAL FOGGING) FOR MOSQUITOES",
+            "PH-HRD01/F-018 PEST CONTROL SERVICE REPORT 4 -IPM (THERMAL FOGGING) FOR MOSQUITOES",
         },
         {
-          value: "PH-HRD01-F-019",
+          value: "PH-HRD01/F-019",
           label:
-            "PH-HRD01-F-019 PEST CONTROL SERVICE REPORT 5 -PRO-GUARD SERVICE FOR CRAWLING INSECTS",
+            "PH-HRD01/F-019 PEST CONTROL SERVICE REPORT 5 -PRO-GUARD SERVICE FOR CRAWLING INSECTS",
         },
       ],
     },
-
     {
       label: <span>Development</span>,
       title: "Development",
@@ -4256,49 +4480,48 @@ const ChoosenScreen = () => {
   ];
 
   const PPCFormMS = [
+    ...(role === "PPC_ASSISTANT"
+      ? [
+        {
+          value: "PH-PPC01/F-003",
+          label: "PH-PPC01/F-003 Contract Review Meeting",
+        },
+        {
+          value: "PH-PPC01/F-002",
+          label: "PH-PPC01/F-002 Monthly plan Summary Details",
+        },
+      ]
+      : []),
+    ...(role === "PPC_INCHARGE"
+      ? [
+        {
+          value: "PH-PPC01/F-002",
+          label: "PH-PPC01/F-002 Monthly plan Summary Details",
+        },
+      ]
+      : []),
+    ...(role === "MARKET_REPRESENTATIVE"
+      ? [
+        {
+          value: "PH-PPC01/F-003",
+          label: "PH-PPC01/F-003 Contract Review Meeting",
+        },
+      ]
+      : []),
+    ...(role === "ROLE_QA"
+      ? [
+        {
+          value: "PH-PPC01/F-004",
+          label: "PH-PPC01/F-004 Pre-Production meeting",
+        },
+      ]
+      : []),
     {
-      label: <span>PPC</span>,
-      title: "PPC",
-      options: [
-        ...(role === "PPC_ASSISTANT"
-          ? [
-            {
-              value: "PH-PPC01/F-003",
-              label: "PH-PPC01/F-003 Contract Review Meeting",
-            },
-            {
-              value: "PH-PPC01/F-002",
-              label: "PH-PPC01/F-002 Monthly plan Summary Details",
-            },
-          ]
-          : []),
-        ...(role === "PPC_INCHARGE"
-          ? [
-            {
-              value: "PH-PPC01/F-002",
-              label: "PH-PPC01/F-002 Monthly plan Summary Details",
-            },
-          ]
-          : []),
-        ...(role === "MARKET_REPRESENTATIVE"
-          ? [
-            {
-              value: "PH-PPC01/F-003",
-              label: "PH-PPC01/F-003 Contract Review Meeting",
-            },
-          ]
-          : []),
-
-        ...(role === "ROLE_QA"
-          ? [
-            {
-              value: "PH-PPC01/F-004",
-              label: "PH-PPC01/F-004 Pre-Production meeting",
-            },
-          ]
-          : []),
-      ],
+      label: <span>Development</span>,
+      title: "Development",
+      options: DevelopmentOptions,
     },
+
   ];
 
   const storeFormMS = [
@@ -4312,10 +4535,7 @@ const ChoosenScreen = () => {
               value: "PH-STR01F-003",
               label: "PH-STR01F-003 RECEPTION CHECK LIST",
             },
-            // {
-            //   value: "PH-STR01F-008",
-            //   label: "PH-STR01F-008 FORK LIFT MOVEMENT CHECKLIST",
-            // },
+
             {
               value: "PH-STR01F-009",
               label: "PH-STR01F-009 EYE WASH WITH SHOWER",
@@ -4356,6 +4576,13 @@ const ChoosenScreen = () => {
           : []),
       ],
     },
+
+    {
+      label: <span>Engineering</span>,
+      title: "Engineering",
+      options: engineeringOptions,
+    },
+
   ];
 
   const DispatchFormsMS = [
@@ -4363,26 +4590,38 @@ const ChoosenScreen = () => {
       label: <span>Dispatch</span>,
       title: "Dispatch",
       options: [
-        {
-          value: "PH-DIS01/F-001",
-          label: "PH-DIS01/F-001  FINISHED GOODS STOCK REGISTER",
-        },
+        ...(role !== "DISPATCH_OPEARTOR"
+          ? [
+            {
+              value: "PH-DIS01/F-001",
+              label: "PH-DIS01/F-001  FINISHED GOODS STOCK REGISTER",
+            },
+          ]
+          : []),
         {
           value: "PH-STR01F-008",
           label: "PH-STR01F-008 FORK LIFT MOVEMENT CHECKLIST",
         },
-        // {
-        //   value: "PH-QAD01-F-039",
-        //   label: "PH-QAD01-F-039 CONTAINER INSPECTION REPORT",
-        // },
+
       ],
+    },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceAllOptionsMS,
+    },
+
+    {
+      label: <span>Stores</span>,
+      title: "Stores",
+      options: StoreOptions,
     },
   ];
 
   const DevelopmentFormsMS = [
     {
-      label: <span>Development</span>,
-      title: "Development",
+      label: <span>Dispatch</span>,
+      title: "Dispatch",
       options: [
         ...(role === "DEVELOPMENT_MANAGER"
           ? [
@@ -4396,7 +4635,7 @@ const ChoosenScreen = () => {
             },
           ]
           : []),
-      ],
+      ]
     },
   ];
 
@@ -4428,8 +4667,8 @@ const ChoosenScreen = () => {
           label: "PH-PRD06/F-004 BATCH MANUFACTURING RECORD",
         },
         {
-          value: "PH-QAD01-F-038",
-          label: "PH-QAD01-F-038 FINAL INSPECTION REPORT",
+          value: "PH-QAD01/F-038",
+          label: "PH-QAD01/F-038 FINAL INSPECTION REPORT",
         },
       ],
     },
@@ -4438,9 +4677,17 @@ const ChoosenScreen = () => {
       title: "Quality Assurance",
       options: [
         {
-          value: "PH-QAD01-F-036",
-          label: "PH-QAD01-F-036 INPROCESS INSPECTION REPORT  BUDS",
+          value: "PH-QAD01/F-036",
+          label: "PH-QAD01/F-036 INPROCESS INSPECTION REPORT  BUDS",
         },
+        ...(role === "ROLE_HOD" || role === "ROLE_DESIGNEE"
+          ? [
+            {
+              value: "PH-QAD01/F-018",
+              label: "PH-QAD01/F-018 CUSTOMER COMPLAINT REGISTER FORM",
+            },
+          ]
+          : []),
       ],
     },
   ];
@@ -4456,21 +4703,20 @@ const ChoosenScreen = () => {
         },
       ],
     },
+
   ];
 
   const HRFormMS = [
     {
       label: <span>Quality Assurance</span>,
       title: "Quality Assurance",
-      options: qualityAssuranceOptionsHR,
+      options: qualityAssuranceAllOptionsMS,
     },
   ];
 
   const departmentIds =
     localStorage.getItem("departmentId")?.split(",").map(Number) || [];
 
-  console.log("departmentIds", departmentIds);
-  // Mapping department numbers to corresponding form objects
   const departmentFormsMap = {
     1: BleachingFormMS,
     2: SpunlaceFormMS,
@@ -4487,15 +4733,40 @@ const ChoosenScreen = () => {
     14: HRFormMS,
   };
 
-  // Constructing the `forms` array dynamically
+  // Step 1: Collect main forms (index 0 of each dept array)
   let mulitpleDepartmentsForms = departmentIds.reduce((acc, id) => {
     if (departmentFormsMap[id]) {
-      acc.push(...departmentFormsMap[id]);
+      acc.push(departmentFormsMap[id][0]); // only main form at index 0
     }
     return acc;
   }, []);
 
-  console.log("forms2", mulitpleDepartmentsForms);
+  // Step 2: Collect all subdivision forms (index 1 to last)
+  let subdivisionFormsMap = new Map(); // to avoid duplicates by title
+
+  departmentIds.forEach((id) => {
+    const formsArr = departmentFormsMap[id];
+    if (formsArr && formsArr.length > 1) {
+      formsArr.slice(1).forEach((subForm) => {
+        if (!subdivisionFormsMap.has(subForm.title)) {
+          subdivisionFormsMap.set(subForm.title, subForm);
+        }
+      });
+    }
+  });
+  console.log("subdivisionFormsMap", subdivisionFormsMap)
+
+  // Step 3: Add consolidated subdivision forms at the end
+  if (subdivisionFormsMap.size > 0) {
+    mulitpleDepartmentsForms.push({
+      label: <span>Subdivision Forms</span>,
+      title: "Subdivision Forms",
+      options: Array.from(subdivisionFormsMap.values()).flatMap((form) => form.options),
+    });
+  }
+
+  console.log("Final Forms =>", mulitpleDepartmentsForms);
+
 
   let forms;
   if (role === "ROLE_QA" && department == "6") {
@@ -4877,7 +5148,7 @@ const ChoosenScreen = () => {
       case "PH-HRD01-F-023":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-HRD01-F-023");
+        setFormNo(" PH-HRD01-F-023");
         setRoutePath("/Precot/PadPunching/F-06/Summary");
         break;
 
@@ -5417,139 +5688,139 @@ const ChoosenScreen = () => {
 
       // Quality Assurance
 
-      case "PH-HRD01-F-015":
+      case "PH-HRD01/F-015":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-015");
+        setFormNo("PH-HRD01/F-015");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
-      case "PH-HRD01-F-016":
+      case "PH-HRD01/F-016":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-016");
+        setFormNo("PH-HRD01/F-016");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
-      case "PH-HRD01-F-017":
+      case "PH-HRD01/F-017":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-017");
+        setFormNo("PH-HRD01/F-017");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
-      case "PH-HRD01-F-018":
+      case "PH-HRD01/F-018":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-018");
+        setFormNo("PH-HRD01/F-018");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
-      case "PH-HRD01-F-019":
+      case "PH-HRD01/F-019":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-019");
+        setFormNo("PH-HRD01/F-019");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
-      case "PH-HRD01-F-014":
+      case "PH-HRD01/F-014":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-014");
+        setFormNo("PH-HRD01/F-014");
         setRoutePath("/Precot/QA/PestControl/Summary");
         break;
 
-      case "PH-QAD01F-001":
+      case "PH-QAD01/F-001":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01F-001");
+        setFormNo("PH-QAD01/F-001");
         setRoutePath("/Precot/QA/F-01/Summary");
         break;
-      case "PH-QAD01-F-010":
+      case "PH-QAD01/F-010":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-010");
+        setFormNo("PH-QAD01/F-010");
         setRoutePath(
           "/Precot/QualityAssurance/F-010/internal_audit_schedule_summary"
         );
         break;
 
-      case "PH-QAD01-F-008":
+      case "PH-QAD01/F-008":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-008");
+        setFormNo("PH-QAD01/F-008");
         setRoutePath("/Precot/QA/QA_F008_Summary");
         break;
 
-      case "PH-QAD01-F-009":
+      case "PH-QAD01/F-009":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-009");
+        setFormNo("PH-QAD01/F-009");
         setRoutePath("/Precot/QA/F-09/Summary");
         break;
 
-      case "PH-QAD01-F-015":
+      case "PH-QAD01/F-015":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-015");
+        setFormNo("PH-QAD01/F-015");
         setRoutePath("/Precot/QA/F-15/Summary");
         break;
 
-      case "PH-QAD01-F-016":
+      case "PH-QAD01/F-016":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-16/Summary");
         break;
-      case "PH-QAD01-F-052":
+      case "PH-QAD01/F-052":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-52/Summary");
         break;
-      case "PH-QAD01-F-041":
+      case "PH-QAD01/F-041":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-041");
+        setFormNo("PH-QAD01/F-041");
         setRoutePath("/Precot/QualityAssurance/QA_F_041_Summary");
         break;
-      case "PH-QAD01-F-042":
+      case "PH-QAD01/F-042":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/QA_F042_Summary");
         break;
-      case "PH-QAD01-F-044":
+      case "PH-QAD01/F-044":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-044/corrective_summary");
         break;
-      case "PH-QAD01-F-058":
+      case "PH-QAD01/F-058":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-58/Summary");
         break;
-      case "PH-QAD01-F-059":
+      case "PH-QAD01/F-059":
         setenableBmr(true);
         setbtnenable(true);
         setFormNo("PH-QAD01/F-059");
         setRoutePath("/Precot/QA/F-59/Summary");
         break;
-      case "PH-QAD01-F-25":
+      case "PH-QAD01/F-25":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-25");
+        setFormNo("PH-QAD01/F-25");
         setRoutePath("/Precot/QA/F-25/Summary");
         break;
-      case "PH-QAD01-F-026":
+      case "PH-QAD01/F-026":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-26/Summary");
         break;
 
-      case "PH-QAD01-F-060":
+      case "PH-QAD01/F-060":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-060");
+        setFormNo("PH-QAD01/F-060");
         setRoutePath("/Precot/QA/F-060/Summary");
         break;
 
-      case "PH-QAD01-f-60":
+      case "PH-QAD01/F-60":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-060");
+        setFormNo("PH-QAD01/F-060");
         setRoutePath("/Precot/QA/f-60/Summary");
         break;
 
@@ -5560,95 +5831,95 @@ const ChoosenScreen = () => {
         setRoutePath("/Precot/QA/F-002/Summary");
         break;
 
-      case "PH-QAD01-F-005":
+      case "PH-QAD01/F-005":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-005");
+        setFormNo("PH-QAD01/F-005");
         setRoutePath("/Precot/QualityAssurance/QA_F005_Summary");
         break;
 
-      case "PH-QAD01-F-017":
+      case "PH-QAD01/F-017":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-017");
+        setFormNo("PH-QAD01/F-017");
         setRoutePath("/Precot/QA/QA_F017_Summary");
         break;
 
-      case "PH-QAD01-F-018":
+      case "PH-QAD01/F-018":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-018");
+        setFormNo("PH-QAD01/F-018");
         setRoutePath("/Precot/QA/F-18/Summary");
         break;
 
-      case "PH-QAD01-F-019":
+      case "PH-QAD01/F-019":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-019");
+        setFormNo("PH-QAD01/F-019");
         setRoutePath("/Precot/QA/cusRegisterSummary");
         break;
 
-      case "PH-QAD01-F-020":
+      case "PH-QAD01/F-020":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-020");
+        setFormNo("PH-QAD01/F-020");
         setRoutePath("/Precot/QA/QA_F020_Summary");
         break;
 
-      case "PH-QAD01-F-022":
+      case "PH-QAD01/F-022":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-022");
+        setFormNo("PH-QAD01/F-022");
         setRoutePath("/Precot/QA/F-22/Summary");
         break;
 
-      case "PH-QAD01-F-012":
+      case "PH-QAD01/F-012":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-012");
+        setFormNo("PH-QAD01/F-012");
         setRoutePath(
           "/Precot/QualityAssurance/F-012/internal_audit_report_summary"
         );
         break;
 
-      case "PH-QAD01-F-007":
+      case "PH-QAD01/F-007":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-007");
+        setFormNo("PH-QAD01/F-007");
         setRoutePath("/Precot/QA/F007/Summary");
         break;
 
-      case "PH-QAD01-F-013":
+      case "PH-QAD01/F-013":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-013");
+        setFormNo("PH-QAD01/F-013");
         setRoutePath("/Precot/QA/QA_F013_Summary");
         break;
 
-      case "PH-QAD01-F-014":
+      case "PH-QAD01/F-014":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-014");
+        setFormNo("PH-QAD01/F-014");
         setRoutePath("/Precot/QA/F-14/Summary");
         break;
 
-      case "PH-QAD01-F-029":
+      case "PH-QAD01/F-029":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-029");
+        setFormNo("PH-QAD01/F-029");
         setRoutePath("/Precot/QA/Inward029/Summary");
         break;
-      case "PH-QAD01-F-027":
+      case "PH-QAD01/F-027":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-027");
+        setFormNo("PH-QAD01/F-027");
         setRoutePath("/Precot/QualityAssurance/F-027/Summary");
         break;
 
-      case "PH-QAD01-F-028":
+      case "PH-QAD01/F-028":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-028");
+        setFormNo("PH-QAD01/F-028");
         setRoutePath("/Precot/QA/F-028_summary");
         break;
 
@@ -5661,78 +5932,78 @@ const ChoosenScreen = () => {
         );
         break;
 
-      case "PH-QAD01-F-030":
+      case "PH-QAD01/F-030":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-030");
+        setFormNo("PH-QAD01/F-030");
         setRoutePath("/Precot/QA/Inward030/Summary");
         break;
-      case "PH-QAD01-F-031":
+      case "PH-QAD01/F-031":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-031");
+        setFormNo("PH-QAD01/F-031");
         setRoutePath("/Precot/QA/Inward031/Summary");
         break;
-      case "PH-QAD01-F-032":
+      case "PH-QAD01/F-032":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-032");
+        setFormNo("PH-QAD01/F-032");
         setRoutePath("/Precot/QA/Inward032/Summary");
         break;
-      case "PH-QAD01-F-033":
+      case "PH-QAD01/F-033":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-033");
+        setFormNo("PH-QAD01/F-033");
         setRoutePath("/Precot/QA/Inward033/Summary");
         break;
-      case "PH-QAD01-F-034":
+      case "PH-QAD01/F-034":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-034");
+        setFormNo("PH-QAD01/F-034");
         setRoutePath(
           "/Precot/QualityAssurance/F-034/inprocess_inspection_report_summary"
         );
         break;
-      case "PH-QAD01-F-035":
+      case "PH-QAD01/F-035":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-035");
+        setFormNo("PH-QAD01/F-035");
         setRoutePath(
           "/Precot/QualityAssurance/F-035/inprocess_inspection_report_summary"
         );
         break;
-      case "PH-QAD01-F-036":
+      case "PH-QAD01/F-036":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-036");
+        setFormNo("PH-QAD01/F-036");
         setRoutePath(
           "/Precot/QualityAssurance/F-036/inprocess_inspection_report_summary"
         );
         break;
-      case "PH-QAD01-F-043":
+      case "PH-QAD01/F-043":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-043");
+        setFormNo("PH-QAD01/F-043");
         setRoutePath("/Precot/QualityAssurance/F-043/Summary");
         break;
-      case "PH-QAD01-F-050":
+      case "PH-QAD01/F-050":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-050");
+        setFormNo("PH-QAD01/F-050");
         setRoutePath("/Precot/QA/F-50/Summary");
         break;
-      case "PH-QAD01-F-076":
+      case "PH-QAD01/F-076":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-076");
+        setFormNo("PH-QAD01/F-076");
         setRoutePath(
           "/Precot/QualityAssurance/F-076/QA_f076_training_session_allotment_register_summary"
         );
         break;
-      case "PH-QAD01-F-039":
+      case "PH-QAD01/F-039":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-039");
+        setFormNo("PH-QAD01/F-039");
         setRoutePath("/Precot/QA/F-39/Summary");
         break;
       case "PH-QAD01/F-062":
@@ -5740,31 +6011,31 @@ const ChoosenScreen = () => {
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-62");
         break;
-      case "PH-QAD01-F-040":
+      case "PH-QAD01/F-040":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-040");
+        setFormNo("PH-QAD01/F-040");
         setRoutePath("/Precot/QualityAssurance/F-040/Summary");
         break;
 
-      case "PH-QAD01-F-045":
+      case "PH-QAD01/F-045":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-045");
+        setFormNo("PH-QAD01/F-045");
         setRoutePath("/Precot/QualityAssurance/F-045/Summary");
         break;
 
-      case "PH-QAD01-F-046":
+      case "PH-QAD01/F-046":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-046");
+        setFormNo("PH-QAD01/F-046");
         setRoutePath("/Precot/QualityAssurance/QA_F_046_Summary");
         break;
 
-      case "PH-QAD01-F-047":
+      case "PH-QAD01/F-047":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-047");
+        setFormNo("PH-QAD01/F-047");
         setRoutePath("/Precot/QA/QA_F047_Summary");
         break;
 
@@ -5775,23 +6046,23 @@ const ChoosenScreen = () => {
         setRoutePath("/Precot/QA/F-048/Summary");
         break;
 
-      case "PH-QAD01-F-049":
+      case "PH-QAD01/F-049":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-049");
+        setFormNo("PH-QAD01/F-049");
         setRoutePath("/Precot/QA/F-49/Summary");
         break;
-      case "PH-QAD01-F-051":
+      case "PH-QAD01/F-051":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo("PH-QAD01-F-051");
+        setFormNo("PH-QAD01/F-051");
         setRoutePath("/Precot/QualityAssurance/F-051/Summary");
         break;
 
-      case "PH-QAD01-F023":
+      case "PH-QAD01/F023":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F023");
+        setFormNo("PH-QAD01/F023");
         setRoutePath("/Precot/QA/F-23/Summary");
         break;
       case "PH-QAD01/F-003":
@@ -5800,27 +6071,27 @@ const ChoosenScreen = () => {
         setFormNo("PH-QAD01/F-003");
         setRoutePath("/Precot/QA/F-03/Summary");
         break;
-      case "PH-QAD01-F-006":
+      case "PH-QAD01/F-006":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/QA/F-06/Summary");
         break;
-      case "PH-QAD01-F-037":
+      case "PH-QAD01/F-037":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-037");
+        setFormNo("PH-QAD01/F-037");
         setRoutePath("/Precot/QualityAssurance/QA_F037_Summary");
         break;
-      case "PH-QAD01-F-021":
+      case "PH-QAD01/F-021":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-QAD01-F-021");
+        setFormNo("PH-QAD01/F-021");
         setRoutePath("/Precot/QA/F-21/Summary");
         break;
-      case "PH-HRD01-F-013":
+      case "PH-HRD01/F-013":
         setenableBmr(true);
         setbtnenable(true);
-        setFormNo("PH-HRD01-F-013");
+        setFormNo("PH-HRD01/F-013");
         setRoutePath("/Precot/QA/rodentBoxSummary");
         break;
 
@@ -5913,7 +6184,7 @@ const ChoosenScreen = () => {
         setRoutePath("/Precot/COTTON_BUDS/F-002/Summary");
         break;
 
-      case "PH-QAD01-F-038":
+      case "PH-QAD01/F-038":
         setenableBmr(true);
         setbtnenable(true);
         setRoutePath("/Precot/Buds/Buds_F038_Summary");
@@ -5997,6 +6268,14 @@ const ChoosenScreen = () => {
       });
     }
   };
+  const storedIds = localStorage.getItem("departmentId");
+
+  const DepartmentIDsMultiple = storedIds
+    ?.split(",")
+    .map((id) => parseInt(id, 10))
+    .filter(Boolean) || [];
+
+  console.log("  const DepartmentIDsMultiple = storedIds", DepartmentIDsMultiple, DepartmentIDsMultiple.includes(3))
 
   return (
     <div className="hell-2">
@@ -6090,7 +6369,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/Report/Generation"),
                     },
-
                     {
                       key: "4",
                       icon: <IoCreate color="#151718" />,
@@ -6177,8 +6455,6 @@ const ChoosenScreen = () => {
                         ),
                         onClick: () => navigate("/Precot/choosenScreen"),
                       },
-
-
                       {
                         key: "3",
                         icon: <IoCreate color="#151718" />,
@@ -6341,7 +6617,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/choosenScreen"),
                     },
-
                     {
                       key: "2",
                       icon: <IoCreate color="#151718" />,
@@ -6712,7 +6987,6 @@ const ChoosenScreen = () => {
               <Col>
                 <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
               </Col>
-
               <Col
                 style={{
                   marginLeft: "1em",
@@ -6728,7 +7002,6 @@ const ChoosenScreen = () => {
                 </p>
               </Col>
             </Row>
-
             <Menu
               theme="dark"
               mode="inline"
@@ -7036,7 +7309,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/choosenScreen"),
                     },
-
                     {
                       key: "3",
                       icon: <IoCreate color="#151718" />,
@@ -7051,8 +7323,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/Report/Generation"),
                     },
-
-
                     {
                       key: "6",
                       icon: <IoCreate color="#151718" />,
@@ -7177,7 +7447,7 @@ const ChoosenScreen = () => {
               }
             />
           </>
-        ) : department == 6 ? (
+        ) : departmentId == 6 ? (
           <>
             <Row>
               <Col>
@@ -7228,7 +7498,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/choosenScreen"),
                     },
-
                     {
                       key: "3",
                       icon: <IoCreate color="#151718" />,
@@ -7243,7 +7512,6 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/Report/Generation"),
                     },
-
                     {
                       key: "7",
                       icon: (
@@ -7285,7 +7553,6 @@ const ChoosenScreen = () => {
                         ),
                         onClick: () => navigate("/Precot/choosenScreen"),
                       },
-
                       {
                         key: "2",
                         icon: (
@@ -7354,7 +7621,7 @@ const ChoosenScreen = () => {
               }
             />
           </>
-        ) : (
+        ) : [1, 2, 3, 4, 5, 6, 12].some(id => DepartmentIDsMultiple?.includes(id)) ? (
           <>
             <Row>
               <Col>
@@ -7390,7 +7657,7 @@ const ChoosenScreen = () => {
                 margin: "0",
               }}
               items={
-                role === "ROLE_HOD"
+                role === "ROLE_QA" || role == "QC_MANAGER"
                   ? [
                     {
                       key: "1",
@@ -7408,13 +7675,95 @@ const ChoosenScreen = () => {
                     },
                     {
                       key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Generation
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Generate"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Bleaching Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          DryGoods Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "6",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "7",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "8",
                       icon: (
                         <FaLock
                           color="#151718"
                           onClick={() => {
-                            if (
-                              window.confirm("Are you sure want to logout")
-                            ) {
+                            if (confirm("Are you sure want to logout")) {
                               localStorage.removeItem("token");
                               navigate("/Precot");
                             }
@@ -7432,12 +7781,372 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot"),
                     },
-                  ]
-                  : null
+                  ] :
+                  role === "QA_MANAGER"
+                    ? [
+                      {
+                        key: "1",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Form Browser
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/choosenScreen"),
+                      },
+                      {
+                        key: "3",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Audit
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/Report/Generation"),
+                      },
+
+                      {
+                        key: "6",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Traceability
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/Traceability"),
+                      },
+                      {
+                        key: "7",
+                        icon: (
+                          <FaLock
+                            color="#151718"
+                            onClick={() => {
+                              if (confirm("Are you sure want to logout")) {
+                                localStorage.removeItem("token");
+                                navigate("/Precot");
+                              }
+                            }}
+                          />
+                        ),
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Logout
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot"),
+                      },
+                    ] :
+                    role === "ROLE_OPERATOR"
+                      ? [
+                        {
+                          key: "1",
+                          icon: <IoCreate color="#151718" />,
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Form Browser
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot/choosenScreen"),
+                        },
+                        {
+                          key: "4",
+                          icon: <IoCreate color="#151718" />,
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Mapping
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot/Mapping"),
+                        },
+                        {
+                          key: "7",
+                          icon: (
+                            <FaLock
+                              color="#151718"
+                              onClick={() => {
+                                if (confirm("Are you sure want to logout")) {
+                                  localStorage.removeItem("token");
+                                  navigate("/Precot");
+                                }
+                              }}
+                            />
+                          ),
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Logout
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot"),
+                        },
+                      ] :
+                      role === "ROLE_SUPERVISOR" ||
+                        role === "ROLE_HOD" ||
+                        role === "ROLE_DESIGNEE" ||
+                        role === "ROLE_HR"
+                        ? [
+                          {
+                            key: "1",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Form Browser
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/choosenScreen"),
+                          },
+                          {
+                            key: "2",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Packing Material
+                              </b>
+                            ),
+                            onClick: () =>
+                              navigate("/Precot/Spunlace/PackingMaterial"),
+                          },
+                          {
+                            key: "3",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Bleaching Mapping
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                          },
+                          {
+                            key: "4",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                DryGoods Mapping
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/Mapping"),
+                          },
+                          {
+                            key: "5",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Closing
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/Closing"),
+                          },
+                          {
+                            key: "6",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Chemical Issue
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/RawMaterialIssue"),
+                          },
+                          {
+                            key: "7",
+                            icon: (
+                              <FaLock
+                                color="#151718"
+                                onClick={() => {
+                                  if (confirm("Are you sure want to logout")) {
+                                    localStorage.removeItem("token");
+                                    navigate("/Precot");
+                                  }
+                                }}
+                              />
+                            ),
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Logout
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot"),
+                          },
+                        ]
+                        : [
+                          {
+                            key: "1",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Form Browser
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/choosenScreen"),
+                          },
+                          {
+                            key: "2",
+                            icon: (
+                              <FaLock
+                                color="#151718"
+                                onClick={() => {
+                                  if (confirm("Are you sure want to logout")) {
+                                    localStorage.removeItem("token");
+                                    navigate("/Precot");
+                                  }
+                                }}
+                              />
+                            ),
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Logout
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot"),
+                          },
+                        ]
               }
             />
+
           </>
-        )}
+        ) : (<>
+          <Row>
+            <Col>
+              <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
+            </Col>
+
+            <Col
+              style={{
+                marginLeft: "1em",
+              }}
+            >
+              <p>{localStorage.getItem("username")}</p>
+              <p
+                style={{
+                  fontSize: "x-small",
+                }}
+              >
+                {localStorage.getItem("role")}
+              </p>
+            </Col>
+          </Row>
+          <Menu
+            theme="dark"
+            mode="inline"
+            // defaultSelectedKeys={["1"]}
+            style={{
+              backgroundColor: "transparent",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "0",
+              margin: "0",
+            }}
+            items={
+              role === "ROLE_HOD"
+                ? [
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => {
+                          if (
+                            window.confirm("Are you sure want to logout")
+                          ) {
+                            localStorage.removeItem("token");
+                            navigate("/Precot");
+                          }
+                        }}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
+                : null
+            }
+          />
+        </>)}
       </Drawer>
       <BleachingHeader
         formName={<h3>Form Browser</h3>}

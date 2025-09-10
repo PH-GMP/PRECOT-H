@@ -105,7 +105,7 @@ const Spunlace_f11_summary = () => {
     const dateformat = parsedDate.format("YYYY-MM-DD");
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProductChangeOverCheckList/findByDateShiftOrderNoPrintApi?date=${datePrint}&shift=${shiftPrint}&orderNo=${value}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProductChangeOverCheckList/findByDateShiftOrderNoPrintApi?date=${datePrint}&shift=${shiftPrint}&orderNo=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ const Spunlace_f11_summary = () => {
           //QA
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const Spunlace_f11_summary = () => {
           //sup
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -178,7 +178,7 @@ const Spunlace_f11_summary = () => {
           //QA
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.qa_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.qa_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -248,7 +248,7 @@ const Spunlace_f11_summary = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           { headers }
         );
         setShiftOptions(response.data);
@@ -321,7 +321,7 @@ const Spunlace_f11_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -357,7 +357,7 @@ const Spunlace_f11_summary = () => {
         const token = localStorage.getItem("token");
         console.log("api called orderbydate goto", newDate);
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/orders`,
+          `${API.prodUrl}/Precot/api/spulance/orders`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -434,7 +434,7 @@ const Spunlace_f11_summary = () => {
       const fetchData = async () => {
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/Service/ProductChangeOverCheckList/getSummary`,
+            `${API.prodUrl}/Precot/api/spunlace/Service/ProductChangeOverCheckList/getSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

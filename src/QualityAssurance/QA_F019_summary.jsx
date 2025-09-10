@@ -21,7 +21,7 @@ import { useInputArray } from "../hooks/useInputArray.js";
 const QA_F019_summary = () => {
   const navigate = useNavigate();
   const formName = "CUSTOMER COMPLAINT REGISTER";
-  const formatNo = "PH-QAD01-F-019";
+  const formatNo = "PH-QAD01/F-019";
   const revNo = "3";
   const refSopNo = "PH-QAD01-D-19";
   const customerComplaint = "/Precot/QA/customerComplaint";

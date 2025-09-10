@@ -128,7 +128,7 @@ const QualityControl_f26G = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QcForm/getMoisturesF26G?product=${productName}&customer=${customerName}&testingDate=${date}`,
+            `${API.prodUrl}/Precot/api/QcForm/getMoisturesF26G?product=${productName}&customer=${customerName}&testingDate=${date}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -343,7 +343,7 @@ const QualityControl_f26G = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -382,7 +382,7 @@ const QualityControl_f26G = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${ API.prodUrl}/Precot/api/QcForm/SaveMoisturesF26G`;
+      apiurl = `${API.prodUrl}/Precot/api/QcForm/SaveMoisturesF26G`;
       payload = {
         id: formData.id || "",
         formatNo: "PH-QCL01/F-026G",
@@ -413,7 +413,7 @@ const QualityControl_f26G = () => {
       role == "QA_MANAGER" ||
       role == "QC_MANAGER"
     ) {
-      apiurl = `${ API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26G`;
+      apiurl = `${API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26G`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.id,
@@ -482,7 +482,7 @@ const QualityControl_f26G = () => {
         return;
       }
 
-      apiurl = `${ API.prodUrl}/Precot/api/QcForm/SubmitMoisturesF26G`;
+      apiurl = `${API.prodUrl}/Precot/api/QcForm/SubmitMoisturesF26G`;
       payload = {
         id: formData.id || "",
         formatNo: "PH-QCL01/F-026G",
@@ -518,7 +518,7 @@ const QualityControl_f26G = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${ API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26G`;
+      apiurl = `${API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF26G`;
       payload = {
         id: formData.id,
         status: "Reject",

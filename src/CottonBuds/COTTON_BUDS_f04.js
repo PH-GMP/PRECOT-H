@@ -199,7 +199,7 @@ const COTTON_BUDS_f04 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -233,7 +233,7 @@ const COTTON_BUDS_f04 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -267,7 +267,7 @@ const COTTON_BUDS_f04 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
 
   // tab 1
   const [productNameRp, setProductNameRp] = useState("");

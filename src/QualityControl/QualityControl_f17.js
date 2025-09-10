@@ -138,7 +138,7 @@ const QualityControl_f17 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const QualityControl_f17 = () => {
         });
     }
     // });
-  }, [printData,      API.prodUrl, token]);
+  }, [printData,     API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -176,7 +176,7 @@ const QualityControl_f17 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -201,7 +201,7 @@ const QualityControl_f17 = () => {
         });
     }
     // });
-  }, [printData,      API.prodUrl, token]);
+  }, [printData,     API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -214,7 +214,7 @@ const QualityControl_f17 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -238,7 +238,7 @@ const QualityControl_f17 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl, token]);
+  }, [printData,     API.prodUrl, token]);
 
   const handleKeyDown = (e) => {
     const isAlphanumeric = /^[a-zA-Z0-9.]$/;
@@ -357,7 +357,7 @@ const QualityControl_f17 = () => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/qc/RegantPreparationReportF017/GetByDateMonthYear`,
+        `${   API.prodUrl}/Precot/api/qc/RegantPreparationReportF017/GetByDateMonthYear`,
         {
           headers,
           params: {
@@ -500,7 +500,7 @@ const QualityControl_f17 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveRegantPreparationReportF017`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveRegantPreparationReportF017`,
         {
           id: id,
           status: "Reject",
@@ -531,7 +531,7 @@ const QualityControl_f17 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveRegantPreparationReportF017`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveRegantPreparationReportF017`,
         {
           id: id,
           status: "Approve",
@@ -604,7 +604,7 @@ const QualityControl_f17 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveRegantPreparationReportF017`,
+        `${   API.prodUrl}/Precot/api/qc/SaveRegantPreparationReportF017`,
         payload,
         { headers }
       );
@@ -666,7 +666,7 @@ const QualityControl_f17 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitRegantPreparationReportF017`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitRegantPreparationReportF017`,
         payload,
         { headers }
       );

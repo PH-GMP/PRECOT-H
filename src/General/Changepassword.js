@@ -46,7 +46,7 @@ const ForgetPassword = () => {
     };
       try {
         const response = await axios.put(
-          `${ API.prodUrl}/Precot/api/auth/updateNewPassword`,
+          `${API.prodUrl}/Precot/api/auth/updateNewPassword`,
           payload,
           {
             headers: {

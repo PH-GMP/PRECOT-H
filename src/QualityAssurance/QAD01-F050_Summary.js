@@ -568,7 +568,7 @@ const QA_f50_Summary = () => {
                     LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="15">PH-QAD01-F-050</td>
+                  <td colSpan="15">PH-QAD01/F-050</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -857,7 +857,7 @@ const QA_f50_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC"
-          formatNo="PH-QAD01-F-050"
+          formatNo="PH-QAD01/F-050"
           sopNo="PH-QAD01-D-47"
           MenuBtn={
             <Button

@@ -101,7 +101,7 @@ const QualityControl_f15_Summary = () => {
     useEffect (() => {
         const fetchUserDataAndImages = () => {
             axios
-              .get(`${    API.prodUrl}/Precot/api/Users/Service/getRoles?department=QUALITY_CONTROL`, {
+              .get(`${   API.prodUrl}/Precot/api/Users/Service/getRoles?department=QUALITY_CONTROL`, {
                 headers: {
                   "Content-Type": "application/json",
                   Authorization: "Bearer " + token, 
@@ -114,7 +114,7 @@ const QualityControl_f15_Summary = () => {
                   console.log(username)
           
                   axios
-                    .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+                    .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
                       headers: {
                         "Content-Type": "application/json",
                         Authorization: "Bearer " + token,
@@ -169,7 +169,7 @@ const QualityControl_f15_Summary = () => {
 
                 axios
                     .get(
-                        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -204,7 +204,7 @@ const QualityControl_f15_Summary = () => {
             initialized.current = true;
             const fetchData = async () => {
                 try {
-                    const response = await axios.get(`${    API.prodUrl}/Precot/api/chemicaltest/CLF015/getAll`,
+                    const response = await axios.get(`${   API.prodUrl}/Precot/api/chemicaltest/CLF015/getAll`,
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`,
@@ -438,7 +438,7 @@ const QualityControl_f15_Summary = () => {
         setPrintButtonLoading(true);
         try {
             const response = await axios.get(
-                `${    API.prodUrl}/Precot/api/chemicaltest/CLF015/print?year=${printParams.year}&month=${printParams.month}&eqid=${printParams.eqId}`,
+                `${   API.prodUrl}/Precot/api/chemicaltest/CLF015/print?year=${printParams.year}&month=${printParams.month}&eqid=${printParams.eqId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -166,7 +166,7 @@ function Bleaching_f05_edit(props) {
 
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -254,7 +254,7 @@ function Bleaching_f05_edit(props) {
 
       // Make the POST request to the API endpoint with headers
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -273,7 +273,7 @@ function Bleaching_f05_edit(props) {
     const fetchPhLovPayload = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${ API.prodUrl}/Precot/api/LOV/Service/PhBasedSupplierLOV`, {
+        const response = await axios.get(`${API.prodUrl}/Precot/api/LOV/Service/PhBasedSupplierLOV`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

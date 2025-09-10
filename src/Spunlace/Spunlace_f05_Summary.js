@@ -100,7 +100,7 @@ const Spunlace_f05_summary = () => {
     const fetchDataOrderNumber = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/orders`,
+          `${API.prodUrl}/Precot/api/spulance/orders`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -140,13 +140,13 @@ const Spunlace_f05_summary = () => {
           let response;
           let apiUrl;
           if (userRole == "ROLE_OPERATOR") {
-            apiUrl = `${ API.prodUrl}/Precot/api/spulance/getOperatorSummeryF005`;
+            apiUrl = `${API.prodUrl}/Precot/api/spulance/getOperatorSummeryF005`;
           } else if (
             userRole == "ROLE_SUPERVISOR" ||
             userRole == "ROLE_HOD" ||
             userRole == "ROLE_DESIGNEE"
           ) {
-            apiUrl = `${ API.prodUrl}/Precot/api/spulance/getsupervisorHodSummeryF005`;
+            apiUrl = `${API.prodUrl}/Precot/api/spulance/getsupervisorHodSummeryF005`;
           }
           response = await axios.get(apiUrl, {
             headers: {
@@ -223,7 +223,7 @@ const Spunlace_f05_summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/getWinderPrintDetailsF005?order_no=${printParams.printOrderNo}&date=${printParams.printDate}&shift=${printParams.printShift}`,
+        `${API.prodUrl}/Precot/api/spulance/getWinderPrintDetailsF005?order_no=${printParams.printOrderNo}&date=${printParams.printDate}&shift=${printParams.printShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -257,7 +257,7 @@ const Spunlace_f05_summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",

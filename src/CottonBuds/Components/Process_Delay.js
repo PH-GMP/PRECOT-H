@@ -40,7 +40,7 @@ const Process_Delay = (props) => {
   const fetchProcessDelayData = () => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/getStoppageByBatch?batchNumber=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/getStoppageByBatch?batchNumber=${props.batchNo}`,
         {
           // params: { batch_no: batchNo },
           headers: {
@@ -82,7 +82,7 @@ const Process_Delay = (props) => {
     if (fromDate && toDate && selectedMachine) {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/buds/bmr/getStoppageSAP`, {
+        .get(`${API.prodUrl}/Precot/api/buds/bmr/getStoppageSAP`, {
           params: {
             fromDate: moment(fromDate).format("YYYY-MM-DD"),
             toDate: moment(toDate).format("YYYY-MM-DD"),
@@ -138,7 +138,7 @@ const Process_Delay = (props) => {
       };
       console.log("Pde Save Payload", payload);
       axios
-        .post(`${ API.prodUrl}/Precot/api/buds/bmr/saveStoppage`, payload, {
+        .post(`${API.prodUrl}/Precot/api/buds/bmr/saveStoppage`, payload, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -193,7 +193,7 @@ const Process_Delay = (props) => {
       };
       console.log("Pde Save Payload", payload);
       axios
-        .post(`${ API.prodUrl}/Precot/api/buds/bmr/submitStoppage`, payload, {
+        .post(`${API.prodUrl}/Precot/api/buds/bmr/submitStoppage`, payload, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

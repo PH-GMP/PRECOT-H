@@ -30,30 +30,26 @@ import PrecotSidebar from "../Components/PrecotSidebar.js";
 const QA_f005 = () => {
   const [datevalues, setdatevalues] = useState("");
   const [getImageSUP, setGetImageSUP] = useState("");
-  const [getImageHOD, setGetImageHOD] = useState(""); 
-  const [deletedIds, setDeletedIds] = useState([]); 
-  const [id, setid] = useState("");  
+  const [getImageHOD, setGetImageHOD] = useState("");
+  const [deletedIds, setDeletedIds] = useState([]);
+  const [id, setid] = useState("");
   const [Critical, setCritical] = useState("");
-  const [showModal, setShowModal] = useState(false); 
-  const [department, setdepartment] = useState(""); 
-  const [loading, setLoading] = useState(true); 
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [print, printdata] = useState("");
-  const [emptyarraycheck, setemptyarraycheck] = useState(""); 
+  const [emptyarraycheck, setemptyarraycheck] = useState("");
   const [supersigndate, setsupersigndate] = useState(false);
   const [operator_signsignaturedate, setoperator_signsignaturedate] =
     useState("");
   const [hodsign, sethodsigndate] = useState("");
-  const [availableshift, setAvailableShifts] = useState([]);
-  const [availableshiftlov, setAvailableShiftslov] =
-    useState("Select Department");
+
   const [selectedRow, setSelectedRow] = useState(null);
   const [saveLoading, setSaveLoading] = useState(false);
   const [dateprintsec, setisdateprintsec] = useState(false);
   const initial = useRef(false);
   const roleBase = localStorage.getItem("role");
-  const onChange = (key) => {};
-  const [saveBtnStatus, setSaveBtnStatus] = useState(true);
-  const [submitBtnStatus, setSubmitBtnStatus] = useState(true);
+  const onChange = (key) => { };
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const location = useLocation();
@@ -87,8 +83,7 @@ const QA_f005 = () => {
     },
   ]);
   const { state } = location;
-  const { datevalue, depno } = state || {};
-  const { departments, years } = state || {}; 
+  const { department, years } = state || {};
 
   const handleDate = (value) => {
     setdatevalues(value);
@@ -102,7 +97,7 @@ const QA_f005 = () => {
     setOpen(false);
   };
 
- 
+
   const handleAddRow = () => {
     const newRow = {
       item_description: "",
@@ -162,182 +157,28 @@ const QA_f005 = () => {
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
-  const canDisplayButtons = () => {
-    if (
-      roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
-    ) {
-      if (
-        selectedRow?.qaManagerStatus == "QA_MR_SUBMITTED" &&
-        (selectedRow?.hodStatus == "WAITING_FOR_APPROVAL" ||
-          selectedRow?.hodStatus == "HOD_SUBMITTED")
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus == "QA_MANAGER_APPROVED" &&
-        selectedRow?.hodStatus == "HOD_SUBMITTED"
-      ) {
-        return "none";
-      }
-    } else if (
-      roleBase == "ROLE_HOD" ||
-      (roleBase == "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
-    ) {
-      if (
-        selectedRow?.qaManagerStatus == "QA_MR_SUBMITTED" &&
-        selectedRow?.hodStatus == "HOD_SUBMITTED"
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus == "WAITING_FOR_APPROVAL" &&
-        selectedRow?.hodStatus == "HOD_SUBMITTED"
-      ) {
-        return "none";
-      } else if (selectedRow?.hodStatus == "HOD_REJECTED") {
-        return "none";
-      }
-    }
-  };
-  const canDisplayButton2 = () => {
-    if (
-      roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
-    ) {
-      if (
-        selectedRow &&
-        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
-        selectedRow?.hodStatus === "WAITING_FOR_APPROVAL"
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
-        selectedRow?.hodStatus === "WAITING_FOR_APPROVAL"
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
-        selectedRow?.hodStatus === "HOD_SUBMITTED"
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
-        selectedRow?.hodStatus === "HOD_REJECTED"
-      ) {
-        return "none";
-      } else if (
-        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
-        selectedRow?.hodStatus === "HOD_SUBMITTED"
-      ) {
-        return "none";
-      }
-    }
 
-    if (
-      roleBase === "ROLE_HOD" ||
-      (roleBase == "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
-    ) {
-      if (selectedRow?.hodStatus === "HOD_SUBMITTED") {
-        return "none";
-      }
-    }
-  };
-  const canEdit = () => {
-    if (
-      roleBase === "ROLE_HOD" ||
-      (roleBase === "ROLE_DESIGNEE" && department !== "QUALITY_ASSURANCE")
-    ) {
-      console.log(
-        "values of canedit",
-        selectedRow?.hodStatus,
-        selectedRow?.qaManagerStatus
-      );
-      if (
-        selectedRow?.hodStatus === "HOD_SUBMITTED" &&
-        selectedRow?.qaManagerStatus === "WAITING_FOR_APPROVAL"
-      ) {
-        return true;
-      } else if (selectedRow?.hodStatus === "HOD_SAVED") {
-        return false;
-      }
-    } else if (
-      roleBase === "QA_MANAGER" ||
-      (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
-    ) {
-      if (
-        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
-        selectedRow?.hodStatus === "HOD_SUBMITTED"
-      ) {
-        return "true";
-      } else if (
-        selectedRow?.hodStatus === "HOD_SUBMITTED" &&
-        selectedRow?.qaManagerStatus === "WAITING_FOR_APPROVAL"
-      ) {
-        return true;
-      } else if (
-        (selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" ||
-          selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED") &&
-        (selectedRow?.hodStatus === "WAITING_FOR_APPROVAL" ||
-          selectedRow?.hodStatus === "HOD_APPROVAL")
-      ) {
-        return "true";
-      } else if (
-        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
-        selectedRow?.hodStatus === "HOD_SUBMITTED"
-      ) {
-        return "true";
-      }
-    }
-  };
-  const isEditable = canEdit();
 
-  const fetchdata_departmentid = async () => {
-    try {
-      const response = await axios.get(
-        `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const ccfno = response.data.map((shift) => shift.department);
-      setAvailableShifts(ccfno);
-      let dep_id = localStorage.getItem("departmentId");
+  useEffect(() => {
+    fetchData_date()
+  }, []);
 
-      const foundDepartment = response.data.find((dept) => {
-        const numericDepId = Number(dep_id);
 
-        if (dept.id === numericDepId) {
-          return true;
-        } else {
-          return false;
-        }
-      });
 
-      if (foundDepartment) {
-        setdepartment(foundDepartment.department);
-        fetchData_date(foundDepartment.department);
-      } else {
-        setdepartment("Department not found");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-  const fetchData_date = async (value) => {
+  const fetchData_date = async () => {
     try {
       setLoading(true);
       let depname;
       if (
         roleBase === "ROLE_HOD" ||
-        (roleBase === "ROLE_DESIGNEE" && value !== "QUALITY_ASSURANCE")
+        (roleBase === "ROLE_DESIGNEE" && !USER_ACCESS)
       ) {
-        depname = value;
+        depname = department;
       } else if (
         roleBase === "QA_MANAGER" ||
-        (roleBase === "ROLE_DESIGNEE" && value === "QUALITY_ASSURANCE")
+        (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
       ) {
-        depname = departments;
+        depname = department;
       }
 
       axios
@@ -352,7 +193,7 @@ const QA_f005 = () => {
         .then((res) => {
           if (
             roleBase === "QA_MANAGER" ||
-            (roleBase === "ROLE_DESIGNEE" && value === "QUALITY_ASSURANCE")
+            (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
           ) {
             if (res.data?.message === "No data") {
               navigate("/Precot/QualityAssurance/QA_F005_Summary");
@@ -390,7 +231,7 @@ const QA_f005 = () => {
             res.data &&
             (res.data?.length > 0 || res.data?.length == undefined)
           ) {
-            setAvailableShiftslov(res.data?.department);
+
 
             setid(res.data?.formId);
             setdatevalues(res.data?.date);
@@ -398,7 +239,7 @@ const QA_f005 = () => {
 
             if (
               roleBase === "QA_MANAGER" ||
-              (roleBase == "ROLE_DESIGNEE" && value === "QUALITY_ASSURANCE")
+              (roleBase == "ROLE_DESIGNEE" && USER_ACCESS)
             ) {
               if (res.data?.qaManagerStatus === "QA_MANAGER_REJECTED") {
                 message.warning(
@@ -433,7 +274,7 @@ const QA_f005 = () => {
                 const url = `data:image/jpeg;base64,${base64}`;
                 setGetImageSUP(url);
               })
-              .catch((err) => {});
+              .catch((err) => { });
 
             axios
               .get(
@@ -456,7 +297,7 @@ const QA_f005 = () => {
                 const url = `data:image/jpeg;base64,${base64}`;
                 setGetImageHOD(url);
               })
-              .catch((err) => {});
+              .catch((err) => { });
           } else {
           }
 
@@ -502,6 +343,166 @@ const QA_f005 = () => {
       setLoading(false);
     }
   };
+
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTEN_BUDS",
+    13: "MARKETING",
+    14: "HR",
+  }
+
+  const storedIds = localStorage.getItem("departmentId");
+  const DepartmentName = storedIds
+    ?.split(",")
+    .map((id) => departmentMap[parseInt(id)])
+    .filter(Boolean)
+    .join(",");
+
+  console.log("DepartmentName", DepartmentName)
+
+  const USER_ACCESS = DepartmentName?.includes("QUALITY_ASSURANCE");
+
+  const canDisplayButtons = () => {
+    if (
+      roleBase === "QA_MANAGER" ||
+      (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
+    ) {
+      if (
+        selectedRow?.qaManagerStatus == "QA_MR_SUBMITTED" &&
+        (selectedRow?.hodStatus == "WAITING_FOR_APPROVAL" ||
+          selectedRow?.hodStatus == "HOD_SUBMITTED")
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus == "QA_MANAGER_APPROVED" &&
+        selectedRow?.hodStatus == "HOD_SUBMITTED"
+      ) {
+        return "none";
+      }
+    } else if (
+      roleBase == "ROLE_HOD" ||
+      (roleBase == "ROLE_DESIGNEE" && !USER_ACCESS)
+    ) {
+      console.log("ROLE_HOD ||(roleBase == ROLE_DESIGNEE && !USER_ACCESS)");
+      if (
+        selectedRow?.qaManagerStatus == "QA_MR_SUBMITTED" &&
+        selectedRow?.hodStatus == "HOD_SUBMITTED"
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus == "WAITING_FOR_APPROVAL" &&
+        selectedRow?.hodStatus == "HOD_SUBMITTED"
+      ) {
+        return "none";
+      } else if (selectedRow?.hodStatus == "HOD_REJECTED") {
+        return "none";
+      }
+    }
+  };
+
+  const canDisplayButton2 = () => {
+    if (
+      roleBase === "QA_MANAGER" ||
+      (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
+    ) {
+      if (
+        selectedRow &&
+        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
+        selectedRow?.hodStatus === "WAITING_FOR_APPROVAL"
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
+        selectedRow?.hodStatus === "WAITING_FOR_APPROVAL"
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
+        selectedRow?.hodStatus === "HOD_SUBMITTED"
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
+        selectedRow?.hodStatus === "HOD_REJECTED"
+      ) {
+        return "none";
+      } else if (
+        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
+        selectedRow?.hodStatus === "HOD_SUBMITTED"
+      ) {
+        return "none";
+      }
+    }
+
+    if (
+      roleBase === "ROLE_HOD" ||
+      (roleBase == "ROLE_DESIGNEE" && !USER_ACCESS)
+    ) {
+      if (selectedRow?.hodStatus === "HOD_SUBMITTED") {
+        return "none";
+      }
+    }
+  };
+
+  const canEdit = () => {
+    if (
+      roleBase === "ROLE_HOD" ||
+      (roleBase === "ROLE_DESIGNEE" && !USER_ACCESS)
+    ) {
+      console.log(
+        "values of canedit",
+        selectedRow?.hodStatus,
+        selectedRow?.qaManagerStatus
+      );
+      if (
+        selectedRow?.hodStatus === "HOD_SUBMITTED" &&
+        selectedRow?.qaManagerStatus === "WAITING_FOR_APPROVAL"
+      ) {
+        return true;
+      } else if (selectedRow?.hodStatus === "HOD_SAVED") {
+        return false;
+      }
+    } else if (
+      roleBase === "QA_MANAGER" ||
+      (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
+    ) {
+      if (
+        selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" &&
+        selectedRow?.hodStatus === "HOD_SUBMITTED"
+      ) {
+        return "true";
+      } else if (
+        selectedRow?.hodStatus === "HOD_SUBMITTED" &&
+        selectedRow?.qaManagerStatus === "WAITING_FOR_APPROVAL"
+      ) {
+        return true;
+      } else if (
+        (selectedRow?.qaManagerStatus === "QA_MR_SUBMITTED" ||
+          selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED") &&
+        (selectedRow?.hodStatus === "WAITING_FOR_APPROVAL" ||
+          selectedRow?.hodStatus === "HOD_APPROVAL")
+      ) {
+        return "true";
+      } else if (
+        selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" &&
+        selectedRow?.hodStatus === "HOD_SUBMITTED"
+      ) {
+        return "true";
+      }
+    }
+  };
+  const isEditable = canEdit();
+
   const setAllYes = () => {
     const updatedRows = rows.map((row) => ({
       ...row,
@@ -558,8 +559,8 @@ const QA_f005 = () => {
     }));
     setRows(updatedRows);
   };
- 
-  
+
+
 
   const handleSubmit = async () => {
     try {
@@ -573,20 +574,19 @@ const QA_f005 = () => {
       } else {
         listofsharptools_submit();
         await deleteRows();
-        setSaveBtnStatus(true);
-        setSubmitBtnStatus(true);
+
       }
     } catch (error) {
       console.error("Error submitting bleaching job card:", error);
     }
-  } ;
+  };
 
   const handleBack = () => {
     navigate("/Precot/QualityAssurance/QA_F005_Summary");
   };
 
   const sharptools_save = () => {
-    const isValid = () => {};
+    const isValid = () => { };
     const validationMessage = isValid();
     if (validationMessage) {
       message.error(validationMessage);
@@ -598,7 +598,7 @@ const QA_f005 = () => {
     const payload = {
       productId: id,
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-005",
+      formatNo: "PH-QAD01/F-005",
       formatName: "TRAINING NEED IDENTIFICATION FORM",
       revisionNo: "01",
       sopNumber: "PH-QAD01-D-15",
@@ -670,8 +670,7 @@ const QA_f005 = () => {
     try {
       sharptools_save();
       await deleteRows();
-      setSaveBtnStatus(true);
-      setSubmitBtnStatus(true);
+
     } catch (error) {
       console.error("Error submitting bleaching job card:", error);
     }
@@ -690,14 +689,12 @@ const QA_f005 = () => {
     setSaveLoading(true);
 
     setSaveLoading(true);
-    const date_month = moment(datevalue, "YYYY-MM-DD");
-    const year = date_month.year();
-    const month = date_month.format("MMMM");
+
 
     const payload = {
       productId: id,
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-005",
+      formatNo: "PH-QAD01/F-005",
       formatName: "TRAINING NEED IDENTIFICATION FORM",
       revisionNo: "01",
       sopNumber: "PH-QAD01-D-15",
@@ -775,7 +772,7 @@ const QA_f005 = () => {
     }
   };
 
-  
+
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -845,16 +842,9 @@ const QA_f005 = () => {
         setSaveLoading(false);
       });
   };
- 
- 
 
-  useEffect(() => {
-    if (!initial.current) {
-      initial.current = true;
 
-      fetchdata_departmentid();
-    }
-  }, [token]);
+
 
   const items = [
     {
@@ -1688,22 +1678,22 @@ const QA_f005 = () => {
                 <td colspan={50}>
                   {(selectedRow?.qaManagerStatus === "QA_MANAGER_APPROVED" ||
                     selectedRow?.qaManagerStatus === "QA_MANAGER_REJECTED") && (
-                    <>
-                      <div>{selectedRow?.qaManagerSign}</div>
-                      <div>{supersigndate}</div>
+                      <>
+                        <div>{selectedRow?.qaManagerSign}</div>
+                        <div>{supersigndate}</div>
 
-                      {getImageSUP && (
-                        <>
-                          <br />
-                          <img
-                            src={getImageSUP}
-                            alt="logo"
-                            className="signature"
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
+                        {getImageSUP && (
+                          <>
+                            <br />
+                            <img
+                              src={getImageSUP}
+                              alt="logo"
+                              className="signature"
+                            />
+                          </>
+                        )}
+                      </>
+                    )}
                 </td>
               </tr>
             </tbody>
@@ -1719,10 +1709,11 @@ const QA_f005 = () => {
         onClose={onClose}
         role={localStorage.getItem("role")}
       />
+
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING NEED IDENTIFICATION FORM"
-        formatNo="PH-QAD01-F-005"
+        formatNo="PH-QAD01/F-005"
         MenuBtn={
           <Button
             type="primary"
@@ -1746,46 +1737,46 @@ const QA_f005 = () => {
             Back
           </Button>,
           roleBase === "QA_MANAGER" ||
-          (roleBase === "ROLE_DESIGNEE" && department === "QUALITY_ASSURANCE")
+            (roleBase === "ROLE_DESIGNEE" && USER_ACCESS)
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
 
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : roleBase === "ROLE_HOD" ||
               (roleBase === "ROLE_DESIGNEE" &&
-                department !== "QUALITY_ASSURANCE")
-            ? [
+                !USER_ACCESS)
+              ? [
                 <Button
                   key="save"
                   loading={saveLoading}
@@ -1819,7 +1810,7 @@ const QA_f005 = () => {
                   Submit
                 </Button>,
               ]
-            : null,
+              : null,
           <Button
             key="logout"
             type="primary"
@@ -2696,7 +2687,7 @@ const QA_f005 = () => {
                   paddingLeft: "1em",
                   paddingRight: "1em",
                 }}
-              > 
+              >
                 pH actual:
                 <span style={{ textAlign: "center" }}>
                   {" "}
@@ -2705,7 +2696,7 @@ const QA_f005 = () => {
                 <div>
                   Surface Activity actual:
                   <span>{print && print.final_process_act_temp}</span>
-                </div> 
+                </div>
               </td>
             </tr>
             <tr
@@ -3012,7 +3003,7 @@ const QA_f005 = () => {
                     </div>
                   </p>
                 </div>
-               </td>
+              </td>
               <td
                 colSpan="2"
                 style={{
@@ -3140,7 +3131,7 @@ const QA_f005 = () => {
                   {operator_signsignaturedate}
                 </div>
               </td>
-            </tr> 
+            </tr>
           </tfoot>
         </table>
 
@@ -3215,7 +3206,7 @@ const QA_f005 = () => {
                   {print && print.supervisor_sign}
                   <br />
                   {supersigndate}
-                </div> 
+                </div>
               </td>
 
               <td
@@ -3232,7 +3223,7 @@ const QA_f005 = () => {
                   {print && print.hod_sign}
                   <br />
                   {hodsign}
-                </div> 
+                </div>
               </td>
 
               <td
@@ -3249,7 +3240,7 @@ const QA_f005 = () => {
                   {print && print.operator_sign}
                   <br />
                   {operator_signsignaturedate}
-                </div> 
+                </div>
               </td>
             </tr>
           </tbody>
@@ -3282,27 +3273,51 @@ const QA_f005 = () => {
           </tr>
         </table>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "left",
-          alignItems: "center",
-          gap: "40px",
-          marginTop: "20px",
-        }}
-      >
-        <Input
-          addonBefore="Date"
-          size="small"
-          value={datevalues}
-          type="date"
+      <div style={{
+        display: "flex",
+        gap: "5px"
+      }}>
+        <div
           style={{
-            width: "200px",
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "center",
+            gap: "40px",
+            marginTop: "20px",
           }}
-          min={`${years}-01-01`}
-          max={`${years}-12-31`}
-          onChange={(e) => handleDate(e.target.value)}
-        />
+        >
+          <Input
+            addonBefore="Date"
+            size="small"
+            value={datevalues}
+            type="date"
+            style={{
+              width: "200px",
+            }}
+            min={`${years}-01-01`}
+            max={`${years}-12-31`}
+            onChange={(e) => handleDate(e.target.value)}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "center",
+            gap: "40px",
+            marginTop: "20px",
+          }}
+        >
+          <Input
+            addonBefore="Department"
+            size="small"
+            value={department} F
+            style={{
+              width: "200px",
+            }}
+          />
+        </div>
       </div>
       <Tabs
         defaultActiveKey="1"

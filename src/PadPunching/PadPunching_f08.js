@@ -117,7 +117,7 @@ const PadPunching_f08 = () => {
     const fetchReciever = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/chemicalName`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/chemicalName`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -144,7 +144,7 @@ const PadPunching_f08 = () => {
     const fetchRecieverChe = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/chemicalBatchNumber`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/chemicalBatchNumber`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -199,7 +199,7 @@ const PadPunching_f08 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -223,7 +223,7 @@ const PadPunching_f08 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [cleaningRecordByDate, API.prodUrl, token]);
+  }, [cleaningRecordByDate,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -233,7 +233,7 @@ const PadPunching_f08 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -257,7 +257,7 @@ const PadPunching_f08 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [cleaningRecordByDate, API.prodUrl, token]);
+  }, [cleaningRecordByDate,API.prodUrl, token]);
 
   const [RollFeeding, setRollFeeding] = useState("");
   const [PunchingTools, setPunchingTools] = useState("");
@@ -552,7 +552,7 @@ const PadPunching_f08 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/SaveSanitisationOfMachinesAndSurfaces`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/SaveSanitisationOfMachinesAndSurfaces`,
         payload,
         { headers }
       );
@@ -632,7 +632,7 @@ const PadPunching_f08 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/SubmitSanitisationOfMachinesAndSurfaces`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/SubmitSanitisationOfMachinesAndSurfaces`,
         payload,
         { headers }
       );
@@ -676,7 +676,7 @@ const PadPunching_f08 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectSanitisationOfMachinesAndSurfaces`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectSanitisationOfMachinesAndSurfaces`,
         {
           id: sanitizationId,
           status: "Approve",
@@ -711,7 +711,7 @@ const PadPunching_f08 = () => {
     }
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectSanitisationOfMachinesAndSurfaces`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectSanitisationOfMachinesAndSurfaces`,
         {
           id: sanitizationId,
           status: "Reject",
@@ -736,7 +736,7 @@ const PadPunching_f08 = () => {
   const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/findByMachineNameWeekNoMonthAndYear/SanitisationOfMachinesAndSurfaces?machineName=${machineName}&weekNo=${week}&month=${month08}&year=${year08}
+        `${API.prodUrl}/Precot/api/PadPunching/Service/findByMachineNameWeekNoMonthAndYear/SanitisationOfMachinesAndSurfaces?machineName=${machineName}&weekNo=${week}&month=${month08}&year=${year08}
 `,
         {
           headers: {

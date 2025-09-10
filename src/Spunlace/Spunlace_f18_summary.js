@@ -127,7 +127,7 @@ const Spunlace_f18_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl]);
+  }, [printresponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -163,7 +163,7 @@ const Spunlace_f18_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl]);
+  }, [printresponseData,API.prodUrl]);
 
   const handleShiftChange = (value) => {
     // console.log(" Shift ", value);

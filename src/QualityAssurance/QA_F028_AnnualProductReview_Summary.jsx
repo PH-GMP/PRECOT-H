@@ -771,7 +771,7 @@ const QA_F028_AnnualProductReview_Summary = () => {
                     {"Annual Product Review"}
                   </th>
                   <th colSpan={2}>Format No.:</th>
-                  <th colSpan={2}>PH-QAD01-F-028</th>
+                  <th colSpan={2}>PH-QAD01/F-028</th>
                 </tr>
                 <tr>
                   <th colSpan={2}>Revision No.:</th>
@@ -2303,7 +2303,7 @@ const QA_F028_AnnualProductReview_Summary = () => {
       </div>
       <BleachingHeader
         formName={"ANNUAL PRODUCT REVIEW"}
-        formatNo={"PH-QAD01-F-028"}
+        formatNo={"PH-QAD01/F-028"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

@@ -189,7 +189,7 @@ const QualityControl_f13 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const QualityControl_f13 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl]);
+  }, [printData,     API.prodUrl]);
 
   useEffect(() => {
     console.log("microentered");
@@ -224,7 +224,7 @@ const QualityControl_f13 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -248,7 +248,7 @@ const QualityControl_f13 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl]);
+  }, [printData,     API.prodUrl]);
 
   useEffect(() => {
     console.log("qcentered");
@@ -259,7 +259,7 @@ const QualityControl_f13 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -283,7 +283,7 @@ const QualityControl_f13 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl]);
+  }, [printData,     API.prodUrl]);
 
   let formattedChemistDate;
   if (printData.chemist_submit_on) {
@@ -340,7 +340,7 @@ const QualityControl_f13 = () => {
       };
 
       axios
-        .get(`${    API.prodUrl}/Precot/api/chemicaltest/ARF013`, {
+        .get(`${   API.prodUrl}/Precot/api/chemicaltest/ARF013`, {
           headers,
           params: {
             year: year1,
@@ -566,7 +566,7 @@ const QualityControl_f13 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF013/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF013/approval`,
         {
           id: id,
           status: "Approve",
@@ -606,7 +606,7 @@ const QualityControl_f13 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF013/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF013/approval`,
         {
           id: id,
           status: "Reject",
@@ -818,7 +818,7 @@ const QualityControl_f13 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF013/save/potableWaterARF013Report`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF013/save/potableWaterARF013Report`,
         adjustedPayload,
         { headers }
       )
@@ -946,7 +946,7 @@ const QualityControl_f13 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF013/Submit/potableWaterARF013Report`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF013/Submit/potableWaterARF013Report`,
         adjustedPayload,
         { headers }
       )

@@ -381,7 +381,7 @@ const PadPunching_f01 = () => {
       };
 
       // API Call 2: Fetch Opening Quantity
-      const apiEndpoint2 = `${ API.prodUrl}/Precot/api/padpunching/opening-qty`;
+      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qty`;
 
       axios
         .get(apiEndpoint2, { params: params2, headers })
@@ -455,7 +455,7 @@ const PadPunching_f01 = () => {
       };
 
       // API Call 2: Fetch Opening Quantity
-      const apiEndpoint2 = `${ API.prodUrl}/Precot/api/padpunching/opening-qty`;
+      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qty`;
 
       axios
         .get(apiEndpoint2, { params: params2, headers })
@@ -480,7 +480,7 @@ const PadPunching_f01 = () => {
 
   // Function to fetch production details with Opening Quantity passed
   const fetchProductionDetails = (index, field, value, quanity) => {
-    const apiEndpoint = `${ API.prodUrl}/Precot/api/padpunching/getProductionDetails`;
+    const apiEndpoint = `${API.prodUrl}/Precot/api/padpunching/getProductionDetails`;
 
     // Parameters for API Call 1 (production details)
     const params = {
@@ -677,7 +677,7 @@ const PadPunching_f01 = () => {
     // Make the API call
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Punching/Service/saveProdDetailsF01`,
+        `${API.prodUrl}/Precot/api/Punching/Service/saveProdDetailsF01`,
         updatedSaveData,
         {
           headers: {
@@ -752,7 +752,7 @@ const PadPunching_f01 = () => {
     // Make the API call
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Punching/Service/submitProdDetailsF01`,
+        `${API.prodUrl}/Precot/api/Punching/Service/submitProdDetailsF01`,
         updatedSaveData,
         {
           headers: {
@@ -800,7 +800,7 @@ const PadPunching_f01 = () => {
     // Make the API call
     axios
       .put(
-        `${ API.prodUrl}/Precot/api/Punching/Service/approveProdDetailsF01`,
+        `${API.prodUrl}/Precot/api/Punching/Service/approveProdDetailsF01`,
         payload,
         {
           headers: {
@@ -836,7 +836,7 @@ const PadPunching_f01 = () => {
     // Make the API call
     axios
       .put(
-        `${ API.prodUrl}/Precot/api/Punching/Service/approveProdDetailsF01`,
+        `${API.prodUrl}/Precot/api/Punching/Service/approveProdDetailsF01`,
         payload,
         {
           headers: {
@@ -1464,7 +1464,7 @@ const PadPunching_f01 = () => {
         if (username) {
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -1508,7 +1508,7 @@ const PadPunching_f01 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=PAD_PUNCHING`,
+            `${API.prodUrl}/Precot/api/Users/Service/getRoleBaseDepartmentNames?department=PAD_PUNCHING`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1543,12 +1543,12 @@ const PadPunching_f01 = () => {
 
       // Making the first API call to get machine LOV
       axios
-        .get(`${ API.prodUrl}/Precot/api/padpunching/MachineLov`, config)
+        .get(`${API.prodUrl}/Precot/api/padpunching/MachineLov`, config)
         .then((response) => {
           setMachineLov(response.data); // Set machine LOV state
           // Making the second API call to get order number LOV
           return axios.get(
-            `${ API.prodUrl}/Precot/api/padpunching/orderNoList`,
+            `${API.prodUrl}/Precot/api/padpunching/orderNoList`,
             config
           );
         })
@@ -1570,7 +1570,7 @@ const PadPunching_f01 = () => {
       // Make the API call
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Punching/Service/getproductiondetailsF01?date=${state.date}&shift=${state.shift}`,
+          `${API.prodUrl}/Precot/api/Punching/Service/getproductiondetailsF01?date=${state.date}&shift=${state.shift}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

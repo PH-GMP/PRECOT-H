@@ -572,7 +572,7 @@ const QA_F_041_Summary = () => {
                     BATCH RELEASE NOTE
                   </td>
                   <td style={{ padding: "0.5em" }}>Format No.:</td>
-                  <td style={{ padding: "0.5em" }}>PH-QAD01-F-046</td>
+                  <td style={{ padding: "0.5em" }}>PH-QAD01/F-046</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -773,7 +773,7 @@ const QA_F_041_Summary = () => {
                           BATCH RELEASE NOTE
                         </td>
                         <td style={{ padding: "0.5em" }}>Format No.:</td>
-                        <td style={{ padding: "0.5em" }}>PH-QAD01-F-046</td>
+                        <td style={{ padding: "0.5em" }}>PH-QAD01/F-046</td>
                       </tr>
                       <tr>
                         <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -971,7 +971,7 @@ const QA_F_041_Summary = () => {
       </div>
       <BleachingHeader
         formName={"BATCH RELEASE NOTE"}
-        formatNo={"PH-QAD01-F-046"}
+        formatNo={"PH-QAD01/F-046"}
         MenuBtn={
           <Button
             type="primary"

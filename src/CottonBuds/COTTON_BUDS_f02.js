@@ -53,7 +53,7 @@ const COTTON_BUDS_f02 = () => {
     const fetchOrderNumberOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/buds/sap/Service/orderInfo`,
+          `${API.prodUrl}/Precot/api/buds/sap/Service/orderInfo`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const COTTON_BUDS_f02 = () => {
     const fetchmachineNameOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/buds/sap/Service/machineList`,
+          `${API.prodUrl}/Precot/api/buds/sap/Service/machineList`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const COTTON_BUDS_f02 = () => {
   const getProductName = async (value) => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/buds/sap/Service/productChangeDetails?orderNumber=${value}`,
+        `${API.prodUrl}/Precot/api/buds/sap/Service/productChangeDetails?orderNumber=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -205,7 +205,7 @@ const COTTON_BUDS_f02 = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -228,14 +228,14 @@ const COTTON_BUDS_f02 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.[0]?.hod_submit_by;
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -258,7 +258,7 @@ const COTTON_BUDS_f02 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const roleauth = localStorage.getItem("role");
   const disabled =
@@ -377,7 +377,7 @@ const COTTON_BUDS_f02 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/buds/Service/saveLogbook`,
+        `${API.prodUrl}/Precot/api/buds/Service/saveLogbook`,
         payload,
         { headers }
       );
@@ -385,7 +385,7 @@ const COTTON_BUDS_f02 = () => {
         await Promise.all(
           RecordTableDelete.map(async (id) => {
             await axios.delete(
-              `${ API.prodUrl}/Precot/api/buds/Service/deleteLogbookLine?id=${id}`,
+              `${API.prodUrl}/Precot/api/buds/Service/deleteLogbookLine?id=${id}`,
               { headers }
             );
           })
@@ -449,7 +449,7 @@ const COTTON_BUDS_f02 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/buds/Service/submitLogbook`,
+        `${API.prodUrl}/Precot/api/buds/Service/submitLogbook`,
         payload,
         { headers }
       );
@@ -477,7 +477,7 @@ const COTTON_BUDS_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/buds/Service/approveLogbook`,
+        `${API.prodUrl}/Precot/api/buds/Service/approveLogbook`,
         {
           id: Id,
           status: "Approve",
@@ -505,7 +505,7 @@ const COTTON_BUDS_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/buds/Service/approveLogbook`,
+        `${API.prodUrl}/Precot/api/buds/Service/approveLogbook`,
         {
           id: Id,
           status: "Reject",
@@ -536,7 +536,7 @@ const COTTON_BUDS_f02 = () => {
   const fetchDetailsByParam = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/buds/Service/getLogbookMaking?date=${date}&shift=${shift}`,
+        `${API.prodUrl}/Precot/api/buds/Service/getLogbookMaking?date=${date}&shift=${shift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

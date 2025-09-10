@@ -90,7 +90,7 @@ const Qa_Release = (props) => {
   const getAPI = () => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/getQualityRelease?batchNumber=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/getQualityRelease?batchNumber=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -214,7 +214,7 @@ const Qa_Release = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/submitQualityRelease`,
+        `${API.prodUrl}/Precot/api/buds/bmr/submitQualityRelease`,
         payload,
         {
           headers: {
@@ -295,7 +295,7 @@ const Qa_Release = (props) => {
       ],
     };
     axios
-      .post(`${ API.prodUrl}/Precot/api/buds/bmr/saveQualityRelease`, payload, {
+      .post(`${API.prodUrl}/Precot/api/buds/bmr/saveQualityRelease`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

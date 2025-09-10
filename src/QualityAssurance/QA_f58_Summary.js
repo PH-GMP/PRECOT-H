@@ -247,7 +247,7 @@ const QA_f58_Summary = () => {
           .catch((err) => {});
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -281,7 +281,7 @@ const QA_f58_Summary = () => {
           .catch((err) => {});
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -315,7 +315,7 @@ const QA_f58_Summary = () => {
           .catch((err) => {});
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   // Print Module
   const handlePrint = () => {
@@ -623,7 +623,7 @@ const QA_f58_Summary = () => {
                   METAL DETECTOR CALIBRATION RECORD
                 </th>
                 <td colSpan="15">Format No.:</td>
-                <td colSpan="15">PH-QAD01-F-058</td>
+                <td colSpan="15">PH-QAD01/F-058</td>
               </tr>
               <tr>
                 <td colSpan="15">Revision No.:</td>
@@ -892,7 +892,7 @@ const QA_f58_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="METAL DETECTOR CALIBRATION RECORD"
-          formatNo="PH-QAD01-F-058"
+          formatNo="PH-QAD01/F-058"
           MenuBtn={
             <Button
               type="primary"

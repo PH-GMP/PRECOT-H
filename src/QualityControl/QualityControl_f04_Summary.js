@@ -112,7 +112,7 @@ const  QualityControl_f04_Summary= () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const  QualityControl_f04_Summary= () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,      API.prodUrl]);
+  }, [printResponseData,     API.prodUrl]);
 
 
   const [getImage1, setGetImage1] = useState("");
@@ -149,7 +149,7 @@ const  QualityControl_f04_Summary= () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const  QualityControl_f04_Summary= () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,      API.prodUrl]);
+  }, [printResponseData,     API.prodUrl]);
 
 
   const formattedDatesupervisor = () => {
@@ -259,7 +259,7 @@ const  QualityControl_f04_Summary= () => {
     // const fetchBMR = async () => {
       // try {
         axios.get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
+          `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
           { headers }
         ).then((response) => {
           setShiftOptions(response.data);
@@ -313,7 +313,7 @@ const  QualityControl_f04_Summary= () => {
 
   // useEffect(() => {
   //   axios
-  //     .get(`${    API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`, {
+  //     .get(`${   API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`, {
   //       headers: {
   //         Authorization: `Bearer ${localStorage.getItem("token")}`,
   //       },
@@ -354,7 +354,7 @@ const  QualityControl_f04_Summary= () => {
   //   console.log("value of BMR", value);
 
   //   axios
-  //     .get(`${    API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${value}`, {
+  //     .get(`${   API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${value}`, {
   //       headers: {
   //         Authorization: `Bearer ${localStorage.getItem("token")}`,
   //       },
@@ -450,7 +450,7 @@ const  QualityControl_f04_Summary= () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShiftPrintApi?date=${printDate}&shift=${value}`,
+          `${   API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShiftPrintApi?date=${printDate}&shift=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

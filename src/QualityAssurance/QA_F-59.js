@@ -587,7 +587,7 @@ const QA_F59 = () => {
     const payload = {
       metal_id: id,
       formatName: "METAL DETECTOR PASS REPORT",
-      formatNo: "PH-QAD01-F-059",
+      formatNo: "PH-QAD01/F-059",
       revisionNo: 1,
       sopNumber: "PH-QAD01-D-44",
       unit: "Unit H",
@@ -673,7 +673,7 @@ const QA_F59 = () => {
     const payload = {
       metal_id: id,
       formatName: "METAL DETECTOR PASS REPORT",
-      formatNo: "PH-QAD01-F-059",
+      formatNo: "PH-QAD01/F-059",
       revisionNo: 1,
       sopNumber: "PH-QAD01-D-44",
       unit: "Unit H",
@@ -736,7 +736,7 @@ const QA_F59 = () => {
         {
           id: id,
           status: "Approve",
-          formatNo: "PH-QAD01-F-059",
+          formatNo: "PH-QAD01/F-059",
         },
         { headers }
       )
@@ -1058,7 +1058,7 @@ const QA_F59 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="METAL DETECTOR PASS REPORT"
-        formatNo="PH-QAD01-F-059"
+        formatNo="PH-QAD01/F-059"
         MenuBtn={
           <Button
             type="primary"

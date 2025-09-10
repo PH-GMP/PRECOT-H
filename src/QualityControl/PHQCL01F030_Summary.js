@@ -106,7 +106,7 @@ const QualityControl_f030_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const QualityControl_f030_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl]);
+  }, [printData,     API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -140,7 +140,7 @@ const QualityControl_f030_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -164,7 +164,7 @@ const QualityControl_f030_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,      API.prodUrl]);
+  }, [printData,     API.prodUrl]);
 
   let formattedMicroDate = printData?.micro_submit_on
     ? moment(printData.micro_submit_on).format("DD/MM/YYYY HH:mm")
@@ -270,7 +270,7 @@ const QualityControl_f030_Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${    API.prodUrl}/Precot/api/QcForm/PrintApiF030?eq_id=${selectedPrintEqNo}&year=${selectedPrintYear}&month=${selectedPrintMonth}`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/QcForm/PrintApiF030?eq_id=${selectedPrintEqNo}&year=${selectedPrintYear}&month=${selectedPrintMonth}`;
 
     axios
       .get(apiUrl, {
@@ -311,7 +311,7 @@ const QualityControl_f030_Summary = () => {
 
   useEffect(() => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/QcForm/DigitalSummary`, {
+      .get(`${   API.prodUrl}/Precot/api/QcForm/DigitalSummary`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

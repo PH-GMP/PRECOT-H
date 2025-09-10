@@ -80,7 +80,7 @@ const[reason,setreason] = useState("");
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const[reason,setreason] = useState("");
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   const [getImage2, setGetImage2] = useState("");
@@ -117,7 +117,7 @@ const[reason,setreason] = useState("");
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -141,7 +141,7 @@ const[reason,setreason] = useState("");
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   
@@ -190,7 +190,7 @@ const[reason,setreason] = useState("");
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectBagMaking`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectBagMaking`,
         {
           id: OverallID,
           status: "Approve",
@@ -230,7 +230,7 @@ const[reason,setreason] = useState("");
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectBagMaking`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/approveOrRejectBagMaking`,
         {
           id: OverallID,
           status: "Reject",
@@ -377,7 +377,7 @@ const[reason,setreason] = useState("");
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/SubmitPackingDetails`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/SubmitPackingDetails`,
           payload,
           { headers }
         )
@@ -419,7 +419,7 @@ const[reason,setreason] = useState("");
     
           axios
             .post(
-              `${ API.prodUrl}/Precot/api/PadPunching/Service/SubmitBagMakingDailyProductionDetail`,
+              `${API.prodUrl}/Precot/api/PadPunching/Service/SubmitBagMakingDailyProductionDetail`,
               payload,
               { headers }
             )
@@ -465,7 +465,7 @@ const checkBmrExist = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(
-      `${ API.prodUrl}/Precot/api/padpunching/api/bag-details?date=${formattedDate}&shift=${numberShift}`,
+      `${API.prodUrl}/Precot/api/padpunching/api/bag-details?date=${formattedDate}&shift=${numberShift}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -501,7 +501,7 @@ const fetchGet = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftBagMaking?date=${newdate}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftBagMaking?date=${newdate}&shift=${shiftvalue}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

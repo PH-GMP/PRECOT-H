@@ -46,7 +46,7 @@ const QCLInwardBookSummary = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${    API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${   API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -65,7 +65,7 @@ const QCLInwardBookSummary = () => {
     const fetchImage = async (roleSign) => {
       try {
         const res = await axios.get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${roleSign}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${roleSign}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -124,7 +124,7 @@ const QCLInwardBookSummary = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${    API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetAll`, {
+      .get(`${   API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetAll`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -383,7 +383,7 @@ const QCLInwardBookSummary = () => {
   };
 
   const fetchPrintData = (formNo) => {
-    let Print_API_URL = `${    API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetReportForPrint`;
+    let Print_API_URL = `${   API.prodUrl}/Precot/api/qc/SampleInwardBookF1F2F3/GetReportForPrint`;
 
     const date = selectedPrintDate;
     const month = selectedPrintMonth || "";

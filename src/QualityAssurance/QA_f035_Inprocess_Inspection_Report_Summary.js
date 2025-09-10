@@ -97,8 +97,8 @@ const QA_f035_Inprocess_Inspection_Report_summary = () => {
       ) {
         // QA Inspector can see all summary without filtering by department
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01-F-035`,
-          // `${ API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=pad punching`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01/F-035`,
+          // `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=pad punching`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const QA_f035_Inprocess_Inspection_Report_summary = () => {
         }
 
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01-F-035`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01/F-035`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -409,7 +409,7 @@ const QA_f035_Inprocess_Inspection_Report_summary = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01-F-035`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01/F-035`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -647,7 +647,7 @@ const QA_f035_Inprocess_Inspection_Report_summary = () => {
                   </th>
 
                   <td colSpan="35">Format No.:</td>
-                  <td colSpan="35">PH-QAD01-F-035</td>
+                  <td colSpan="35">PH-QAD01/F-035</td>
                 </tr>
                 <tr>
                   <td colSpan="35">Revision No.:</td>
@@ -1287,7 +1287,7 @@ const QA_f035_Inprocess_Inspection_Report_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="ON-LINE INSPECTION REPORT(FOR BALLS)"
-        formatNo="PH-QAD01-F-035"
+        formatNo="PH-QAD01/F-035"
         MenuBtn={
           <Button
             type="primary"

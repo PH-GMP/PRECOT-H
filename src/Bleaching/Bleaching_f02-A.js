@@ -137,7 +137,7 @@ function Bleaching_f02A() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveRejectF02A`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveRejectF02A`,
         {
           id: clean_id,
           status: "Approve",
@@ -183,7 +183,7 @@ function Bleaching_f02A() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveRejectF02A`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveRejectF02A`,
         {
           id: clean_id,
           status: "Reject",
@@ -285,7 +285,7 @@ function Bleaching_f02A() {
     // const a = String(event.target.value).split('-').reverse().join('/');
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
         {
           headers,
           params: {
@@ -508,7 +508,7 @@ function Bleaching_f02A() {
       "Content-Type": "application/json", // Adjust content type if needed
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02A/`, {
+      .get(`${API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02A/`, {
         headers,
         params: {
           date: date,
@@ -786,7 +786,7 @@ function Bleaching_f02A() {
 
     const response = await axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02A`,
         payload,
         { headers }
       )

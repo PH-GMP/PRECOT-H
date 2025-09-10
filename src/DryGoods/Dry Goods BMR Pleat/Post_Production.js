@@ -95,7 +95,7 @@ const Post_Production = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/cottonPleat/12.GetPostProductionReview?batch_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/cottonPleat/12.GetPostProductionReview?batch_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -209,7 +209,7 @@ const Post_Production = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/cottonPleat/12.SubmitPostProductionReview`,
+        `${API.prodUrl}/Precot/api/cottonPleat/12.SubmitPostProductionReview`,
         newSave ? payload_2 : payload,
         {
           headers: {
@@ -222,7 +222,7 @@ const Post_Production = (props) => {
         message.success("Post Production Submitted Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/cottonPleat/12.GetPostProductionReview?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/cottonPleat/12.GetPostProductionReview?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

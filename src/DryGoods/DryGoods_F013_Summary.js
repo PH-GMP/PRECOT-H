@@ -85,7 +85,7 @@ const DryGoods_F013_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -210,9 +210,9 @@ const DryGoods_F013_Summary = () => {
       const roleauth = localStorage.getItem("role");
       let apiUrl = "";
       if (roleauth === "ROLE_HOD" || roleauth === "ROLE_DESIGNEE") {
-        apiUrl = `${ API.prodUrl}/Precot/api/goods/getHandSanitationSummaryF013`;
+        apiUrl = `${API.prodUrl}/Precot/api/goods/getHandSanitationSummaryF013`;
       } else if (roleauth === "ROLE_SUPERVISOR") {
-        apiUrl = `${ API.prodUrl}/Precot/api/goods/getHandSanitationSummaryF013`;
+        apiUrl = `${API.prodUrl}/Precot/api/goods/getHandSanitationSummaryF013`;
       } else {
         message.error("Invalid role. Access denied.");
         navigate("/Precot/choosenScreen");
@@ -270,7 +270,7 @@ const DryGoods_F013_Summary = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           { headers }
         );
         setShiftOptions(response.data);
@@ -402,7 +402,7 @@ const DryGoods_F013_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/goods/getHandSanitationPrintF013?date=${printParams.datePrint}&shift=${printParams.shiftPrint}`,
+        `${API.prodUrl}/Precot/api/goods/getHandSanitationPrintF013?date=${printParams.datePrint}&shift=${printParams.shiftPrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

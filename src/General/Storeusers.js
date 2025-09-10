@@ -54,7 +54,7 @@ const UserForm = () => {
     const fetchDepartments = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
         console.log("Department List: ", response.data);
@@ -98,7 +98,7 @@ const UserForm = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleaching/bleachStorePersons/CreateOrUpdate`,
+        `${API.prodUrl}/Precot/api/bleaching/bleachStorePersons/CreateOrUpdate`,
         data,
         { headers }
       )

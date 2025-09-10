@@ -218,7 +218,7 @@ const QA_f26 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.manager_sign;
@@ -246,7 +246,7 @@ const QA_f26 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const handleKeyDown = (e) => {
     const isAlphanumeric = /^[a-zA-Z.,]$/;
@@ -354,7 +354,7 @@ const QA_f26 = () => {
     try {
       const payload = {
         formatName: "TEMPLATE FOR RECALL / MOCK RECALL",
-        formatNo: "PH-QAD01-F-026",
+        formatNo: "PH-QAD01/F-026",
         revisionNo: 1,
         refSopNo: "PH-QAD01-D-24",
         unit: "H",
@@ -430,7 +430,7 @@ const QA_f26 = () => {
     try {
       const payload = {
         formatName: "TEMPLATE FOR RECALL / MOCK RECALL",
-        formatNo: "PH-QAD01-F-026",
+        formatNo: "PH-QAD01/F-026",
         revisionNo: 1,
         refSopNo: "PH-QAD01-D-24",
         unit: "H",
@@ -1012,7 +1012,7 @@ const QA_f26 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="Template For Recall / Mock Recall"
-        formatNo="PH-QAD01-F-026"
+        formatNo="PH-QAD01/F-026"
         sopNo="PH-QAD01-D-24"
         MenuBtn={
           <Button

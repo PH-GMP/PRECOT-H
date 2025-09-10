@@ -503,7 +503,7 @@ const Engineering_FC004 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -539,7 +539,7 @@ const Engineering_FC004 = () => {
      
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -575,7 +575,7 @@ const Engineering_FC004 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   // console.loglog(productName);
   // console.loglog("noOfFlagsInRoll", mixing);

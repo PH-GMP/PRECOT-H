@@ -60,7 +60,7 @@ const QA_PestControl_Summary = () => {
   const formattedToday = `${yearF}-${monthF}-${day}`;
 
   useEffect(() => {
-    if (formNo === "PH-HRD01-F-015") {
+    if (formNo === "PH-HRD01/F-015") {
       setformName(
         "PEST CONTROL SERVICE REPORT - IFIM for House, Drain, Flesh Flies"
       );
@@ -70,7 +70,7 @@ const QA_PestControl_Summary = () => {
       setChemicalAndDosage(
         "Deltamethrin 2.5%SC, Propoxur 2% Bait, Propoxur 20% EC, Lambda cyhalothrin 10% WP"
       );
-    } else if (formNo === "PH-HRD01-F-016") {
+    } else if (formNo === "PH-HRD01/F-016") {
       setformName(
         "PEST CONTROL SERVICE REPORT - ILM Service for House Lizards"
       );
@@ -78,7 +78,7 @@ const QA_PestControl_Summary = () => {
         "Integrated Lizard Management (ILM) Service for House Lizards"
       );
       setChemicalAndDosage("Turbble Gum");
-    } else if (formNo === "PH-HRD01-F-017") {
+    } else if (formNo === "PH-HRD01/F-017") {
       setformName(
         "PEST CONTROL SERVICE REPORT - ISMS for Spider & Crawling Insects"
       );
@@ -86,11 +86,11 @@ const QA_PestControl_Summary = () => {
         "Integrated Spider Management Service for Spider & Crawling Insects"
       );
       setChemicalAndDosage("Propoxur 20% EC");
-    } else if (formNo === "PH-HRD01-F-018") {
+    } else if (formNo === "PH-HRD01/F-018") {
       setformName("PEST CONTROL SERVICE REPORT - IPM for Mosquitoes");
       setTypeOfService("IPM (Thermal Fogging) for Mosquitoes");
       setChemicalAndDosage("Deltamethrin 1.25% w/w or 1.% w/v  ");
-    } else if (formNo === "PH-HRD01-F-019") {
+    } else if (formNo === "PH-HRD01/F-019") {
       setformName(
         "PEST CONTROL SERVICE REPORT - Pro-Guard Service for Crawling Insects"
       );
@@ -98,7 +98,7 @@ const QA_PestControl_Summary = () => {
       setChemicalAndDosage(
         "Deltamethrin 2.5%SC, Propoxur 20% EC, Cyfluthrin 5% EW."
       );
-    } else if (formNo === "PH-HRD01-F-014") {
+    } else if (formNo === "PH-HRD01/F-014") {
       setformName("PEST CONTROL SERVICE REPORT - IMM Service for Mosquitoes");
       setTypeOfService(
         "IMM (Integrated Mosquito Management) Service for Mosquitoes"
@@ -169,7 +169,7 @@ const QA_PestControl_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -209,7 +209,7 @@ const QA_PestControl_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -364,9 +364,9 @@ const QA_PestControl_Summary = () => {
       align: "center",
     },
 
-    ...(formNo !== "PH-HRD01-F-016" &&
-    formNo !== "PH-HRD01-F-017" &&
-    formNo !== "PH-HRD01-F-018"
+    ...(formNo !== "PH-HRD01/F-016" &&
+    formNo !== "PH-HRD01/F-017" &&
+    formNo !== "PH-HRD01/F-018"
       ? [
           {
             title: "Date",
@@ -437,9 +437,9 @@ const QA_PestControl_Summary = () => {
   let columns;
   let splitNO;
   if (
-    formNo === "PH-HRD01-F-016" ||
-    formNo === "PH-HRD01-F-017" ||
-    formNo === "PH-HRD01-F-018"
+    formNo === "PH-HRD01/F-016" ||
+    formNo === "PH-HRD01/F-017" ||
+    formNo === "PH-HRD01/F-018"
   ) {
     splitNO = 5;
   } else {
@@ -487,15 +487,15 @@ const QA_PestControl_Summary = () => {
       DateP = datePrint;
     }
     if (
-      formNo == "PH-HRD01-F-015" ||
-      formNo == "PH-HRD01-F-019" ||
-      formNo == "PH-HRD01-F-014"
+      formNo == "PH-HRD01/F-015" ||
+      formNo == "PH-HRD01/F-019" ||
+      formNo == "PH-HRD01/F-014"
     ) {
       api = `${API.prodUrl}/Precot/api/QA/Service/PestController/print?format_no=${formNo}&month=${monthP}&year=${YearP}&date=${DateP}`;
     } else if (
-      formNo == "PH-HRD01-F-016" ||
-      formNo == "PH-HRD01-F-017" ||
-      formNo == "PH-HRD01-F-018"
+      formNo == "PH-HRD01/F-016" ||
+      formNo == "PH-HRD01/F-017" ||
+      formNo == "PH-HRD01/F-018"
     ) {
       api = `${API.prodUrl}/Precot/api/QA/Service/PestController/print?format_no=${formNo}&month=${monthP}&year=${YearP}`;
     } else {
@@ -525,9 +525,9 @@ const QA_PestControl_Summary = () => {
   //   goto button
   const goTo = () => {
     if (
-      formNo === "PH-HRD01-F-015" ||
-      formNo === "PH-HRD01-F-019" ||
-      formNo === "PH-HRD01-F-014"
+      formNo === "PH-HRD01/F-015" ||
+      formNo === "PH-HRD01/F-019" ||
+      formNo === "PH-HRD01/F-014"
     ) {
       if (date == "" || date == null) {
         message.warning("Please Select Date");
@@ -541,9 +541,9 @@ const QA_PestControl_Summary = () => {
       });
     }
     if (
-      formNo === "PH-HRD01-F-016" ||
-      formNo === "PH-HRD01-F-017" ||
-      formNo === "PH-HRD01-F-018"
+      formNo === "PH-HRD01/F-016" ||
+      formNo === "PH-HRD01/F-017" ||
+      formNo === "PH-HRD01/F-018"
     ) {
       if (month == "" || month == null) {
         message.warning("Please Select Month");
@@ -608,11 +608,11 @@ const QA_PestControl_Summary = () => {
             </thead>
             <br />
             <tbody>
-              {(formNo == "PH-HRD01-F-016" ||
-                formNo == "PH-HRD01-F-017" ||
-                formNo == "PH-HRD01-F-018" ||
-                formNo == "PH-HRD01-F-019" ||
-                formNo == "PH-HRD01-F-014") && (
+              {(formNo == "PH-HRD01/F-016" ||
+                formNo == "PH-HRD01/F-017" ||
+                formNo == "PH-HRD01/F-018" ||
+                formNo == "PH-HRD01/F-019" ||
+                formNo == "PH-HRD01/F-014") && (
                 <tr>
                   <td colSpan="40">
                     <b>Frequency :</b> {printResponseData?.[index]?.frequency}
@@ -629,7 +629,7 @@ const QA_PestControl_Summary = () => {
                   </td>
                 </tr>
               )}
-              {formNo == "PH-HRD01-F-015" && (
+              {formNo == "PH-HRD01/F-015" && (
                 <tr>
                   <td colSpan="57">
                     <b>Frequency : </b>
@@ -886,9 +886,9 @@ const QA_PestControl_Summary = () => {
             marginLeft: "10px",
           }}
         >
-          {(formNo === "PH-HRD01-F-015" ||
-            formNo === "PH-HRD01-F-019" ||
-            formNo === "PH-HRD01-F-014") && (
+          {(formNo === "PH-HRD01/F-015" ||
+            formNo === "PH-HRD01/F-019" ||
+            formNo === "PH-HRD01/F-014") && (
             <>
               <Col>
                 <label htmlFor="dateInput">Date:</label>
@@ -905,9 +905,9 @@ const QA_PestControl_Summary = () => {
               </Col>
             </>
           )}
-          {(formNo === "PH-HRD01-F-016" ||
-            formNo === "PH-HRD01-F-017" ||
-            formNo === "PH-HRD01-F-018") && (
+          {(formNo === "PH-HRD01/F-016" ||
+            formNo === "PH-HRD01/F-017" ||
+            formNo === "PH-HRD01/F-018") && (
             <>
               <Col>
                 {" "}
@@ -935,9 +935,9 @@ const QA_PestControl_Summary = () => {
             </>
           )}
 
-          {(formNo === "PH-HRD01-F-016" ||
-            formNo === "PH-HRD01-F-017" ||
-            formNo === "PH-HRD01-F-018") && (
+          {(formNo === "PH-HRD01/F-016" ||
+            formNo === "PH-HRD01/F-017" ||
+            formNo === "PH-HRD01/F-018") && (
             <>
               {" "}
               <Col>
@@ -1021,9 +1021,9 @@ const QA_PestControl_Summary = () => {
         ]}
       >
         {" "}
-        {(formNo === "PH-HRD01-F-015" ||
-          formNo === "PH-HRD01-F-019" ||
-          formNo === "PH-HRD01-F-014") && (
+        {(formNo === "PH-HRD01/F-015" ||
+          formNo === "PH-HRD01/F-019" ||
+          formNo === "PH-HRD01/F-014") && (
           <div
             style={{
               display: "flex",

@@ -96,7 +96,7 @@ const QualityControl_f23_Summary = () => {
     useEffect (() => {
     const fetchUserDataAndImages = () => {
         axios
-          .get(`${    API.prodUrl}/Precot/api/Users/Service/getRoles?department=QUALITY_CONTROL`, {
+          .get(`${   API.prodUrl}/Precot/api/Users/Service/getRoles?department=QUALITY_CONTROL`, {
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token, 
@@ -109,7 +109,7 @@ const QualityControl_f23_Summary = () => {
               console.log(username)
       
               axios
-                .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+                .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
                   headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + token,
@@ -158,7 +158,7 @@ const QualityControl_f23_Summary = () => {
     
     //         axios
     //           .get(
-    //             `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+    //             `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
     //             {
     //               headers: {
     //                 "Content-Type": "application/json",
@@ -192,7 +192,7 @@ const QualityControl_f23_Summary = () => {
         if (!initialized.current) {
             const fetchData = async () => {
                 try {
-                    const response = await axios.get(`${    API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/GetAll`,
+                    const response = await axios.get(`${   API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/GetAll`,
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`,
@@ -349,7 +349,7 @@ const QualityControl_f23_Summary = () => {
         setPrintButtonLoading(true);
         try {
             const response = await axios.get(
-                `${    API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/PrintForF028?date=${printParams.date}&week=${printParams.week}`,
+                `${   API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/PrintForF028?date=${printParams.date}&week=${printParams.week}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

@@ -190,7 +190,7 @@ const QC_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails, API.prodUrl]);
+  }, [fetchedDetails,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -226,7 +226,7 @@ const QC_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails, API.prodUrl]);
+  }, [fetchedDetails,API.prodUrl]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -481,7 +481,7 @@ const QC_f04 = (props) => {
   //     "Content-Type": "application/json",
   //   };
   //       axios.get(
-  //         `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/batch-numbers`,
+  //         `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/batch-numbers`,
   //         { headers,
   //           params : {
   //             bmrNo : bmr

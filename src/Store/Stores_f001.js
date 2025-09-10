@@ -163,7 +163,7 @@ const Stores_f001 = () => {
     try {
       const response = await fetch(
         // /Precot/api/Store/getMetarialInwards?date=2024-12-16
-        `${ API.prodUrl}/Precot/api/Store/getMetarialInwards?date=${state.date}`,
+        `${API.prodUrl}/Precot/api/Store/getMetarialInwards?date=${state.date}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -303,7 +303,7 @@ const Stores_f001 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -327,7 +327,7 @@ const Stores_f001 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -339,7 +339,7 @@ const Stores_f001 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -363,7 +363,7 @@ const Stores_f001 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -375,7 +375,7 @@ const Stores_f001 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const Stores_f001 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const handleSave = () => {
     setSaveLoading(true);
@@ -428,7 +428,7 @@ const Stores_f001 = () => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Store/MetarialInwards/Save`,
+        `${API.prodUrl}/Precot/api/Store/MetarialInwards/Save`,
         payload,
         {
           headers,
@@ -495,7 +495,7 @@ const Stores_f001 = () => {
     };
 
     axios
-      .post(` ${ API.prodUrl}/Precot/api/Store/MetarialInwards/Submit`, payload, {
+      .post(` ${API.prodUrl}/Precot/api/Store/MetarialInwards/Submit`, payload, {
         headers,
       })
       .then((res) => {

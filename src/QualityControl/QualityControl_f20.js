@@ -104,7 +104,7 @@ const QualityControl_f20 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const QualityControl_f20 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/PDEData?pde=${date}`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/PDEData?pde=${date}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -174,7 +174,7 @@ const QualityControl_f20 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/CLF020?date=${date}`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/CLF020?date=${date}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -271,7 +271,7 @@ const QualityControl_f20 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/save/micro`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/save/micro`;
       payload = {
         test_id: formData.test_id,
         arNumber: formData.arNumber,
@@ -297,7 +297,7 @@ const QualityControl_f20 = () => {
         month: formData.month,
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/approval`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
@@ -364,7 +364,7 @@ const QualityControl_f20 = () => {
         month: formData.month,
       };
       succesMsg = "Submitted Successfully ";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/submit/micro`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/submit/micro`;
     } else if (
       role == "QA_EXECUTIVE" ||
       role == "QA_MANAGER" ||
@@ -375,7 +375,7 @@ const QualityControl_f20 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/approval`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,

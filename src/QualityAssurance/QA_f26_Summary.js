@@ -193,7 +193,7 @@ const QA_f26_Summary = () => {
     if (printResponseData?.length > 0) {
       fetchImages();
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // Print Module
   const handlePrint = () => {
@@ -411,7 +411,7 @@ const QA_f26_Summary = () => {
                   TEMPLATE FOR RECALL / MOCK RECALL
                 </th>
                 <td colSpan="15">Format No.:</td>
-                <td colSpan="25">PH-QAD01-F-026</td>
+                <td colSpan="25">PH-QAD01/F-026</td>
               </tr>
               <tr>
                 <td colSpan="15">Revision No.:</td>
@@ -711,7 +711,7 @@ const QA_f26_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="TEMPLATE FOR RECALL / MOCK RECALL"
-          formatNo="PH-QAD01-F-026"
+          formatNo="PH-QAD01/F-026"
           MenuBtn={
             <Button
               type="primary"

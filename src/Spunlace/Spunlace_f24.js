@@ -192,7 +192,7 @@ const Spunlace_f24 = () => {
 
         try {
             const response = await fetch(
-                `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/findByMonthYearWeek?month=${state.month}&year=${state.year}&week=${state.week}`,
+                `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/findByMonthYearWeek?month=${state.month}&year=${state.year}&week=${state.week}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -220,7 +220,7 @@ const Spunlace_f24 = () => {
             setHodSubmitOn(data.hod_submit_on);
             axios
             .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -248,7 +248,7 @@ const Spunlace_f24 = () => {
             ////////////////////////////
             axios
             .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.hodSign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.hodSign}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -444,7 +444,7 @@ const Spunlace_f24 = () => {
 
         const res = await axios
             .put(
-                `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/approveOrReject`,
+                `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/approveOrReject`,
                 {
                     id: smsId,
                     status: "Approve",
@@ -485,7 +485,7 @@ const Spunlace_f24 = () => {
 
         const res = await axios
             .put(
-                `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/approveOrReject`,
+                `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/approveOrReject`,
                 {
                     id: smsId,
                     status: "Reject",
@@ -601,7 +601,7 @@ const Spunlace_f24 = () => {
 
         axios
             .post(
-                `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/SaveSMS`,
+                `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/SaveSMS`,
                 payload,
                 { headers }
             )
@@ -755,7 +755,7 @@ const Spunlace_f24 = () => {
 
         axios
             .post(
-                `${ API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/SubmitSMS`,
+                `${API.prodUrl}/Precot/api/spunlace/Service/SanitizationOfMachinesAndSurfaces/SubmitSMS`,
                 payload,
                 { headers }
             )

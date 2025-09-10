@@ -513,7 +513,7 @@ const QA_F60 = () => {
     const payload = {
       tool_id: id,
       format_name: "LIST OF SHARP TOOLS",
-      format_no: "PH-QAD01-F-060",
+      format_no: "PH-QAD01/F-060",
       revision_no: 3,
       sop_number: "PH-QAD01-D-45",
       unit: "Unit H",
@@ -582,7 +582,7 @@ const QA_F60 = () => {
     const payload = {
       tool_id: id,
       format_name: "LIST OF SHARP TOOLS",
-      format_no: "PH-QAD01-F-060",
+      format_no: "PH-QAD01/F-060",
       revision_no: 3,
       sop_number: "PH-QAD01-D-45",
       unit: "Unit H",
@@ -903,7 +903,7 @@ const QA_F60 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="LIST OF SHARP TOOLS"
-        formatNo="PH-QAD01-F-060"
+        formatNo="PH-QAD01/F-060"
         MenuBtn={
           <Button
             type="primary"

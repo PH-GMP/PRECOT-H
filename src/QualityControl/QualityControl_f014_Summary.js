@@ -52,7 +52,7 @@ const QualityControlF014Summary = () => {
   // Function to fetch image based on the username
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -98,11 +98,11 @@ const QualityControlF014Summary = () => {
 
       const url =
         roleauth === "ROLE_MICROBIOLOGIST"
-          ? `${    API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/GetAll`
+          ? `${   API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/GetAll`
           : roleauth === "QC_MANAGER" ||
             roleauth === "QA_MANAGER" ||
             roleauth === "MICRO_DESIGNEE"
-          ? `${    API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/getAllManagerNotSubmitted`
+          ? `${   API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/getAllManagerNotSubmitted`
           : null;
 
       if (url) {
@@ -315,7 +315,7 @@ const QualityControlF014Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${    API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/PrintForF014?eqIdNo=${selectedPrintEqNo}`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/PrintForF014?eqIdNo=${selectedPrintEqNo}`;
 
     // Build API URL based on selected fields
     if (selectedPrintDate) {

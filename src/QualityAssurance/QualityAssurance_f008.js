@@ -282,7 +282,7 @@ const QualityAssuranceF008 = () => {
     const payload = {
       card_id: mainId,
       formatName: "TRAINING CARD",
-      formatNo: "PH-QAD01-F-008",
+      formatNo: "PH-QAD01/F-008",
       revisionNo: 1,
       refSopNo: "PH-QAD01-D-15",
       unit: "Unit H",
@@ -373,7 +373,7 @@ const QualityAssuranceF008 = () => {
     const payload = {
       card_id: mainId,
       formatName: "TRAINING CARD",
-      formatNo: "PH-QAD01-F-008",
+      formatNo: "PH-QAD01/F-008",
       revisionNo: 1,
       refSopNo: "PH-QAD01-D-15",
       unit: "Unit H",
@@ -827,7 +827,7 @@ const QualityAssuranceF008 = () => {
       <BleachingHeader
         unit="Unit H"
         formName="Training Card"
-        formatNo="PH-QAD01-F-008"
+        formatNo="PH-QAD01/F-008"
         MenuBtn={
           <Button
             type="primary"

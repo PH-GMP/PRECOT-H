@@ -45,7 +45,7 @@ const Product_Reconciliation = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/08.GetProductReconciliation?order_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/08.GetProductReconciliation?order_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -88,7 +88,7 @@ const Product_Reconciliation = (props) => {
     console.log("payload", payload);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/08.SaveProductReconciliation`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/08.SaveProductReconciliation`,
         payload,
         {
           headers: {
@@ -101,7 +101,7 @@ const Product_Reconciliation = (props) => {
         message.success("Product Reconcilliation Submitted");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/08.GetProductReconciliation?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/08.GetProductReconciliation?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

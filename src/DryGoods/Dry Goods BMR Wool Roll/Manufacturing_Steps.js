@@ -155,7 +155,7 @@ const Manufacturing_Steps = (props) => {
       });
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -246,7 +246,7 @@ const Manufacturing_Steps = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/07.SaveManufacturingSteps`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/07.SaveManufacturingSteps`,
         payload,
         {
           headers: {
@@ -260,7 +260,7 @@ const Manufacturing_Steps = (props) => {
         message.success("Manufacturing Steps Saved Succesfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -455,7 +455,7 @@ const Manufacturing_Steps = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/07.SubmitManufacturingSteps`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/07.SubmitManufacturingSteps`,
         payload,
         {
           headers: {
@@ -469,7 +469,7 @@ const Manufacturing_Steps = (props) => {
         message.success("Manufacturing Steps Submitted Succesfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/CottonWoolRall/07.GetManufacturingSteps?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

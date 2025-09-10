@@ -68,7 +68,7 @@ const Packing_Material_Issue = (props) => {
       axios
         .get(
           `${API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterialPde?batch_no=${props.orderNo}&fromdate=${moment(fromDate).format('DD.MM.YYYY')}&todate=${moment(toDate).format('DD.MM.YYYY')}`,
-          // `${ API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterialPde?batch_no=000800010480&fromdate=29.06.2024&todate=29.06.2024`,
+          // `${API.prodUrl}/Precot/api/punching/bmr/03.GetPackingMeterialPde?batch_no=000800010480&fromdate=29.06.2024&todate=29.06.2024`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

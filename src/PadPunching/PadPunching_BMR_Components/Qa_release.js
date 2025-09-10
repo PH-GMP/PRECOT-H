@@ -73,7 +73,7 @@ const Qa_Release = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -174,7 +174,7 @@ const Qa_Release = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/submitQualityRelease`,
+        `${API.prodUrl}/Precot/api/punching/bmr/submitQualityRelease`,
         payload,
         {
           headers: {
@@ -187,7 +187,7 @@ const Qa_Release = (props) => {
         message.success("Qa Release Successfully Submitted");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -291,7 +291,7 @@ const Qa_Release = (props) => {
       ],
     };
     axios
-      .post(`${ API.prodUrl}/Precot/api/punching/bmr/saveQualityRelease`, payload, {
+      .post(`${API.prodUrl}/Precot/api/punching/bmr/saveQualityRelease`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -301,7 +301,7 @@ const Qa_Release = (props) => {
         message.success("Qa Release Successfully Submitted");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/punching/bmr/getQualityReleaseList?order=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

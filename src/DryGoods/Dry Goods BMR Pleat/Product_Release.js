@@ -46,7 +46,7 @@ const Product_Release = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/cottonPleat/14.GetProductRelease?batch_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/cottonPleat/14.GetProductRelease?batch_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -105,7 +105,7 @@ const Product_Release = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/cottonPleat/14.SubmitProductRelease`,
+        `${API.prodUrl}/Precot/api/cottonPleat/14.SubmitProductRelease`,
         payload,
         {
           headers: {
@@ -118,7 +118,7 @@ const Product_Release = (props) => {
         message.success("Product Release Submitted Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/cottonPleat/14.GetProductRelease?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/cottonPleat/14.GetProductRelease?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

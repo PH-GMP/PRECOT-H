@@ -1236,7 +1236,7 @@ const RodentBoxFull = () => {
 
   const [statusLoader, setStatusLoader] = useState(false);
   const formName = "RODENT BOX CHECK LIST";
-  const formatNo = "PH-HRD01-F-013";
+  const formatNo = "PH-HRD01/F-013";
   const showDrawer = () => {
     setOpen(true);
   };

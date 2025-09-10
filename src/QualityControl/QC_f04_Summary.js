@@ -93,7 +93,7 @@ const QC_f04_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const QC_f04_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -136,7 +136,7 @@ const QC_f04_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -168,7 +168,7 @@ const QC_f04_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
 
   const formattedDate = (dateString) => {
     if (dateString) {
@@ -204,9 +204,9 @@ const QC_f04_Summary = () => {
       const role = localStorage.getItem("role");
       let apiUrl = "";
       if (role === "ROLE_CHEMIST") {
-        apiUrl = `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/GetAll`;
+        apiUrl = `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/GetAll`;
       } else if (role === "QA_MANAGER" || role === "QC_MANAGER") {
-        apiUrl = `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/getAllQcNotSubmitted`;
+        apiUrl = `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/getAllQcNotSubmitted`;
       } else {
         throw new Error("Role not found in localStorage.");
       }
@@ -271,7 +271,7 @@ const QC_f04_Summary = () => {
       "Content-Type": "application/json",
     };
     axios
-      .get(`${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`, {
+      .get(`${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`, {
         headers,
       })
       .then((response) => {
@@ -329,7 +329,7 @@ const QC_f04_Summary = () => {
     try {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/GetReportForPrint?bleachingBmrNo=${bmrPrint}`,
+          `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/GetReportForPrint?bleachingBmrNo=${bmrPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

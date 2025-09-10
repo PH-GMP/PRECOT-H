@@ -45,7 +45,7 @@ const Bleaching_f01_summary = () => {
   const [role, setRole] = useState("");
 
   const token = localStorage.getItem("token");
-  const decodedToken = jwtDecode(token);
+
 
   const showDrawer = () => {
     setOpen(true);
@@ -240,12 +240,9 @@ const Bleaching_f01_summary = () => {
   useEffect(() => {
     const headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
-    /*
-${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForHod
-${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForSupervisor
-    */
+
     const userRole = localStorage.getItem("role");
     setRole(userRole);
     const fetchSummary = async (url) => {
@@ -255,7 +252,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
         if (Array.isArray(res.data)) {
           setSummary(
             res.data.map((x, index) => ({
-              month: x.month || "N/A", // Handle potential null or undefined values
+              month: x.month || "N/A",
               date: x.weekAndDate || "N/A",
               week: x.week || "N/A",
               sup_status: x.supervisor_status || "N/A",
@@ -267,11 +264,11 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
             }))
           );
         } else {
-          setSummary([]); // Set an empty array if data is not as expected
+          setSummary([]);
         }
       } catch (err) {
         console.error("Error fetching summary data", err);
-        setSummary([]); // Set an empty array in case of error
+        setSummary([]);
         navigate("/Precot/Bleaching/F-01/Summary");
       }
     };
@@ -412,7 +409,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // Hide loading spinner after response or error
+      setLoading(false);
     }
   };
   const formatDate = (dateStr) => {
@@ -425,20 +422,18 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
     ...new Set(printresponseData.map((item) => item.remarks)),
   ].filter((remark) => !unwantedRemarks.includes(remark));
 
-  // const displayRemark =
-  //   uniqueRemarks.length > 0 ? uniqueRemarks.join(", ") : "Nil";
 
   const displayRemark = printresponseData
     .map((item) => {
       const formattedDate = formatDate(item.weekAndDate);
-      const remarks = uniqueRemarks.length > 0 ? uniqueRemarks : "Nil"; // Default to "Nil" if no remarks
+      const remarks = uniqueRemarks.length > 0 ? uniqueRemarks : "Nil";
       return `${formattedDate} - ${remarks}`;
     })
     .join(", ");
 
   const handleNavigate = () => {
     if (month == "") {
-      // setError('Please select a date');
+
       message.warning("Please Select Month");
     } else if (year == "") {
       message.warning("Please select a year");
@@ -492,7 +487,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td style={{ border: "none" }}></td>
             </tr>
           </thead>
-          {/* <br/> */}
+
 
           <tbody>
             <tr style={{ height: "30px", border: "none", width: "20%" }}>
@@ -562,41 +557,41 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td style={{ height: "20px", textAlign: "center" }}>
                 {printresponseData.find((item) => item.week === "1")
                   ? formatDate(
-                      printresponseData.find((item) => item.week === "1")
-                        .weekAndDate
-                    )
+                    printresponseData.find((item) => item.week === "1")
+                      .weekAndDate
+                  )
                   : "N/A"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printresponseData.find((item) => item.week === "2")
                   ? formatDate(
-                      printresponseData.find((item) => item.week === "2")
-                        .weekAndDate
-                    )
+                    printresponseData.find((item) => item.week === "2")
+                      .weekAndDate
+                  )
                   : "N/A"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printresponseData.find((item) => item.week === "3")
                   ? formatDate(
-                      printresponseData.find((item) => item.week === "3")
-                        .weekAndDate
-                    )
+                    printresponseData.find((item) => item.week === "3")
+                      .weekAndDate
+                  )
                   : "N/A"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printresponseData.find((item) => item.week === "4")
                   ? formatDate(
-                      printresponseData.find((item) => item.week === "4")
-                        .weekAndDate
-                    )
+                    printresponseData.find((item) => item.week === "4")
+                      .weekAndDate
+                  )
                   : "N/A"}
               </td>
               <td style={{ textAlign: "center" }}>
                 {printresponseData.find((item) => item.week === "5")
                   ? formatDate(
-                      printresponseData.find((item) => item.week === "5")
-                        .weekAndDate
-                    )
+                    printresponseData.find((item) => item.week === "5")
+                      .weekAndDate
+                  )
                   : "N/A"}
               </td>
             </tr>
@@ -609,30 +604,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td style={{ textAlign: "center" }}>1</td>
               <td colSpan="2">Conveyor at Bale Press</td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "1")
-                  ? printresponseData
-                      .find((item) => item.week === "1")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description === "Conveyor at Bale Press"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
-                {/* {
-  printresponseData?.find((item) => item.week === "1")?.activitesf01
-    ?.find((activity) => activity.description === "Conveyor at Bale Press") 
-    ? (
-        activity.completed === true 
-          ? "✓" 
-          : activity.notApplicable === true 
-          ? "X" 
-          : activity.not_completed === true 
-          ? "N/A" 
-          : "N/A"
-      ) 
-    : "N/A"
-} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "1")
@@ -645,24 +617,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "2")
-                  ? printresponseData
-                      .find((item) => item.week === "2")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description === "Conveyor at Bale Press"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "2")
@@ -675,21 +638,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "3")
-                  ? printresponseData
-                      .find((item) => item.week === "3")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description === "Conveyor at Bale Press"
-                      ).completed == true ? "✓": "X": "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "3")
@@ -702,24 +659,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "4")
-                  ? printresponseData
-                      .find((item) => item.week === "4")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description === "Conveyor at Bale Press"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "4")
@@ -732,24 +680,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "5")
-                  ? printresponseData
-                      .find((item) => item.week === "5")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description === "Conveyor at Bale Press"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "5")
@@ -762,10 +701,10 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
@@ -774,36 +713,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td style={{ textAlign: "center" }}>2</td>
               <td colSpan="2">Pusher</td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "1")
-                  ? printresponseData
-                      .find((item) => item.week === "1")
-                      .activitesf01.find(
-                        (activity) => activity.description === "Pusher"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
-                {/* {printresponseData?.find((item) => item.week === "1")
-  ?.activitesf01?.find((activity) => activity.description === "Pusher")
-  ?.completed === true
-  ? "✓"
-  : printresponseData?.find((item) => item.week === "1") 
-    ? "X"
-    : "N/A"} */}
-                {/* {
-  printresponseData?.find((item) => item.week === "1")?.activitesf01
-    ?.find((activity) => activity.description === "Pusher") 
-    ? (
-        activity.completed === true 
-          ? "✓" 
-          : activity.notApplicable === true 
-          ? "X" 
-          : activity.not_completed === true 
-          ? "N/A" 
-          : "N/A"
-      ) 
-    : "N/A"
-} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "1")
@@ -815,23 +725,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "2")
-                  ? printresponseData
-                      .find((item) => item.week === "2")
-                      .activitesf01.find(
-                        (activity) => activity.description === "Pusher"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "2")
@@ -843,23 +745,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "3")
-                  ? printresponseData
-                      .find((item) => item.week === "3")
-                      .activitesf01.find(
-                        (activity) => activity.description === "Pusher"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "3")
@@ -871,23 +765,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "4")
-                  ? printresponseData
-                      .find((item) => item.week === "4")
-                      .activitesf01.find(
-                        (activity) => activity.description === "Pusher"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "4")
@@ -899,23 +785,15 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "5")
-                  ? printresponseData
-                      .find((item) => item.week === "5")
-                      .activitesf01.find(
-                        (activity) => activity.description === "Pusher"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "5")
@@ -927,10 +805,10 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
@@ -939,24 +817,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td style={{ textAlign: "center" }}>3</td>
               <td colSpan="2">Inside part of Bale Press box</td>
               <td style={{ textAlign: "center" }}>
-                {/* {printresponseData.find((item) => item.week === "1")
-                  ? printresponseData
-                      .find((item) => item.week === "1")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description ===
-                          "Inside part of Bale Press box"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
-                {/* {printresponseData?.find((item) => item.week === "1")
-  ?.activitesf01?.find((activity) => activity.description === "Inside part of Bale Press box")
-  ?.completed === true
-  ? "✓"
-  : printresponseData?.find((item) => item.week === "1") 
-    ? "X"
-    : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "1")
@@ -969,26 +830,16 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
                 {" "}
-                {/* {printresponseData.find((item) => item.week === "2")
-                  ? printresponseData
-                      .find((item) => item.week === "2")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description ===
-                          "Inside part of Bale Press box"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "2")
@@ -1001,26 +852,16 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
                 {" "}
-                {/* {printresponseData.find((item) => item.week === "3")
-                  ? printresponseData
-                      .find((item) => item.week === "3")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description ===
-                          "Inside part of Bale Press box"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "3")
@@ -1033,24 +874,14 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "N/A"
+                        : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
                 {" "}
-                {/* {printresponseData.find((item) => item.week === "4")
-                  ? printresponseData
-                      .find((item) => item.week === "4")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description ===
-                          "Inside part of Bale Press box"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "4")
@@ -1063,26 +894,16 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
               <td style={{ textAlign: "center" }}>
                 {" "}
-                {/* {printresponseData.find((item) => item.week === "5")
-                  ? printresponseData
-                      .find((item) => item.week === "5")
-                      .activitesf01.find(
-                        (activity) =>
-                          activity.description ===
-                          "Inside part of Bale Press box"
-                      ).completed == true
-                    ? "✓"
-                    : "X"
-                  : "N/A"} */}
+
                 {(() => {
                   const activity = printresponseData
                     ?.find((item) => item.week === "5")
@@ -1095,10 +916,10 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     ? activity.completed === true
                       ? "✓"
                       : activity.not_completed === true
-                      ? "X"
-                      : activity.notApplicable === true
-                      ? "N/A"
-                      : "N/A"
+                        ? "X"
+                        : activity.notApplicable === true
+                          ? "N/A"
+                          : "N/A"
                     : "N/A";
                 })()}
               </td>
@@ -1123,7 +944,6 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td colSpan="1">
                 <b>Signature & Date </b>
               </td>
-              {/* <td>Signature & Date</td> */}
               <td>
                 {printresponseData.find((item) => item.week === "1") ? (
                   <>
@@ -1289,31 +1109,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                   <b>N/A</b>
                 )}
               </td>
-              {/* <td>
-                {printresponseData.find((item) => item.week === "1")
-                  ? printresponseData.find((item) => item.week === "1")
-                      .sanitized_by
-                  : "N/A"}
 
-              </td> */}
-              {/* <td> {printresponseData.find((item) => item.week === "2")
-                  ? printresponseData.find((item) => item.week === "2")
-                      .sanitized_by
-                  : "N/A"}
-                  </td>
-              
-              <td> {printresponseData.find((item) => item.week === "3")
-                  ? printresponseData.find((item) => item.week === "3")
-                      .sanitized_by
-                  : "N/A"}</td>
-              <td> {printresponseData.find((item) => item.week === "4")
-                  ? printresponseData.find((item) => item.week === "4")
-                      .sanitized_by
-                  : "N/A"}</td>
-              <td> {printresponseData.find((item) => item.week === "5")
-                  ? printresponseData.find((item) => item.week === "5")
-                      .sanitized_by
-                  : "N/A"}</td> */}
             </tr>
             <tr style={{ height: "40px" }}>
               <td colSpan="2">
@@ -1323,7 +1119,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td colSpan="1">
                 <b>Signature & Date </b>
               </td>
-              {/* <td>Signature & Date</td> */}
+
               <td>
                 {printresponseData.find((item) => item.week === "1") ? (
                   <>
@@ -1496,7 +1292,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
               <td colSpan="1">
                 <b>Signature & Date </b>
               </td>
-              {/* <td>Signature & Date</td> */}
+
               <td colSpan="5">
                 {printresponseData && printresponseData.length > 0 && (
                   <>
@@ -1506,22 +1302,22 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     <br></br>
                     {printresponseData[printresponseData.length - 1]
                       .hod_submit_on && (
-                      <span>
-                        <b>
-                          {new Date(
-                            printresponseData[
-                              printresponseData.length - 1
-                            ].hod_submit_on
-                          ).toLocaleDateString("en-GB", {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </b>
-                      </span>
-                    )}
+                        <span>
+                          <b>
+                            {new Date(
+                              printresponseData[
+                                printresponseData.length - 1
+                              ].hod_submit_on
+                            ).toLocaleDateString("en-GB", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </b>
+                        </span>
+                      )}
                   </>
                 )}
                 {getImage1 !== "" && (
@@ -1529,15 +1325,11 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                 )}
               </td>
             </tr>
-            {/* <tr style={{ border: "none" }}>
-              <td style={{ border: "none" }} ></td>
-            </tr> */}
+
           </tbody>
           <br />
           <tfoot>
-            {/* <tr>
-              <td colspan="8" style={{ height: "10px" }}></td>
-            </tr> */}
+
             <tr style={{ height: "30px" }}>
               <td colSpan="1" style={{ textAlign: "center" }}>
                 Particulars
@@ -1606,7 +1398,6 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
         <Menu
           theme="dark"
           mode="inline"
-          // defaultSelectedKeys={["1"]}
           style={{
             backgroundColor: "transparent",
             display: "flex",
@@ -1618,91 +1409,91 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
           items={
             role === "ROLE_QA"
               ? [
-                  {
-                    key: "1",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Form Browser
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/choosenScreen"),
-                  },
-                  {
-                    key: "2",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Generation
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Generate"),
-                  },
-                  {
-                    key: "3",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Mapping
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                  },
-                  {
-                    key: "4",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Closing
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Closing"),
-                  },
-                  {
-                    key: "5",
-                    icon: (
-                      <FaLock
-                        color="#151718"
-                        onClick={() => {
-                          if (confirm("Are you sure want to logout")) {
-                            localStorage.removeItem("token");
-                            navigate("/Precot");
-                          }
-                        }}
-                      />
-                    ),
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Logout
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot"),
-                  },
-                ]
+                {
+                  key: "1",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Form Browser
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/choosenScreen"),
+                },
+                {
+                  key: "2",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Generation
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Generate"),
+                },
+                {
+                  key: "3",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Mapping
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                },
+                {
+                  key: "4",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Closing
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Closing"),
+                },
+                {
+                  key: "5",
+                  icon: (
+                    <FaLock
+                      color="#151718"
+                      onClick={() => {
+                        if (confirm("Are you sure want to logout")) {
+                          localStorage.removeItem("token");
+                          navigate("/Precot");
+                        }
+                      }}
+                    />
+                  ),
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Logout
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot"),
+                },
+              ]
               : role === "ROLE_SUPERVISOR" ||
                 role === "ROLE_HOD" ||
                 role === "ROLE_DESIGNEE"
-              ? [
+                ? [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -1784,7 +1575,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
                     onClick: () => navigate("/Precot"),
                   },
                 ]
-              : [
+                : [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -1936,7 +1727,7 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
       />
       <div style={{ paddingBottom: "2em" }}></div>
 
-      {/* header code above */}
+
       <Row>
         <Form
           style={{
@@ -1964,10 +1755,10 @@ ${       API.prodUrl}/Precot/api/bleach/SanitizationMechineAndSurfaceSummaryForS
             <Select
               placeholder="Choose Week"
               style={{
-                width: "150px", // Adjust the width as needed
+                width: "150px",
               }}
               onChange={weekChange}
-              // value={setweek}
+
               options={weeks}
             />
           </Form.Item>

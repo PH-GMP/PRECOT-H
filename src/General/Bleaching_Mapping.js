@@ -62,7 +62,7 @@ const Bleaching_Mapping = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
         // setdepartmentList(response.data);
@@ -106,8 +106,8 @@ const Bleaching_Mapping = () => {
     // Precot/api/goodsLaydown/getLaydownByDepartment?department_id=4
     const newURL =
       values == "4"
-        ? `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${values}`
-        : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${values}`;
+        ? `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${values}`
+        : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${values}`;
     axios
       .get(newURL, {
         headers,
@@ -127,7 +127,7 @@ const Bleaching_Mapping = () => {
         setLaydownData(a);
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${values}`,
+            `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${values}`,
             {
               headers,
             }
@@ -143,8 +143,8 @@ const Bleaching_Mapping = () => {
             setBmrData(a);
             const urlNEW =
               values == "4"
-                ? `${ API.prodUrl}/Precot/api/goodsLaydown/BaleNoLov`
-                : `${ API.prodUrl}/Precot/api/bleaching/generation/getJobCard`;
+                ? `${API.prodUrl}/Precot/api/goodsLaydown/BaleNoLov`
+                : `${API.prodUrl}/Precot/api/bleaching/generation/getJobCard`;
             axios
               .get(urlNEW, {
                 headers,
@@ -191,8 +191,8 @@ const Bleaching_Mapping = () => {
           };
           const URL =
             department == "4"
-              ? `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownBaleNoMapping`
-              : `${ API.prodUrl}/Precot/api/bleaching/generation/BmrLaydownMapping`;
+              ? `${API.prodUrl}/Precot/api/goodsLaydown/LaydownBaleNoMapping`
+              : `${API.prodUrl}/Precot/api/bleaching/generation/BmrLaydownMapping`;
           const payload_2 =
             department == "4"
               ? {

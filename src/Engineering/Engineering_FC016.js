@@ -202,7 +202,7 @@ const Engineering_FC016 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Engineering/getweightScale?date=${state.date}&machineIdNo=${state.machineIdNo}&department=${state.department}`,
+        `${API.prodUrl}/Precot/api/Engineering/getweightScale?date=${state.date}&machineIdNo=${state.machineIdNo}&department=${state.department}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -379,7 +379,7 @@ const Engineering_FC016 = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -400,7 +400,7 @@ const Engineering_FC016 = () => {
         })
         .catch((err) => {});
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -410,7 +410,7 @@ const Engineering_FC016 = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -431,7 +431,7 @@ const Engineering_FC016 = () => {
         })
         .catch((err) => {});
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -441,7 +441,7 @@ const Engineering_FC016 = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -462,7 +462,7 @@ const Engineering_FC016 = () => {
         })
         .catch((err) => {});
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -474,7 +474,7 @@ const Engineering_FC016 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Engineering/weightScale/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Engineering/weightScale/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -509,7 +509,7 @@ const Engineering_FC016 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Engineering/weightScale/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Engineering/weightScale/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -563,7 +563,7 @@ const Engineering_FC016 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/Engineering/weightScale/Save`, payload, {
+      .post(`${API.prodUrl}/Precot/api/Engineering/weightScale/Save`, payload, {
         headers,
       })
       .then((res) => {
@@ -623,7 +623,7 @@ const Engineering_FC016 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/weightScale/Submit`,
+        ` ${API.prodUrl}/Precot/api/Engineering/weightScale/Submit`,
         payload,
         { headers }
       )

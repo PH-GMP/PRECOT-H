@@ -79,7 +79,7 @@ const QualityControl_f16_Summary = () => {
     const chemicalLovApi = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/QcForm/PrintApiF016?`,
+          `${   API.prodUrl}/Precot/api/QcForm/PrintApiF016?`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -111,7 +111,7 @@ const QualityControl_f16_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const QualityControl_f16_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/QcForm/F016StandardOfChemicalSummary`,
+            `${   API.prodUrl}/Precot/api/QcForm/F016StandardOfChemicalSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -323,7 +323,7 @@ const QualityControl_f16_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/QcForm/PrintApiF016?date=${printParams.date}&shift=${printParams.shift}&chemical=${printParams.chemical}`,
+        `${   API.prodUrl}/Precot/api/QcForm/PrintApiF016?date=${printParams.date}&shift=${printParams.shift}&chemical=${printParams.chemical}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -118,7 +118,7 @@ const QualityControl_f11 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ const QualityControl_f11 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [chemist_sign,     API.prodUrl]);
+  }, [chemist_sign,    API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -152,7 +152,7 @@ const QualityControl_f11 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -176,7 +176,7 @@ const QualityControl_f11 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [qc_sign,     API.prodUrl]);
+  }, [qc_sign,    API.prodUrl]);
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -188,7 +188,7 @@ const QualityControl_f11 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF011/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF011/approval`,
         {
           id: Id,
           status: "Approve",
@@ -229,7 +229,7 @@ const QualityControl_f11 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF011/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF011/approval`,
         {
           id: Id,
           status: "Reject",
@@ -295,7 +295,7 @@ const QualityControl_f11 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/CLF011`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/CLF011`,
           {
             params: {
               eq_no: eq,
@@ -514,7 +514,7 @@ const QualityControl_f11 = () => {
     // Make the API request to save the data
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF011/save/spectrometerreport`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF011/save/spectrometerreport`,
         payload,
         {
           headers: {
@@ -603,7 +603,7 @@ const QualityControl_f11 = () => {
     // Make the API request to save the data
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF011/submit/spectrometerreport`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF011/submit/spectrometerreport`,
         payload,
         {
           headers: {

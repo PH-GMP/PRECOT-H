@@ -75,7 +75,7 @@ const QualityControl_AR_f04_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const QualityControl_AR_f04_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const QualityControl_AR_f04_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/getAll`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/getAll`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -300,7 +300,7 @@ const QualityControl_AR_f04_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/print?invoice=${formParams.printInvoiceNo}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/print?invoice=${formParams.printInvoiceNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

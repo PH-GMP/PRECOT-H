@@ -104,7 +104,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
         setSaveLoading(true);
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-010",
+          formatNo: "PH-QAD01/F-010",
           formatName: "INTERNAL AUDIT SCHEDULE",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",
@@ -317,7 +317,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
         // Make the API call to add the participant
         const response = await axios.post(
           `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditParticipant`,
-          { participant: participantName, formatNo: "PH-QAD01-F-010" },
+          { participant: participantName, formatNo: "PH-QAD01/F-010" },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -430,7 +430,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
         setSaveLoading(true);
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-010",
+          formatNo: "PH-QAD01/F-010",
           formatName: "INTERNAL AUDIT SCHEDULE",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",
@@ -554,7 +554,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
       try {
         const response = await axios.post(
           `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditType`,
-          { auditType: newAuditType, formatNo: "PH-QAD01-F-010" },
+          { auditType: newAuditType, formatNo: "PH-QAD01/F-010" },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -900,7 +900,7 @@ const QualityAssurance_f010_internal_audit_schedule = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INTERNAL AUDIT SCHEDULE "
-        formatNo="PH-QAD01-F-010 "
+        formatNo="PH-QAD01/F-010 "
         sopNo="PA-QAD01-D-17 "
         MenuBtn={
           <Button

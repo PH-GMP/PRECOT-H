@@ -137,7 +137,7 @@ const QA_f012_internal_audit_report_summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // For auditorSign images
   useEffect(() => {
@@ -181,7 +181,7 @@ const QA_f012_internal_audit_report_summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // For qaMrSign images
   useEffect(() => {
@@ -225,7 +225,7 @@ const QA_f012_internal_audit_report_summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // Open print screen when all images are loaded
   useEffect(() => {
@@ -519,7 +519,7 @@ const QA_f012_internal_audit_report_summary = () => {
                     INTERNAL AUDIT REPORT
                   </th>
                   <td colSpan="25">Format No:</td>
-                  <td colSpan="25">PH-QAD01-F-012</td>
+                  <td colSpan="25">PH-QAD01/F-012</td>
                 </tr>
                 <tr>
                   <td colSpan="25">Revision No:</td>

@@ -117,7 +117,7 @@ const QualityControl_f20_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const QualityControl_f20_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const QualityControl_f20_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/getAll`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/getAll`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -344,7 +344,7 @@ const QualityControl_f20_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF020/print?year=${printParams.year}&month=${printParams.month}&date=${printParams.date}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF020/print?year=${printParams.year}&month=${printParams.month}&date=${printParams.date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

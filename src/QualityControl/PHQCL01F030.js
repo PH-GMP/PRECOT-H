@@ -258,7 +258,7 @@ const QualityControl_f030 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -282,7 +282,7 @@ const QualityControl_f030 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.micro_sign,      API.prodUrl]);
+  }, [selectedRow?.micro_sign,     API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -292,7 +292,7 @@ const QualityControl_f030 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -316,7 +316,7 @@ const QualityControl_f030 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.micro_designee_sign,      API.prodUrl]);
+  }, [selectedRow?.micro_designee_sign,     API.prodUrl]);
 
 
 
@@ -328,7 +328,7 @@ const QualityControl_f030 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF030`,
+        `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF030`,
         {
           id: formValues.id,
           status: "Reject",
@@ -357,7 +357,7 @@ const QualityControl_f030 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF030`,
+        `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF030`,
         {
           id: formValues.id,
           status: "Approve",
@@ -433,7 +433,7 @@ const QualityControl_f030 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/QcForm/SaveDigitalColonyF030`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/QcForm/SaveDigitalColonyF030`, payload, {
         headers,
       })
       .then((response) => {
@@ -499,7 +499,7 @@ const QualityControl_f030 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/QcForm/SubmitDigitalColonyF030`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/QcForm/SubmitDigitalColonyF030`, payload, {
         headers,
       })
       .then((response) => {
@@ -554,7 +554,7 @@ const QualityControl_f030 = () => {
     if (uniqueMonth && uniqueYear && uniqueEqNo) {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/QcForm/getDigitalF030?month=${uniqueMonth}&year=${uniqueYear}&eq_id=${uniqueEqNo}`,
+          `${   API.prodUrl}/Precot/api/QcForm/getDigitalF030?month=${uniqueMonth}&year=${uniqueYear}&eq_id=${uniqueEqNo}`,
           {
             headers,
           }

@@ -143,7 +143,7 @@ const Stores_f006 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Store/getGatePass?gatePassNo=${state.gatePassNo}`,
+        `${API.prodUrl}/Precot/api/Store/getGatePass?gatePassNo=${state.gatePassNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -299,7 +299,7 @@ const Stores_f006 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -323,7 +323,7 @@ const Stores_f006 = () => {
           
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -335,7 +335,7 @@ const Stores_f006 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -359,7 +359,7 @@ const Stores_f006 = () => {
           
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
 
 
@@ -373,7 +373,7 @@ const Stores_f006 = () => {
 
     const res = await axios
       .post(
-        `${ API.prodUrl}/Precot/api/Store/Gatepass/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/Gatepass/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -414,7 +414,7 @@ const Stores_f006 = () => {
 
     const res = await axios
       .post(
-        `${ API.prodUrl}/Precot/api/Store/Gatepass/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/Gatepass/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -471,7 +471,7 @@ const Stores_f006 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/Store/Gatepass/Save`, payload, {
+      .post(`${API.prodUrl}/Precot/api/Store/Gatepass/Save`, payload, {
         headers,
       })
       .then((res) => {
@@ -538,7 +538,7 @@ const Stores_f006 = () => {
     };
 
     axios
-      .post(` ${ API.prodUrl}/Precot/api/Store/Gatepass/Submit`, payload, {
+      .post(` ${API.prodUrl}/Precot/api/Store/Gatepass/Submit`, payload, {
         headers,
       })
       .then((res) => {

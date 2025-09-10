@@ -25,7 +25,7 @@ const List_Of_Enclosure = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/enclosureListByBatch?batchNumber=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/enclosureListByBatch?batchNumber=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -71,7 +71,7 @@ const List_Of_Enclosure = (props) => {
       id: state.id,
     };
     axios
-      .post(`${ API.prodUrl}/Precot/api/buds/bmr/saveEnclosureList`, payload, {
+      .post(`${API.prodUrl}/Precot/api/buds/bmr/saveEnclosureList`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -80,7 +80,7 @@ const List_Of_Enclosure = (props) => {
         message.success("List of enclousres Submitted");
         axios
         .get(
-          `${ API.prodUrl}/Precot/api/buds/bmr/enclosureListByBatch?batchNumber=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/buds/bmr/enclosureListByBatch?batchNumber=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

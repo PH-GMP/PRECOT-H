@@ -33,7 +33,7 @@ const Process_Delay = (props) => {
     axios
     .get(
       `${
-      API.prodUrl
+     API.prodUrl
       }/Precot/api/spunlace/summary/09.GetDelayEqupmentBrkDwnRecord?order_no=${
         props.orderNo
       }&from_date=${localStorage.getItem(
@@ -127,7 +127,7 @@ const Process_Delay = (props) => {
     console.log("New Data", payload);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/09.SaveDelayEqupmentBrkDwnRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/09.SaveDelayEqupmentBrkDwnRecord`,
         payload,
         {
           headers: {
@@ -171,7 +171,7 @@ const Process_Delay = (props) => {
     console.log("New Data", payload);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/09.SubmitDelayEqupmentBrkDwnRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/09.SubmitDelayEqupmentBrkDwnRecord`,
         payload,
         {
           headers: {

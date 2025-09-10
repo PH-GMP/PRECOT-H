@@ -137,7 +137,7 @@ const QualityControlF021 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${   API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetByIncubationStartOn?incubationStartOn=${selectedDate}`,
+          `${  API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetByIncubationStartOn?incubationStartOn=${selectedDate}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const QualityControlF021 = () => {
           //getImage
           axios
             .get(
-              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const QualityControlF021 = () => {
 
           axios
             .get(
-              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+              `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -289,7 +289,7 @@ const QualityControlF021 = () => {
 
     try {
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/qc/SaveMediaGrowthF010Report`,
+        `${  API.prodUrl}/Precot/api/qc/SaveMediaGrowthF010Report`,
         payload,
         {
           headers: {
@@ -400,7 +400,7 @@ const QualityControlF021 = () => {
 
     try {
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/qc/SubmitMediaGrowthF010Report`,
+        `${  API.prodUrl}/Precot/api/qc/SubmitMediaGrowthF010Report`,
         payload,
         {
           headers: {
@@ -431,7 +431,7 @@ const QualityControlF021 = () => {
     };
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/qc/ApproveMediaGrowthF021Report`,
+        `${  API.prodUrl}/Precot/api/qc/ApproveMediaGrowthF021Report`,
         {
           id: mainId,
           status: "Approve",
@@ -469,7 +469,7 @@ const QualityControlF021 = () => {
 
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/qc/ApproveMediaGrowthF021Report`,
+        `${  API.prodUrl}/Precot/api/qc/ApproveMediaGrowthF021Report`,
         {
           id: mainId,
           status: "Reject",

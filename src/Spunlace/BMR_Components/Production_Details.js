@@ -137,7 +137,7 @@ const Production_Details = (props) => {
       console.log("f", props.orderNo);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/01.fetchProductionDetailsByBatch?order_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/01.fetchProductionDetailsByBatch?order_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -187,7 +187,7 @@ const Production_Details = (props) => {
           // axios
           //   .get(
           //     `${
-          //     API.prodUrl
+          //    API.prodUrl
           //     }/Precot/api/spunlace/summary/01.GetProductionDetails?order_no=${
           //       props.orderNo
           //     }&fromDate=${moment(response.data[0].start_date).format(
@@ -254,7 +254,7 @@ const Production_Details = (props) => {
   }, [props.batchNo]);
 
   // useEffect(() => {
-  //   const API_URL = `${ API.prodUrl}/Precot/api/spunlace/summary/getShaftNoByOrderDate?orderNumber=${props.orderNo}&fromDate=${productionDetails.start_date}&toDate=${productionDetails.end_date}`;
+  //   const API_URL = `${API.prodUrl}/Precot/api/spunlace/summary/getShaftNoByOrderDate?orderNumber=${props.orderNo}&fromDate=${productionDetails.start_date}&toDate=${productionDetails.end_date}`;
 
   //   const fetchData = async () => {
   //     try {
@@ -276,7 +276,7 @@ const Production_Details = (props) => {
   // }, [props.orderNo, productionDetails.start_date, productionDetails.end_date]);
 
   useEffect(() => {
-    const API_URL = `${ API.prodUrl}/Precot/api/spunlace/summary/getShaftNoByOrderDate?orderNumber=${props.orderNo}&fromDate=${productionDetails.start_date}&toDate=${productionDetails.end_date}`;
+    const API_URL = `${API.prodUrl}/Precot/api/spunlace/summary/getShaftNoByOrderDate?orderNumber=${props.orderNo}&fromDate=${productionDetails.start_date}&toDate=${productionDetails.end_date}`;
 
     const fetchData = async () => {
       try {
@@ -321,7 +321,7 @@ const Production_Details = (props) => {
   //   axios
   //     .get(
   //       `${
-  //       API.prodUrl
+  //      API.prodUrl
   //       }/Precot/api/spunlace/summary/getProductionDetailsByShaftDateOrder?orderNumber=${
   //         props.orderNo
   //       }&fromdate=${moment(productionDetails.start_date).format(
@@ -403,7 +403,7 @@ const Production_Details = (props) => {
     if (selectedOption && selectedOptions) {
       setLoading(true);
       const apiUrl = `${
-      API.prodUrl
+     API.prodUrl
       }/Precot/api/spunlace/summary/getProductionDetailsByShaftDateOrder?orderNumber=${
         props.orderNo
       }&fromDate=${moment(productionDetails.start_date).format(
@@ -488,7 +488,7 @@ const Production_Details = (props) => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/01.SaveProductionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/01.SaveProductionDetails`,
         data,
         {
           headers: {
@@ -552,7 +552,7 @@ const Production_Details = (props) => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/01.SubmitProductionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/01.SubmitProductionDetails`,
         data,
         {
           headers: {

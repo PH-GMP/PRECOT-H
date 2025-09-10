@@ -399,7 +399,7 @@ const Bleaching_f38_edit = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -423,7 +423,7 @@ const Bleaching_f38_edit = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [supervisorSign, API.prodUrl, token]);
+  }, [supervisorSign,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -435,7 +435,7 @@ const Bleaching_f38_edit = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -459,7 +459,7 @@ const Bleaching_f38_edit = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [hodStatus, API.prodUrl, token]);
+  }, [hodStatus,API.prodUrl, token]);
  
   // console.log("conditio for the radio")
   const renderRadioGroup = (record, role,handleStatusChange) => {
@@ -568,7 +568,7 @@ const Bleaching_f38_edit = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF38`,
         {
           id: id,
           status: "Approve",
@@ -619,7 +619,7 @@ const Bleaching_f38_edit = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF38`,
         {
           id: id,
           status: "Reject",
@@ -663,7 +663,7 @@ const Bleaching_f38_edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoFrom}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoFrom}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -682,7 +682,7 @@ const Bleaching_f38_edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -709,7 +709,7 @@ const Bleaching_f38_edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoTo}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoTo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -728,7 +728,7 @@ const Bleaching_f38_edit = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -755,7 +755,7 @@ const Bleaching_f38_edit = () => {
     const role = localStorage.getItem("role");
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getMixchMachineF38?id=${id}`, {
+      .get(`${API.prodUrl}/Precot/api/Bleaching/Service/getMixchMachineF38?id=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -975,7 +975,7 @@ const Bleaching_f38_edit = () => {
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1035,7 +1035,7 @@ const Bleaching_f38_edit = () => {
         });
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/saveMixchMachineF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/saveMixchMachineF38`,
         payload,
         {
           headers: {
@@ -1135,7 +1135,7 @@ const Bleaching_f38_edit = () => {
       });
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/submitMixchMachineF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/submitMixchMachineF38`,
 
         payload,
         {
@@ -1293,7 +1293,7 @@ const Bleaching_f38_edit = () => {
   //   const token = localStorage.getItem("token");
   //   try {
   //     const response = await axios.post(
-  //       `${ API.prodUrl}/Precot/api/Bleaching/Service/ApproveOrRejectMixchMachineF38?id=${id}`,
+  //       `${API.prodUrl}/Precot/api/Bleaching/Service/ApproveOrRejectMixchMachineF38?id=${id}`,
   //       { approvalStatus: "approve" },
   //       {
   //         headers: {
@@ -1313,7 +1313,7 @@ const Bleaching_f38_edit = () => {
 
   //   try {
   //     const response = await axios.post(
-  //       `${ API.prodUrl}/Precot/api/Bleaching/Service/ApproveOrRejectMixchMachineF38?id=${id}`,
+  //       `${API.prodUrl}/Precot/api/Bleaching/Service/ApproveOrRejectMixchMachineF38?id=${id}`,
   //       { approvalStatus: "reject" },
   //       {
   //         headers: {

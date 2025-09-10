@@ -21,7 +21,7 @@ const QA_F037 = () => {
   const navigate = useNavigate();
   const { TextArea } = Input;
   const formName = "Final Inspection Report";
-  const formatNo = "PH-QAD01-F-037";
+  const formatNo = "PH-QAD01/F-037";
   const [open, setOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState();
   const [rejectModal, setRejectModal] = useState(false);
@@ -279,7 +279,7 @@ const QA_F037 = () => {
           //
         });
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     const username = response?.qa_mr_sign;
@@ -311,7 +311,7 @@ const QA_F037 = () => {
           //
         });
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     if (editBMR) {
@@ -328,7 +328,7 @@ const QA_F037 = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01-F-037`,
+        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01/F-037`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -352,7 +352,7 @@ const QA_F037 = () => {
 
     try {
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/findByParamFinalInspectionReport?date=${editDate}&shift=${editShift}&pOrder=${editpOrder}&bmrNo=${editBMR}&formatNo=PH-QAD01-F-037`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/findByParamFinalInspectionReport?date=${editDate}&shift=${editShift}&pOrder=${editpOrder}&bmrNo=${editBMR}&formatNo=PH-QAD01/F-037`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -660,7 +660,7 @@ const QA_F037 = () => {
     const payload = {
       finalInspectionId: finalInspectionId,
       formatName: "FINAL INSPECTION REPORT(PRE - DISPATCH)",
-      formatNo: "PH-QAD01-F-037",
+      formatNo: "PH-QAD01/F-037",
       revisionNo: "3",
       refSopNo: "PH-QAD01-D-32",
       productDescription: productDescription,
@@ -772,7 +772,7 @@ const QA_F037 = () => {
     const payload = {
       finalInspectionId: finalInspectionId,
       formatName: " FINAL INSPECTION REPORT(PRE - DISPATCH)",
-      formatNo: "PH-QAD01-F-037",
+      formatNo: "PH-QAD01/F-037",
       revisionNo: "3",
       refSopNo: "PH-QAD01-D-32",
       productDescription: productDescription === "" ? "NA" : productDescription,

@@ -166,7 +166,7 @@ const QA_f39 = () => {
         })
         .catch((err) => {});
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.operator_sign;
@@ -194,7 +194,7 @@ const QA_f39 = () => {
         })
         .catch((err) => {});
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -225,7 +225,7 @@ const QA_f39 = () => {
           //
         });
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
 
   const filteredOrderNumberLov = (index) => {
     const selectedOrderNumbersList = Object.values(selectedOrderNumbers);
@@ -3161,7 +3161,7 @@ const QA_f39 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="CONTAINER INSPECTION REPORT"
-        formatNo="PH-QAD01-F-039"
+        formatNo="PH-QAD01/F-039"
         sopNo="PH-QAD01-D-35"
         MenuBtn={
           <Button

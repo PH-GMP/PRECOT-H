@@ -126,7 +126,7 @@
 
 //       axios
 //         .get(
-//           `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+//           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
@@ -150,7 +150,7 @@
 //           console.log("Error in fetching image:", err);
 //         });
 //     }
-//   }, [RolconsumptionDetails, API.prodUrl, token]);
+//   }, [RolconsumptionDetails,API.prodUrl, token]);
 
 //   useEffect(() => {
 //     const token = localStorage.getItem("token");
@@ -160,7 +160,7 @@
 
 //       axios
 //         .get(
-//           `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+//           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
@@ -184,7 +184,7 @@
 //           console.log("Error in fetching image:", err);
 //         });
 //     }
-//   }, [RolconsumptionDetails, API.prodUrl, token]);
+//   }, [RolconsumptionDetails,API.prodUrl, token]);
 
 //   useEffect(() => {
 //     const token = localStorage.getItem("token");
@@ -194,7 +194,7 @@
 
 //       axios
 //         .get(
-//           `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+//           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
@@ -218,7 +218,7 @@
 //           console.log("Error in fetching image:", err);
 //         });
 //     }
-//   }, [RolconsumptionDetails, API.prodUrl, token]);
+//   }, [RolconsumptionDetails,API.prodUrl, token]);
 
 //   const handleSave = async () => {
 //     try {
@@ -287,7 +287,7 @@
 //       };
 
 //       const response = await axios.post(
-//         `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/saveReport`,
+//         `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/saveReport`,
 //         payload,
 //         { headers }
 //       );
@@ -357,7 +357,7 @@
 //       };
 
 //       const response = await axios.post(
-//         `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/SubmitReport`,
+//         `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/SubmitReport`,
 //         payload,
 //         { headers }
 //       );
@@ -386,7 +386,7 @@
 
 //     const res = await axios
 //       .put(
-//         `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
+//         `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
 //         {
 //           id: ReportId,
 //           status: "Approve",
@@ -419,7 +419,7 @@
 
 //     const res = await axios
 //       .put(
-//         `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
+//         `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
 //         {
 //           id: ReportId,
 //           status: "Reject",
@@ -449,7 +449,7 @@
 //   const fetchDetailsByDateShiftMachineName = async () => {
 //     try {
 //       const response = await axios.get(
-//         `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachine?date=${date}&shift=${shift}&machineName=${machineName}`,
+//         `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachine?date=${date}&shift=${shift}&machineName=${machineName}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -565,7 +565,7 @@
 //     const fetchOrderNumberOptions = async () => {
 //       try {
 //         const response = await fetch(
-//           `${ API.prodUrl}/Precot/api/padpunching/orderNoList`,
+//           `${API.prodUrl}/Precot/api/padpunching/orderNoList`,
 //           {
 //             headers: {
 //               "Content-Type": "application/json",
@@ -602,7 +602,7 @@
 //     try {
 //       const formattedShift = convertShift(shift);
 //       const response = await axios.get(
-//         `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
+//         `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -626,7 +626,7 @@
 //       setOrderNumberRollConsumption(value);
 //       const formattedShift = convertShift(shift);
 //       const response = await axios.get(
-//         `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${value}&ShiftId=${formattedShift}`,
+//         `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${value}&ShiftId=${formattedShift}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -654,7 +654,7 @@
 //     try {
 //       const formattedShift = convertShift(shift);
 //       const response = await axios.get(
-//         `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption3?PackDt=${date}&ShiftID=${formattedShift}&mcn=${machineName}`,
+//         `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption3?PackDt=${date}&ShiftID=${formattedShift}&mcn=${machineName}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -1575,7 +1575,7 @@ const PadPunching_f02 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -1599,7 +1599,7 @@ const PadPunching_f02 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [RolconsumptionDetails, API.prodUrl, token]);
+  }, [RolconsumptionDetails,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -1609,7 +1609,7 @@ const PadPunching_f02 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -1633,7 +1633,7 @@ const PadPunching_f02 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [RolconsumptionDetails, API.prodUrl, token]);
+  }, [RolconsumptionDetails,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -1643,7 +1643,7 @@ const PadPunching_f02 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -1667,7 +1667,7 @@ const PadPunching_f02 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [RolconsumptionDetails, API.prodUrl, token]);
+  }, [RolconsumptionDetails,API.prodUrl, token]);
 
   const handleSave = async () => {
     try {
@@ -1736,7 +1736,7 @@ const PadPunching_f02 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/saveReport`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/saveReport`,
         payload,
         { headers }
       );
@@ -1806,7 +1806,7 @@ const PadPunching_f02 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/SubmitReport`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/SubmitReport`,
         payload,
         { headers }
       );
@@ -1835,7 +1835,7 @@ const PadPunching_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
         {
           id: ReportId,
           status: "Approve",
@@ -1868,7 +1868,7 @@ const PadPunching_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/approveOrReject`,
         {
           id: ReportId,
           status: "Reject",
@@ -1898,7 +1898,7 @@ const PadPunching_f02 = () => {
   const fetchDetailsByDateShiftMachineName = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachine?date=${date}&shift=${shift}&machineName=${machineName}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachine?date=${date}&shift=${shift}&machineName=${machineName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -2015,7 +2015,7 @@ const PadPunching_f02 = () => {
     const fetchOrderNumberOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/orderNoList`,
+          `${API.prodUrl}/Precot/api/padpunching/orderNoList`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -2054,7 +2054,7 @@ const PadPunching_f02 = () => {
   //   try {
   //     const formattedShift = convertShift(shift);
   //     const response = await axios.get(
-  //       `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
+  //       `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -2087,7 +2087,7 @@ const PadPunching_f02 = () => {
     try {
       const formattedShift = convertShift(shift);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
+        `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumptionDetail1?ConsDt=${date}&mcn=${machineName}&shiftId=${formattedShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -2123,7 +2123,7 @@ const PadPunching_f02 = () => {
         pOrders.map(async (pOrder) => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${pOrder}&ShiftId=${formattedShift}`,
+              `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${pOrder}&ShiftId=${formattedShift}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -2155,7 +2155,7 @@ const PadPunching_f02 = () => {
   //     setOrderNumberRollConsumption(value);
   //     const formattedShift = convertShift(shift);
   //     const response = await axios.get(
-  //       `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${value}&ShiftId=${formattedShift}`,
+  //       `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption2?ConsDt=${date}&POrder=${value}&ShiftId=${formattedShift}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -2183,7 +2183,7 @@ const PadPunching_f02 = () => {
     try {
       const formattedShift = convertShift(shift);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption3?PackDt=${date}&ShiftID=${formattedShift}&mcn=${machineName}`,
+        `${API.prodUrl}/Precot/api/padpunching/api/DailyRollConsumption3?PackDt=${date}&ShiftID=${formattedShift}&mcn=${machineName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -433,7 +433,7 @@ const Spunlace_f02 = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${order_no}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${order_no}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -461,7 +461,7 @@ const Spunlace_f02 = () => {
       setLoading(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spulance/getdetailsbyParamF002?date=${date}&shift=${shift}&order_no=${order_no}`,
+          `${API.prodUrl}/Precot/api/spulance/getdetailsbyParamF002?date=${date}&shift=${shift}&order_no=${order_no}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -654,7 +654,7 @@ const Spunlace_f02 = () => {
             //opimage
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -682,7 +682,7 @@ const Spunlace_f02 = () => {
             //supimage
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -710,7 +710,7 @@ const Spunlace_f02 = () => {
             //opimage
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -1579,7 +1579,7 @@ const Spunlace_f02 = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1741,7 +1741,7 @@ const Spunlace_f02 = () => {
     // Make the POST request to the API endpoint with headers
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spulance/saveProcessSetupVerificationOpeningLineF002`,
+        `${API.prodUrl}/Precot/api/spulance/saveProcessSetupVerificationOpeningLineF002`,
         payload,
         { headers }
       )
@@ -2018,7 +2018,7 @@ const Spunlace_f02 = () => {
     // Make the POST request to the API endpoint with headers
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spulance/submitProcessSetupVerificationOpeningLineF002`,
+        `${API.prodUrl}/Precot/api/spulance/submitProcessSetupVerificationOpeningLineF002`,
         payload,
         { headers }
       )
@@ -2756,7 +2756,7 @@ const Spunlace_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/ProcessSetupVerificationOpeningLineF002/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spulance/ProcessSetupVerificationOpeningLineF002/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -2795,7 +2795,7 @@ const Spunlace_f02 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/ProcessSetupVerificationOpeningLineF002/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spulance/ProcessSetupVerificationOpeningLineF002/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -2865,7 +2865,7 @@ const Spunlace_f02 = () => {
       fetchDataOrderNodetails_f2();
 
       axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

@@ -87,7 +87,7 @@ const QualityAssurance_f43_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const QualityAssurance_f43_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/QA/Service/api/getBmrIssueRegisterSummary`,
+            `${API.prodUrl}/Precot/api/QA/Service/api/getBmrIssueRegisterSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -287,7 +287,7 @@ const QualityAssurance_f43_Summary = () => {
 
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/api/getBmrIssueRegisterPrint?date=${printParams.date}&month=${printParams.month}&year=${printParams.year}&department=${printParams.deptName}`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getBmrIssueRegisterPrint?date=${printParams.date}&month=${printParams.month}&year=${printParams.year}&department=${printParams.deptName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -361,7 +361,7 @@ const QualityAssurance_f43_Summary = () => {
   const fetchSignature = async (sign, key) => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${sign}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${sign}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -581,7 +581,7 @@ const QualityAssurance_f43_Summary = () => {
                   BMR - Issue Register
                 </td>
                 <td style={{ padding: "0.5em" }}>Format No.:</td>
-                <td style={{ padding: "0.5em" }}>PH-QAD01-F-045</td>
+                <td style={{ padding: "0.5em" }}>PH-QAD01/F-045</td>
               </tr>
               <tr>
                 <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -711,7 +711,7 @@ const QualityAssurance_f43_Summary = () => {
 
       <BleachingHeader
         formName={"BMR - Issue Register"}
-        formatNo={"PH-QAD01-F-045"}
+        formatNo={"PH-QAD01/F-045"}
         MenuBtn={
           <Button
             type="primary"

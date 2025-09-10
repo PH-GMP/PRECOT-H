@@ -62,7 +62,7 @@ function Bleach_f11() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function Bleach_f11() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl, token]);
+  }, [rows,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -99,7 +99,7 @@ function Bleach_f11() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -124,7 +124,7 @@ function Bleach_f11() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl, token]);
+  }, [rows,API.prodUrl, token]);
   
 
   useEffect(() => {
@@ -132,7 +132,7 @@ function Bleach_f11() {
       try {
         // Step 1: Fetching job order number from getMapLaydown API
         const mapLaydownResponse = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoParam}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoParam}`,
           {
             headers: {
               'Authorization': `Bearer ${token}`
@@ -145,7 +145,7 @@ function Bleach_f11() {
 
           // Step 2: Fetching mixing options based on job order number
           const mixingResponse = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${jobOrderNo}`,
+            `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${jobOrderNo}`,
             {
               headers: {
                 'Authorization': `Bearer ${token}`
@@ -188,7 +188,7 @@ function Bleach_f11() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getByBmrAndBatchNo?bmrNo=${bmrNoParam}&batchNo=${subBatchNoParam}`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getByBmrAndBatchNo?bmrNo=${bmrNoParam}&batchNo=${subBatchNoParam}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -345,7 +345,7 @@ function Bleach_f11() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/approveOrRejectEquipLogHydroExtracotor`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/approveOrRejectEquipLogHydroExtracotor`,
         {
           id: rows.id,
           status: "Approve",
@@ -392,7 +392,7 @@ function Bleach_f11() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/approveOrRejectEquipLogHydroExtracotor`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/approveOrRejectEquipLogHydroExtracotor`,
         {
           id: rows.id,
           status: "Reject",
@@ -439,7 +439,7 @@ function Bleach_f11() {
     }
     // console.log("payload", payload)
     try {
-      const response = await axios.post(`${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/SaveUsageLogHydroExtractor`, payload, {
+      const response = await axios.post(`${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/SaveUsageLogHydroExtractor`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -521,7 +521,7 @@ setStatusLoader(false);
     }
 
     try {
-      const response = await axios.post(`${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/SubmitUsageLogHydroExtractor`, payload, {
+      const response = await axios.post(`${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/SubmitUsageLogHydroExtractor`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

@@ -114,7 +114,7 @@ const QualityControlF008 = () => {
 
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/qc/TdsMeterCalibrationReportF008/GetByDateMonthYear?date=${uniqueDate}`,
+            `${   API.prodUrl}/Precot/api/qc/TdsMeterCalibrationReportF008/GetByDateMonthYear?date=${uniqueDate}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const QualityControlF008 = () => {
             //getImage
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const QualityControlF008 = () => {
 
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+                `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -256,7 +256,7 @@ const QualityControlF008 = () => {
     try {
       // Make the API call using Axios
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveTdsMeterCalibrationReportF008`,
+        `${   API.prodUrl}/Precot/api/qc/SaveTdsMeterCalibrationReportF008`,
         payload,
         {
           headers: {
@@ -309,7 +309,7 @@ const QualityControlF008 = () => {
     try {
       // Make the API call using Axios
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitTdsMeterCalibrationReportF008`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitTdsMeterCalibrationReportF008`,
         payload,
         {
           headers: {
@@ -453,7 +453,7 @@ const QualityControlF008 = () => {
     };
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveTdsMeterCalibrationReportF008`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveTdsMeterCalibrationReportF008`,
         {
           id: mainID,
           status: "Approve",
@@ -491,7 +491,7 @@ const QualityControlF008 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveTdsMeterCalibrationReportF008`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveTdsMeterCalibrationReportF008`,
         {
           id: mainID,
           status: "Reject",

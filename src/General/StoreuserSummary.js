@@ -73,7 +73,7 @@ const UserSummary = () => {
         };
 
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/bleachStorePersons/getAll`,
+          `${API.prodUrl}/Precot/api/bleaching/bleachStorePersons/getAll`,
           {
             headers,
           }
@@ -114,7 +114,7 @@ const UserSummary = () => {
       };
 
       await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/bleachStorePersons/CreateOrUpdate`,
+        `${API.prodUrl}/Precot/api/bleaching/bleachStorePersons/CreateOrUpdate`,
         data,
         { headers }
       );

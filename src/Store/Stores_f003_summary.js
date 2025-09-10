@@ -215,7 +215,7 @@ const Stores_f003_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Store/getReceptionChecklistSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Store/getReceptionChecklistSummary`;
 
     if (["STORE_OPERATOR", "STORE_INCHARGE"].includes(userRole)) {
       fetchSummary(summaryUrl);
@@ -226,7 +226,7 @@ const Stores_f003_summary = () => {
     const fetchInvoiceNo = async () => {
 
       try {
-        const response = await axios.get(`${ API.prodUrl}/Precot/api/Store/Invoice`,
+        const response = await axios.get(`${API.prodUrl}/Precot/api/Store/Invoice`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -319,7 +319,7 @@ const Stores_f003_summary = () => {
   };
 
   const fetchPrintData = () => {
-    let baseUrl = `${ API.prodUrl}/Precot/api/Store/getReceptionChecklistPrint?year=${selectedYear}&month=${selectedMonth}&invoice=${selectedInvoice}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
+    let baseUrl = `${API.prodUrl}/Precot/api/Store/getReceptionChecklistPrint?year=${selectedYear}&month=${selectedMonth}&invoice=${selectedInvoice}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
     let query = [];
 
 
@@ -393,7 +393,7 @@ const Stores_f003_summary = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -417,7 +417,7 @@ const Stores_f003_summary = () => {
 
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -427,7 +427,7 @@ const Stores_f003_summary = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -451,7 +451,7 @@ const Stores_f003_summary = () => {
 
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formatDate = (dateStr) => {
 

@@ -119,7 +119,7 @@ const HouseKeeping_14 = () => {
 
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const HouseKeeping_14 = () => {
  
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Drygoods/Service/getDateHouseKeepingF14`,
+            `${API.prodUrl}/Precot/api/Drygoods/Service/getDateHouseKeepingF14`,
             {
               params: { date: state.date },  
               headers: {
@@ -248,7 +248,7 @@ const HouseKeeping_14 = () => {
     // Making the API call with axios
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/saveHouseKeppingF010`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/saveHouseKeppingF010`,
         updatedValues,
         {
           headers: {
@@ -281,7 +281,7 @@ const HouseKeeping_14 = () => {
     };
     axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveRejectF14`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveRejectF14`,
         payload,
         {
           headers: {
@@ -314,7 +314,7 @@ const HouseKeeping_14 = () => {
     setStatusLoader(true);
     axios
       .put(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/approveRejectF14`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/approveRejectF14`,
         payload,
         {
           headers: {
@@ -396,7 +396,7 @@ const HouseKeeping_14 = () => {
     // Making the API call with axios
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/SubmitHouseKeepingF14`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/SubmitHouseKeepingF14`,
         updatedValues,
         {
           headers: {

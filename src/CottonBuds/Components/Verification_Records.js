@@ -99,7 +99,7 @@ const Verification_Of_Records = (props) => {
   const getData = () => {
     axios
     .get(
-      `${ API.prodUrl}/Precot/api/buds/bmr/getVerificationRecords?batchNo=${props.batchNo}`,
+      `${API.prodUrl}/Precot/api/buds/bmr/getVerificationRecords?batchNo=${props.batchNo}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -331,7 +331,7 @@ const Verification_Of_Records = (props) => {
     ///Precot/api/buds/bmr/submitVerificationRecords
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/submitVerificationRecords`,
+        `${API.prodUrl}/Precot/api/buds/bmr/submitVerificationRecords`,
         status.supervisor_saved || status.supervisor_approved ? submitPayload_2 : submitPayload_1,
         {
           headers: {
@@ -344,7 +344,7 @@ const Verification_Of_Records = (props) => {
         message.success("Verification of Record Submitted Successfully");
         axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/getVerificationRecords?batchNo=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/getVerificationRecords?batchNo=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -581,7 +581,7 @@ const Verification_Of_Records = (props) => {
     console.log("Submit Payload :",submitPayload_2)
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/saveVerificationRecords`,
+        `${API.prodUrl}/Precot/api/buds/bmr/saveVerificationRecords`,
         submitPayload_2,
         {
           headers: {

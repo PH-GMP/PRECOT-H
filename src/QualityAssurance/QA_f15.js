@@ -135,7 +135,7 @@ const QA_f15 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const handleAddRow = () => {
     const newLineId =
@@ -237,7 +237,7 @@ const QA_f15 = () => {
     try {
       const payload = {
         formatName: "Annual Plan",
-        formatNo: "PH-QAD01-F-015",
+        formatNo: "PH-QAD01/F-015",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-18",
         unit: "H",
@@ -312,7 +312,7 @@ const QA_f15 = () => {
       }
       const payload = {
         formatName: "Annual Plan",
-        formatNo: "PH-QAD01-F-015",
+        formatNo: "PH-QAD01/F-015",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-18",
         unit: "H",
@@ -1056,7 +1056,7 @@ const QA_f15 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="Annual Plan"
-        formatNo="PH-QAD01-F-015"
+        formatNo="PH-QAD01/F-015"
         sopNo="PH-QAD01-D-18"
         MenuBtn={
           <Button

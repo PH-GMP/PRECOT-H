@@ -159,7 +159,7 @@ const PadPunching_f03_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
 
   useEffect(() => {
@@ -204,7 +204,7 @@ const PadPunching_f03_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -250,7 +250,7 @@ const PadPunching_f03_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
 
   const handleBack = () => {

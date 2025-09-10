@@ -130,7 +130,7 @@ const Spunlace_f25_edit = (props) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=2`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=2`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ const Spunlace_f25_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -184,7 +184,7 @@ const Spunlace_f25_edit = (props) => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -196,7 +196,7 @@ const Spunlace_f25_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -220,7 +220,7 @@ const Spunlace_f25_edit = (props) => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
   const canEdit = () => {
     if (roleauth === "ROLE_SUPERVISOR") {
       return !(
@@ -320,7 +320,7 @@ const Spunlace_f25_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           id: handSanitizationId,
           status: "Approve",
@@ -361,7 +361,7 @@ const Spunlace_f25_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           id: handSanitizationId,
           status: "Reject",
@@ -415,7 +415,7 @@ const Spunlace_f25_edit = (props) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${selectedDate}&shift=${selectedShift}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${selectedDate}&shift=${selectedShift}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -575,7 +575,7 @@ const Spunlace_f25_edit = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -1166,7 +1166,7 @@ const Spunlace_f25_edit = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SaveHandSanitizationReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SaveHandSanitizationReport`,
         payload,
         {
           headers: {
@@ -1239,7 +1239,7 @@ const Spunlace_f25_edit = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SubmitHandSanitizationReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SubmitHandSanitizationReport`,
         payload,
         {
           headers: {

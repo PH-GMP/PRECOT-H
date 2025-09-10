@@ -56,7 +56,7 @@ const Process_Deviation = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -187,7 +187,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/saveProcessDeviation`,
+        `${API.prodUrl}/Precot/api/buds/bmr/saveProcessDeviation`,
         payload,
         {
           headers: {
@@ -202,7 +202,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -349,7 +349,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/submitProcessDeviation`,
+        `${API.prodUrl}/Precot/api/buds/bmr/submitProcessDeviation`,
         payload,
         {
           headers: {
@@ -364,7 +364,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/buds/bmr/getDeviationList?batchNumber=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

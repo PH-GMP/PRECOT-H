@@ -211,15 +211,15 @@ const QA_f029_new_sample_request = () => {
 
   useEffect(() => {
     fetchImage(selectedRow?.mark_rep_sign, setGetImage1); // Set image for mark_rep_sign
-  }, [selectedRow?.mark_rep_sign, API.prodUrl]);
+  }, [selectedRow?.mark_rep_sign,API.prodUrl]);
 
   useEffect(() => {
     fetchImage(selectedRow?.mark_rep_sign_b, setGetImage2); // Set image for mark_rep_sign_b
-  }, [selectedRow?.mark_rep_sign_b, API.prodUrl]);
+  }, [selectedRow?.mark_rep_sign_b,API.prodUrl]);
 
   useEffect(() => {
     fetchImage(selectedRow?.qc_sign, setGetImage3); // Set image for qc_sign
-  }, [selectedRow?.qc_sign, API.prodUrl]);
+  }, [selectedRow?.qc_sign,API.prodUrl]);
 
   useEffect(() => {
     if (uniqueDate) {

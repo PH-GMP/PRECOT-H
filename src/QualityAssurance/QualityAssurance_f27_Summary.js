@@ -483,7 +483,7 @@ const Drygoods_f01_Summary = () => {
                     MINUTES OF MEETING - MOCK RECALL
                   </td>
                   <td style={{ padding: "0.5em" }}>Format No.:</td>
-                  <td style={{ padding: "0.5em" }}>PH-QAD01-F-027</td>
+                  <td style={{ padding: "0.5em" }}>PH-QAD01/F-027</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -675,7 +675,7 @@ const Drygoods_f01_Summary = () => {
       </div>
       <BleachingHeader
         formName={"MINUTES OF MEETING - MOCK RECALL"}
-        formatNo={"PH-QAD01-F-027"}
+        formatNo={"PH-QAD01/F-027"}
         MenuBtn={
           <Button
             type="primary"

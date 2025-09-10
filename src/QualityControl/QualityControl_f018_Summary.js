@@ -45,7 +45,7 @@ const QualityControlF018Summary = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/print`,
+          `${API.prodUrl}/Precot/api/chemicaltest/CLF018/print`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const QualityControlF018Summary = () => {
   const getImage = (username, type) => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -126,7 +126,7 @@ const QualityControlF018Summary = () => {
         roleauth === "QA_MANAGER" ||
         roleauth === "MICRO_DESIGNEE"
       ) {
-        url = `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/getAll`;
+        url = `${API.prodUrl}/Precot/api/chemicaltest/CLF018/getAll`;
       }
 
       if (url) {
@@ -296,7 +296,7 @@ const QualityControlF018Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/print?eq_no=${selectedPrintEqNo}`;
+    let apiUrl = `${API.prodUrl}/Precot/api/chemicaltest/CLF018/print?eq_no=${selectedPrintEqNo}`;
 
     // Build API URL based on selected fields
     if (selectedPrintDate) {

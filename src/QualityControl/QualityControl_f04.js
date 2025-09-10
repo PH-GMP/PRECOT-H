@@ -108,7 +108,7 @@ const QualityControl_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -144,7 +144,7 @@ const QualityControl_f04 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
   const showDrawer = () => {
     setOpen(true);
   };

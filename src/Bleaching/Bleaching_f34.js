@@ -73,7 +73,7 @@ function Bleach_f34() {
  
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function Bleach_f34() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl]);
+  }, [rows,API.prodUrl]);
  
   const [getImage1, setGetImage1] = useState("");
  
@@ -109,7 +109,7 @@ function Bleach_f34() {
  
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -133,7 +133,7 @@ function Bleach_f34() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl]);
+  }, [rows,API.prodUrl]);
  
   // console.log("get image", getImage);
 
@@ -264,7 +264,7 @@ function Bleach_f34() {
       const fetchMixingOptions = async () => {
         try {
           const mapLaydownResponse = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoParam}`,
+            `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${bmrNoParam}`,
             {
               headers: {
                 'Authorization': `Bearer ${token}`
@@ -276,7 +276,7 @@ function Bleach_f34() {
             const jobOrderNo = mapLaydownResponse.data[0].job_order_no;
 
             const mixingResponse = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${jobOrderNo}`,
+              `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${jobOrderNo}`,
               {
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -296,7 +296,7 @@ function Bleach_f34() {
             const laydownNo = mapLaydownResponse.data[0].laydown_no;
 
             const baleResponse = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/generation/rawCotton?laydown_no=${laydownNo}`,
+              `${API.prodUrl}/Precot/api/bleaching/generation/rawCotton?laydown_no=${laydownNo}`,
               {
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -318,7 +318,7 @@ function Bleach_f34() {
             const laydownNo = mapLaydownResponse.data[0].laydown_no;
 
             const weightResponse = await axios.get(
-              `${ API.prodUrl}/Precot/api/bleaching/generation/rawCotton?laydown_no=${laydownNo}`,
+              `${API.prodUrl}/Precot/api/bleaching/generation/rawCotton?laydown_no=${laydownNo}`,
               {
                 headers: {
                   'Authorization': `Bearer ${token}`
@@ -351,7 +351,7 @@ function Bleach_f34() {
   // useEffect(() => {
   //   const fetchBaleOptions = async () => {
   //     try {
-  //       const response = await axios.get(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/GetBaleNo`, {
+  //       const response = await axios.get(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/GetBaleNo`, {
   //         headers: {
   //           'Authorization': `Bearer ${token}`
   //         }
@@ -381,7 +381,7 @@ function Bleach_f34() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf34ByBmrNo?bmrNumber=${bmrNoParam}`,
+          `${API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf34ByBmrNo?bmrNumber=${bmrNoParam}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -471,7 +471,7 @@ function Bleach_f34() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectF34`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectF34`,
         {
           id: Id,
           status: "Approve",
@@ -518,7 +518,7 @@ function Bleach_f34() {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectF34`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectF34`,
         {
           id: Id,
           status: "Reject",
@@ -619,7 +619,7 @@ function Bleach_f34() {
     }
     // console.log("payload", payload)
     try {
-      const response = await axios.post( `${ API.prodUrl}/Precot/api/bleach/savebleachequipmentusagelogbookf34`, payload, {
+      const response = await axios.post( `${API.prodUrl}/Precot/api/bleach/savebleachequipmentusagelogbookf34`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -760,7 +760,7 @@ function Bleach_f34() {
     }
 
     try {
-      const response = await axios.post(`${ API.prodUrl}/Precot/api/bleach/submitbleachequipmentusagelogbookf34`, payload, {
+      const response = await axios.post(`${API.prodUrl}/Precot/api/bleach/submitbleachequipmentusagelogbookf34`, payload, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'

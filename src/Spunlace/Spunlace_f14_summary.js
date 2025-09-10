@@ -146,7 +146,7 @@ const Spunlace_f14_summary = () => {
       setLoading(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spulance/report/fetchRPProdReport?order=${value}&shift=${availableshiftlov2}&date=${date1}`,
+          `${API.prodUrl}/Precot/api/spulance/report/fetchRPProdReport?order=${value}&shift=${availableshiftlov2}&date=${date1}`,
 
           {
             headers: {
@@ -183,7 +183,7 @@ const Spunlace_f14_summary = () => {
             setSupervisorSign(res.data[0].supervisor_sign);
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].operator_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].operator_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const Spunlace_f14_summary = () => {
 
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].supervisor_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].supervisor_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -234,7 +234,7 @@ const Spunlace_f14_summary = () => {
               });
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].hod_sign}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0].hod_sign}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -271,7 +271,7 @@ const Spunlace_f14_summary = () => {
   const fetchdataSummary_f003 = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/report/SummarydetailsF014`,
+        `${API.prodUrl}/Precot/api/spulance/report/SummarydetailsF014`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -327,7 +327,7 @@ const Spunlace_f14_summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spulance/baleWeight?order=${value}&shift=${convertedShiftValue}&date=${date1}`,
+        `${API.prodUrl}/Precot/api/spulance/baleWeight?order=${value}&shift=${convertedShiftValue}&date=${date1}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -388,7 +388,7 @@ const Spunlace_f14_summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spulance/baleWeight?order=${value}&shift=${convertedShiftValue}&date=${date}`,
+        `${API.prodUrl}/Precot/api/spulance/baleWeight?order=${value}&shift=${convertedShiftValue}&date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -461,7 +461,7 @@ const Spunlace_f14_summary = () => {
     try {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -516,7 +516,7 @@ const Spunlace_f14_summary = () => {
         setLoading(true);
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spulance/ordersRbBale?date=${date}&shift=${shiftparam}`,
+            `${API.prodUrl}/Precot/api/spulance/ordersRbBale?date=${date}&shift=${shiftparam}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -579,7 +579,7 @@ const Spunlace_f14_summary = () => {
         setLoading(true);
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spulance/ordersRbBale?date=${date1}&shift=${shiftparam}`,
+            `${API.prodUrl}/Precot/api/spulance/ordersRbBale?date=${date1}&shift=${shiftparam}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -711,7 +711,7 @@ const Spunlace_f14_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -735,7 +735,7 @@ const Spunlace_f14_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -747,7 +747,7 @@ const Spunlace_f14_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -771,7 +771,7 @@ const Spunlace_f14_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -783,7 +783,7 @@ const Spunlace_f14_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -807,7 +807,7 @@ const Spunlace_f14_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   console.log("get image", getImage);
 

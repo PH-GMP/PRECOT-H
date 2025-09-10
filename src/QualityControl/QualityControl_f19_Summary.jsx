@@ -267,7 +267,7 @@ const QualityControl_f19_Summary = () => {
             if (username) {
               axios
                 .get(
-                  `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                  `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -312,7 +312,7 @@ const QualityControl_f19_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -343,7 +343,7 @@ const QualityControl_f19_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/qc/MediaPreparationF019/GetAll`,
+            `${   API.prodUrl}/Precot/api/qc/MediaPreparationF019/GetAll`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -515,7 +515,7 @@ const QualityControl_f19_Summary = () => {
     try {
       const response = await axios.get(
         `${
-               API.prodUrl
+              API.prodUrl
         }/Precot/api/qc/MediaPreparationF019/GetByPreparationDateLoadNoMonthYear/print?year=${
           printParams.year
         }&month=${getFullMonthFromNumber(

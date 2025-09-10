@@ -421,7 +421,7 @@ const QA_f076_training_session_register_summary = () => {
                       fontFamily: "'Times New Roman', Times, serif",
                     }}
                   >
-                    PH-QAD01-F-076
+                    PH-QAD01/F-076
                   </td>
                 </tr>
                 <tr>

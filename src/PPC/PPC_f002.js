@@ -452,7 +452,7 @@ const PPC_002 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -486,7 +486,7 @@ const PPC_002 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   // Example: Bleaching days handler
   const handleBleachingDaysChange = (e) => {

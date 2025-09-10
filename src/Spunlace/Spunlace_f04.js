@@ -115,7 +115,7 @@ const Spunlace_f04 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const Spunlace_f04 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -149,7 +149,7 @@ const Spunlace_f04 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const Spunlace_f04 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -183,7 +183,7 @@ const Spunlace_f04 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -207,7 +207,7 @@ const Spunlace_f04 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   let formattedOperatorDate;
   if (newData.operator_submit_on) {
@@ -255,7 +255,7 @@ const Spunlace_f04 = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/getByDateAndShift`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/getByDateAndShift`,
         {
           headers,
           params: {
@@ -503,7 +503,7 @@ const Spunlace_f04 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/SubmitFilterConsumptionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/SubmitFilterConsumptionDetails`,
         payload,
         { headers }
       )
@@ -555,7 +555,7 @@ const Spunlace_f04 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/SaveFilterConsumptionDetails`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/SaveFilterConsumptionDetails`,
         payload,
         { headers }
       )
@@ -755,7 +755,7 @@ const Spunlace_f04 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/approveOrReject`,
         {
           id: filterId,
           status: "Approve",
@@ -801,7 +801,7 @@ const Spunlace_f04 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/FilterConsumptionDetails/approveOrReject`,
         {
           id: filterId,
           status: "Reject",

@@ -88,7 +88,7 @@ const QA_f23_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -127,7 +127,7 @@ const QA_f23_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -165,7 +165,7 @@ const QA_f23_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const handleYearPrintChange = (value) => {
     setYearPrint(value);
@@ -428,7 +428,7 @@ const QA_f23_Summary = () => {
                 Supplier Audit Report
               </th>
               <td colSpan="15">Format No.:</td>
-              <td colSpan="15">PH-QAD01-F-023</td>
+              <td colSpan="15">PH-QAD01/F-023</td>
             </tr>
             <tr>
               <td colSpan="15">Revision No.:</td>
@@ -556,7 +556,7 @@ const QA_f23_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="Supplier Audit Report"
-          formatNo="PH-QAD01-F-023"
+          formatNo="PH-QAD01/F-023"
           MenuBtn={
             <Button
               type="primary"

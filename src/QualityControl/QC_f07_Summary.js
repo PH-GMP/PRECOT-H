@@ -90,7 +90,7 @@ const QC_f07_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const QC_f07_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -133,7 +133,7 @@ const QC_f07_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const QC_f07_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
 
   const monthsLov = [
     { id: 1, value: "January" },
@@ -197,7 +197,7 @@ const QC_f07_Summary = () => {
     const fetchEquipmentNo = async () => {
       try {
         const response = await fetch(
-          `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE-EQID`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE-EQID`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -299,7 +299,7 @@ const QC_f07_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/getAll`;
+      let apiUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/getAll`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -463,7 +463,7 @@ const QC_f07_Summary = () => {
     try {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/print?year=${YearP}&month=${monthP}&eq_no=${equipmentP}&date=${dateP}`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/print?year=${YearP}&month=${monthP}&eq_no=${equipmentP}&date=${dateP}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -17,7 +17,7 @@ import PrecotSidebar from "../Components/PrecotSidebar.js";
 const RodentBoxSummary = () => {
   const navigate = useNavigate();
   const formName = "RODENT BOX CHECK LIST SUMMARY";
-  const formatNo = "PH-HRD01-F-013";
+  const formatNo = "PH-HRD01/F-013";
   const [open, setOpen] = useState(false);
   const [isModalPrint, setIsModalPrint] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");

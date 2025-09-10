@@ -171,7 +171,7 @@ const QA_f62 = () => {
       "Content-Type": "application/json",
     };
     axios.get(
-      `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+      `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
       { headers }
     ).then((response) => {
       setDepartmentOptions(response.data);
@@ -234,7 +234,7 @@ const QA_f62 = () => {
     try {
 
       axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/getForPrintSharpTools?department=${departmentP}&year=${yearP}&month=${monthP}&date=${dateP}`,
+        `${API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/getForPrintSharpTools?department=${departmentP}&year=${yearP}&month=${monthP}&date=${dateP}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -288,7 +288,7 @@ const QA_f62 = () => {
 
   //     axios
   //       .get(
-  //         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+  //         `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -312,7 +312,7 @@ const QA_f62 = () => {
   //         
   //       });
   //   }
-  // }, [DetailsByParam, API.prodUrl, token]);
+  // }, [DetailsByParam,API.prodUrl, token]);
 
   const handleAddRow = () => {
     const currentRows = rows || [];
@@ -435,14 +435,14 @@ const QA_f62 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/QA/Service/saveSharpToolsAndVerificationRegister`,
+        `${API.prodUrl}/Precot/api/QA/Service/saveSharpToolsAndVerificationRegister`,
         payload,
         { headers }
       );
 
       if (RecordTableDelete.length > 0) {
         await Promise.all(RecordTableDelete.map(async (id) => {
-          await axios.delete(`${ API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/deleteChildEntry/${id}`, { headers });
+          await axios.delete(`${API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/deleteChildEntry/${id}`, { headers });
         }));
         setRecordTableDelete([]);
       }
@@ -517,7 +517,7 @@ const QA_f62 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/QA/Service/SubmitSharpToolsAndVerificationRegister`,
+        `${API.prodUrl}/Precot/api/QA/Service/SubmitSharpToolsAndVerificationRegister`,
         payload,
         { headers }
       );
@@ -546,7 +546,7 @@ const QA_f62 = () => {
     try {
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/getAll`,
+        `${API.prodUrl}/Precot/api/QA/Service/SharpToolsAndVerificationRegister/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

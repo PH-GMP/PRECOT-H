@@ -85,7 +85,7 @@ const DryGoods_f01 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -154,7 +154,7 @@ const DryGoods_f01 = () => {
 
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/baleReport?date=${date}&shift=${pdeShift}&laydown_no=${laydownNo}`,
+            `${API.prodUrl}/Precot/api/drygoods/baleReport?date=${date}&shift=${pdeShift}&laydown_no=${laydownNo}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ const DryGoods_f01 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/getdetailsbyParamF001?date=${date}&shift=${shift}&laydown_no=${laydownNo}`,
+            `${API.prodUrl}/Precot/api/drygoods/getdetailsbyParamF001?date=${date}&shift=${shift}&laydown_no=${laydownNo}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -279,7 +279,7 @@ const DryGoods_f01 = () => {
     };
     try {
       const response = await axios.put(
-        `${ API.prodUrl}/Precot/api/drygoods/BaleConsumptionReportF001/approveOrReject`,
+        `${API.prodUrl}/Precot/api/drygoods/BaleConsumptionReportF001/approveOrReject`,
         payload,
         {
           headers: {
@@ -303,7 +303,7 @@ const DryGoods_f01 = () => {
   const handleSubmit = async () => {
     let apiurl, payload;
     if (role == "ROLE_OPERATOR") {
-      apiurl = `${ API.prodUrl}/Precot/api/drygoods/submitBaleConsumptionReportF001`;
+      apiurl = `${API.prodUrl}/Precot/api/drygoods/submitBaleConsumptionReportF001`;
       payload = {
         unit: "Unit H",
         formatNo: "F001",
@@ -338,7 +338,7 @@ const DryGoods_f01 = () => {
         message.warning("Please Enter The Reason");
         return;
       }
-      apiurl = `${ API.prodUrl}/Precot/api/drygoods/BaleConsumptionReportF001/approveOrReject`;
+      apiurl = `${API.prodUrl}/Precot/api/drygoods/BaleConsumptionReportF001/approveOrReject`;
       payload = {
         id: formData.bale_report_id,
         status: "Reject",

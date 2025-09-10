@@ -254,7 +254,7 @@ const QualityAssurance_f51 = () => {
       payload = {
         id: formData.id,
         unit: "UNIT H",
-        formatNo: "PH-QAD01-F-051",
+        formatNo: "PH-QAD01/F-051",
         formatName: "CONTROL OF GLASS / HARD PLASTIC / WOOD / CERAMIC",
         sopNumber: "PH-QAD01-D-47",
         revisionNo: "01",
@@ -278,7 +278,7 @@ const QualityAssurance_f51 = () => {
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.id,
-        formatNo: "PH-QAD01-F-051",
+        formatNo: "PH-QAD01/F-051",
         status: "Approve",
       };
     }
@@ -338,7 +338,7 @@ const QualityAssurance_f51 = () => {
       payload = {
         id: formData.id,
         unit: "UNIT H",
-        formatNo: "PH-QAD01-F-051",
+        formatNo: "PH-QAD01/F-051",
         formatName: "CONTROL OF GLASS / HARD PLASTIC / WOOD / CERAMIC",
         sopNumber: "PH-QAD01-D-47",
         revisionNo: "01",
@@ -367,7 +367,7 @@ const QualityAssurance_f51 = () => {
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.id,
-        formatNo: "PH-QAD01-F-051",
+        formatNo: "PH-QAD01/F-051",
         status: "Reject",
         remarks: formData.reason,
       };
@@ -544,7 +544,7 @@ const QualityAssurance_f51 = () => {
     <>
       <BleachingHeader
         formName={"CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC"}
-        formatNo={"PH-QAD01-F-051"}
+        formatNo={"PH-QAD01/F-051"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

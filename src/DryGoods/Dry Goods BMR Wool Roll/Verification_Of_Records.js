@@ -129,7 +129,7 @@ const Verification_Of_Records = (props) => {
     if (props.batchNo.length > 0) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -700,7 +700,7 @@ const Verification_Of_Records = (props) => {
     setButtonLoader(true);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/06.SaveVerificationOfRecords`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/06.SaveVerificationOfRecords`,
         newSave ? payload_2 : payload,
         {
           headers: {
@@ -716,7 +716,7 @@ const Verification_Of_Records = (props) => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -1196,7 +1196,7 @@ const Verification_Of_Records = (props) => {
       setButtonLoader(true);
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/06.SubmitVerificationOfRecords`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/06.SubmitVerificationOfRecords`,
           newSave ? payload_2 : payload,
           {
             headers: {
@@ -1210,7 +1210,7 @@ const Verification_Of_Records = (props) => {
             setButtonLoader(false);
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
+                `${API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
                 {
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -1632,7 +1632,7 @@ const Verification_Of_Records = (props) => {
       setButtonLoader(true);
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/06.SubmitVerificationOfRecords`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/06.SubmitVerificationOfRecords`,
           newSave ? payload_2 : payload,
           {
             headers: {
@@ -1646,7 +1646,7 @@ const Verification_Of_Records = (props) => {
             setButtonLoader(false);
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
+                `${API.prodUrl}/Precot/api/CottonWoolRall/06.GetVerificationOfRecords?batch_no=${props.batchNo}`,
                 {
                   headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,

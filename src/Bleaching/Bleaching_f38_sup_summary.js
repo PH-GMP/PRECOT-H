@@ -175,7 +175,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
     const fetchFromBmr = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getFromBmr?month=${monthNumber}&year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getFromBmr?month=${monthNumber}&year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -198,7 +198,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
     const fetchToBmr = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getToBmr?month=${monthNumber}&year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getToBmr?month=${monthNumber}&year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -240,7 +240,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -264,7 +264,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -312,8 +312,8 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
     try {
       axios
         .get(
-          // `${ API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38Print?month=${monthP}&year=${yearP}&date=${dateP}`,
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getPrintF38?month=${monthNumber}&year=${yearPrint}&fromBmr=${selectedFromBmr}&toBmr=${selectedToBmr}`,
+          // `${API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38Print?month=${monthP}&year=${yearP}&date=${dateP}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getPrintF38?month=${monthNumber}&year=${yearPrint}&fromBmr=${selectedFromBmr}&toBmr=${selectedToBmr}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -346,7 +346,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -370,14 +370,14 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   // const handleDatePrintChange = (event) => {
   //   setPrintByDate(event.target.value);
   //   const a = String(event.target.value).split("-").reverse().join("/");
   //   axios
   //     .get(
-  //       `${ API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38?date=${a}`,
+  //       `${API.prodUrl}/Precot/api/Bleaching/Service/getDateSummeryF38?date=${a}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -404,7 +404,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getAllMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getAllMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -450,7 +450,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getSupervisorSummeryF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getSupervisorSummeryF38`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -537,7 +537,7 @@ const [isYearMonthDisabled, setIsYearMonthDisabled] = useState(false);
     };
     axios
       .delete(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/deleteMachineCleaningRecord?id=${e.id}`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/deleteMachineCleaningRecord?id=${e.id}`,
         { headers }
       )
       .then((res) => {

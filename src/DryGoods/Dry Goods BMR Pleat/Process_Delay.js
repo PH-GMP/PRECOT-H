@@ -52,7 +52,7 @@ const Process_Delay = (props) => {
   const fetchProcessDelayData = (batchNo) => {
     setLoading(true);
     axios
-      .get(`${ API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`, {
+      .get(`${API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`, {
         params: { batch_no: batchNo },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -96,7 +96,7 @@ const Process_Delay = (props) => {
     if (fromDate && toDate && selectedMachine) {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/cottonPleat/stoppageReports`, {
+        .get(`${API.prodUrl}/Precot/api/cottonPleat/stoppageReports`, {
           params: {
             fromdate: moment(fromDate).format("YYYY-MM-DD"),
             todate: moment(toDate).format("YYYY-MM-DD"),
@@ -151,7 +151,7 @@ const Process_Delay = (props) => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/cottonPleat/10.SaveProcessDelayEqupment`,
+          `${API.prodUrl}/Precot/api/cottonPleat/10.SaveProcessDelayEqupment`,
           payload,
           {
             headers: {
@@ -166,7 +166,7 @@ const Process_Delay = (props) => {
           setDates({});
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`,
+              `${API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`,
               {
                 params: { batch_no: props.batchNo },
                 headers: {
@@ -245,7 +245,7 @@ const Process_Delay = (props) => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/cottonPleat/10.SubmitProcessDelayEqupment`,
+          `${API.prodUrl}/Precot/api/cottonPleat/10.SubmitProcessDelayEqupment`,
           payload,
           {
             headers: {
@@ -260,7 +260,7 @@ const Process_Delay = (props) => {
           setDates({});
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`,
+              `${API.prodUrl}/Precot/api/cottonPleat/10.GetProcessDelayEqupment`,
               {
                 params: { batch_no: props.batchNo },
                 headers: {

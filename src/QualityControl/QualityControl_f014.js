@@ -114,7 +114,7 @@ const QualityControlF014 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/GetByDate?date=${date}&eqIdNo=${eqno}`,
+          `${   API.prodUrl}/Precot/api/qc/ValidationForAutoclaveChemistF014/GetByDate?date=${date}&eqIdNo=${eqno}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const QualityControlF014 = () => {
             //getImage
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const QualityControlF014 = () => {
 
             axios
               .get(
-                `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+                `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -252,7 +252,7 @@ const QualityControlF014 = () => {
 
     try {
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SavevalidationForAutoclaveChemistF014`,
+        `${   API.prodUrl}/Precot/api/qc/SavevalidationForAutoclaveChemistF014`,
         payload,
         {
           headers: {
@@ -307,7 +307,7 @@ const QualityControlF014 = () => {
 
     try {
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitvalidationForAutoclaveChemistF014`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitvalidationForAutoclaveChemistF014`,
         payload,
         {
           headers: {
@@ -341,7 +341,7 @@ const QualityControlF014 = () => {
     };
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveValidationForAutoclaveChemistF014`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveValidationForAutoclaveChemistF014`,
         {
           id: mainID,
           status: "Approve",
@@ -379,7 +379,7 @@ const QualityControlF014 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveValidationForAutoclaveChemistF014`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveValidationForAutoclaveChemistF014`,
         {
           id: mainID,
           status: "Reject",

@@ -101,7 +101,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -125,7 +125,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [printResponseData,      API.prodUrl, token]);
+}, [printResponseData,     API.prodUrl, token]);
 useEffect(() => {
   const token = localStorage.getItem("token");
   const username = printResponseData?.hod_sign;
@@ -134,7 +134,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -158,7 +158,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [printResponseData,      API.prodUrl, token]);
+}, [printResponseData,     API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -192,7 +192,7 @@ useEffect(() => {
     try {
       setDatePrint(event.target.value);
       axios.get(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDatePrintApi?date=${event.target.value}`,
+        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDatePrintApi?date=${event.target.value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -223,7 +223,7 @@ useEffect(() => {
     };
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/chemicaltest/CLF007/getAll`, {
+      .get(`${   API.prodUrl}/Precot/api/chemicaltest/CLF007/getAll`, {
         headers,
       })
       .then((response) => {
@@ -372,7 +372,7 @@ useEffect(() => {
     try {
        
       axios.get(
-         `${    API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=${12}&date=${datePrint}&shift=${value}`,
+         `${   API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=${12}&date=${datePrint}&shift=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -166,7 +166,7 @@ const Spunlace_f08 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -226,7 +226,7 @@ const Spunlace_f08 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spulance/getdetailsbyParamF008?date=${date}`,
+            `${API.prodUrl}/Precot/api/spulance/getdetailsbyParamF008?date=${date}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -274,7 +274,7 @@ const Spunlace_f08 = () => {
       };
       fetchData();
     }
-  }, [date, token, API.prodUrl, navigate]);
+  }, [date, token,API.prodUrl, navigate]);
 
   const statusFunction = (responseData) => {
     // console.log("ResponseData", responseData);
@@ -332,7 +332,7 @@ const Spunlace_f08 = () => {
   const fetchJob = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/splResponse1?date=${date}`,
+        `${API.prodUrl}/Precot/api/spulance/splResponse1?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -397,7 +397,7 @@ const Spunlace_f08 = () => {
     setStatusLoader(true);
     let apiurl, payload, successMsg;
     if (role == "ROLE_SUPERVISOR") {
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/saveDailyStoppageDetailsF008`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/saveDailyStoppageDetailsF008`;
       successMsg = "Data Saved Succesfully";
       payload = {
         unit: "Unit-H",
@@ -486,7 +486,7 @@ const Spunlace_f08 = () => {
         payload.hod_mail_status = formData.hod_mail_status;
       }
     } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/DailyStoppageDetailsF008/approveOrReject`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/DailyStoppageDetailsF008/approveOrReject`;
       successMsg = "Approved Succesfully!";
       payload = {
         id: formData.stoppage_id,
@@ -537,7 +537,7 @@ const Spunlace_f08 = () => {
     setStatusLoader(true);
     let apiurl, payload;
     if (role == "ROLE_SUPERVISOR") {
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/submitDailyStoppageDetailsF008`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/submitDailyStoppageDetailsF008`;
       payload = {
         unit: "Unit-H",
         formatNo: "PH-PRD02/F-008",
@@ -634,7 +634,7 @@ const Spunlace_f08 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/DailyStoppageDetailsF008/approveOrReject`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/DailyStoppageDetailsF008/approveOrReject`;
       payload = {
         id: formData.stoppage_id,
         status: "Reject",

@@ -93,7 +93,7 @@ const Bleaching_f11_Summary = () => {
       // console.log("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const Bleaching_f11_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -155,13 +155,13 @@ const Bleaching_f11_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printRecord, API.prodUrl, token]);
+  }, [printRecord,API.prodUrl, token]);
 
   useEffect(() => {
     const fetchAllBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -225,7 +225,7 @@ const Bleaching_f11_Summary = () => {
         let response;
         if (userRole === "ROLE_SUPERVISOR") {
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getAllSupervisorNotSubmitted`,
+            `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getAllSupervisorNotSubmitted`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -234,7 +234,7 @@ const Bleaching_f11_Summary = () => {
           );
         } else if (userRole == "ROLE_HOD" || userRole == "ROLE_DESIGNEE") {
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getAllHodNotSubmitted`,
+            `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/getAllHodNotSubmitted`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -309,7 +309,7 @@ const Bleaching_f11_Summary = () => {
     const fetchBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -337,7 +337,7 @@ const Bleaching_f11_Summary = () => {
       ///Precot/api/bleaching/summary/batchByBleach/hydroextractor?bmr_no=(New Api)
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/batchByBleach/hydroextractor?bmr_no=${bmrNoModal}`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/batchByBleach/hydroextractor?bmr_no=${bmrNoModal}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -392,7 +392,7 @@ const Bleaching_f11_Summary = () => {
 
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/GetByBmrRange?fromBmr=${fromBmr}&toBmr=${toBmr}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/EquipLogHydroExtracotor/GetByBmrRange?fromBmr=${fromBmr}&toBmr=${toBmr}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

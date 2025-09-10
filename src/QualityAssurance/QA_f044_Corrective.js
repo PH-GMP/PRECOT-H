@@ -233,7 +233,7 @@ const QA_f044_Corrective = () => {
     fetchImage(selectedRow?.qaInspectorSign, "qaInspector");
     fetchImage(selectedRow?.qaDesigneeSign, "qaDesignee");
     fetchImage(selectedRow?.qaManagerMrSign, "qaManager");
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage3, setGetImage3] = useState("");
 
@@ -263,7 +263,7 @@ const QA_f044_Corrective = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -294,7 +294,7 @@ const QA_f044_Corrective = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   useEffect(() => {
     const headers = {
@@ -514,7 +514,7 @@ const QA_f044_Corrective = () => {
       const payload = {
         reportId: mainid,
         formatName: "CORRECTIVE ACTION REPORT",
-        formatNo: "PH-QAD01-F-044",
+        formatNo: "PH-QAD01/F-044",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-21",
         unit: "Unit H", // Assuming unit as "Unit H" based on your response
@@ -596,7 +596,7 @@ const QA_f044_Corrective = () => {
       const payload = {
         reportId: mainid,
         formatName: "CORRECTIVE ACTION REPORT",
-        formatNo: "PH-QAD01-F-044",
+        formatNo: "PH-QAD01/F-044",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-21",
         unit: "Unit H", // Assuming unit as "Unit H" based on your response
@@ -1188,7 +1188,7 @@ const QA_f044_Corrective = () => {
       <BleachingHeader
         unit="Unit H"
         formName="CORRECTIVE ACTION REPORT"
-        formatNo="PH-QAD01-F-044"
+        formatNo="PH-QAD01/F-044"
         MenuBtn={
           <Button
             type="primary"

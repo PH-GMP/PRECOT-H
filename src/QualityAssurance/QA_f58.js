@@ -279,7 +279,7 @@ const QA_f58 = () => {
           
         });
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.supervisor_sign;
@@ -312,7 +312,7 @@ const QA_f58 = () => {
           
         });
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.qa_inspector_sign;
@@ -345,7 +345,7 @@ const QA_f58 = () => {
           
         });
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const handleSave = async () => {
     try {
@@ -367,7 +367,7 @@ const QA_f58 = () => {
     try {
       const payload = {
         formatName: "METAL DETECTOR CALIBRATION RECORD",
-        formatNo: "PH-QAD01-F-058",
+        formatNo: "PH-QAD01/F-058",
         revisionNo: 1,
         sopNumber: "PH-QAD01-D-44",
         unit: "H",
@@ -438,7 +438,7 @@ const QA_f58 = () => {
     try {
       const payload = {
         formatName: "METAL DETECTOR CALIBRATION RECORD",
-        formatNo: "PH-QAD01-F-058",
+        formatNo: "PH-QAD01/F-058",
         revisionNo: 1,
         sopNumber: "PH-QAD01-D-44",
         unit: "H",
@@ -1238,7 +1238,7 @@ const QA_f58 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="METAL DETECTOR CALIBRATION RECORD"
-        formatNo="PH-QAD01-F-058"
+        formatNo="PH-QAD01/F-058"
         sopNo="PH-QAD01-D-44"
         MenuBtn={
           <Button

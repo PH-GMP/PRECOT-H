@@ -298,7 +298,7 @@ const QA_f010_internal_audit_schedule_summary = () => {
                     INTERNAL AUDIT SCHEDULE
                   </th>
                   <td colSpan="10">Format No:</td>
-                  <td colSpan="55">PH-QAD01-F-010</td>
+                  <td colSpan="55">PH-QAD01/F-010</td>
                 </tr>
                 <tr>
                   <td colSpan="10">Revision No:</td>
@@ -533,7 +533,7 @@ const QA_f010_internal_audit_schedule_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INTERNAL AUDIT SCHEDULE"
-        formatNo="PH-QAD01-F-010"
+        formatNo="PH-QAD01/F-010"
         MenuBtn={
           <Button
             type="primary"

@@ -203,7 +203,7 @@ const Manufacturing_Steps = (props) => {
   const getData = () => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/07.GetManufacturingSteps?order_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/07.GetManufacturingSteps?order_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -509,7 +509,7 @@ const Manufacturing_Steps = (props) => {
     // try {
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/07.SaveManufacturingSteps`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/07.SaveManufacturingSteps`,
         payload_2,
         {
           headers: {
@@ -850,7 +850,7 @@ const Manufacturing_Steps = (props) => {
     // try {
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/07.SubmitManufacturingSteps`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/07.SubmitManufacturingSteps`,
         payload_1,
         {
           headers: {

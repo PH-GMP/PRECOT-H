@@ -105,7 +105,7 @@ const Spunlace_f25_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -129,7 +129,7 @@ const Spunlace_f25_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -141,7 +141,7 @@ const Spunlace_f25_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const Spunlace_f25_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const formattedDatesupervisor = () => {
     if (printResponseData?.supervisor_submit_on) {
@@ -246,7 +246,7 @@ const Spunlace_f25_summary = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
 
-        let apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/getSummary`;
+        let apiUrl = `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/getSummary`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -328,7 +328,7 @@ const Spunlace_f25_summary = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -432,7 +432,7 @@ const Spunlace_f25_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShiftPrintApi?date=${printDate}&shift=${value}`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShiftPrintApi?date=${printDate}&shift=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

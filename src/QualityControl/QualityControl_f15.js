@@ -115,7 +115,7 @@ const QualityControl_f15 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -157,7 +157,7 @@ const QualityControl_f15 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/CLF015?year=${year}&month=${month}&eqid=${eqId}`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/CLF015?year=${year}&month=${month}&eqid=${eqId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -252,7 +252,7 @@ const QualityControl_f15 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF015/save/VAC`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF015/save/VAC`;
       payload = {
         test_id: formData.test_id,
         format: "VALIDATION FOR AUTOCLAVE BY BIOLOGICAL INDICATOR",
@@ -282,7 +282,7 @@ const QualityControl_f15 = () => {
         lot_no: formData.lot_no,
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF015/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF015/approval`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
@@ -376,7 +376,7 @@ const QualityControl_f15 = () => {
         }
       }
 
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF015/submit/VAC`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF015/submit/VAC`;
       payload = {
         test_id: formData.test_id,
         format: "VALIDATION FOR AUTOCLAVE BY BIOLOGICAL INDICATOR",
@@ -412,7 +412,7 @@ const QualityControl_f15 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF015/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF015/approval`;
       payload = {
         id: formData.test_id,
         status: "Reject",
@@ -480,7 +480,7 @@ const QualityControl_f15 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",

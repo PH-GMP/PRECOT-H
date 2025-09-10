@@ -70,7 +70,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${value}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${value}`,
         {
           headers,
         }
@@ -96,7 +96,7 @@ const CreateBMR = () => {
             };
           })
         );
-        const newURL = value == "4" ?  `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${value}` : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${value}`
+        const newURL = value == "4" ?  `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${value}` : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${value}`
         axios
           .get(
             newURL,
@@ -142,7 +142,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/bmr?department_id=${department}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/bmr?department_id=${department}`,
         {
           headers,
         }
@@ -163,7 +163,7 @@ const CreateBMR = () => {
       "Content-Type": "application/json", // Adjust content type if needed
     };
     
-    const newURL = department == "4" ? `${ API.prodUrl}/Precot/api/goodsLaydown/generation?department_id=${department}` : `${ API.prodUrl}/Precot/api/bleaching/generation/laydown?department_id=${department}`
+    const newURL = department == "4" ? `${API.prodUrl}/Precot/api/goodsLaydown/generation?department_id=${department}` : `${API.prodUrl}/Precot/api/bleaching/generation/laydown?department_id=${department}`
     axios
       .get(
         newURL,
@@ -192,7 +192,7 @@ const CreateBMR = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
         // setdepartmentList(response.data);
@@ -317,7 +317,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
         {
           headers,
         }
@@ -336,7 +336,7 @@ const CreateBMR = () => {
             };
           })
         );
-        const newURL = department == "4" ?  `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
+        const newURL = department == "4" ?  `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
         axios
           .get(
             newURL,
@@ -376,7 +376,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
         {
           headers,
         }
@@ -396,7 +396,7 @@ const CreateBMR = () => {
           })
         );
         //Precot/api/goodsLaydown/getLaydownByDepartment?department_id=4
-        const newURL = department == "4" ?  `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
+        const newURL = department == "4" ?  `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
         axios
           .get(
             newURL,
@@ -436,7 +436,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
         {
           headers,
         }
@@ -455,7 +455,7 @@ const CreateBMR = () => {
             };
           })
         );
-        const newURL = department == "4" ?  `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
+        const newURL = department == "4" ?  `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
 
         axios
           .get(
@@ -495,7 +495,7 @@ const CreateBMR = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getBMR?department_id=${department}`,
         {
           headers,
         }
@@ -514,7 +514,7 @@ const CreateBMR = () => {
             };
           })
         );
-       const newURL = department == "4" ?  `${ API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${ API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
+       const newURL = department == "4" ?  `${API.prodUrl}/Precot/api/goodsLaydown/getLaydownByDepartment?department_id=${department}` : `${API.prodUrl}/Precot/api/bleaching/generation/getLaydown?department_id=${department}`
 
         axios
           .get(

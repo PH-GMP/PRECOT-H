@@ -32,7 +32,7 @@ const Packing_Material_Issue = (props) => {
   const fetchProcessDelayData = (batchNo) => {
     setLoading(true);
     axios
-      .get(`${ API.prodUrl}/Precot/api/cottonPleat/03.GetPackingMeterial`, {
+      .get(`${API.prodUrl}/Precot/api/cottonPleat/03.GetPackingMeterial`, {
         params: { batch_no: batchNo },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -69,7 +69,7 @@ const Packing_Material_Issue = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/cottonPleat/01.GetProductionDetails?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/cottonPleat/01.GetProductionDetails?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -99,7 +99,7 @@ const Packing_Material_Issue = (props) => {
       axios
         .get(
           `${
-          API.prodUrl
+         API.prodUrl
           }/Precot/api/cottonPleat/03.GetPackingMeterialPde?batch_no=${order_no}&fromdate=${moment(
             fromDate
           ).format("DD.MM.YYYY")}&todate=${moment(toDate).format(
@@ -144,7 +144,7 @@ const Packing_Material_Issue = (props) => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/cottonPleat/03.SubmitPackingMeterialIssue`,
+          `${API.prodUrl}/Precot/api/cottonPleat/03.SubmitPackingMeterialIssue`,
           payload,
           {
             headers: {
@@ -155,7 +155,7 @@ const Packing_Material_Issue = (props) => {
         .then(() => {
           message.success("Submitted successfully!");
           axios
-            .get(`${ API.prodUrl}/Precot/api/cottonPleat/03.GetPackingMeterial`, {
+            .get(`${API.prodUrl}/Precot/api/cottonPleat/03.GetPackingMeterial`, {
               params: { batch_no: props.batchNo },
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

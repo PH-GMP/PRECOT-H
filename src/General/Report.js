@@ -118,7 +118,7 @@ const Report = () => {
     setButtonLoading(true);
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/document/formCounts`, {
+      .get(`${API.prodUrl}/Precot/api/document/formCounts`, {
         params: { fromdate: fromDate, todate: toDate },
         responseType: "blob",
         headers: {

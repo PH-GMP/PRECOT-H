@@ -339,7 +339,7 @@ const QualityAssuranceF042 = () => {
     const payload = {
       id: mainId || "",
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-042",
+      formatNo: "PH-QAD01/F-042",
       formatName: "Change control log book",
       sopNumber: "PH-QAD01-D-37",
       revisionNo: "1",
@@ -407,7 +407,7 @@ const QualityAssuranceF042 = () => {
     const payload = {
       id: mainId || "",
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-042",
+      formatNo: "PH-QAD01/F-042",
       formatName: "Change control log book",
       sopNumber: "PH-QAD01-D-37",
       revisionNo: "1",
@@ -534,14 +534,14 @@ const QualityAssuranceF042 = () => {
       ? {
           id: mainId || "",
           detailsId: fieldData.detailsId,
-          formatNo: "PH-QAD01-F-042",
+          formatNo: "PH-QAD01/F-042",
           actualClouserDate: fieldData.actualClosureDate || "N/A",
           remarks: fieldData.remarks || "N/A",
         }
       : {
           id: mainId || "",
           detailsId: fieldData.detailsId,
-          formatNo: "PH-QAD01-F-042",
+          formatNo: "PH-QAD01/F-042",
           tentativeClosureDate: fieldData.tentativeClosureDate || "N/A",
         };
 
@@ -1007,7 +1007,7 @@ const QualityAssuranceF042 = () => {
       <BleachingHeader
         unit="Unit H"
         formName="Change control log book"
-        formatNo="PH-QAD01-F-042"
+        formatNo="PH-QAD01/F-042"
         MenuBtn={
           <Button
             type="primary"

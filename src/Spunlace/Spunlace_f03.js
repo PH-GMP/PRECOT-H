@@ -430,7 +430,7 @@ const Spunlace_03 = () => {
       
         const res = await axios
           .put(
-            `${ API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
+            `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
             {
               id: id,
               status: "Reject",
@@ -464,7 +464,7 @@ const Spunlace_03 = () => {
       
         const res = await axios
           .put(
-            `${ API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
+            `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
             {
               id: id,
               status: "Approve",
@@ -1235,7 +1235,7 @@ const Spunlace_03 = () => {
             setLoading(true);
             axios
                 .get(
-                    `${ API.prodUrl}/Precot/api/spulance/getdetailsbyParamF003?date=${date}&shift=${shift}&order_no=${order_no}`,
+                    `${API.prodUrl}/Precot/api/spulance/getdetailsbyParamF003?date=${date}&shift=${shift}&order_no=${order_no}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -1397,7 +1397,7 @@ const Spunlace_03 = () => {
                  //op image
                  axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -1424,7 +1424,7 @@ const Spunlace_03 = () => {
        //Sup image
        axios
        .get(
-         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
+         `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
          {
            headers: {
              "Content-Type": "application/json",
@@ -1452,7 +1452,7 @@ const Spunlace_03 = () => {
                  //Sup image
        axios
        .get(
-         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
+         `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
          {
            headers: {
              "Content-Type": "application/json",
@@ -1499,7 +1499,7 @@ const Spunlace_03 = () => {
             setLoading(true);
             axios
                 .get(
-                    `${ API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${order_no}`,
+                    `${API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${order_no}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -1640,7 +1640,7 @@ const Spunlace_03 = () => {
 
         // Make the POST request to the API endpoint with headers
         axios.post(
-            `${ API.prodUrl}/Precot/api/spulance/saveProcessSetupJetLaceF003`,
+            `${API.prodUrl}/Precot/api/spulance/saveProcessSetupJetLaceF003`,
             payload,
             { headers }
         ).then((res) => {
@@ -1883,7 +1883,7 @@ const Spunlace_03 = () => {
 
         // Make the POST request to the API endpoint with headers
         axios.post(
-            `${ API.prodUrl}/Precot/api/spulance/submitProcessSetupJetLaceF003`,
+            `${API.prodUrl}/Precot/api/spulance/submitProcessSetupJetLaceF003`,
             payload,
             { headers }
         ).then((res) => {
@@ -1920,7 +1920,7 @@ const Spunlace_03 = () => {
 
         axios
             .get(
-                `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+                `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -1939,7 +1939,7 @@ const Spunlace_03 = () => {
         try {
             setLoading(true);
             const response = await axios.get(
-                `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${order_no}`,
+                `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${order_no}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

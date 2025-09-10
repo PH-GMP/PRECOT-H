@@ -222,7 +222,7 @@ const QA_f076_training_session_register = () => {
         })
         .catch((err) => { });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -253,7 +253,7 @@ const QA_f076_training_session_register = () => {
         })
         .catch((err) => { });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   useEffect(() => {
     const headers = {
@@ -269,7 +269,7 @@ const QA_f076_training_session_register = () => {
             headers,
             params: {
               department: uniqueDep,
-              formNumber: "PH-QAD01-F-076",
+              formNumber: "PH-QAD01/F-076",
             },
           }
         );
@@ -390,7 +390,7 @@ const QA_f076_training_session_register = () => {
       const payload = {
         formId: mainid,
         formatName: "TRAINING SESSION ALLOTMENT REGISTER",
-        formatNo: "PH-QAD01-F-076",
+        formatNo: "PH-QAD01/F-076",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-15",
         unit: "H",
@@ -456,7 +456,7 @@ const QA_f076_training_session_register = () => {
       const payload = {
         formId: mainid,
         formatName: "TRAINING SESSION ALLOTMENT REGISTER",
-        formatNo: "PH-QAD01-F-076",
+        formatNo: "PH-QAD01/F-076",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-15",
         unit: "H",

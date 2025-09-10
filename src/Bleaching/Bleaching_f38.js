@@ -391,7 +391,7 @@ const Bleaching_f38 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -415,7 +415,7 @@ const Bleaching_f38 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [supervisorSign, API.prodUrl, token]);
+  }, [supervisorSign,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -427,7 +427,7 @@ const Bleaching_f38 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -451,7 +451,7 @@ const Bleaching_f38 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [hodStatus, API.prodUrl, token]);
+  }, [hodStatus,API.prodUrl, token]);
 
   const { id } = useParams();
 
@@ -640,7 +640,7 @@ const Bleaching_f38 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: recordId,
           status: "Approve",
@@ -686,7 +686,7 @@ const Bleaching_f38 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02`,
         {
           id: recordId,
           status: "Reject",
@@ -733,7 +733,7 @@ const Bleaching_f38 = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getBmrFromToSummeryF38?date=${selecteddate}&bmrFrom=${selectedbmrfrom}&bmrTo=${selectedbmrto}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getBmrFromToSummeryF38?date=${selecteddate}&bmrFrom=${selectedbmrfrom}&bmrTo=${selectedbmrto}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -911,7 +911,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/getMixchMachineF38?id=${
+          `${API.prodUrl}/Precot/api/Bleaching/Service/getMixchMachineF38?id=${
             id || recordId
           }`,
           {
@@ -1003,7 +1003,7 @@ if (isRole("ROLE_SUPERVISOR")) {
         });
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/saveMixchMachineF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/saveMixchMachineF38`,
         payload,
         {
           headers: {
@@ -1093,7 +1093,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       }
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/submitMixchMachineF38`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/submitMixchMachineF38`,
         payload,
         {
           headers: {
@@ -1251,7 +1251,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${selectedbmrfrom}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${selectedbmrfrom}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1270,7 +1270,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1297,7 +1297,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${selectedbmrto}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMapLaydown?MappingBmr_No=${selectedbmrto}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1316,7 +1316,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMixingLov?orderNo=${JobOrderNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -1343,7 +1343,7 @@ if (isRole("ROLE_SUPERVISOR")) {
   //     const token = localStorage.getItem("token");
   //     try {
   //       const response = await axios.get(
-  //         "${ API.prodUrl}/Precot/api/LOV/Service/mixingLOV",
+  //         "${API.prodUrl}/Precot/api/LOV/Service/mixingLOV",
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,
@@ -1364,7 +1364,7 @@ if (isRole("ROLE_SUPERVISOR")) {
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

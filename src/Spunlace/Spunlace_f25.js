@@ -114,7 +114,7 @@ const Spunlace_f25 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const Spunlace_f25 = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -150,7 +150,7 @@ const Spunlace_f25 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -174,7 +174,7 @@ const Spunlace_f25 = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -261,7 +261,7 @@ const Spunlace_f25 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           id: handSanitizationId,
           status: "Approve",
@@ -301,7 +301,7 @@ const Spunlace_f25 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/approveOrReject`,
         {
           id: handSanitizationId,
           status: "Reject",
@@ -409,7 +409,7 @@ const Spunlace_f25 = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -460,7 +460,7 @@ const Spunlace_f25 = (props) => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=2`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=2`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -562,7 +562,7 @@ const Spunlace_f25 = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SaveHandSanitizationReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SaveHandSanitizationReport`,
         payload,
         {
           headers: {
@@ -641,7 +641,7 @@ const Spunlace_f25 = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SubmitHandSanitizationReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/SubmitHandSanitizationReport`,
         payload,
         {
           headers: {
@@ -686,7 +686,7 @@ const Spunlace_f25 = (props) => {
     setShift(shiftvalue);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${date}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/HandSanitizationReport/findByDateShift?date=${date}&shift=${shiftvalue}`,
 
         {
           headers: {

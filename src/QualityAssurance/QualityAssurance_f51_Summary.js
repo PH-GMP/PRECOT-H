@@ -87,7 +87,7 @@ const QualityAssurance_f43_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -122,13 +122,13 @@ const QualityAssurance_f43_Summary = () => {
       let apiUrl;
       if (role == "ROLE_SUPERVISOR") {
         apiUrl = `${
-        API.prodUrl
+       API.prodUrl
         }/Precot/api/QA/Service/GetSupervisorHodControlOfGHpWc?department=${getDeptName(
           deptId
         )}`;
       } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
         apiUrl = `${
-        API.prodUrl
+       API.prodUrl
         }/Precot/api/QA/Service/GetSupervisorSummeryControlOfGHpWc?department=${getDeptName(
           deptId
         )}`;
@@ -290,7 +290,7 @@ const QualityAssurance_f43_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/QA/Service/PrintControlOfGHpWc?month=${
+        `${API.prodUrl}/Precot/api/QA/Service/PrintControlOfGHpWc?month=${
           printParams.month
         }&year=${printParams.year}&department=${getDeptName(deptId)}`,
         {
@@ -625,7 +625,7 @@ const QualityAssurance_f43_Summary = () => {
                       CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC
                     </td>
                     <td style={{ padding: "0.5em" }}>Format No.:</td>
-                    <td style={{ padding: "0.5em" }}>PH-QAD01-F-051</td>
+                    <td style={{ padding: "0.5em" }}>PH-QAD01/F-051</td>
                   </tr>
                   <tr>
                     <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -902,7 +902,7 @@ const QualityAssurance_f43_Summary = () => {
                       CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC
                     </td>
                     <td style={{ padding: "0.5em" }}>Format No.:</td>
-                    <td style={{ padding: "0.5em" }}>PH-QAD01-F-051</td>
+                    <td style={{ padding: "0.5em" }}>PH-QAD01/F-051</td>
                   </tr>
                   <tr>
                     <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -1076,7 +1076,7 @@ const QualityAssurance_f43_Summary = () => {
                       CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC
                     </td>
                     <td style={{ padding: "0.5em" }}>Format No.:</td>
-                    <td style={{ padding: "0.5em" }}>PH-QAD01-F-051</td>
+                    <td style={{ padding: "0.5em" }}>PH-QAD01/F-051</td>
                   </tr>
                   <tr>
                     <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -1282,7 +1282,7 @@ const QualityAssurance_f43_Summary = () => {
       </div>
       <BleachingHeader
         formName={"CONTROL OF GLASS/HARD PLASTIC/WOOD/CERAMIC"}
-        formatNo={"PH-QAD01-F-051"}
+        formatNo={"PH-QAD01/F-051"}
         MenuBtn={
           <Button
             type="primary"

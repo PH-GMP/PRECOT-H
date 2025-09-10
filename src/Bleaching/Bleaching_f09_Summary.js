@@ -148,7 +148,7 @@ const Bleaching_f09_Summary = () => {
     const fetchAllBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F09`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F09`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -174,7 +174,7 @@ const Bleaching_f09_Summary = () => {
         let response;
         if (userRole === "ROLE_SUPERVISOR") {
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09SummaryForSupervisor`,
+            `${API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09SummaryForSupervisor`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ const Bleaching_f09_Summary = () => {
           );
         } else if (userRole === "ROLE_HOD" || userRole == "ROLE_DESIGNEE") {
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09SummaryForHod`,
+            `${API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09SummaryForHod`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -265,7 +265,7 @@ const Bleaching_f09_Summary = () => {
     const fetchBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -310,7 +310,7 @@ const Bleaching_f09_Summary = () => {
   const handlePrint = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09ByBmrRange?fromBmr=${fromBmr}&toBmr=${toBmr}`,
+        `${API.prodUrl}/Precot/api/bleach/bleachequipmentusagelogbookf09ByBmrRange?fromBmr=${fromBmr}&toBmr=${toBmr}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -363,7 +363,7 @@ const Bleaching_f09_Summary = () => {
     const fetchprivioussubbatchNo = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleach/getLastSubbatchNo`,
+          `${API.prodUrl}/Precot/api/bleach/getLastSubbatchNo`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -482,7 +482,7 @@ const Bleaching_f09_Summary = () => {
       // console.log("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -508,7 +508,7 @@ const Bleaching_f09_Summary = () => {
           setGetImage("");
         });
     }
-  }, [printRecord, API.prodUrl, token]);
+  }, [printRecord,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -518,7 +518,7 @@ const Bleaching_f09_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -544,7 +544,7 @@ const Bleaching_f09_Summary = () => {
           setGetImage1("");
         });
     }
-  }, [printRecord, API.prodUrl, token]);
+  }, [printRecord,API.prodUrl, token]);
 
   // console.log("get image", getImage);
 

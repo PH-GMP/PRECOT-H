@@ -102,7 +102,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
       ) {
         // QA Inspector can see all summary without filtering by department
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01-F-036`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=null&formatNo=PH-QAD01/F-036`,
 
           {
             headers: {
@@ -130,7 +130,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
         }
 
         const summaryResponse = await axios.get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01-F-036`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportSummary?department=${department}&formatNo=PH-QAD01/F-036`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -196,7 +196,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
         }
       });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -237,7 +237,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
         }
       });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -277,7 +277,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
         }
       });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   useEffect(() => {
     fetchBMRLov();
@@ -384,7 +384,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01-F-036`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getOnlineInspectionReportPrint?date=${date}&shift=${shift}&machineNo=${selectedMachine}&pOrder=${selectedpOrder}&bmrNo=${selectedBMr}&formatNo=PH-QAD01/F-036`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -613,7 +613,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
                       </th>
 
                       <th colSpan={2}>Format No:</th>
-                      <th colSpan={2}>PH-QAD01-F-036</th>
+                      <th colSpan={2}>PH-QAD01/F-036</th>
                     </tr>
                     <tr>
                       <th colSpan={2}>Revision No:</th>
@@ -1358,7 +1358,7 @@ const QA_f036_Inprocess_Inspection_Report_summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="ON-LINE INSPECTION REPORT (BUDS)"
-        formatNo="PH-QAD01-F-036"
+        formatNo="PH-QAD01/F-036"
         MenuBtn={
           <Button
             type="primary"

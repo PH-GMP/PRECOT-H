@@ -184,7 +184,7 @@ const Spunlace_f07 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/approveOrReject`,
         {
           id: reportId,
           status: "Approve",
@@ -224,7 +224,7 @@ const Spunlace_f07 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/approveOrReject`,
         {
           id: reportId,
           status: "Reject",
@@ -260,7 +260,7 @@ const Spunlace_f07 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -284,7 +284,7 @@ const Spunlace_f07 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -296,7 +296,7 @@ const Spunlace_f07 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -320,7 +320,7 @@ const Spunlace_f07 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
 
   const [getImage2, setGetImage2] = useState("");
@@ -333,7 +333,7 @@ const Spunlace_f07 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -357,7 +357,7 @@ const Spunlace_f07 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
 
   // console.log("get image", getImage);
@@ -377,7 +377,7 @@ const Spunlace_f07 = () => {
   const fetchBmrOptions = async (date, shift, orderNo) => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShift?date=${date}&shift=${shift}&orderNo=${orderNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShift?date=${date}&shift=${shift}&orderNo=${orderNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -451,8 +451,8 @@ const Spunlace_f07 = () => {
   const fetchActivity = async (date, shift, orderNo) => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spulance/splRejection?date=${date}&shift=${convertShiftValue(shift)}&order=${orderNo}`,
-        // `${ API.prodUrl}/Precot/api/spulance/splRejection?date=2018-03-16&shift=1&order=80002146`,
+        `${API.prodUrl}/Precot/api/spulance/splRejection?date=${date}&shift=${convertShiftValue(shift)}&order=${orderNo}`,
+        // `${API.prodUrl}/Precot/api/spulance/splRejection?date=2018-03-16&shift=1&order=80002146`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -507,7 +507,7 @@ const Spunlace_f07 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/SubmitDailyRejectionReport`,
+        ` ${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/SubmitDailyRejectionReport`,
         payload,
         { headers }
       )

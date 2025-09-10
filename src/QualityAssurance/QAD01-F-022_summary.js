@@ -55,7 +55,7 @@ const QA_f22_Summary = () => {
         })
         .catch((err) => { });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -86,7 +86,7 @@ const QA_f22_Summary = () => {
         })
         .catch((err) => { });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = (dateStr) => {
     if (!dateStr) return "";
@@ -574,7 +574,7 @@ const QA_f22_Summary = () => {
                     SUPPLIER’S AUDIT PLAN
                   </th>
                   <td colSpan="5">Format No.:</td>
-                  <td colSpan="5">PH-QAD01-F-022</td>
+                  <td colSpan="5">PH-QAD01/F-022</td>
                 </tr>
                 <tr>
                   <td colSpan="5">Revision No.:</td>
@@ -802,7 +802,7 @@ const QA_f22_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="SUPPLIER’S AUDIT PLAN"
-          formatNo="PH-QAD01-F-022"
+          formatNo="PH-QAD01/F-022"
           MenuBtn={
             <Button
               type="primary"

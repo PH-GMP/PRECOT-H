@@ -88,7 +88,7 @@ function Bmr_Closing() {
     const fetchBmrOptions = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getMappingBmr`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ function Bmr_Closing() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
+          `${API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -155,7 +155,7 @@ function Bmr_Closing() {
     setShowButton(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatch`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchBatch`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -178,7 +178,7 @@ function Bmr_Closing() {
   const handleGo = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getStartDate?MappingBmr_No=${bmr}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getStartDate?MappingBmr_No=${bmr}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -218,7 +218,7 @@ function Bmr_Closing() {
           department_id: 4,
         };
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/goodsLaydown/closingLaydown`,
+          `${API.prodUrl}/Precot/api/goodsLaydown/closingLaydown`,
           payload,
           {
             headers: {
@@ -235,7 +235,7 @@ function Bmr_Closing() {
           const fetchData = async () => {
             try {
               const response = await axios.get(
-                `${ API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
+                `${API.prodUrl}/Precot/api/goodsLaydown/LaydownLov`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,
@@ -272,7 +272,7 @@ function Bmr_Closing() {
       console.log("apiBatch", apiBatch);
       try {
         response = await axios.post(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/closingBMR`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/closingBMR`,
           {
             bmrNo: bmr,
             endDate: endDateTime,

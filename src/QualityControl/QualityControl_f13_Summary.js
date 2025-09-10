@@ -163,7 +163,7 @@ const QualityControl_f013_Summary = () => {
   const fetchImage = async (username, token) => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -247,7 +247,7 @@ const QualityControl_f013_Summary = () => {
     // }
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/chemicaltest/ARF013`, {
+      .get(`${   API.prodUrl}/Precot/api/chemicaltest/ARF013`, {
         headers,
         params: {
           date: selectDate,
@@ -277,7 +277,7 @@ const QualityControl_f013_Summary = () => {
     };
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/chemicaltest/ARF013/getAll`, {
+      .get(`${   API.prodUrl}/Precot/api/chemicaltest/ARF013/getAll`, {
         headers,
       })
       .then((response) => {

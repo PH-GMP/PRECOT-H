@@ -285,7 +285,7 @@ const QualityAssurance_f047 = () => {
     const payload = {
       test_id: mainID,
       format: "BATCH RELEASE CHECKLIST",
-      format_no: "PH-QAD01-F-047",
+      format_no: "PH-QAD01/F-047",
       ref_sop_no: "PH-QAD01-D-43",
       bmrNo: formValues.bmrNumber,
       prodName: formValues.productName,
@@ -405,7 +405,7 @@ const QualityAssurance_f047 = () => {
     const payload = {
       test_id: mainID,
       format: "BATCH RELEASE CHECKLIST",
-      format_no: "PH-QAD01-F-047",
+      format_no: "PH-QAD01/F-047",
       ref_sop_no: "PH-QAD01-D-43",
       department: formValues.department || "N/A",
       bmrNo: formValues.bmrNumber || "N/A",
@@ -1605,7 +1605,7 @@ const QualityAssurance_f047 = () => {
       <BleachingHeader
         unit="Unit H"
         formName="BATCH RELEASE CHECKLIST"
-        formatNo="PH-QAD01-F-047"
+        formatNo="PH-QAD01/F-047"
         MenuBtn={
           <Button
             type="primary"

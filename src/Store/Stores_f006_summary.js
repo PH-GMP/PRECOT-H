@@ -198,7 +198,7 @@ const Stores_f006_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Store/getGatepassSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Store/getGatepassSummary`;
 
     // if (["STORE_INCHARGE", "ROLE_HOD"].includes(userRole)) {
     //   fetchSummary(summaryUrl);
@@ -288,7 +288,7 @@ const Stores_f006_summary = () => {
 
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Store/lastGatePassNo`,
+          `${API.prodUrl}/Precot/api/Store/lastGatePassNo`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -342,7 +342,7 @@ const Stores_f006_summary = () => {
   };
 
   const fetchData = () => {
-    let baseUrl = `${ API.prodUrl}/Precot/api/Store/getGatePassPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
+    let baseUrl = `${API.prodUrl}/Precot/api/Store/getGatePassPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
     let query = [];
     let finalUrl = baseUrl + query.join("&");
     console.log("finalUrl", finalUrl);
@@ -380,7 +380,7 @@ const Stores_f006_summary = () => {
         }
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.storeInchargeSign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.storeInchargeSign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -405,7 +405,7 @@ const Stores_f006_summary = () => {
           });
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hod_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hod_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",

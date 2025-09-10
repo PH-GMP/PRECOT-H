@@ -136,7 +136,7 @@ const QualityControl_f26G_Summary = () => {
   //   const customerLovApi = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `${  API.prodUrl}/Precot/api/QcForm/CustomerName`,
+  //         `${ API.prodUrl}/Precot/api/QcForm/CustomerName`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,

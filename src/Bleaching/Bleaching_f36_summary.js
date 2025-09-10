@@ -181,7 +181,7 @@ const Bleaching_f36_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -205,7 +205,7 @@ const Bleaching_f36_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -217,7 +217,7 @@ const Bleaching_f36_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -241,7 +241,7 @@ const Bleaching_f36_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = printResponseData?.[0]?.date
     ? new Date(printResponseData[0].date).toLocaleDateString("en-GB", {
@@ -281,7 +281,7 @@ const Bleaching_f36_Summary = () => {
         "Content-Type": "application/json",
       };
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleach/findStoppageByDateAndShift`,
+        `${API.prodUrl}/Precot/api/bleach/findStoppageByDateAndShift`,
         {
           pack_dt: printDate,
           shift_id: numericShiftValue,
@@ -341,7 +341,7 @@ const Bleaching_f36_Summary = () => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/bleach/findByDateAndShift`,
+          `${API.prodUrl}/Precot/api/bleach/findByDateAndShift`,
           { date: printDate, shift: value },
           {
             headers: {
@@ -378,7 +378,7 @@ const Bleaching_f36_Summary = () => {
       };
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleach/ShiftlogBookF36SummaryForSupervisor`,
+          `${API.prodUrl}/Precot/api/bleach/ShiftlogBookF36SummaryForSupervisor`,
           {
             headers,
           }
@@ -433,7 +433,7 @@ const Bleaching_f36_Summary = () => {
         "Content-Type": "application/json", // Adjust content type if needed
       };
       axios
-        .get(`${ API.prodUrl}/Precot/api/bleach/ShiftlogBookF36SummaryForHod`, {
+        .get(`${API.prodUrl}/Precot/api/bleach/ShiftlogBookF36SummaryForHod`, {
           headers,
         })
         .then((res) => {
@@ -570,7 +570,7 @@ const Bleaching_f36_Summary = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           { headers }
         );
         setShiftOptions(response.data);

@@ -109,7 +109,7 @@ const Spunlace_f12_summary = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           { headers }
         );
         setShiftOptions(response.data);
@@ -198,7 +198,7 @@ const Spunlace_f12_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -231,7 +231,7 @@ const Spunlace_f12_summary = () => {
   //   try {
   //     setShiftPrint(value);
   //     axios.get(
-  //       `${ API.prodUrl}/Precot/api/spulance/getSampleReportDetailsF012?order_no=${orderNumberPrint}&date=${formattedDate}&shift=${value}`,
+  //       `${API.prodUrl}/Precot/api/spulance/getSampleReportDetailsF012?order_no=${orderNumberPrint}&date=${formattedDate}&shift=${value}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -280,7 +280,7 @@ const Spunlace_f12_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spulance/getSampleReportDetailsF012?order_no=${orderNumberPrint}&date=${formattedDate}&shift=${shiftPrint}`,
+          `${API.prodUrl}/Precot/api/spulance/getSampleReportDetailsF012?order_no=${orderNumberPrint}&date=${formattedDate}&shift=${shiftPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -329,7 +329,7 @@ const Spunlace_f12_summary = () => {
   //     try {
   //       const token = localStorage.getItem("token");
   //       const response = await axios.get(
-  //         `${ API.prodUrl}/Precot/api/spulance/orders`,
+  //         `${API.prodUrl}/Precot/api/spulance/orders`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,
@@ -363,7 +363,7 @@ const Spunlace_f12_summary = () => {
   //   const fetchOrderNumberOptions = async () => {
   //     try {
   //       const response = await fetch(
-  //         `${ API.prodUrl}/Precot/api/spulance/orders`,
+  //         `${API.prodUrl}/Precot/api/spulance/orders`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -403,7 +403,7 @@ const Spunlace_f12_summary = () => {
         const token = localStorage.getItem("token");
         console.log("api called orderbydate goto", newDate);
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/orderByDate?date=${newDate}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderByDate?date=${newDate}&shift=${shiftparam}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -446,7 +446,7 @@ const Spunlace_f12_summary = () => {
       }
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/spulance/orderByDate?date=${datePrint}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderByDate?date=${datePrint}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -524,11 +524,11 @@ const Spunlace_f12_summary = () => {
 
         let apiUrl = "";
         if (role === "ROLE_SUPERVISOR") {
-          apiUrl = `${ API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
+          apiUrl = `${API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
         } else if (role === "ROLE_QC") {
-          apiUrl = `${ API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
+          apiUrl = `${API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
         } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
+          apiUrl = `${API.prodUrl}/Precot/api/spulance/getSummarydetailsF012`;
         } else {
           throw new Error("Role not found in localStorage.");
         }
@@ -758,7 +758,7 @@ const Spunlace_f12_summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -783,7 +783,7 @@ const Spunlace_f12_summary = () => {
           });
       }
     }
-  }, [printresponseData, API.prodUrl]);
+  }, [printresponseData,API.prodUrl]);
 
   const [getImage3, setGetImage3] = useState("");
 
@@ -796,7 +796,7 @@ const Spunlace_f12_summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -821,7 +821,7 @@ const Spunlace_f12_summary = () => {
           });
       }
     }
-  }, [printresponseData, API.prodUrl]);
+  }, [printresponseData,API.prodUrl]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -834,7 +834,7 @@ const Spunlace_f12_summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -859,7 +859,7 @@ const Spunlace_f12_summary = () => {
           });
       }
     }
-  }, [printresponseData, API.prodUrl]);
+  }, [printresponseData,API.prodUrl]);
 
   return (
     <div>
@@ -1040,7 +1040,7 @@ const Spunlace_f12_summary = () => {
 
             <tr>
               <td colSpan="5" style={{ textAlign: "center" }}>
-                Superisor Sign & Date
+                Supervisor Sign & Date
               </td>
 
               <td colSpan="5" style={{ textAlign: "center" }}>

@@ -95,7 +95,7 @@ const Padpunching_f05_f001_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const Padpunching_f05_f001_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -131,7 +131,7 @@ const Padpunching_f05_f001_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const Padpunching_f05_f001_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   console.log("get image", getImage);
 
@@ -241,7 +241,7 @@ const Padpunching_f05_f001_summary = () => {
   //       setIsButtonDisabled(false); 
 
   //       axios.get(
-  //         `${ API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftPrintApi?date=${formattedDate}&shift=${value}`,
+  //         `${API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftPrintApi?date=${formattedDate}&shift=${value}`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,
@@ -296,7 +296,7 @@ const Padpunching_f05_f001_summary = () => {
 
       // First API call
       const response1 = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftPrintApi?date=${formattedDate}&shift=${value}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/findByDateShiftPrintApi?date=${formattedDate}&shift=${value}`,
         { headers }
       );
 
@@ -309,7 +309,7 @@ const Padpunching_f05_f001_summary = () => {
 
         // Second API call
         const response2 = await axios.get(
-          `${ API.prodUrl}/Precot/api/padpunching/api/bag-details?date=${datePrint}&shift=${numberShift}`,
+          `${API.prodUrl}/Precot/api/padpunching/api/bag-details?date=${datePrint}&shift=${numberShift}`,
           { headers }
         );
 
@@ -357,7 +357,7 @@ const Padpunching_f05_f001_summary = () => {
   useEffect(() => {
     const fetchShiftOptions = async () => {
       try {
-        const response = await fetch(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        const response = await fetch(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -422,9 +422,9 @@ const Padpunching_f05_f001_summary = () => {
 
         let apiUrl = "";
         if (role === "ROLE_OPERATOR") {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/getSummaryBagMakingDailyProduction`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/getSummaryBagMakingDailyProduction`;
         } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/getSummaryBagMakingDailyProduction`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/getSummaryBagMakingDailyProduction`;
         }
         else {
           throw new Error("Role not found in localStorage.");

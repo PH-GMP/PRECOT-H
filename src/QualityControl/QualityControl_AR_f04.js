@@ -232,7 +232,7 @@ const QualityControl_AR_f04 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -272,7 +272,7 @@ const QualityControl_AR_f04 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/PDEData?pde=${invoiceNo}`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/PDEData?pde=${invoiceNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -308,7 +308,7 @@ const QualityControl_AR_f04 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/getByInvoice?invoice=${invoiceNo}`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/getByInvoice?invoice=${invoiceNo}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -442,7 +442,7 @@ const QualityControl_AR_f04 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/saveChemicalTest`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/saveChemicalTest`;
 
       payload = {
         test_id: formData.test_id,
@@ -675,7 +675,7 @@ const QualityControl_AR_f04 = () => {
         ],
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/approve`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/approve`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
@@ -1402,7 +1402,7 @@ const QualityControl_AR_f04 = () => {
         }
       }
       succesMsg = "Submitted Successfully ";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/submitChemicalTest`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/submitChemicalTest`;
       payload = {
         test_id: formData.test_id,
         invoice_no: invoiceNo,
@@ -1643,7 +1643,7 @@ const QualityControl_AR_f04 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF004/approve`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF004/approve`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,

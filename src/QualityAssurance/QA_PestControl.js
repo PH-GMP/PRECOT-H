@@ -91,9 +91,9 @@ const QA_PestControl = () => {
 
   useEffect(() => {
     if (
-      formNo === "PH-HRD01-F-015" ||
-      formNo === "PH-HRD01-F-019" ||
-      formNo === "PH-HRD01-F-014"
+      formNo === "PH-HRD01/F-015" ||
+      formNo === "PH-HRD01/F-019" ||
+      formNo === "PH-HRD01/F-014"
     ) {
       const dateObject = new Date(date);
       const monthIndex = dateObject.getMonth();
@@ -183,7 +183,7 @@ const QA_PestControl = () => {
         })
         .catch((err) => {});
     }
-  }, [getResponse, API.prodUrl, token]);
+  }, [getResponse,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -212,7 +212,7 @@ const QA_PestControl = () => {
         })
         .catch((err) => {});
     }
-  }, [getResponse, API.prodUrl, token]);
+  }, [getResponse,API.prodUrl, token]);
 
   const handleAddArea = () => {
     setShowModalNewArea(true);
@@ -315,7 +315,7 @@ const QA_PestControl = () => {
   const [Frequency, setFrequency] = useState("");
   const [formName, setformName] = useState("");
   useEffect(() => {
-    if (formNo === "PH-HRD01-F-015") {
+    if (formNo === "PH-HRD01/F-015") {
       setformName("PEST CONTROL REPORT - IFIM for House, Drain, Flesh Flies");
       setTypeOfService(
         "Integrated Flying Insect Management for House Flies, Drain Flies, Flesh Flies"
@@ -324,7 +324,7 @@ const QA_PestControl = () => {
         "Deltamethrin 2.5%SC, Propoxur 2% Bait, Propoxur 20% EC, Lambda cyhalothrin 10% WP"
       );
       setFrequency("Fortnightly");
-    } else if (formNo === "PH-HRD01-F-016") {
+    } else if (formNo === "PH-HRD01/F-016") {
       setformName(
         "PEST CONTROL SERVICE REPORT - ILM Service for House Lizards"
       );
@@ -333,19 +333,19 @@ const QA_PestControl = () => {
       );
       setChemicalAndDosage("Turbble Gum");
       setFrequency("Monthly");
-    } else if (formNo === "PH-HRD01-F-017") {
+    } else if (formNo === "PH-HRD01/F-017") {
       setformName("PEST CONTROL REPORT - ISMS for Spider & Crawling Insects");
       setTypeOfService(
         "Integrated Spider Management Service for Spider & Crawling Insects"
       );
       setChemicalAndDosage("Propoxur 20% EC");
       setFrequency("Half Yearly");
-    } else if (formNo === "PH-HRD01-F-018") {
+    } else if (formNo === "PH-HRD01/F-018") {
       setformName("PEST CONTROL SERVICE REPORT - IPM for Mosquitoes");
       setTypeOfService("IPM (Thermal Fogging) for Mosquitoes");
       setChemicalAndDosage("Deltamethrin 1.25% w/w or 1.% w/v  ");
       setFrequency("Monthly");
-    } else if (formNo === "PH-HRD01-F-019") {
+    } else if (formNo === "PH-HRD01/F-019") {
       setformName(
         "PEST CONTROL REPORT - Pro-Guard Service for Crawling Insects"
       );
@@ -354,7 +354,7 @@ const QA_PestControl = () => {
         "Deltamethrin 2.5%SC, Propoxur 20% EC, Cyfluthrin 5% EW."
       );
       setFrequency("Fortnightly");
-    } else if (formNo === "PH-HRD01-F-014") {
+    } else if (formNo === "PH-HRD01/F-014") {
       setformName("PEST CONTROL SERVICE REPORT - IMM Service for Mosquitoes");
       setTypeOfService(
         "IMM (Integrated Mosquito Management) Service for Mosquitoes"
@@ -481,7 +481,7 @@ const QA_PestControl = () => {
       return;
     }
     if (
-      formNo !== "PH-HRD01-F-015" &&
+      formNo !== "PH-HRD01/F-015" &&
       (nextDueDate == "null" || nextDueDate == "")
     ) {
       message.warning("Next Due Date Required");
@@ -489,9 +489,9 @@ const QA_PestControl = () => {
       return;
     }
     if (
-      (formNo == "PH-HRD01-F-016" ||
-        formNo == "PH-HRD01-F-017" ||
-        formNo == "PH-HRD01-F-018") &&
+      (formNo == "PH-HRD01/F-016" ||
+        formNo == "PH-HRD01/F-017" ||
+        formNo == "PH-HRD01/F-018") &&
       (changeableDate == "null" || changeableDate == "")
     ) {
       message.warning("Date Required");
@@ -711,15 +711,15 @@ const QA_PestControl = () => {
   const fetchDetailsByDate = async () => {
     let api;
     if (
-      formNo == "PH-HRD01-F-015" ||
-      formNo == "PH-HRD01-F-019" ||
-      formNo == "PH-HRD01-F-014"
+      formNo == "PH-HRD01/F-015" ||
+      formNo == "PH-HRD01/F-019" ||
+      formNo == "PH-HRD01/F-014"
     ) {
       api = `${API.prodUrl}/Precot/api/QA/Service/PestController/getByparam?format_no=${formNo}&month=${monthName}&year=${yearName}&date=${date}`;
     } else if (
-      formNo == "PH-HRD01-F-016" ||
-      formNo == "PH-HRD01-F-017" ||
-      formNo == "PH-HRD01-F-018"
+      formNo == "PH-HRD01/F-016" ||
+      formNo == "PH-HRD01/F-017" ||
+      formNo == "PH-HRD01/F-018"
     ) {
       api = `${API.prodUrl}/Precot/api/QA/Service/PestController/getByparam?format_no=${formNo}&month=${monthName}&year=${yearName}`;
     } else {
@@ -1268,9 +1268,9 @@ const QA_PestControl = () => {
           value={Frequency}
           style={{ width: "15%", height: "35px" }}
         />
-        {(formNo === "PH-HRD01-F-015" ||
-          formNo === "PH-HRD01-F-019" ||
-          formNo === "PH-HRD01-F-014") && (
+        {(formNo === "PH-HRD01/F-015" ||
+          formNo === "PH-HRD01/F-019" ||
+          formNo === "PH-HRD01/F-014") && (
           <Input
             addonBefore="Date:"
             placeholder="Date"
@@ -1290,7 +1290,7 @@ const QA_PestControl = () => {
           value={yearName}
           style={{ width: "20%", height: "35px" }}
         />
-        {formNo !== "PH-HRD01-F-015" && (
+        {formNo !== "PH-HRD01/F-015" && (
           <Input
             addonBefore="Next Due Date:"
             placeholder="Next Due Date"
@@ -1302,9 +1302,9 @@ const QA_PestControl = () => {
             style={{ width: "20%", height: "35px" }}
           />
         )}
-        {(formNo == "PH-HRD01-F-016" ||
-          formNo == "PH-HRD01-F-017" ||
-          formNo == "PH-HRD01-F-018") && (
+        {(formNo == "PH-HRD01/F-016" ||
+          formNo == "PH-HRD01/F-017" ||
+          formNo == "PH-HRD01/F-018") && (
           <Input
             addonBefore="Date:"
             placeholder="Date"

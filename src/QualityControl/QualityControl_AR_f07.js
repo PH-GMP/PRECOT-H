@@ -3115,7 +3115,7 @@ const QualityControl_AR_f07 = () => {
 
         axios
           .get(
-            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -3167,7 +3167,7 @@ const QualityControl_AR_f07 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${   API.prodUrl}/Precot/api/QcForm/getWaterAnalysisReport?date=${date}`,
+            `${  API.prodUrl}/Precot/api/QcForm/getWaterAnalysisReport?date=${date}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -3378,7 +3378,7 @@ const QualityControl_AR_f07 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SaveWaterAnalysisReportF007`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/SaveWaterAnalysisReportF007`;
       if (role == "ROLE_CHEMIST") {
         payload = {
           water_id: formData.water_id,
@@ -4174,7 +4174,7 @@ const QualityControl_AR_f07 = () => {
       role == "QC_MANAGER" ||
       role == "QA_EXECUTIVE"
     ) {
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF007`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF007`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.water_id,
@@ -5034,7 +5034,7 @@ const QualityControl_AR_f07 = () => {
         };
       }
       succesMsg = "Submitted Successfully ";
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SubmitWaterAnalysisReportF007`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/SubmitWaterAnalysisReportF007`;
     } else if (
       role == "QA_EXECUTIVE" ||
       role == "QA_MANAGER" ||
@@ -5045,7 +5045,7 @@ const QualityControl_AR_f07 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF007`;
+      apiurl = `${  API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF007`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.water_id,

@@ -159,7 +159,7 @@ const Spunlace_f14 = () => {
       setLoading(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spulance/baleWeight?order=${orderNo}&shift=${convertedShiftValue}&date=${newdate}`,
+          `${API.prodUrl}/Precot/api/spulance/baleWeight?order=${orderNo}&shift=${convertedShiftValue}&date=${newdate}`,
 
           {
             headers: {
@@ -296,7 +296,7 @@ const Spunlace_f14 = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -326,7 +326,7 @@ const Spunlace_f14 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF014`,
+        `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF014`,
         {
           id: id,
           status: "Approve",
@@ -366,7 +366,7 @@ const Spunlace_f14 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/report/approveOrRejectF014`,
+        `${API.prodUrl}/Precot/api/spulance/report/approveOrRejectF014`,
         {
           id: id,
           status: "Reject",
@@ -437,7 +437,7 @@ const Spunlace_f14 = () => {
       setLoading(true);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spulance/report/fetchRPProdReport?order=${orderNo}&shift=${shiftvalue}&date=${newdate}`,
+          `${API.prodUrl}/Precot/api/spulance/report/fetchRPProdReport?order=${orderNo}&shift=${shiftvalue}&date=${newdate}`,
 
           {
             headers: {
@@ -500,7 +500,7 @@ const Spunlace_f14 = () => {
           // console.log("Shift details fetched:", res.data);
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.operator_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.operator_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -526,7 +526,7 @@ const Spunlace_f14 = () => {
           /////////////////
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.supervisor_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.supervisor_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -552,7 +552,7 @@ const Spunlace_f14 = () => {
           ///////////////////
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.hod_sign}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data[0]?.hod_sign}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -592,7 +592,7 @@ const Spunlace_f14 = () => {
   //     setLoading(true);
   //     axios
   //       .get(
-  //         `${ API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseSliterWinderProdReport/getByDateShiftOrderNo=${orderNo}&shift=${shiftvalue}&date=${newdate}`,
+  //         `${API.prodUrl}/Precot/api/spunlace/Service/ShiftWiseSliterWinderProdReport/getByDateShiftOrderNo=${orderNo}&shift=${shiftvalue}&date=${newdate}`,
 
   //         {
   //           headers: {
@@ -661,7 +661,7 @@ const Spunlace_f14 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spulance/report/submitRPProdReport`,
+        `${API.prodUrl}/Precot/api/spulance/report/submitRPProdReport`,
         payload,
         { headers }
       )

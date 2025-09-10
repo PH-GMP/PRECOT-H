@@ -188,7 +188,7 @@ const QA_f25 = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -212,14 +212,14 @@ const QA_f25 = () => {
           
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = selectedRow?.qaManagerOrMrSign;
     if (username) { 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -243,7 +243,7 @@ const QA_f25 = () => {
           
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -284,7 +284,7 @@ const QA_f25 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qa/SummaryOfTraceability/approveOrReject`,
+        `${API.prodUrl}/Precot/api/qa/SummaryOfTraceability/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -314,7 +314,7 @@ const QA_f25 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qa/SummaryOfTraceability/approveOrReject`,
+        `${API.prodUrl}/Precot/api/qa/SummaryOfTraceability/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -354,7 +354,7 @@ const QA_f25 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "SUMMARY OF TRACEABILITY",
-        formatNo: "PH-QAD01-F-025",
+        formatNo: "PH-QAD01/F-025",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-23",
         date: date,
@@ -393,7 +393,7 @@ const QA_f25 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/qa/saveSummaryOfTraceability`,
+        `${API.prodUrl}/Precot/api/qa/saveSummaryOfTraceability`,
         payload,
         { headers }
       );
@@ -438,7 +438,7 @@ const QA_f25 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "SUMMARY OF TRACEABILITY",
-        formatNo: "PH-QAD01-F-025",
+        formatNo: "PH-QAD01/F-025",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-23",
         date: date,
@@ -556,7 +556,7 @@ const QA_f25 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/qa/submitSummaryOfTraceability`,
+        `${API.prodUrl}/Precot/api/qa/submitSummaryOfTraceability`,
         payload,
         { headers }
       );
@@ -585,7 +585,7 @@ const QA_f25 = () => {
   const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/qa/getdetailsbySummaryOfTraceability?date=${date}&department=${departments}&bmrNo=${BMRNo}`,
+        `${API.prodUrl}/Precot/api/qa/getdetailsbySummaryOfTraceability?date=${date}&department=${departments}&bmrNo=${BMRNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -629,7 +629,7 @@ const QA_f25 = () => {
   const fetchBmrDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/qa/SummaryOfTraceabilityBMRDetails?department=${departments}&batchNo=${BMRNo}`,
+        `${API.prodUrl}/Precot/api/qa/SummaryOfTraceabilityBMRDetails?department=${departments}&batchNo=${BMRNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1640,7 +1640,7 @@ const QA_f25 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="SUMMARY OF TRACEABILITY"
-        formatNo="PH-QAD01-F-025"
+        formatNo="PH-QAD01/F-025"
         sopNo="PH-QAD01-D-22"
         MenuBtn={
           <Button

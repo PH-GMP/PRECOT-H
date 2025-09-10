@@ -93,7 +93,7 @@ const ReprocessSummary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -117,7 +117,7 @@ const ReprocessSummary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.supervisorSubmittedBy, API.prodUrl, token]);
+  }, [selectedRow?.supervisorSubmittedBy,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -127,7 +127,7 @@ const ReprocessSummary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const ReprocessSummary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, selectedRow?.hodSubmittedBy, API.prodUrl, token]);
+  }, [selectedRow, selectedRow?.hodSubmittedBy,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -161,7 +161,7 @@ const ReprocessSummary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -185,7 +185,7 @@ const ReprocessSummary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow?.qaSign, API.prodUrl, token]);
+  }, [selectedRow?.qaSign,API.prodUrl, token]);
 
   const roleBase = localStorage.getItem("role");
 
@@ -308,7 +308,7 @@ const ReprocessSummary = () => {
 
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${BMR}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${BMR}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -338,7 +338,7 @@ const ReprocessSummary = () => {
     const fetchLayDown = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR
+          `${API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR
  `,
           { headers }
         );
@@ -404,7 +404,7 @@ const ReprocessSummary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -438,7 +438,7 @@ const ReprocessSummary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
+          `${API.prodUrl}/Precot/api/chemicaltest/ARF004/PDE`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -469,7 +469,7 @@ const ReprocessSummary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/bleaching/Service/getReprocessSummary`,
+            `${API.prodUrl}/Precot/api/bleaching/Service/getReprocessSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -692,7 +692,7 @@ const ReprocessSummary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportPrint?bmrNumber=${printBMR}&date=${printParams.date}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/getReprocessReportPrint?bmrNumber=${printBMR}&date=${printParams.date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -715,7 +715,7 @@ const ReprocessSummary = () => {
       //getImage
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -744,7 +744,7 @@ const ReprocessSummary = () => {
       //getImage
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -774,7 +774,7 @@ const ReprocessSummary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
           {
             headers: {
               "Content-Type": "application/json",

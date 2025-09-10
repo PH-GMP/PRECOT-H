@@ -247,7 +247,7 @@ const QualityAssurance_f43 = () => {
       payload = {
         bmrIssueId: formData.bmrIssueId,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-045",
+        formatNo: "PH-QAD01/F-045",
         formatName: "BMR - Issue Register",
         sopNumber: "PH-QAD01-D-43",
         revisionNo: "01",
@@ -270,7 +270,7 @@ const QualityAssurance_f43 = () => {
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.bmrIssueId,
-        formatNo: "PH-QAD01-F-045",
+        formatNo: "PH-QAD01/F-045",
         status: "Approve",
       };
     }
@@ -325,7 +325,7 @@ const QualityAssurance_f43 = () => {
       payload = {
         bmrIssueId: formData.bmrIssueId,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-045",
+        formatNo: "PH-QAD01/F-045",
         formatName: "BMR - Issue Register",
         sopNumber: "PH-QAD01-D-43",
         revisionNo: "01",
@@ -354,7 +354,7 @@ const QualityAssurance_f43 = () => {
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.bmrIssueId,
-        formatNo: "PH-QAD01-F-045",
+        formatNo: "PH-QAD01/F-045",
         status: "Reject",
         remarks: formData.reason,
       };
@@ -509,7 +509,7 @@ const QualityAssurance_f43 = () => {
     <>
       <BleachingHeader
         formName={"BMR - Issue Register"}
-        formatNo={"PH-QAD01-F-045"}
+        formatNo={"PH-QAD01/F-045"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

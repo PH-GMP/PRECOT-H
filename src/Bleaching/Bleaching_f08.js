@@ -209,7 +209,7 @@ const Bleaching_f08 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -233,7 +233,7 @@ const Bleaching_f08 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -245,7 +245,7 @@ const Bleaching_f08 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -269,7 +269,7 @@ const Bleaching_f08 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   // const [selectedrow, setSelectedrow] = useState("");
   const showDrawer = () => {
@@ -302,7 +302,7 @@ const Bleaching_f08 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF08`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF08`,
         {
           id: overallRawId,
           status: "Approve",
@@ -348,7 +348,7 @@ const Bleaching_f08 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF08`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF08`,
         {
           id: overallRawId,
           status: "Reject",
@@ -406,7 +406,7 @@ const Bleaching_f08 = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getAppliedAbCottonByBmrNumberF08?bmrNumber=${state.bmrno}`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getAppliedAbCottonByBmrNumberF08?bmrNumber=${state.bmrno}`,
         { headers }
       )
       .then((res) => {
@@ -1175,7 +1175,7 @@ const Bleaching_f08 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/saveAppliedAbCottonF08`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/saveAppliedAbCottonF08`,
         payload,
         { headers }
       )
@@ -1413,7 +1413,7 @@ const Bleaching_f08 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/submitAppliedAbCottonF08`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/submitAppliedAbCottonF08`,
         payload,
         { headers }
       )

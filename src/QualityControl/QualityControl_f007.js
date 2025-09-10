@@ -165,7 +165,7 @@ const QualityControl_f007 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const QualityControl_f007 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,      API.prodUrl, token]);
+  }, [planingDetailsByDate,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -198,7 +198,7 @@ const QualityControl_f007 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -222,7 +222,7 @@ const QualityControl_f007 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,      API.prodUrl, token]);
+  }, [planingDetailsByDate,     API.prodUrl, token]);
 
   const roleauth = localStorage.getItem("role");
 
@@ -327,7 +327,7 @@ const QualityControl_f007 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           id: 2,
           status: "Reject",
@@ -364,7 +364,7 @@ const QualityControl_f007 = () => {
       };
 
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/Id/`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/Id/`,
         { headers }
       );
       console.log("response (details based on date)", response.data);
@@ -404,7 +404,7 @@ const QualityControl_f007 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           // id : id,
           status: "Approve",
@@ -467,7 +467,7 @@ const QualityControl_f007 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/save/wigClf007`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/save/wigClf007`,
         payload,
         { headers }
       );
@@ -514,7 +514,7 @@ const QualityControl_f007 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/Submit/wigClf007`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/Submit/wigClf007`,
         payload,
         { headers }
       );
@@ -543,7 +543,7 @@ const QualityControl_f007 = () => {
   const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
+        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

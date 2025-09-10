@@ -285,7 +285,7 @@ const Engineering_FC020_Summary = () => {
             }
         };
 
-        const summaryUrl = `${ API.prodUrl}/Precot/api/Engineering/getWorkorderlistSummary?username=${username}`;
+        const summaryUrl = `${API.prodUrl}/Precot/api/Engineering/getWorkorderlistSummary?username=${username}`;
 
         // if (["ROLE_OPERATOR", "ROLE_SUPERVISOR", "ROLE_HOD", "ROLE_DESIGNEE"].includes(userRole)) {
         fetchSummary(summaryUrl);
@@ -363,7 +363,7 @@ const Engineering_FC020_Summary = () => {
     };
 
     const fetchData = () => {
-        let baseUrl = `${ API.prodUrl}/Precot/api/Engineering/getWorkorderlistPrint?worNo=${selectedWorNo}&month=${selectedMonth}&year=${selectedYear}`;
+        let baseUrl = `${API.prodUrl}/Precot/api/Engineering/getWorkorderlistPrint?worNo=${selectedWorNo}&month=${selectedMonth}&year=${selectedYear}`;
         let query = [];
 
 
@@ -403,7 +403,7 @@ const Engineering_FC020_Summary = () => {
                 }
                 axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.requesterSign}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.requesterSign}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -428,7 +428,7 @@ const Engineering_FC020_Summary = () => {
                     });
                     axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.accepterSign}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.accepterSign}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -453,7 +453,7 @@ const Engineering_FC020_Summary = () => {
                     });
                 axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.receiverSign}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.receiverSign}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -478,7 +478,7 @@ const Engineering_FC020_Summary = () => {
                     });
                 axios
                     .get(
-                        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hodSign}`,
+                        `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hodSign}`,
                         {
                             headers: {
                                 "Content-Type": "application/json",
@@ -521,7 +521,7 @@ const Engineering_FC020_Summary = () => {
 
             try {
                 const response = await axios.get(
-                    `${ API.prodUrl}/Precot/api/Engineering/lastWoRNo`,
+                    `${API.prodUrl}/Precot/api/Engineering/lastWoRNo`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -553,7 +553,7 @@ const Engineering_FC020_Summary = () => {
 
     const fetchWorNo = async (department) => {
         try {
-            const response = await fetch(`${ API.prodUrl}/Precot/api/Engineering/departmentbasedworno?department=${department}`, {
+            const response = await fetch(`${API.prodUrl}/Precot/api/Engineering/departmentbasedworno?department=${department}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

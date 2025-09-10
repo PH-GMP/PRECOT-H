@@ -257,7 +257,7 @@ const DryGoods_F012 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -307,7 +307,7 @@ const DryGoods_F012 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/goods/getHandSanitationF013?date=${date}&shift=${shiftvalue}`,
+            `${API.prodUrl}/Precot/api/goods/getHandSanitationF013?date=${date}&shift=${shiftvalue}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -369,7 +369,7 @@ const DryGoods_F012 = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const DryGoods_F012 = () => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=4`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=4`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -538,7 +538,7 @@ const DryGoods_F012 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/goods/saveHandSanitationF013`, payload, {
+      .post(`${API.prodUrl}/Precot/api/goods/saveHandSanitationF013`, payload, {
         headers,
       })
       .then((response) => {
@@ -587,7 +587,7 @@ const DryGoods_F012 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/goods/submitHandSanitationF013`, payload, {
+      .post(`${API.prodUrl}/Precot/api/goods/submitHandSanitationF013`, payload, {
         headers,
       })
       .then((response) => {
@@ -613,7 +613,7 @@ const DryGoods_F012 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/goods/approveHandSanitationF013`,
+        `${API.prodUrl}/Precot/api/goods/approveHandSanitationF013`,
         {
           id: handSanitizationIdState,
           status: "Approve",
@@ -651,7 +651,7 @@ const DryGoods_F012 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/goods/approveHandSanitationF013`,
+        `${API.prodUrl}/Precot/api/goods/approveHandSanitationF013`,
         {
           id: handSanitizationIdState,
           status: "Reject",

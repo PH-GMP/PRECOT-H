@@ -44,7 +44,7 @@ const QualityControlARF012Summary = () => {
     const fetchImage = async (roleSign) => {
       try {
         const res = await axios.get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${roleSign}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${roleSign}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -86,16 +86,16 @@ const QualityControlARF012Summary = () => {
     };
 
     fetchAllImages();
-  }, [printData, token,      API.prodUrl]);
+  }, [printData, token,     API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     const apiUrl =
       roleauth === "ROLE_CHEMIST"
-        ? `${    API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/getAllChemistNotSubmitted`
+        ? `${   API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/getAllChemistNotSubmitted`
         : roleauth === "QC_MANAGER" || roleauth === "QA_MANAGER"
-        ? `${    API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/getAllQcNotSubmitted`
+        ? `${   API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/getAllQcNotSubmitted`
         : null; // Handle invalid role if necessary
 
     axios
@@ -248,7 +248,7 @@ const QualityControlARF012Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let baseUrl = `${    API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/GetByDateMonthYear/print?`;
+    let baseUrl = `${   API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/GetByDateMonthYear/print?`;
     let query = [];
 
     // Construct the query based on selected fields

@@ -139,7 +139,7 @@ const Bleaching_f42_summary = () => {
       setPrintLaydown(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LayDownChecklistDetailsF42?layDownNo=${value}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LayDownChecklistDetailsF42?layDownNo=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -185,7 +185,7 @@ const Bleaching_f42_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const Bleaching_f42_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -221,7 +221,7 @@ const Bleaching_f42_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -245,14 +245,14 @@ const Bleaching_f42_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   // console.log("get image", getImage);
 
   const fetchDataLOV_BMRNO = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getMappingLaydown`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -268,7 +268,7 @@ const Bleaching_f42_summary = () => {
   const fetchAllBMRNOAndLayDown = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F01`,
+        `${API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F01`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -284,7 +284,7 @@ const Bleaching_f42_summary = () => {
   const fetchDataBMRwiseLaydown = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/getMapBMR?MappingBmr_No=${availableBMRnoLov}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/getMapBMR?MappingBmr_No=${availableBMRnoLov}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -307,7 +307,7 @@ const Bleaching_f42_summary = () => {
 
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LaydownChechListF33Summary`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/LaydownChechListF33Summary`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

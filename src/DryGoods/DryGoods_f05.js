@@ -313,7 +313,7 @@ const DryGoods_f05 = () => {
           console.log("Api Call Happen");
           const response2 = await axios.get(
             `${
-              API.prodUrl
+             API.prodUrl
             }/Precot/api/goods/api/dryGoodsMiniROllStoppage?date=${date}&order_no=${Number(
               order_no
             )}&shift=${pdeShift}`,

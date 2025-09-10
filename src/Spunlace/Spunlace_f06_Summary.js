@@ -107,7 +107,7 @@ const Spunlace_f06_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -143,7 +143,7 @@ const Spunlace_f06_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // console.log("get image", getImage);
 
@@ -181,7 +181,7 @@ const Spunlace_f06_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   // console.log("get image", getImage);
 

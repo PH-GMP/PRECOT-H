@@ -198,7 +198,7 @@ const Bleaching = () => {
 
       // Make the POST request to the API endpoint with headers
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Caking/Service/creatBleachingJobCard`,
+        `${API.prodUrl}/Precot/api/Caking/Service/creatBleachingJobCard`,
         payload,
         { headers }
       );
@@ -323,7 +323,7 @@ const Bleaching = () => {
 
       // Make the POST request to the API endpoint with headers
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Caking/Service/UpdateBleachingJobCard`,
+        `${API.prodUrl}/Precot/api/Caking/Service/UpdateBleachingJobCard`,
         payload,
         { headers }
       );

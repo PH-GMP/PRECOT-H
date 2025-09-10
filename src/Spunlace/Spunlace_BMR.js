@@ -141,7 +141,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -175,7 +175,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -209,7 +209,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
 
   const formattedDate = () => {
     if (printResponseData?.operator_submitted_on) {

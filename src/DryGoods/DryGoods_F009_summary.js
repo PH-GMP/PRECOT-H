@@ -146,7 +146,7 @@ const Drygoods_f09_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetchDataOrderNumber();
@@ -181,7 +181,7 @@ const Drygoods_f09_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetchDataOrderNumber();
@@ -216,7 +216,7 @@ const Drygoods_f09_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   const fetchDataOrderNumber = async () => {
     try {
       setLoading(true);
@@ -297,7 +297,7 @@ const Drygoods_f09_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = () => {
     if (printResponseData?.hod_submit_on) {
@@ -561,7 +561,7 @@ const Drygoods_f09_Summary = () => {
       axios
         .get(
           `${
-            API.prodUrl
+           API.prodUrl
           }/Precot/api/spulance/fetchBaleConsumption?order=${12}&date=${datePrint}&shift=${value}`,
           {
             headers: {

@@ -732,7 +732,7 @@ const QA_F21_Summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="NON-CONFORMITY LOG BOOK "
-        formatNo="PH-QAD01-F-021"
+        formatNo="PH-QAD01/F-021"
         MenuBtn={
           <Button
             type="primary"
@@ -859,7 +859,7 @@ const QA_F21_Summary = () => {
                       NON-CONFORMITY LOG BOOK
                     </th>
                     <td colSpan="20">Format No.:</td>
-                    <td colSpan="35">PH-QAD01-F-021</td>
+                    <td colSpan="35">PH-QAD01/F-021</td>
                   </tr>
                   <tr>
                     <td colSpan="20">Revision No.:</td>

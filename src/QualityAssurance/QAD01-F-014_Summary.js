@@ -74,7 +74,7 @@ const QA_f14_Summary = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -334,7 +334,7 @@ const QA_f14_Summary = () => {
                     SUMMARY OF INTERNAL AUDIT
                   </th>
                   <th colSpan={25}>Format No.:</th>
-                  <th colSpan={25}>PH-QAD01-F-014</th>
+                  <th colSpan={25}>PH-QAD01/F-014</th>
                 </tr>
                 <tr>
                   <th colSpan={25}>Revision No.:</th>
@@ -590,7 +590,7 @@ const QA_f14_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="SUMMARY OF INTERNAL AUDIT "
-          formatNo="PH-QAD01-F-014"
+          formatNo="PH-QAD01/F-014"
           MenuBtn={
             <Button
               type="primary"

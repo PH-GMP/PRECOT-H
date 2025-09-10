@@ -45,7 +45,7 @@ const QualityControlF006Summary = () => {
   // Function to fetch image based on the username
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -90,11 +90,11 @@ const QualityControlF006Summary = () => {
 
       const url =
         roleauth === "ROLE_CHEMIST"
-          ? `${    API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/GetAll`
+          ? `${   API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/GetAll`
           : roleauth === "QC_MANAGER" ||
             roleauth === "QA_MANAGER" ||
             roleauth === "CHEMIST_DESIGNEE"
-          ? `${    API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/getAllQcNotSubmitted`
+          ? `${   API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/getAllQcNotSubmitted`
           : null;
 
       const token = localStorage.getItem("token");
@@ -294,7 +294,7 @@ const QualityControlF006Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${    API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/GetByDateMonthYearEqId/print?eqIdNo=${selectedPrintEqNo}`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/qc/PhMeterCalibrationReportF006/GetByDateMonthYearEqId/print?eqIdNo=${selectedPrintEqNo}`;
 
     // Build API URL based on selected fields
     if (selectedPrintDate) {

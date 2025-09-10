@@ -163,7 +163,7 @@ const Drygoods_f03_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   const handleSelectChange = (value) => {
     const selectedMachine = machineNameLov.find(
       (MacLOV) => MacLOV.value === value
@@ -237,7 +237,7 @@ const Drygoods_f03_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -271,7 +271,7 @@ const Drygoods_f03_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   const formattedDate_hod = () => {
     if (printResponseData?.hod_submit_on) {
       const date = moment(printResponseData.hod_submit_on);

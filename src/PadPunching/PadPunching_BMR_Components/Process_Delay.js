@@ -52,7 +52,7 @@
 
 //   useEffect(() => {
 //     axios
-//       .get(`${ API.prodUrl}/Precot/api/padpunching/MachineLov`, {
+//       .get(`${API.prodUrl}/Precot/api/padpunching/MachineLov`, {
 //         headers: {
 //           Authorization: `Bearer ${localStorage.getItem("token")}`,
 //         },
@@ -72,7 +72,7 @@
 //     //getStoppagesBybatch
 //     axios
 //       .get(
-//         `${ API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
+//         `${API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -105,7 +105,7 @@
 //     setLoading(true);
 //     axios
 //       .get(
-//         `${ API.prodUrl}/Precot/api/punching/bmr/stoppageReports?fromdate=${moment(
+//         `${API.prodUrl}/Precot/api/punching/bmr/stoppageReports?fromdate=${moment(
 //           primaryKeys.fromDate
 //         ).format("YYYY-MM-DD")}&todate=${moment(primaryKeys.toDate).format(
 //           "YYYY-MM-DD"
@@ -158,7 +158,7 @@
 //       }),
 //     };
 //     axios
-//       .post(`${ API.prodUrl}/Precot/api/punching/bmr/saveStoppage`, payload, {
+//       .post(`${API.prodUrl}/Precot/api/punching/bmr/saveStoppage`, payload, {
 //         headers: {
 //           Authorization: `Bearer ${localStorage.getItem("token")}`,
 //         },
@@ -381,7 +381,7 @@ const Process_Delay = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${ API.prodUrl}/Precot/api/padpunching/MachineLov`, {
+      .get(`${API.prodUrl}/Precot/api/padpunching/MachineLov`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -403,7 +403,7 @@ const Process_Delay = (props) => {
     setLoading(true);
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
         {
           // params: { batch_no: batchNo },
           headers: {
@@ -445,7 +445,7 @@ const Process_Delay = (props) => {
     if (fromDate && toDate && selectedMachine) {
       setLoading(true);
       axios
-        .get(`${ API.prodUrl}/Precot/api/punching/bmr/stoppageReports`, {
+        .get(`${API.prodUrl}/Precot/api/punching/bmr/stoppageReports`, {
           params: {
             fromdate: moment(fromDate).format("YYYY-MM-DD"),
             todate: moment(toDate).format("YYYY-MM-DD"),
@@ -505,7 +505,7 @@ const Process_Delay = (props) => {
       };
 
       axios
-        .post(`${ API.prodUrl}/Precot/api/punching/bmr/saveStoppage`, payload, {
+        .post(`${API.prodUrl}/Precot/api/punching/bmr/saveStoppage`, payload, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -517,7 +517,7 @@ const Process_Delay = (props) => {
           setDates({});
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -599,7 +599,7 @@ const Process_Delay = (props) => {
       };
 
       axios
-        .post(`${ API.prodUrl}/Precot/api/punching/bmr/submitStoppage`, payload, {
+        .post(`${API.prodUrl}/Precot/api/punching/bmr/submitStoppage`, payload, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -611,7 +611,7 @@ const Process_Delay = (props) => {
           setDates({});
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -138,7 +138,7 @@ const QualityControl_f25_Summary = () => {
 
           axios
             .get(
-              `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -258,7 +258,7 @@ const QualityControl_f25_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -282,7 +282,7 @@ const QualityControl_f25_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = printResponseData?.hod_sign;
@@ -291,7 +291,7 @@ const QualityControl_f25_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -315,7 +315,7 @@ const QualityControl_f25_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -357,7 +357,7 @@ const QualityControl_f25_Summary = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026`,
+          `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -499,7 +499,7 @@ const QualityControl_f25_Summary = () => {
 
           if (role === "ROLE_CHEMIST" || role === "ROLE_MICROBIOLOGIST") {
             response = await axios.get(
-              `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/GetAll`,
+              `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/GetAll`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -508,7 +508,7 @@ const QualityControl_f25_Summary = () => {
             );
           } else if (role === "QC_MANAGER" || role === "QA_MANAGER") {
             response = await axios.get(
-              `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/getAllQcNotSubmitted`,
+              `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/getAllQcNotSubmitted`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -541,8 +541,8 @@ const QualityControl_f25_Summary = () => {
     try {
       axios
         .get(
-          // `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026?lotNo=${SelectedLotNo}&year=${selectedPrintYear}`,
-          `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026?lotNo=${SelectedLotNo}&year=${selectedPrintYear}`,
+          // `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026?lotNo=${SelectedLotNo}&year=${selectedPrintYear}`,
+          `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/PrintForF026?lotNo=${SelectedLotNo}&year=${selectedPrintYear}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

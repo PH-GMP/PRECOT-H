@@ -77,7 +77,7 @@ const List_Of_Enclosure = (props) => {
     });
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/cottonBall/11.GetListOfEnclosurs?batch_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/cottonBall/11.GetListOfEnclosurs?batch_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -150,7 +150,7 @@ const List_Of_Enclosure = (props) => {
     setButtonLoader(true);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/cottonBall/11.submitListOfEnclosurs`,
+        `${API.prodUrl}/Precot/api/cottonBall/11.submitListOfEnclosurs`,
         payload,
         {
           headers: {
@@ -164,7 +164,7 @@ const List_Of_Enclosure = (props) => {
           message.success("List of enclousres Submitted");
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/cottonBall/11.GetListOfEnclosurs?batch_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/cottonBall/11.GetListOfEnclosurs?batch_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,

@@ -516,7 +516,7 @@ const QA_f25_Summary = () => {
                     SUMMARY OF TRACEABILITY
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="15">PH-QAD01-F-025</td>
+                  <td colSpan="15">PH-QAD01/F-025</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -813,7 +813,7 @@ const QA_f25_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="SUMMARY OF TRACEABILITY"
-          formatNo="PH-QAD01-F-025"
+          formatNo="PH-QAD01/F-025"
           MenuBtn={
             <Button
               type="primary"

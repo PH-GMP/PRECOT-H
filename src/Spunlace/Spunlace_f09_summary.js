@@ -103,7 +103,7 @@ const Spunlace_f09_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const Spunlace_f09_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = printResponseData?.hod_sign;
@@ -136,7 +136,7 @@ const Spunlace_f09_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const Spunlace_f09_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const GlobalStyle = createGlobalStyle`
    @media print {
@@ -270,11 +270,11 @@ const Spunlace_f09_summary = () => {
       };
 
       const firstApi = axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getByDateShiftOrderNoPrintApi?date=${datePrint}&shift=${shiftPrint}&orderNo=${orderNumberPrint}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getByDateShiftOrderNoPrintApi?date=${datePrint}&shift=${shiftPrint}&orderNo=${orderNumberPrint}`,
         { headers }
       );
       const secondApi = axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/getMahloData?date=${formattedDate}&shift=${shiftparam}`,
+        `${API.prodUrl}/Precot/api/spulance/getMahloData?date=${formattedDate}&shift=${shiftparam}`,
         { headers }
       );
 
@@ -319,7 +319,7 @@ const Spunlace_f09_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -347,7 +347,7 @@ const Spunlace_f09_summary = () => {
   //   const fetchOrderNumberOptions = async () => {
   //     try {
   //       const response = await fetch(
-  //         `${ API.prodUrl}/Precot/api/spulance/orders`,
+  //         `${API.prodUrl}/Precot/api/spulance/orders`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -386,7 +386,7 @@ const Spunlace_f09_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/orderByDate?date=${date}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderByDate?date=${date}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -426,7 +426,7 @@ const Spunlace_f09_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/orderByDate?date=${datePrint}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderByDate?date=${datePrint}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -582,7 +582,7 @@ const Spunlace_f09_summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getGsmAnalysisSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getGsmAnalysisSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",

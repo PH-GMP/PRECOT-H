@@ -208,7 +208,7 @@ const Stores_f009_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Store/getEyeWashChecklistSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Store/getEyeWashChecklistSummary`;
 
     if (["STORE_OPERATOR", "STORE_INCHARGE"].includes(userRole)) {
       fetchSummary(summaryUrl);
@@ -295,9 +295,9 @@ const Stores_f009_summary = () => {
   };
 
   const fetchData = () => {
-    // let baseUrl = `${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklistPrint?`;
+    // let baseUrl = `${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklistPrint?`;
 
-    let baseUrl = `${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklistPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
+    let baseUrl = `${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklistPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}`;
     let query = [];
     let finalUrl = baseUrl + query.join("&");
     console.log("finalUrl", finalUrl);
@@ -335,7 +335,7 @@ const Stores_f009_summary = () => {
         }
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.operator_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.operator_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -360,7 +360,7 @@ const Stores_f009_summary = () => {
           });
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.store_in_charge_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.store_in_charge_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",

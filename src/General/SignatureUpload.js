@@ -90,7 +90,7 @@ const SignatureUpload = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/Users/Service/getListOfUsers`, {
+      .get(`${API.prodUrl}/Precot/api/Users/Service/getListOfUsers`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -117,7 +117,7 @@ const SignatureUpload = () => {
     setLoading(true);
     axios
       .delete(
-        `${ API.prodUrl}/Precot/api/Format/Service/deleteImage?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/deleteImage?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -144,7 +144,7 @@ const SignatureUpload = () => {
       const token = localStorage.getItem("token");
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -194,7 +194,7 @@ const SignatureUpload = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Format/Service/uploadImage?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/uploadImage?username=${username}`,
         formData,
         {
           headers: {

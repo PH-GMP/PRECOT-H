@@ -265,7 +265,7 @@ const QA_f60 = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedrow, API.prodUrl, token]);
+  }, [selectedrow,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = selectedrow?.managerSign;
@@ -293,7 +293,7 @@ const QA_f60 = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedrow, API.prodUrl, token]);
+  }, [selectedrow,API.prodUrl, token]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -404,7 +404,7 @@ const QA_f60 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "MASTER LIST OF SHARP TOOLS",
-        formatNo: "PH-QAD01-F-060",
+        formatNo: "PH-QAD01/F-060",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-43",
         date: date,
@@ -489,7 +489,7 @@ const QA_f60 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "MASTER LIST OF SHARP TOOLS",
-        formatNo: "PH-QAD01-F-060",
+        formatNo: "PH-QAD01/F-060",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-43",
         date: date,
@@ -946,7 +946,7 @@ const QA_f60 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="MASTER LIST OF SHARP TOOLS"
-        formatNo="PH-QAD01-F-060"
+        formatNo="PH-QAD01/F-060"
         sopNo="PH-QAD01-D-22"
         MenuBtn={
           <Button

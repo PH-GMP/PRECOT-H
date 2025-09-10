@@ -238,7 +238,7 @@ const QualityControl_f03_Summary = () => {
   const getImage = (username, type) => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -290,7 +290,7 @@ const QualityControl_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
+          `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
           {
             headers,
             params: { formatNo: formNo },
@@ -338,7 +338,7 @@ const QualityControl_f03_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/getAllQcNotSubmitted`,
+          `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/getAllQcNotSubmitted`,
           {
             headers,
           }
@@ -426,7 +426,7 @@ const QualityControl_f03_Summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetReportForPrint`,
+        `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetReportForPrint`,
         {
           headers,
           params: {

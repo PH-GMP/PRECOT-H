@@ -205,7 +205,7 @@ const Bleaching_f02A_Summary = () => {
   //   // const a = String(event.target.value).split('-').reverse().join('/');
   //   axios
   //     .get(
-  //       `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
+  //       `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
   //       {
   //         headers,
   //         params: {
@@ -240,7 +240,7 @@ const Bleaching_f02A_Summary = () => {
   
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingMonthYearSummeryF02A`,
         {
           headers,
           params: {
@@ -353,7 +353,7 @@ const Bleaching_f02A_Summary = () => {
     };
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingSummeryF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/getHouseKeepingSummeryF02A`,
         {
           headers,
         }

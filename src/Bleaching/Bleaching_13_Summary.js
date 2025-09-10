@@ -39,12 +39,9 @@ const Bleaching_f13_Summary = () => {
   const [reason, setReason] = useState(false);
   const [availableBMRnoLov, setAvailableBMRnoLov] = useState("Select BMR No");
   const [cakingData, setCakingData] = useState([]);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [newModal, setnewModal] = useState(false);
+
   const [modalData, setmodalData] = useState([]);
   const [newData, setnewData] = useState([]);
-  const [newStatus, setNewStatus] = useState("");
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -53,13 +50,10 @@ const Bleaching_f13_Summary = () => {
   const [batchNolist, setBatchNolist] = useState("Select Batch No");
   const [batchNolistPrint, setBatchNolistPrint] = useState(null);
   const [open, setOpen] = useState(false);
-  const [placement, setPlacement] = useState("left");
   const role = localStorage.getItem("role");
-  const [messageApi, contextHolder] = message.useMessage();
   const [bmrListPrint, setBmrListPrint] = useState([]);
   const [PrintBmr, setPrintBmr] = useState(null);
   const [printResponseData, setPrintResponseData] = useState(null);
-  const [printRecord, setPrintRecord] = useState([]);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -479,8 +473,8 @@ const Bleaching_f13_Summary = () => {
   const handleAvailableBMRnoLovChange = (value) => {
     console.log("BMR Value", value);
     setAvailableBMRnoLov(value);
-    setBatchNolist(null); // Clear the batch number list
-    fetchDatabatchByBleach(); // Assuming this is an existing function to fetch data
+    setBatchNolist(null);
+    fetchDatabatchByBleach();
   };
   const handleGo = async () => {
     console.log(availableBMRno, batchNolist);
@@ -527,9 +521,8 @@ const Bleaching_f13_Summary = () => {
 
   const handlePrint = () => {
     setShowModal(true);
-    // window.print()
     console.log("print screen works");
-    // Add any other print-related logic here
+
   };
 
   const baseColumns = [
@@ -783,7 +776,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-                
+
                 }}
               >
                 Activity
@@ -793,7 +786,7 @@ const Bleaching_f13_Summary = () => {
                 style={{
                   border: "1px solid",
                   fontWeight: "bold",
-             
+
                   textAlign: "center",
                 }}
               >
@@ -805,7 +798,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-                
+
                 }}
               >
                 Actual Time in Minutes
@@ -816,7 +809,7 @@ const Bleaching_f13_Summary = () => {
                   border: "1px solid",
                   fontWeight: "bold",
                   textAlign: "center",
-             
+
                 }}
               >
                 Observations
@@ -1463,7 +1456,6 @@ const Bleaching_f13_Summary = () => {
                   paddingRight: "1em",
                 }}
               >
-                {/* <span style={{ textAlign: "center" }}>  {print && print.newtralizing_act_temp}</span> */}
                 pH actual:
                 <span style={{ textAlign: "center" }}>
                   {" "}
@@ -1477,9 +1469,7 @@ const Bleaching_f13_Summary = () => {
                     {" (Std. < 5 Sec.)"}
                   </span>
                 </div>
-                {/* <span style={{ textAlign: "center" }}>  
 
-      </span> */}
               </td>
             </tr>
             <tr
@@ -1508,15 +1498,8 @@ const Bleaching_f13_Summary = () => {
               }}
             ></tr>
             <br></br>
-            {/* <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          */}
           </tbody>
           <tfoot>
-            {/* <br /> */}
-
             <tr>
               <td style={{ padding: "1em" }} colSpan="4">
                 Particulars
@@ -1935,6 +1918,7 @@ const Bleaching_f13_Summary = () => {
               >
                 <p style={{ fontSize: "11px" }}>Citric acid</p>
               </td>
+
               <td
                 colSpan="2"
                 style={{
@@ -1947,9 +1931,9 @@ const Bleaching_f13_Summary = () => {
               </td>
               <td
                 colSpan="3"
-                 style={{
+                style={{
                   border: "1px solid",
-       
+
                 }}
               >
                 {printResponseData?.[0]?.citric_acid}
@@ -1982,9 +1966,6 @@ const Bleaching_f13_Summary = () => {
               </td>
             </tr>
 
-            {/* <br /> */}
-            {/* <br /> */}
-
             <tr>
               <td colSpan="4" style={{ textAlign: "center" }}>
                 Performed by Production Supervisor
@@ -2007,7 +1988,6 @@ const Bleaching_f13_Summary = () => {
                 >
                   {printResponseData?.[0]?.supervisor_sign}
                   <br></br>
-                  {/* <span style={{ marginLeft: '5px', marginRight: '5px' }}> - </span> */}
                   {printResponseData?.[0]?.supervisor_submit_on &&
                     new Date(
                       printResponseData?.[0]?.supervisor_submit_on
@@ -2040,12 +2020,7 @@ const Bleaching_f13_Summary = () => {
                 >
                   {printResponseData?.[0]?.qa_sign}
                   <br></br>
-                  {/* <span style={{ marginLeft: '5px', marginRight: '5px' }}> - </span> */}
-                  {/* {printResponseData?.[0]?.hod_submit_on &&
-                  new Date(
-                    printResponseData?.[0]?.hod_submit_on
-                  ).formatDate("en-GB")}{" "} */}
-                  {/* <br></br> Sign & Date */}
+
                   {printResponseData?.[0]?.qa_submit_on &&
                     new Date(
                       printResponseData?.[0]?.qa_submit_on
@@ -2072,13 +2047,8 @@ const Bleaching_f13_Summary = () => {
                   }}
                 >
                   {printResponseData?.[0]?.hod_sign}
-                  {/* <span style={{ marginLeft: '5px', marginRight: '5px' }}> - </span> */}
                   <br></br>
-                  {/* {printResponseData?.[0]?.hod_submit_on &&
-                  new Date(
-                    printResponseData?.[0]?.hod_submit_on
-                  ).formatDate("en-GB")}{" "} */}
-                  {/* <br></br> Sign & Date */}
+
                   {printResponseData?.[0]?.hod_submit_on &&
                     new Date(
                       printResponseData?.[0]?.hod_submit_on
@@ -2101,7 +2071,6 @@ const Bleaching_f13_Summary = () => {
           <br />
           <br />
           <tfoot>
-            {/* <br /> */}
 
             <tr>
               <td style={{ padding: "1em" }} colSpan="4">
@@ -2170,7 +2139,7 @@ const Bleaching_f13_Summary = () => {
         <Menu
           theme="dark"
           mode="inline"
-           style={{
+          style={{
             backgroundColor: "transparent",
             display: "flex",
             flexDirection: "column",
@@ -2457,7 +2426,7 @@ const Bleaching_f13_Summary = () => {
           </Button>,
           <Button
             key="back"
-             onClick={handleBack}
+            onClick={handleBack}
             style={{
               backgroundColor: "#E5EEF9",
               color: "#00308F",

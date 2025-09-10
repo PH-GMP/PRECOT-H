@@ -489,7 +489,7 @@ function Bleach_f09() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl, token]);
+  }, [rows,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -525,7 +525,7 @@ function Bleach_f09() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [rows, API.prodUrl, token]);
+  }, [rows,API.prodUrl, token]);
 
   const handleSave = async () => {
     setStatusLoader(true);

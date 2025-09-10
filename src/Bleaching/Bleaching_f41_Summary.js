@@ -154,7 +154,7 @@ const Bleaching_f41_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -178,7 +178,7 @@ const Bleaching_f41_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -190,7 +190,7 @@ const Bleaching_f41_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -214,7 +214,7 @@ const Bleaching_f41_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -222,7 +222,7 @@ const Bleaching_f41_summary = () => {
   //       const role = localStorage.getItem("role");
 
   //       const response = await fetch(
-  //         `${ API.prodUrl}/Precot/api/Format/Service/getAllFormatSummary`,
+  //         `${API.prodUrl}/Precot/api/Format/Service/getAllFormatSummary`,
   //         {
   //           method: "POST",
   //           headers: {
@@ -275,9 +275,9 @@ const Bleaching_f41_summary = () => {
         // Determine the API endpoint based on the role
         let apiUrl = "";
         if (role === "ROLE_HOD" || role === "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/HandSanitizationSummaryForHod`;
+          apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/HandSanitizationSummaryForHod`;
         } else if (role === "ROLE_SUPERVISOR") {
-          apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/HandSanitizationSummaryForSupervisor`;
+          apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/HandSanitizationSummaryForSupervisor`;
         }
  
         if (!apiUrl) {
@@ -340,7 +340,7 @@ return;
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -425,7 +425,7 @@ return;
       setPrintShift(value);
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/getHandSanitizationByShiftAnddate`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/getHandSanitizationByShiftAnddate`,
           {
             date: printDate,
             shift: value,

@@ -44,7 +44,7 @@ const QualityControlF021Summary = () => {
   const getImage = (username, type) => {
     axios
       .get(
-        `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -92,9 +92,9 @@ const QualityControlF021Summary = () => {
 
       const url =
         roleauth === "ROLE_MICROBIOLOGIST"
-          ? `${   API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetAll`
+          ? `${  API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetAll`
           : roleauth === "QC_MANAGER" || roleauth === "QA_MANAGER"
-          ? `${   API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/getAllManagerNotSubmitted`
+          ? `${  API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/getAllManagerNotSubmitted`
           : null;
 
       if (url) {
@@ -225,7 +225,7 @@ const QualityControlF021Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let baseUrl = `${   API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetByIncubationStartOnMonthYear/print?`;
+    let baseUrl = `${  API.prodUrl}/Precot/api/qc/MediaGrowthF021Report/GetByIncubationStartOnMonthYear/print?`;
     let query = [];
 
     // Construct the query based on selected fields

@@ -457,7 +457,7 @@ const QualityAssuranceF008Summary = () => {
       <BleachingHeader
         unit="Unit H"
         formName="Training Card"
-        formatNo="PH-QAD01-F-008"
+        formatNo="PH-QAD01/F-008"
         MenuBtn={
           <Button
             type="primary"
@@ -838,7 +838,7 @@ const QualityAssuranceF008Summary = () => {
                     Format No.:
                   </td>
                   <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                    PH-QAD01-F-008
+                    PH-QAD01/F-008
                   </td>
                 </tr>
                 <tr>

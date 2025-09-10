@@ -284,7 +284,7 @@ const Engineering_FC003_Summary = () => {
             }
         };
 
-        const summaryUrl = `${ API.prodUrl}/Precot/api/Engineering/getBreakdownSummary?username=${username}`;
+        const summaryUrl = `${API.prodUrl}/Precot/api/Engineering/getBreakdownSummary?username=${username}`;
 
 
         fetchSummary(summaryUrl);
@@ -314,7 +314,7 @@ const Engineering_FC003_Summary = () => {
 
             try {
                 const response = await axios.get(
-                    `${ API.prodUrl}/Precot/api/Engineering/lastBsiNo`,
+                    `${API.prodUrl}/Precot/api/Engineering/lastBsiNo`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -400,7 +400,7 @@ const Engineering_FC003_Summary = () => {
     };
 
     const fetchData = () => {
-        let baseUrl = `${ API.prodUrl}/Precot/api/Engineering/getBreakdownPrint?bisNo=${selectedBisNo}&month=${selectedMonth}&year=${selectedYear}`;
+        let baseUrl = `${API.prodUrl}/Precot/api/Engineering/getBreakdownPrint?bisNo=${selectedBisNo}&month=${selectedMonth}&year=${selectedYear}`;
         let query = [];
         let finalUrl = baseUrl + query.join("&");
         console.log("finalUrl", finalUrl);
@@ -465,7 +465,7 @@ const Engineering_FC003_Summary = () => {
         if (!username) return;
 
         axios
-            .get(`${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+            .get(`${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + token,
@@ -510,7 +510,7 @@ const Engineering_FC003_Summary = () => {
 
     const fetchBisNo = async (department) => {
         try {
-            const response = await fetch(`${ API.prodUrl}/Precot/api/Engineering/departmentbasedbsino?issuerDepartment=${department}`, {
+            const response = await fetch(`${API.prodUrl}/Precot/api/Engineering/departmentbasedbsino?issuerDepartment=${department}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

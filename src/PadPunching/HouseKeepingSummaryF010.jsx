@@ -105,7 +105,7 @@ const HouseKeepingSummary = () => {
 
                     axios
                         .get(
-                            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                             {
                                 headers: {
                                     "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const HouseKeepingSummary = () => {
             const token = localStorage.getItem('token');
 
             // Making the API call with axios
-            axios.get(`${ API.prodUrl}/Precot/api/PadPunching/Service/getHouseKeepingSummeryF010`, {
+            axios.get(`${API.prodUrl}/Precot/api/PadPunching/Service/getHouseKeepingSummeryF010`, {
 
                 headers: {
                     Authorization: `Bearer ${token}`, // Include the token in the Authorization header
@@ -512,7 +512,7 @@ const HouseKeepingSummary = () => {
         // const a = String(event.target.value).split('-').reverse().join('/');
         axios
             .get(
-                `${ API.prodUrl}/Precot/api/PadPunching/Service/PrintHouseCleaningReportF010`,
+                `${API.prodUrl}/Precot/api/PadPunching/Service/PrintHouseCleaningReportF010`,
                 {
                     headers,
                     params: {

@@ -180,7 +180,7 @@ const QualityControl_f01_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -223,7 +223,7 @@ const QualityControl_f01_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/PDE`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/PDE`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -278,7 +278,7 @@ const QualityControl_f01_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/print/?invoice=${selectedInvoicePrint}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/print/?invoice=${selectedInvoicePrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -339,7 +339,7 @@ const QualityControl_f01_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -363,7 +363,7 @@ const QualityControl_f01_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData?.[0]?.supervisor_sign,      API.prodUrl, token]);
+  }, [printResponseData?.[0]?.supervisor_sign,     API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -375,7 +375,7 @@ const QualityControl_f01_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const QualityControl_f01_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData?.[0]?.hod_sign,      API.prodUrl, token]);
+  }, [printResponseData?.[0]?.hod_sign,     API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -411,7 +411,7 @@ const QualityControl_f01_Summary = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -435,7 +435,7 @@ const QualityControl_f01_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData?.[0]?.qa_sign,      API.prodUrl, token]);
+  }, [printResponseData?.[0]?.qa_sign,     API.prodUrl, token]);
 
   useEffect(() => {
     if (token) {
@@ -467,7 +467,7 @@ const QualityControl_f01_Summary = () => {
   const fetchBmrOptionsPrint = async () => {
     try {
       const response = await fetch(
-        `${    API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
+        `${   API.prodUrl}/Precot/api/bleaching/summary/allBmrAndLaydownLov`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -502,7 +502,7 @@ const QualityControl_f01_Summary = () => {
       setLoading(true);
       console.log("inside print bmr", value);
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${value}`,
+        `${   API.prodUrl}/Precot/api/bleaching/summary/batchByBleach?bmr_no=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -521,7 +521,7 @@ const QualityControl_f01_Summary = () => {
   const fetchData_getBleachingJobSupervisorSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -567,7 +567,7 @@ const QualityControl_f01_Summary = () => {
   const fetchData_geBleachingJobtHodSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -613,7 +613,7 @@ const QualityControl_f01_Summary = () => {
   const geBleachingJobQaSummeryF13 = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -691,7 +691,7 @@ const QualityControl_f01_Summary = () => {
       setBatchNolistPrint(value);
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Bleaching/Service/getBmrbatchNoDetails13?bmr_no=${PrintBmr}&batchNo=${value}`,
+          `${   API.prodUrl}/Precot/api/Bleaching/Service/getBmrbatchNoDetails13?bmr_no=${PrintBmr}&batchNo=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

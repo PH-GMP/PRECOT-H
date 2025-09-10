@@ -375,7 +375,7 @@ const F006 = () => {
 
       if (bmrnos2) {
         axios
-          .get(`${    API.prodUrl}/Precot/api/chemicaltest/ARF014/${bmrnos2}`, {
+          .get(`${   API.prodUrl}/Precot/api/chemicaltest/ARF014/${bmrnos2}`, {
             headers,
           })
           .then((response) => {
@@ -415,7 +415,7 @@ const F006 = () => {
           });
       } else {
         axios
-          .get(`${    API.prodUrl}/Precot/api/chemicaltest/ARF014/Id/${formID}`, {
+          .get(`${   API.prodUrl}/Precot/api/chemicaltest/ARF014/Id/${formID}`, {
             headers,
           })
           .then((response) => {
@@ -495,7 +495,7 @@ const F006 = () => {
     // console.log("usernameparams", username);
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -519,7 +519,7 @@ const F006 = () => {
       });
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -544,7 +544,7 @@ const F006 = () => {
       });
 
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -613,7 +613,7 @@ const F006 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/save/briquettesanalysisreportARF014`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/save/briquettesanalysisreportARF014`,
         payload,
         { headers }
       )
@@ -674,7 +674,7 @@ const F006 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/Submit/briquettesanalysisreportARF014`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/Submit/briquettesanalysisreportARF014`,
         updatedPayload, // Use the updated payload
         { headers }
       )
@@ -699,7 +699,7 @@ const F006 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/approve`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/approve`,
         {
           id: payload.test_id,
           status: "Approve",
@@ -726,7 +726,7 @@ const F006 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF014/approve`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF014/approve`,
         {
           id: payload.test_id,
           status: "Reject",

@@ -255,7 +255,7 @@ const { year, monthName } = extractYearAndMonthName(Date);
         })
         .catch((err) => {});
     }
-  }, [selectedrow, API.prodUrl, token]);
+  }, [selectedrow,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -284,7 +284,7 @@ const { year, monthName } = extractYearAndMonthName(Date);
         })
         .catch((err) => {});
     }
-  }, [selectedrow, API.prodUrl, token]);
+  }, [selectedrow,API.prodUrl, token]);
 
   const roleauth = localStorage.getItem("role");
   const roleBase = localStorage.getItem("role");
@@ -422,7 +422,7 @@ const { year, monthName } = extractYearAndMonthName(Date);
     try {
       const payload = {
         formatName: "LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
-        formatNo: "PH-QAD01-F-050",
+        formatNo: "PH-QAD01/F-050",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-47",
         unit: "Unit H",
@@ -552,7 +552,7 @@ const { year, monthName } = extractYearAndMonthName(Date);
     try {
       const payload = {
         formatName: "LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC",
-        formatNo: "PH-QAD01-F-050",
+        formatNo: "PH-QAD01/F-050",
         revisionNo: "01",
         sopNumber: "PH-QAD01-D-47",
         unit: "Unit H",
@@ -1651,7 +1651,7 @@ const { year, monthName } = extractYearAndMonthName(Date);
       <BleachingHeader
         unit="Unit-H"
         formName="LIST OF GLASS /HARD PLASTIC / WOOD / CERAMIC"
-        formatNo="PH-QAD01-F-050"
+        formatNo="PH-QAD01/F-050"
         sopNo="PH-QAD01-D-47"
         MenuBtn={
           <Button

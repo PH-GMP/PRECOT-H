@@ -369,7 +369,7 @@ const QualityControl_ARF_011 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -417,7 +417,7 @@ const QualityControl_ARF_011 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/?date=${fumigation}`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/ARF011/?date=${fumigation}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -544,7 +544,7 @@ const QualityControl_ARF_011 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/save/fumigationReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF011/save/fumigationReport`;
       payload = {
         test_id: formData.test_id,
         format: "FUMIGATION AND MICROBIOLOGICAL ANALYSIS FOR AIR",
@@ -857,7 +857,7 @@ const QualityControl_ARF_011 = () => {
         ],
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF011/approval`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
@@ -1520,7 +1520,7 @@ const QualityControl_ARF_011 = () => {
       // }
 
       succesMsg = "Submitted Successfully ";
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/Submit/fumigationReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF011/Submit/fumigationReport`;
       payload = {
         test_id: formData.test_id,
         format: "FUMIGATION AND MICROBIOLOGICAL ANALYSIS FOR AIR",
@@ -1925,7 +1925,7 @@ const QualityControl_ARF_011 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/chemicaltest/ARF011/approval`;
+      apiurl = `${   API.prodUrl}/Precot/api/chemicaltest/ARF011/approval`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,

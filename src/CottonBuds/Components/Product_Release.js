@@ -26,7 +26,7 @@ const Product_Release = (props) => {
   const getData = () => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/getProductRelease?batchNo=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/getProductRelease?batchNo=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -76,7 +76,7 @@ const Product_Release = (props) => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/buds/bmr/submitProductRelease`, payload, {
+      .post(`${API.prodUrl}/Precot/api/buds/bmr/submitProductRelease`, payload, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

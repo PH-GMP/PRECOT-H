@@ -90,7 +90,7 @@ const QA_F_041 = () => {
   const [formData, setFormData] = useState({
     action: "",
     formatName: "QA CHANGE CONTROL FORM",
-    formatNo: "PH-QAD01-F-041",
+    formatNo: "PH-QAD01/F-041",
     ref_sop_no: "PH-QCL01-D-05 & PH-QCL01-D-11",
     revisionNo: "01",
     sopNumber: "PH-QAD01-D-37",
@@ -398,7 +398,7 @@ const QA_F_041 = () => {
       try {
         if (tabNo === "2") {
           const response = await axios.get(
-            `${API.prodUrl}/Precot/api/qa/number/generationbasedDpt?department=${initiatingDept}&formNumber=PH-QAD01-F-041`,
+            `${API.prodUrl}/Precot/api/qa/number/generationbasedDpt?department=${initiatingDept}&formNumber=PH-QAD01/F-041`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -653,7 +653,7 @@ const QA_F_041 = () => {
       payload = {
         formId: formData.formId,
         formatName: "QA CHANGE CONTROL FORM",
-        formatNo: "PH-QAD01-F-041",
+        formatNo: "PH-QAD01/F-041",
         revisionNo: "1",
         sopNumber: "PH-QAD01-D-37",
         unit: "Unit H",
@@ -845,7 +845,7 @@ const QA_F_041 = () => {
     <>
       <BleachingHeader
         formName={"CHANGE CONTROL FORM"}
-        formatNo={"PH-QAD01-F-041"}
+        formatNo={"PH-QAD01/F-041"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

@@ -102,7 +102,7 @@ const Spunlace_f15_Summary = () => {
           let response;
 
           response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spulance/report/hodSummaryF015`,
+            `${API.prodUrl}/Precot/api/spulance/report/hodSummaryF015`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -158,7 +158,7 @@ const Spunlace_f15_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/report/printRPBalePressStopage?date=${printParam.date}`,
+        `${API.prodUrl}/Precot/api/spulance/report/printRPBalePressStopage?date=${printParam.date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -198,7 +198,7 @@ const Spunlace_f15_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -232,7 +232,7 @@ const Spunlace_f15_Summary = () => {
     // console.log("Print response api called")
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/aggregatedResults?date=${printParam.date}`,
+        `${API.prodUrl}/Precot/api/spulance/aggregatedResults?date=${printParam.date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -14,7 +14,7 @@ const Product_Reconciliation = (props) => {
     console.log("fcgh", props.batchNo);
      axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/productReconillation?orderNumber=${
+        `${API.prodUrl}/Precot/api/buds/bmr/productReconillation?orderNumber=${
           props.orderNo
         }&batchNo=${props.batchNo}&fromdate=${localStorage.getItem(
           "prod_start_date"

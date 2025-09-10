@@ -117,7 +117,7 @@ const COTTON_BUDS_f04_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -159,7 +159,7 @@ const COTTON_BUDS_f04_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -205,7 +205,7 @@ const COTTON_BUDS_f04_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const handleBack = () => {
     navigate("/Precot/choosenScreen");

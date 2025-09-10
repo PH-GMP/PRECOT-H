@@ -158,7 +158,7 @@ const Bleaching_f36_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const Bleaching_f36_edit = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [supervisor_sign, API.prodUrl, token]);
+  }, [supervisor_sign,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -194,7 +194,7 @@ const Bleaching_f36_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -218,7 +218,7 @@ const Bleaching_f36_edit = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [hod_sign, API.prodUrl, token]);
+  }, [hod_sign,API.prodUrl, token]);
 
   const handleChange = (e) => {
     const words = e.target.value.trim().split(/\s+/);
@@ -335,7 +335,7 @@ const Bleaching_f36_edit = (props) => {
     const fetchShifts = async () => {
       try {
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/bleach/findStoppageByDateAndShift`,
+          `${API.prodUrl}/Precot/api/bleach/findStoppageByDateAndShift`,
           {
             pack_dt: date,
             shift_id: numericShiftValue,
@@ -371,7 +371,7 @@ const Bleaching_f36_edit = (props) => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleach/getShiftlogBookF36Details/${slb_id}`,
+        `${API.prodUrl}/Precot/api/bleach/getShiftlogBookF36Details/${slb_id}`,
         { headers }
       )
       .then((res) => {
@@ -518,7 +518,7 @@ const Bleaching_f36_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectHOD`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectHOD`,
         {
           id: slb_id,
           status: "Approve",
@@ -563,7 +563,7 @@ const Bleaching_f36_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectHOD`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectHOD`,
         {
           id: slb_id,
           status: "Reject",
@@ -619,7 +619,7 @@ const Bleaching_f36_edit = (props) => {
       // Make the POST request to the API endpoint with headers
       const response = await axios
         .put(
-          `${ API.prodUrl}/Precot/api/bleach/approveOrRejectShiftlogBookF36Details`,
+          `${API.prodUrl}/Precot/api/bleach/approveOrRejectShiftlogBookF36Details`,
           {
             slb_id: slb_id,
             unit: unit,
@@ -711,7 +711,7 @@ const Bleaching_f36_edit = (props) => {
       // Make the POST request to the API endpoint with headers
       const response = await axios
         .post(
-          `${ API.prodUrl}/Precot/api/bleach/createOrUpdateShiftlogBookF36`,
+          `${API.prodUrl}/Precot/api/bleach/createOrUpdateShiftlogBookF36`,
           {
             slb_id: slb_id,
             unit: unit,

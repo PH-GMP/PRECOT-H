@@ -66,7 +66,7 @@ const Spunlace_f23_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const Spunlace_f23_Summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = printResponseData?.[printResponseData.length - 1]?.hod_sign;
@@ -99,7 +99,7 @@ const Spunlace_f23_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const Spunlace_f23_Summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const months = [
     { value: "January", label: "January" },
@@ -234,7 +234,7 @@ const Spunlace_f23_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/MachineCleaningRecord/getMachineCleaningSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/spunlace/Service/MachineCleaningRecord/getMachineCleaningSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -368,8 +368,8 @@ const Spunlace_f23_Summary = () => {
 
       setmonthPrint(value)
       axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/MachineCleaningRecord/findByMonthYearPrintApi?month=${value}&year=${yearPrint}`,
-        // `${ API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=ORD5678&date=2024-07-10&shift=III`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/MachineCleaningRecord/findByMonthYearPrintApi?month=${value}&year=${yearPrint}`,
+        // `${API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=ORD5678&date=2024-07-10&shift=III`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

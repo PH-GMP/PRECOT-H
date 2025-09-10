@@ -121,7 +121,7 @@ const QualityControl_F013_Summary = () => {
   // Function to fetch image based on the username
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -207,7 +207,7 @@ const QualityControl_F013_Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let apiUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/print?eq_no=${selectedPrintEqNo}`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/print?eq_no=${selectedPrintEqNo}`;
 
     // Build API URL based on selected fields
     if (selectedPrintDate) {
@@ -260,7 +260,7 @@ const QualityControl_F013_Summary = () => {
   const getAll = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/getAll`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/getAll`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

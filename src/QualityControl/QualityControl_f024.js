@@ -99,7 +99,7 @@ const QualityControlF024 = () => {
 
     if (selectedDate) {
       axios
-        .get(`${    API.prodUrl}/Precot/api/chemicaltest/CLF024?date=${selectedDate}`, {
+        .get(`${   API.prodUrl}/Precot/api/chemicaltest/CLF024?date=${selectedDate}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ const QualityControlF024 = () => {
           //getImage
           axios
             .get(
-              `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const QualityControlF024 = () => {
 
     try {
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF024/save/disposalRecord`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF024/save/disposalRecord`,
         payload,
         {
           headers: {
@@ -243,7 +243,7 @@ const QualityControlF024 = () => {
 
     try {
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF024/submit/disposalRecord`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF024/submit/disposalRecord`,
         payload,
         {
           headers: {

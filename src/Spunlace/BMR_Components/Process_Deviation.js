@@ -111,7 +111,7 @@ const Process_Deviation = (props) => {
     } else {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -202,7 +202,7 @@ const Process_Deviation = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/10.SubmitProcessDeviationRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/10.SubmitProcessDeviationRecord`,
         payload_2,
         {
           headers: {
@@ -215,7 +215,7 @@ const Process_Deviation = (props) => {
         message.success("Submitted Successfully!");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -315,7 +315,7 @@ const Process_Deviation = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/10.SaveProcessDeviationRecord`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/10.SaveProcessDeviationRecord`,
         payload_2,
         {
           headers: {
@@ -328,7 +328,7 @@ const Process_Deviation = (props) => {
         message.success("Saved Successfully!");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/10.GetProcessDeviationRecord?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

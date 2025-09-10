@@ -270,7 +270,7 @@ const PadPunchingSummary = () => {
 
     // Make the API call using axios
     axios
-      .get(`${ API.prodUrl}/Precot/api/Punching/Service/getProdDetailsPrintF01`, {
+      .get(`${API.prodUrl}/Precot/api/Punching/Service/getProdDetailsPrintF01`, {
         params: {
           date: printSelectDate,
           shift: printShift,
@@ -345,7 +345,7 @@ const PadPunchingSummary = () => {
         if (username) {
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -382,7 +382,7 @@ const PadPunchingSummary = () => {
 
     // Make the API call
     axios
-      .get(`${ API.prodUrl}/Precot/api/Punching/Service/summaryProductionF01`, {
+      .get(`${API.prodUrl}/Precot/api/Punching/Service/summaryProductionF01`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

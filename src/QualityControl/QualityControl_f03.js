@@ -176,7 +176,7 @@ const QualityControl_f03 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData, API.prodUrl, token]);
+  }, [printData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -210,7 +210,7 @@ const QualityControl_f03 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData, API.prodUrl, token]);
+  }, [printData,API.prodUrl, token]);
 
   // Get the PDE details.....
   useEffect(() => {

@@ -394,7 +394,7 @@ const QA_F018_Summary = () => {
   const getccfnodata = async () => {
     try {
       const res = await axios.get(
-        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01-F-018`,
+        `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01/F-018`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -516,7 +516,7 @@ const QA_F018_Summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="CUSTOMER COMPLAINT REGISTER FORM "
-        formatNo="PH-QAD01-F-018"
+        formatNo="PH-QAD01/F-018"
         MenuBtn={
           <Button
             type="primary"
@@ -698,7 +698,7 @@ const QA_F018_Summary = () => {
                     CUSTOMER COMPLAINT REGISTER FORM
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="40">PH-QAD01-F-018</td>
+                  <td colSpan="40">PH-QAD01/F-018</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>

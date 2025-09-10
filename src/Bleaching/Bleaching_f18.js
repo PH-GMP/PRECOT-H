@@ -238,7 +238,7 @@ const Bleaching_f18 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -262,7 +262,7 @@ const Bleaching_f18 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -274,7 +274,7 @@ const Bleaching_f18 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -298,7 +298,7 @@ const Bleaching_f18 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   // console.log("get image", getImage);
 
@@ -312,7 +312,7 @@ const Bleaching_f18 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/approveOrRejectBleachAbsCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/approveOrRejectBleachAbsCotton`,
         {
           id: id,
           status: "Approve",
@@ -359,7 +359,7 @@ const Bleaching_f18 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/approveOrRejectBleachAbsCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/approveOrRejectBleachAbsCotton`,
         {
           id: id,
           status: "Reject",
@@ -510,7 +510,7 @@ const formattedToday = `${year}-${month}-${day}`;
       const response = await axios.post(
 
 
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/SubmitBleachAbsCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/SubmitBleachAbsCotton`,
         payload,
         { headers }
       );
@@ -646,7 +646,7 @@ const formattedToday = `${year}-${month}-${day}`;
       // console.log("stored bmr inside", bmrNolocal);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCottonByBmrAndSubbatchAndBale?bmrNo=${bmrNolocal}&batchNo=${batch}&baleNo=${bale}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCottonByBmrAndSubbatchAndBale?bmrNo=${bmrNolocal}&batchNo=${batch}&baleNo=${bale}`,
         {
 
           headers: {
@@ -756,7 +756,7 @@ const formattedToday = `${year}-${month}-${day}`;
   const fetchBatchOptions = async () => {
     try {
       const bmrNolocal = bmrnos;
-      const response = await fetch(`${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmrnos}`, {
+      const response = await fetch(`${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${bmrnos}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -783,7 +783,7 @@ const formattedToday = `${year}-${month}-${day}`;
   useEffect(() => {
     const fetchBmrOptions = async () => {
       try {
-        const response = await fetch(`${ API.prodUrl}/Precot/api/LOV/Service/bMRNumbersLOV`, {
+        const response = await fetch(`${API.prodUrl}/Precot/api/LOV/Service/bMRNumbersLOV`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -812,7 +812,7 @@ const formattedToday = `${year}-${month}-${day}`;
   const fetchBaleOptions = async (value) => {
     // console.log("value of fetch", value);
     try {
-      const response = await fetch(`${ API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${value}&bmr_no=${bmrnos}`, {
+      const response = await fetch(`${API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${value}&bmr_no=${bmrnos}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -985,7 +985,7 @@ const formattedToday = `${year}-${month}-${day}`;
 
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/SaveBleachAbsCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/SaveBleachAbsCotton`,
         payload,
         { headers }
       );

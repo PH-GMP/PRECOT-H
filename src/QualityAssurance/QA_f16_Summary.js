@@ -134,7 +134,7 @@ const QA_f16_Summary = () => {
           .catch((err) => {});
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -234,7 +234,7 @@ const QA_f16_Summary = () => {
     if (printResponseData) {
       fetchImages();
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -519,7 +519,7 @@ const QA_f16_Summary = () => {
                       AGENDA FOR MANAGEMENT REVIEW MEETING
                     </th>
                     <td colSpan="15">Format No.:</td>
-                    <td colSpan="15">PH-QAD01-F-016</td>
+                    <td colSpan="15">PH-QAD01/F-016</td>
                   </tr>
                   <tr>
                     <td colSpan="15">Revision No.:</td>
@@ -728,7 +728,7 @@ const QA_f16_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="AGENDA FOR MANAGEMENT REVIEW MEETING"
-          formatNo="PH-QAD01-F-016"
+          formatNo="PH-QAD01/F-016"
           MenuBtn={
             <Button
               type="primary"

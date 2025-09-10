@@ -98,7 +98,7 @@ const QA_f03_Summary = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = (dateString) => {
     if (dateString) {

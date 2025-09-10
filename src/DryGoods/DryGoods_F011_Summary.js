@@ -159,7 +159,7 @@ const DryGoods_F011_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -275,7 +275,7 @@ const DryGoods_F011_Summary = () => {
     const fetchShifts = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           { headers }
         );
         setShiftOptions(response.data);
@@ -301,7 +301,7 @@ const DryGoods_F011_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/getSummarydetailsF011`,
+            `${API.prodUrl}/Precot/api/drygoods/getSummarydetailsF011`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -413,7 +413,7 @@ const DryGoods_F011_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF011?date=${printParams.datePrint}&shift=${printParams.shiftPrint}`,
+        `${API.prodUrl}/Precot/api/drygoods/getdetailsForPrintF011?date=${printParams.datePrint}&shift=${printParams.shiftPrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

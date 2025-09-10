@@ -174,7 +174,7 @@ const QualityControlF010 = () => {
         // API call
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/GetByMonthYear?month=${selectedMonth}&year=${selectedYear}`,
+            `${   API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/GetByMonthYear?month=${selectedMonth}&year=${selectedYear}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -195,7 +195,7 @@ const QualityControlF010 = () => {
               //getImage
               axios
                 .get(
-                  `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                  `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -225,7 +225,7 @@ const QualityControlF010 = () => {
 
               axios
                 .get(
-                  `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+                  `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -353,7 +353,7 @@ const QualityControlF010 = () => {
     try {
       // Call the API with the payload
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveWiraFiberFinenessF010`,
+        `${   API.prodUrl}/Precot/api/qc/SaveWiraFiberFinenessF010`,
         payload,
         {
           headers: {
@@ -544,7 +544,7 @@ const QualityControlF010 = () => {
     try {
       // Call the API with the payload
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitWiraFiberFinenessF010`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitWiraFiberFinenessF010`,
         payload,
         {
           headers: {
@@ -577,7 +577,7 @@ const QualityControlF010 = () => {
     };
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveWiraFiberFinessF010`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveWiraFiberFinessF010`,
         {
           id: mainID,
           status: "Approve",
@@ -615,7 +615,7 @@ const QualityControlF010 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveWiraFiberFinessF010`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveWiraFiberFinessF010`,
         {
           id: mainID,
           status: "Reject",

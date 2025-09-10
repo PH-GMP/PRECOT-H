@@ -41,7 +41,7 @@ const QualityControlF010Summary = () => {
   // Function to fetch image based on the username
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -86,13 +86,13 @@ const QualityControlF010Summary = () => {
       try {
         let apiUrl = "";
         if (roleauth === "ROLE_CHEMIST") {
-          apiUrl = `${    API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/getAllChemistNotSubmitted`;
+          apiUrl = `${   API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/getAllChemistNotSubmitted`;
         } else if (
           roleauth === "QC_MANAGER" ||
           roleauth === "QA_MANAGER" ||
           roleauth === "CHEMIST_DESIGNEE"
         ) {
-          apiUrl = `${    API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/getAllQcNotSubmitted`;
+          apiUrl = `${   API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/getAllQcNotSubmitted`;
         }
 
         if (apiUrl) {
@@ -252,7 +252,7 @@ const QualityControlF010Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let baseUrl = `${    API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/GetByMonthYear/print?`;
+    let baseUrl = `${   API.prodUrl}/Precot/api/qc/WiraFiberFinessF010/GetByMonthYear/print?`;
     let query = [];
 
     if (selectedPrintMonth) {

@@ -253,7 +253,7 @@ const Engineering_FC016_Summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Engineering/getWeightScaleSummary?username=${username}`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Engineering/getWeightScaleSummary?username=${username}`;
 
     fetchSummary(summaryUrl);
   }, []);
@@ -440,7 +440,7 @@ const Engineering_FC016_Summary = () => {
   };
 
   const fetchData = () => {
-    let baseUrl = `${ API.prodUrl}/Precot/api/Engineering/getweightScalePrint?machineIdNo=${selectedMachineIdNo}&month=${selectedMonth}&year=${selectedYear}`;
+    let baseUrl = `${API.prodUrl}/Precot/api/Engineering/getweightScalePrint?machineIdNo=${selectedMachineIdNo}&month=${selectedMonth}&year=${selectedYear}`;
     let query = [];
 
     let finalUrl = baseUrl + query.join("&");
@@ -478,7 +478,7 @@ const Engineering_FC016_Summary = () => {
         }
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.engineeringSupervisorSign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.engineeringSupervisorSign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -500,7 +500,7 @@ const Engineering_FC016_Summary = () => {
           .catch((err) => {});
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hodSign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${response.data[0]?.hodSign}`,
             {
               headers: {
                 "Content-Type": "application/json",

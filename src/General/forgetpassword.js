@@ -16,12 +16,12 @@ const ForgetPassword = () => {
   
     const payload = {
      email: email,
-    forgetPasswordUrl: `${ API.prodUrl}/Precot/api/auth/updateNewPassword`
+    forgetPasswordUrl: `${API.prodUrl}/Precot/api/auth/updateNewPassword`
     };
   
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/auth/forgetPassword`,
+        `${API.prodUrl}/Precot/api/auth/forgetPassword`,
         payload,
         {
           headers: {

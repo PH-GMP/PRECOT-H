@@ -83,7 +83,7 @@ const Process_Deviation = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -222,7 +222,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/cottonBall/09.SaveProcessDevRecord`,
+        `${API.prodUrl}/Precot/api/cottonBall/09.SaveProcessDevRecord`,
         payload,
         {
           headers: {
@@ -237,7 +237,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -381,7 +381,7 @@ const Process_Deviation = (props) => {
     setButtonLoader(true);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/cottonBall/09.SubmitProcessDevRecord`,
+        `${API.prodUrl}/Precot/api/cottonBall/09.SubmitProcessDevRecord`,
         payload,
         {
           headers: {
@@ -396,7 +396,7 @@ const Process_Deviation = (props) => {
         const fetchData = async () => {
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/cottonBall/09.GetProcessDevRecord?batch_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

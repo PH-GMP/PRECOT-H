@@ -218,7 +218,7 @@ const Stores_f008_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/Store/getForkliftCheckListSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/Store/getForkliftCheckListSummary`;
 
     if (["STORE_OPERATOR", "STORE_INCHARGE"].includes(userRole)) {
       fetchSummary(summaryUrl);
@@ -308,8 +308,8 @@ const Stores_f008_summary = () => {
   };
 
   const fetchData = () => {
-    // let baseUrl = `${ API.prodUrl}/Precot/api/Store/ForkliftCheckListPrint?`;
-    let baseUrl = `${ API.prodUrl}/Precot/api/Store/ForkliftCheckListPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}&forkliftNo=${selectedForkliftNo}`;
+    // let baseUrl = `${API.prodUrl}/Precot/api/Store/ForkliftCheckListPrint?`;
+    let baseUrl = `${API.prodUrl}/Precot/api/Store/ForkliftCheckListPrint?year=${selectedYear}&month=${selectedMonth}&fromDate=${fromSelectedDate}&toDate=${toSelectedDate}&forkliftNo=${selectedForkliftNo}`;
     let query = [];
 
     // if (selectedDate) query.push(`date=${selectedDate}`);
@@ -341,7 +341,7 @@ const Stores_f008_summary = () => {
             if (data.operator_sign) {
               axios
                 .get(
-                  `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
+                  `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -369,7 +369,7 @@ const Stores_f008_summary = () => {
             if (data.store_in_charge_sign) {
               axios
                 .get(
-                  `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.store_in_charge_sign}`,
+                  `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.store_in_charge_sign}`,
                   {
                     headers: {
                       "Content-Type": "application/json",

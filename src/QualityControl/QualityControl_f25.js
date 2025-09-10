@@ -609,7 +609,7 @@ const QualityControl_f25 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`,
+        `${   API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`,
         {
           id: formData.id,
           status: "Reject",
@@ -938,7 +938,7 @@ const QualityControl_f25 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`,
+        `${   API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`,
         {
           id: formData.id,
           status: "Approve",
@@ -1059,7 +1059,7 @@ const QualityControl_f25 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/qc/saveShelfLifePeriodReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/qc/saveShelfLifePeriodReport`;
       console.log("resId", resId);
       console.log(
         "formData.physicalAndChemicalTests[0]?.chemist_id",
@@ -1415,7 +1415,7 @@ const QualityControl_f25 = () => {
         ],
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.formData_id,
@@ -1709,7 +1709,7 @@ const QualityControl_f25 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Submitted Successfully ";
-      apiurl = `${    API.prodUrl}/Precot/api/qc/SubmitShelfLifePeriodReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/qc/SubmitShelfLifePeriodReport`;
       console.log("resId", resId);
       console.log(
         "formData.physicalAndChemicalTests[0]?.chemist_id",
@@ -2070,7 +2070,7 @@ const QualityControl_f25 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`;
+      apiurl = `${   API.prodUrl}/Precot/api/qc/approveShelfLifePeriodReport`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,
@@ -2229,7 +2229,7 @@ const QualityControl_f25 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/ByProdDateTestingDateForF026?LotNo=${Ltno}&testingDate=${date}`,
+          `${   API.prodUrl}/Precot/api/qc/ShelfLifePeriodReport/ByProdDateTestingDateForF026?LotNo=${Ltno}&testingDate=${date}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -2575,7 +2575,7 @@ const QualityControl_f25 = () => {
           //getImage
           axios
             .get(
-              `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -2605,7 +2605,7 @@ const QualityControl_f25 = () => {
 
           axios
             .get(
-              `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -2635,7 +2635,7 @@ const QualityControl_f25 = () => {
 
           axios
             .get(
-              `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
+              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
               {
                 headers: {
                   "Content-Type": "application/json",

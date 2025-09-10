@@ -88,7 +88,7 @@ const QualityControl_AR_f07_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -130,7 +130,7 @@ const QualityControl_AR_f07_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/QcForm/WaterAnalysisSummary`,
+            `${   API.prodUrl}/Precot/api/QcForm/WaterAnalysisSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -284,7 +284,7 @@ const QualityControl_AR_f07_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/QcForm/WaterAnalysisPrintApi?date=${printParams.date}`,
+        `${   API.prodUrl}/Precot/api/QcForm/WaterAnalysisPrintApi?date=${printParams.date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

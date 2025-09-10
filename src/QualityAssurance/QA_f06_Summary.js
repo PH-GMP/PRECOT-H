@@ -38,7 +38,7 @@ const QA_f06_Summary = () => {
   const [printResponseData, setPrintResponseData] = useState(null);
   const [reason, setReason] = useState(false);
   const [cakingData, setCakingData] = useState([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const [getImage1, setGetImage1] = useState("");
   const [getImage2, setGetImage2] = useState("");
   const role = localStorage.getItem("role");
@@ -61,7 +61,7 @@ const QA_f06_Summary = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const QA_f06_Summary = () => {
           setGetImage1(url);
         })
         .catch((err) => {
-          
+
         });
     }
   }, [printResponseData, API.prodUrl, token]);
@@ -91,7 +91,7 @@ const QA_f06_Summary = () => {
     if (username) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -111,7 +111,7 @@ const QA_f06_Summary = () => {
           setGetImage2(url);
         })
         .catch((err) => {
-          
+
         });
     }
   }, [printResponseData, API.prodUrl, token]);
@@ -186,7 +186,7 @@ const QA_f06_Summary = () => {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("token");
-      let apiUrl = `${ API.prodUrl}/Precot/api/QA/Service/trainingCalendar/getTrainingCalendarSummary`;
+      let apiUrl = `${API.prodUrl}/Precot/api/QA/Service/trainingCalendar/getTrainingCalendarSummary`;
       const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -221,7 +221,7 @@ const QA_f06_Summary = () => {
         }, 1500);
       }
     } catch (error) {
-      console.error("Error fetching data:", error.message); 
+      console.error("Error fetching data:", error.message);
     } finally {
     }
   };
@@ -262,7 +262,7 @@ const QA_f06_Summary = () => {
             icon={<EditOutlined />}
             onClick={() => handleEdit(record)}
             style={{ width: "100%" }}
-            //   disabled={record.status == "SUBMIT" ? true : false}
+          //   disabled={record.status == "SUBMIT" ? true : false}
           >
             Review
           </Button>
@@ -299,7 +299,7 @@ const QA_f06_Summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/QA/Service/trainingCalendar/print?year=${yearPrint}`,
+          `${API.prodUrl}/Precot/api/QA/Service/trainingCalendar/print?year=${yearPrint}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -316,12 +316,12 @@ const QA_f06_Summary = () => {
           }
         })
         .catch((err) => {
-          
+
         });
     } catch (error) {
       console.error("Error in handleDatePrintChange:", error);
     }
-  }; 
+  };
   const goTo = () => {
     if (year == "" || year == null) {
       message.warning("Please Select Year");
@@ -337,7 +337,7 @@ const QA_f06_Summary = () => {
   const totalPages = Math.ceil(
     printResponseData?.[0]?.trainingSessionList?.length / recordsPerPage || 0
   );
-  
+
   const paginateData = (data, pageNumber) => {
     const start = (pageNumber - 1) * recordsPerPage;
     return data.slice(start, start + recordsPerPage);
@@ -347,7 +347,7 @@ const QA_f06_Summary = () => {
   return (
     // print section
     <div>
-    <div id="section-to-print">
+      <div id="section-to-print">
         {Array.from({ length: totalPages }).map((_, pageIndex) => (
           <div
             key={pageIndex}
@@ -376,7 +376,7 @@ const QA_f06_Summary = () => {
                     TRAINING CALENDAR
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="15">PH-QAD01-F-006</td>
+                  <td colSpan="15">PH-QAD01/F-006</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -606,79 +606,79 @@ const QA_f06_Summary = () => {
                     </tr>
                   )
                 )}
-                  {pageIndex + 1 === totalPages && (
+                {pageIndex + 1 === totalPages && (
                   <>
-                <tr>
-                  <th colSpan="55">
-                    Note : This annual plan can be updated as and when required
-                    considering the need and demand by user dept.{" "}
-                  </th>
-                  <td colSpan="30" rowSpan="2">
-                    <div style={{ textAlign: "center" }}>
-                      <b>Prepared by:</b>{" "}
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {getImage1 && (
-                        <img
-                          src={getImage1}
-                          alt="Designee Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {printResponseData?.[0]?.qaDesigneeSign}
-                      <br />
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {formattedDateWithTime(
-                        printResponseData?.[0]?.qaDesigneeSubmitOn
-                      )}
-                    </div>
-                  </td>
-                  <td colSpan="30" rowSpan="2">
-                    <div style={{ textAlign: "center" }}>
-                      <b>Approved by: </b>{" "}
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {getImage2 && (
-                        <img
-                          src={getImage2}
-                          alt="MR/QA Manager Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {printResponseData?.[0]?.qaManagerMrSign}
-                      <br />
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      {formattedDateWithTime(
-                        printResponseData?.[0]?.qaManagerMrSubmitOn
-                      )}
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th colSpan="55">
-                    Legends : Two digits number indicates date of particular month;
-                    Letter 'P' indicates Plan; Letter 'C' indicates Completed.
-                  </th>
-                </tr>
-                </>
+                    <tr>
+                      <th colSpan="55">
+                        Note : This annual plan can be updated as and when required
+                        considering the need and demand by user dept.{" "}
+                      </th>
+                      <td colSpan="30" rowSpan="2">
+                        <div style={{ textAlign: "center" }}>
+                          <b>Prepared by:</b>{" "}
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {getImage1 && (
+                            <img
+                              src={getImage1}
+                              alt="Designee Sign"
+                              style={{
+                                width: "60px",
+                                height: "60px",
+                                objectFit: "contain",
+                                mixBlendMode: "multiply",
+                                justifyContent: "center",
+                              }}
+                            />
+                          )}
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {printResponseData?.[0]?.qaDesigneeSign}
+                          <br />
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {formattedDateWithTime(
+                            printResponseData?.[0]?.qaDesigneeSubmitOn
+                          )}
+                        </div>
+                      </td>
+                      <td colSpan="30" rowSpan="2">
+                        <div style={{ textAlign: "center" }}>
+                          <b>Approved by: </b>{" "}
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {getImage2 && (
+                            <img
+                              src={getImage2}
+                              alt="MR/QA Manager Sign"
+                              style={{
+                                width: "60px",
+                                height: "60px",
+                                objectFit: "contain",
+                                mixBlendMode: "multiply",
+                                justifyContent: "center",
+                              }}
+                            />
+                          )}
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {printResponseData?.[0]?.qaManagerMrSign}
+                          <br />
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          {formattedDateWithTime(
+                            printResponseData?.[0]?.qaManagerMrSubmitOn
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th colSpan="55">
+                        Legends : Two digits number indicates date of particular month;
+                        Letter 'P' indicates Plan; Letter 'C' indicates Completed.
+                      </th>
+                    </tr>
+                  </>
                 )}
               </tbody>
               <br />
@@ -712,9 +712,9 @@ const QA_f06_Summary = () => {
                 </tr>
               </tfoot>
             </table>
-            </div>
-        ))}
           </div>
+        ))}
+      </div>
 
       {/* HEADER */}
 
@@ -727,7 +727,7 @@ const QA_f06_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="TRAINING CALENDAR"
-          formatNo="PH-QAD01-F-006"
+          formatNo="PH-QAD01/F-006"
           MenuBtn={
             <Button
               type="primary"

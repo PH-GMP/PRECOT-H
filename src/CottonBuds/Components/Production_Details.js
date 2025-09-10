@@ -69,7 +69,7 @@ const Production_Details = (props) => {
     updateProductionDetails({ batchNo: props.batchNo });
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -194,7 +194,7 @@ const Production_Details = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/saveProductionDetails`,
+        `${API.prodUrl}/Precot/api/buds/bmr/saveProductionDetails`,
         payload,
         {
           headers: {
@@ -207,7 +207,7 @@ const Production_Details = (props) => {
         message.success("Saved Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -325,7 +325,7 @@ const Production_Details = (props) => {
     
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/buds/bmr/submitProductionDetails`,
+        `${API.prodUrl}/Precot/api/buds/bmr/submitProductionDetails`,
         payload,
         {
           headers: {
@@ -338,7 +338,7 @@ const Production_Details = (props) => {
         message.success("Submitted Successfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/buds/bmr/getSubmittedProductionDetails?batchNumber=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -409,7 +409,7 @@ const Production_Details = (props) => {
                axios
                 .get(
                   `${
-                  API.prodUrl
+                 API.prodUrl
                   }/Precot/api/buds/bmr/getProductionDetails?batchNo=${
                     props.batchNo
                   }&orderNo=${props.orderNo}&fromdate=${
@@ -454,7 +454,7 @@ const Production_Details = (props) => {
     axios
       .get(
         `${
-        API.prodUrl
+       API.prodUrl
         }/Precot/api/buds/bmr/getProductionDetails?batchNo=${
           props.batchNo
         }&orderNo=${props.orderNo}&fromDate=${moment(

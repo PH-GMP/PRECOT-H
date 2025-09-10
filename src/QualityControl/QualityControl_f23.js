@@ -103,7 +103,7 @@ const QualityControl_f23 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -139,7 +139,7 @@ const QualityControl_f23 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/FetchF028ByDate?date=${date}`,
+            `${   API.prodUrl}/Precot/api/qc/CleaningOfAutoclavesF023/FetchF028ByDate?date=${date}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -185,7 +185,7 @@ const QualityControl_f23 = () => {
     try {
       setStatusLoader(true);
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveCleaningOfAutoclaveF023`,
+        `${   API.prodUrl}/Precot/api/qc/SaveCleaningOfAutoclaveF023`,
         payload,
         {
           headers: {
@@ -237,7 +237,7 @@ const QualityControl_f23 = () => {
     try {
       setStatusLoader(true);
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitCleaningOfAutoclavesF023`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitCleaningOfAutoclavesF023`,
         payload,
         {
           headers: {

@@ -443,7 +443,7 @@ const QA_f22 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -472,7 +472,7 @@ const QA_f22 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const handleKeyDown2 = (event) => {
     if (!["P", "p"].includes(event.key) && event.key.length === 1) {
@@ -600,7 +600,7 @@ const QA_f22 = () => {
     try {
       const payload = {
         formatName: "SUPPLIER’S AUDIT PLAN",
-        formatNo: "PH-QAD01-F-022",
+        formatNo: "PH-QAD01/F-022",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-22",
         unit: "Unit H",
@@ -801,7 +801,7 @@ const QA_f22 = () => {
     try {
       const payload = {
         formatName: "SUPPLIER’S AUDIT PLAN",
-        formatNo: "PH-QAD01-F-022",
+        formatNo: "PH-QAD01/F-022",
         revisionNo: 2,
         sopNumber: "PH-QAD01-D-22",
         unit: "Unit H",
@@ -2294,7 +2294,7 @@ const QA_f22 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="SUPPLIER’S AUDIT PLAN"
-        formatNo="PH-QAD01-F-022"
+        formatNo="PH-QAD01/F-022"
         sopNo="PH-QAD01-D-18"
         MenuBtn={
           <Button

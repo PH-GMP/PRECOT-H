@@ -121,7 +121,7 @@ const PadPunching_f08_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const PadPunching_f08_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username =
@@ -155,7 +155,7 @@ const PadPunching_f08_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -179,7 +179,7 @@ const PadPunching_f08_Summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDatesupervisor = (dateString) => {
     if (dateString) {
@@ -207,7 +207,7 @@ const PadPunching_f08_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -236,7 +236,7 @@ const PadPunching_f08_Summary = () => {
     const fetchmachineNameOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/padpunching/MachineLov`,
+          `${API.prodUrl}/Precot/api/padpunching/MachineLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -338,7 +338,7 @@ const PadPunching_f08_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/getSummarySanitisationOfMachinesAndSurfaces`;
+      let apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/getSummarySanitisationOfMachinesAndSurfaces`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -494,7 +494,7 @@ const PadPunching_f08_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/findByMachineNameWeekNoMonthAndYearPrintApi/SanitisationOfMachinesAndSurfaces?month=${monthP}&year=${YearP}`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/findByMachineNameWeekNoMonthAndYearPrintApi/SanitisationOfMachinesAndSurfaces?month=${monthP}&year=${YearP}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

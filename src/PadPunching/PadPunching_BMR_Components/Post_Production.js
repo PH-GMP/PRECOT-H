@@ -65,7 +65,7 @@ const Post_Production = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/postProductionReview?order=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/postProductionReview?order=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -149,7 +149,7 @@ const Post_Production = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/submitPostProductionReview`,
+        `${API.prodUrl}/Precot/api/punching/bmr/submitPostProductionReview`,
         newSave ? payload_2 : payload,
         {
           headers: {
@@ -163,7 +163,7 @@ const Post_Production = (props) => {
         // get api
         axios
         .get(
-          `${ API.prodUrl}/Precot/api/punching/bmr/postProductionReview?order=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/punching/bmr/postProductionReview?order=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

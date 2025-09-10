@@ -298,7 +298,7 @@ const Spunlace_f16 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getByDateShiftOrderNo?date=${date1}&shift=${state.shift}&orderNo=${state.orderNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getByDateShiftOrderNo?date=${date1}&shift=${state.shift}&orderNo=${state.orderNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -377,7 +377,7 @@ const Spunlace_f16 = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spulance/silterWinderProductionDetails?order=${state.orderNo}`,
+        `${API.prodUrl}/Precot/api/spulance/silterWinderProductionDetails?order=${state.orderNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -596,7 +596,7 @@ const Spunlace_f16 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -620,7 +620,7 @@ const Spunlace_f16 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -632,7 +632,7 @@ const Spunlace_f16 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -656,7 +656,7 @@ const Spunlace_f16 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -668,7 +668,7 @@ const Spunlace_f16 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -692,7 +692,7 @@ const Spunlace_f16 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   // console.loglog(productName);
   // console.loglog("noOfFlagsInRoll", mixing);
@@ -707,7 +707,7 @@ const Spunlace_f16 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
         {
           id: processId,
           status: "Approve",
@@ -747,7 +747,7 @@ const Spunlace_f16 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
         {
           id: processId,
           status: "Reject",
@@ -807,7 +807,7 @@ const Spunlace_f16 = () => {
     console.log("payload", payload);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/SaveProcessSetupVerificationSliterWinder`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/SaveProcessSetupVerificationSliterWinder`,
         payload,
         { headers }
       )
@@ -883,7 +883,7 @@ const Spunlace_f16 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/SubmitProcessSetupVerificationSliterWinder`,
+        ` ${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/SubmitProcessSetupVerificationSliterWinder`,
         payload,
         { headers }
       )

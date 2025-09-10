@@ -56,7 +56,7 @@ const QA_f15_Summary = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const formattedDate = (dateString) => {
     if (dateString) {
@@ -283,7 +283,7 @@ const QA_f15_Summary = () => {
                     Annual Plan
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="15">PH-QAD01-F-015</td>
+                  <td colSpan="15">PH-QAD01/F-015</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -563,7 +563,7 @@ const QA_f15_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="Annual Plan"
-          formatNo="PH-QAD01-F-015"
+          formatNo="PH-QAD01/F-015"
           MenuBtn={
             <Button
               type="primary"

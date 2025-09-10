@@ -197,7 +197,7 @@ const Padpunching_f25 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -233,7 +233,7 @@ const Padpunching_f25 = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl]);
+  }, [apiData,API.prodUrl]);
   const showDrawer = () => {
     setOpen(true);
   };

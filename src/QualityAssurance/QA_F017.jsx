@@ -27,7 +27,7 @@ const QA_F017 = () => {
   const initialized = useRef(false);
   const navigateSummary = "/Precot/QA/QA_F017_Summary";
   const formName = "Minutes of MRM";
-  const formatNo = "PH-QAD01-F-017";
+  const formatNo = "PH-QAD01/F-017";
   const role = localStorage.getItem("role");
   const pageSize = 4;
   const [currentPage, setCurrentPage] = useState(1);

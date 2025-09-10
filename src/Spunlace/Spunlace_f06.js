@@ -102,7 +102,7 @@ const initial=useRef(false);
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -126,7 +126,7 @@ const initial=useRef(false);
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   // // console.log("get image", getImage);
 
@@ -141,7 +141,7 @@ const initial=useRef(false);
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -165,7 +165,7 @@ const initial=useRef(false);
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   const [getImage2, setGetImage2] = useState("");
@@ -178,7 +178,7 @@ const initial=useRef(false);
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -202,7 +202,7 @@ const initial=useRef(false);
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   const canEdit = () => {
@@ -337,7 +337,7 @@ const initial=useRef(false);
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/approveOrReject`,
         {
           id: OverallID,
           status: "Approve",
@@ -377,7 +377,7 @@ const initial=useRef(false);
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/approveOrReject`,
         {
           id: OverallID,
           status: "Reject",
@@ -586,7 +586,7 @@ const initial=useRef(false);
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SaveProductionReportDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SaveProductionReportDetails`,
           payload,
           { headers }
         )
@@ -643,7 +643,7 @@ const initial=useRef(false);
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SaveProductionReportDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SaveProductionReportDetails`,
           payload,
           { headers }
         )
@@ -722,7 +722,7 @@ const initial=useRef(false);
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SubmitProductionReportDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SubmitProductionReportDetails`,
           payload,
           { headers }
         )
@@ -779,7 +779,7 @@ const initial=useRef(false);
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SubmitProductionReportDetails`,
+          `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/SubmitProductionReportDetails`,
           payload,
           { headers }
         )
@@ -837,7 +837,7 @@ const initial=useRef(false);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -883,7 +883,7 @@ const initial=useRef(false);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/splProduction?order=${orderNo}&date=${formattedDate}&shift=${numberShift}`,
+        `${API.prodUrl}/Precot/api/spulance/splProduction?order=${orderNo}&date=${formattedDate}&shift=${numberShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -923,7 +923,7 @@ const initial=useRef(false);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/getByDateShiftOrderNo?orderNo=${orderNo}&date=${newdate}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/DailyProductionReport/getByDateShiftOrderNo?orderNo=${orderNo}&date=${newdate}&shift=${shiftvalue}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

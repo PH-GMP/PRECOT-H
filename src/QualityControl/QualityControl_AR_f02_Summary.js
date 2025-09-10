@@ -74,7 +74,7 @@ const QualityControl_AR_f02_Summary = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const QualityControl_AR_f02_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/bleaching/generation/fetchBatchNumbers`,
+          `${   API.prodUrl}/Precot/api/bleaching/generation/fetchBatchNumbers`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const QualityControl_AR_f02_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/ARF002/GETALL`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/ARF002/GETALL`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -293,7 +293,7 @@ const QualityControl_AR_f02_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF002/print/${formParams.printSubBatchNo}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF002/print/${formParams.printSubBatchNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

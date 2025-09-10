@@ -271,7 +271,7 @@ const Spunlace_f07_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/supervisorSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/supervisorSummary`;
 
     if (
       [
@@ -304,7 +304,7 @@ const Spunlace_f07_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -404,7 +404,7 @@ const Spunlace_f07_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -443,7 +443,7 @@ const Spunlace_f07_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/orderGoodsByDate?date=${date}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderGoodsByDate?date=${date}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -483,7 +483,7 @@ const Spunlace_f07_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/orderGoodsByDate?date=${selectedDate}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/orderGoodsByDate?date=${selectedDate}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -518,8 +518,8 @@ const Spunlace_f07_summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShiftPrintApi?date=${selectedDate}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
-        // `${ API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShift?date=2024-06-01&shift=I`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShiftPrintApi?date=${selectedDate}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
+        // `${API.prodUrl}/Precot/api/spunlace/Service/RejectionReport/getByDateAndShift?date=2024-06-01&shift=I`,
         { headers }
       )
       .then((res) => {
@@ -536,7 +536,7 @@ const Spunlace_f07_summary = () => {
         //op
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -563,7 +563,7 @@ const Spunlace_f07_summary = () => {
         //op
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -590,7 +590,7 @@ const Spunlace_f07_summary = () => {
         //op
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.hod_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.hod_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -633,7 +633,7 @@ const Spunlace_f07_summary = () => {
     axios
       .get(
         `${
-        API.prodUrl
+       API.prodUrl
         }/Precot/api/spulance/splRejection?date=${selectedDate}&shift=${convertShiftValue(
           selectedShift
         )}&order=${selectedOrderNo}`,

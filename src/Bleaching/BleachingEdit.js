@@ -191,7 +191,7 @@ const BleachingEdit = (props) => {
       setshiftInchargeFlag(false);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Caking/Service/getshiftsign/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/getshiftsign/${props.data[0].header_id}`,
           { headers }
         )
         .then((res) => {
@@ -231,7 +231,7 @@ const BleachingEdit = (props) => {
       setPerson("HOD");
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Caking/Service/gethodsign/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/gethodsign/${props.data[0].header_id}`,
           { headers }
         )
         .then((res) => {
@@ -260,7 +260,7 @@ const BleachingEdit = (props) => {
       setPerson("QA");
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Caking/Service/getqasign/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/getqasign/${props.data[0].header_id}`,
           { headers }
         )
         .then((res) => {
@@ -449,7 +449,7 @@ const BleachingEdit = (props) => {
 
       // Make the POST request to the API endpoint with headers
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Caking/Service/UpdateBleachingJobCard`,
+        `${API.prodUrl}/Precot/api/Caking/Service/UpdateBleachingJobCard`,
         payload,
         { headers }
       );
@@ -569,7 +569,7 @@ const BleachingEdit = (props) => {
 
       // Make the POST request to the API endpoint with headers
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Caking/Service/creatBleachingJobCard`,
+        `${API.prodUrl}/Precot/api/Caking/Service/creatBleachingJobCard`,
         payload,
         { headers }
       );
@@ -591,7 +591,7 @@ const BleachingEdit = (props) => {
       // console.log("hod");
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/Caking/Service/hodApprove/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/hodApprove/${props.data[0].header_id}`,
           {
             dateTime: HOD_date,
             signature: HOD_sign,
@@ -609,7 +609,7 @@ const BleachingEdit = (props) => {
       // console.log("shift");
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/Caking/Service/ShiftInchargeApprove/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/ShiftInchargeApprove/${props.data[0].header_id}`,
           {
             dateTime: INcharge_Date,
             signature: INcharge_sign,
@@ -627,7 +627,7 @@ const BleachingEdit = (props) => {
       // console.log("QA");
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/Caking/Service/QaApprove/${props.data[0].header_id}`,
+          `${API.prodUrl}/Precot/api/Caking/Service/QaApprove/${props.data[0].header_id}`,
           {
             dateTime: QA_date,
             signature: QA_sign,

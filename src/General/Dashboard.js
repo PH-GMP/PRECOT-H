@@ -58,7 +58,7 @@ const Dashboard = () => {
     const fetchDepartments = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
           { headers }
         );
         setDepartments(response.data);
@@ -85,7 +85,7 @@ const Dashboard = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/Bleaching/audit/dashboard`,
+        `${API.prodUrl}/Precot/api/Bleaching/audit/dashboard`,
         { month, year },
         { headers }
       );

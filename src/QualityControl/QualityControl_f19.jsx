@@ -461,7 +461,7 @@ export default function Qualitycontrol_f19() {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `${   API.prodUrl}/Precot/api/qc/MediaPreparationF019/GetByPreparationDateAndLoadno?preparationDate=${date}&loadNo=${loadno}`,
+        `${  API.prodUrl}/Precot/api/qc/MediaPreparationF019/GetByPreparationDateAndLoadno?preparationDate=${date}&loadNo=${loadno}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -499,7 +499,7 @@ export default function Qualitycontrol_f19() {
         if (username) {
           axios
             .get(
-              `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -550,7 +550,7 @@ export default function Qualitycontrol_f19() {
     console.log("Payload being sent:", formData);
     try {
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/qc/SaveMediaPreparationF019`,
+        `${  API.prodUrl}/Precot/api/qc/SaveMediaPreparationF019`,
         formData,
         {
           headers: {
@@ -603,7 +603,7 @@ export default function Qualitycontrol_f19() {
 
     try {
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/qc/SubmitMediaPreparationF019`,
+        `${  API.prodUrl}/Precot/api/qc/SubmitMediaPreparationF019`,
         formData, // Ensure the payload is sent in the body
         {
           headers: {
@@ -635,7 +635,7 @@ export default function Qualitycontrol_f19() {
 
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/qc/ApproveMediaPreparationF019`,
+        `${  API.prodUrl}/Precot/api/qc/ApproveMediaPreparationF019`,
         {
           id: formData.id,
           status: "Approve",
@@ -665,7 +665,7 @@ export default function Qualitycontrol_f19() {
 
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/qc/ApproveMediaPreparationF019`,
+        `${  API.prodUrl}/Precot/api/qc/ApproveMediaPreparationF019`,
         {
           id: formData.id,
           status: "Reject",

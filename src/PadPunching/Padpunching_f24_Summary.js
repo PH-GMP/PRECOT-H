@@ -114,7 +114,7 @@ const Padpunching_f25_summary = () => {
 
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const Padpunching_f25_summary = () => {
         }
       });
     }
-  }, [ API.prodUrl, printResponseData]);
+  }, [API.prodUrl, printResponseData]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -162,7 +162,7 @@ const Padpunching_f25_summary = () => {
 
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+              `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
               {
                 headers: {
                   "Content-Type": "application/json",
@@ -191,7 +191,7 @@ const Padpunching_f25_summary = () => {
         }
       });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const formattedDate = (dateString) => {
     if (dateString) {
@@ -295,7 +295,7 @@ const Padpunching_f25_summary = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
 
-        let apiUrl = `${ API.prodUrl}/Precot/api/punching/getHandSanitationSummaryF24`;
+        let apiUrl = `${API.prodUrl}/Precot/api/punching/getHandSanitationSummaryF24`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -377,7 +377,7 @@ const Padpunching_f25_summary = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -425,7 +425,7 @@ const Padpunching_f25_summary = () => {
 
     try {
       let apiUrl = `${
-       API.prodUrl
+      API.prodUrl
       }/Precot/api/punching/getHandSanitationPrintF24?date=${date || ""}`;
 
       if (shiftValue) {
@@ -550,7 +550,7 @@ const Padpunching_f25_summary = () => {
   //         setPrintShift(shiftValue);
 
   //         // Construct the API URL based on whether printDate is defined
-  //         let apiUrl = `${ API.prodUrl}/Precot/api/punching/getHandSanitationPrintF24?date=${printDate}`;
+  //         let apiUrl = `${API.prodUrl}/Precot/api/punching/getHandSanitationPrintF24?date=${printDate}`;
   //         if (shiftValue) {
   //             apiUrl += `&shift=${shiftValue}`;
   //         }

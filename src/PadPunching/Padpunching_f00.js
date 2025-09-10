@@ -167,7 +167,7 @@ const  Padpunching_f00 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -191,7 +191,7 @@ const  Padpunching_f00 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   const [getImage2, setGetImage2] = useState("");
@@ -204,7 +204,7 @@ const  Padpunching_f00 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -228,7 +228,7 @@ const  Padpunching_f00 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
 
   const canEdit = () => {
@@ -329,7 +329,7 @@ const  Padpunching_f00 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/approveOrReject`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/approveOrReject`,
         {
           id: OverallID,
           status: "Approve",
@@ -369,7 +369,7 @@ const  Padpunching_f00 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/approveOrReject`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/approveOrReject`,
         {
           id: OverallID,
           status: "Reject",
@@ -544,7 +544,7 @@ const  Padpunching_f00 = () => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SaveLogBookBagMakingF003`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SaveLogBookBagMakingF003`,
           payload,
           { headers }
         )
@@ -594,7 +594,7 @@ const  Padpunching_f00 = () => {
 
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SaveLogBookBagMakingF003`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SaveLogBookBagMakingF003`,
           payload,
           { headers }
         )
@@ -666,7 +666,7 @@ if (NewSave) {
  
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SubmitLogBookBagMakingF003`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SubmitLogBookBagMakingF003`,
           payload,
           { headers }
         )
@@ -716,7 +716,7 @@ if (NewSave) {
  
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SubmitLogBookBagMakingF003`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/SubmitLogBookBagMakingF003`,
           payload,
           { headers }
         )
@@ -757,7 +757,7 @@ const checkBmrExists = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${formattedDate}&ShiftID=${numberShift}`,
+        `${API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${formattedDate}&ShiftID=${numberShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -793,7 +793,7 @@ const checkBmrExists = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/api/LogBooks-details`,
+        `${API.prodUrl}/Precot/api/padpunching/api/LogBooks-details`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -825,7 +825,7 @@ const checkBmrExists = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftMachineNo?date=${newdate}&shift=${shiftvalue}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftMachineNo?date=${newdate}&shift=${shiftvalue}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

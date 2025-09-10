@@ -152,7 +152,7 @@ export default function Bleaching_f42() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -188,7 +188,7 @@ export default function Bleaching_f42() {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const { state } = location;
   const { bmrnos, bmrnos2 } = state || {};

@@ -185,7 +185,7 @@ const QA_Inward033 = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -216,7 +216,7 @@ const QA_Inward033 = () => {
         })
         .catch((err) => {});
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const canDisplayButtons = () => {
     if (roleauth == "ROLE_QA") {
@@ -296,7 +296,7 @@ const QA_Inward033 = () => {
       .put(
         `${API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
         {
-          formatNo: "PH-QAD01-F-033",
+          formatNo: "PH-QAD01/F-033",
           id: fetchedId,
           status: "Approve",
         },
@@ -330,7 +330,7 @@ const QA_Inward033 = () => {
       .put(
         `${API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
         {
-          formatNo: "PH-QAD01-F-033",
+          formatNo: "PH-QAD01/F-033",
           id: fetchedId,
           status: "Reject",
           remarks: rejectRemarks,
@@ -376,8 +376,8 @@ const QA_Inward033 = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01-F-033"}`,
+         API.prodUrl
+        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01/F-033"}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -443,8 +443,8 @@ const QA_Inward033 = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsbyParamInward?formatNo=${"PH-QAD01-F-033"}&gr_date=${newDate}&supplierName=${Suppliers}&invoice_no=${invoice}&item_description=${productdesc}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsbyParamInward?formatNo=${"PH-QAD01/F-033"}&gr_date=${newDate}&supplierName=${Suppliers}&invoice_no=${invoice}&item_description=${productdesc}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -582,7 +582,7 @@ const QA_Inward033 = () => {
 
     const payload = {
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-033",
+      formatNo: "PH-QAD01/F-033",
       formatName: "INWARD INSPECTION REPORT(JAR/BLISTER)",
       sopNumber: "PH-QAD01-D-30",
       revisionNo: "01",
@@ -831,7 +831,7 @@ const QA_Inward033 = () => {
 
     const payload = {
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-033",
+      formatNo: "PH-QAD01/F-033",
       formatName: "INWARD INSPECTION REPORT(JAR/BLISTER)",
       sopNumber: "PH-QAD01-D-30",
       revisionNo: "01",
@@ -1784,7 +1784,7 @@ const QA_Inward033 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INWARD INSPECTION REPORT(JAR/BLISTER)"
-        formatNo="PH-QAD01-F-033"
+        formatNo="PH-QAD01/F-033"
         sopNo="PH-QAD01-D-15"
         MenuBtn={
           <Button

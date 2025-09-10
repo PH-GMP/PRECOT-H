@@ -70,7 +70,7 @@ const Bleaching_f05_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const Bleaching_f05_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -107,7 +107,7 @@ const Bleaching_f05_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const Bleaching_f05_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const navigate = useNavigate();
 
@@ -191,7 +191,7 @@ const Bleaching_f05_summary = () => {
       }
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getByDateF05?phNo=${PHNos}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getByDateF05?phNo=${PHNos}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -279,9 +279,9 @@ const Bleaching_f05_summary = () => {
 
         let apiUrl = "";
         if (role === "ROLE_SUPERVISOR") {
-          apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getAllSupervisorNotSubmitted`;
+          apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getAllSupervisorNotSubmitted`;
         } else if (role === "ROLE_HOD" || role === "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getAllHodNotSubmitted`;
+          apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/getAllHodNotSubmitted`;
         } else {
           throw new Error("Role not found in localStorage.");
         }
@@ -412,7 +412,7 @@ const Bleaching_f05_summary = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/rawCottonData`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -449,7 +449,7 @@ const Bleaching_f05_summary = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PRD01/F05`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PRD01/F05`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -600,7 +600,7 @@ const Bleaching_f05_summary = () => {
       // render: (text) => formatDate(text),
     },
     {
-      title: "Superisor Status",
+      title: "Supervisor Status",
       dataIndex: "supervisor_status",
       key: "supervisor_status",
       align: "center",

@@ -21,7 +21,7 @@ const List_Of_Enclosure = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/11.GetListOFEnclousers?order_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/11.GetListOFEnclousers?order_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -54,7 +54,7 @@ const List_Of_Enclosure = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/11.SaveListOFEnclousers`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/11.SaveListOFEnclousers`,
         payload,
         {
           headers: {
@@ -67,7 +67,7 @@ const List_Of_Enclosure = (props) => {
         //////////////
         axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/11.GetListOFEnclousers?order_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/11.GetListOFEnclousers?order_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

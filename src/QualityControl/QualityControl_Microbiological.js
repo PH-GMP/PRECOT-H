@@ -204,9 +204,9 @@ const Micro = () => {
       if (formNo === "PH-QCL01-AR-F-008") {
         axios
           .get(
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
-            `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF008MonthYear`,
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
+            `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF008MonthYear`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
             {
               headers,
               params: {
@@ -365,9 +365,9 @@ const Micro = () => {
       if (formNo === "PH-QCL01-AR-F-009") {
         axios
           .get(
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
-            `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF009MonthYear`,
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
+            `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF009MonthYear`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
             {
               headers,
               params: {
@@ -526,9 +526,9 @@ const Micro = () => {
       if (formNo === "PH-QCL01-AR-F-010") {
         axios
           .get(
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
-            `${ API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF010MonthYear`,
-            // `${    API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByFormatId`,
+            `${API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetByDateF010MonthYear`,
+            // `${   API.prodUrl}/Precot/api/qc/SwabMicroAnalysisF8F9F10/GetById/${id}`,
             {
               headers,
               params: {
@@ -693,7 +693,7 @@ const Micro = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -717,7 +717,7 @@ const Micro = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,  API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -727,7 +727,7 @@ const Micro = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -751,7 +751,7 @@ const Micro = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,  API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   let formattedMicroDate;
   if (printData.microbiologist_submit_on) {
@@ -887,7 +887,7 @@ const Micro = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qc/ApproveSwabMicrobiologicalAnalysis`,
+        `${API.prodUrl}/Precot/api/qc/ApproveSwabMicrobiologicalAnalysis`,
         {
           id: id,
           formatNo: formNo,
@@ -972,7 +972,7 @@ const Micro = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qc/ApproveSwabMicrobiologicalAnalysis`,
+        `${API.prodUrl}/Precot/api/qc/ApproveSwabMicrobiologicalAnalysis`,
         {
           id: id,
           formatNo: formNo,
@@ -1098,7 +1098,7 @@ const Micro = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/qc/SaveSwabMicroAnalysisF8F9F10`,
+        `${API.prodUrl}/Precot/api/qc/SaveSwabMicroAnalysisF8F9F10`,
         payload,
         {
           headers,
@@ -1234,7 +1234,7 @@ const Micro = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/qc/SubmitSwabMicroAnalysisARF8F9F10`,
+        `${API.prodUrl}/Precot/api/qc/SubmitSwabMicroAnalysisARF8F9F10`,
         payload,
         { headers }
       )

@@ -136,7 +136,7 @@ const Spunlace_f05 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -182,7 +182,7 @@ const Spunlace_f05 = () => {
       const fetchJobOrder = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/spulance/getWinderOperatorOrderDetailsF005?order_no=${orderNo}&date=${date}&shift=${shift}`,
+            `${API.prodUrl}/Precot/api/spulance/getWinderOperatorOrderDetailsF005?order_no=${orderNo}&date=${date}&shift=${shift}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -241,7 +241,7 @@ const Spunlace_f05 = () => {
             const fetchJob = async () => {
               try {
                 const response = await axios.get(
-                  `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
+                  `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNo}`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -393,7 +393,7 @@ const Spunlace_f05 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_OPERATOR") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/saveWinderF005`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/saveWinderF005`;
       payload = {
         unit: "Unit H",
         format_name: "PROCESS SETUP DETAILS-WINDER",
@@ -449,7 +449,7 @@ const Spunlace_f05 = () => {
       role == "ROLE_HOD" ||
       role == "ROLE_DESIGNEE"
     ) {
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/approveOrReject`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/approveOrReject`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.id,
@@ -497,7 +497,7 @@ const Spunlace_f05 = () => {
     setStatusLoader(true);
     let apiurl, payload;
     if (role == "ROLE_OPERATOR") {
-      apiurl = `${ API.prodUrl}/Precot/api/spulance/submitWinderF005`;
+      apiurl = `${API.prodUrl}/Precot/api/spulance/submitWinderF005`;
       const mpmRange = (speed, name) => {
         if (speed == "" || speed == null) {
           message.warning(`${name} required`);
@@ -749,7 +749,7 @@ const Spunlace_f05 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = apiurl = `${ API.prodUrl}/Precot/api/spulance/approveOrReject`;
+      apiurl = apiurl = `${API.prodUrl}/Precot/api/spulance/approveOrReject`;
       payload = {
         id: formData.id,
         status: "Reject",

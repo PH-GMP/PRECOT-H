@@ -59,7 +59,7 @@ const QualityControlARF012 = () => {
         const token = localStorage.getItem("token");
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/GetByDateMonthYear?date=${date}`,
+            `${   API.prodUrl}/Precot/api/qc/DistilledWaterAnalysisReportARF012/GetByDateMonthYear?date=${date}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const QualityControlARF012 = () => {
               //getImage
               axios
                 .get(
-                  `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                  `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const QualityControlARF012 = () => {
               //getImage
               axios
                 .get(
-                  `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+                  `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
                   {
                     headers: {
                       "Content-Type": "application/json",
@@ -272,7 +272,7 @@ const QualityControlARF012 = () => {
     try {
       // Sending the payload to the API using axios
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveDistilledWaterAnalysisReportARF012`,
+        `${   API.prodUrl}/Precot/api/qc/SaveDistilledWaterAnalysisReportARF012`,
         payload,
         {
           headers: {
@@ -365,7 +365,7 @@ const QualityControlARF012 = () => {
     try {
       // Sending the payload to the API using axios
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitDistilledWaterAnalysisReportARF012`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitDistilledWaterAnalysisReportARF012`,
         payload,
         {
           headers: {
@@ -397,7 +397,7 @@ const QualityControlARF012 = () => {
     };
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveDistilledWaterAnalysisARF012`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveDistilledWaterAnalysisARF012`,
         {
           id: mainId,
           status: "Approve",
@@ -434,7 +434,7 @@ const QualityControlARF012 = () => {
 
     const res = await axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveDistilledWaterAnalysisARF012`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveDistilledWaterAnalysisARF012`,
         {
           id: mainId,
           status: "Reject",

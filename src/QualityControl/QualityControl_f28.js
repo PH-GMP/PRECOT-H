@@ -127,7 +127,7 @@ const QualityControl_f28 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const QualityControl_f28 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,      API.prodUrl, token]);
+  }, [planingDetailsByDate,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -160,7 +160,7 @@ const QualityControl_f28 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -184,7 +184,7 @@ const QualityControl_f28 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,      API.prodUrl, token]);
+  }, [planingDetailsByDate,     API.prodUrl, token]);
 
   const handleAddRow = () => {
     setRows([...rows, {}]);
@@ -290,7 +290,7 @@ const QualityControl_f28 = () => {
       };
 
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/GetById/${formid}`,
+        `${   API.prodUrl}/Precot/api/qc/GlasswareBreakageDisposal/GetById/${formid}`,
         { headers }
       );
       console.log("response (details based on date)", response.data);
@@ -386,7 +386,7 @@ const QualityControl_f28 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SaveGlasswareBreakageDisposalF028`,
+        `${   API.prodUrl}/Precot/api/qc/SaveGlasswareBreakageDisposalF028`,
         payload,
         { headers }
       );
@@ -471,7 +471,7 @@ const QualityControl_f28 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/qc/SubmitGlasswareBreakageDisposalF028`,
+        `${   API.prodUrl}/Precot/api/qc/SubmitGlasswareBreakageDisposalF028`,
         payload,
         { headers }
       );

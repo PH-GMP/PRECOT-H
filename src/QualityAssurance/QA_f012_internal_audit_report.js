@@ -190,7 +190,7 @@ const QA_f012_internal_audit_report = () => {
         // Make the API call to add the participant
         const response = await axios.post(
           `${API.prodUrl}/Precot/api/QA/Service/internalAuditSchedule/addAuditParticipant`,
-          { participant: participantName, formatNo: "PH-QAD01-F-010" },
+          { participant: participantName, formatNo: "PH-QAD01/F-010" },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -283,7 +283,7 @@ const QA_f012_internal_audit_report = () => {
           //
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -317,7 +317,7 @@ const QA_f012_internal_audit_report = () => {
           //
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -351,7 +351,7 @@ const QA_f012_internal_audit_report = () => {
           //
         });
     }
-  }, [newData, API.prodUrl, token]);
+  }, [newData,API.prodUrl, token]);
 
   let formattedAuditeeDate;
   if (newData.auditeeSubmitOn) {
@@ -595,7 +595,7 @@ const QA_f012_internal_audit_report = () => {
 
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-012",
+          formatNo: "PH-QAD01/F-012",
           formatName: "INTERNAL AUDIT REPORT",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",
@@ -658,7 +658,7 @@ const QA_f012_internal_audit_report = () => {
       .then((values) => {
         const payloadData = {
           unit: "Unit H",
-          formatNo: "PH-QAD01-F-012",
+          formatNo: "PH-QAD01/F-012",
           formatName: "INTERNAL AUDIT REPORT",
           sopNumber: "PH-QAD01-D-17",
           revisionNo: "02",

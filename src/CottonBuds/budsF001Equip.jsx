@@ -908,7 +908,7 @@ const BudsF001Equip = () => {
         try {
           const response = await axios.get(
             `${
-              API.prodUrl
+             API.prodUrl
             }/Precot/api/buds/bmr/getOrderByBatchNumber?batchNumber=${
               saleOrderNo.split("-")[0]
             }`,

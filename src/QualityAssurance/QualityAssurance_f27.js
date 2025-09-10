@@ -369,7 +369,7 @@ const Drygoods_f01 = () => {
       payload = {
         mom_id: formData.mom_id,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-027",
+        formatNo: "PH-QAD01/F-027",
         formatName: "MINUTES OF MEETING - MOCK RECALL",
         sopNumber: "PH-QAD01-D-24",
         revisionNo: "01",
@@ -404,7 +404,7 @@ const Drygoods_f01 = () => {
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.mom_id,
-        formatNo: "PH-QAD01-F-027",
+        formatNo: "PH-QAD01/F-027",
         status: "Approve",
       };
     }
@@ -495,7 +495,7 @@ const Drygoods_f01 = () => {
       payload = {
         mom_id: formData.mom_id,
         unit: "Unit H",
-        formatNo: "PH-QAD01-F-027",
+        formatNo: "PH-QAD01/F-027",
         formatName: "MINUTES OF MEETING - MOCK RECALL",
         sopNumber: "PH-QAD01-D-24",
         revisionNo: "01",
@@ -536,7 +536,7 @@ const Drygoods_f01 = () => {
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.mom_id,
-        formatNo: "PH-QAD01-F-027",
+        formatNo: "PH-QAD01/F-027",
         status: "Reject",
         remarks: formData.reason,
       };
@@ -750,7 +750,7 @@ const Drygoods_f01 = () => {
     <>
       <BleachingHeader
         formName={"MINUTES OF MEETING - MOCK RECALL"}
-        formatNo={"PH-QAD01-F-027"}
+        formatNo={"PH-QAD01/F-027"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

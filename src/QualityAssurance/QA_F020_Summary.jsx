@@ -36,7 +36,7 @@ const QA_F020_Summary = () => {
   const navigateForward = "/Precot/QA/QA_F020";
   const formName =
     "Non Conformity Report (For Machine Process/ WIP/ Finished Products)";
-  const formatNo = "PH-QAD01-F-020";
+  const formatNo = "PH-QAD01/F-020";
   const [open, setOpen] = useState(false);
   const [isModalCreate, setIsModalCreate] = useState(false);
   const [isModalPrint, setIsModalPrint] = useState(false);
@@ -68,7 +68,7 @@ const QA_F020_Summary = () => {
     tabStatus: "",
     action: "",
     format_name: "NON –CONFORMITY REPORT",
-    format_no: "PH-QAD01-F-020",
+    format_no: "PH-QAD01/F-020",
     revision_no: 2,
     sop_number: "PH-QAD01-D-20",
     unit: "H",

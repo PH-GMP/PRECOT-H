@@ -25,7 +25,6 @@ import PrecotSidebar from "../Components/PrecotSidebar.js";
 import {
   getYearAndMonth,
   handleDecimalNumberKeyDown,
-  handleKeyDown,
   printDateFormat,
   slashFormatDate,
 } from "../util/util.js";
@@ -35,6 +34,7 @@ export default function QA_F028_AnnualProductReview() {
   const navigate = useNavigate();
   const location = useLocation();
   const { TextArea } = Input;
+  const handleKeyDown = () => {};
   const { date } = location.state || {};
   const today = new Date().toISOString().split("T")[0];
   const [rejectModal, setRejectModal] = useState(false);
@@ -53,7 +53,7 @@ export default function QA_F028_AnnualProductReview() {
     month: month,
     year: year,
     unit: "Unit H",
-    formatNo: "PH-QAD01-F-028",
+    formatNo: "PH-QAD01/F-028",
     formatName: "ANNUAL PRODUCT REVIEW",
     sopNumber: "PH-QAD01-D-25",
     revisionNo: "01",
@@ -3665,7 +3665,7 @@ export default function QA_F028_AnnualProductReview() {
       <BleachingHeader
         unit="Unit-H"
         formName="ANNUAL PRODUCT REVIEW"
-        formatNo="PH-QAD01-F-028"
+        formatNo="PH-QAD01/F-028"
         sopNo="PH-QAD01-D-25"
         MenuBtn={
           <Button

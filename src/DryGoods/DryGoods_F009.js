@@ -214,7 +214,7 @@ const DryGoods_f09 = () => {
         })
         .catch((err) => {});
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
   useEffect(() => {
     console.log("state value", date, shift, orderNo);
     const token = localStorage.getItem("token");
@@ -243,7 +243,7 @@ const DryGoods_f09 = () => {
         })
         .catch((err) => {});
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -271,7 +271,7 @@ const DryGoods_f09 = () => {
         })
         .catch((err) => {});
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
 
   const filteredOrderNumberLov = (index) => {
     const selectedOrderNumbersList = Object.values(selectedOrderNumbers);

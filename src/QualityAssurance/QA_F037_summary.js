@@ -48,7 +48,7 @@ const QA_F037_Summary = () => {
   `;
 
   const formName = "Final Inspection Report";
-  const formatNo = "PH-QAD01-F-037";
+  const formatNo = "PH-QAD01/F-037";
   const [selectedpOrder, setSelectedpOrder] = useState("");
 
   const pOrderChange = (value) => setSelectedpOrder(value);
@@ -95,7 +95,7 @@ const QA_F037_Summary = () => {
       const token = localStorage.getItem("token");
 
       const summaryResponse = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportSummary?formatNo=PH-QAD01-F-037`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportSummary?formatNo=PH-QAD01/F-037`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const QA_F037_Summary = () => {
       const token = localStorage.getItem("token");
 
       // Construct the dynamic URL
-      let url = `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportPrint?date=${date}&formatNo=PH-QAD01-F-037`;
+      let url = `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportPrint?date=${date}&formatNo=PH-QAD01/F-037`;
 
       // Add parameters only if they are provided
       if (shift) {

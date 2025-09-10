@@ -88,7 +88,7 @@ const QualityControl_f05 = () => {
 
       axios
         .get(
-          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const QualityControl_f05 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,    API.prodUrl, token]);
+  }, [planingDetailsByDate,   API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -121,7 +121,7 @@ const QualityControl_f05 = () => {
 
       axios
         .get(
-          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const QualityControl_f05 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate,    API.prodUrl, token]);
+  }, [planingDetailsByDate,   API.prodUrl, token]);
 
   const handleAddRow = () => {
     setRows([...rows, {}]);
@@ -269,7 +269,7 @@ const QualityControl_f05 = () => {
 
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${  API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           id: 2,
           status: "Reject",
@@ -299,7 +299,7 @@ const QualityControl_f05 = () => {
 
     const res = await axios
       .put(
-        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${  API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           id: 2,
           status: "Approve",
@@ -357,7 +357,7 @@ const QualityControl_f05 = () => {
       };
 
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SaveLogbookSpunlacePlanning`,
+        `${  API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SaveLogbookSpunlacePlanning`,
         payload,
         { headers }
       );
@@ -399,7 +399,7 @@ const QualityControl_f05 = () => {
       };
 
       const response = await axios.post(
-        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SubmitLogbookSpunlacePlanning`,
+        `${  API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SubmitLogbookSpunlacePlanning`,
         payload,
         { headers }
       );
@@ -430,7 +430,7 @@ const QualityControl_f05 = () => {
   const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${   API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
+        `${  API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -89,7 +89,7 @@ const Qa_Release = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -221,7 +221,7 @@ const Qa_Release = (props) => {
     console.log("new", newSave);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/13.SubmitQaRelease`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/13.SubmitQaRelease`,
         payload_2,
         {
           headers: {
@@ -234,7 +234,7 @@ const Qa_Release = (props) => {
         message.success("Qa Release Submitted");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -372,7 +372,7 @@ const Qa_Release = (props) => {
     console.log("new", newSave);
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/13.SaveQaRelease`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/13.SaveQaRelease`,
         payload_2,
         {
           headers: {
@@ -385,7 +385,7 @@ const Qa_Release = (props) => {
         message.success("Qa Release Saved");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/13.GetQaRelease?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

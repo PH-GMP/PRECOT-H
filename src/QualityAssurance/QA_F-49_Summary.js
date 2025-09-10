@@ -500,7 +500,7 @@ const QA_F49_Summary = () => {
                     PRODUCT DISPOSITION LOG BOOK
                   </th>
                   <td colSpan={20}>Format No.:</td>
-                  <td colSpan={10}>PH-QAD01-F-049</td>
+                  <td colSpan={10}>PH-QAD01/F-049</td>
                 </tr>
                 <tr>
                   <td colSpan={20}>Revision No.:</td>
@@ -653,7 +653,7 @@ const QA_F49_Summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="PRODUCT DISPOSITION LOG BOOK"
-        formatNo="PH-QAD01-F-049"
+        formatNo="PH-QAD01/F-049"
         MenuBtn={
           <Button
             type="primary"

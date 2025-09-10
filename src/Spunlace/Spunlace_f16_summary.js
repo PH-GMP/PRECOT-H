@@ -243,7 +243,7 @@ const Spunlace_f16_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getSliterWinderSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getSliterWinderSummary`;
 
     if (
       [
@@ -337,7 +337,7 @@ const Spunlace_f16_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -371,7 +371,7 @@ const Spunlace_f16_summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getByDateShiftOrderNoPrintApi?date=${dateformated}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/getByDateShiftOrderNoPrintApi?date=${dateformated}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
         { headers }
       )
       .then((res) => {
@@ -387,7 +387,7 @@ const Spunlace_f16_summary = () => {
   //     const fetchOrderNumberOptions = async () => {
   //       try {
   //         const response = await fetch(
-  //           `${ API.prodUrl}/Precot/api/spulance/OrderLovsliterwinder`,
+  //           `${API.prodUrl}/Precot/api/spulance/OrderLovsliterwinder`,
   //           {
   //             headers: {
   //               "Content-Type": "application/json",
@@ -419,7 +419,7 @@ const Spunlace_f16_summary = () => {
     const fetchOrderNumberOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/OrderLovsliterwinder`,
+          `${API.prodUrl}/Precot/api/spulance/OrderLovsliterwinder`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -475,7 +475,7 @@ const Spunlace_f16_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -499,7 +499,7 @@ const Spunlace_f16_summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -511,7 +511,7 @@ const Spunlace_f16_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -535,7 +535,7 @@ const Spunlace_f16_summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -547,7 +547,7 @@ const Spunlace_f16_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -571,7 +571,7 @@ const Spunlace_f16_summary = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   // console.loglog("get image", getImage);
 

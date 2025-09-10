@@ -119,7 +119,7 @@ const Bleaching_f34_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printRecord, API.prodUrl, token]);
+  }, [printRecord,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -154,7 +154,7 @@ const Bleaching_f34_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printRecord, API.prodUrl, token]);
+  }, [printRecord,API.prodUrl, token]);
 
   const handleSubBatchInputChange = (e) => {
     setSubBatchNoInput(e.target.value);

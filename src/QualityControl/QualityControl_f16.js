@@ -88,7 +88,7 @@ const QualityControl_f16 = () => {
     const chemicalLovApi = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/QcForm/ChemicalName`,
+          `${   API.prodUrl}/Precot/api/QcForm/ChemicalName`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -145,7 +145,7 @@ const QualityControl_f16 = () => {
 
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -192,7 +192,7 @@ const QualityControl_f16 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/QcForm/getStandardOfChemicalF016?date=${date}&shift=${shift}&chemical=${formData.to_be_name_of_solution}`,
+            `${   API.prodUrl}/Precot/api/QcForm/getStandardOfChemicalF016?date=${date}&shift=${shift}&chemical=${formData.to_be_name_of_solution}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -287,7 +287,7 @@ const QualityControl_f16 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${    API.prodUrl}/Precot/api/QcForm/SaveStandardOfChemicalF016`;
+      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SaveStandardOfChemicalF016`;
       payload = {
         formatNo: "PH-QCL01/F-016",
         revisionNo: "01",
@@ -315,7 +315,7 @@ const QualityControl_f16 = () => {
         payload.id = formData.id;
       }
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${    API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF016`;
+      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF016`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.id,
@@ -394,7 +394,7 @@ const QualityControl_f16 = () => {
         }
       }
 
-      apiurl = `${    API.prodUrl}/Precot/api/QcForm/SubmitStandardOfChemicalF016`;
+      apiurl = `${   API.prodUrl}/Precot/api/QcForm/SubmitStandardOfChemicalF016`;
       payload = {
         formatNo: "PH-QCL01/F-016",
         revisionNo: "01",
@@ -427,7 +427,7 @@ const QualityControl_f16 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${    API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF016`;
+      apiurl = `${   API.prodUrl}/Precot/api/QcForm/ApproveOrRejectF016`;
       payload = {
         id: formData.id,
         status: "Reject",

@@ -136,7 +136,7 @@ const Spunlace_f18 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -172,7 +172,7 @@ const Spunlace_f18 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const canDisplayButtons = () => {
     if (roleauth === "ROLE_OPERATOR") {

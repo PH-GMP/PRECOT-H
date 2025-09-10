@@ -224,7 +224,7 @@ const Spunlace_f13_summary = () => {
       }
     };
 
-    const summaryUrl = `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getRpBalePressSummary`;
+    const summaryUrl = `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getRpBalePressSummary`;
 
     if (
       [
@@ -321,7 +321,7 @@ const Spunlace_f13_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -355,7 +355,7 @@ const Spunlace_f13_summary = () => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getByDateShiftOrderNoPrintApi?date=${dateformated}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getByDateShiftOrderNoPrintApi?date=${dateformated}&shift=${selectedShift}&orderNo=${selectedOrderNo}`,
         { headers }
       )
       .then((res) => {
@@ -364,7 +364,7 @@ const Spunlace_f13_summary = () => {
         // Fetch Supervisor Sign Image
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -390,7 +390,7 @@ const Spunlace_f13_summary = () => {
         // Fetch HOD Sign Image
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -416,7 +416,7 @@ const Spunlace_f13_summary = () => {
         // Fetch Operator Sign Image
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -455,7 +455,7 @@ const Spunlace_f13_summary = () => {
   //   const fetchOrderNumberOptions = async () => {
   //     try {
   //       const response = await fetch(
-  //         `${ API.prodUrl}/Precot/api/spulance/processSetupOrders`,
+  //         `${API.prodUrl}/Precot/api/spulance/processSetupOrders`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -494,7 +494,7 @@ const Spunlace_f13_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/processSetupOrdersByDate?date=${date}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/processSetupOrdersByDate?date=${date}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -534,7 +534,7 @@ const Spunlace_f13_summary = () => {
       }
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/processSetupOrdersByDate?date=${selectedDate}&shift=${shiftparam}`,
+          `${API.prodUrl}/Precot/api/spulance/processSetupOrdersByDate?date=${selectedDate}&shift=${shiftparam}`,
           {
             headers: {
               "Content-Type": "application/json",

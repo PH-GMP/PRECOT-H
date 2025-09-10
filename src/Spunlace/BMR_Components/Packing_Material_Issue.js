@@ -9,7 +9,7 @@ const Packing_Material_Issue = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/03.GetPackingMeterialIssue?order_no=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/03.GetPackingMeterialIssue?order_no=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

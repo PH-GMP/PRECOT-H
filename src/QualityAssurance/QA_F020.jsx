@@ -80,7 +80,7 @@ const QA_F020 = () => {
     tabStatus: "",
     action: "",
     format_name: "NON –CONFORMITY REPORT",
-    format_no: "PH-QAD01-F-020",
+    format_no: "PH-QAD01/F-020",
     revision_no: 2,
     sop_number: "PH-QAD01-D-20",
     unit: "H",
@@ -850,7 +850,7 @@ const QA_F020 = () => {
 
   const formName =
     "Non Conformity Report (For Machine Process/ WIP/ Finished Products)";
-  const formatNo = "PH-QAD01-F-020";
+  const formatNo = "PH-QAD01/F-020";
   const showDrawer = () => {
     setOpen(true);
   };
@@ -1929,7 +1929,7 @@ const QA_F020 = () => {
           // Return the axios promise so that we can chain `.then()` later
           return axios
             .get(
-              `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01-F-020`,
+              `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01/F-020`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`, // Attach the token in the Authorization header

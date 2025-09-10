@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
 import { EditOutlined } from "@ant-design/icons";
-import { Button, Input, message, Modal, Table, Tooltip } from "antd";
+import { Button, Input, message, Modal, Table, Tooltip, Select } from "antd";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { BiLock, BiNavigation } from "react-icons/bi";
@@ -14,11 +14,7 @@ import logo from "../Assests/logo.png";
 import API from "../baseUrl.json";
 import BleachingHeader from "../Components/BleachingHeader.js";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
-import {
-  getDepartmentName,
-  getFullMonthFromNumber,
-  slashFormatDate,
-} from "../util/util.js";
+import { getFullMonthFromNumber, slashFormatDate } from "../util/util.js";
 
 const QA_F007_TrainingRec_summary = () => {
   const [reason, setReason] = useState(false);
@@ -35,48 +31,13 @@ const QA_F007_TrainingRec_summary = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [summary, setSummaryData] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [open, setOpen] = useState(false);
   const today = new Date().toISOString().split("T")[0];
-  const [printDatas, setPrintDatas] = useState([
-    {
-      formatName: "Training Record",
-      formatNo: "PH-QAD01-F-007",
-      revisionNo: "03",
-      refSopNo: "PH-QAD01-D-15",
-      unit: "Unit H",
-      date: "",
-      month: "",
-      year: "",
-      department: "",
-      mode_of_training: "",
-      topic: "",
-      training_session_no: "",
-      content: "",
-      venue: "",
-      start_time: "",
-      end_time: "",
-      name_of_trainer: "",
-      reference_document: "",
-      trainer_signature_and_date: "",
-      reason: "",
-      hod_status: "",
-      hod_saved_on: "",
-      hod_saved_by: "",
-      hod_saved_id: "",
-      hod_submitted_on: "",
-      hod_submitted_by: null,
-      hod_submitted_id: null,
-      hod_sign: "",
-      details: [
-        {
-          name_of_the_employee: "",
-          employee_id: "",
-          department: "",
-          signature: "",
-        },
-      ],
-    },
-  ]);
+  const [selectedDepartmentPrint, setSelectedDepartmentPrint] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+
+  const [printDatas, setPrintDatas] = useState([]);
   const [eSign, setESign] = useState([
     {
       hod_sign: null,
@@ -135,18 +96,56 @@ const QA_F007_TrainingRec_summary = () => {
   }, [printDatas]);
 
   useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setDepartments(response.data);
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+    fetchDepartments();
+  }, []);
+
+  const departmentMap = {
+    1: "BLEACHING",
+    2: "SPUNLACE",
+    3: "PAD_PUNCHING",
+    4: "DRY_GOODS",
+    5: "QUALITY_CONTROL",
+    6: "QUALITY_ASSURANCE",
+    7: "PPC",
+    8: "STORE",
+    9: "DISPATCH",
+    10: "PRODUCT_DEVELOPMENT",
+    11: "ENGINEERING",
+    12: "COTTEN_BUDS",
+    13: "MARKETING",
+    14: "HR",
+  };
+
+  useEffect(() => {
     if (!initialized.current) {
       initialized.current = true;
-      const departmentId = localStorage.getItem("departmentId");
+      const storedIds = localStorage.getItem("departmentId");
+      const getDepartmentName = storedIds
+        ?.split(",")
+        .map((id) => departmentMap[parseInt(id)])
+        .filter(Boolean)
+        .join(",");
 
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${
-              API.prodUrl
-            }/Precot/api/QA/Service/TrainingRecordSummary?department=${getDepartmentName(
-              departmentId
-            )}`,
+            `${API.prodUrl}/Precot/api/QA/Service/TrainingRecordSummary?department=${getDepartmentName}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -158,7 +157,6 @@ const QA_F007_TrainingRec_summary = () => {
           message.error(error.response.data.message);
         }
       };
-
       fetchData();
     }
   }, [token, navigate]);
@@ -232,6 +230,7 @@ const QA_F007_TrainingRec_summary = () => {
               navigate("/Precot/QA/F007", {
                 state: {
                   date: record.date,
+                  selectedDepartment: record.department,
                 },
               })
             }
@@ -269,10 +268,50 @@ const QA_F007_TrainingRec_summary = () => {
       message.warning("Please Select The Date");
       return;
     }
+    if (!selectedDepartment) {
+      message.warning("Please Select Department");
+      return;
+    }
+
+    const storedIds = localStorage.getItem("departmentId");
+
+    let singleDepartmentId = null;
+
+    if (storedIds && !storedIds.includes(",")) {
+      singleDepartmentId = storedIds;
+    }
+
+    if (
+      singleDepartmentId &&
+      selectedDepartment != departmentMap[singleDepartmentId]
+    ) {
+      message.warning("Please Select Your Current Department");
+      return;
+    }
+
+    //multiple department user check
+    const DepartmentName = storedIds
+      ?.split(",")
+      .map((id) => departmentMap[parseInt(id)])
+      .filter(Boolean)
+      .join(",");
+
+    console.log("DepartmentName", DepartmentName);
+    console.log(
+      "DepartmentName?.includes(selectedDepartment)",
+      DepartmentName?.includes(selectedDepartment)
+    );
+
+    // Check if selected department id is in the list
+    if (!DepartmentName?.includes(selectedDepartment)) {
+      message.warning("Selected department is not in your department list");
+      return;
+    }
 
     navigate("/Precot/QA/F007", {
       state: {
         date: formParams.date,
+        selectedDepartment: selectedDepartment,
       },
     });
   };
@@ -281,6 +320,8 @@ const QA_F007_TrainingRec_summary = () => {
     if (printParams.year === "" && printParams.month === "") {
       message.warning("Please Select Month and year");
       return;
+    } else if (!selectedDepartmentPrint) {
+      message.warning("Please select department");
     }
 
     setPrintButtonLoading(true);
@@ -292,9 +333,7 @@ const QA_F007_TrainingRec_summary = () => {
         }/Precot/api/QA/Service/TrainingRecordPrint?month=${getFullMonthFromNumber(
           printParams.year,
           printParams.month
-        )}&year=${printParams.year}&department=${getDepartmentName(
-          localStorage.getItem("departmentId")
-        )}`,
+        )}&year=${printParams.year}&department=${selectedDepartmentPrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -308,7 +347,7 @@ const QA_F007_TrainingRec_summary = () => {
           return;
         }
 
-        setPrintDatas(response.data[0]);
+        setPrintDatas(response.data);
 
         setTimeout(() => {
           setPrintButtonLoading(false);
@@ -326,10 +365,11 @@ const QA_F007_TrainingRec_summary = () => {
       month: "",
       year: "",
     });
+    setSelectedDepartmentPrint("");
     setPrintButtonLoading(false);
     setIsModalPrint(false);
   };
-  
+
   const formatDates = (dateString) => {
     if (!dateString) return "";
     const datePattern = /^\d{2}\/\d{2}\/\d{4}$/;
@@ -349,14 +389,6 @@ const QA_F007_TrainingRec_summary = () => {
       year: year,
       month: month,
     });
-  };
-
-  const recordsPerPage = 15;
-  const totalPages = Math.ceil(printDatas?.details?.length / recordsPerPage);
-
-  const paginateData = (data, pageNumber) => {
-    const start = (pageNumber - 1) * recordsPerPage;
-    return data.slice(start, start + recordsPerPage);
   };
 
   return (
@@ -388,223 +420,346 @@ const QA_F007_TrainingRec_summary = () => {
       }
     `}
         </style>
-        {Array.from({ length: totalPages }).map((_, pageIndex) => (
-          <div
-            key={pageIndex}
-            style={{ marginTop: "40px", pageBreakAfter: "always" }}
-          >
-            <table key={pageIndex}>
-              <thead>
-                <tr>
-                  <td style={{ border: "none", padding: "30px" }}></td>
-                </tr>
 
-                <tr>
-                  <th
-                    colSpan="1"
-                    rowSpan="4"
-                    printDateSubmit
-                    style={{ textAlign: "center", height: "80px" }}
-                  >
-                    <img
-                      src={logo}
-                      alt="Logo"
-                      style={{ width: "100px", height: "auto" }}
-                    />{" "}
-                    <br></br>
-                    Unit H
-                  </th>
-                  <th colSpan="2" rowSpan="4" style={{ textAlign: "center" }}>
-                    {"TRAINING RECORD"}
-                  </th>
-                  <th style={{ padding: "0.5rem" }}>Format No.:</th>
-                  <th style={{ padding: "0.5rem" }}>PH-QAD01-F-007</th>
-                </tr>
-                <tr>
-                  <th style={{ padding: "0.5rem" }}>Revision No.:</th>
-                  <th style={{ padding: "0.5rem" }}>01</th>
-                </tr>
-                <tr>
-                  <th style={{ padding: "0.5rem" }}>Ref. SOP No.:</th>
-                  <th style={{ padding: "0.5rem" }}>PH-QAD01-D-15</th>
-                </tr>
-                <tr>
-                  <th style={{ padding: "0.5rem" }}>Page No.:</th>
-                  <th style={{ padding: "0.5rem" }}>
-                    {" "}
-                    {pageIndex + 1} of {totalPages}
-                  </th>
-                </tr>
-                <tr>
-                  <td style={{ padding: "0.5rem", border: "none" }}></td>
-                </tr>
-              </thead>
-              <tbody>
-                {pageIndex === 0 && (
-                  <>
-                    <tr>
-                      <td style={{ padding: "0.5rem" }}>Mode of Training</td>
-                      <td colSpan="4" style={{ padding: "0.5rem" }}>
-                        {printDatas.mode_of_training}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={3} style={{ padding: "0.5rem" }}>
-                        Topic:{printDatas.topic}
-                      </td>
-                      <td colSpan={2} style={{ padding: "0.5rem" }}>
-                        Date:{formatDates(printDatas.date)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: "0.5rem" }}>
-                        Training Session No.
-                      </td>
-                      <td colSpan={4} style={{ padding: "0.5rem" }}>
-                        {printDatas.training_session_no}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        colSpan={3}
-                        rowSpan="4"
-                        style={{ padding: "0.5rem", verticalAlign: "top" }}
+        {(() => {
+          const recordsPerPage = 5; // Changed from 5 to 8 as requested
+
+          // Calculate total pages across ALL records
+          const totalPagesAllRecords = printDatas.reduce((sum, record) => {
+            const detailsCount = record?.details?.length || 0;
+            // pages needed for this record
+            const pagesForThisRecord = Math.ceil(detailsCount / recordsPerPage);
+            return sum + pagesForThisRecord;
+          }, 0);
+
+          // Running counter for global page numbering
+          let globalPageCounter = 0;
+
+          return printDatas?.map((record, recordIndex) => {
+            const totalPagesForThisRecord = Math.ceil(
+              record?.details?.length / recordsPerPage
+            );
+
+            const paginateData = (data, pageNumber) => {
+              const start = (pageNumber - 1) * recordsPerPage;
+              return data.slice(start, start + recordsPerPage);
+            };
+
+            return (
+              <div key={recordIndex}>
+                {Array.from({ length: totalPagesForThisRecord }).map(
+                  (_, pageIndex) => {
+                    globalPageCounter++;
+
+                    return (
+                      <div
+                        key={pageIndex}
+                        className="page-break"
+                        style={{ marginTop: "40px" }}
                       >
-                        Contents:
-                        {printDatas.content}
-                      </td>
-                      <td colSpan={2} style={{ padding: "0.5rem" }}>
-                        Venue:{printDatas.venue}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={2} style={{ padding: "0.5rem" }}>
-                        Start Time:{printDatas.start_time}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colSpan={2} style={{ padding: "0.5rem" }}>
-                        End Time:{printDatas.end_time}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: "0.5rem" }}>
-                        Name of Trainer:{printDatas.name_of_trainer}
-                      </td>
-                      <td style={{ padding: "0.5rem" }}>
-                        Reference Document, if any:{" "}
-                        {printDatas.reference_document}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        S. No.
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        Name of Employee
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        Employee Id.
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        Dept.
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        signature
-                      </td>
-                    </tr>
-                  </>
-                )}
-                {paginateData(printDatas?.details, pageIndex + 1).map(
-                  (detail, index) => (
-                    <tr key={index}>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        {index + 1 + recordsPerPage * pageIndex}
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        {detail.name_of_the_employee}
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        {detail.employee_id}
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        {detail.department}
-                      </td>
-                      <td style={{ padding: "0.5rem", textAlign: "center" }}>
-                        {detail.signature}
-                      </td>
-                    </tr>
-                  )
-                )}
-                {pageIndex + 1 === totalPages && (
-                  <>
-                    <tr>
-                      <td
-                        colSpan={5}
-                        style={{ padding: "0.5rem", textAlign: "center" }}
-                      >
-                        <div>Trainer Signature & Date:</div>
-                        <div>
-                          <div>{printDatas.hod_sign}</div>
-                          <div>
-                            {formatDates(printDatas.hod_submitted_on)}
-                          </div>
-                          <div>
-                            {eSign[0]?.hod_sign ? (
-                              <img
-                                src={eSign[0]?.hod_sign}
-                                alt="hod_sign"
+                        <table>
+                          <thead>
+                            <tr>
+                              <td
+                                style={{ border: "none", padding: "30px" }}
+                              ></td>
+                            </tr>
+
+                            <tr>
+                              <th
+                                colSpan="1"
+                                rowSpan="4"
+                                printDateSubmit
+                                style={{ textAlign: "center", height: "80px" }}
+                              >
+                                <img
+                                  src={logo}
+                                  alt="Logo"
+                                  style={{ width: "100px", height: "auto" }}
+                                />{" "}
+                                <br></br>
+                                Unit H
+                              </th>
+                              <th
+                                colSpan="2"
+                                rowSpan="4"
+                                style={{ textAlign: "center" }}
+                              >
+                                {"TRAINING RECORD"}
+                              </th>
+                              <th style={{ padding: "0.5rem" }}>Format No.:</th>
+                              <th style={{ padding: "0.5rem" }}>
+                                PH-QAD01/F-007
+                              </th>
+                            </tr>
+                            <tr>
+                              <th style={{ padding: "0.5rem" }}>
+                                Revision No.:
+                              </th>
+                              <th style={{ padding: "0.5rem" }}>01</th>
+                            </tr>
+                            <tr>
+                              <th style={{ padding: "0.5rem" }}>
+                                Ref. SOP No.:
+                              </th>
+                              <th style={{ padding: "0.5rem" }}>
+                                PH-QAD01-D-15
+                              </th>
+                            </tr>
+                            <tr>
+                              <th style={{ padding: "0.5rem" }}>Page No.:</th>
+                              <th style={{ padding: "0.5rem" }}>
+                                {globalPageCounter} of {totalPagesAllRecords}
+                              </th>
+                            </tr>
+                            <tr>
+                              <td
+                                style={{ padding: "0.5rem", border: "none" }}
+                              ></td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {pageIndex === 0 && (
+                              <>
+                                <tr>
+                                  <td style={{ padding: "0.5rem" }}>
+                                    Mode of Training
+                                  </td>
+                                  <td colSpan="4" style={{ padding: "0.5rem" }}>
+                                    {record.mode_of_training}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colSpan={3} style={{ padding: "0.5rem" }}>
+                                    Topic: {record.topic}
+                                  </td>
+                                  <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                    Date: {formatDates(record.date)}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style={{ padding: "0.5rem" }}>
+                                    Training Session No.
+                                  </td>
+                                  <td colSpan={4} style={{ padding: "0.5rem" }}>
+                                    {record.training_session_no}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td
+                                    colSpan={3}
+                                    rowSpan="4"
+                                    style={{
+                                      padding: "0.5rem",
+                                      verticalAlign: "top",
+                                    }}
+                                  >
+                                    Contents: {record.content}
+                                  </td>
+                                  <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                    Venue: {record.venue}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                    Start Time: {record.start_time}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                    End Time: {record.end_time}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style={{ padding: "0.5rem" }}>
+                                    Name of Trainer: {record.name_of_trainer}
+                                  </td>
+                                  <td style={{ padding: "0.5rem" }}>
+                                    Reference Document, if any:{" "}
+                                    {record.reference_document}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    S. No.
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    Name of Employee
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    Employee Id.
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    Dept.
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    signature
+                                  </td>
+                                </tr>
+                              </>
+                            )}
+                            {paginateData(record.details, pageIndex + 1).map(
+                              (detail, index) => (
+                                <tr key={index}>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    {index + 1 + recordsPerPage * pageIndex}
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    {detail.name_of_the_employee}
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    {detail.employee_id}
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    {detail.department}
+                                  </td>
+                                  <td
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    <img
+                                      src={`data:image/png;base64,${detail.signature}`}
+                                      alt="Signature"
+                                      style={{ maxHeight: "50px" }}
+                                    />
+                                    <div>
+                                      {formatDates(record?.hod_submitted_on)}
+                                    </div>
+                                  </td>
+                                </tr>
+                              )
+                            )}
+                            {pageIndex + 1 === totalPagesForThisRecord && (
+                              <>
+                                <tr>
+                                  <td
+                                    colSpan={5}
+                                    style={{
+                                      padding: "0.5rem",
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    <div>Trainer Signature & Date:</div>
+                                    <div>
+                                      <div>{record.hod_sign}</div>
+                                      <div>
+                                        {formatDates(record.hod_submitted_on)}
+                                      </div>
+                                      <div>
+                                        {eSign[0]?.hod_sign ? (
+                                          <img
+                                            src={eSign[0]?.hod_sign}
+                                            alt="hod_sign"
+                                            style={{
+                                              width: "100px",
+                                              height: "50px",
+                                              objectFit: "contain",
+                                              mixBlendMode: "multiply",
+                                            }}
+                                          />
+                                        ) : null}
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </>
+                            )}
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td
                                 style={{
-                                  width: "100px",
-                                  height: "50px",
-                                  objectFit: "contain",
-                                  mixBlendMode: "multiply",
+                                  padding: "0.5rem",
+                                  border: "none",
                                 }}
-                              />
-                            ) : null}
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </>
+                              ></td>
+                            </tr>
+                            <tr>
+                              <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                Particulars
+                              </td>
+                              <td style={{ padding: "0.5rem" }}>Prepared By</td>
+                              <td style={{ padding: "0.5rem" }}>Reviewed By</td>
+                              <td style={{ padding: "0.5rem" }}>Approved By</td>
+                            </tr>
+                            <tr>
+                              <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                Name
+                              </td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                            </tr>
+                            <tr>
+                              <td colSpan={2} style={{ padding: "0.5rem" }}>
+                                Signature & Date
+                              </td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                              <td style={{ padding: "0.5rem" }}></td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    );
+                  }
                 )}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td style={{ padding: "0.5rem", border: "none" }}></td>
-                </tr>
-                <tr>
-                  <td colSpan={2} style={{ padding: "0.5rem" }}>
-                    Particulars
-                  </td>
-                  <td style={{ padding: "0.5rem" }}>Prepared By</td>
-                  <td style={{ padding: "0.5rem" }}>Reviewed By</td>
-                  <td style={{ padding: "0.5rem" }}>Approved By</td>
-                </tr>
-                <tr>
-                  <td colSpan={2} style={{ padding: "0.5rem" }}>
-                    Name
-                  </td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                </tr>
-                <tr>
-                  <td colSpan={2} style={{ padding: "0.5rem" }}>
-                    Signature & Date
-                  </td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                  <td style={{ padding: "0.5rem" }}></td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        ))}
+              </div>
+            );
+          });
+        })()}
       </div>
+
       <BleachingHeader
         formName={"TRANING RECORD"}
-        formatNo={"PH-QAD01-F-007"}
+        formatNo={"PH-QAD01/F-007"}
         unit={"UNIT H"}
         MenuBtn={
           <Button
@@ -706,6 +861,32 @@ const QA_F007_TrainingRec_summary = () => {
             }}
             style={{ width: "150px", textAlign: "center" }}
           ></Input>
+          <div
+            style={{
+              fontSize: "14px",
+              marginTop: "8px",
+            }}
+          >
+            Department :
+          </div>
+          <Select
+            placeholder="Select Department"
+            value={selectedDepartment}
+            onChange={(value) => {
+              setSelectedDepartment(value);
+            }}
+            style={{ width: "180px", textAlign: "center" }}
+          >
+            {departments.map((dept) => (
+              <Select.Option
+                key={dept.department}
+                value={dept.department}
+                style={{ textAlign: "center" }}
+              >
+                {dept.department}
+              </Select.Option>
+            ))}
+          </Select>
 
           <Button
             key="go"
@@ -763,6 +944,29 @@ const QA_F007_TrainingRec_summary = () => {
               onChange={handlePrintMonthChange}
               style={{ margin: "0.5rem" }}
             />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+            <span style={{ margin: "0.5rem", width: "50%" }}>
+              Department :{" "}
+            </span>
+            <Select
+              placeholder="Select Department"
+              value={selectedDepartmentPrint}
+              onChange={(value) => {
+                setSelectedDepartmentPrint(value);
+              }}
+              style={{ width: "80%", textAlign: "center" }}
+            >
+              {departments.map((dept) => (
+                <Select.Option
+                  key={dept.department}
+                  value={dept.department}
+                  style={{ textAlign: "center" }}
+                >
+                  {dept.department}
+                </Select.Option>
+              ))}
+            </Select>
           </div>
         </Modal>
       </div>

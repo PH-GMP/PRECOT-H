@@ -168,7 +168,7 @@ const QA_f23 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const roleauth = localStorage.getItem("role");
 
@@ -274,7 +274,7 @@ const QA_f23 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "Supplier Audit Report",
-        formatNo: "PH-QAD01-F-023",
+        formatNo: "PH-QAD01/F-023",
         revisionNo: "2",
         sopNumber: "PH-QAD01-D-22",
         reportDate: date,
@@ -348,7 +348,7 @@ const QA_f23 = () => {
       const payload = {
         unit: "Unit-H",
         formatName: "Supplier Audit Report",
-        formatNo: "PH-QAD01-F-023",
+        formatNo: "PH-QAD01/F-023",
         revisionNo: "2",
         sopNumber: "PH-QAD01-D-22",
         reportDate: date,
@@ -647,7 +647,7 @@ const QA_f23 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="Supplier Audit Report"
-        formatNo="PH-QAD01-F-023"
+        formatNo="PH-QAD01/F-023"
         sopNo="PH-QAD01-D-22"
         MenuBtn={
           <Button

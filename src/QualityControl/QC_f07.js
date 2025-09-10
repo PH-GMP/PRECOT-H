@@ -148,7 +148,7 @@ const QC_f07 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -172,7 +172,7 @@ const QC_f07 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails,      API.prodUrl, token]);
+  }, [fetchedDetails,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = fetchedDetails?.[0]?.chemist_sign;
@@ -181,7 +181,7 @@ const QC_f07 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -205,7 +205,7 @@ const QC_f07 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails,      API.prodUrl, token]);
+  }, [fetchedDetails,     API.prodUrl, token]);
   // const observationReadingOneOnBlur = () => {
   //   const lowerBound = standeredWtOne - tolerance;
   //   const upperBound = standeredWtOne + tolerance;
@@ -414,7 +414,7 @@ const QC_f07 = () => {
 
     const res = await axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/approval`,
         {
           id: labId,
           status: "Reject",
@@ -444,7 +444,7 @@ const QC_f07 = () => {
 
     const res = await axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/approval`,
         {
           id: labId,
           status: "Approve",
@@ -519,7 +519,7 @@ const QC_f07 = () => {
         "Content-Type": "application/json",
       };
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/save/wigClf007`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/save/wigClf007`,
         payload,
         { headers }
       );
@@ -615,7 +615,7 @@ const QC_f07 = () => {
       };
 
       const response = await axios.post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/Submit/wigClf007`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/Submit/wigClf007`,
         payload,
         { headers }
       );
@@ -657,7 +657,7 @@ const QC_f07 = () => {
   const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007?eq_no=${equipment}&year=${year}&month=${monthName}&date=${date}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007?eq_no=${equipment}&year=${year}&month=${monthName}&date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -713,7 +713,7 @@ const QC_f07 = () => {
     console.log("pde setting");
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE?eq_no=${equipment}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF007/PDE?eq_no=${equipment}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

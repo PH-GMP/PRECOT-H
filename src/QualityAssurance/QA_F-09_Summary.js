@@ -581,7 +581,7 @@ const QA_F09_Summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING QUESTIONNNAIRE "
-        formatNo="PH-QAD01-F-009"
+        formatNo="PH-QAD01/F-009"
         MenuBtn={
           <Button
             type="primary"
@@ -763,7 +763,7 @@ const QA_F09_Summary = () => {
                             TRAINING QUESTIONNAIRE
                           </th>
                           <td colSpan="15">Format No.:</td>
-                          <td colSpan="40">PH-QAD01-F-009</td>
+                          <td colSpan="40">PH-QAD01/F-009</td>
                         </tr>
                         <tr>
                           <td colSpan="15">Revision No.:</td>
@@ -902,7 +902,7 @@ const QA_F09_Summary = () => {
                             TRAINING QUESTIONNAIRE
                           </th>
                           <td colSpan="15">Format No.:</td>
-                          <td colSpan="40">PH-QAD01-F-009</td>
+                          <td colSpan="40">PH-QAD01/F-009</td>
                         </tr>
                         <tr>
                           <td colSpan="15">Revision No.:</td>
@@ -1016,7 +1016,7 @@ const QA_F09_Summary = () => {
                             TRAINING QUESTIONNAIRE
                           </th>
                           <td colSpan="15">Format No.:</td>
-                          <td colSpan="40">PH-QAD01-F-009</td>
+                          <td colSpan="40">PH-QAD01/F-009</td>
                         </tr>
                         <tr>
                           <td colSpan="15">Revision No.:</td>

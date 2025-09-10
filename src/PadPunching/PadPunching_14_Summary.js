@@ -81,7 +81,7 @@ const PadPunching_14_Summary = () => {
     const fetchReciever = async () => {
       try {
         const response = await axios.get(
-          `${  API.prodUrl}/Precot/api/PadPunching/Service/productNamesBags`,
+          `${ API.prodUrl}/Precot/api/PadPunching/Service/productNamesBags`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -141,7 +141,7 @@ const PadPunching_14_Summary = () => {
 
         axios
           .get(
-            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const PadPunching_14_Summary = () => {
           });
       }
     });
-  }, [printResponseData,    API.prodUrl, token]);
+  }, [printResponseData,   API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -185,7 +185,7 @@ const PadPunching_14_Summary = () => {
 
         axios
           .get(
-            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -217,7 +217,7 @@ const PadPunching_14_Summary = () => {
           });
       }
     });
-  }, [printResponseData,    API.prodUrl, token]);
+  }, [printResponseData,   API.prodUrl, token]);
 
   const formattedDateOperator = (dateString) => {
     if (dateString) {
@@ -256,7 +256,7 @@ const PadPunching_14_Summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${  API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -355,7 +355,7 @@ const PadPunching_14_Summary = () => {
       const token = localStorage.getItem("token");
       const role = localStorage.getItem("role");
 
-      let apiUrl = `${  API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getBagMakingSpecificationSummary`;
+      let apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getBagMakingSpecificationSummary`;
 
       const response = await fetch(apiUrl, {
         method: "GET",
@@ -514,7 +514,7 @@ const PadPunching_14_Summary = () => {
 
       axios
         .get(
-          `${  API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShiftPrint?date=${date}&shift=${value}`,
+          `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShiftPrint?date=${date}&shift=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -549,7 +549,7 @@ const PadPunching_14_Summary = () => {
       }
       axios
         .get(
-          `${  API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShiftPrint?date=${event.target.value}&shift=${shift}`,
+          `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShiftPrint?date=${event.target.value}&shift=${shift}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

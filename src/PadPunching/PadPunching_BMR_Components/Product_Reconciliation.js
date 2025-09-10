@@ -20,7 +20,7 @@ const Product_Reconciliation = (props) => {
     // /Precot/api/punching/bmr/productReconillation?order=800017415&batchNo=95134010-1&fromdate=2023-07-23&todate=2023-07-25
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/productReconillation?order=${
+        `${API.prodUrl}/Precot/api/punching/bmr/productReconillation?order=${
           props.orderNo
         }&batchNo=${props.batchNo}&fromdate=${localStorage.getItem(
           "prod_start_date"

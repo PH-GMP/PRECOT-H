@@ -44,7 +44,7 @@ const QualityControlF009Summary = () => {
   // Function to fetch image based on the username
   const getImage = (username, type) => {
     axios
-      .get(`${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
+      .get(`${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -94,7 +94,7 @@ const QualityControlF009Summary = () => {
         roleauth === "CHEMIST_DESIGNEE" ||
         roleauth === "ROLE_CHEMIST"
       ) {
-        url = `${    API.prodUrl}/Precot/api/chemicaltest/CLF009/getAll`;
+        url = `${   API.prodUrl}/Precot/api/chemicaltest/CLF009/getAll`;
       }
 
       const token = localStorage.getItem("token");
@@ -264,7 +264,7 @@ const QualityControlF009Summary = () => {
   };
 
   const fetchPrintData = () => {
-    let baseUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF009/print?`;
+    let baseUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF009/print?`;
     let query = [];
 
     // Construct the query based on selected fields

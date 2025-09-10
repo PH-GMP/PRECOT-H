@@ -117,7 +117,7 @@ const QualityControl_F013 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -141,7 +141,7 @@ const QualityControl_F013 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow,      API.prodUrl]);
+  }, [selectedRow,     API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -153,7 +153,7 @@ const QualityControl_F013 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -177,7 +177,7 @@ const QualityControl_F013 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow,      API.prodUrl]);
+  }, [selectedRow,     API.prodUrl]);
 
   const canEdit = () => {
     if (roleauth === "ROLE_MICROBIOLOGIST") {
@@ -317,7 +317,7 @@ const QualityControl_F013 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/save/fungalIncubator`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/save/fungalIncubator`,
         payload,
         { headers }
       )
@@ -370,7 +370,7 @@ const QualityControl_F013 = () => {
 
     axios
       .post(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/submit/fungalIncubator`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/submit/fungalIncubator`,
         payload,
         { headers }
       )
@@ -418,7 +418,7 @@ const QualityControl_F013 = () => {
     if (date && Eqid) {
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/chemicaltest/CLF013?eq_no=${Eqid}&date=${date}`,
+          `${   API.prodUrl}/Precot/api/chemicaltest/CLF013?eq_no=${Eqid}&date=${date}`,
           {
             headers,
           }
@@ -487,7 +487,7 @@ const QualityControl_F013 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/approval`,
         {
           id: formValues.lab_id,
           status: "Reject",
@@ -514,7 +514,7 @@ const QualityControl_F013 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/chemicaltest/CLF013/approval`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/CLF013/approval`,
         {
           id: formValues.lab_id,
           status: "Approve",

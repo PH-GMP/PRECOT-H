@@ -585,7 +585,7 @@ const QA_F59_Summary = () => {
                     METAL DETECTOR PASS REPORT
                   </th>
                   <td colSpan="15">Format No.:</td>
-                  <td colSpan="40">PH-QAD01-F-059</td>
+                  <td colSpan="40">PH-QAD01/F-059</td>
                 </tr>
                 <tr>
                   <td colSpan="15">Revision No.:</td>
@@ -762,7 +762,7 @@ const QA_F59_Summary = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="METAL DETECTOR PASS REPORT"
-        formatNo="PH-QAD01-F-059"
+        formatNo="PH-QAD01/F-059"
         MenuBtn={
           <Button
             type="primary"

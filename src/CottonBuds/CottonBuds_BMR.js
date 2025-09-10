@@ -1146,7 +1146,7 @@ const CottonBuds_BMR = () => {
     axios
       .get(
         `${
-          API.prodUrl
+         API.prodUrl
         }/Precot/api/PadPunching/Service/RollConsumptionReport/getByDateShiftMachinePrint?date=${moment(
           baleDate
         ).format("YYYY-MM-DD")}&shift=${baleShift}&machineName=${baleMachine}`,
@@ -5892,7 +5892,7 @@ const CottonBuds_BMR = () => {
                 The material produced through the execution of this Batch Record
                 shall be archival by QA according to Product Release Procedure
                 (PH-QAD01-D-43) and documented as per the Format:
-                PH-QAD01-F-047.
+                PH-QAD01/F-047.
               </td>
             </tr>
 

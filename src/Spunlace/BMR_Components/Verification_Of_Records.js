@@ -134,7 +134,7 @@ const Verification_Of_Records = (props) => {
     if (props.batchNo.length > 0) {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -620,7 +620,7 @@ const Verification_Of_Records = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/summary/06.SaveVerificationOfRecords`,
+        `${API.prodUrl}/Precot/api/spunlace/summary/06.SaveVerificationOfRecords`,
         newSave ? payload_2 : payload,
         {
           headers: {
@@ -632,7 +632,7 @@ const Verification_Of_Records = (props) => {
         message.success("Verification of Record Saved Sucessfully");
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -1061,7 +1061,7 @@ const Verification_Of_Records = (props) => {
     ) {
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/06.SubmitVerificationOfRecords`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/06.SubmitVerificationOfRecords`,
           newSave ? payload_2 : payload,
           {
             headers: {
@@ -1073,7 +1073,7 @@ const Verification_Of_Records = (props) => {
           message.success("Verification of Record Submitted Sucessfully");
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -1224,7 +1224,7 @@ const Verification_Of_Records = (props) => {
     ) {
       axios
         .post(
-          `${ API.prodUrl}/Precot/api/spunlace/summary/06.SubmitVerificationOfRecords`,
+          `${API.prodUrl}/Precot/api/spunlace/summary/06.SubmitVerificationOfRecords`,
           newSave ? payload_2 : payload,
           {
             headers: {
@@ -1236,7 +1236,7 @@ const Verification_Of_Records = (props) => {
           message.success("Verification of Record Submitted Sucessfully");
           axios
             .get(
-              `${ API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/spunlace/summary/06.GetVerificationOfRecords?order_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,

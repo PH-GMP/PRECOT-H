@@ -154,7 +154,7 @@ const Stores_f009 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Store/getEyeWashChecklistCheckList?date=${state.date}`,
+        `${API.prodUrl}/Precot/api/Store/getEyeWashChecklistCheckList?date=${state.date}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -311,7 +311,7 @@ const Stores_f009 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -335,7 +335,7 @@ const Stores_f009 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -347,7 +347,7 @@ const Stores_f009 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -371,7 +371,7 @@ const Stores_f009 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -383,7 +383,7 @@ const Stores_f009 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -407,7 +407,7 @@ const Stores_f009 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   // console.loglog(productName);
   // console.loglog("noOfFlagsInRoll", mixing);
@@ -422,7 +422,7 @@ const Stores_f009 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -463,7 +463,7 @@ const Stores_f009 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -512,7 +512,7 @@ const Stores_f009 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/Save`,
+        `${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/Save`,
         payload,
         {
           headers,
@@ -565,7 +565,7 @@ const Stores_f009 = () => {
     };
 
     axios
-      .post(` ${ API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/Submit`, payload, {
+      .post(` ${API.prodUrl}/Precot/api/Store/EyeWashConditionChecklist/Submit`, payload, {
         headers,
       })
       .then((res) => {

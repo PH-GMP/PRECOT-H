@@ -1,25 +1,24 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import { Button, Col, Input, Row, Tabs, Select, message, Tooltip } from "antd";
-import React, { useEffect, useState } from "react";
+import { Button, Col, Input, message, Radio, Row, Select, Tabs, Tooltip } from "antd";
 import axios from "axios";
-import { Radio } from "antd";
-import logo from "../Assests/logo.png";
-import API from "../baseUrl.json";
-import { useNavigate, useLocation } from "react-router-dom";
-import BleachingHeader from "../Components/BleachingHeader";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import { BiLock } from "react-icons/bi";
-import { IoCreate, IoSave } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { GrDocumentStore } from "react-icons/gr";
-import moment from "moment";
+import { IoCreate, IoSave } from "react-icons/io5";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 
-import { Modal, Drawer, Menu, Avatar } from "antd";
+import { Avatar, Drawer, Menu, Modal } from "antd";
 import { FaLock } from "react-icons/fa6";
 import { TbMenuDeep } from "react-icons/tb";
 
-import { GoArrowLeft } from "react-icons/go";
 import TextArea from "antd/es/input/TextArea";
+import { GoArrowLeft } from "react-icons/go";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
 
@@ -76,7 +75,6 @@ const Bleaching = () => {
   const [availableshiftlov, setAvailableShiftslov] = useState("");
   const [availableMachineLov, setAvailableMachineLov] = useState([]);
   const [availablemclov, setAvailableMAClov] = useState("Select M/C No");
-  const [value, setValue] = useState("");
   const [print, printdata] = useState("");
   const [mail_status, setmail_status] = useState("");
   const [supervisor_status, setsupervisor_status] = useState("");
@@ -117,7 +115,7 @@ const Bleaching = () => {
   const [dateprintsec, setisdateprintsec] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const onChange = (key) => {};
+  const onChange = (key) => { };
   const [saveBtnStatus, setSaveBtnStatus] = useState(false);
   const [submitBtnStatus, setSubmitBtnStatus] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -180,7 +178,7 @@ const Bleaching = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [selectedRow?.supervisor_sign, API.prodUrl, token]);
 
@@ -211,7 +209,7 @@ const Bleaching = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage1(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [selectedRow?.hod_sign, API.prodUrl, token]);
 
@@ -242,7 +240,7 @@ const Bleaching = () => {
           const url = `data:image/jpeg;base64,${base64}`;
           setGetImage2(url);
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, [selectedRow?.qa_sign, API.prodUrl, token]);
 
@@ -265,8 +263,7 @@ const Bleaching = () => {
   const onClose = () => {
     setOpen(false);
   };
-  // const roleBase = localStorage.getItem("role");
-  // const roleauth = localStorage.getItem("role");
+
   const [rejectRemarks, setRejectRemarks] = useState("");
 
   const handleApprove = async () => {
@@ -274,7 +271,7 @@ const Bleaching = () => {
 
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     const res = await axios
@@ -448,9 +445,6 @@ const Bleaching = () => {
       }
     }
   };
-  const handlePrint = () => {
-    window.print();
-  };
 
   const getMinutes = (time) => {
     if (!time) return 0;
@@ -480,9 +474,9 @@ const Bleaching = () => {
       return;
     }
 
-    // const numericValue = Number(value);
+
     if (PW_waterFill < 19 || PW_waterFill > 29) {
-      //alert("Please enter a number between 19 and 29");
+
       message.error(
         "Please enter a number between 19 and 29 for Pre - Wetting"
       );
@@ -565,9 +559,7 @@ const Bleaching = () => {
     if (timeCondition()) {
       message.error("Total water fill time exceeds available time");
     }
-    // const numericValue = Number(value);
     if (SB_waterFill < 80 || SB_waterFill > 120) {
-      //alert("Please enter a number between 19 and 29");
       message.error(
         "Please enter a number between 80 and 120 for Scouring & Bleaching"
       );
@@ -575,9 +567,7 @@ const Bleaching = () => {
     }
   };
   const handleBlur_range28to42 = () => {
-    // const numericValue = Number(value);
     if (CH_caustic < 28 || CH_caustic > 42) {
-      //alert("Please enter a number between 19 and 29");
       message.error(
         "Please enter a number between 28 and 42 for Caustic soda Flakes"
       );
@@ -585,25 +575,24 @@ const Bleaching = () => {
     }
   };
   const handleBlur_range10to12 = () => {
-    // const numericValue = Number(value);
+
     if (CH_haipaloene < 10 || CH_haipaloene > 12) {
-      //alert("Please enter a number between 19 and 29");
       message.error("Please enter a number between 10 and 12 for Haipolene");
       setCH_haipaloene("");
     }
   };
   const handleBlur_range7to16 = () => {
-    // const numericValue = Number(value);
+
     if (CH_sarofom < 7.0 || CH_sarofom > 16.0) {
-      //alert("Please enter a number between 19 and 29");
+
       message.error("Please enter a number between 7.0 and 16.0 for Sarofom");
       setCH_sarofom("");
     }
   };
   const handleBlur_range50to70 = () => {
-    // const numericValue = Number(value);
+
     if (CH_Hydrogen < 50 || CH_Hydrogen > 70) {
-      //alert("Please enter a number between 19 and 29");
+
       message.error(
         "Please enter a number between 50 and 70 for Hydrogen peroxide"
       );
@@ -611,9 +600,9 @@ const Bleaching = () => {
     }
   };
   const handleBlur_range1to3 = () => {
-    // const numericValue = Number(value);
+
     if (CH_setilon < 1.5 || CH_setilon > 3.5) {
-      //alert("Please enter a number between 19 and 29");
+
       message.error(
         "Please enter a number between 1.5 and 3.5 for Setilon KN / Persoftal 9490"
       );
@@ -621,9 +610,8 @@ const Bleaching = () => {
     }
   };
   const handleBlur_range6to9 = () => {
-    // const numericValue = Number(value);
+
     if (CH_citric < 6 || CH_citric > 9) {
-      //alert("Please enter a number between 19 and 29");
       message.error("Please enter a number between 6 and 9 for Citric acid");
       setCH_citric("");
     }
@@ -632,9 +620,8 @@ const Bleaching = () => {
     if (timeCondition()) {
       message.error("Total water fill time exceeds available time");
     }
-    // const numericValue = Number(value);
+
     if (FC_waterFill < 15 || FC_waterFill > 25) {
-      //alert("Please enter a number between 19 and 29");
       message.error(
         "Please enter a number between 15 and 25 for FinalCold Wash"
       );
@@ -645,9 +632,7 @@ const Bleaching = () => {
     if (timeCondition()) {
       message.error("Total water fill time exceeds available time");
     }
-    // const numericValue = Number(value);
     if (NW_waterFill < 24 || NW_waterFill > 36) {
-      //alert("Please enter a number between 19 and 29");
       message.error(
         "Please enter a number between 24 and 36 for Neutralizing Wash"
       );
@@ -796,7 +781,7 @@ const Bleaching = () => {
             setFC_surfacePH(select.final_process_act_temp);
             setsetilon_kn(select.setilon_kn);
             setpersoftal(select.persoftal);
-            // setFC_surfacePH(select.setilon_persoftal_actual);
+
             setmail_status(select.mail_status);
             setsupervisor_status(select.supervisor_status);
             setsupervisor_saved_on(select.supervisor_saved_on);
@@ -839,7 +824,7 @@ const Bleaching = () => {
     }
   };
 
-  useEffect(() => {}, [disable, saveBtnStatus, submitBtnStatus]);
+  useEffect(() => { }, [disable, saveBtnStatus, submitBtnStatus]);
 
   const statusFunction = (responseData) => {
     if (
@@ -944,45 +929,14 @@ const Bleaching = () => {
 
   const sendBleachingJobCard = () => {
     const isValid = () => {
-      // if (!id) return "Header ID is required";
       if (!newDate) return "Date is required";
       if (!batchNolist) return "Batch No is required";
-      // if (!bmrnos2) return "BMR No is required";
       if (!availableshiftlov) return "Shift is required";
       if (!finisharraylist) return "Finish is required";
       if (!availablemclov) return "MC No is required";
-
       if (!startTime) return "Start Time is required";
       if (!endTime) return "End Time is required";
 
-      // if (!PW_waterFill) return "Wetting is required";
-      // if (!SB_waterFill) return "Scouring is required";
-      // if (!HW_waterFill) return "Hotwash One is required";
-      // if (!HW_waterFill2) return "Hotwash Two is required";
-      // if (!NW_waterFill) return "Neutralizing is required";
-      // if (!FC_waterFill) return "Final Process is required";
-      // if (!CH_caustic) return "Caustic Soda Flakes are required";
-      // if (!CH_haipaloene) return "Haipolene is required";
-      // if (!CH_sarofom) return "Sarofom is required";
-      // if (!CH_Hydrogen) return "Hydrogen Peroxide is required";
-      // if (!CH_setilon) return "Setilon Persoftal Actual is required";
-      // if (!CH_citric) return "Citric Acid is required";
-      // // if (!CH_remark) return "Remarks are required";
-      // if (!PW_Observation) return "Wetting Act Temp is required";
-      // if (!SB_Observation) return "Scouring Act Temp is required";
-      // if (!HW_Observation) return "Hotwash One Act Temp is required";
-      // if (!HW_Observation2) return "Hotwash Two Act Temp is required";
-      // if (!NW_Observation) return "Neutralizing Act Temp is required";
-      // if (!FC_ciruclationPH) return "Final Process PH Temp is required";
-      // if (!FC_surfacePH) return "Final Process Act Temp is required";
-      // if (!INcharge_sign) return "Shift Sign is required";
-      // if (!INcharge_Date) return "Shift Date is required";
-      // if (!HOD_sign) return "Department Sign is required";
-      // if (!HOD_date) return "Department Date is required";
-      // if (!QA_date) return "QA Date is required";
-      // if (!QA_sign) return "QA Sign is required";
-      // if (!persoftal) return "Persoftal is required";
-      // if (!setilon_kn) return "Setilon KN is required";
       return null;
     };
     const validationMessage = isValid();
@@ -992,7 +946,7 @@ const Bleaching = () => {
     }
     setSaveLoading(true);
     const remarkToSave = CH_remark.trim() === "" ? "N/A" : CH_remark;
-    // Format the payload according to the API documentation
+
     const payload = {
       header_id: id,
       unit: "Unit H",
@@ -1063,13 +1017,13 @@ const Bleaching = () => {
       qa_sign: qa_sign,
     };
 
-    // Make the POST request to the API endpoint
+
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
-    // Make the POST request to the API endpoint with headers
+
     axios
       .post(
         `${API.prodUrl}/Precot/api/Bleaching/Service/saveBleachingJobCardF13`,
@@ -1094,11 +1048,8 @@ const Bleaching = () => {
   };
 
   const handleSave = async () => {
-    // Here you can add your logic for saving the data
     try {
       sendBleachingJobCard();
-      // alert("Bleaching job card Saved successfully!");
-      //  message.success("Bleaching job card Saved successfully!");
     } catch (error) {
       console.error("Error submitting bleaching job card:", error);
     }
@@ -1136,68 +1087,15 @@ const Bleaching = () => {
       { field: FC_ciruclationPH, message: "Final Process PH Temp is required" },
       { field: FC_surfacePH, message: "Final Process Act Temp is required" },
     ];
-
     const validationMessages = requiredFields
       .filter(({ field }) => !field)
       .map(({ message }) => message);
-
     if (validationMessages.length > 0) {
       validationMessages.forEach((msg) => message.warning(msg));
-      return; // Stop execution if any field is invalid
+      return;
     }
-
-    // if (!remarkToSave || remarkToSave.trim() === "") {
-    //   message.warning("Remarks are required");
-    //   return;
-    // }
-    // const isValid = () => {
-    //   // if (!id) return "Header ID is required";
-    //   if (!newDate) return "Date is required";
-    //   // if (!bmrnos2) return "BMR No is required";
-    //   if (!availableshiftlov) return "Shift is required";
-    //   if (!finisharraylist) return "Finish is required";
-    //   if (!availablemclov) return "MC No is required";
-    //   if (!batchNolist) return "Batch No is required";
-    //   if (!startTime) return "Start Time is required";
-    //   if (!endTime) return "End Time is required";
-    //   if (!PW_waterFill) return "Wetting is required";
-    //   if (!SB_waterFill) return "Scouring is required";
-    //   if (!HW_waterFill) return "Hotwash One is required";
-    //   if (!HW_waterFill2) return "Hotwash Two is required";
-    //   if (!NW_waterFill) return "Neutralizing is required";
-    //   if (!FC_waterFill) return "Final Process is required";
-    //   if (!CH_caustic) return "Caustic Soda Flakes are required";
-    //   if (!CH_haipaloene) return "Haipolene is required";
-    //   if (!CH_sarofom) return "Sarofom is required";
-    //   if (!CH_Hydrogen) return "Hydrogen Peroxide is required";
-    //   if (!CH_setilon) return "Setilon Persoftal Actual is required";
-    //   if (!CH_citric) return "Citric Acid is required";
-    //   // if (!CH_remark) return "Remarks are required";
-    //   if (!PW_Observation) return "Wetting Act Temp is required";
-    //   if (!SB_Observation) return "Scouring Act Temp is required";
-    //   if (!HW_Observation) return "Hotwash One Act Temp is required";
-    //   if (!HW_Observation2) return "Hotwash Two Act Temp is required";
-    //   if (!NW_Observation) return "Neutralizing Act Temp is required";
-    //   if (!FC_ciruclationPH) return "Final Process PH Temp is required";
-    //   if (!FC_surfacePH) return "Final Process Act Temp is required";
-    //   // if (!INcharge_sign) return "Shift Sign is required";
-    //   // if (!INcharge_Date) return "Shift Date is required";
-    //   // if (!HOD_sign) return "Department Sign is required";
-    //   // if (!HOD_date) return "Department Date is required";
-    //   // if (!QA_date) return "QA Date is required";
-    //   // if (!QA_sign) return "QA Sign is required";
-    //   // if (!persoftal) return "Persoftal is required";
-    //   // if (!setilon_kn) return "Setilon KN is required";
-    //   return null;
-    // };
-    // const validationMessage = isValid();
-    // if (validationMessage) {
-    //   message.error(validationMessage);
-    //   return;
-    // }
     setSaveLoading(true);
     const remarkToSave = CH_remark.trim() === "" ? "N/A" : CH_remark;
-    // Format the payload according to the API documentation
     const payload = {
       header_id: id,
       unit: "Unit H",
@@ -1268,13 +1166,13 @@ const Bleaching = () => {
       qa_sign: qa_sign,
     };
 
-    // Make the POST request to the API endpoint
+
     const headers = {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     };
 
-    // Make the POST request to the API endpoint with headers
+
     axios
       .post(
         `${API.prodUrl}/Precot/api/Bleaching/Service/submitBleachingJobCardF13`,
@@ -1334,7 +1232,7 @@ const Bleaching = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Check initial window size
+    handleResize();
     const roleBase = localStorage.getItem("role");
     const roleauth = localStorage.getItem("role");
     axios
@@ -1367,7 +1265,6 @@ const Bleaching = () => {
     }
   }, []);
 
-  // const role = localStorage.getItem("role");
   const items = [
     {
       key: "1",
@@ -1824,11 +1721,10 @@ const Bleaching = () => {
               <td
                 colSpan="2"
                 rowSpan="4"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -1963,11 +1859,10 @@ const Bleaching = () => {
               <td
                 colSpan="2"
                 rowSpan="4"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2101,11 +1996,8 @@ const Bleaching = () => {
               <td
                 colSpan="2"
                 rowSpan="5"
-                // contentEditable="false"
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
                 }}
               >
                 <input
@@ -2126,7 +2018,7 @@ const Bleaching = () => {
               <td
                 colSpan="3"
                 rowspan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
                   paddingLeft: "1em",
@@ -2242,11 +2134,10 @@ const Bleaching = () => {
               <td
                 colSpan="2"
                 rowSpan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2267,14 +2158,13 @@ const Bleaching = () => {
               <td
                 colSpan="3"
                 rowspan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
                   paddingLeft: "1em",
                   paddingRight: "1em",
                 }}
               >
-                {/* <span style={{ textAlign: "center" }}>  {print && print.newtralizing_act_temp}</span> */}
                 pH actual:
                 <span style={{ textAlign: "center" }}>
                   <input
@@ -2293,7 +2183,7 @@ const Bleaching = () => {
                     disabled={
                       (roleBase === "ROLE_SUPERVISOR" &&
                         selectedRow?.supervisor_status ===
-                          "SUPERVISOR_APPROVED" &&
+                        "SUPERVISOR_APPROVED" &&
                         selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                       selectedRow?.hod_status === "HOD_APPROVED" ||
                       roleBase === "ROLE_QA" ||
@@ -2331,7 +2221,7 @@ const Bleaching = () => {
                     disabled={
                       (roleBase === "ROLE_SUPERVISOR" &&
                         selectedRow?.supervisor_status ===
-                          "SUPERVISOR_APPROVED" &&
+                        "SUPERVISOR_APPROVED" &&
                         selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                       selectedRow?.hod_status === "HOD_APPROVED" ||
                       roleBase === "ROLE_QA" ||
@@ -2494,11 +2384,10 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2558,11 +2447,10 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                //  contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2622,11 +2510,10 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2685,11 +2572,10 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2743,7 +2629,7 @@ const Bleaching = () => {
                     disabled={
                       (roleBase === "ROLE_SUPERVISOR" &&
                         selectedRow?.supervisor_status ===
-                          "SUPERVISOR_APPROVED" &&
+                        "SUPERVISOR_APPROVED" &&
                         selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                       selectedRow?.hod_status === "HOD_APPROVED" ||
                       roleBase === "ROLE_QA" ||
@@ -2776,7 +2662,7 @@ const Bleaching = () => {
                     disabled={
                       (roleBase === "ROLE_SUPERVISOR" &&
                         selectedRow?.supervisor_status ===
-                          "SUPERVISOR_APPROVED" &&
+                        "SUPERVISOR_APPROVED" &&
                         selectedRow?.hod_status === "WAITING_FOR_APPROVAL") ||
                       selectedRow?.hod_status === "HOD_APPROVED" ||
                       roleBase === "ROLE_QA" ||
@@ -2812,11 +2698,9 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                //contentEditable="false"
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -2875,11 +2759,10 @@ const Bleaching = () => {
               </td>
               <td
                 colSpan="1"
-                //contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 <input
@@ -3008,7 +2891,7 @@ const Bleaching = () => {
                   <>
                     <div>{selectedRow.supervisor_sign}</div>
                     <div>{supersigndate}</div>
-                    {/* <div>Signature & Date</div> */}
+
                     {getImage !== "" && (
                       <img
                         className="signature"
@@ -3038,7 +2921,6 @@ const Bleaching = () => {
                       {getImage2 !== "" && (
                         <img className="signature" src={getImage2} alt="QA" />
                       )}
-                      {/* <span style={{ fontSize: '11px', marginLeft: "0px" }}>Signature & Date</span> */}
                     </>
                   )}
               </td>
@@ -3060,13 +2942,12 @@ const Bleaching = () => {
                       {getImage1 !== "" && (
                         <img className="signature" src={getImage1} alt="HOD" />
                       )}
-                      {/* <span style={{ fontSize: '11px', marginLeft: "0px" }}>Signature & Date</span> */}
                     </>
                   )}
               </td>
             </tr>
           </table>
-          {/* Container for buttons positioned at the right */}
+
         </div>
       ),
     },
@@ -3107,7 +2988,7 @@ const Bleaching = () => {
         <Menu
           theme="dark"
           mode="inline"
-          // defaultSelectedKeys={["1"]}
+
           style={{
             backgroundColor: "transparent",
             display: "flex",
@@ -3119,91 +3000,91 @@ const Bleaching = () => {
           items={
             role === "ROLE_QA" || roleBase === "ROLE_QA"
               ? [
-                  {
-                    key: "1",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Form Browser
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/choosenScreen"),
-                  },
-                  {
-                    key: "2",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Generation
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Generate"),
-                  },
-                  {
-                    key: "3",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Mapping
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
-                  },
-                  {
-                    key: "4",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Closing
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/Closing"),
-                  },
-                  {
-                    key: "5",
-                    icon: (
-                      <FaLock
-                        color="#151718"
-                        onClick={() => {
-                          if (confirm("Are you sure want to logout")) {
-                            localStorage.removeItem("token");
-                            navigate("/Precot");
-                          }
-                        }}
-                      />
-                    ),
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Logout
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot"),
-                  },
-                ]
+                {
+                  key: "1",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Form Browser
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/choosenScreen"),
+                },
+                {
+                  key: "2",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Generation
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Generate"),
+                },
+                {
+                  key: "3",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Mapping
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                },
+                {
+                  key: "4",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Closing
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/Closing"),
+                },
+                {
+                  key: "5",
+                  icon: (
+                    <FaLock
+                      color="#151718"
+                      onClick={() => {
+                        if (confirm("Are you sure want to logout")) {
+                          localStorage.removeItem("token");
+                          navigate("/Precot");
+                        }
+                      }}
+                    />
+                  ),
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Logout
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot"),
+                },
+              ]
               : role === "ROLE_SUPERVISOR" ||
                 role === "ROLE_HOD" ||
                 role === "ROLE_DESIGNEE"
-              ? [
+                ? [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -3285,7 +3166,7 @@ const Bleaching = () => {
                     onClick: () => navigate("/Precot"),
                   },
                 ]
-              : [
+                : [
                   {
                     key: "1",
                     icon: <IoCreate color="#151718" />,
@@ -3357,55 +3238,7 @@ const Bleaching = () => {
         />
       </Drawer>
 
-      {/* <BleachingHeader
-        unit="Unit-H"
-        formName="BLEACHING JOB CARD"
-        formatNo="PH-PRD01/F-007"
-        buttonsArray={[
-          <Button
-            onClick={handleSave}
-            style={{ marginRight: "10px" }}
-            type="primary"
-          >
-            Save
-          </Button>,
-          <Button
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              marginRight: "10px",
-            }}
-            type="primary"
-          >
-            Submit
-          </Button>,
-          <Button
-            onClick={handleBack}
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              marginRight: "10px",
-            }}
-            type="primary"
-          >
-            Back
-          </Button>,
-          <Button
-            type="primary"
-            style={{
-              backgroundColor: "#E5EEF9",
-              color: "#00308F",
-              fontWeight: "bold",
-              // display: submitBtnStatus ? "block" : "none",
-            }}
-            //  icon={<PrinterOutlined />}
-            onClick={handlePrint}
-          >
-            Print
-          </Button>
-        ]}
-      /> */}
+
 
       <BleachingHeader
         unit="Unit-H"
@@ -3425,7 +3258,7 @@ const Bleaching = () => {
               backgroundColor: "#E5EEF9",
               color: "#00308F",
               fontWeight: "bold",
-              // display: saveBtnStatus ? "block" : "none",
+
             }}
             onClick={handleBack}
             shape="round"
@@ -3434,10 +3267,10 @@ const Bleaching = () => {
             &nbsp;Back
           </Button>,
           role === "ROLE_HOD" ||
-          role === "ROLE_QA" ||
-          role === "ROLE_QA" ||
-          role === "ROLE_QC" ||
-          role === "ROLE_DESIGNEE" ? (
+            role === "ROLE_QA" ||
+            role === "ROLE_QA" ||
+            role === "ROLE_QC" ||
+            role === "ROLE_DESIGNEE" ? (
             <>
               <Button
                 loading={saveLoading}
@@ -3513,7 +3346,7 @@ const Bleaching = () => {
             }}
             shape="round"
             icon={<BiLock color="#00308F" />}
-            // onClick={handleLogout}
+
             onClick={() => {
               if (confirm("Are you sure want to logout")) {
                 localStorage.removeItem("token");
@@ -3524,25 +3357,6 @@ const Bleaching = () => {
             Logout
           </Button>,
 
-          // <Button
-          //   type="primary"
-          //   style={{
-          //     backgroundColor: "#E5EEF9",
-          //     color: "#00308F",
-          //     fontWeight: "bold",
-          //     display: canDisplayPrint()
-          //     // display: submitBtnStatus ? "block" : "none",
-          //   }}
-          //   icon={<FaPrint  color="#00308F" />}
-          //   onClick={handlePrint}
-          // >
-          //   Print
-          // </Button>
-          // ,
-
-          // roleBase !== "ROLE_SUPERVISOR" &&   selectedRow?.supervisor_status!=="SUPERVISOR_SAVED" &&  selectedRow?.supervisor_status!=="SUPERVISOR_APPROVED"&&selectedRow?.supervisor_status!=="HOD_SAVED" &&  selectedRow?.supervisor_status!=="HOD_APPROVED"&&(
-          //   <div style={{color:"white",backgroundColor:"red",borderRadius:"3px",padding:"2px"}}>{bmrnos2}-BMR not yet Saved</div>
-          // ),
           <Tooltip
             trigger="click"
             style={{
@@ -3600,8 +3414,8 @@ const Bleaching = () => {
           <TextArea
             value={rejectRemarks}
             onChange={(e) => setRejectRemarks(e.target.value)}
-            rows={4} // Adjust the number of rows as needed
-            style={{ width: "100%" }} // Adjust the width as needed
+            rows={4}
+            style={{ width: "100%" }}
           />
         </div>
       </Modal>
@@ -4069,11 +3883,8 @@ const Bleaching = () => {
             <td
               colSpan="2"
               rowSpan="4"
-              // contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.hotwash_one}
@@ -4181,11 +3992,8 @@ const Bleaching = () => {
             <td
               colSpan="2"
               rowSpan="4"
-              // contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.hotwash_two}
@@ -4291,11 +4099,8 @@ const Bleaching = () => {
             <td
               colSpan="2"
               rowSpan="5"
-              // contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.newtralizing}
@@ -4303,7 +4108,7 @@ const Bleaching = () => {
             <td
               colSpan="3"
               rowspan="5"
-              // contentEditable="false"
+
               style={{
                 border: "1px solid",
                 paddingLeft: "1em",
@@ -4405,11 +4210,10 @@ const Bleaching = () => {
             <td
               colSpan="2"
               rowSpan="5"
-              // contentEditable="false"
+
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
+
               }}
             >
               {print && print.newtralizing}
@@ -4417,7 +4221,7 @@ const Bleaching = () => {
             <td
               colSpan="3"
               rowspan="5"
-              // contentEditable="false"
+
               style={{
                 border: "1px solid",
                 paddingLeft: "1em",
@@ -4648,11 +4452,8 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              // contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.caustic_soda_flakes}
@@ -4698,11 +4499,8 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              //  contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.haipolene}
@@ -4748,11 +4546,8 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              // contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.sarofom}
@@ -4798,11 +4593,10 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              // contentEditable="false"
+
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
+
               }}
             >
               {print && print.hydrogen_peroxide}
@@ -4840,9 +4634,7 @@ const Bleaching = () => {
                   <div>Persoftal 9490 : {print && print.persoftal}</div>
                 </p>
               </div>
-              {/* <div>     <p style={{fontSize:"11px"}}>  Persoftal 9490</p>
-                 
-                </div> */}
+
             </td>
             <td
               colSpan="2"
@@ -4856,11 +4648,8 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              //contentEditable="false"
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
               }}
             >
               {print && print.setilon_persoftal_actual}
@@ -4906,11 +4695,10 @@ const Bleaching = () => {
             </td>
             <td
               colSpan="1"
-              //contentEditable="false"
+
               style={{
                 border: "1px solid",
-                //   paddingLeft: "1em",
-                //   paddingRight: "1em",
+
               }}
             >
               {print && print.citric_acid}
@@ -4966,7 +4754,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  height: "auto", // Set height to auto for header row
+                  height: "auto",
                 }}
               >
                 <b style={{ fontSize: "11px" }}>
@@ -4979,7 +4767,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  height: "auto", // Set height to auto for header row
+                  height: "auto",
                 }}
               >
                 <b style={{ fontSize: "11px" }}>Reviewed by HOD / Designees</b>
@@ -4990,7 +4778,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  height: "auto", // Set height to auto for header row
+                  height: "auto",
                 }}
               >
                 <b style={{ fontSize: "11px" }}>Approved by QA Inspector</b>
@@ -5005,7 +4793,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  verticalAlign: "top", // Ensure vertical alignment is consistent
+                  verticalAlign: "top",
                 }}
               >
                 <div align="center" style={{ minHeight: "80px" }}>
@@ -5015,7 +4803,6 @@ const Bleaching = () => {
                   <br></br>
                   Sign & Date
                 </div>
-                {/* <div style={{ fontSize: "11px", textAlign: "center" }}>Sign & Date</div> */}
               </td>
               <td
                 colSpan="1"
@@ -5023,7 +4810,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  verticalAlign: "top", // Ensure vertical alignment is consistent
+                  verticalAlign: "top",
                 }}
               >
                 <div align="center" style={{ minHeight: "80px" }}>
@@ -5033,7 +4820,6 @@ const Bleaching = () => {
                   <br></br>
                   Sign & Date
                 </div>
-                {/* <div style={{ fontSize: "11px", textAlign: "center" }}>Sign & Date</div> */}
               </td>
               <td
                 colSpan="1"
@@ -5041,7 +4827,7 @@ const Bleaching = () => {
                   border: "1px solid",
                   padding: "1em",
                   textAlign: "center",
-                  verticalAlign: "top", // Ensure vertical alignment is consistent
+                  verticalAlign: "top",
                 }}
               >
                 <div align="center">
@@ -5052,7 +4838,6 @@ const Bleaching = () => {
                   Sign & Date
                 </div>
 
-                {/* <div style={{ fontSize: "11px", textAlign: "center" }}>Sign & Date</div> */}
               </td>
             </tr>
           </tbody>
@@ -5115,15 +4900,8 @@ const Bleaching = () => {
           addonBefore="StartDate"
           max={getCurrentDate()}
           type="date"
-          // disabled={
-          //   (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-          //   (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-          //   (roleBase === "ROLE_QA" && selectedRow?.qa_status === "HOD_APPROVED") ||
-          //   (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-          // }
           disabled={disable}
           value={newDate}
-          // min={lastDateTime}
           onChange={handleDateChange}
           style={{ width: "100%", height: "35px" }}
         />

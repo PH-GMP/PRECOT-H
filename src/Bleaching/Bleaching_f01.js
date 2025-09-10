@@ -189,7 +189,7 @@ const Bleaching_f01 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -213,7 +213,7 @@ const Bleaching_f01 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -225,7 +225,7 @@ const Bleaching_f01 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -249,7 +249,7 @@ const Bleaching_f01 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [states, setStates] = useState({
     year: "",
@@ -289,7 +289,7 @@ const Bleaching_f01 = () => {
     setWeek(state.week);
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/bleach/getdateSanitizationMechineAndSurfaceDetails/${state.month}/${state.year}/${state.week}`,
+        `${API.prodUrl}/Precot/api/bleach/getdateSanitizationMechineAndSurfaceDetails/${state.month}/${state.year}/${state.week}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -526,7 +526,7 @@ const Bleaching_f01 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectSanitizationMechineAndSurfaceDetails`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectSanitizationMechineAndSurfaceDetails`,
         {
           id: smsId,
           status: "Approve",
@@ -570,7 +570,7 @@ const Bleaching_f01 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleach/approveOrRejectSanitizationMechineAndSurfaceDetails`,
+        `${API.prodUrl}/Precot/api/bleach/approveOrRejectSanitizationMechineAndSurfaceDetails`,
         {
           id: smsId,
           status: "Reject",
@@ -694,7 +694,7 @@ const Bleaching_f01 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleach/saveSanitizationMechineAndSurface`,
+        `${API.prodUrl}/Precot/api/bleach/saveSanitizationMechineAndSurface`,
         payload,
         { headers }
       )
@@ -850,7 +850,7 @@ const Bleaching_f01 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/bleach/submitSanitizationMechineAndSurface`,
+        `${API.prodUrl}/Precot/api/bleach/submitSanitizationMechineAndSurface`,
         payload,
         { headers }
       )

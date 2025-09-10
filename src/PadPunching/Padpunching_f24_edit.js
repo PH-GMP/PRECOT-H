@@ -136,7 +136,7 @@ const Padpunching_f25_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const Padpunching_f25_edit = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -172,7 +172,7 @@ const Padpunching_f25_edit = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -196,7 +196,7 @@ const Padpunching_f25_edit = (props) => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
   const canEdit = () => {
     if (roleauth === "ROLE_SUPERVISOR") {
       return !(
@@ -296,7 +296,7 @@ const Padpunching_f25_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
         {
           id: handSanitizationId,
           status: "Approve",
@@ -337,7 +337,7 @@ const Padpunching_f25_edit = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/approveHandSanitationF24`,
         {
           id: handSanitizationId,
           status: "Reject",
@@ -389,7 +389,7 @@ const Padpunching_f25_edit = (props) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/punching/getHandSanitationF24?date=${selectedDate}&shift=${selectedShift}`,
+        `${API.prodUrl}/Precot/api/punching/getHandSanitationF24?date=${selectedDate}&shift=${selectedShift}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -551,7 +551,7 @@ const Padpunching_f25_edit = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -595,7 +595,7 @@ const Padpunching_f25_edit = (props) => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=3`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=3`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -622,7 +622,7 @@ const Padpunching_f25_edit = (props) => {
     console.log("fetchIDNo valled");
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationName`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationName`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -1220,7 +1220,7 @@ const Padpunching_f25_edit = (props) => {
     const payload = {
       unit: "Unit H",
       formatNo: "PH-PRD03/F-006",
-      formatName: " API.prodUrlitisation Report",
+      formatName: "API.prodUrlitisation Report",
       revisionNo: "02",
       sopNumber: "PH-HRD04-D-03",
       handSanitizationId: handSanitizationId,
@@ -1246,7 +1246,7 @@ const Padpunching_f25_edit = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/saveHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/saveHandSanitationF24`,
         payload,
         {
           headers: {
@@ -1325,7 +1325,7 @@ const Padpunching_f25_edit = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/punching/submitHandSanitationF24`,
+        `${API.prodUrl}/Precot/api/punching/submitHandSanitationF24`,
         payload,
         {
           headers: {

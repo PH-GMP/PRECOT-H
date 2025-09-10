@@ -447,7 +447,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
     const payload = {
       inspectionId: inspectionId,
       formatName: "QA Inspection Format",
-      formatNo: "PH-QAD01-F-036",
+      formatNo: "PH-QAD01/F-036",
       revisionNo: "01",
       refSopNo: "PH-QAD01-D-31",
       productDescription: productDescription,
@@ -638,7 +638,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
     const payload = {
       inspectionId: inspectionId,
       formatName: "QA Inspection Format",
-      formatNo: "PH-QAD01-F-036",
+      formatNo: "PH-QAD01/F-036",
       revisionNo: "01",
       refSopNo: "PH-QAD01-D-31",
       productDescription: productDescription,
@@ -1148,7 +1148,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
     try {
       await axios
         .get(
-          `${API.prodUrl}/Precot/api/QA/Service/api/findByDateShidtMachineNoPordeBmr?date=${editDate}&shift=${editShift}&machineNo=${editMachineNo}&pOrder=${editPOrder}&bmrNo=${editBmrNo}&formatNo=PH-QAD01-F-036`,
+          `${API.prodUrl}/Precot/api/QA/Service/api/findByDateShidtMachineNoPordeBmr?date=${editDate}&shift=${editShift}&machineNo=${editMachineNo}&pOrder=${editPOrder}&bmrNo=${editBmrNo}&formatNo=PH-QAD01/F-036`,
 
           {
             headers: {
@@ -1399,7 +1399,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
         })
         .catch((err) => {});
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -1430,7 +1430,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
         })
         .catch((err) => {});
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -1464,7 +1464,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
           //
         });
     }
-  }, [response, API.prodUrl, token]);
+  }, [response,API.prodUrl, token]);
 
   let formattedInspectorDate;
   if (response.qa_inspector_submit_on) {
@@ -1572,7 +1572,7 @@ const QA_f036_Inprocess_Inspection_Report = () => {
       <BleachingHeader
         unit={"unit H"}
         formName={"ON-LINE INSPECTION REPORT (BUDS)"}
-        formatNo={"PH-QAD01-F-036"}
+        formatNo={"PH-QAD01/F-036"}
         MenuBtn={
           <Button
             type="primary"

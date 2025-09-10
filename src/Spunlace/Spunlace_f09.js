@@ -97,7 +97,7 @@ const Spunlace_f09 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -121,7 +121,7 @@ const Spunlace_f09 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [reportDetails, API.prodUrl, token]);
+  }, [reportDetails,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -131,7 +131,7 @@ const Spunlace_f09 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -155,7 +155,7 @@ const Spunlace_f09 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [reportDetails, API.prodUrl, token]);
+  }, [reportDetails,API.prodUrl, token]);
 
   const handleRejectModal = () => {
     setShowModal(true);
@@ -171,7 +171,7 @@ const Spunlace_f09 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/approveOrReject`,
         {
           id: reportId,
           status: "Reject",
@@ -203,7 +203,7 @@ const Spunlace_f09 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/approveOrReject`,
         {
           id: reportId,
           status: "Approve",
@@ -311,7 +311,7 @@ const Spunlace_f09 = () => {
   const fetchDetailsByDateShiftOrderNo = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getByDateShiftOrderNo?date=${date}&shift=${shift}&orderNo=${orderNumber}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/getByDateShiftOrderNo?date=${date}&shift=${shift}&orderNo=${orderNumber}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -356,7 +356,7 @@ const Spunlace_f09 = () => {
   const fetchOrderDetails = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNumber}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNumber}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -403,7 +403,7 @@ const Spunlace_f09 = () => {
       const formattedShift = convertShift(shift);
       // console.log("converted shift",formattedShift)
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/getMahloData?date=${formattedDate}&shift=${formattedShift}&orderNumber=${orderNumber}`,
+        `${API.prodUrl}/Precot/api/spulance/getMahloData?date=${formattedDate}&shift=${formattedShift}&orderNumber=${orderNumber}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -464,7 +464,7 @@ const Spunlace_f09 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/SubmitSpunlaceGsmAnalysisReport`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/SpunlaceGsmAnalysisReport/SubmitSpunlaceGsmAnalysisReport`,
         payload,
         { headers }
       );

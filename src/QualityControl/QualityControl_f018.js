@@ -119,7 +119,7 @@ const QualityControlF018 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/chemicaltest/CLF018?date=${date}&eq_no=${eqno}`,
+          `${API.prodUrl}/Precot/api/chemicaltest/CLF018?date=${date}&eq_no=${eqno}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -138,7 +138,7 @@ const QualityControlF018 = () => {
             //getImage
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -168,7 +168,7 @@ const QualityControlF018 = () => {
 
             axios
               .get(
-                `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+                `${API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
                 {
                   headers: {
                     "Content-Type": "application/json",
@@ -266,7 +266,7 @@ const QualityControlF018 = () => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/save/temp`,
+        `${API.prodUrl}/Precot/api/chemicaltest/CLF018/save/temp`,
         payload,
         {
           headers: {
@@ -384,7 +384,7 @@ const QualityControlF018 = () => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/submit/temp`,
+        `${API.prodUrl}/Precot/api/chemicaltest/CLF018/submit/temp`,
         payload,
         {
           headers: {
@@ -417,7 +417,7 @@ const QualityControlF018 = () => {
     };
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/approval`,
+        `${API.prodUrl}/Precot/api/chemicaltest/CLF018/approval`,
         {
           id: mainID,
           status: "Approve",
@@ -455,7 +455,7 @@ const QualityControlF018 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/chemicaltest/CLF018/approval`,
+        `${API.prodUrl}/Precot/api/chemicaltest/CLF018/approval`,
         {
           id: mainID,
           status: "Reject",

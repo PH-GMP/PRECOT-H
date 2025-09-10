@@ -172,7 +172,7 @@ const Engineering_FC003 = () => {
   useEffect(() => {
     if (issuerDepartment) {
       // Fetch BMR options from API for the selected department
-      axios.get(`${ API.prodUrl}/Precot/api/Engineering/getProductionDetails?department=${issuerDepartment}`, {
+      axios.get(`${API.prodUrl}/Precot/api/Engineering/getProductionDetails?department=${issuerDepartment}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -206,7 +206,7 @@ const Engineering_FC003 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Engineering/getBreakdown?date=${state.date}&bisNo=${state.bisNo}`,
+        `${API.prodUrl}/Precot/api/Engineering/getBreakdown?date=${state.date}&bisNo=${state.bisNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -303,7 +303,7 @@ const Engineering_FC003 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -327,7 +327,7 @@ const Engineering_FC003 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -339,7 +339,7 @@ const Engineering_FC003 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -363,7 +363,7 @@ const Engineering_FC003 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -375,7 +375,7 @@ const Engineering_FC003 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const Engineering_FC003 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
 
 
@@ -434,7 +434,7 @@ const Engineering_FC003 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Engineering/Breakdown/Save`,
+        `${API.prodUrl}/Precot/api/Engineering/Breakdown/Save`,
         payload,
         { headers }
       )
@@ -498,7 +498,7 @@ const Engineering_FC003 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/Breakdown/Submit`,
+        ` ${API.prodUrl}/Precot/api/Engineering/Breakdown/Submit`,
         payload,
         { headers }
       )
@@ -560,7 +560,7 @@ const Engineering_FC003 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/Breakdown/EngineerSubmit`,
+        ` ${API.prodUrl}/Precot/api/Engineering/Breakdown/EngineerSubmit`,
         payload,
         { headers }
       )
@@ -629,7 +629,7 @@ const Engineering_FC003 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Engineering/Breakdown/ReceiverSubmit`,
+        `${API.prodUrl}/Precot/api/Engineering/Breakdown/ReceiverSubmit`,
         payload,
         { headers }
       )
@@ -691,7 +691,7 @@ const Engineering_FC003 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Engineering/Breakdown/CloserSubmit`,
+        `${API.prodUrl}/Precot/api/Engineering/Breakdown/CloserSubmit`,
         payload,
         { headers }
       )

@@ -40,7 +40,6 @@ function Bleaching_Bmr_Summary() {
   const navigate = useNavigate();
   const [bmrList, setBmrList] = useState([]);
   const elementRef = useRef(null);
-  const [elementHeight, setElementHeight] = useState(0);
   // states of Product Details
   const [chemicalDate, setChemicalDate] = useState("");
   const [loading, setLoading] = useState(false);
@@ -53,10 +52,8 @@ function Bleaching_Bmr_Summary() {
   const [pd_EndSub, setPd_EndSub] = useState("");
   const [pd_qaStatus, setPd_QaStatus] = useState("");
   const [pd_prodStatus, setPd_ProdStatus] = useState("");
-  const [pd_Finish, setPd_Finish] = useState("");
   const [pd_status, setPd_Status] = useState("");
   const [pd_qaId, setPd_QaId] = useState("");
-  const [pd_removeSubmit, setPd_removeSubmit] = useState(false);
   const [pd_ManufacturingStartDate, setPd_ManufacturingStartDate] =
     useState("");
   const [pd_ManufacturingStartTime, setPd_ManufacturingStartTime] =
@@ -70,11 +67,11 @@ function Bleaching_Bmr_Summary() {
   const [pd_finish_Crish, setpd_pd_finish_Crish] = useState("");
   const [pd_FinishSoft, setpd_FinishSoft] = useState("");
 
-  ////////
+
   const [enclosure1Status, setEnclosure1Status] = useState("");
   const [enclosure2Status, setEnclosure2Status] = useState("");
   const [enclosure3Status, setEnclosure3Status] = useState("");
-  //////////pde
+
   const [signatureValues, setSignatureValues] = useState({});
   const [dateValues, setDateValues] = useState({});
   const [process_id, setProcessId] = useState("");
@@ -90,7 +87,7 @@ function Bleaching_Bmr_Summary() {
   const [postprodHod, setPostProdHod] = useState(false);
   const [postProdSubmitStatus, setPostProdSubmitStatus] = useState("");
 
-  ////////////pde
+  //pde
   const [pecs_State, setPecs_State] = useState(false);
   const [pecsStateArray, setPecsStateArray] = useState([]);
   const [printValidation, setPrintValidation] = useState(false);
@@ -119,9 +116,8 @@ function Bleaching_Bmr_Summary() {
   const [freezeEnclosureQa, setFreezeEnclosureQa] = useState(false);
 
   //States for Verification Records Ended Here
-  const [checkedItems2, setCheckedItems2] = useState({});
+
   const [signatures, setSignatures] = useState({});
-  const [dates, setDates] = useState({});
   //Machine Operating Parameters starts
   const [MOP_ASB_Observation, setMOP_ASB_Observation] = useState("");
   const [MOP_FDS_Observation, setMOP_FDS_Observation] = useState("");
@@ -164,31 +160,21 @@ function Bleaching_Bmr_Summary() {
     MOP_AS_ReferSOP_Line2_Observation,
     setMOP_AS_ReferSOP_Line2_Observation,
   ] = useState("");
-  //Machine Operating Parameters Ends here
-  //manufacturing steps end here
+
   const [freeText, setFreeText] = useState("");
-  //List of Enclosures ends here
+
 
   const [bmr, setBmr] = useState("");
   const [fieldsDisabled, setFieldsDisabled] = useState({
     qaInspector: false,
     qaManager: false,
-  }); // State for PDR Deviation Log
-  const [PDR_DeviationLogNo1, setPDR_DeviationLogNo1] = useState("");
-  const [PDR_DeviationLogNo2, setPDR_DeviationLogNo2] = useState("");
-  const [PDR_DeviationLogNo3, setPDR_DeviationLogNo3] = useState("");
-  // State for PDR QARemarks
-  const [PDR_QARemarks1, setPDR_QARemarks1] = useState("");
-  const [PDR_QARemarks2, setPDR_QARemarks2] = useState("");
-  const [PDR_QARemarks3, setPDR_QARemarks3] = useState("");
-  //Giri 12
-  // QA realse End
+  });
+
+
 
   const [pdeDate, setPdeDate] = useState("");
   const [pdeDate2, setPdeDate2] = useState("");
-  const [newSavePD, setNewSavePD] = useState(false);
-  const [pdeSignatureNew, setPdeSignatureNew] = useState("");
-  const [pdeDateNew, setPdeDateNew] = useState("");
+
 
   const [rawReceivedBy, setRawReceivedBy] = useState("");
   const [rawIssuedBy, setRawIssuedBy] = useState("");
@@ -198,17 +184,12 @@ function Bleaching_Bmr_Summary() {
   const [rawCottonIssue, setRawCottonIssue] = useState();
   const [rawweightTotal, setRawWeightTotal] = useState("");
   const [rawweightTotalBaleWeight, setRawWeightTotalBaleWeight] = useState("");
-  const [packingDetails, setPackingDetails] = useState();
-  //verification sign
-  const [listofEnclosuresArray, setListOfEnclosuresArray] = useState([]);
-  //verification sign
 
-  const [PDR_Sign1, setPDR_Sign1] = useState("");
-  const [PDR_Sign2, setPDR_Sign2] = useState("");
-  const [PDR_Sign3, setPDR_Sign3] = useState("");
-  const [PDR_SignQASign1, setPDR_SignQASign1] = useState("");
-  const [PDR_SignQASign2, setPDR_SignQASign2] = useState("");
-  const [PDR_SignQASign3, setPDR_SignQASign3] = useState("");
+
+  const [listofEnclosuresArray, setListOfEnclosuresArray] = useState([]);
+
+
+
   const [bmrSummary, setBmrSummary] = useState([]);
   const [chemicalDetailsArray, setChemicalDetailsArray] = useState([]);
   const [packingMaterialsArray, setPackingMaterialsArray] = useState([]);
@@ -269,8 +250,7 @@ function Bleaching_Bmr_Summary() {
       ? localStorage.getItem("username")
       : "";
 
-  // const usernameQAInspector =
-  //   role === "QA_INSPECTOR" ? localStorage.getItem("username") : "";
+
 
   let usernameQADESANDMAN = "";
   if (role == "QA_DESIGNEE" || role == "QA_MANAGER") {
@@ -280,7 +260,7 @@ function Bleaching_Bmr_Summary() {
   const usernameQAManager =
     role === "QA_MANAGER" ? localStorage.getItem("username") : "";
 
-  //Process Deviation status
+
   const [processDeviationValidation, setProcessDeviationValidation] = useState({
     supervisorSaved: false,
     supervisorApproved: false,
@@ -359,7 +339,7 @@ function Bleaching_Bmr_Summary() {
     machineOpsQualityId16: "",
     machineOpsQualityId17: "",
     machineOpsQualityId18: "",
-    /////////////
+
     machineOpsSummaryId1: "",
     machineOpsSummaryId2: "",
     machineOpsSummaryId3: "",
@@ -407,7 +387,7 @@ function Bleaching_Bmr_Summary() {
   const [pdrId3, setPdrId3] = useState("");
   const [pprNewSave, setPprNewSave] = useState(false);
   const [pprId, setPprId] = useState("");
-  //const []
+
 
   const Qa1SignOnchange = (values) => {
     SetQaSign1(values);
@@ -415,7 +395,6 @@ function Bleaching_Bmr_Summary() {
   const Prod1SignChange = (val) => {
     setProductionSign1(val);
   };
-  //------------------------------------------------------------//
 
   const [vorStateObject, setVorStateObject] = useState({
     housekeeping: "",
@@ -425,22 +404,7 @@ function Bleaching_Bmr_Summary() {
     machineSanitizer: "",
   });
 
-  const formatDateTime = (dateString) => {
-    if (!dateString) return "";
 
-    const date = new Date(dateString);
-
-    // Extract YYYY-MM-DD
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    // Extract HH:MM
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
 
   const [manufacturingSteps, setManufacturingSteps] = useState({
     SwitchOn: "",
@@ -514,7 +478,7 @@ function Bleaching_Bmr_Summary() {
     productionRecord: "",
     machineSanitizer: "",
   });
-  ///////////
+
   const [verifiedbySign, setVerifiedBySign] = useState({
     housekeeping: "",
     machineCleaning: "",
@@ -560,7 +524,7 @@ function Bleaching_Bmr_Summary() {
     nine: "",
   });
 
-  /////////////////
+
   const [
     manufacturingStepsVerifiedbysign,
     setmanufacturingStepsVerifiedbysign,
@@ -591,7 +555,7 @@ function Bleaching_Bmr_Summary() {
     nine: "",
   });
 
-  /////////////////
+
   const [deviationLog, setdeviationLog] = useState({
     one: "",
     two: "",
@@ -662,37 +626,15 @@ function Bleaching_Bmr_Summary() {
     Date2: localDateValue3,
   });
 
-  const handleCheckboxChange2 = (e, index) => {
-    const isChecked = e.target.checked;
-    setCheckedItems((prev) => ({
-      ...prev,
-      [index]: isChecked,
-    }));
 
-    if (isChecked) {
-      console.log("Checked data:", pdeArray[index]);
-    }
-  };
 
-  const handleSignatureChange = (selectedOption, index) => {
-    setSignatures((prev) => ({
-      ...prev,
-      [index]: selectedOption,
-    }));
-  };
 
-  // const handleDateChange = (e, index) => {
-  //   setDates((prev) => ({
-  //     ...prev,
-  //     [index]: e.target.value,
-  //   }));
-  // };
   const handleDateChange = (e, index) => {
     const updatedDateValues = {
       ...dateValues,
-      [index]: e.target.value, // Correctly update the date value
+      [index]: e.target.value,
     };
-    console.log("Date value for row", index, ":", e.target.value); // Debugging log
+    console.log("Date value for row", index, ":", e.target.value);
     setDateValues(updatedDateValues);
   };
 
@@ -706,27 +648,8 @@ function Bleaching_Bmr_Summary() {
     setSignatureValues(updatedSignatureValues);
   };
 
-  // Handle date input change
-  const handleDateChangepde = (e, index) => {
-    const updatedDateValues = {
-      ...dateValues,
-      [index]: e.target.value,
-    };
-    setDateValues(updatedDateValues);
-  };
 
-  const handleSubmitSelected = () => {
-    const selectedData = pdeArray
-      .filter((_, index) => checkedItems[index]) // filter only selected rows
-      .map((x, index) => ({
-        ...x,
-        signature: signatureValues[index], // selected signature
-        date: dateValues[index], // selected date
-      }));
 
-    console.log("Selected Data: ", selectedData);
-    return selectedData; // return or use this data as needed
-  };
   //pde
 
   const manufacturingObservatioArray = [
@@ -761,7 +684,7 @@ function Bleaching_Bmr_Summary() {
     "Beater Roller Speed in RPM",
     "Refer SOP No. PRD01-D-09",
   ];
-  /////////////////
+
   const machineData = [
     {
       id: 1,
@@ -1003,7 +926,7 @@ function Bleaching_Bmr_Summary() {
     },
   ];
 
-  ////////////////
+
   const [machineOpsPerformedBy, setMachineOpsPerformedBy] = useState("");
   const [machineOpsCheckedBy, setMachineOpsCheckedBy] = useState("");
   const [machineOpsPerformedByDate, setMachineOpsPerformedByDate] =
@@ -1045,19 +968,6 @@ function Bleaching_Bmr_Summary() {
     setMachines(updatedMachines);
   };
 
-  function formatDateForInput(dateString) {
-    const date = new Date(dateString);
-    const formattedDate = date.toISOString().slice(0, 16);
-    return formattedDate;
-  }
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
   const handleSubmit = (event) => {
     if (pecs_verified == "" || newDate == "") {
       event.preventDefault();
@@ -1082,7 +992,7 @@ function Bleaching_Bmr_Summary() {
 
       console.log("API Payload:", payload);
 
-      //api/bleaching/summary/submitAnnexureCompletion
+
 
       axios
         .post(
@@ -1179,7 +1089,7 @@ function Bleaching_Bmr_Summary() {
     console.log("values", value);
     updateManufacturingStepsVerifiedBySign({ nine: value });
   };
-  ///////////////////
+
 
   const manufacturingStepsPerformedBySign1 = (value) => {
     console.log("values", value);
@@ -1216,7 +1126,7 @@ function Bleaching_Bmr_Summary() {
   const manufacturingStepsPerformedBySign9 = (value) => {
     console.log("values", value);
     updateManufacturingStepsPerformedBySign({ nine: value });
-  }; ///////////////////////
+  };
 
   const newPerformedByChange1 = (value) => {
     console.log("one", value);
@@ -1260,7 +1170,7 @@ function Bleaching_Bmr_Summary() {
     updateVerifiedBySign({ machineSanitizer: value });
   };
 
-  //////////
+
   const qaOnchange1 = (value) => {
     updateQa({ Sign1: value });
   };
@@ -1277,12 +1187,11 @@ function Bleaching_Bmr_Summary() {
     updateQa({ Sign5: value });
   };
 
-  //annexure 1 states
+
 
   const [qaSign1, SetQaSign1] = useState("");
   const [productionSign1, setProductionSign1] = useState("");
-  const [stoppageQADate, setStoppageQADate] = useState("");
-  const [stoppageSupDate, setStoppageSupDate] = useState("");
+
 
   const [qaLov, setQaLov] = useState([]);
   const [qaManagerLov, setManagerQaLov] = useState([]);
@@ -1298,10 +1207,6 @@ function Bleaching_Bmr_Summary() {
     useState(false);
   const [loggedInQaManager, setLoggedInQaManager] = useState(false);
 
-  const ProductionProductionsignOnChange = (values) => {
-    console.log("Values", values);
-    updateProdLov({ produtionProductionSign: values });
-  };
 
   const rawCottonIssueProdSignOnChange = (values) => {
     console.log("Values", values);
@@ -1309,10 +1214,7 @@ function Bleaching_Bmr_Summary() {
     setRawCottonProd(values);
   };
 
-  const postProductionProductionsignOnChange = (values) => {
-    console.log("Values", values);
-    updateProdLov({ postProductionProductionsign: values });
-  };
+
 
   const [store1Sign, setStore1Sign] = useState("");
 
@@ -1374,7 +1276,6 @@ function Bleaching_Bmr_Summary() {
         }));
         setBmrList(a);
         setFindLaydown(res.data);
-        // message.success("Closed BMR Values Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
@@ -1383,7 +1284,7 @@ function Bleaching_Bmr_Summary() {
           content: "Unable to fetch BMR Caused Network Error",
         });
       });
-    //Department Users List for HOD
+
     axios
       .get(
         `${API.prodUrl}/Precot/api/Users/Service/getBleachingQA?department=BLEACHING`,
@@ -1400,7 +1301,7 @@ function Bleaching_Bmr_Summary() {
           label: option.name,
         }));
         setQaLov(a);
-        // message.success("QA List Fetched Successfully");
+
       })
       .catch((err) => {
         console.log("ERRor", err);
@@ -1427,7 +1328,6 @@ function Bleaching_Bmr_Summary() {
           label: option.username,
         }));
         setProdLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
@@ -1449,14 +1349,10 @@ function Bleaching_Bmr_Summary() {
           label: option.value,
         }));
         setManagerQaLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
+
       });
 
     axios
@@ -1475,14 +1371,10 @@ function Bleaching_Bmr_Summary() {
           label: option.value,
         }));
         setQaInspectorLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
+
       });
 
     axios
@@ -1498,14 +1390,10 @@ function Bleaching_Bmr_Summary() {
           label: option.username,
         }));
         setHodnLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
+
       });
 
     axios
@@ -1521,14 +1409,10 @@ function Bleaching_Bmr_Summary() {
           label: option.value,
         }));
         setVerifiedByLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
+
       });
 
     //Department Users List for HOD
@@ -1545,18 +1429,13 @@ function Bleaching_Bmr_Summary() {
           label: option.username,
         }));
         setHodLov(a);
-        // message.success("Production Department Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: "Unable to fetch Production Department Caused Network Error",
-        // });
+
       });
 
-    ///Precot/api/Users/Service/getHod?departmentId=
-    //Department Users List for Stores
+
     axios
       .get(`${API.prodUrl}/Precot/api/bleaching/bleachStorePersons/getAll`, {
         headers: {
@@ -1570,7 +1449,6 @@ function Bleaching_Bmr_Summary() {
         }));
         setStores(a);
         console.log("res", res.data);
-        // message.success("Stores Users Fetched Successfully");
       })
       .catch((err) => {
         console.log("ERRor", err);
@@ -1604,17 +1482,15 @@ function Bleaching_Bmr_Summary() {
       "15",
       "16",
     ];
-    // setLoading(true);
+
     numbers.forEach((number) => {
       onChange(number, x);
     });
-    // alert("gfguhij")
-    // setLoading(false);
+
   };
 
   const datePDE = (value) => {
-    //Againstb date pde
-    ///api/bleaching/summary/shoppage?date=2017-01-22
+
     console.log("val", value);
   };
 
@@ -1625,35 +1501,11 @@ function Bleaching_Bmr_Summary() {
     }));
   };
 
-  // function formatDateForInput2(dateString) {
-  //   if (!dateString) return ""; // Handle empty or undefined values safely
 
-  //   // Check if the format is "YYYY-MM-DD HH:MM:SS" (like genDate)
-  //   if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(dateString)) {
-  //     // Convert "YYYY-MM-DD HH:MM:SS" to "YYYY-MM-DDTHH:MM:SS"
-  //     dateString = dateString.replace(" ", "T");
-  //   }
-
-  //   const date = new Date(dateString);
-
-  //   if (isNaN(date.getTime())) {
-  //     console.warn("Invalid date received:", dateString);
-  //     return ""; // Return an empty string to prevent UI issues
-  //   }
-
-  //   const year = date.getFullYear();
-  //   const month = String(date.getMonth() + 1).padStart(2, "0");
-  //   const day = String(date.getDate()).padStart(2, "0");
-  //   const hours = String(date.getHours()).padStart(2, "0");
-  //   const minutes = String(date.getMinutes()).padStart(2, "0");
-
-  //   return `${year}-${month}-${day}T${hours}:${minutes}`; // Correct format for datetime-local input
-  // }
 
   function formatDateForInput1(dateString) {
     if (!dateString) return "";
 
-    // Convert "YYYY-MM-DD HH:MM:SS" to "YYYY-MM-DDTHH:MM:SS" if necessary
     if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(dateString)) {
       dateString = dateString.replace(" ", "T");
     }
@@ -1662,7 +1514,7 @@ function Bleaching_Bmr_Summary() {
 
     if (isNaN(date.getTime())) {
       console.warn("Invalid date received:", dateString);
-      return ""; // Avoid showing "Invalid Date"
+      return "";
     }
 
     const day = String(date.getDate()).padStart(2, "0");
@@ -1788,7 +1640,7 @@ function Bleaching_Bmr_Summary() {
               productionQADate: res.data.productionDetails[0].qaDate,
             });
 
-            //Production Details Data ended here
+
             break;
           case "2":
             const s = res.data.bmrCompletionTable.filter((x, i) => {
@@ -1803,9 +1655,8 @@ function Bleaching_Bmr_Summary() {
                 res.data.rawCottonResponse[0].totalWeight
               );
             } else {
-              // setRawCottonNewSave(false);
+
               setRawCottonNewSave(true);
-              // setRawCottonStatus(false);
               setRawCottonQaStatus(
                 s[0].qaName.length > 0 && s[0].shoppageDate.length > 0
                   ? true
@@ -1832,12 +1683,12 @@ function Bleaching_Bmr_Summary() {
             }
             break;
           case "3":
-            //alert("hhjj")
+
             setChemicalDetailsArray(res.data.bmrSummary[0].chemicalDetails);
             setChemicalDate(res.data.bmrSummary[0].date);
             break;
           case "4":
-            // alert("pak")
+
             setPackingMaterialsArray(res.data.bmrSummary[0].packingDetails);
             break;
           case "6":
@@ -2144,8 +1995,7 @@ function Bleaching_Bmr_Summary() {
             }
             break;
           case "8":
-            //setManufacturingStepsArray setMamnufacturingStepsStatus
-            //manufacturingOperationsList
+
             console.log(
               "ManufacturingSteps :",
               res.data.manufacturingStepsList
@@ -2158,8 +2008,7 @@ function Bleaching_Bmr_Summary() {
               res.data.manufacturingStepsList[0].supervisor_status ==
               "SUPERVISOR_APPROVED"
             ) {
-              // alert("ghjk")
-              // console.log("vjhvjhg")
+
               setManufacturingNewSave(false);
               setManufacturingStepsStatus(true);
               setManufacturingStepsArray(
@@ -2251,9 +2100,9 @@ function Bleaching_Bmr_Summary() {
                   ops9[0]?.observation1
                 ).toUpperCase(),
               });
-              //state of value
+
               console.log("jgjhyf", ops2[0]?.observation1);
-              //ID's Data
+
               updateManufacturingID({
                 masterID: res.data.manufacturingStepsList[0].manufacturingId,
                 manufacturingId1: ops1[0].operationId,
@@ -2275,7 +2124,7 @@ function Bleaching_Bmr_Summary() {
                 manufacturingStepsId8: ops8[0].manufacturingId,
                 manufacturingStepsId9: ops9[0].manufacturingId,
               });
-              //manufacturingsteps........
+
               manufacturingStepsPerformedbydate;
               manufacturingStepsPerformedbysign;
               manufacturingStepsVerifiedbydate;
@@ -2292,8 +2141,7 @@ function Bleaching_Bmr_Summary() {
                 eight: ops8[0].date1,
                 nine: ops9[0].date1,
               });
-              //performBy
-              //cleanedBy
+
               updateManufacturingStepsPerformedBySign({
                 one: ops1[0].performBy,
                 two: ops2[0].performBy,
@@ -2423,9 +2271,8 @@ function Bleaching_Bmr_Summary() {
                   ops9[0]?.observation1
                 ).toUpperCase(),
               });
-              //state of value
+
               console.log("jgjhyf", ops2[0]?.observation1);
-              //ID's Data
               updateManufacturingID({
                 masterID: res.data.manufacturingStepsList[0].manufacturingId,
                 manufacturingId1: ops1[0].operationId,
@@ -2447,7 +2294,7 @@ function Bleaching_Bmr_Summary() {
                 manufacturingStepsId8: ops8[0].manufacturingId,
                 manufacturingStepsId9: ops9[0].manufacturingId,
               });
-              //manufacturingsteps........
+
               manufacturingStepsPerformedbydate;
               manufacturingStepsPerformedbysign;
               manufacturingStepsVerifiedbydate;
@@ -2464,8 +2311,7 @@ function Bleaching_Bmr_Summary() {
                 eight: ops8[0].date1,
                 nine: ops9[0].date1,
               });
-              //performBy
-              //cleanedBy
+
               updateManufacturingStepsPerformedBySign({
                 one: ops1[0].performBy,
                 two: ops2[0].performBy,
@@ -2502,7 +2348,7 @@ function Bleaching_Bmr_Summary() {
             }
             break;
           case "9":
-            //setManufacturingStepsArray setMamnufacturingStepsStatus
+
             console.log("jgjh", res.data.manufacturingOperationsList[0]);
             if (res.data.manufacturingOperationsList.length == 0) {
               setManufacturingParameterStatus(false);
@@ -2653,7 +2499,7 @@ function Bleaching_Bmr_Summary() {
                     return x.description == "Desc18";
                   }
                 );
-              //    alert("calling here there");
+
               console.log("fghjkl;", _1[0].machineOperationId);
               updateMachineOpsID({
                 masterID: res.data.manufacturingOperationsList[0].summaryId,
@@ -2675,7 +2521,7 @@ function Bleaching_Bmr_Summary() {
                 machineOpsQualityId16: _16[0].machineOperationId,
                 machineOpsQualityId17: _17[0].machineOperationId,
                 machineOpsQualityId18: _18[0].machineOperationId,
-                /////////////
+
                 machineOpsSummaryId1: _1[0].summaryId,
                 machineOpsSummaryId2: _2[0].summaryId,
                 machineOpsSummaryId3: _3[0].summaryId,
@@ -2695,7 +2541,7 @@ function Bleaching_Bmr_Summary() {
                 machineOpsSummaryId17: _17[0].summaryId,
                 machineOpsSummaryId18: _18[0].summaryId,
               });
-              //state for showing
+
 
               setMOP_ASB_Observation(_1[0]?.observation1);
               setMOP_FDS_Observation(_2[0]?.observation1);
@@ -2850,7 +2696,7 @@ function Bleaching_Bmr_Summary() {
                     return x.description == "Desc18";
                   }
                 );
-              //  alert("calling here");
+
               updateMachineOpsID({
                 masterID: res.data.manufacturingOperationsList[0].summaryId,
                 machineOpsQualityId1: _1[0].machineOperationId,
@@ -2871,7 +2717,6 @@ function Bleaching_Bmr_Summary() {
                 machineOpsQualityId16: _16[0].machineOperationId,
                 machineOpsQualityId17: _17[0].machineOperationId,
                 machineOpsQualityId18: _18[0].machineOperationId,
-                /////////////
                 machineOpsSummaryId1: _1[0].summaryId,
                 machineOpsSummaryId2: _2[0].summaryId,
                 machineOpsSummaryId3: _3[0].summaryId,
@@ -2926,15 +2771,13 @@ function Bleaching_Bmr_Summary() {
             });
             break;
           case "11":
-            //setStoppageDetailsStatus
-            //setStoppageDetailsStore
+
             const filterDate = pd_ManufacturingStartDate.split("/");
             const filterDate2 = pd_ManufacturingCompletionDate.split("/");
             console.log(
               "gg76",
               `${filterDate[2]}-${filterDate[1]}-${filterDate[0]}`
             );
-            // console.log("lll",pd_ManufacturingCompletionDate)
             if (res.data.shoppageDetailsList.length == 0) {
               setStoppageDetailsStatus(false);
               axios
@@ -2988,7 +2831,7 @@ function Bleaching_Bmr_Summary() {
               })
               console.log("beforeQAConditionForSupervisor", processDeviationStatus.beforeQAConditionForSupervisor);
             }
-            //setProcessDeviationStatus
+
             if (
               role == "ROLE_QA" &&
               res.data.processDeviationRecords[0].status == "QA_APPROVED"
@@ -3215,12 +3058,10 @@ function Bleaching_Bmr_Summary() {
               setPostProdStatus(true);
               setPostProdArrayNew(a);
             }
-            //setPostProdArrayNew()
+
             break;
           case "15":
-            //QA Release Data Here
 
-            //setQastatus
 
             if (
               res.data.manufacturingOperationsList[0].qualityRelease.length == 0
@@ -3269,11 +3110,7 @@ function Bleaching_Bmr_Summary() {
                   BatchReleased:
                     res.data.manufacturingOperationsList[0].qualityRelease[4]
                       .status1,
-                  // Sign1: "",
-                  // Sign2: "",
-                  // Sign3: "",
-                  // Sign4: "",
-                  // Sign5: "",
+
                 });
                 updateQa({
                   Sign1:
@@ -3310,7 +3147,6 @@ function Bleaching_Bmr_Summary() {
               }
             }
 
-            //manufacturingOperationsList qualityRelease
             break;
 
           case "16":
@@ -3321,7 +3157,6 @@ function Bleaching_Bmr_Summary() {
             if (b.length === 0) {
               setProductReleaseStatus(false);
 
-              // Clear prodRelease state if no data is found
               setProdRelease({
                 Name1: "",
                 Name2: "",
@@ -3331,19 +3166,17 @@ function Bleaching_Bmr_Summary() {
                 Date2: "",
               });
 
-              // Reset field disabled states since there is no data
               setFieldsDisabled({
                 qaInspector: false,
                 qaManager: false,
               });
             } else {
-              const productionReleaseData = b[0]; // Assuming you want the first matching entry
+              const productionReleaseData = b[0];
               setProductReleaseStatus(true);
               setProductReleaseArray(b);
               setPrintBtnEnable(true);
               setPrintValidation(true);
 
-              // Update prodRelease state with the new response, reset fields for null/empty values
               setProdRelease({
                 Name1: productionReleaseData.supervisorName || "",
                 Name2: productionReleaseData.qaName || "",
@@ -3431,7 +3264,6 @@ function Bleaching_Bmr_Summary() {
           setProductionLovStates((prevState) => ({
             ...prevState,
             productionQADate: formatDateForInput1(data[0]?.genDate),
-            // productionDate: formatDateForInput2(data[0]?.genDate),
           }));
 
         } else {
@@ -3442,36 +3274,6 @@ function Bleaching_Bmr_Summary() {
         console.error("Error fetching generation details:", error);
       });
 
-    //Supervisor
-    // console.log("role_supervisor");
-    // axios
-    //   .get(
-    //     `${API.prodUrl}/Precot/api/bleaching/generation/mappingDetailsByBmr?bmrNumber=${bmr}`,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //       },
-    //     }
-    //   )
-    //   .then((response) => {
-    //     const data = response.data;
-    //     console.log("Array of objects from API:", data);
-
-    //     if (Array.isArray(data) && data.length > 0) {
-    //       console.log("formatDate(data[0]?.createdBy)", data[0]?.createdBy);
-
-    //       setProductionSign1(data[0]?.createdBy);
-    //       console.log("formatDate(data[0]?.createdAt)", data[0]?.createdAt);
-
-
-    //     } else {
-    //       console.warn("No data received from API");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching generation details:", error);
-    //   });
 
   }
 
@@ -3775,7 +3577,7 @@ function Bleaching_Bmr_Summary() {
       )
       .then((res) => {
         console.log("Verification POST", res.data);
-        // setListOfEnclosuresArray(res.data);
+
         messageApi.open({
           type: "success",
           content: "Verification Of Records Saved Successfully",
@@ -3790,7 +3592,6 @@ function Bleaching_Bmr_Summary() {
         });
       });
 
-    // }
   };
 
   const submitVerificationRecords = () => {
@@ -3799,7 +3600,7 @@ function Bleaching_Bmr_Summary() {
       const payload = {
         bmr_no: bmr,
         key: "VERIFICATION",
-        // summaryRecordId:verificationID.masterID,
+
         summaryVerification: [
           {
             recordName: "Housekeeping",
@@ -3821,8 +3622,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.housekeeping || usernameSupervisor,
             date1: verifiedbyDate.housekeeping || localDateValue,
             date2: performedbyDate.housekeeping,
-            // summaryVerficationId:verificationID.housekeepingVerificationId,
-            // summary_record_id:verificationID.housekeepingId
+
           },
           {
             recordName: "Machine",
@@ -3844,8 +3644,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.machineCleaning || usernameSupervisor,
             date1: verifiedbyDate.machineCleaning || localDateValue,
             date2: performedbyDate.machineCleaning,
-            // summaryVerficationId:verificationID.machineCleaningVerificationId,
-            // summary_record_id:verificationID.machineCleaningId
+
           },
           {
             recordName: "Logbook",
@@ -3867,8 +3666,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.logbook || usernameSupervisor,
             date1: verifiedbyDate.logbook || localDateValue,
             date2: performedbyDate.logbook,
-            // summaryVerficationId:verificationID.logbookVerificationId,
-            // summary_record_id:verificationID.logbookId
+
           },
           {
             recordName: "Production",
@@ -3890,8 +3688,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.productionRecord || usernameSupervisor,
             date1: verifiedbyDate.productionRecord || localDateValue,
             date2: performedbyDate.productionRecord,
-            // summaryVerficationId:verificationID.productionRecordVerificationId,
-            // summary_record_id:verificationID.productionRecordId
+
           },
           {
             recordName: "Machine Sanitizer",
@@ -3913,8 +3710,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.machineSanitizer || usernameSupervisor,
             date1: verifiedbyDate.machineSanitizer || localDateValue,
             date2: performedbyDate.machineSanitizer,
-            // summaryVerficationId:verificationID.machineSanitizerVerificationId,
-            // summary_record_id:verificationID.machineSanitizerId
+
           },
         ],
         enclosureList: [],
@@ -4056,7 +3852,7 @@ function Bleaching_Bmr_Summary() {
         )
         .then((res) => {
           console.log("Verification POST", res.data);
-          // setListOfEnclosuresArray(res.data);
+
           messageApi.open({
             type: "success",
             content: "Verification Of Records Submitted Successfully",
@@ -4070,32 +3866,13 @@ function Bleaching_Bmr_Summary() {
             content: err.response.data.message + "" + bmr,
           });
         });
-      // }
+
     } else if (loggedInQa) {
-      // if (
-      //   performedbySign.housekeeping == "" ||
-      //   verifiedbyDate.housekeeping == "" ||
-      //   performedbyDate.housekeeping == "" ||
-      //   performedbySign.logbook == "" ||
-      //   verifiedbyDate.logbook == "" ||
-      //   performedbyDate.logbook == "" ||
-      //   performedbySign.machineCleaning == "" ||
-      //   verifiedbyDate.machineCleaning == "" ||
-      //   performedbyDate.machineCleaning == "" ||
-      //   performedbySign.machineSanitizer == "" ||
-      //   verifiedbyDate.machineSanitizer == "" ||
-      //   performedbyDate.machineSanitizer == "" ||
-      //   performedbySign.productionRecord == "" ||
-      //   verifiedbyDate.productionRecord == "" ||
-      //   performedbyDate.productionRecord == ""
-      // ) {
-      //   message.error("Please Fill All Date and Signature");
-      // } else {
+
       console.log("Verification Of Records", vorStateObject);
       const payload = {
         bmr_no: bmr,
         key: "VERIFICATION",
-        // summaryRecordId:verificationID.masterID,
         summaryVerification: [
           {
             recordName: "Housekeeping",
@@ -4117,8 +3894,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.housekeeping || usernameSupervisor,
             date1: verifiedbyDate.housekeeping || localDateValue,
             date2: performedbyDate.housekeeping,
-            // summaryVerficationId:verificationID.housekeepingVerificationId,
-            // summary_record_id:verificationID.housekeepingId
+
           },
           {
             recordName: "Machine",
@@ -4140,8 +3916,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.machineCleaning || usernameSupervisor,
             date1: verifiedbyDate.machineCleaning || localDateValue,
             date2: performedbyDate.machineCleaning,
-            // summaryVerficationId:verificationID.machineCleaningVerificationId,
-            // summary_record_id:verificationID.machineCleaningId
+
           },
           {
             recordName: "Logbook",
@@ -4163,8 +3938,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.logbook || usernameSupervisor,
             date1: verifiedbyDate.logbook || localDateValue,
             date2: performedbyDate.logbook,
-            // summaryVerficationId:verificationID.logbookVerificationId,
-            // summary_record_id:verificationID.logbookId
+
           },
           {
             recordName: "Production",
@@ -4186,8 +3960,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.productionRecord || usernameSupervisor,
             date1: verifiedbyDate.productionRecord || localDateValue,
             date2: performedbyDate.productionRecord,
-            // summaryVerficationId:verificationID.productionRecordVerificationId,
-            // summary_record_id:verificationID.productionRecordId
+
           },
           {
             recordName: "Machine Sanitizer",
@@ -4209,8 +3982,7 @@ function Bleaching_Bmr_Summary() {
             reviewedBy: performedbySign.machineSanitizer || usernameSupervisor,
             date1: verifiedbyDate.machineSanitizer || localDateValue,
             date2: performedbyDate.machineSanitizer,
-            // summaryVerficationId:verificationID.machineSanitizerVerificationId,
-            // summary_record_id:verificationID.machineSanitizerId
+
           },
         ],
         enclosureList: [],
@@ -4352,7 +4124,6 @@ function Bleaching_Bmr_Summary() {
         )
         .then((res) => {
           console.log("Verification POST", res.data);
-          // setListOfEnclosuresArray(res.data);
           messageApi.open({
             type: "success",
             content: "Verification Of Records Submitted Successfully",
@@ -4366,7 +4137,6 @@ function Bleaching_Bmr_Summary() {
             content: err.response.data.message + "" + bmr,
           });
         });
-      // }
     }
   };
 
@@ -5216,7 +4986,7 @@ function Bleaching_Bmr_Summary() {
         )
         .then((res) => {
           console.log("Verification POST", res.data);
-          // setListOfEnclosuresArray(res.data);
+
           messageApi.open({
             type: "success",
             content: "Manufactuuring Steps Submitted Successfully",
@@ -5225,17 +4995,14 @@ function Bleaching_Bmr_Summary() {
         })
         .catch((err) => {
           console.log("Error", err);
-          // messageApi.open({
-          //   type: "error",
-          //   content: err.response.data.message + "" + bmr,
-          // });
+
         });
       console.log("Manufacturing Steps", manufacturingSteps);
-      // }
+
     }
   };
 
-  //Save API For Manufacturing Steps
+
 
   const SaveManufacturingSteps = () => {
     const payload = {
@@ -5457,7 +5224,7 @@ function Bleaching_Bmr_Summary() {
       )
       .then((res) => {
         console.log("Verification POST", res.data);
-        // setListOfEnclosuresArray(res.data);
+
         messageApi.open({
           type: "success",
           content: "Manufactuuring Steps Saved Successfully",
@@ -5466,10 +5233,7 @@ function Bleaching_Bmr_Summary() {
       })
       .catch((err) => {
         console.log("Error", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: err.response.data.message + "" + bmr,
-        // });
+
       });
     console.log("Manufacturing Steps", manufacturingSteps);
   };
@@ -5503,7 +5267,7 @@ function Bleaching_Bmr_Summary() {
         MOP_AS_ReferSOP_Line2_Observation,
       ];
 
-      // Check if any required field is empty
+
       const emptyFields = requiredObservations.some(
         (field) => field === "" || field === undefined || field === null
       );
@@ -5796,8 +5560,7 @@ function Bleaching_Bmr_Summary() {
           },
         ],
       };
-      //submitMachineOperations
-      //console.log("submit-payload",payload_2)
+
       axios
         .post(
           `${API.prodUrl}/Precot/api/bleaching/summary/submitMachineOperations`,
@@ -5810,7 +5573,7 @@ function Bleaching_Bmr_Summary() {
         )
         .then((res) => {
           console.log("Verification POST", res.data);
-          // setListOfEnclosuresArray(res.data);
+
           messageApi.open({
             type: "success",
             content:
@@ -5820,20 +5583,10 @@ function Bleaching_Bmr_Summary() {
         })
         .catch((err) => {
           console.log("Error", err);
-          // messageApi.open({
-          //   type: "error",
-          //   content: err.response.data.message + "" + bmr,
-          // });
+
         });
     } else if (loggedInQa) {
-      // if (
-      //   machineOpsCheckedBy == "" ||
-      //   machineOpsPerformedBy == "" ||
-      //   machineOpsCheckedByDate == "" ||
-      //   machineOpsPerformedByDate == ""
-      // ) {
-      //   message.error("Please Fill All Date and Signature");
-      // } else {
+
       const payload = {
         bmrNo: bmr,
         stage: "Machine Operations",
@@ -6129,7 +5882,7 @@ function Bleaching_Bmr_Summary() {
         )
         .then((res) => {
           console.log("Verification POST", res.data);
-          // setListOfEnclosuresArray(res.data);
+
           messageApi.open({
             type: "success",
             content:
@@ -6139,12 +5892,9 @@ function Bleaching_Bmr_Summary() {
         })
         .catch((err) => {
           console.log("Error", err);
-          // messageApi.open({
-          //   type: "error",
-          //   content: err.response.data.message + "" + bmr,
-          // });
+
         });
-      // }
+
     }
   };
 
@@ -6322,7 +6072,6 @@ function Bleaching_Bmr_Summary() {
       )
       .then((res) => {
         console.log("Verification POST", res.data);
-        // setListOfEnclosuresArray(res.data);
         messageApi.open({
           type: "success",
           content: "Manufacturing Operations Parameter Saved Successfully",
@@ -6331,74 +6080,12 @@ function Bleaching_Bmr_Summary() {
       })
       .catch((err) => {
         console.log("Error", err);
-        // messageApi.open({
-        //   type: "error",
-        //   content: err.response.data.message + "" + bmr,
-        // });
+
       });
   };
 
-  const processDeviationRecordSubmit = () => {
-    const data = {
-      PDR_DeviationLogNo1,
-      PDR_DeviationLogNo2,
-      PDR_DeviationLogNo3,
-      PDR_QARemarks1,
-      PDR_QARemarks2,
-      PDR_QARemarks3,
-    };
-    console.log("Data", data);
-
-    const payload = [
-      {
-        deviationLogNo: PDR_DeviationLogNo1,
-        qaRemarks: PDR_QARemarks1,
-        sign: PDR_Sign1,
-        signDate: String(new Date().toISOString()),
-        qa_saved_on: String(new Date().toISOString()),
-        qa_saved_by: PDR_SignQASign1,
-      },
-      {
-        deviationLogNo: PDR_DeviationLogNo2,
-        qaRemarks: PDR_QARemarks2,
-        sign: PDR_Sign2,
-        signDate: String(new Date().toISOString()),
-        qa_saved_on: String(new Date().toISOString()),
-        qa_saved_by: PDR_SignQASign2,
-      },
-      {
-        deviationLogNo: PDR_DeviationLogNo3,
-        qaRemarks: PDR_QARemarks3,
-        sign: PDR_Sign3,
-        signDate: String(new Date().toISOString()),
-        qa_saved_on: String(new Date().toISOString()),
-        qa_saved_by: PDR_SignQASign3,
-      },
-    ];
-    //summary/submitProcessDeviationRecord
-    axios
-      .post(
-        `${API.prodUrl}/Precot/api/bleaching/summary/submitProcessDeviationRecord`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log("Process Deviation", res.data);
-        alert("Process Deviation Submitted Successfully");
-      })
-      .catch((err) => {
-        console.log("Error", err);
-      });
-  };
 
   const listofEnclosures = () => {
-
-
-
     console.log("!listofEnclosuresArray || !listofEnclosuresArray.enclosureList start")
 
     if (
@@ -6412,13 +6099,10 @@ function Bleaching_Bmr_Summary() {
       });
     } else {
       if (listofEnclosuresArray.enclosureList.length > 0) {
-        //alert("Have Data Already");
-        //console.log("ArrayEEE", listofEnclosuresArray.enclosureList);
+
         if (listofEnclosuresArray.enclosureList[2].status == "QA_APPROVED") {
           setFreezeEnclosureQa(true);
-          //console.log("6666", e);
         } else {
-          //console.log("5555", listofEnclosuresArray);
           const e = listofEnclosuresArray;
           const c = e.enclosureList;
           c[0] = {
@@ -6457,9 +6141,7 @@ function Bleaching_Bmr_Summary() {
             updatedAt: e.enclosureList[2].updatedAt,
             updatedBy: e.enclosureList[2].updatedBy,
           };
-          //const a = listofEnclosuresArray.
-          // a.key = "ENCLOSURE";
-          // console.log("payloaddd", e);
+
           axios
             .post(
               `${API.prodUrl}/Precot/api/bleaching/summary/SubmitRecordVerification`,
@@ -6479,7 +6161,6 @@ function Bleaching_Bmr_Summary() {
               console.log("Error", err);
             });
         }
-        // need to mapp the payload
       } else {
         listofEnclosuresArray.enclosureList.push({
           title: "Bleaching Job Card",
@@ -6559,7 +6240,6 @@ function Bleaching_Bmr_Summary() {
           });
       }
     }
-    //overall else block is here
   };
 
   //production details submit
@@ -6751,9 +6431,7 @@ function Bleaching_Bmr_Summary() {
   const postqareleaseSend = () => {
     console.log("qasend called");
 
-    ////////////////////////////
     if (qaReleaseStore?.qualityRelease.length > 0) {
-      //alert("have data");
       const e = qaReleaseStore;
       const c = e.qualityRelease;
       c[0] = {
@@ -6936,14 +6614,11 @@ function Bleaching_Bmr_Summary() {
           });
         });
     }
-    // }
   };
 
-  ////////
   const postqareleaseSave = () => {
     console.log("savecalled");
     if (qaReleaseStore?.qualityRelease?.length > 0) {
-      //alert("have data");
       const e = qaReleaseStore;
       const c = e.qualityRelease;
       c[0] = {
@@ -7144,7 +6819,7 @@ function Bleaching_Bmr_Summary() {
     const payload_2 = {
       form: "RAW COTTON ISSUE",
       qaName: store1Sign,
-      // hodName: "",
+
       supervisorName:
         productionLovStates.rawCottonIssueProdSign | usernameSupervisor,
       bmrNo: bmr,
@@ -7175,19 +6850,11 @@ function Bleaching_Bmr_Summary() {
   };
 
   const prodReleaseFunc = () => {
-    // eslint-disable-next-line eqeqeq
-    // if (
-    //   prodRelease.Name1 == "" ||
-    //   prodRelease.Name1 == ""
-    //   // prodRelease.Date1 == "" ||
-    //   // prodRelease.Date2 == ""
-    // ) {
-    //   message.error("Please Fill Date and Signature");
-    // } else {
+
     const payload = {
       form: "PRODUCTION RELEASE",
       qaName: prodRelease.Sign2 || usernameQADESANDMAN,
-      // hodName: "",
+
       supervisorName: prodRelease.Sign1 || username,
       bmrNo: bmr,
       date: new Date().toISOString().slice(0, 10),
@@ -7222,36 +6889,36 @@ function Bleaching_Bmr_Summary() {
         console.log("Error", err);
         message.error(err.response.data.message);
       });
-    // }
+
   };
 
   const pdeSave = () => {
     const selectedData = pdeArray
-      .filter((_, index) => checkedItems[index]) // Filter only the selected rows
+      .filter((_, index) => checkedItems[index])
       .map((x, index) => ({
-        id: x.id, // Assign an ID (you can adjust this based on your data)
+        id: x.id,
         date:
           x.packDt != undefined
             ? moment(x.packDt).format("YYYY-MM-DD")
-            : moment(x.date).format("YYYY-MM-DD"), // Format the date
-        machine: x.mcn || x.machine, // Machine name
-        from_hour: x.f_time || x.from_hour, // From hour
-        to_hour: x.t_time || x.to_hour, // To hour
-        total_hour: x.totHrs || x.total_hour, // Total hour
+            : moment(x.date).format("YYYY-MM-DD"),
+        machine: x.mcn || x.machine,
+        from_hour: x.f_time || x.from_hour,
+        to_hour: x.t_time || x.to_hour,
+        total_hour: x.totHrs || x.total_hour,
         reason: x.reason,
-        remarks: x.remarks, // Remarks
-        shift: x.shift, // Shift info
-        sign: signatureValues[index] || x.sign, // Selected signature
+        remarks: x.remarks,
+        shift: x.shift,
+        sign: signatureValues[index] || x.sign,
         sign_date:
           dateValues[index] !== null || dateValues[index] !== undefined
             ? moment(dateValues[index]).format("YYYY-MM-DD")
-            : moment(x.sign_date).format("YYYY-MM-DD"), // Selected sign date (formatted)
+            : moment(x.sign_date).format("YYYY-MM-DD"),
       }));
 
     const payload = {
-      process_id: process_id, // Hardcoded for now, you can make it dynamic if needed
-      bmr_no: bmr, // Hardcoded for now, can be made dynamic
-      details: selectedData, // Use selected data as details
+      process_id: process_id,
+      bmr_no: bmr,
+      details: selectedData,
     };
 
     console.log("paykload", payload);
@@ -7279,7 +6946,7 @@ function Bleaching_Bmr_Summary() {
     const selectedData = pdeArray
       .filter((_, index) => checkedItems[index])
       .map((x, index) => ({
-        id: x.id, // Assign an ID (you can adjust this based on your data)
+        id: x.id,
         date:
           x.packDt != undefined
             ? moment(x.packDt).format("YYYY-MM-DD")
@@ -7575,7 +7242,6 @@ function Bleaching_Bmr_Summary() {
     }));
   };
 
-  ////////////////////
   const updateDeviationLogNo = (updates) => {
     setdeviationLog((prevState) => ({
       ...prevState,
@@ -7666,18 +7332,9 @@ function Bleaching_Bmr_Summary() {
     updatePostProduction({ QaName: value });
   };
 
-  const ppOnchangeSign1 = (value) => {
-    updatePostProduction({ prodSupSign: value });
-  };
-  const ppOnchangeSign2 = (value) => {
-    updatePostProduction({ hodSign: value });
-  };
-  const ppOnchangeSign3 = (value) => {
-    updatePostProduction({ QaSign: value });
-  };
+
 
   const processDeviationFunc = () => {
-    //payload2
     const payload_2 = [
       {
         deviationLogNo: deviationLog.one,
@@ -7710,7 +7367,6 @@ function Bleaching_Bmr_Summary() {
         id: pdrId3,
       },
     ];
-    //console.log("NEW-PAYLOAD", payload);
     axios
       .post(
         `${API.prodUrl}/Precot/api/bleaching/summary/submitProcessDeviationRecord`,
@@ -7731,7 +7387,7 @@ function Bleaching_Bmr_Summary() {
       });
   };
 
-  ////
+
   const saveprocessDeviationFunc = () => {
     const payload3 = [
       {
@@ -7743,7 +7399,6 @@ function Bleaching_Bmr_Summary() {
         signDate: pdrDate1.one,
         qa_saved_on: pdrDate2.one || localDateValue4,
         qa_saved_by: pdrSign2.one || usernameSupervisor,
-        // "status": "Approved"
       },
       {
         id: pdrId2,
@@ -7754,7 +7409,7 @@ function Bleaching_Bmr_Summary() {
         signDate: pdrDate1.two,
         qa_saved_on: pdrDate2.two || localDateValue4,
         qa_saved_by: pdrSign2.two || usernameSupervisor,
-        // "status": "Pending"
+
       },
       {
         id: pdrId3,
@@ -7765,7 +7420,6 @@ function Bleaching_Bmr_Summary() {
         signDate: pdrDate1.three,
         qa_saved_on: pdrDate2.three || localDateValue4,
         qa_saved_by: pdrSign2.three || usernameSupervisor,
-        // "status": "Rejected"
       },
     ];
     console.log("payload3", payload3);
@@ -7789,7 +7443,7 @@ function Bleaching_Bmr_Summary() {
         message.error(err.response?.data?.message);
       });
   };
-  //////
+
   const printingFunc = () => {
     if (listOf.bleaching == true) {
       setBleachingModal(true);
@@ -7803,10 +7457,8 @@ function Bleaching_Bmr_Summary() {
     }
     console.log("List Of", listOf);
   };
-  /////////////////////
 
   const changeBatchNo = (value) => {
-    //https://secure.focusrtech.com:5050/Precot/api/Bleaching/Service/getBmrbatchNoDetails13?bmr_no=24/AB/0014&batchNo=AB12345
     setBatchNoNew(value);
   };
 
@@ -7826,16 +7478,15 @@ function Bleaching_Bmr_Summary() {
         setTimeout(() => {
           window.print();
         }, 1000);
-        // message.success("Process Deviation Record Submitted Successfully")
       })
       .catch((err) => {
         console.log("error", err);
       });
   };
-  //////////////////////
 
 
-  ///////////////////////
+
+
   const items = [
     {
       key: "1",
@@ -7968,9 +7619,7 @@ function Bleaching_Bmr_Summary() {
                   >
                     <Radio.Group
                       value={pd_ProductsupplyInhouse}
-                      // onChange={(e) =>
-                      //   setpd_ProductsupplyInhouse(e.target.value)
-                      // } machineOperationsBmr?bmr_no=24/AB/0007
+
                       disabled={pd_disable}
                     >
                       <Radio value="TICK">✓</Radio>
@@ -7997,9 +7646,7 @@ function Bleaching_Bmr_Summary() {
                   >
                     <Radio.Group
                       value={pd_ProductsupplyExport}
-                      // onChange={(e) =>
-                      //   setpd_ProductsupplyExport(e.target.value)
-                      // }
+
                       disabled={pd_disable}
                     >
                       <Radio value="TICK">✓</Radio>
@@ -8037,7 +7684,6 @@ function Bleaching_Bmr_Summary() {
                   >
                     <Radio.Group
                       value={pd_finish_Crish}
-                      // onChange={(e) => setpd_pd_finish_Crish(e.target.value)}
                       disabled={pd_disable}
                     >
                       <Radio value="TICK">✓</Radio>
@@ -8064,7 +7710,6 @@ function Bleaching_Bmr_Summary() {
                   >
                     <Radio.Group
                       value={pd_FinishSoft}
-                      // onChange={(e) => setpd_FinishSoft(e.target.value)}
                       disabled={pd_disable}
                     >
                       <Radio value="TICK">✓</Radio>
@@ -8409,7 +8054,7 @@ function Bleaching_Bmr_Summary() {
                 );
               })}
             <tr>
-              {/* <td colSpan="1" style={{height:"50px"}}></td> */}
+
               <td colSpan="2" style={{ height: "50px", textAlign: "Center" }}>
                 Total
               </td>
@@ -8489,7 +8134,7 @@ function Bleaching_Bmr_Summary() {
                           }
                         />
                       </Form.Item>
-                      {/* <p>{moment(rawIssuedBy).format("DD-MM-YYYY - HH:mm")}</p> */}
+
                     </Form>
                   </td>
                   <td
@@ -8595,12 +8240,7 @@ function Bleaching_Bmr_Summary() {
               <td colSpan="2" style={{ borderRight: "none", padding: "1em" }}>
                 Issued by (Stores):
                 <br />
-                {/* <input
-                  className="inp-new"
-                  value={ChemicalIssueQASign}
-                  // onChange={(e) => setChemicalIssueQASign(e.target.value)}
-                /> */}
-                {/* {chemicalDetailsArray && chemicalDetailsArray[0].issuedBy} */}
+
                 {chemicalDetailsArray.length > 0
                   ? chemicalDetailsArray[0].issuedBy
                   : ""}
@@ -8610,12 +8250,7 @@ function Bleaching_Bmr_Summary() {
               <td colSpan="3" style={{ borderLeft: "none", padding: "1em" }}>
                 Received by (Production):
                 <br />
-                {/* <input
-                  className="inp-new"
-                  value={ChemicalIssueProductSign}
-                  // onChange={(e) => setChemicalIssueProductSign(e.target.value)}
-                /> */}
-                {/* {chemicalDetailsArray && chemicalDetailsArray[0].verifiedBy} */}
+
                 {chemicalDetailsArray.length > 0
                   ? chemicalDetailsArray[0].verifiedBy
                   : ""}
@@ -8709,13 +8344,7 @@ function Bleaching_Bmr_Summary() {
               >
                 Issued by (Stores):
                 <br />
-                {/* <input
-                  className="inp-new"
-                  value={PackingMaterialQASign}
-                  onChange=
-                  {(e) => setPackingMaterialQASign(e.target.value)}
-                /> */}
-                {/* {packingMaterialsArray && packingMaterialsArray[0].issuedBy} */}
+
                 {packingMaterialsArray.length > 0
                   ? packingMaterialsArray[0].issuedBy
                   : ""}
@@ -8730,14 +8359,7 @@ function Bleaching_Bmr_Summary() {
               >
                 Received by (Production):
                 <br />
-                {/* <input
-                  className="inp-new"
-                  value={PackingMaterialProductionSign}
-                  onChange={(e) =>
-                    setPackingMaterialProductionSig(e.target.value)
-                  }
-                /> */}
-                {/* {packingMaterialsArray && packingMaterialsArray[0].verifiedBy} */}
+
                 {packingMaterialsArray.length > 0
                   ? packingMaterialsArray[0].verifiedBy
                   : ""}
@@ -8875,16 +8497,7 @@ function Bleaching_Bmr_Summary() {
                         display: "flex",
                       }}
                     >
-                      {/* <Select
-                        value={pecs_verified}
-                        options={prodLov}
-                        onChange={newVerifiedBychange}
-                        style={{
-                          width: "12em",
-                        }}
-                        placeholder="Verfied By"
-                        disabled={!loggedInSupervisor}
-                      /> */}
+
                       <Select
                         options={verifiedByLov}
                         value={pecs_verified}
@@ -8969,7 +8582,7 @@ function Bleaching_Bmr_Summary() {
                       <td align="center">
                         <input
                           type={machine.startDate == "NA" ? "input" : "date"}
-                          //type="date"
+
                           value={machine.startDate}
                           onChange={(event) =>
                             handleInputChange(event, machine.id, "startDate")
@@ -11058,22 +10671,7 @@ function Bleaching_Bmr_Summary() {
                         />
                       </label>
                     </div>
-                    {/* <input
-                      className="inp-new"
-                      type="number"
-                      onChange={(e) =>
-                        setMOP_ERM_Line1_Observation(e.target.value)
-                      }
-                      value={MOP_ERM_Line1_Observation}
-                      onBlur={() => {
-                        if (
-                          MOP_ERM_Line1_Observation < 2.0 ||
-                          MOP_ERM_Line1_Observation > 4.0
-                        ) {
-                          message.error("Please Choose Between 2.0 and 4.0");
-                        }
-                      }}
-                    /> */}
+
                   </td>
                 </tr>
                 {/* six */}
@@ -11897,7 +11495,6 @@ function Bleaching_Bmr_Summary() {
                 <input
                   value={productionReconillationObject.inputQty}
                   disabled
-                  //  onChange={(e) => updateProductionReconciliation({inputQty:e.target.value})}
                   className="inp-new"
                 />
               </td>
@@ -11909,7 +11506,6 @@ function Bleaching_Bmr_Summary() {
                 <input
                   value={productionReconillationObject.outPutQty}
                   disabled
-                  //  onChange={(e) => updateProductionReconciliation({outPutQty:e.target.value})}
                   className="inp-new"
                 />
               </td>
@@ -11920,7 +11516,6 @@ function Bleaching_Bmr_Summary() {
                 <input
                   disabled
                   value={productionReconillationObject.YieldSpecification}
-                  //  onChange={(e) => updateProductionReconciliation({YieldSpecification:e.target.value})}
                   className="inp-new"
                 />
               </td>
@@ -12056,26 +11651,11 @@ function Bleaching_Bmr_Summary() {
                       marginRight: "1em",
                     }}
                   >
-                    {/* <Input
-                      type="date"
-                      // onChange={(e) => {
-                      //   setPdeDate(e.target.value);
-                      // }}
-                      value={pdeDate}
-                      disabled={!loggedInSupervisor}
-                    /> */}
+
                     {pd_ManufacturingStartDate}
                   </Form.Item>
                   <Form.Item label="To Date">
-                    {/* <Input
-                      type="date"
-                      // onChange={(e) => {
-                      //   setPdeDate2(e.target.value);
-                      //   datePDE(e.target.value);
-                      // }}
-                      value={pdeDate2}
-                      disabled={!loggedInSupervisor}
-                    /> */}
+
                     {pd_ManufacturingCompletionDate}
                   </Form.Item>
                 </Form>
@@ -12222,20 +11802,15 @@ function Bleaching_Bmr_Summary() {
                               LoggedInQA_DESIGNEEandQA_MAN
                             }
                           />
-                          {/* <input
-                    type="datetime-local"
-                    onChange={(e) => handleDateChange(e, index)}
-                    value={dateValues[index] || ""}
-                    disabled={!checkedItems[index]} // Disable if not checked
-                  /> */}
+
                           <input
                             type="date"
                             onChange={(e) => handleDateChange(e, index)}
-                            value={dateValues[index] || x.sign_date} // Ensure date value is in the correct format
+                            value={dateValues[index] || x.sign_date}
                             disabled={
                               !checkedItems[index] ||
                               LoggedInQA_DESIGNEEandQA_MAN
-                            } // Disable if not checked
+                            }
                           />
                         </td>
                       </tr>
@@ -12539,7 +12114,7 @@ function Bleaching_Bmr_Summary() {
                       type="datetime-local"
                       value={
                         pdrDate2.one
-                          ? pdrDate2.one.slice(0, 16) // Remove seconds and timezone
+                          ? pdrDate2.one.slice(0, 16)
                           : localDateValue4
                       }
                       onChange={(e) => {
@@ -12657,7 +12232,7 @@ function Bleaching_Bmr_Summary() {
                       type="datetime-local"
                       value={
                         pdrDate2.two
-                          ? pdrDate2.two.slice(0, 16) // Remove seconds and timezone
+                          ? pdrDate2.two.slice(0, 16)
                           : localDateValue4
                       }
                       onChange={(e) => {
@@ -12775,7 +12350,7 @@ function Bleaching_Bmr_Summary() {
                       type="datetime-local"
                       value={
                         pdrDate2.three
-                          ? pdrDate2.three.slice(0, 16) // Remove seconds and timezone
+                          ? pdrDate2.three.slice(0, 16)
                           : localDateValue4
                       }
                       onChange={(e) => {
@@ -13661,13 +13236,7 @@ function Bleaching_Bmr_Summary() {
                     </Radio.Group>
                   </td>
                   <td>
-                    {/* <input
-                  className="inp-new"
-                  value={qaReleaseArray.Sign5}
-                  onChange={(e) =>
-                    updateQaReleaseObject({ Sign5: e.target.value })
-                  }
-                /> */}
+
                     <Select
                       value={qaReleaseObj.Sign5 || usernameQADESANDMAN}
                       onChange={qaOnchange5}
@@ -13879,7 +13448,7 @@ function Bleaching_Bmr_Summary() {
             Print
           </Button>,
           <Button
-            // onClick={handleBack}
+
             onClick={() => window.history.back()}
             type="primary"
             style={{
@@ -13898,10 +13467,9 @@ function Bleaching_Bmr_Summary() {
               backgroundColor: "#E5EEF9",
               color: "#00308F",
               fontWeight: "bold",
-              // display: saveBtnStatus ? "block" : "none",
             }}
             onClick={() => {
-              // eslint-disable-next-line no-unused-expressions
+
               confirm("You Want to logged out") == true
                 ? navigate("/Precot")
                 : null;
@@ -15476,21 +15044,7 @@ function Bleaching_Bmr_Summary() {
               </td>
             </tr>
 
-            {/* <tr>
-              <th
-                colspan="20"
-                style={{
-                  textAlign: "left",
-                  fontSize: "12pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                  marginLeft: "none",
-                  marginRight: "none",
-                }}
-              >
-                6.0 PROCESSING EQUIPMENT’S CALIBRATION STATUS: Refer Annexure
-                No. 01.{" "}
-              </th>
-            </tr> */}
+
             <tr>
               <th
                 colspan="20"
@@ -17631,16 +17185,7 @@ function Bleaching_Bmr_Summary() {
               >
                 2.0 - 4.0
               </td>
-              {/* <td
-                colSpan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "12pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-               {manufacturingParametersArray && manufacturingParametersArray[4]?.observation1}
-              </td> */}
+
               <td
                 colSpan="3"
                 style={{
@@ -18355,13 +17900,11 @@ function Bleaching_Bmr_Summary() {
                 }}
               >
                 Performed by <br />
-                {/* {manufacturingParametersStore && manufacturingParametersStore[0].verifiedBy || ""} */}
                 {manufacturingParametersStore?.[0]?.verifiedBy || ""}
                 <br />
                 {moment(manufacturingParametersStore?.[0]?.verifiedDate).format(
                   "DD/MM/YYYY - HH:mm"
                 ) || ""}
-                {/* {moment(manufacturingParametersStore && manufacturingParametersStore[0].verifiedDate).format("DD/MM/YYYY - HH:mm")} */}
               </td>
               <td
                 colspan="10"
@@ -18374,13 +17917,11 @@ function Bleaching_Bmr_Summary() {
               >
                 Checked by
                 <br />
-                {/* {manufacturingParametersStore && manufacturingParametersStore[0].reviewedBy || ""} */}
                 {manufacturingParametersStore?.[0]?.reviewedBy || ""}
                 <br />
                 {moment(manufacturingParametersStore?.[0]?.reviewedDate).format(
                   "DD/MM/YYYY - HH:mm"
                 ) || ""}
-                {/* {moment(manufacturingParametersStore && manufacturingParametersStore[0].reviewedDate).format("DD/MM/YYYY - HH:mm")} */}
               </td>
             </tr>
 
@@ -20953,7 +20494,7 @@ function Bleaching_Bmr_Summary() {
           <Menu
             theme="dark"
             mode="inline"
-            // defaultSelectedKeys={["1"]}
+
             style={{
               backgroundColor: "transparent",
               display: "flex",

@@ -22,7 +22,7 @@ const QA_F017_Summary = () => {
   const navigate = useNavigate();
   const naviagateForm = "/Precot/QA/QA_F017";
   const formName = "Minutes of MRM";
-  const formatNo = "PH-QAD01-F-017";
+  const formatNo = "PH-QAD01/F-017";
   const [loadingState, setLoadingState] = useState(false);
   const [open, setOpen] = useState(false);
   const [isModalPrint, setIsModalPrint] = useState(false);

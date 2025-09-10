@@ -149,7 +149,7 @@ const Bleaching_f03_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData, API.prodUrl, token]);
+  }, [printData,API.prodUrl, token]);
 
   const [printButtonLoading, setPrintButtonLoading] = useState(false);
 

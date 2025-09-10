@@ -49,7 +49,7 @@ const Buds_f038_Summary = () => {
   `;
 
   const formName = "FINAL INSPECTION REPORT (PRE - DISPATCH)";
-  const formatNo = "PH-QAD01-F-038";
+  const formatNo = "PH-QAD01/F-038";
   const [selectedpOrder, setSelectedpOrder] = useState("");
 
   const pOrderChange = (value) => setSelectedpOrder(value);
@@ -101,7 +101,7 @@ const Buds_f038_Summary = () => {
       const token = localStorage.getItem("token");
 
       const summaryResponse = await axios.get(
-        `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportSummary?formatNo=PH-QAD01-F-038`,
+        `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportSummary?formatNo=PH-QAD01/F-038`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -411,7 +411,7 @@ const Buds_f038_Summary = () => {
       const token = localStorage.getItem("token");
 
       // Construct the dynamic URL
-      let url = `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportPrint?date=${date}&formatNo=PH-QAD01-F-038`;
+      let url = `${API.prodUrl}/Precot/api/QA/Service/api/getFinalInspectionReportPrint?date=${date}&formatNo=PH-QAD01/F-038`;
 
       // Add parameters only if they are provided
       if (shift) {
@@ -802,7 +802,7 @@ const Buds_f038_Summary = () => {
                     FINAL INSPECTION REPORT (PRE - DISPATCH)
                   </th>
                   <th>Format No.:</th>
-                  <th style={{ textAlign: "center" }}>PH-QAD01-F-038</th>
+                  <th style={{ textAlign: "center" }}>PH-QAD01/F-038</th>
                 </tr>
                 <tr>
                   <th>Revision No.:</th>

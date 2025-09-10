@@ -88,7 +88,7 @@ const Padpunching_f00_summary = () => {
 
      axios
        .get(
-         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+         `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
          {
            headers: {
              "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const Padpunching_f00_summary = () => {
          console.log("Error in fetching image:", err);
        });
    }
- }, [printResponseData, API.prodUrl]);
+ }, [printResponseData,API.prodUrl]);
 
  const [getImage1, setGetImage1] = useState("");
 
@@ -124,7 +124,7 @@ const Padpunching_f00_summary = () => {
 
      axios
        .get(
-         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+         `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
          {
            headers: {
              "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const Padpunching_f00_summary = () => {
          console.log("Error in fetching image:", err);
        });
    }
- }, [printResponseData, API.prodUrl]);
+ }, [printResponseData,API.prodUrl]);
 
  console.log("get image", getImage);
 
@@ -259,7 +259,7 @@ const Padpunching_f00_summary = () => {
   //     setIsButtonDisabled(false); 
 
   //     axios.get(
-  //       `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
+  //       `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -294,7 +294,7 @@ const Padpunching_f00_summary = () => {
   //     setIsButtonDisabled(false);
   
   //     const fetchFirstSet = axios.get(
-  //       `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
+  //       `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -304,7 +304,7 @@ const Padpunching_f00_summary = () => {
   //     );
   //     const numberShift = convertShiftValue(value);
   //     const fetchSecondSet = axios.get(
-  //       `${ API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${formattedDate}&ShiftID=${numberShift}`,
+  //       `${API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${formattedDate}&ShiftID=${numberShift}`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,
@@ -360,7 +360,7 @@ const Padpunching_f00_summary = () => {
       setIsButtonDisabled(false); // Initially set button to enabled
   
       const fetchFirstSet = axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getByDateShiftPrint?date=${formattedDate}&shift=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -371,7 +371,7 @@ const Padpunching_f00_summary = () => {
   
       const numberShift = convertShiftValue(value);
       const fetchSecondSet = axios.get(
-        `${ API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${datePrint}&ShiftID=${numberShift}`,
+        `${API.prodUrl}/Precot/api/padpunching/api/LogBookBagMakingStoppage?PackDt=${datePrint}&ShiftID=${numberShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -446,7 +446,7 @@ const Padpunching_f00_summary = () => {
   useEffect(() => {
     const fetchShiftOptions = async () => {
       try {
-        const response = await fetch(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+        const response = await fetch(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
@@ -511,9 +511,9 @@ const Padpunching_f00_summary = () => {
 
         let apiUrl = "";
        if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getLogBookBagMakingSummary`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getLogBookBagMakingSummary`;
         } else if (role === "ROLE_OPERATOR" ) {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getLogBookBagMakingSummary`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/LogBook/getLogBookBagMakingSummary`;
         }
         else {
           throw new Error("Role not found in localStorage.");

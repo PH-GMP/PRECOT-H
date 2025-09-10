@@ -117,7 +117,7 @@ const QualityControl_f17_Summary = () => {
 
         axios
           .get(
-            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -145,7 +145,7 @@ const QualityControl_f17_Summary = () => {
           });
       }
     });
-  }, [printData,    API.prodUrl, token]);
+  }, [printData,   API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -158,7 +158,7 @@ const QualityControl_f17_Summary = () => {
 
         axios
           .get(
-            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const QualityControl_f17_Summary = () => {
           });
       }
     });
-  }, [printData,    API.prodUrl, token]);
+  }, [printData,   API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -199,7 +199,7 @@ const QualityControl_f17_Summary = () => {
 
         axios
           .get(
-            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${  API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -227,7 +227,7 @@ const QualityControl_f17_Summary = () => {
           });
       }
     });
-  }, [printData,    API.prodUrl, token]);
+  }, [printData,   API.prodUrl, token]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -277,7 +277,7 @@ const QualityControl_f17_Summary = () => {
     };
     axios
       .get(
-        `${   API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetByMonthYear/print`,
+        `${  API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetByMonthYear/print`,
         {
           headers,
           params: {
@@ -342,7 +342,7 @@ const QualityControl_f17_Summary = () => {
   //   };
 
   //   axios
-  //     .get(`${    API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetAll`, {
+  //     .get(`${   API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetAll`, {
   //       headers,
   //     })
   //     .then((response) => {
@@ -386,7 +386,7 @@ const QualityControl_f17_Summary = () => {
     };
 
     axios
-      .get(`${   API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetAll`, {
+      .get(`${  API.prodUrl}/Precot/api/qc/RegantPreparationReport/GetAll`, {
         headers,
       })
       .then((response) => {

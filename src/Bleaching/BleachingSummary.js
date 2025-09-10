@@ -34,7 +34,7 @@ const BleachingSummary = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Caking/Service/getListofBleachingJobCard`,
+        `${API.prodUrl}/Precot/api/Caking/Service/getListofBleachingJobCard`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

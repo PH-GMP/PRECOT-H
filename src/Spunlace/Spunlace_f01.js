@@ -71,7 +71,7 @@ const Spunlace_f01 = () => {
   
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const Spunlace_f01 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [DetailOrderShiftDate, API.prodUrl, token]);
+  }, [DetailOrderShiftDate,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -105,7 +105,7 @@ const Spunlace_f01 = () => {
   
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -129,7 +129,7 @@ const Spunlace_f01 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [DetailOrderShiftDate, API.prodUrl, token]);
+  }, [DetailOrderShiftDate,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -139,7 +139,7 @@ const Spunlace_f01 = () => {
   
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const Spunlace_f01 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [DetailOrderShiftDate, API.prodUrl, token]);
+  }, [DetailOrderShiftDate,API.prodUrl, token]);
 
   const handleApprove = async () => {
     setSaveLoading(true);
@@ -173,7 +173,7 @@ const Spunlace_f01 = () => {
       "Content-Type": "application/json", 
     };
   
-    const res = await axios.put(`${ API.prodUrl}/Precot/api/spulance/approveOrRejectF001`,
+    const res = await axios.put(`${API.prodUrl}/Precot/api/spulance/approveOrRejectF001`,
       {
         id : sb_id,
         status: "Approve"
@@ -207,7 +207,7 @@ const Spunlace_f01 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spulance/approveOrRejectF001`,
+        `${API.prodUrl}/Precot/api/spulance/approveOrRejectF001`,
         {
           id: sb_id,
           status: "Reject",
@@ -538,7 +538,7 @@ const formattedTotalWeightrp = totalWeightrp.toFixed(3) === '0.000' ? '' : total
       // console.log("stored order Number inside", orderNumber);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNumber}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${orderNumber}`,
         {
 
           headers: {
@@ -589,8 +589,8 @@ const formattedTotalWeightrp = totalWeightrp.toFixed(3) === '0.000' ? '' : total
       const formattedShift = convertShift(shift);
 
       axios.get(
-        // `${ API.prodUrl}/Precot/api/spulance/baleByOrder?order=${orderNumber}`,
-        `${ API.prodUrl}/Precot/api/spulance/baleByOrderdateshift?order=${orderNumber}&date=${date}&shift=${formattedShift}`,
+        // `${API.prodUrl}/Precot/api/spulance/baleByOrder?order=${orderNumber}`,
+        `${API.prodUrl}/Precot/api/spulance/baleByOrderdateshift?order=${orderNumber}&date=${date}&shift=${formattedShift}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -668,7 +668,7 @@ const formattedTotalWeightrp = totalWeightrp.toFixed(3) === '0.000' ? '' : total
 
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spulance/submitBaleConsumption`,
+        `${API.prodUrl}/Precot/api/spulance/submitBaleConsumption`,
         payload,
         { headers }
       );
@@ -697,8 +697,8 @@ const formattedTotalWeightrp = totalWeightrp.toFixed(3) === '0.000' ? '' : total
   const fetchByOrderShiftDate = () => {
     try {
       axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=${orderNumber}&date=${date}&shift=${shift}`,
-        // `${ API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=ORD5678&date=2024-07-10&shift=III`,
+        `${API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=${orderNumber}&date=${date}&shift=${shift}`,
+        // `${API.prodUrl}/Precot/api/spulance/fetchBaleConsumption?order=ORD5678&date=2024-07-10&shift=III`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

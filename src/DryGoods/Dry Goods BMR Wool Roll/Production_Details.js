@@ -105,7 +105,7 @@ const Production_Details = (props) => {
       try {
         // Replace the hard cord ${props.batchNo}  ${productionDetails.order_no}
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -208,7 +208,7 @@ const Production_Details = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/cottonBall/getOrderByBatchNo?batchNo=${batchNo}`,
+          `${API.prodUrl}/Precot/api/cottonBall/getOrderByBatchNo?batchNo=${batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -235,7 +235,7 @@ const Production_Details = (props) => {
       try {
         // --------- Replace the hardcord batchNo ${props.batchNo}
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/getProductionDetailsBatchOrder?batchNo=${props.batchNo}&orderNo=${productionDetails.order_no}&fromdate=${productionDetails.start_date}&todate=${productionDetails.end_date}`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/getProductionDetailsBatchOrder?batchNo=${props.batchNo}&orderNo=${productionDetails.order_no}&fromdate=${productionDetails.start_date}&todate=${productionDetails.end_date}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -367,7 +367,7 @@ const Production_Details = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/CottonWoolRall/01.SaveProductionDetails`,
+        `${API.prodUrl}/Precot/api/CottonWoolRall/01.SaveProductionDetails`,
         payload,
         {
           headers: {
@@ -382,7 +382,7 @@ const Production_Details = (props) => {
         setLoading(false);
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+            `${API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -533,7 +533,7 @@ const Production_Details = (props) => {
         };
 
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/01.SubmitProductionDetails`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/01.SubmitProductionDetails`,
           newSave ? data2 : data,
           {
             headers: {
@@ -546,7 +546,7 @@ const Production_Details = (props) => {
           setLoading(false);
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -643,7 +643,7 @@ const Production_Details = (props) => {
         };
 
         const response = await axios.post(
-          `${ API.prodUrl}/Precot/api/CottonWoolRall/01.SubmitProductionDetails`,
+          `${API.prodUrl}/Precot/api/CottonWoolRall/01.SubmitProductionDetails`,
           payload,
           {
             headers: {
@@ -656,7 +656,7 @@ const Production_Details = (props) => {
           setLoading(false);
           try {
             const response = await axios.get(
-              `${ API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+              `${API.prodUrl}/Precot/api/CottonWoolRall/01.GetProductionDetails?batch_no=${props.batchNo}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

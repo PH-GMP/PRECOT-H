@@ -212,7 +212,7 @@ const QCLARF05 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -248,7 +248,7 @@ const QCLARF05 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   const [formData, setFormData] = useState({
     bmrNumber: BMR_No,

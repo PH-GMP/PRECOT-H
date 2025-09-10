@@ -117,7 +117,7 @@ const Bleaching_f33_summary = () => {
   const handlePrintData = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDatePrint?date=${printDate}`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDatePrint?date=${printDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -281,7 +281,7 @@ const Bleaching_f33_summary = () => {
     const fetchData = () => {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetAll`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetAll`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`, // Include accessToken in the request headers
@@ -377,7 +377,7 @@ const Bleaching_f33_summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDatePrint?month=${monthP}&year=${yearP}&fromDate=${dateP}&toDate=${datePTO}`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDatePrint?month=${monthP}&year=${yearP}&fromDate=${dateP}&toDate=${datePTO}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

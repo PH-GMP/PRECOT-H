@@ -96,7 +96,7 @@ const Bleaching_f33 = () => {
 
   //     axios
   //       .get(
-  //         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+  //         `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const Bleaching_f33 = () => {
   //         // console.log("Error in fetching image:", err);
   //       });
   //   }
-  // }, [formData, API.prodUrl, token]);
+  // }, [formData,API.prodUrl, token]);
 
   // const [getImage1, setGetImage1] = useState("");
 
@@ -132,7 +132,7 @@ const Bleaching_f33 = () => {
 
   //     axios
   //       .get(
-  //         `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+  //         `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
   //         {
   //           headers: {
   //             "Content-Type": "application/json",
@@ -156,7 +156,7 @@ const Bleaching_f33 = () => {
   //         // console.log("Error in fetching image:", err);
   //       });
   //   }
-  // }, [formData, API.prodUrl, token]);
+  // }, [formData,API.prodUrl, token]);
 
     const formatDate = (dateString) => {
         if (!dateString) return '';
@@ -257,7 +257,7 @@ const Bleaching_f33 = () => {
 
     const getBySapDate = (valueFormatted) => {
         const accessToken = localStorage.getItem('token');
-        axios.get(`${ API.prodUrl}/Precot/api/bleaching/generation/wasteBaleResponse?date=${valueFormatted}`, {
+        axios.get(`${API.prodUrl}/Precot/api/bleaching/generation/wasteBaleResponse?date=${valueFormatted}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -318,7 +318,7 @@ const Bleaching_f33 = () => {
 
         // API call on click the date
         const accessToken = localStorage.getItem("token");
-        axios.get(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDate?date=${valueFormatted}`, {
+        axios.get(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/EquipmentUsageF33/GetByDate?date=${valueFormatted}`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -386,7 +386,7 @@ const Bleaching_f33 = () => {
     
         const res = await axios
           .put(
-            `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveWasteBaleF33`,
+            `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveWasteBaleF33`,
             {
               formatNo : slashDate,
               status: "Approve",
@@ -432,7 +432,7 @@ const Bleaching_f33 = () => {
     
         const res = await axios
           .put(
-            `${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveWasteBaleF33`,
+            `${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/approveWasteBaleF33`,
             {
               formatNo : slashDate,
               status: "Reject",
@@ -462,7 +462,7 @@ const Bleaching_f33 = () => {
         const accessToken = localStorage.getItem("token");
         if (role == "ROLE_SUPERVISOR") {
 
-            axios.post(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveEquipmentUsageF33`, formData, {
+            axios.post(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveEquipmentUsageF33`, formData, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -483,7 +483,7 @@ const Bleaching_f33 = () => {
                 ;
         }
         else if (role == "ROLE_HOD") {
-            axios.post(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveEquipmentUsageF33`, formData, {
+            axios.post(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/saveEquipmentUsageF33`, formData, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -542,7 +542,7 @@ const Bleaching_f33 = () => {
         // console.log("submitted clicked with payload", payloads)
         const accessToken = localStorage.getItem("token")
         if (role == "ROLE_SUPERVISOR") {
-            axios.post(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitEquipmentUsageF33`, payloads, {
+            axios.post(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitEquipmentUsageF33`, payloads, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -571,7 +571,7 @@ const Bleaching_f33 = () => {
                 ;
         }
         else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-            axios.post(`${ API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitEquipmentUsageF33`, formData, {
+            axios.post(`${API.prodUrl}/Precot/api/Bleaching/Service/CRUD/submitEquipmentUsageF33`, formData, {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
@@ -625,7 +625,7 @@ const Bleaching_f33 = () => {
 
         const accessToken = localStorage.getItem('token');
         const fetchData = () => {
-            axios.get(`${ API.prodUrl}/Precot/api/LOV/Service/baleNumbersLOV`, {
+            axios.get(`${API.prodUrl}/Precot/api/LOV/Service/baleNumbersLOV`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}` // Include accessToken in the request headers
                 }

@@ -111,7 +111,7 @@ const QA_f39_summary = () => {
            
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
  
   const roleBase = localStorage.getItem("role");
 
@@ -170,7 +170,7 @@ const QA_f39_summary = () => {
           
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -204,7 +204,7 @@ const QA_f39_summary = () => {
           
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   const handleChange_bmr = (value) => {
     const departmentString = value.join(", "); // Convert array to comma-separated string
     set_dep(departmentString); // Update state with the string
@@ -329,7 +329,7 @@ const QA_f39_summary = () => {
       setLoading(true);
       axios
         .get(
-          `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01-F-039`,
+          `${API.prodUrl}/Precot/api/qa/number/generation?formNumber=PH-QAD01/F-039`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -668,7 +668,7 @@ const QA_f39_summary = () => {
                 CONTAINER INSPECTION REPORT{" "}
               </th>
               <td colSpan="10">Format No.:</td>
-              <td colSpan="20">PH-QAD01-F-039</td>
+              <td colSpan="20">PH-QAD01/F-039</td>
             </tr>
             <tr>
               <td colSpan="10">Revision No.:</td>
@@ -1444,7 +1444,7 @@ const QA_f39_summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="CONTAINER INSPECTION REPORT"
-          formatNo="PH-QAD01-F-039"
+          formatNo="PH-QAD01/F-039"
           MenuBtn={
             <Button
               type="primary"

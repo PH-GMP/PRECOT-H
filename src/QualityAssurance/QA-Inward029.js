@@ -181,7 +181,7 @@ const QA_Inward029 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -205,7 +205,7 @@ const QA_Inward029 = () => {
           
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -217,7 +217,7 @@ const QA_Inward029 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -241,7 +241,7 @@ const QA_Inward029 = () => {
           
         });
     }
-  }, [selectedRow, API.prodUrl]);
+  }, [selectedRow,API.prodUrl]);
 
   const canDisplayButtons = () => {
     if (roleauth == "ROLE_QA") {
@@ -330,9 +330,9 @@ const QA_Inward029 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
+        `${API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
         {
-          formatNo: "PH-QAD01-F-029",
+          formatNo: "PH-QAD01/F-029",
           id: fetchedId,
           status: "Approve",
         },
@@ -364,9 +364,9 @@ const QA_Inward029 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
+        `${API.prodUrl}/Precot/api/qa/InwardInspection/approveOrReject`,
         {
-          formatNo: "PH-QAD01-F-029",
+          formatNo: "PH-QAD01/F-029",
           id: fetchedId,
           status: "Reject",
           remarks: rejectRemarks,
@@ -401,8 +401,8 @@ const QA_Inward029 = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-         API.prodUrl
-        }/Precot/api/qa/getdetailsbyParamInward?formatNo=${"PH-QAD01-F-029"}&gr_date=${newDate}&supplierName=${Suppliers}&invoice_no=${invoice}&item_description=${productdesc}`,
+        API.prodUrl
+        }/Precot/api/qa/getdetailsbyParamInward?formatNo=${"PH-QAD01/F-029"}&gr_date=${newDate}&supplierName=${Suppliers}&invoice_no=${invoice}&item_description=${productdesc}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -515,8 +515,8 @@ const QA_Inward029 = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-         API.prodUrl
-        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01-F-029"}`,
+        API.prodUrl
+        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01/F-029"}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -560,7 +560,7 @@ const QA_Inward029 = () => {
     setSaveLoading(true); 
     const payload = {
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-029",
+      formatNo: "PH-QAD01/F-029",
       formatName: "INWARD INSPECTION REPORT(for Carton)",
       sopNumber: "PH-QAD01-D-30",
       revisionNo: "01",
@@ -785,7 +785,7 @@ const QA_Inward029 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/qa/saveInwardInspectionReport`, payload, {
+      .post(`${API.prodUrl}/Precot/api/qa/saveInwardInspectionReport`, payload, {
         headers,
       })
       .then((res) => {
@@ -813,7 +813,7 @@ const QA_Inward029 = () => {
 
     const payload = {
       unit: "Unit H",
-      formatNo: "PH-QAD01-F-029",
+      formatNo: "PH-QAD01/F-029",
       formatName: "INWARD INSPECTION REPORT(for Carton)",
       sopNumber: "PH-QAD01-D-30",
       revisionNo: "01",
@@ -1036,7 +1036,7 @@ const QA_Inward029 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/qa/submitInwardInspectionReport`, payload, {
+      .post(`${API.prodUrl}/Precot/api/qa/submitInwardInspectionReport`, payload, {
         headers,
       })
       .then((res) => {
@@ -1077,7 +1077,7 @@ const QA_Inward029 = () => {
       const formattedDate = formatDate(newDate);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${formattedDate}&supplier=${Suppliers}&invoice=${invoice}&materialDescription=${selectedItem}`,
+        `${API.prodUrl}/Precot/api/qa/inwardPde/details?grDate=${formattedDate}&supplier=${Suppliers}&invoice=${invoice}&materialDescription=${selectedItem}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1938,7 +1938,7 @@ const QA_Inward029 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INWARD INSPECTION REPORT (for Carton)"
-        formatNo="PH-QAD01-F-029"
+        formatNo="PH-QAD01/F-029"
         sopNo="PH-QAD01-D-15"
         MenuBtn={
           <Button

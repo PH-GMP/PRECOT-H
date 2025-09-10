@@ -196,7 +196,7 @@ const PHQCL01F012 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -220,7 +220,7 @@ const PHQCL01F012 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow.microbiologist_sign,      API.prodUrl]);
+  }, [selectedRow.microbiologist_sign,     API.prodUrl]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -230,7 +230,7 @@ const PHQCL01F012 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -254,7 +254,7 @@ const PHQCL01F012 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow.manager_sign,      API.prodUrl]);
+  }, [selectedRow.manager_sign,     API.prodUrl]);
 
   let formattedMicroDate;
   if (selectedRow.microbiologist_submit_on) {
@@ -296,7 +296,7 @@ const PHQCL01F012 = () => {
       if (uniqueDate) {
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/qc/BacterialIncubatorF012/GetByDateMonthYearEqIdNo?date=${uniqueDate}&eqIdNo=${uniqueEqNo}`,
+            `${   API.prodUrl}/Precot/api/qc/BacterialIncubatorF012/GetByDateMonthYearEqIdNo?date=${uniqueDate}&eqIdNo=${uniqueEqNo}`,
             { headers }
           )
           .then((response) => {
@@ -370,7 +370,7 @@ const PHQCL01F012 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveBacterialIncubatorF012`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveBacterialIncubatorF012`,
         {
           id: formValues.id,
           status: "Reject",
@@ -399,7 +399,7 @@ const PHQCL01F012 = () => {
 
     axios
       .put(
-        `${    API.prodUrl}/Precot/api/qc/ApproveBacterialIncubatorF012`,
+        `${   API.prodUrl}/Precot/api/qc/ApproveBacterialIncubatorF012`,
         {
           id: formValues.id,
           status: "Approve",
@@ -447,7 +447,7 @@ const PHQCL01F012 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/qc/SaveBacterialIncubatorF012`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/qc/SaveBacterialIncubatorF012`, payload, {
         headers,
       })
       .then((response) => {
@@ -500,7 +500,7 @@ const PHQCL01F012 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/qc/SubmitBacterialIncubatorF012`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/qc/SubmitBacterialIncubatorF012`, payload, {
         headers,
       })
       .then((response) => {

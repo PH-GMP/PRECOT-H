@@ -211,7 +211,7 @@ const QA_f52 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.hod_sign;
@@ -239,7 +239,7 @@ const QA_f52 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = DetailsByParam?.manager_sign;
@@ -267,7 +267,7 @@ const QA_f52 = () => {
         })
         .catch((err) => {});
     }
-  }, [DetailsByParam, API.prodUrl, token]);
+  }, [DetailsByParam,API.prodUrl, token]);
 
   const disabled =
     (role == "ROLE_QA" &&
@@ -360,7 +360,7 @@ const QA_f52 = () => {
     try {
       const payload = {
         format_name: "Breakage Report (GLASS / HARD PLASTIC / WOOD / CERAMIC)",
-        format_no: "PH-QAD01-F-052",
+        format_no: "PH-QAD01/F-052",
         revision_no: 3,
         ref_sop_no: "PH-QAD01-D-47",
         unit: "H",
@@ -470,7 +470,7 @@ const QA_f52 = () => {
     try {
       const payload = {
         format_name: "Breakage Report (GLASS / HARD PLASTIC / WOOD / CERAMIC)",
-        format_no: "PH-QAD01-F-052",
+        format_no: "PH-QAD01/F-052",
         revision_no: 3,
         ref_sop_no: "PH-QAD01-D-47",
         unit: "H",
@@ -1686,7 +1686,7 @@ const QA_f52 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="Breakage Report (GLASS / HARD PLASTIC / WOOD / CERAMIC)"
-        formatNo="PH-QAD01-F-052"
+        formatNo="PH-QAD01/F-052"
         sopNo="PH-QAD01-D-47"
         MenuBtn={
           <Button

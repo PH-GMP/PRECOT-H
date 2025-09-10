@@ -214,7 +214,7 @@ const QualityControl_AR_f02 = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -254,7 +254,7 @@ const QualityControl_AR_f02 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBleachingdataByBatchNumber?batchNumber=${subbatch}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/fetchBleachingdataByBatchNumber?batchNumber=${subbatch}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -298,7 +298,7 @@ const QualityControl_AR_f02 = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/chemicaltest/ARF002/getchemicalTestbyBatch/${subbatch}`,
+            `${API.prodUrl}/Precot/api/chemicaltest/ARF002/getchemicalTestbyBatch/${subbatch}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -341,7 +341,7 @@ const QualityControl_AR_f02 = () => {
   const fetchProductionDetails = async (bmrNo) => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/summary/getProductionDetailsByBmr?bmr_no=${bmrNo}`,
+        `${API.prodUrl}/Precot/api/bleaching/summary/getProductionDetailsByBmr?bmr_no=${bmrNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -455,7 +455,7 @@ const QualityControl_AR_f02 = () => {
     let apiurl, payload, succesMsg;
     if (role == "ROLE_CHEMIST" || role == "ROLE_MICROBIOLOGIST") {
       succesMsg = "Data Saved Sucessfully";
-      apiurl = `${ API.prodUrl}/Precot/api/chemicaltest/ARF002/saveChemicalTest`;
+      apiurl = `${API.prodUrl}/Precot/api/chemicaltest/ARF002/saveChemicalTest`;
       payload = {
         test_id: formData.test_id,
         ar_no: formData.ar_no,
@@ -656,7 +656,7 @@ const QualityControl_AR_f02 = () => {
         ],
       };
     } else if (role == "QA_MANAGER" || role == "QC_MANAGER") {
-      apiurl = `${ API.prodUrl}/Precot/api/chemicaltest/ARF002/approval`;
+      apiurl = `${API.prodUrl}/Precot/api/chemicaltest/ARF002/approval`;
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
@@ -1049,7 +1049,7 @@ const QualityControl_AR_f02 = () => {
         // }
       }
       succesMsg = "Submitted Successfully ";
-      apiurl = `${ API.prodUrl}/Precot/api/chemicaltest/ARF002/submitChemicalTest`;
+      apiurl = `${API.prodUrl}/Precot/api/chemicaltest/ARF002/submitChemicalTest`;
       payload = {
         test_id: formData.test_id,
         ar_no: formData.ar_no,
@@ -1259,7 +1259,7 @@ const QualityControl_AR_f02 = () => {
         setStatusLoader(false);
         return;
       }
-      apiurl = `${ API.prodUrl}/Precot/api/chemicaltest/ARF002/approval`;
+      apiurl = `${API.prodUrl}/Precot/api/chemicaltest/ARF002/approval`;
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,

@@ -158,7 +158,7 @@ const Stores_f008 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Store/getForkliftCheckList?date=${state.date}&forkliftNo=${state.forkliftNo}`,
+        `${API.prodUrl}/Precot/api/Store/getForkliftCheckList?date=${state.date}&forkliftNo=${state.forkliftNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -315,7 +315,7 @@ const Stores_f008 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -339,7 +339,7 @@ const Stores_f008 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -351,7 +351,7 @@ const Stores_f008 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -375,7 +375,7 @@ const Stores_f008 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
   // console.log("operator",operator);
@@ -388,7 +388,7 @@ const Stores_f008 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -412,7 +412,7 @@ const Stores_f008 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   // console.loglog(productName);
   // console.loglog("noOfFlagsInRoll", mixing);
@@ -427,7 +427,7 @@ const Stores_f008 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Store/ForkliftCheckList/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/ForkliftCheckList/approveOrReject`,
         {
           id: id,
           status: "Approve",
@@ -468,7 +468,7 @@ const Stores_f008 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Store/ForkliftCheckList/approveOrReject`,
+        `${API.prodUrl}/Precot/api/Store/ForkliftCheckList/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -525,7 +525,7 @@ const Stores_f008 = () => {
     };
 
     axios
-      .post(`${ API.prodUrl}/Precot/api/Store/ForkliftCheckList/Save`, payload, {
+      .post(`${API.prodUrl}/Precot/api/Store/ForkliftCheckList/Save`, payload, {
         headers,
       })
       .then((res) => {
@@ -592,7 +592,7 @@ const Stores_f008 = () => {
     };
 
     axios
-      .post(` ${ API.prodUrl}/Precot/api/Store/ForkliftCheckList/Submit`, payload, {
+      .post(` ${API.prodUrl}/Precot/api/Store/ForkliftCheckList/Submit`, payload, {
         headers,
       })
       .then((res) => {

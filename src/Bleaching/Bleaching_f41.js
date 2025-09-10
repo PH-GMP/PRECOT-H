@@ -127,7 +127,7 @@ const Bleaching_f41 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -151,7 +151,7 @@ const Bleaching_f41 = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl, token]);
+  }, [apiData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -159,7 +159,7 @@ const Bleaching_f41 = (props) => {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=1`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchHandSanitationIdNumbers?department=1`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -174,7 +174,7 @@ const Bleaching_f41 = (props) => {
       .catch((err) => {
         // console.log("Error in fetching image:", err);
       });
-  }, [apiData, API.prodUrl, token]);
+  }, [apiData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -184,7 +184,7 @@ const Bleaching_f41 = (props) => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -208,7 +208,7 @@ const Bleaching_f41 = (props) => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [apiData, API.prodUrl, token]);
+  }, [apiData,API.prodUrl, token]);
   const canDisplayButtons = () => {
     if (roleauth == "ROLE_SUPERVISOR") {
       if (
@@ -290,7 +290,7 @@ const Bleaching_f41 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF41`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF41`,
         {
           id: handSanitizationId,
           status: "Approve",
@@ -336,7 +336,7 @@ const Bleaching_f41 = (props) => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF41`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveOrRejectF41`,
         {
           id: handSanitizationId,
           status: "Reject",
@@ -424,7 +424,7 @@ const Bleaching_f41 = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get(`${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
+      .get(`${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -586,7 +586,7 @@ const Bleaching_f41 = (props) => {
     };
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/createHandSanitizationF41`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/createHandSanitizationF41`,
         payload,
         {
           headers: {
@@ -681,7 +681,7 @@ const Bleaching_f41 = (props) => {
 
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/submitHandSanitizationF41`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/submitHandSanitizationF41`,
         payload,
         {
           headers: {
@@ -723,7 +723,7 @@ const Bleaching_f41 = (props) => {
     setShift(shiftvalue);
     try {
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/getHandSanitizationByShiftAnddate`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/getHandSanitizationByShiftAnddate`,
         {
           date: date,
           shift: shiftvalue,

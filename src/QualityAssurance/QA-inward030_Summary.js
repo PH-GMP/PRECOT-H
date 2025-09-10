@@ -105,7 +105,7 @@ const QA_Inward030_Sum = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -136,7 +136,7 @@ const QA_Inward030_Sum = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const formatDateTime = (inputDate) => {
     const date = new Date(inputDate);
@@ -216,8 +216,8 @@ const QA_Inward030_Sum = () => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
         let apiUrl = `${
-          API.prodUrl
-        }/Precot/api/qa/getSummarydetailsInward?formatNo=${"PH-QAD01-F-030"}`;
+         API.prodUrl
+        }/Precot/api/qa/getSummarydetailsInward?formatNo=${"PH-QAD01/F-030"}`;
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
@@ -505,8 +505,8 @@ const QA_Inward030_Sum = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-030"}&gr_date=${date}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-030"}&gr_date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -538,8 +538,8 @@ const QA_Inward030_Sum = () => {
       // API call with both selected GRNO and the formatted date
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -566,8 +566,8 @@ const QA_Inward030_Sum = () => {
       // API call with both selected GRNO and the formatted date
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -594,8 +594,8 @@ const QA_Inward030_Sum = () => {
       // API call with both selected GRNO and the formatted date
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}&iir_no=${SelectediirNumbers}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-030"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}&iir_no=${SelectediirNumbers}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -669,7 +669,7 @@ const QA_Inward030_Sum = () => {
                 INWARD INSPECTION REPORT (for Film)
               </th>
               <th colSpan={3}>Format No.:</th>
-              <th colSpan={3}>PH-QAD01-F-030</th>
+              <th colSpan={3}>PH-QAD01/F-030</th>
             </tr>
             <tr>
               <th colSpan={3}>Revision No.:</th>

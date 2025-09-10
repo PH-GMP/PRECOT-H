@@ -135,7 +135,7 @@ const QA_f01 = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-          API.prodUrl
+         API.prodUrl
         }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01/F-001"}`,
         {
           headers: {
@@ -207,7 +207,7 @@ const QA_f01 = () => {
         })
         .catch((err) => {});
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = fetchedData?.qa_manager_sign;
@@ -235,7 +235,7 @@ const QA_f01 = () => {
         })
         .catch((err) => {});
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = fetchedData?.plant_head_sign;
@@ -263,7 +263,7 @@ const QA_f01 = () => {
         })
         .catch((err) => {});
     }
-  }, [fetchedData, API.prodUrl, token]);
+  }, [fetchedData,API.prodUrl, token]);
 
   const roleauth = localStorage.getItem("role");
 

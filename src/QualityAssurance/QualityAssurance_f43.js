@@ -430,7 +430,7 @@ const QualityAssurance_f43 = () => {
       payload = {
         meetingId: formData.meetingId,
         unit: "UNIT H",
-        formatNo: "PH-QAD01-F-043",
+        formatNo: "PH-QAD01/F-043",
         formatName: "QUALITY REVIEW MEETING",
         sopNumber: "PH-QAD01-D-41",
         revisionNumber: "01",
@@ -469,7 +469,7 @@ const QualityAssurance_f43 = () => {
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.meetingId,
-        formatNo: "PH-QAD01-F-043",
+        formatNo: "PH-QAD01/F-043",
         status: "Approve",
       };
     }
@@ -547,7 +547,7 @@ const QualityAssurance_f43 = () => {
       payload = {
         meetingId: formData.meetingId,
         unit: "UNIT H",
-        formatNo: "PH-QAD01-F-043",
+        formatNo: "PH-QAD01/F-043",
         formatName: "QUALITY REVIEW MEETING",
         sopNumber: "PH-QAD01-D-41",
         revisionNumber: "01",
@@ -590,7 +590,7 @@ const QualityAssurance_f43 = () => {
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.meetingId,
-        formatNo: "PH-QAD01-F-043",
+        formatNo: "PH-QAD01/F-043",
         status: "Reject",
         remarks: formData.reason,
       };
@@ -805,7 +805,7 @@ const QualityAssurance_f43 = () => {
     <>
       <BleachingHeader
         formName={"QUALITY REVIEW MEETING"}
-        formatNo={"PH-QAD01-F-043"}
+        formatNo={"PH-QAD01/F-043"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

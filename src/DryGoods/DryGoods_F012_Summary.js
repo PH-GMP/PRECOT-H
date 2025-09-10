@@ -202,7 +202,7 @@ const DryGoods_F012_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -242,9 +242,9 @@ const DryGoods_F012_Summary = () => {
       const roleauth = localStorage.getItem("role");
       let apiUrl = "";
       if (roleauth === "ROLE_HOD" || roleauth === "ROLE_DESIGNEE") {
-        apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF12`;
+        apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getHodSummarydetailsF12`;
       } else if (roleauth === "ROLE_SUPERVISOR") {
-        apiUrl = `${ API.prodUrl}/Precot/api/Drygoods/Service/getSupSummarydetailsF12`;
+        apiUrl = `${API.prodUrl}/Precot/api/Drygoods/Service/getSupSummarydetailsF12`;
       } else {
         message.error("Invalid role. Access denied.");
         navigate("/Precot/choosenScreen");
@@ -347,7 +347,7 @@ const DryGoods_F012_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -368,7 +368,7 @@ const DryGoods_F012_Summary = () => {
         })
         .catch((err) => {});
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -380,7 +380,7 @@ const DryGoods_F012_Summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -404,12 +404,12 @@ const DryGoods_F012_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printresponseData, API.prodUrl, token]);
+  }, [printresponseData,API.prodUrl, token]);
 
   const fetchPrintData = async (selectedYear) => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Drygoods/Service/getSaniPrintF12?month=${selectedMonth}&year=${selectedYear}`,
+        `${API.prodUrl}/Precot/api/Drygoods/Service/getSaniPrintF12?month=${selectedMonth}&year=${selectedYear}`,
         {
           method: "GET",
           headers: {
@@ -426,7 +426,7 @@ const DryGoods_F012_Summary = () => {
         const hodsign = lastData?.hod_sign;
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${hodsign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${hodsign}`,
             {
               headers: {
                 "Content-Type": "application/json",

@@ -85,7 +85,7 @@ const Spunlace_f10 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const Spunlace_f10 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const username = planingDetailsByDate?.hod_sign;
@@ -118,7 +118,7 @@ const Spunlace_f10 = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -142,7 +142,7 @@ const Spunlace_f10 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [planingDetailsByDate, API.prodUrl, token]);
+  }, [planingDetailsByDate,API.prodUrl, token]);
 
   const filteredOrderNumberLov = (index) => {
     const selectedOrderNumbersList = Object.values(selectedOrderNumbers);
@@ -192,7 +192,7 @@ const Spunlace_f10 = () => {
 
     try {
       const response = await axios.delete(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/deleteLogbookLine?id=${rowID}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/deleteLogbookLine?id=${rowID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -481,7 +481,7 @@ const Spunlace_f10 = () => {
     const fetchOrderNumberOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/spulance/orders`,
+          `${API.prodUrl}/Precot/api/spulance/orders`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -534,7 +534,7 @@ const Spunlace_f10 = () => {
       setRows(updatedRows);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spulance/orderDetails?order=${value}`,
+        `${API.prodUrl}/Precot/api/spulance/orderDetails?order=${value}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -677,7 +677,7 @@ const Spunlace_f10 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           id: planId,
           status: "Reject",
@@ -709,7 +709,7 @@ const Spunlace_f10 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/approveOrReject`,
         {
           id: planId,
           status: "Approve",
@@ -832,7 +832,7 @@ const Spunlace_f10 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SaveLogbookSpunlacePlanning`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SaveLogbookSpunlacePlanning`,
         payload,
         { headers }
       );
@@ -939,7 +939,7 @@ const Spunlace_f10 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SubmitLogbookSpunlacePlanning`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/SubmitLogbookSpunlacePlanning`,
         payload,
         { headers }
       );
@@ -973,7 +973,7 @@ const Spunlace_f10 = () => {
       // console.log("stored Date inside Api", date);
 
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/LogbookSpunlacePlanning/getByDate?date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

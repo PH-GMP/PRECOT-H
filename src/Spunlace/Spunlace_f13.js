@@ -356,7 +356,7 @@ const Spunlace_f13 = () => {
   const fetchBmrOptions = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getByDateShiftOrderNo?date=${date1}&shift=${state.shift}&orderNo=${state.orderNo}`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/getByDateShiftOrderNo?date=${date1}&shift=${state.shift}&orderNo=${state.orderNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -399,7 +399,7 @@ const Spunlace_f13 = () => {
         setHodDate(data.hod_submit_on);
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.supervisor_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -424,7 +424,7 @@ const Spunlace_f13 = () => {
           });
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.hod_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.hod_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -449,7 +449,7 @@ const Spunlace_f13 = () => {
           });
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${data.operator_sign}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -751,7 +751,7 @@ const Spunlace_f13 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/approveOrReject`,
         {
           id: processId,
           status: "Approve",
@@ -791,7 +791,7 @@ const Spunlace_f13 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/approveOrReject`,
         {
           id: processId,
           status: "Reject",
@@ -850,7 +850,7 @@ const Spunlace_f13 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/SaveProcessSetupVerificationRpBalePress`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/SaveProcessSetupVerificationRpBalePress`,
         payload,
         { headers }
       )
@@ -925,7 +925,7 @@ const Spunlace_f13 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/SubmitProcessSetupVerificationRpBalePress`,
+        ` ${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationRpBalePress/SubmitProcessSetupVerificationRpBalePress`,
         payload,
         { headers }
       )

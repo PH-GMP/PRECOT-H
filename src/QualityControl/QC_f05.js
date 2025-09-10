@@ -114,7 +114,7 @@ const QC_f05 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails, API.prodUrl]);
+  }, [fetchedDetails,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -150,7 +150,7 @@ const QC_f05 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [fetchedDetails, API.prodUrl]);
+  }, [fetchedDetails,API.prodUrl]);
 
   const handleAddRow = () => {
     setRows([...rows, {}]);

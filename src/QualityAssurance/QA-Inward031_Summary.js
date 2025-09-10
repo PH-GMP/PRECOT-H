@@ -110,7 +110,7 @@ const QA_Inward031_Sum = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -141,7 +141,7 @@ const QA_Inward031_Sum = () => {
         })
         .catch((err) => {});
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const formatDateTime = (inputDate) => {
     const date = new Date(inputDate);
@@ -224,8 +224,8 @@ const QA_Inward031_Sum = () => {
       try {
         const token = localStorage.getItem("token");
         let apiUrl = `${
-          API.prodUrl
-        }/Precot/api/qa/getSummarydetailsInward?formatNo=${"PH-QAD01-F-031"}`;
+         API.prodUrl
+        }/Precot/api/qa/getSummarydetailsInward?formatNo=${"PH-QAD01/F-031"}`;
 
         const response = await fetch(apiUrl, {
           method: "GET",
@@ -516,8 +516,8 @@ const QA_Inward031_Sum = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-031"}&gr_date=${date}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-031"}&gr_date=${date}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -548,8 +548,8 @@ const QA_Inward031_Sum = () => {
     try {
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -574,8 +574,8 @@ const QA_Inward031_Sum = () => {
 
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -601,8 +601,8 @@ const QA_Inward031_Sum = () => {
       // API call with both selected GRNO and the formatted date
       const response = await axios.get(
         `${
-          API.prodUrl
-        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01-F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}&iir_no=${SelectediirNumbers}`,
+         API.prodUrl
+        }/Precot/api/qa/getdetailsForPrintInward?formatNo=${"PH-QAD01/F-031"}&gr_date=${printDate}&supplierName=${SelectedPrintSupplier}&invoice_no=${SelectedInvoicePrint}&iir_no=${SelectediirNumbers}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -677,7 +677,7 @@ const QA_Inward031_Sum = () => {
                 INWARD INSPECTION REPORT (for Zip lock)
               </th>
               <th colSpan={3}>Format No.:</th>
-              <th colSpan={3}>PH-QAD01-F-031</th>
+              <th colSpan={3}>PH-QAD01/F-031</th>
             </tr>
             <tr>
               <th colSpan={3}>Revision No.:</th>
@@ -1093,7 +1093,7 @@ const QA_Inward031_Sum = () => {
                 INWARD INSPECTION REPORT (for Zip lock)
               </th>
               <th colSpan={3}>Format No.:</th>
-              <th colSpan={3}>PH-QAD01-F-031</th>
+              <th colSpan={3}>PH-QAD01/F-031</th>
             </tr>
             <tr>
               <th colSpan={3}>Revision No.:</th>
@@ -1213,7 +1213,7 @@ const QA_Inward031_Sum = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="INWARD INSPECTION REPORT (for Zip lock)"
-        formatNo="PH-QAD01-F-31"
+        formatNo="PH-QAD01/F-31"
         MenuBtn={
           <Button
             type="primary"

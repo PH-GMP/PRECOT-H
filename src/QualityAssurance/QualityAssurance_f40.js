@@ -44,7 +44,7 @@ const QualityAssurance_f40 = () => {
   const [tabNo, setTabNo] = useState("");
   const [formData, setFormData] = useState({
     format: "PRODUCTION RETAINED SAMPLE REGISTER",
-    format_no: "PH-QAD01-F-040",
+    format_no: "PH-QAD01/F-040",
     ref_sop_no: "PH-QAD01-D-36",
     month: "",
     shift: "",
@@ -295,7 +295,7 @@ const QualityAssurance_f40 = () => {
       payload = {
         test_id: formData.test_id,
         format: "PRODUCTION RETAINED SAMPLE REGISTER",
-        format_no: "PH-QAD01-F-040",
+        format_no: "PH-QAD01/F-040",
         ref_sop_no: "PH-QAD01-D-36",
         month: getMonthAndYear(date).month,
         shift: shift,
@@ -322,7 +322,7 @@ const QualityAssurance_f40 = () => {
       succesMsg = "Approved Successfully";
       payload = {
         id: formData.test_id,
-        formatNo: "PH-QAD01-F-040",
+        formatNo: "PH-QAD01/F-040",
         status: "Approve",
       };
     } else if (tab == "issue" && type == "Save") {
@@ -341,7 +341,7 @@ const QualityAssurance_f40 = () => {
       payload = {
         test_id: formData.test_id,
         format: "PRODUCTION RETAINED SAMPLE REGISTER",
-        format_no: "PH-QAD01-F-040",
+        format_no: "PH-QAD01/F-040",
         ref_sop_no: "PH-QAD01-D-36",
         revison_number: "01",
         month: getMonthAndYear(date).month,
@@ -443,7 +443,7 @@ const QualityAssurance_f40 = () => {
       payload = {
         test_id: formData.test_id,
         format: "PRODUCTION RETAINED SAMPLE REGISTER",
-        format_no: "PH-QAD01-F-040",
+        format_no: "PH-QAD01/F-040",
         ref_sop_no: "PH-QAD01-D-36",
         revison_number: "01",
         month: getMonthAndYear(date).month,
@@ -474,7 +474,7 @@ const QualityAssurance_f40 = () => {
       succesMsg = "Rejected Successfully";
       payload = {
         id: formData.test_id,
-        formatNo: "PH-QAD01-F-040",
+        formatNo: "PH-QAD01/F-040",
         status: "Reject",
         remarks: formData.reason,
       };
@@ -533,7 +533,7 @@ const QualityAssurance_f40 = () => {
       payload = {
         test_id: formData.test_id,
         format: "PRODUCTION RETAINED SAMPLE REGISTER",
-        format_no: "PH-QAD01-F-040",
+        format_no: "PH-QAD01/F-040",
         ref_sop_no: "PH-QAD01-D-36",
         revison_number: "01",
         month: getMonthAndYear(date).month,
@@ -817,7 +817,7 @@ const QualityAssurance_f40 = () => {
     <>
       <BleachingHeader
         formName={"PRODUCTION RETAINED SAMPLE REGISTER"}
-        formatNo={"PH-QAD01-F-040"}
+        formatNo={"PH-QAD01/F-040"}
         unit={"UNIT H"}
         MenuBtn={
           <Button

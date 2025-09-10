@@ -533,7 +533,7 @@ const QA_F49 = () => {
     const payload = {
       productId: id,
       formatName: "PRODUCT DISPOSITION LOG BOOK",
-      formatNo: "PH-QAD01-F-049",
+      formatNo: "PH-QAD01/F-049",
       revisionNo: 1,
       sopNumber: "PH-QAD01-D-26",
       unit: "Unit H",
@@ -611,7 +611,7 @@ const QA_F49 = () => {
     const payload = {
       productId: id,
       formatName: "PRODUCT DISPOSITION LOG BOOK",
-      formatNo: "PH-QAD01-F-049",
+      formatNo: "PH-QAD01/F-049",
       revisionNo: 1,
       sopNumber: "PH-QAD01-D-26",
       unit: "Unit H",
@@ -936,7 +936,7 @@ const QA_F49 = () => {
       <BleachingHeader
         unit="Unit-H"
         formName="PRODUCT DISPOSITION LOG BOOK"
-        formatNo="PH-QAD01-F-049"
+        formatNo="PH-QAD01/F-049"
         MenuBtn={
           <Button
             type="primary"

@@ -594,7 +594,7 @@ const Audittrail = () => {
   //     const fetchData = async () => {
   //       try {
   //         const response = await axios.get(
-  //           `${ API.prodUrl}/Precot/api/Store/invoice/descriptions?invoiceNo=${storesFrequency.invoiceNo}`,
+  //           `${API.prodUrl}/Precot/api/Store/invoice/descriptions?invoiceNo=${storesFrequency.invoiceNo}`,
   //           {
   //             headers: {
   //               Authorization: `Bearer ${token}`,
@@ -2018,24 +2018,24 @@ const Audittrail = () => {
     }
 
     const formatNoLovI = [
-      { value: "PH-HRD01-F-014", label: "PH-HRD01-F-014" },
-      { value: "PH-HRD01-F-015", label: "PH-HRD01-F-015" },
-      { value: "PH-HRD01-F-016", label: "PH-HRD01-F-016" },
-      { value: "PH-HRD01-F-017", label: "PH-HRD01-F-017" },
-      { value: "PH-HRD01-F-018", label: "PH-HRD01-F-018" },
-      { value: "PH-HRD01-F-019", label: "PH-HRD01-F-019" },
+      { value: "PH-HRD01/F-014", label: "PH-HRD01/F-014" },
+      { value: "PH-HRD01/F-015", label: "PH-HRD01/F-015" },
+      { value: "PH-HRD01/F-016", label: "PH-HRD01/F-016" },
+      { value: "PH-HRD01/F-017", label: "PH-HRD01/F-017" },
+      { value: "PH-HRD01/F-018", label: "PH-HRD01/F-018" },
+      { value: "PH-HRD01/F-019", label: "PH-HRD01/F-019" },
     ];
     const formatNoLovII = [
-      { value: "PH-QAD01-F-029", label: "PH-QAD01-F-029" },
-      { value: "PH-QAD01-F-030", label: "PH-QAD01-F-030" },
-      { value: "PH-QAD01-F-031", label: "PH-QAD01-F-031" },
-      { value: "PH-QAD01-F-032", label: "PH-QAD01-F-032" },
-      { value: "PH-QAD01-F-033", label: "PH-QAD01-F-033" },
+      { value: "PH-QAD01/F-029", label: "PH-QAD01/F-029" },
+      { value: "PH-QAD01/F-030", label: "PH-QAD01/F-030" },
+      { value: "PH-QAD01/F-031", label: "PH-QAD01/F-031" },
+      { value: "PH-QAD01/F-032", label: "PH-QAD01/F-032" },
+      { value: "PH-QAD01/F-033", label: "PH-QAD01/F-033" },
     ];
     const formatNoLovIII = [
-      { value: "PH-QAD01-F-034", label: "PH-QAD01-F-034" },
-      { value: "PH-QAD01-F-035", label: "PH-QAD01-F-035" },
-      { value: "PH-QAD01-F-036", label: "PH-QAD01-F-036" },
+      { value: "PH-QAD01/F-034", label: "PH-QAD01/F-034" },
+      { value: "PH-QAD01/F-035", label: "PH-QAD01/F-035" },
+      { value: "PH-QAD01/F-036", label: "PH-QAD01/F-036" },
     ];
     const shiftTypeI = [
       { value: "I", label: "I" },
@@ -3900,7 +3900,7 @@ const Audittrail = () => {
         case "product_disposition_logbook":
           payload = {
             ...payload,
-            form_no: "PH-QAD01-F-049",
+            form_no: "PH-QAD01/F-049",
           };
           break;
         case "final_inspection_report":
@@ -3949,7 +3949,7 @@ const Audittrail = () => {
           payload = {
             ...payload,
             department: "QUALITY ASSURANCE",
-            form_no: "PH-QAD01-F-042",
+            form_no: "PH-QAD01/F-042",
             changeControlNo: qaFrequency.changeControlNo,
           };
           break;
@@ -3957,7 +3957,7 @@ const Audittrail = () => {
           payload = {
             ...payload,
             department: "QUALITY ASSURANCE",
-            form_no: "PH-QAD01-F-060",
+            form_no: "PH-QAD01/F-060",
             departmentName: qaFrequency.departmentName,
           };
           break;
@@ -5515,7 +5515,307 @@ const Audittrail = () => {
               }
             />
           </>
-        ) : null}
+        ) : departmentId.includes(",") ? (<>
+          <Row>
+            <Col>
+              <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
+            </Col>
+            <Col
+              style={{
+                marginLeft: "1em",
+              }}
+            >
+              <p>{localStorage.getItem("username")}</p>
+              <p
+                style={{
+                  fontSize: "x-small",
+                }}
+              >
+                {localStorage.getItem("role")}
+              </p>
+            </Col>
+          </Row>
+          <Menu
+            theme="dark"
+            mode="inline"
+            // defaultSelectedKeys={["1"]}
+            style={{
+              backgroundColor: "transparent",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+              padding: "0",
+              margin: "0",
+            }}
+            items={
+              role === "ROLE_QA"
+                ? [
+                  {
+                    key: "1",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Form Browser
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/choosenScreen"),
+                  },
+                  {
+                    key: "2",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Generation
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Generate"),
+                  },
+                  {
+                    key: "3",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Audit
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Report/Generation"),
+                  },
+                  {
+                    key: "4",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Bleaching Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                  },
+                  {
+                    key: "5",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        DryGoods Mapping
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Mapping"),
+                  },
+                  {
+                    key: "6",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Closing
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Closing"),
+                  },
+                  {
+                    key: "7",
+                    icon: <IoCreate color="#151718" />,
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Traceability
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot/Traceability"),
+                  },
+                  {
+                    key: "8",
+                    icon: (
+                      <FaLock
+                        color="#151718"
+                        onClick={() => {
+                          if (confirm("Are you sure want to logout")) {
+                            localStorage.removeItem("token");
+                            navigate("/Precot");
+                          }
+                        }}
+                      />
+                    ),
+                    label: (
+                      <b
+                        style={{
+                          color: "#151718",
+                        }}
+                      >
+                        Logout
+                      </b>
+                    ),
+                    onClick: () => navigate("/Precot"),
+                  },
+                ]
+                : role === "ROLE_SUPERVISOR" ||
+                  role === "ROLE_HOD" ||
+                  role === "ROLE_DESIGNEE" ||
+                  role === "ROLE_HR"
+                  ? [
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Bleaching Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Bleaching_Mapping"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          DryGoods Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Chemical Issue
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/RawMaterialIssue"),
+                    },
+                    {
+                      key: "6",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
+                  : [
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
+            }
+          />
+        </>) : null}
       </Drawer>
 
       <Row gutter={16} style={{ marginTop: 16 }}>

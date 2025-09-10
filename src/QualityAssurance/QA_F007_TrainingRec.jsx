@@ -1,61 +1,38 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-import {
-  Table,
-  Tabs,
-  Button,
-  Tooltip,
-  Form,
-  Input,
-  Row,
-  Col,
-  DatePicker,
-  InputNumber,
-  message,
-  Modal,
-  Select,
-} from "antd";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
+import { useEffect, useRef, useState } from "react";
+import { TbMenuDeep } from "react-icons/tb";
 import BleachingHeader from "../Components/BleachingHeader.js";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
-import { TbMenuDeep } from "react-icons/tb";
-import approveIcon from "../Assests/outlined-approve.svg";
-import rejectIcon from "../Assests/outlined-reject.svg";
+
+import axios from "axios";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
 import { GrDocumentStore } from "react-icons/gr";
-import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
-import { FaLock, FaUserCircle } from "react-icons/fa";
-import { IoCreate, IoPrint, IoSave } from "react-icons/io5";
-import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { IoSave } from "react-icons/io5";
+import { useLocation, useNavigate } from "react-router-dom";
 import API from "../baseUrl.json";
-import moment from "moment";
+import SignatureCanvas from "react-signature-canvas";
+
 import {
-  handleKeyDown,
-  handleNumberKeyDown,
-  printDateFormat,
-  handleDecimalNumberKeyDown,
   getYearAndMonth,
-  getDepartmentName,
+  printDateFormat,
   slashFormatDate,
 } from "../util/util.js";
-
-const { TabPane } = Tabs;
 
 const role = localStorage.getItem("role");
 
 export default function QA_F007_TrainingRec() {
-  const [activeKey, setActiveKey] = useState("1");
+  const signatureRefs = useRef({});
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const { TextArea } = Input;
-  const { date } = location.state || {};
+  const { date, selectedDepartment } = location.state || {};
   // const { date } = state || {};
   // const { loadno } = state || {};
   const initialized = useRef(false);
-
-  const [selectedRow, setSelectedRow] = useState("");
 
   const [rejectModal, setRejectModal] = useState(false);
 
@@ -71,17 +48,16 @@ export default function QA_F007_TrainingRec() {
 
   const { year, month } = getYearAndMonth(date);
 
-  const department = getDepartmentName(localStorage.getItem("departmentId"));
   const [formData, setFormData] = useState({
     formatName: "TRAINING RECORD",
-    formatNo: "PH-QAD01-F-007",
+    formatNo: "PH-QAD01/F-007",
     revisionNo: "03",
     refSopNo: "PH-QAD01-D-15",
     unit: "Unit H",
     date: date,
     month: month,
     year: year,
-    department: department,
+    department: selectedDepartment,
     mode_of_training: "",
     topic: "",
     training_session_no: "",
@@ -115,13 +91,16 @@ export default function QA_F007_TrainingRec() {
 
   const [rejectReason, setRejectReason] = useState();
 
-  const handleOpenRejectModal = () => {
-    setRejectModal(true);
-  };
-
   const handleCancel = () => {
     setRejectModal(false);
   };
+
+  // Initialize or update signatureRefs when details change
+  useEffect(() => {
+    signatureRefs.current = formData.details.map(
+      (_, i) => signatureRefs.current[i] || null
+    );
+  }, [formData.details]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,7 +110,7 @@ export default function QA_F007_TrainingRec() {
     }));
   };
 
-  const handleCheckBoxChan = (index, e) => {
+  const handleArrayChange = (index, e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => {
       const updatedDetails = [...prevFormData.details];
@@ -147,15 +126,28 @@ export default function QA_F007_TrainingRec() {
     });
   };
 
-  const handleArrayChange = (index, e) => {
-    const { name, value } = e.target;
+  const handleSaveSignature = (actualIndex, base64Image) => {
+    console.log("actualIndex", actualIndex);
     setFormData((prevFormData) => {
       const updatedDetails = [...prevFormData.details];
-      updatedDetails[index] = {
-        ...updatedDetails[index],
-        [name]: value,
+      updatedDetails[actualIndex] = {
+        ...updatedDetails[actualIndex],
+        signature: base64Image,
       };
+      return {
+        ...prevFormData,
+        details: updatedDetails,
+      };
+    });
+  };
 
+  const handleClearSignature = (actualIndex) => {
+    setFormData((prevFormData) => {
+      const updatedDetails = [...prevFormData.details];
+      updatedDetails[actualIndex] = {
+        ...updatedDetails[actualIndex],
+        signature: "",
+      };
       return {
         ...prevFormData,
         details: updatedDetails,
@@ -333,36 +325,11 @@ export default function QA_F007_TrainingRec() {
     }
   };
 
-  // const navigateBack = (responseData) => {
-  //     if (role === 'QA_MANAGER' || role === 'QC_MANAGER' || role === 'MICRO_DESIGNEE') {
-  //         if (
-  //             (responseData?.microbiologist_status === 'MICROBIOLOGIST_APPROVED' &&
-  //                 responseData?.manager_status === 'QC_REJECTED') ||
-  //             (responseData?.microbiologist_status === 'MICROBIOLOGIST_APPROVED' &&
-  //                 responseData?.manager_status === 'QA_REJECTED') ||
-  //             (responseData?.microbiologist_status === 'MICROBIOLOGIST_APPROVED' &&
-  //                 responseData?.manager_status === 'MICRO_DESIGNEE_REJECTED')
-  //         ) {
-  //             message.warning('Microbiologist Not Yet Approved');
-  //             setTimeout(() => {
-  //                 navigate('/Precot/QualityControl/F-019/Summary');
-  //             }, 1500);
-  //         }
-  //     }
-  // }
-
-  // useEffect to call fetch function when the component mounts
-
   const fetchDataByDateAndDepartment = () => {
     const token = localStorage.getItem("token");
-
     axios
       .get(
-        `${
-          API.prodUrl
-        }/Precot/api/QA/Service/getTrainingRecord?date=${date}&department=${getDepartmentName(
-          localStorage.getItem("departmentId")
-        )}`,
+        `${API.prodUrl}/Precot/api/QA/Service/getTrainingRecord?date=${date}&department=${selectedDepartment}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -371,8 +338,24 @@ export default function QA_F007_TrainingRec() {
       )
       .then((response) => {
         if (response.data.length > 0) {
-          setTrainingId(response.data[0].training_id);
-          setFormData(response.data[0]);
+          const res = response.data[0];
+
+          // Map details with signature properly formatted
+          const updatedDetails =
+            res.details?.map((item) => ({
+              ...item,
+              signature: item.signature
+                ? `data:image/png;base64,${item.signature}`
+                : "",
+            })) || [];
+
+          // Update state
+          setTrainingId(res.training_id);
+          setFormData({
+            ...res,
+            details: updatedDetails,
+          });
+
           validateHideButtons(response.data[0]);
           validateDisableFields(response.data[0]);
         }
@@ -387,11 +370,7 @@ export default function QA_F007_TrainingRec() {
     const token = localStorage.getItem("token");
     axios
       .get(
-        `${
-          API.prodUrl
-        }/Precot/api/QA/Service/TrainingCard/trainingSessionNoLov?department=${getDepartmentName(
-          localStorage.getItem("departmentId")
-        )}`,
+        `${API.prodUrl}/Precot/api/QA/Service/TrainingCard/trainingSessionNoLov?department=${selectedDepartment}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -402,14 +381,8 @@ export default function QA_F007_TrainingRec() {
         if (response.data.length > 0) {
           setSessionNumberOptions(response.data);
         }
-        // else {
-        //   message.warning("Training Session is not Submitted Yet!");
-        //   navigate("/Precot/QA/F007/Summary");
-        //   return;
-        // }
       })
       .catch((error) => {
-        // Handle error
         console.error(error);
       });
   };
@@ -476,6 +449,14 @@ export default function QA_F007_TrainingRec() {
   };
 
   const handleSave = async () => {
+    formData.details = formData.details.map((detail) => ({
+      name_of_the_employee: detail.name_of_the_employee,
+      employee_id: detail.employee_id,
+      department: detail.department,
+      signature: detail.signature ? detail.signature.split(",")[1] : null,
+    }));
+
+    setFormData({ ...formData });
     setIsLoading(true);
     const token = localStorage.getItem("token");
     try {
@@ -532,7 +513,7 @@ export default function QA_F007_TrainingRec() {
       name_of_the_employee: detail.name_of_the_employee || "N/A",
       employee_id: detail.employee_id || "N/A",
       department: detail.department || "N/A",
-      signature: detail.signature || "N/A",
+      signature: detail.signature ? detail.signature.split(",")[1] : "N/A",
     }));
 
     setFormData({ ...formData });
@@ -556,36 +537,6 @@ export default function QA_F007_TrainingRec() {
       message.error("Unable to Submit Form");
       setIsLoading(false);
     }
-  };
-
-  const handleApprove = async () => {
-    const token = localStorage.getItem("token");
-    setIsLoading(true);
-
-    const headers = {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    };
-
-    const res = await axios
-      .put(
-        `${API.prodUrl}/Precot/api/qc/ApproveMediaPreparationF019`,
-        {
-          id: formData.id,
-          status: "Approve",
-        },
-        { headers }
-      )
-      .then((res) => {
-        message.success(res.data.message);
-        setIsLoading(false);
-        navigate("/Precot/QualityControl/F-019/Summary");
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        message.error(err.response.data.message);
-      })
-      .finally(() => {});
   };
 
   const handleReject = async () => {
@@ -634,7 +585,7 @@ export default function QA_F007_TrainingRec() {
       <BleachingHeader
         unit="Unit-H"
         formName="TRAINING RECORD"
-        formatNo="PH-QAD01-F-007"
+        formatNo="PH-QAD01/F-007"
         sopNo="PH-QAD01-D-15"
         MenuBtn={
           <Button
@@ -934,7 +885,6 @@ export default function QA_F007_TrainingRec() {
                   }
                 />
               </td>
-
               <td style={{ padding: "0.5rem", textAlign: "center" }}>
                 {(currentPage - 1) * recordsPerPage + index + 1}
               </td>
@@ -978,17 +928,83 @@ export default function QA_F007_TrainingRec() {
                 />
               </td>
               <td>
-                <Input
-                  name="signature"
-                  value={detail.signature}
-                  onChange={(e) =>
-                    handleArrayChange(
-                      (currentPage - 1) * recordsPerPage + index,
-                      e
-                    )
-                  }
-                  disabled={isFieldsDisabled}
-                />
+                {formData.hod_status !== "HOD_SUBMITTED" ? (
+                  !detail.signature ? (
+                    <>
+                      <SignatureCanvas
+                        ref={(ref) => {
+                          const actualIndex =
+                            (currentPage - 1) * recordsPerPage + index;
+                          signatureRefs.current[actualIndex] = ref;
+                        }}
+                        penColor="green"
+                        canvasProps={{
+                          width: 400,
+                          height: 150,
+                          className: "sigCanvas",
+                          style: { border: "1px solid #ccc" },
+                        }}
+                        backgroundColor="#f9e5e1"
+                      />
+                      <div style={{ marginTop: "5px" }}>
+                        <Button
+                          type="primary"
+                          size="small"
+                          onClick={() => {
+                            const actualIndex =
+                              (currentPage - 1) * recordsPerPage + index;
+                            const canvas = signatureRefs.current[actualIndex];
+                            if (canvas) {
+                              canvas.getTrimmedCanvas().toBlob((blob) => {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                  const base64 = reader.result.split(",")[1];
+                                  handleSaveSignature(
+                                    actualIndex,
+                                    `data:image/png;base64,${base64}`
+                                  );
+                                };
+                                reader.readAsDataURL(blob);
+                              }, "image/png");
+                            }
+                          }}
+                        >
+                          Save
+                        </Button>
+
+                        <Button
+                          size="small"
+                          style={{ marginLeft: "8px" }}
+                          onClick={() => {
+                            const actualIndex =
+                              (currentPage - 1) * recordsPerPage + index;
+                            const canvas = signatureRefs.current[actualIndex];
+                            if (canvas) {
+                              canvas.clear();
+                              handleClearSignature(actualIndex);
+                            }
+                          }}
+                        >
+                          Clear
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <img
+                      src={detail.signature}
+                      alt="Signature"
+                      style={{ height: "50px", objectFit: "contain" }}
+                    />
+                  )
+                ) : detail.signature ? (
+                  <img
+                    src={detail.signature}
+                    alt="Signature"
+                    style={{ height: "50px", objectFit: "contain" }}
+                  />
+                ) : (
+                  "No signature selected"
+                )}
               </td>
             </tr>
           ))}
@@ -1019,8 +1035,6 @@ export default function QA_F007_TrainingRec() {
           </tr>
         </tbody>
       </table>
-      {/* <div style={{ display: 'flex', justifyContent: 'space-around' }}> */}
-
       <div
         style={{ marginTop: "0.5rem", textAlign: "center", display: "flex" }}
       >
@@ -1038,7 +1052,6 @@ export default function QA_F007_TrainingRec() {
           Remove
         </Button>
       </div>
-
       <div style={{ marginTop: "0.5rem", textAlign: "center" }}>
         <Button onClick={handlePrevious} disabled={currentPage === 1}>
           Previous
@@ -1050,7 +1063,6 @@ export default function QA_F007_TrainingRec() {
           Next
         </Button>
       </div>
-      {/* </div> */}
     </div>
   );
 }

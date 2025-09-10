@@ -88,7 +88,7 @@ const Padpunching_f04_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const Padpunching_f04_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -124,7 +124,7 @@ const Padpunching_f04_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username1}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const Padpunching_f04_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   console.log("get image", getImage);
 
@@ -162,7 +162,7 @@ const Padpunching_f04_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username2}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -186,7 +186,7 @@ const Padpunching_f04_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   console.log("get image2", getImage2);
 
@@ -200,7 +200,7 @@ const Padpunching_f04_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username3}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -224,7 +224,7 @@ const Padpunching_f04_summary = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl]);
+  }, [printResponseData,API.prodUrl]);
 
   console.log("get image", getImage);
 
@@ -294,7 +294,7 @@ const Padpunching_f04_summary = () => {
       const formattedDate = moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getByDatePrint?date=${formattedDate}`,
+          `${API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getByDatePrint?date=${formattedDate}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -341,7 +341,7 @@ const Padpunching_f04_summary = () => {
     const fetchShiftOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+          `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -397,9 +397,9 @@ const Padpunching_f04_summary = () => {
 
         let apiUrl = "";
         if (role === "ROLE_SUPERVISOR") {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getPackingDetailsSummary`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getPackingDetailsSummary`;
         } else if (role == "ROLE_HOD" || role == "ROLE_DESIGNEE") {
-          apiUrl = `${ API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getPackingDetailsSummary`;
+          apiUrl = `${API.prodUrl}/Precot/api/PadPunching/Service/PackingDetails/getPackingDetailsSummary`;
         } else {
           throw new Error("Role not found in localStorage.");
         }

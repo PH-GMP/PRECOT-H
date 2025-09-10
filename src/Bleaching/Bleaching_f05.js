@@ -172,7 +172,7 @@ function Bleaching_f05() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -196,7 +196,7 @@ function Bleaching_f05() {
           // // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
 
   const [getImage1, setGetImage1] = useState("");
@@ -209,7 +209,7 @@ function Bleaching_f05() {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -233,7 +233,7 @@ function Bleaching_f05() {
           // // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [selectedRow, API.prodUrl, token]);
+  }, [selectedRow,API.prodUrl, token]);
 
   
   const [availablequantitylistLoveLov, setAvailablequantitylistLov] = useState([]);
@@ -320,7 +320,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
     try {
       const token = localStorage.getItem("token");
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/GetByPhNo?phNo=${PHNo}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/GetByPhNo?phNo=${PHNo}`,
         {
 
           headers: {
@@ -530,7 +530,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveRawcottonF05`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveRawcottonF05`,
         {
           id: Id,
           status: "Approve",
@@ -585,7 +585,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/approveRawcottonF05`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/approveRawcottonF05`,
         {
           id: Id,
           status: "Reject",
@@ -847,7 +847,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -944,7 +944,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
       };
 
       const response = await axios.post(
-       `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
+       `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SubmitBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -1085,7 +1085,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -1183,7 +1183,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
       };
 
       const response = await axios.post(
-       `${ API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
+       `${API.prodUrl}/Precot/api/bleaching/Service/BleachContRawCotton/SaveBleachContRawCotton`,
         payload,
         { headers }
       );
@@ -1209,7 +1209,7 @@ navigate("/Precot/Bleaching/F-05/Summary")
     const fetchPhLovPayload = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${ API.prodUrl}/Precot/api/LOV/Service/PhBasedSupplierLOV`, {
+        const response = await axios.get(`${API.prodUrl}/Precot/api/LOV/Service/PhBasedSupplierLOV`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

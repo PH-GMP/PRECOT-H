@@ -111,7 +111,7 @@ const Manufacturing_Steps = (props) => {
   useEffect(() => {
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/punching/bmr/getManufacturerStepsByBatch?batchNo=${props.batchNo}`,
+        `${API.prodUrl}/Precot/api/punching/bmr/getManufacturerStepsByBatch?batchNo=${props.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -546,7 +546,7 @@ const Manufacturing_Steps = (props) => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/submitManufacturerSteps`,
+        `${API.prodUrl}/Precot/api/punching/bmr/submitManufacturerSteps`,
         newSave ? payload : payload_2,
         {
           headers: {
@@ -559,7 +559,7 @@ const Manufacturing_Steps = (props) => {
         message.success("Manufacturing Steps Submitted Successfully");
         axios
         .get(
-          `${ API.prodUrl}/Precot/api/punching/bmr/getManufacturerStepsByBatch?batchNo=${props.batchNo}`,
+          `${API.prodUrl}/Precot/api/punching/bmr/getManufacturerStepsByBatch?batchNo=${props.batchNo}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -996,7 +996,7 @@ const Manufacturing_Steps = (props) => {
     };
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/punching/bmr/saveManufacturerSteps`,
+        `${API.prodUrl}/Precot/api/punching/bmr/saveManufacturerSteps`,
         newSave ? payload : payload_2,
         {
           headers: {

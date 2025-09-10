@@ -169,7 +169,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -193,7 +193,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [BagMakingDetails, API.prodUrl, token]);
+}, [BagMakingDetails,API.prodUrl, token]);
 
 useEffect(() => {
   const token = localStorage.getItem("token");
@@ -203,7 +203,7 @@ useEffect(() => {
 
     axios
       .get(
-        `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+        `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -227,7 +227,7 @@ useEffect(() => {
         console.log("Error in fetching image:", err);
       });
   }
-}, [BagMakingDetails, API.prodUrl, token]);
+}, [BagMakingDetails,API.prodUrl, token]);
 
 const disable=
   (roleauth === "ROLE_OPERATOR" &&
@@ -447,7 +447,7 @@ const canDisplayButton2 = () => {
       };
 
       const response = await axios.post(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/SaveBagMakingF014`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/SaveBagMakingF014`,
         payload,
         { headers }
       );
@@ -576,7 +576,7 @@ const canDisplayButton2 = () => {
 
 
     const response = await axios.post(
-      `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/SubmitBagMakingF014`,
+      `${API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/SubmitBagMakingF014`,
       payload,
       { headers }
     );
@@ -622,7 +622,7 @@ const canDisplayButton2 = () => {
       "Content-Type": "application/json", 
     };
 
-    const res = await axios.put(`${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/approveOrReject`,
+    const res = await axios.put(`${API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/approveOrReject`,
       {
          id : bagId,
         status: "Approve"
@@ -657,7 +657,7 @@ const canDisplayButton2 = () => {
     }
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/approveOrReject`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/approveOrReject`,
         {
           id: bagId,
           status: "Reject",
@@ -682,7 +682,7 @@ const canDisplayButton2 = () => {
  const fetchDetailsByDate = async () => {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShift?date=${date}&shift=${shift}&machineName=${machineName}&productName=${productName}`,
+        `${API.prodUrl}/Precot/api/PadPunching/Service/BagMaking/getByDateShift?date=${date}&shift=${shift}&machineName=${machineName}&productName=${productName}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

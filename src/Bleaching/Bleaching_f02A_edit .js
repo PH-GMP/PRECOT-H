@@ -147,7 +147,7 @@ function Bleaching_f02A_edit(props) {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02A`,
         {
           id: clean_id,
           status: "Approve",
@@ -193,7 +193,7 @@ function Bleaching_f02A_edit(props) {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02A`,
+        `${API.prodUrl}/Precot/api/Bleaching/Service/approveRejectF02A`,
         {
           id: clean_id,
           status: "Reject",
@@ -268,7 +268,7 @@ function Bleaching_f02A_edit(props) {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02A`, {
+      .get(`${API.prodUrl}/Precot/api/Bleaching/Service/getDateHouseKeepingF02A`, {
         headers,
         params: {
           date: date,
@@ -550,7 +550,7 @@ function Bleaching_f02A_edit(props) {
     try {
       const response = await axios
         .post(
-          `${ API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02A`,
+          `${API.prodUrl}/Precot/api/Bleaching/Service/SubmitHouseKeepingF02A`,
           payload,
           {
             headers: {

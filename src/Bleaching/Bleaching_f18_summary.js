@@ -76,7 +76,7 @@ const Bleaching_f18_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -105,14 +105,14 @@ const Bleaching_f18_summary = () => {
 
 
 
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   useEffect(() => {
 
     //Filtered API Response
     axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F-012`,
+          `${API.prodUrl}/Precot/api/bleaching/summary/fetchApprovedBMR?formNumber=PH-PRD01/F-012`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const Bleaching_f18_summary = () => {
 
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -172,7 +172,7 @@ const Bleaching_f18_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   // console.log("get image", getImage);
 
@@ -222,7 +222,7 @@ const Bleaching_f18_summary = () => {
       setBaleNoPrint(value);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCottonByBmrAndSubbatchAndBale?bmrNo=${bmrOptionsValuePrint}&batchNo=${batch_NoPrint}&baleNo=${value}`,
+          `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCottonByBmrAndSubbatchAndBale?bmrNo=${bmrOptionsValuePrint}&batchNo=${batch_NoPrint}&baleNo=${value}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -254,7 +254,7 @@ const Bleaching_f18_summary = () => {
     try {
       const bmr = localStorage.getItem("selectedBmrDescription");
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${value}&bmr_no=${bmr}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchBaleByBatch?batchNo=${value}&bmr_no=${bmr}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -283,7 +283,7 @@ const Bleaching_f18_summary = () => {
     try {
       const bmr = localStorage.getItem("selectedBmrDescription");
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/baleNoLov?bmrNo=${bmrOptionsValuePrint}&batchNo=${value}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/baleNoLov?bmrNo=${bmrOptionsValuePrint}&batchNo=${value}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -309,7 +309,7 @@ const Bleaching_f18_summary = () => {
     try {
       const bmrNolocal = localStorage.getItem("selectedBmrDescription");
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${value}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchByBMR?bmr_no=${value}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -336,7 +336,7 @@ const Bleaching_f18_summary = () => {
     try {
       const bmrNolocal = localStorage.getItem("selectedBmrDescription");
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/batchNoLov?bmrNo=${value}`,
+        `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/batchNoLov?bmrNo=${value}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -424,7 +424,7 @@ const Bleaching_f18_summary = () => {
     const fetchBmrOptions = async () => {
       try {
         const response = await fetch(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/getcloseBMR`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -460,9 +460,9 @@ const Bleaching_f18_summary = () => {
 
       let apiUrl = "";
       if (role === "ROLE_SUPERVISOR") {
-        apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/getAllSupervisorNotSubmitted`;
+        apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/getAllSupervisorNotSubmitted`;
       } else if (role === "ROLE_HOD" || role === "ROLE_DESIGNEE") {
-        apiUrl = `${ API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/getAllHodNotSubmitted`;
+        apiUrl = `${API.prodUrl}/Precot/api/bleaching/Service/BleachAbsCotton/getAllHodNotSubmitted`;
       } else {
         throw new Error("Role not found in localStorage.");
       }

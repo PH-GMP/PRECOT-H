@@ -74,7 +74,7 @@ const QualityControl_f006_Summary = () => {
         console.log("usernameparams", username);
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -108,7 +108,7 @@ const QualityControl_f006_Summary = () => {
     const fetchDatamillbatch = async () => {
       try {
         const response = await axios.get(
-          `${    API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
+          `${   API.prodUrl}/Precot/api/punching/bmr/fetchProductionDetails`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const QualityControl_f006_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${    API.prodUrl}/Precot/api/chemicaltest/ARF006/getAll`,
+            `${   API.prodUrl}/Precot/api/chemicaltest/ARF006/getAll`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -316,7 +316,7 @@ const QualityControl_f006_Summary = () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${    API.prodUrl}/Precot/api/chemicaltest/ARF006/print?bmr=${formParams.bmrNo}&date=${formParams.samplingDate}`,
+        `${   API.prodUrl}/Precot/api/chemicaltest/ARF006/print?bmr=${formParams.bmrNo}&date=${formParams.samplingDate}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -67,7 +67,7 @@ const QC_f05_Summary = () => {
  
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const QC_f05_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
  
@@ -109,7 +109,7 @@ const QC_f05_Summary = () => {
  
         axios
           .get(
-            `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -140,7 +140,7 @@ const QC_f05_Summary = () => {
           });
       }
     });
-  }, [printResponseData,      API.prodUrl, token]);
+  }, [printResponseData,     API.prodUrl, token]);
 
   const formattedDate = (dateString) => {
     if (dateString) {
@@ -168,7 +168,7 @@ useEffect(() => {
     "Content-Type": "application/json",
   };
       axios.get(
-        `${    API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
+        `${   API.prodUrl}/Precot/api/qc/RawCottonConsolidatedF004/bmrNoList`,
         { headers }
       ).then((response) => {
         setBMROptions(response.data);
@@ -241,7 +241,7 @@ const fetchData = async () => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 
-    let apiUrl = `${    API.prodUrl}/Precot/api/chemicaltest/CLF005/getAll`;
+    let apiUrl = `${   API.prodUrl}/Precot/api/chemicaltest/CLF005/getAll`;
    
     const response = await fetch(apiUrl,{
       method: "GET",
@@ -365,7 +365,7 @@ const fetchData = async () => {
        try {
        
       axios.get(
-         `${    API.prodUrl}/Precot/api/chemicaltest/CLF005/print?id=${bmrPrint}`,
+         `${   API.prodUrl}/Precot/api/chemicaltest/CLF005/print?id=${bmrPrint}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

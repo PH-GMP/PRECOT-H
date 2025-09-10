@@ -250,7 +250,7 @@ const QA_F_041_Summary = () => {
   //   const hodLovApi = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `${ API.prodUrl}/Precot/api/QA/Service/ChangeControlForm/changeControlNumberLov`,
+  //         `${API.prodUrl}/Precot/api/QA/Service/ChangeControlForm/changeControlNumberLov`,
   //         {
   //           headers: {
   //             Authorization: `Bearer ${token}`,
@@ -798,7 +798,7 @@ const QA_F_041_Summary = () => {
                     CHANGE CONTROL FORM
                   </td>
                   <td style={{ padding: "0.5em" }}>Format No.:</td>
-                  <td style={{ padding: "0.5em" }}>PH-QAD01-F-041</td>
+                  <td style={{ padding: "0.5em" }}>PH-QAD01/F-041</td>
                 </tr>
                 <tr>
                   <td style={{ padding: "0.5em" }}>Revision No.:</td>
@@ -1661,7 +1661,7 @@ const QA_F_041_Summary = () => {
       </div>
       <BleachingHeader
         formName={"CHANGE CONTROL FORM"}
-        formatNo={"PH-QAD01-F-041"}
+        formatNo={"PH-QAD01/F-041"}
         MenuBtn={
           <Button
             type="primary"

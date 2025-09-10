@@ -387,7 +387,7 @@ const QualityAssuranceF042Summary = () => {
       <BleachingHeader
         unit="Unit H"
         formName="Change control log book"
-        formatNo="PH-QAD01-F-042"
+        formatNo="PH-QAD01/F-042"
         MenuBtn={
           <Button
             type="primary"
@@ -666,7 +666,7 @@ const QualityAssuranceF042Summary = () => {
                     Format No.:
                   </td>
                   <td colSpan="10" style={{ paddingLeft: "5px" }}>
-                    PH-QAD01-F-042
+                    PH-QAD01/F-042
                   </td>
                 </tr>
                 <tr>

@@ -212,6 +212,7 @@ const DryGoods_f06 = () => {
       e.preventDefault();
     }
   };
+
   useEffect(() => {
     console.log("state value", date, shift, order_no);
     const token = localStorage.getItem("token");
@@ -246,6 +247,7 @@ const DryGoods_f06 = () => {
         });
     }
   }, [planingDetailsByDate, API.prodUrl, token]);
+
   useEffect(() => {
     console.log("state value", date, shift, order_no);
     const token = localStorage.getItem("token");
@@ -682,6 +684,11 @@ const DryGoods_f06 = () => {
   };
 
   const sendContaminationCheck2 = async () => {
+    if (!Bag_Box) {
+      message.info("Bag/Box is not found");
+      return;
+    }
+
     setSaveLoading(true);
     const boxtotal =
       Number(Box1 || 0) +
@@ -775,6 +782,10 @@ const DryGoods_f06 = () => {
   };
 
   const sendContaminationCheck = async () => {
+    if (!Bag_Box) {
+      message.info("Bag/Box is not found");
+      return;
+    }
     const boxtotal =
       Number(Box1 || 0) +
       Number(Box2 || 0) +
@@ -1004,7 +1015,7 @@ const DryGoods_f06 = () => {
         const numberShift = convertShiftValue(shift);
 
         let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${date}&shift=${numberShift}&machine_name=${machineName}&order_no=${value}`;
-        // let apiUrl = `${ API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${date}&shift=${numberShift}&order_no=${'800005272'}`;
+        // let apiUrl = `${API.prodUrl}/Precot/api/drygoods/getStoppageDetailsF006?date=${date}&shift=${numberShift}&order_no=${'800005272'}`;
         const response = await fetch(apiUrl, {
           method: "GET",
           headers: {
@@ -1020,10 +1031,7 @@ const DryGoods_f06 = () => {
           setstoppagedata(data);
           console.log("setstoppage", data);
         } else {
-          // message.error(data.message)
-          // setTimeout(() => {
-          //   navigate("/Precot/choosenScreen");
-          // }, 1500)
+
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -1077,8 +1085,7 @@ const DryGoods_f06 = () => {
       console.log("shift", shift);
       const numberShift = convertShiftValue(shift);
       const response = await axios.get(
-        `${API.prodUrl}/Precot/api/drygoods/FleecetDetailsF006?date=${date}&shift=${numberShift}&
-order_no=${e}`,
+        `${API.prodUrl}/Precot/api/drygoods/FleecetDetailsF006?date=${date}&shift=${numberShift}&order_no=${e}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1535,7 +1542,7 @@ order_no=${e}`,
                   value={waste_kg}
                   onChange={(e) => setwaste_kg(e.target.value)}
                   disabled={!isEditable}
-                  // onKeyDown={(e) => handleKeyDown(e)}
+                // onKeyDown={(e) => handleKeyDown(e)}
                 />
               </th>
             </tr>
@@ -1618,37 +1625,37 @@ order_no=${e}`,
               >
                 {planingDetailsByDate?.operator_status ===
                   "OPERATOR_APPROVED" && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{planingDetailsByDate?.operator_sign}</div>
-                        <div>{formattedDate_operator()}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div>
+                          {" "}
+                          <div>{planingDetailsByDate?.operator_sign}</div>
+                          <div>{formattedDate_operator()}</div>
+                        </div>
+                        {getImage3 && (
+                          <img
+                            src={getImage3}
+                            alt="Supervisor Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "center",
+                            }}
+                          />
+                        )}
                       </div>
-                      {getImage3 && (
-                        <img
-                          src={getImage3}
-                          alt="Supervisor Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                    {/* <div>Signature & Date</div> */}
-                  </>
-                )}
+                      {/* <div>Signature & Date</div> */}
+                    </>
+                  )}
               </td>
               <td
                 colSpan="35"
@@ -1662,40 +1669,40 @@ order_no=${e}`,
                 {(planingDetailsByDate?.supervisor_status ===
                   "SUPERVISOR_APPROVED" ||
                   planingDetailsByDate?.supervisor_status ===
-                    "SUPERVISOR_REJECTED" ||
+                  "SUPERVISOR_REJECTED" ||
                   planingDetailsByDate?.hod_status === "HOD_APPROVED" ||
                   planingDetailsByDate?.hod_status === "HOD_REJECTED") && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{planingDetailsByDate?.supervisor_sign}</div>
-                        <div>{formattedDatesupervisor()}</div>
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div>
+                          {" "}
+                          <div>{planingDetailsByDate?.supervisor_sign}</div>
+                          <div>{formattedDatesupervisor()}</div>
+                        </div>
+                        {getImage1 && (
+                          <img
+                            src={getImage1}
+                            alt="Supervisor Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "center",
+                            }}
+                          />
+                        )}
                       </div>
-                      {getImage1 && (
-                        <img
-                          src={getImage1}
-                          alt="Supervisor Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "center",
-                          }}
-                        />
-                      )}
-                    </div>
-                    {/* <div>Signature & Date</div> */}
-                  </>
-                )}
+                      {/* <div>Signature & Date</div> */}
+                    </>
+                  )}
               </td>
               {/* <td colSpan="50" style={{ textAlign: "center"}}>{planingDetailsByDate.hod_sign}<br/>{formattedDate()}
               </td> */}
@@ -1708,36 +1715,36 @@ order_no=${e}`,
               >
                 {(planingDetailsByDate?.hod_status === "HOD_REJECTED" ||
                   planingDetailsByDate?.hod_status === "HOD_APPROVED") && (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div>
-                        {" "}
-                        <div>{planingDetailsByDate.hod_sign}</div>
-                        <div>{formattedDate()}</div>
-                      </div>
-                      {getImage2 && (
-                        <img
-                          src={getImage2}
-                          alt="HOD Sign"
-                          style={{
-                            width: "60px",
-                            height: "60px",
-                            marginLeft: "20px",
-                            objectFit: "contain",
-                            mixBlendMode: "multiply",
-                            justifyContent: "space-evenly",
-                          }}
-                        />
-                      )}
-                    </div>{" "}
-                  </>
-                )}
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div>
+                          {" "}
+                          <div>{planingDetailsByDate.hod_sign}</div>
+                          <div>{formattedDate()}</div>
+                        </div>
+                        {getImage2 && (
+                          <img
+                            src={getImage2}
+                            alt="HOD Sign"
+                            style={{
+                              width: "60px",
+                              height: "60px",
+                              marginLeft: "20px",
+                              objectFit: "contain",
+                              mixBlendMode: "multiply",
+                              justifyContent: "space-evenly",
+                            }}
+                          />
+                        )}
+                      </div>{" "}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
@@ -1788,77 +1795,77 @@ order_no=${e}`,
             Back
           </Button>,
           ...(roleBase === "ROLE_HOD" ||
-          roleBase === "ROLE_SUPERVISOR" ||
-          roleBase === "ROLE_QC" ||
-          roleBase === "ROLE_DESIGNEE"
+            roleBase === "ROLE_SUPERVISOR" ||
+            roleBase === "ROLE_QC" ||
+            roleBase === "ROLE_DESIGNEE"
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={rejectIcon} alt="Reject Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={rejectIcon} alt="Reject Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : [
-                <Button
-                  key="save"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButton2(),
-                  }}
-                  shape="round"
-                  icon={<IoSave color="#00308F" />}
-                >
-                  Save
-                </Button>,
-                <Button
-                  key="submit"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ]),
+              <Button
+                key="save"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButton2(),
+                }}
+                shape="round"
+                icon={<IoSave color="#00308F" />}
+              >
+                Save
+              </Button>,
+              <Button
+                key="submit"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ]),
           <Button
             key="logout"
             type="primary"

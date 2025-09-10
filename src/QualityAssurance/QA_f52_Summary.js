@@ -164,7 +164,7 @@ const QA_f52_Summary = () => {
       "Content-Type": "application/json",
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
+      .get(`${API.prodUrl}/Precot/api/Format/Service/getListofDepartment`, {
         headers,
       })
       .then((response) => {
@@ -178,7 +178,7 @@ const QA_f52_Summary = () => {
       "Content-Type": "application/json",
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/QA/Service/BreakageReportgetAllSeqNo`, {
+      .get(`${API.prodUrl}/Precot/api/QA/Service/BreakageReportgetAllSeqNo`, {
         headers,
       })
       .then((response) => {
@@ -192,7 +192,7 @@ const QA_f52_Summary = () => {
       "Content-Type": "application/json",
     };
     axios
-      .get(`${ API.prodUrl}/Precot/api/QA/Service/BreakageReportgetApproveSeqNo`, {
+      .get(`${API.prodUrl}/Precot/api/QA/Service/BreakageReportgetApproveSeqNo`, {
         headers,
       })
       .then((response) => {
@@ -207,8 +207,8 @@ const QA_f52_Summary = () => {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${
-         API.prodUrl
-        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01-F-052"}`,
+        API.prodUrl
+        }/Precot/api/qa/number/generation?formNumber=${"PH-QAD01/F-052"}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -240,7 +240,7 @@ const QA_f52_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -267,7 +267,7 @@ const QA_f52_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -278,7 +278,7 @@ const QA_f52_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -305,7 +305,7 @@ const QA_f52_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -316,7 +316,7 @@ const QA_f52_Summary = () => {
 
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+            `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
             {
               headers: {
                 "Content-Type": "application/json",
@@ -343,7 +343,7 @@ const QA_f52_Summary = () => {
           });
       }
     });
-  }, [printResponseData, API.prodUrl, token]);
+  }, [printResponseData,API.prodUrl, token]);
 
   // Print Module
   const handlePrint = () => {
@@ -398,7 +398,7 @@ const QA_f52_Summary = () => {
     try {
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/QA/Service/BreakageReportPrint?month=${monthP}&year=${yearP}&reportNo=${reportNoP}&date=${dateP}`,
+          `${API.prodUrl}/Precot/api/QA/Service/BreakageReportPrint?month=${monthP}&year=${yearP}&reportNo=${reportNoP}&date=${dateP}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -481,12 +481,12 @@ const QA_f52_Summary = () => {
         role === "ROLE_QA" ||
         (role === "ROLE_DESIGNEE" && departmentId == 6)
       ) {
-        apiUrl = `${ API.prodUrl}/Precot/api/QA/Service/BreakageReportsummary`;
+        apiUrl = `${API.prodUrl}/Precot/api/QA/Service/BreakageReportsummary`;
       } else if (
         role === "ROLE_HOD" ||
         (role === "ROLE_DESIGNEE" && departmentId != 6)
       ) {
-        apiUrl = `${ API.prodUrl}/Precot/api/QA/Service/BreakageReportGetHodummary?department=${department}`;
+        apiUrl = `${API.prodUrl}/Precot/api/QA/Service/BreakageReportGetHodummary?department=${department}`;
       } else {
         throw new Error("Role not found in localStorage.");
       }
@@ -666,7 +666,7 @@ const QA_f52_Summary = () => {
                   (GLASS / HARD PLASTIC / WOOD / CERAMIC)
                 </th>
                 <td colSpan="15">Format No.:</td>
-                <td colSpan="15">PH-QAD01-F-052</td>
+                <td colSpan="15">PH-QAD01/F-052</td>
               </tr>
               <tr>
                 <td colSpan="15">Revision No.:</td>
@@ -1177,7 +1177,7 @@ const QA_f52_Summary = () => {
         <BleachingHeader
           unit="Unit-H"
           formName="Breakage Report (GLASS / HARD PLASTIC / WOOD / CERAMIC)"
-          formatNo="PH-QAD01-F-052"
+          formatNo="PH-QAD01/F-052"
           MenuBtn={
             <Button
               type="primary"

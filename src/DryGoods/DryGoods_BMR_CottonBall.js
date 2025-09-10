@@ -684,7 +684,7 @@ const DryGoods_BMR_CottonBall = () => {
   // const handlePrint1 = async () => {
   //   try {
   //     const response = await axios.get(
-  //       `${ API.prodUrl}/Precot/api/cottonBall/GetCottonBallPrint?batch_no=95277810-1`,
+  //       `${API.prodUrl}/Precot/api/cottonBall/GetCottonBallPrint?batch_no=95277810-1`,
   //       {
   //         headers: {
   //           Authorization: `Bearer ${token}`,

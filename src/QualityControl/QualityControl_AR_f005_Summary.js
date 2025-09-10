@@ -100,7 +100,7 @@ const QCLARF05Summary = () => {
     };
 
     fetchImages();
-  }, [printData, API.prodUrl, token]);
+  }, [printData,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

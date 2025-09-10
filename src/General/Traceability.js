@@ -310,7 +310,7 @@ const handleRadioChange = (e) => {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchBale`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchBale`, {
         headers,
       })
       .then((res) => {
@@ -329,7 +329,7 @@ const handleRadioChange = (e) => {
       });
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/generation/fetchBatchNumbers`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/generation/fetchBatchNumbers`, {
         headers,
       })
       .then((res) => {
@@ -449,13 +449,13 @@ const handleDGLov = () => {
   }
   let apiurl;
   if(dgPrintParam.dgType == "Pleat" ){
-    apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityBatchNoPleat?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
+    apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityBatchNoPleat?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
   }
   else if(dgPrintParam.dgType == "Wool Roll"){
-    apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityWollRoll?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
+    apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityWollRoll?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
   }
   else if(dgPrintParam.dgType == "Cotton Balls"){
-   apiurl = `${ API.prodUrl}/Precot/api/drygoods/traceability/getBallTraceblityBatchNo?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
+   apiurl = `${API.prodUrl}/Precot/api/drygoods/traceability/getBallTraceblityBatchNo?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`;
   } 
   setSelectLoading(true);
   const fetchBatchNumber = async () => {
@@ -507,7 +507,7 @@ else if(department == 12){
   const fetchBudsLov = async () => {
     
     try {
-      const response = await axios.get(`${ API.prodUrl}/Precot/api/buds/bmr/getBudsTraceblityBatchNo?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`,
+      const response = await axios.get(`${API.prodUrl}/Precot/api/buds/bmr/getBudsTraceblityBatchNo?julianDay=${dgPrintParam.julianDay}&yearLastTwoDigits=${dgPrintParam.year}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -563,7 +563,7 @@ const handlePrint =  async () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/bleachingTrace?bale_no=${bleachingPrintParams.bale}&batchNo=${bleachingPrintParams.batchNo}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/bleachingTrace?bale_no=${bleachingPrintParams.bale}&batchNo=${bleachingPrintParams.batchNo}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -596,7 +596,7 @@ const handlePrint =  async () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/bleaching/generation/spulanceTrace?roll=${spunlacePrintParams.rollNum}`,
+        `${API.prodUrl}/Precot/api/bleaching/generation/spulanceTrace?roll=${spunlacePrintParams.rollNum}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -633,7 +633,7 @@ const handlePrint =  async () => {
     setPrintButtonLoading(true);
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/punching/tracebility/getCompleteTracebilityDetails?batchNo=${ppPrintParams.batchNumber}`,
+        `${API.prodUrl}/Precot/api/punching/tracebility/getCompleteTracebilityDetails?batchNo=${ppPrintParams.batchNumber}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -700,13 +700,13 @@ const handlePrint =  async () => {
     
        let apiurl;
        if(dgPrintParam.dgType == "Pleat" ){
-         apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsPleat?batchNo=${dgPrintParam.batchNumber}`;
+         apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsPleat?batchNo=${dgPrintParam.batchNumber}`;
        }
        else if(dgPrintParam.dgType == "Wool Roll"){
-         apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsWollRoll?batchNo=${dgPrintParam.batchNumber}`;
+         apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsWollRoll?batchNo=${dgPrintParam.batchNumber}`;
        } 
        else if(dgPrintParam.dgType == "Cotton Balls"){
-        apiurl = `${ API.prodUrl}/Precot/api/drygoods/traceability/ballsTraceability?batchNumber=${dgPrintParam.batchNumber}`
+        apiurl = `${API.prodUrl}/Precot/api/drygoods/traceability/ballsTraceability?batchNumber=${dgPrintParam.batchNumber}`
        } 
     
        
@@ -823,7 +823,7 @@ const handlePrint =  async () => {
     
         setPrintButtonLoading(true);
         try {
-          const response = await axios.get(`${ API.prodUrl}/Precot/api/buds/bmr/budsTraceability?batchNumber=${dgPrintParam.batchNumber}`,
+          const response = await axios.get(`${API.prodUrl}/Precot/api/buds/bmr/budsTraceability?batchNumber=${dgPrintParam.batchNumber}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -896,7 +896,7 @@ const showPrintModal = () => {
     };
 
     axios
-      .get(`${ API.prodUrl}/Precot/api/bleaching/generation/fetchSpunlaceRollNo`, {
+      .get(`${API.prodUrl}/Precot/api/bleaching/generation/fetchSpunlaceRollNo`, {
         headers,
       })
       .then((res) => {
@@ -930,7 +930,7 @@ const showPrintModal = () => {
     if (field === "bmrNumber") {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/buds/bmr/budsTraceability?batchNumber=${value}`,
+        `${API.prodUrl}/Precot/api/buds/bmr/budsTraceability?batchNumber=${value}`,
         { 
           headers: {
             Authorization: `Bearer ${token}`,
@@ -957,7 +957,7 @@ const showPrintModal = () => {
     if (field === "bmrNumber") {
     try {
       const response = await axios.get(
-        `${ API.prodUrl}/Precot/api/punching/tracebility/getCompleteTracebilityDetails?batchNo=${value}`,
+        `${API.prodUrl}/Precot/api/punching/tracebility/getCompleteTracebilityDetails?batchNo=${value}`,
         { 
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1009,7 +1009,7 @@ const showPrintModal = () => {
         };
         axios
           .get(
-            `${ API.prodUrl}/Precot/api/bleaching/generation/bleachingTrace?bale_no=${baleNo}&batchNo=${batchNo}`,
+            `${API.prodUrl}/Precot/api/bleaching/generation/bleachingTrace?bale_no=${baleNo}&batchNo=${batchNo}`,
             {
               headers,
             }
@@ -1053,7 +1053,7 @@ const showPrintModal = () => {
       };
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/bleaching/generation/spulanceTrace?roll=${selectedRollNumber}`,
+          `${API.prodUrl}/Precot/api/bleaching/generation/spulanceTrace?roll=${selectedRollNumber}`,
           {
             headers,
           }
@@ -1087,7 +1087,7 @@ const showPrintModal = () => {
       };
 
       axios
-      .get(`${ API.prodUrl}/Precot/api/buds/bmr/getBudsTraceblityBatchNo?julianDay=${budsParams.julianDay}&yearLastTwoDigits=${budsParams.year}`, {
+      .get(`${API.prodUrl}/Precot/api/buds/bmr/getBudsTraceblityBatchNo?julianDay=${budsParams.julianDay}&yearLastTwoDigits=${budsParams.year}`, {
         headers,
       })
       .then((res) => {
@@ -1128,7 +1128,7 @@ const showPrintModal = () => {
       };
 
       axios
-      .get(`${ API.prodUrl}/Precot/api/punching/tracebility/getTraceblityBatchNo?julianDay=${padPunchiingParams.julianDay}&yearLastTwoDigits=${padPunchiingParams.year}`, {
+      .get(`${API.prodUrl}/Precot/api/punching/tracebility/getTraceblityBatchNo?julianDay=${padPunchiingParams.julianDay}&yearLastTwoDigits=${padPunchiingParams.year}`, {
         headers,
       })
       .then((res) => {
@@ -1164,7 +1164,7 @@ const showPrintModal = () => {
       const fetchBatchNumber = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/traceability/getBallTraceblityBatchNo?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`,
+            `${API.prodUrl}/Precot/api/drygoods/traceability/getBallTraceblityBatchNo?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1193,10 +1193,10 @@ const showPrintModal = () => {
       else if(dgParam.dgType == "Pleat" || dgParam.dgType == "Wool Roll"){
         let apiurl;
         if(dgParam.dgType == "Pleat" ){
-          apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityBatchNoPleat?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`;
+          apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityBatchNoPleat?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`;
         }
         else if(dgParam.dgType == "Wool Roll"){
-          apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityWollRoll?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`;
+          apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/getTraceblityWollRoll?julianDay=${dgParam.julianDay}&yearLastTwoDigits=${dgParam.year}`;
         }
        
         const fetchBatchNumber = async () => {
@@ -1248,7 +1248,7 @@ const showPrintModal = () => {
     };
 
     axios
-    .get(`${ API.prodUrl}/Precot/api/punching/tracebility/getTraceblityBatchNo?julianDay=${ppPrintParams.julianDay}&yearLastTwoDigits=${ppPrintParams.year}`, {
+    .get(`${API.prodUrl}/Precot/api/punching/tracebility/getTraceblityBatchNo?julianDay=${ppPrintParams.julianDay}&yearLastTwoDigits=${ppPrintParams.year}`, {
       headers,
     })
     .then((res) => {
@@ -1276,7 +1276,7 @@ const showPrintModal = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${ API.prodUrl}/Precot/api/drygoods/traceability/ballsTraceability?batchNumber=${dgParam.batchNumber}`,
+            `${API.prodUrl}/Precot/api/drygoods/traceability/ballsTraceability?batchNumber=${dgParam.batchNumber}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -1314,10 +1314,10 @@ const showPrintModal = () => {
     if((dgParam.dgType == "Pleat" || dgParam.dgType == "Wool Roll") && dgParam.batchNumber !== ""){
       let apiurl;
       if(dgParam.dgType == "Pleat" ){
-        apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsPleat?batchNo=${dgParam.batchNumber}`;
+        apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsPleat?batchNo=${dgParam.batchNumber}`;
       }
       else if(dgParam.dgType == "Wool Roll"){
-        apiurl =`${ API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsWollRoll?batchNo=${dgParam.batchNumber}`;
+        apiurl =`${API.prodUrl}/Precot/api/drygoods/traceability/productionDetailsWollRoll?batchNo=${dgParam.batchNumber}`;
       } 
   
       const fetchData = async () => {

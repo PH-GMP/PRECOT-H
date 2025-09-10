@@ -204,7 +204,7 @@ const PadPunching_f03 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [productChangeOverRecord, API.prodUrl, token]);
+  }, [productChangeOverRecord,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -238,7 +238,7 @@ const PadPunching_f03 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [productChangeOverRecord, API.prodUrl, token]);
+  }, [productChangeOverRecord,API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -272,7 +272,7 @@ const PadPunching_f03 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [productChangeOverRecord, API.prodUrl, token]);
+  }, [productChangeOverRecord,API.prodUrl, token]);
 
   // tab 1
   const [ProductNameRP, setProductNameRP] = useState("");

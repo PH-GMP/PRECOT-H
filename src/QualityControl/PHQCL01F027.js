@@ -101,7 +101,7 @@ const PHQCL01F027 = () => {
 
       axios
         .get(
-          `${    API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${   API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const PHQCL01F027 = () => {
           console.log("Error in fetching image:", err);
         });
     }
-  }, [selectedRow.micro_sign, selectedRow.chemist_sign,      API.prodUrl]);
+  }, [selectedRow.micro_sign, selectedRow.chemist_sign,     API.prodUrl]);
 
   useEffect(() => {
     const headers = {
@@ -150,7 +150,7 @@ const PHQCL01F027 = () => {
     // Fetch data based on date or eq
     if (uniqueDate) {
       axios
-        .get(`${    API.prodUrl}/Precot/api/chemicaltest/CLF027`, { headers, params })
+        .get(`${   API.prodUrl}/Precot/api/chemicaltest/CLF027`, { headers, params })
         .then((response) => {
           if (
             response.data &&
@@ -252,7 +252,7 @@ const PHQCL01F027 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/chemicaltest/CLF027/submit/temp`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/chemicaltest/CLF027/submit/temp`, payload, {
         headers,
       })
       .then((response) => {
@@ -322,7 +322,7 @@ const PHQCL01F027 = () => {
     };
 
     axios
-      .post(`${    API.prodUrl}/Precot/api/chemicaltest/CLF027/save/temp`, payload, {
+      .post(`${   API.prodUrl}/Precot/api/chemicaltest/CLF027/save/temp`, payload, {
         headers,
       })
       .then((response) => {

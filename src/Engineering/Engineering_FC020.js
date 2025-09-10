@@ -206,7 +206,7 @@ const Engineering_FC020 = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${ API.prodUrl}/Precot/api/Engineering/getWorkorderlist?dateOfRequest=${state.date}&worNo=${state.worNo}`,
+        `${API.prodUrl}/Precot/api/Engineering/getWorkorderlist?dateOfRequest=${state.date}&worNo=${state.worNo}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -275,7 +275,7 @@ const Engineering_FC020 = () => {
       // console.loglog("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -299,7 +299,7 @@ const Engineering_FC020 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage1, setGetImage1] = useState("");
 
@@ -310,7 +310,7 @@ const Engineering_FC020 = () => {
       // console.loglog("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -334,7 +334,7 @@ const Engineering_FC020 = () => {
           // console.loglog("Error in fetching image:", err);
         });
     }
-  }, [editResponse, API.prodUrl, token]);
+  }, [editResponse,API.prodUrl, token]);
 
   const [getImage2, setGetImage2] = useState("");
 
@@ -345,7 +345,7 @@ const Engineering_FC020 = () => {
       // console.loglog("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -379,7 +379,7 @@ const Engineering_FC020 = () => {
       // console.loglog("usernameparams", username);
       axios
         .get(
-          `${ API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
+          `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -443,7 +443,7 @@ const Engineering_FC020 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/Workorder/Accept`,
+        ` ${API.prodUrl}/Precot/api/Engineering/Workorder/Accept`,
         payload,
         { headers }
       )
@@ -502,7 +502,7 @@ const Engineering_FC020 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/Workorder/Completed`,
+        ` ${API.prodUrl}/Precot/api/Engineering/Workorder/Completed`,
         payload,
         { headers }
       )
@@ -545,7 +545,7 @@ const Engineering_FC020 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/Engineering/Workorder/approve`,
+        `${API.prodUrl}/Precot/api/Engineering/Workorder/approve`,
         {
           id: id,
           status: "Approve",
@@ -584,7 +584,7 @@ const Engineering_FC020 = () => {
 
     const res = await axios
       .put(
-        `${ API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
+        `${API.prodUrl}/Precot/api/spunlace/Service/ProcessSetupVerificationSliterWinder/approveOrReject`,
         {
           id: id,
           status: "Reject",
@@ -631,7 +631,7 @@ const Engineering_FC020 = () => {
 
     axios
       .post(
-        `${ API.prodUrl}/Precot/api/Engineering/Workorder/Save`,
+        `${API.prodUrl}/Precot/api/Engineering/Workorder/Save`,
         payload,
         { headers }
       )
@@ -690,7 +690,7 @@ const Engineering_FC020 = () => {
 
     axios
       .post(
-        ` ${ API.prodUrl}/Precot/api/Engineering/Workorder/Submit`,
+        ` ${API.prodUrl}/Precot/api/Engineering/Workorder/Submit`,
         payload,
         { headers }
       )
