@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.focusr.Precot.util.AppConstants;
@@ -30,8 +31,12 @@ public class TrainingRecordLines {
 	@Column(name = "DEPARTMENT")
 	private String department;
 
+//	@Column(name = "SIGNATURE")
+//	private String signature;
+	
+    @Lob
 	@Column(name = "SIGNATURE")
-	private String signature;
+	private byte[] Signature;
 
 	@Column(name = "TRAINING_ID")
 	private Long training_id;

@@ -293,7 +293,7 @@ public class QaService2 {
 				{
 					InternalAuditDepartment department = new InternalAuditDepartment();
 					department.setAuditDepartment(dept.trim());
-					department.setFormatNo("PH-QAD01-F-010");
+					department.setFormatNo("PH-QAD01/F-010");
 					auditDepartmentRepo.save(department);
 				}
 			}

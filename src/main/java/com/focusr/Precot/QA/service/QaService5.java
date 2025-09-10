@@ -887,7 +887,7 @@ public class QaService5 {
 					{
 						TrainingTopic trainingTopic = new TrainingTopic();
 						trainingTopic.setTopic(topic);
-						trainingTopic.setFormatNo("PH-QAD01-F-006");
+						trainingTopic.setFormatNo("PH-QAD01/F-006");
 						topicRepo.save(trainingTopic);
 					}
 				}

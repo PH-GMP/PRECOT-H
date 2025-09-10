@@ -165,20 +165,20 @@ public interface QaOnlineInspectionRepository extends JpaRepository<QaOnlineInsp
 	
 			// TRACEABILITY
 	
-	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01-F-034'", nativeQuery = true)
+	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01/F-034'", nativeQuery = true)
 	List<QaOnlineInspectionReport> onlineInspectionTraceForPleat(@Param("batchNumber") String batchNumber);
 	
 	
-	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01-F-034'", nativeQuery = true)
+	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01/F-034'", nativeQuery = true)
 	List<QaOnlineInspectionReport> onlineInspectionTraceForWoll(@Param("batchNumber") String batchNumber);
 	
 	
-	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01-F-035'", nativeQuery = true)
+	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO = 'PH-QAD01/F-035'", nativeQuery = true)
 	List<QaOnlineInspectionReport> onlineInspectionTraceForBalls(@Param("batchNumber") String batchNumber);
 	
-	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO IN ('PH-QAD01-F-036')", nativeQuery = true)
+	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:batchNumber AND FORMAT_NO IN ('PH-QAD01/F-036')", nativeQuery = true)
 	List<QaOnlineInspectionReport> onlineInspectionTraceForBuds(@Param("batchNumber") String batchNumber);
 
-	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:bmrNo AND FORMAT_NO='PH-QAD01-F-034'", nativeQuery = true)
+	@Query(value = "SELECT * FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE BMR_NO=:bmrNo AND FORMAT_NO='PH-QAD01/F-034'", nativeQuery = true)
 	List<QaOnlineInspectionReport> getDetailsOnlineInspection(@Param("bmrNo") String bmrNo);
 }

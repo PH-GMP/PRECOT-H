@@ -3,6 +3,7 @@ package com.focusr.Precot.QA.service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -2159,8 +2160,14 @@ public class QaService6 {
 
 			if (userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")||
 					userRole.equals("QA_MANAGER") || userRole.equals("ROLE_MR")|| userRole.equals("HR_EXECUTIVE")) {
+				
+				List<String> departmentList = Arrays.asList(department.split(","));
+				
+				if (departmentList.isEmpty()) {
+				    return new ResponseEntity<>("No departments provided.", HttpStatus.BAD_REQUEST);
+				}
 
-				details = trainingRecordRepo.hodSummary(department);
+				details = trainingRecordRepo.hodSummary(departmentList);
 			}
 
 			return new ResponseEntity<>(details, HttpStatus.OK);

@@ -753,6 +753,19 @@ public class PunchingBmrService {
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
 		try {
+			
+			if (productionDetails.getProductionId() != null) {
+				
+				PunchingBmrProductionDetails existing =
+						productionDetailsRepository.findById(productionDetails.getProductionId()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			    	productionDetails.setCreatedAt(existing.getCreatedAt());
+			    	productionDetails.setCreatedBy(existing.getCreatedBy());
+			    }
+			}
+
 
 			if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
 
@@ -800,6 +813,19 @@ public class PunchingBmrService {
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
 		try {
+			
+			if (productionDetails.getProductionId() != null) {
+				
+				PunchingBmrProductionDetails existing =
+						productionDetailsRepository.findById(productionDetails.getProductionId()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			    	productionDetails.setCreatedAt(existing.getCreatedAt());
+			    	productionDetails.setCreatedBy(existing.getCreatedBy());
+			    }
+			}
+
 
 			if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
 

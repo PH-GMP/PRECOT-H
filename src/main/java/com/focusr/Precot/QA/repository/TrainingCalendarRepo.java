@@ -19,9 +19,14 @@ public interface TrainingCalendarRepo extends JpaRepository<TrainingCalendar,Lon
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_CALENDAR WHERE YEAR =:year",nativeQuery = true)
 	TrainingCalendar findByUniqueParams(@Param("year") String year);
 	
+//	@Query("select new com.focusr.Precot.QA.model.TrainingCalendarSummaryDTO(i.calendarId,i.year,i.qaDesigneeStatus,i.qaManagerMrStatus,i.reason)"
+//			+ " from TrainingCalendar i WHERE i.qaManagerMrStatus <> 'QA_MANAGER_MR_APPROVED' OR i.qaManagerMrStatus IS NULL order by updatedAt desc")
+//	List<TrainingCalendarSummaryDTO> getTrainingCalendarSummary();
+	
 	@Query("select new com.focusr.Precot.QA.model.TrainingCalendarSummaryDTO(i.calendarId,i.year,i.qaDesigneeStatus,i.qaManagerMrStatus,i.reason)"
-			+ " from TrainingCalendar i WHERE i.qaManagerMrStatus <> 'QA_MANAGER_MR_APPROVED' OR i.qaManagerMrStatus IS NULL order by updatedAt desc")
+			+ " from TrainingCalendar i order by updatedAt desc")
 	List<TrainingCalendarSummaryDTO> getTrainingCalendarSummary();
+
 	
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_CALENDAR"
 			+ " WHERE YEAR =:year"

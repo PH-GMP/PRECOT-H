@@ -17,8 +17,12 @@ public interface TrainingRecordRepo extends JpaRepository<TrainingRecord, Long> 
 	@Query(value = "SELECT * FROM precot.TRAINING_RECORD WHERE TRAINING_ID=:id", nativeQuery = true)
 	TrainingRecord findFormById(@Param("id") Long id);
 
-	@Query(value = "SELECT * FROM precot.TRAINING_RECORD WHERE HOD_STATUS = 'HOD_SAVED' AND DEPARTMENT =:department ORDER BY TRAINING_ID DESC", nativeQuery = true)
-	List<TrainingRecord> hodSummary(@Param("department") String department);
+//	@Query(value = "SELECT * FROM precot.TRAINING_RECORD WHERE HOD_STATUS = 'HOD_SAVED' AND DEPARTMENT =:department ORDER BY TRAINING_ID DESC", nativeQuery = true)
+//	List<TrainingRecord> hodSummary(@Param("department") String department);
+	
+	@Query(value = "SELECT * FROM precot.TRAINING_RECORD WHERE HOD_STATUS = 'HOD_SAVED' AND DEPARTMENT IN (:department) ORDER BY TRAINING_ID DESC", nativeQuery = true)
+	List<TrainingRecord> hodSummary(@Param("department") List<String> department);
+
 	
 	@Query(value = "SELECT * FROM precot.TRAINING_RECORD WHERE"
 			+ "(:month IS NULL OR :month = '' OR MONTH = :month) "

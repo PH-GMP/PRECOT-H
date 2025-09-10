@@ -667,6 +667,19 @@ public class BleachBmrSummaryService {
 				value = "startSubBatch";
 			}
 			
+			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
+				
+			    BmrSummaryProductionDetails existing =
+			        productionDetailsRepository.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			        bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
+			        bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
+			    }
+			}
+
+			
 			if(userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
 				
 				bmrSummaryProductionDetails.setStatus(AppConstants.supervisorApprovedStatus);
@@ -712,6 +725,18 @@ public class BleachBmrSummaryService {
 
 			if (bmrSummaryProductionDetails.getStartSubBatch() == null) {
 				value = "startSubBatch";
+			}
+			
+			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
+				
+			    BmrSummaryProductionDetails existing =
+			        productionDetailsRepository.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			        bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
+			        bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
+			    }
 			}
 			
 			if(userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {

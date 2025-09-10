@@ -3841,11 +3841,11 @@ public class QaService4 {
 
 			String deptName = "";
 
-			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
+			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01/F-037")) {
 
 				deptName = "QUALITY_ASSURANCE";
 
-			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
+			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01/F-038")) {
 
 				deptName = "COTTON_BUDS";
 
@@ -4003,11 +4003,11 @@ public class QaService4 {
 
 			String deptName = "";
 
-			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-037")) {
+			if (details.getFormatNo().equalsIgnoreCase("PH-QAD01/F-037")) {
 
 				deptName = "QUALITY_ASSURANCE";
 
-			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01-F-038")) {
+			} else if (details.getFormatNo().equalsIgnoreCase("PH-QAD01/F-038")) {
 
 				deptName = "COTTON_BUDS";
 
@@ -4517,11 +4517,11 @@ public class QaService4 {
 
 		String deptName = "";
 
-		if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+		if (formatNo.equalsIgnoreCase("PH-QAD01/F-037")) {
 
 			deptName = "QUALITY_ASSURANCE";
 
-		} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+		} else if (formatNo.equalsIgnoreCase("PH-QAD01/F-038")) {
 
 			deptName = "COTTON_BUDS";
 
@@ -4559,11 +4559,11 @@ public class QaService4 {
 
 		String deptName = "";
 
-		if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+		if (formatNo.equalsIgnoreCase("PH-QAD01/F-037")) {
 
 			deptName = "QUALITY_ASSURANCE";
 
-		} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+		} else if (formatNo.equalsIgnoreCase("PH-QAD01/F-038")) {
 
 			deptName = "COTTON_BUDS";
 
@@ -4608,11 +4608,11 @@ public class QaService4 {
 
 			String deptName = "";
 
-			if (formatNo.equalsIgnoreCase("PH-QAD01-F-037")) {
+			if (formatNo.equalsIgnoreCase("PH-QAD01/F-037")) {
 
 				deptName = "QUALITY_ASSURANCE";
 
-			} else if (formatNo.equalsIgnoreCase("PH-QAD01-F-038")) {
+			} else if (formatNo.equalsIgnoreCase("PH-QAD01/F-038")) {
 
 				deptName = "COTTON_BUDS";
 

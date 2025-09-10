@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Precot/static/css/main.f57673d5.css",
-    "main.js": "/Precot/static/js/main.7c89ec0e.js",
+    "main.css": "/Precot/static/css/main.8acaf099.css",
+    "main.js": "/Precot/static/js/main.8b7cd671.js",
     "static/js/206.e14dbd35.chunk.js": "/Precot/static/js/206.e14dbd35.chunk.js",
     "static/media/bg.png": "/Precot/static/media/bg.fe7a50dde221aeed82b6.png",
     "static/media/Banner-Changed.jpg": "/Precot/static/media/Banner-Changed.186b32d38598d289d6ef.jpg",
@@ -19,7 +19,7 @@
     "static/media/outlined-approve.svg": "/Precot/static/media/outlined-approve.97771b47dcdfd46e0a7e4a9abc85ee8c.svg"
   },
   "entrypoints": [
-    "static/css/main.f57673d5.css",
-    "static/js/main.7c89ec0e.js"
+    "static/css/main.8acaf099.css",
+    "static/js/main.8b7cd671.js"
   ]
 }

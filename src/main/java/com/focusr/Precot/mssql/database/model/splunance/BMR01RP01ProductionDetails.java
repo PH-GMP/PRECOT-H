@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
+import com.focusr.Precot.model.audit.UserDateAudit;
 import com.focusr.Precot.util.AppConstants;
 
 import lombok.Data;
@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS", schema = AppConstants.schema)
-public class BMR01RP01ProductionDetails {
+public class BMR01RP01ProductionDetails extends UserDateAudit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,47 +78,44 @@ public class BMR01RP01ProductionDetails {
 
 	@Column(name = "QA_ID")
 	private Long qa_id;
-	
-	
-	
-		// New Fields
-	
+
+	// New Fields
+
 	@Column(name = "MIXING")
 	private String mixing;
-	
+
 	@Column(name = "PRODUCT_DESCRIPTION")
 	private String productDescription;
-	
+
 	@Column(name = "No_of_Shaft")
 	private String shaftCount;
-	
+
 	@Column(name = "BATCH_QUANTITY")
 	private String batchQuantity;
-	
+
 	@Column(name = "WIDTH")
 	private String width;
-	
+
 	@Column(name = "NO_OF_ROLLS_SHAFT")
 	private String rollShaftCount;
-	
+
 	@Column(name = "PRODUCT_SUPPLY")
 	private String productSupply;
-	
-		// For Spl Bmr
-	
+
+	// For Spl Bmr
+
 	@Column(name = "SHAFT_FROM")
 	private String shaftFrom;
-	
+
 	@Column(name = "SHAFT_TO")
 	private String shaftTo;
-	
-	
-		// For Rp Bale
+
+	// For Rp Bale
 
 	@Column(name = "BALE_FROM")
 	private String BaleFrom;
-	
+
 	@Column(name = "BALE_TO")
 	private String BaleTo;
-	
+
 }

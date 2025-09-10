@@ -39,7 +39,7 @@ public interface StandarizationOfChemicalReportF016HistoryRepo
 	@Query(value = "SELECT * FROM precot.STANDARIZATION_OF_CHEMICAL_REPORT_F016_HISTORY WHERE "
 			+ "(:from_date IS NULL OR :to_date IS NULL OR DATE BETWEEN :from_date AND :to_date)"
 			+ "AND (:shift IS NULL OR SHIFT = :shift)"
-			+ "AND (:chemical IS NULL OR NAME_OF_SOLUTION = :chemical)", nativeQuery = true)
+			+ "AND (:chemical IS NULL OR TO_BE_NAME_OF_SOLUTION = :chemical)", nativeQuery = true)
 	List<StandarizationOfChemicalReportF016History> findByParamsF016(@Param("from_date") String from_date,
 			@Param("to_date") String to_date, @Param("shift") String shift, @Param("chemical") String chemical);
 

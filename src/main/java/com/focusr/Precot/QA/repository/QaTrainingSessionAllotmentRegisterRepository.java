@@ -21,6 +21,12 @@ public interface QaTrainingSessionAllotmentRegisterRepository extends JpaReposit
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_SESSION_ALLOTMENT_REGISTER WHERE DEPARTMENT =:department AND HOD_STATUS = 'HOD_SAVED' ORDER BY FORM_ID DESC", nativeQuery = true)
 	List<QaTrainingSessionAllotmentRegister> hodSummary(@Param("department") String department);
 	
+	@Query(value = "SELECT * FROM precot.QA_TRAINING_SESSION_ALLOTMENT_REGISTER " +
+            "WHERE DEPARTMENT IN (:department) " +
+            "AND HOD_STATUS = 'HOD_SAVED' " +
+            "ORDER BY FORM_ID DESC", nativeQuery = true)
+List<QaTrainingSessionAllotmentRegister> hodSummaryMultiple(@Param("department") List<String> department);
+	
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_SESSION_ALLOTMENT_REGISTER WHERE "
 			+ " (:month IS NULL OR :month='' OR MONTH=:month) "
 			+ " AND (:year IS NULL OR :year='' OR YEAR=:year) "

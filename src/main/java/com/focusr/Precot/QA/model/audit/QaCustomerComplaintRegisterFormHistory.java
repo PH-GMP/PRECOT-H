@@ -124,7 +124,7 @@ public class QaCustomerComplaintRegisterFormHistory extends UserDateAudit {
 	@Column(name = "MINOR")
 	private String minor;
 
-	@Column(name = "NATURE_OF_NON_CONFORMITY")
+	@Column(name = "NATURE_OF_NON_CONFORMITY", columnDefinition = "VARCHAR(MAX)")
 	private String nature_of_non_conformity;
 
 	@Column(name = "WHY1", columnDefinition = "VARCHAR(MAX)")
@@ -142,10 +142,10 @@ public class QaCustomerComplaintRegisterFormHistory extends UserDateAudit {
 	@Column(name = "WHY5", columnDefinition = "VARCHAR(MAX)")
 	private String why5;
 
-	@Column(name = "CORRECTIVE_ACTION")
+	@Column(name = "CORRECTIVE_ACTION", columnDefinition = "VARCHAR(MAX)")
 	private String corrective_action;
 
-	@Column(name = "VERIFICATION_FOR_EFFECTIVENESS")
+	@Column(name = "VERIFICATION_FOR_EFFECTIVENESS", columnDefinition = "VARCHAR(MAX)")
 	private String verification_for_effectiveness;
 
 	@Column(name = "TARGET_DATE")

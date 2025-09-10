@@ -371,7 +371,7 @@ public class ExcelGeneratorService {
 						: summeryrequest.getBmr_no();
 				String pOrder = (summeryrequest.getPorder() == null || summeryrequest.getPorder().isEmpty()) ? null
 						: summeryrequest.getPorder();
-				String formatNo = "PH-QAD01-F-034";
+				String formatNo = "PH-QAD01/F-034";
 
 				summaryF034 = qaOnlineInspectionReportHistoryRepository.excelReport(shift, machineNo, bmrNo, pOrder,
 						formatNo, fromDate, toDate);
@@ -403,7 +403,7 @@ public class ExcelGeneratorService {
 						: summeryrequest.getBmr_no();
 				String pOrder = (summeryrequest.getPorder() == null || summeryrequest.getPorder().isEmpty()) ? null
 						: summeryrequest.getPorder();
-				String formatNo = "PH-QAD01-F-035";
+				String formatNo = "PH-QAD01/F-035";
 
 				summaryF035 = qaOnlineInspectionReportHistoryRepository.excelReport(shift, machineNo, bmrNo, pOrder,
 						formatNo, fromDate, toDate);
@@ -435,7 +435,7 @@ public class ExcelGeneratorService {
 						: summeryrequest.getBmr_no();
 				String pOrder = (summeryrequest.getPorder() == null || summeryrequest.getPorder().isEmpty()) ? null
 						: summeryrequest.getPorder();
-				String formatNo = "PH-QAD01-F-036";
+				String formatNo = "PH-QAD01/F-036";
 
 				summaryF036 = qaOnlineInspectionReportHistoryRepository.excelReport(shift, machineNo, bmrNo, pOrder,
 						formatNo, fromDate, toDate);

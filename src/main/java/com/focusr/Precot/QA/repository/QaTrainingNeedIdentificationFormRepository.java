@@ -19,6 +19,9 @@ public interface QaTrainingNeedIdentificationFormRepository extends JpaRepositor
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_NEED_IDENTIFICATION_FORM_F005 WHERE DEPARTMENT =:department AND QA_MANAGER_STATUS != 'QA_MANAGER_APPROVED' ORDER BY FORM_ID DESC", nativeQuery = true)
 	List<QaTrainingNeedIdentificationForm> hodSummary(@Param("department") String department);
 	
+	@Query(value = "SELECT * FROM precot.QA_TRAINING_NEED_IDENTIFICATION_FORM_F005 WHERE DEPARTMENT IN (:department) AND QA_MANAGER_STATUS != 'QA_MANAGER_APPROVED' ORDER BY FORM_ID DESC", nativeQuery = true)
+	List<QaTrainingNeedIdentificationForm> hodSummaryMultipleDept(@Param("department") List<String> department);
+	
 	@Query(value = "SELECT * FROM precot.QA_TRAINING_NEED_IDENTIFICATION_FORM_F005 WHERE HOD_STATUS = 'HOD_SUBMITTED' AND QA_MANAGER_STATUS != 'QA_MANAGER_APPROVED' ORDER BY FORM_ID DESC", nativeQuery = true)
 	List<QaTrainingNeedIdentificationForm> qaManagerSummary();
 	

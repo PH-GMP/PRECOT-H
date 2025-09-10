@@ -151,6 +151,19 @@ public class SupulaceBmrSummaryService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			
+			if (details.getProd_id() != null) {
+				
+				BMR01RP01ProductionDetails existing =
+						bmr_01_productiondetailsrepository.findById(details.getProd_id()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			    	details.setCreatedAt(existing.getCreatedAt());
+			    	details.setCreatedBy(existing.getCreatedBy());
+			    }
+			}
+
 
 			if (role.equals("ROLE_SUPERVISOR")) {
 				details.setForm_no("PRD02/F-26");
@@ -196,6 +209,18 @@ public class SupulaceBmrSummaryService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			
+			if (details.getProd_id() != null) {
+				
+				BMR01RP01ProductionDetails existing =
+						bmr_01_productiondetailsrepository.findById(details.getProd_id()).orElse(null);
+
+			    if (existing != null) {
+			    	
+			    	details.setCreatedAt(existing.getCreatedAt());
+			    	details.setCreatedBy(existing.getCreatedBy());
+			    }
+			}
 
 			if (role.equals("ROLE_SUPERVISOR")) {
 

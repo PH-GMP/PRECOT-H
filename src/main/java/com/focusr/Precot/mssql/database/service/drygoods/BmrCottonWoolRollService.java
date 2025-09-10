@@ -170,6 +170,19 @@ public class BmrCottonWoolRollService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			
+			if (details.getProd_id() != null) {
+
+				BMR001GoodsProductionDetails existing = bmr001goodsproductiondetailsrepository
+						.findById(details.getProd_id()).orElse(null);
+
+				if (existing != null) {
+
+					details.setCreatedAt(existing.getCreatedAt());
+					details.setCreatedBy(existing.getCreatedBy());
+				}
+			}
+
 
 			if (role.equals("ROLE_SUPERVISOR")) {
 
@@ -217,6 +230,19 @@ public class BmrCottonWoolRollService {
 
 			String role = sca.getUserRoleFromRequest(http, tokenProvider);
 			Long userId = sca.getUserIdFromRequest(http, tokenProvider);
+			
+			if (details.getProd_id() != null) {
+
+				BMR001GoodsProductionDetails existing = bmr001goodsproductiondetailsrepository
+						.findById(details.getProd_id()).orElse(null);
+
+				if (existing != null) {
+
+					details.setCreatedAt(existing.getCreatedAt());
+					details.setCreatedBy(existing.getCreatedBy());
+				}
+			}
+
 
 			if (role.equals("ROLE_SUPERVISOR")) {
 

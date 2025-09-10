@@ -4679,7 +4679,7 @@ public class QcService2 {
 
 						String date1 = rejectionReportHistory.getDate();
 						String shift = rejectionReportHistory.getShift();
-						String chemical = rejectionReportHistory.getName_of_solution();
+						String chemical = rejectionReportHistory.getTo_be_name_of_solution();
 
 						int version = standarizationOfChemicalReportF016HistoryRepo
 								.getMaximumVersion(date1, shift, chemical).map(temp -> temp + 1).orElse(1);
@@ -4728,7 +4728,7 @@ public class QcService2 {
 
 				String date1 = rejectionReportHistory.getDate();
 				String shift = rejectionReportHistory.getShift();
-				String chemical = rejectionReportHistory.getName_of_solution();
+				String chemical = rejectionReportHistory.getTo_be_name_of_solution();
 
 				int version = standarizationOfChemicalReportF016HistoryRepo.getMaximumVersion(date1, shift, chemical)
 						.map(temp -> temp + 1).orElse(1);
@@ -4844,7 +4844,7 @@ public class QcService2 {
 
 					String date1 = object.getDate();
 					String shift = object.getShift();
-					String chemical = object.getName_of_solution();
+					String chemical = object.getTo_be_name_of_solution();
 
 					objHistory = standarizationOfChemicalReportF016HistoryRepo.fetchLastSubmittedRecord(date1, shift,
 							chemical);

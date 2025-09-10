@@ -321,10 +321,10 @@ public class NumberGenerationService {
 
 		int sequenceNumber = 0;
 
-		if (formNumber.equalsIgnoreCase("PH-QAD01-F-076")) {
+		if (formNumber.equalsIgnoreCase("PH-QAD01/F-076")) {
 			result = qaTrainingSessionAllotmentRegisterLineRepository.fetchLastGeneratedNo(department, year);
 			sequencePart = 3; // sequence number is in 3rd part
-		} else if (formNumber.equalsIgnoreCase("PH-QAD01-F-041")) {
+		} else if (formNumber.equalsIgnoreCase("PH-QAD01/F-041")) {
 			result = qaChangeControlFormRepository.fetchLastGeneratedNo(department, year);
 			sequencePart = 2; // sequence number is in 2nd part
 		} else if(formNumber.equalsIgnoreCase("PH- QAD01/F-048"))
@@ -337,7 +337,7 @@ public class NumberGenerationService {
 		if (result != null) {
 			lastSequenceNumber = (String) result; // Cast to the correct type
 		} else {
-			if (formNumber.equalsIgnoreCase("PH-QAD01-F-076")) {
+			if (formNumber.equalsIgnoreCase("PH-QAD01/F-076")) {
 				return new ResponseEntity(new ApiResponse(false, "no data"), HttpStatus.OK);
 			}
 
@@ -355,9 +355,9 @@ public class NumberGenerationService {
 			}
 		}
 
-		if (formNumber.equalsIgnoreCase("PH-QAD01-F-076")) {
+		if (formNumber.equalsIgnoreCase("PH-QAD01/F-076")) {
 			generationNumber = String.format("TS/%s/%s/%04d", departmentCode, lastTwoDigitYear, sequenceNumber);
-		} else if (formNumber.equalsIgnoreCase("PH-QAD01-F-041")) {
+		} else if (formNumber.equalsIgnoreCase("PH-QAD01/F-041")) {
 //			generationNumber = String.format("CCF/%s/%04d/%s", departmentCode, sequenceNumber + 1, year.trim());
 			generationNumber = String.format("PCC/%s/%04d/%s", departmentCode, sequenceNumber + 1, year.trim());
 		} else if(formNumber.equalsIgnoreCase("PH- QAD01/F-048")) 

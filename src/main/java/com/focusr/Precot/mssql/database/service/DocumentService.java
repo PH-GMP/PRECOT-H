@@ -769,42 +769,42 @@ public class DocumentService {
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-014",
+	                "PH-HRD01/F-014",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController14(fromdate, todate)));
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-015",
+	                "PH-HRD01/F-015",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController15(fromdate, todate)));
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-016",
+	                "PH-HRD01/F-016",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController16(fromdate, todate)));
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-017",
+	                "PH-HRD01/F-017",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController17(fromdate, todate)));
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-018",
+	                "PH-HRD01/F-018",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController18(fromdate, todate)));
 	        
 	        formCountList.add(new FormsRequestDTO(
 	                "QA",
-	                "PH-HRD01-F-019",
+	                "PH-HRD01/F-019",
 	                "PEST CONTROL SERVICE REPORT",
 	                fromdate, todate,
 	                sanitizationRepository.countPestController19(fromdate, todate)));
@@ -1265,7 +1265,7 @@ public class DocumentService {
 	        long finalInspectionCount = sanitizationRepository.finalInspectionReport(fromdate, todate);
 	        formCountList.add(new FormsRequestDTO(
 	                AppConstantsBuds.department, 
-	                "PH-QAD01-F-037", 
+	                "PH-QAD01/F-037", 
 	                "Final Inspection Report", 
 	                fromdate, todate, 
 	                finalInspectionCount));
@@ -1346,6 +1346,86 @@ public class DocumentService {
 	                "Weighing Scales Calibration Record",
 	                fromdate, todate,
 	                sanitizationRepository.countWeighingScalesCalibrationRecord(fromdate, todate)));
+	        
+		//			  BATCH MANUFACTURING RECORD
+			        
+					
+		// 			  BLEACHING 
+		  
+			formCountList.add(new FormsRequestDTO(
+		              "Bleaching",
+		              "PRD01/F-43",
+		              "Batch Manufacturing Record",
+		              fromdate, todate,
+		              sanitizationRepository.countBmr(fromdate, todate)));
+			
+			
+			// SPUNLACE F26
+			
+			formCountList.add(new FormsRequestDTO(
+		          "Spunlace",
+		          "PRD02/F-26",
+		          "Batch Manufacturing Record",
+		          fromdate, todate,
+		          sanitizationRepository.countBmrSpunlace(fromdate, todate)));
+			
+			System.out.println("Spunlace" + formCountList);
+			
+			// SPUNLACE F27 RP BALE
+			
+			formCountList.add(new FormsRequestDTO(
+		          "Spunlace",
+		          "PRD02/F-27",
+		          "Batch Manufacturing Record",
+		          fromdate, todate,
+		          sanitizationRepository.countBmrRpBale(fromdate, todate)));
+			
+			// DRY GOODS  - Cotton Ball - PH-PRD04/F-004
+			
+			formCountList.add(new FormsRequestDTO(
+		          "DryGoods",
+		          "PH-PRD04/F-004 ",
+		          "Batch Manufacturing Record - CottonBall",
+		          fromdate, todate,
+		          sanitizationRepository.cottonBallBmrCount(fromdate, todate)));
+		
+			// DRY GOODS  - Pleat  - PH-PRD04/F-007
+			
+			formCountList.add(new FormsRequestDTO(
+		          "DryGoods",
+		          "PH-PRD04/F-007",
+		          "Batch Manufacturing Record - Pleat",
+		          fromdate, todate,
+		          sanitizationRepository.pleatBmrCount(fromdate, todate)));
+		
+			// DRY GOODS  - Wool Roll  - PH-PRD04/F-008
+			
+			formCountList.add(new FormsRequestDTO(
+		          "DryGoods",
+		          "PH-PRD04/F-008",
+		          "Batch Manufacturing Record - WoolRoll",
+		          fromdate, todate,
+		          sanitizationRepository.woolRollBmrCount(fromdate, todate)));
+		
+			// PAD PUNCHING
+			
+			formCountList.add(new FormsRequestDTO(
+		          "PadPunching",
+		          "PH-QAD01/F-070",
+		          "Batch Manufacturing Record",
+		          fromdate, todate,
+		          sanitizationRepository.padPunchingBmrCount(fromdate, todate)));
+		
+			
+			// COTTON BUDS
+			
+			formCountList.add(new FormsRequestDTO(
+		          "CottonBuds",
+		          "PH-PRD06/F-004",
+		          "Batch Manufacturing Record",
+		          fromdate, todate,
+		          sanitizationRepository.budsBmrCount(fromdate, todate)));
+
 	        
 	        
 	        

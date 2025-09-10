@@ -128,7 +128,6 @@ public class ReportService {
 	            // Check if the current order number matches the provided orderNo
 				
 	            if (orderNo == null || baleNoList.contains(orderNo)) {
-	            	
 	            	System.out.println("Order matches !!!");
 	            	
 	                currentRoll = new HashMap<>();

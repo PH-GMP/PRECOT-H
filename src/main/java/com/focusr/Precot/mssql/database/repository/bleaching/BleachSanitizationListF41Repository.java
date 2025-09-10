@@ -547,7 +547,7 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     @Query(value = "SELECT COUNT(*) FROM precot.QA_TRAINING_NEED_IDENTIFICATION_FORM_F005 WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countTrainingNeedIdentification(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_TRAINING_CALENDAR WHERE UPDATED_DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_TRAINING_CALENDAR WHERE createdAt BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countTrainingCalendar(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     @Query(value = "SELECT COUNT(*) FROM precot.QA_TRAINING_CARD WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
@@ -607,22 +607,22 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     
     	// F030 - F045
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-029'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-029'", nativeQuery = true)
     long countInwardInspectionReport1(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-030'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-030'", nativeQuery = true)
     long countInwardInspectionReport2(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-031'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-031'", nativeQuery = true)
     long countInwardInspectionReport3(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-032'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-032'", nativeQuery = true)
     long countInwardInspectionReport4(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-033'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-033'", nativeQuery = true)
     long countInwardInspectionReport5(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-//    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01-F-034'", nativeQuery = true)
+//    @Query(value = "SELECT COUNT(*) FROM precot.QA_INWARD_INSPECTION_REPORT WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-QAD01/F-034'", nativeQuery = true)
 //    long countInwardInspectionReport6(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     @Query(value = "SELECT COUNT(*) FROM precot.QA_ONLINE_INSPECTION_REPORT_F034 WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
@@ -698,22 +698,22 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     @Query(value = "SELECT COUNT(*) FROM precot.QA_RODENT_BOX_CHECK_LIST WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countRodentCheckbox(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-014'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-014'", nativeQuery = true)
     long countPestController14(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-015'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-015'", nativeQuery = true)
     long countPestController15(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-016'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-016'", nativeQuery = true)
     long countPestController16(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-017'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-017'", nativeQuery = true)
     long countPestController17(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-018'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-018'", nativeQuery = true)
     long countPestController18(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
-    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01-F-019'", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.QA_PEST_CONTROLLER WHERE DATE BETWEEN :fromDate AND :toDate AND FORMAT_NO='PH-HRD01/F-019'", nativeQuery = true)
     long countPestController19(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
     
@@ -735,6 +735,49 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     long countWeighingScalesCalibrationRecord(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
     
+    
+    /**
+     *  BATCH MANUFACTURING RECORD
+     */
+    
+    
+    @Query(value = "SELECT COUNT(*) FROM precot.BMR_SUMMARY_PROD_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate)", nativeQuery = true)
+	long countBmr(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// Spunlace
+
+	@Query(value = "SELECT COUNT(*) FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) AND FORM_NO = 'PRD02/F-26'", nativeQuery = true)
+	long countBmrSpunlace(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	@Query(value = "SELECT COUNT(*) FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) AND FORM_NO = 'PRD02/F-27'", nativeQuery = true)
+	long countBmrRpBale(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// DRY_GOODS
+
+	// Cotton Ball - PH-PRD04/F-004
+
+	@Query(value = "SELECT COUNT(*) FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) AND FORM_NO = 'PH-PRD04/F-004'", nativeQuery = true)
+	long cottonBallBmrCount(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// Pleat - PH-PRD04/F-007
+
+	@Query(value = "SELECT COUNT(*) FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) AND FORM_NO = 'PH-PRD04/F-007'", nativeQuery = true)
+	long pleatBmrCount(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// Wool Roll - PH-PRD04/F-008
+
+	@Query(value = "SELECT COUNT(*) FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) AND FORM_NO = 'PH-PRD04/F-008'", nativeQuery = true)
+	long woolRollBmrCount(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// PAD_PUNCHING
+
+	@Query(value = "SELECT COUNT(*) FROM precot.PUNCHING_BMR_PROD_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) ", nativeQuery = true)
+	long padPunchingBmrCount(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
+
+	// COTTON BUDS
+
+	@Query(value = "SELECT COUNT(*) FROM precot.BUDS_BMR_PRODUCTION_DETAILS WHERE createdAt >= :fromDate AND createdAt < DATEADD(DAY, 1, :toDate) ", nativeQuery = true)
+	long budsBmrCount(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
     
 	
 }

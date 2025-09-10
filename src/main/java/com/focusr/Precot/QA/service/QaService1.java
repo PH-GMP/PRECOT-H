@@ -3147,8 +3147,14 @@ public class QaService1 {
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
 			if (role.equalsIgnoreCase("ROLE_HOD") || role.equalsIgnoreCase("ROLE_DESIGNEE")) {
+				
+				List<String> departmentList = Arrays.asList(department.split(","));
+				
+				if (departmentList.isEmpty()) {
+				    return new ResponseEntity<>("No departments provided.", HttpStatus.BAD_REQUEST);
+				}
 
-				details = qaTrainingSessionAllotmentRegisterRepository.hodSummary(department);
+				details = qaTrainingSessionAllotmentRegisterRepository.hodSummaryMultiple(departmentList);
 
 			} else {
 				return new ResponseEntity<>(new ApiResponse(false, role + " is not authorize to access the form."),
@@ -3583,8 +3589,15 @@ public class QaService1 {
 			String role = scaUtil.getUserRoleFromRequest(http, tokenProvider);
 
 			if (role.equalsIgnoreCase("ROLE_HOD") || role.equalsIgnoreCase("ROLE_DESIGNEE")) {
+				
+				List<String> departmentList = Arrays.asList(department.split(","));
+				
+				if (departmentList.isEmpty()) {
+				    return new ResponseEntity<>("No departments provided.", HttpStatus.BAD_REQUEST);
+				}
+				
 
-				details = qaTrainingNeedIdentificationFormRepository.hodSummary(department);
+				details = qaTrainingNeedIdentificationFormRepository.hodSummaryMultipleDept(departmentList);
 
 			} else {
 				return new ResponseEntity<>(new ApiResponse(false, role + " is not authorize to access the form."),

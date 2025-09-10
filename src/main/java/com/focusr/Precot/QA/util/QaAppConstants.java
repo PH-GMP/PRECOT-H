@@ -75,39 +75,39 @@ public interface QaAppConstants {
 	String QCRejected = "QC_REJECTED";
 
 	// Pest Controller
-	String PC_Format = "PH-HRD01-F-014";
-	String PC_Format_1 = "PH-HRD01-F-015";
-	String PC_Format_2 = "PH-HRD01-F-016";
-	String PC_Format_3 = "PH-HRD01-F-017";
-	String PC_Format_4 = "PH-HRD01-F-018";
-	String PC_Format_5 = "PH-HRD01-F-019";
+	String PC_Format = "PH-HRD01/F-014";
+	String PC_Format_1 = "PH-HRD01/F-015";
+	String PC_Format_2 = "PH-HRD01/F-016";
+	String PC_Format_3 = "PH-HRD01/F-017";
+	String PC_Format_4 = "PH-HRD01/F-018";
+	String PC_Format_5 = "PH-HRD01/F-019";
 
 	// INWARD INSPECTION
 
-	String inward_formt_carton = "PH-QAD01-F-029";
-	String inward_format_film = "PH-QAD01-F-030";
-	String inward_format_ziplock = "PH-QAD01-F-031";
-	String inward_format_stick = "PH-QAD01-F-032";
-	String inward_format_jar = "PH-QAD01-F-033";
+	String inward_formt_carton = "PH-QAD01/F-029";
+	String inward_format_film = "PH-QAD01/F-030";
+	String inward_format_ziplock = "PH-QAD01/F-031";
+	String inward_format_stick = "PH-QAD01/F-032";
+	String inward_format_jar = "PH-QAD01/F-033";
 
-	String finalInspection = "PH-QAD01-F-037";
-	String finalInspectionCottonBuds = "PH-QAD01-F-038";
-	String containerInspection = "PH-QAD01-F-039";
+	String finalInspection = "PH-QAD01/F-037";
+	String finalInspectionCottonBuds = "PH-QAD01/F-038";
+	String containerInspection = "PH-QAD01/F-039";
 	String managementOfIncidence = "PH-QAD01/F-001";
-	String customerComplaint = "PH-QAD01-F-018";
-	String nonConfirmityReport = "PH-QAD01-F-020";
-	String listOfSharpTools = "PH-QAD01-F-060";
-	String rodentBox = "PH-HRD01-F-013";
-	String onlineInspection = "PH-QAD01-F-035";
-	String inprocessInsBud = "PH-QAD01-F-036";
-	String inprocessInsPleates = "PH-QAD01-F-034";
-	String finalDispatch = "PH-QAD01-F-037";
-	String internalAuditReport = "PH-QAD01-F-012";
+	String customerComplaint = "PH-QAD01/F-018";
+	String nonConfirmityReport = "PH-QAD01/F-020";
+	String listOfSharpTools = "PH-QAD01/F-060";
+	String rodentBox = "PH-HRD01/F-013";
+	String onlineInspection = "PH-QAD01/F-035";
+	String inprocessInsBud = "PH-QAD01/F-036";
+	String inprocessInsPleates = "PH-QAD01/F-034";
+	String finalDispatch = "PH-QAD01/F-037";
+	String internalAuditReport = "PH-QAD01/F-012";
 
-	String changeControlLogBook = "PH-QAD01-F-042";
-	String summaryOfTraceability="PH-QAD01-F-025";
-	String trainingNeedIdentification="PH-QAD01-F-005";
-	String correctiveActionReport="PH-QAD01-F-044";
+	String changeControlLogBook = "PH-QAD01/F-042";
+	String summaryOfTraceability="PH-QAD01/F-025";
+	String trainingNeedIdentification="PH-QAD01/F-005";
+	String correctiveActionReport="PH-QAD01/F-044";
 
 	// ANUUAL PLAN
 	String mrSaved = "MR_SAVED";
@@ -192,7 +192,7 @@ public interface QaAppConstants {
 	String SupervisorApprove = "SUPERVISOR_APPROVED";
 	String SupervisorReject = "SUPERVISOR_REJECTED";
 
-	String BREAKAGEREPORT = "PH-QAD01-F-052";
+	String BREAKAGEREPORT = "PH-QAD01/F-052";
 
 	String prodDesignee = "ROLE_DESIGNEE";
 	String RoleMr = "ROLE_MR";
