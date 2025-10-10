@@ -7,12 +7,57 @@ const Product_Reconciliation = (props) => {
   const token = localStorage.getItem("token");
 
   const [pdeData, setPdeData] = useState({
+
     input_quantity: "",
     output_quantity: "",
     yield_quantity: "",
   });
+  console.log("status pde", pdeData.status)
 
   const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    const fetchSavedData = async () => {
+      try {
+        const response = await axios.get(
+          `${API.prodUrl}/Precot/api/cottonBall/getReconillationByBatchNo`,
+          {
+            params: {
+              batchNo: props.batchNo,
+            },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.status === 200 && response.data) {
+          if (response.data.length === 1) {
+            setIsDisabled(true);
+          } else {
+            fetchData();
+            setIsDisabled(false);
+          }
+
+          const { input_quantity, output_quantity, yield_quantity } =
+            response.data[0];
+          setPdeData({
+            input_quantity: input_quantity || "",
+            output_quantity: output_quantity || "",
+            yield_quantity: yield_quantity || "",
+          });
+        } else {
+          message.warning("No reconciliation data found for the batch.");
+        }
+      } catch (error) {
+        console.log("error", error)
+      }
+    };
+
+    if (props.batchNo) {
+      fetchSavedData();
+    }
+  }, [props.batchNo, token]);
 
   const handleSubmit = async () => {
     const params = {
@@ -58,19 +103,22 @@ const Product_Reconciliation = (props) => {
             }
             console.log("response.data", response.data[0]);
             const data = response.data[0];
-
+            // if (form_no == "Balls") {
+            //   setSubmitStatus(true)
+            // }
             setPdeData({
+
               input_quantity: data.input_quantity || "",
               output_quantity: data.output_quantity || "",
               yield_quantity: data.yield_quantity || "",
             });
           } else {
-            message.warning("No reconciliation data found for the batch.");
+            message.info("No reconciliation data found for the batch.");
           }
         } catch (error) {
           message.error(
             error.response?.data?.message ||
-              "Failed to fetch reconciliation data."
+            "Failed to fetch reconciliation data."
           );
         }
       }
@@ -81,81 +129,32 @@ const Product_Reconciliation = (props) => {
     }
   };
 
-  useEffect(() => {
-    setPdeData({
-      output: "",
-      input: "",
-      yield: "",
-    });
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${API.prodUrl}/Precot/api/cottonBall/01.GetProductionDetails?batch_no=${props.batchNo}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.data.length == 0) {
-          message.warning("No data found");
-        } else if (response.data.length > 0) {
-          const data = response.data[0];
-          handlePde(data.order_no, data.start_date, data.end_date);
+
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${API.prodUrl}/Precot/api/cottonBall/01.GetProductionDetails?batch_no=${props.batchNo}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (error) {
-        message.error(error.response.data.message);
+      );
+      if (response.data.length == 0) {
+        message.warning("No data found");
+      } else if (response.data.length > 0) {
+        const data = response.data[0];
+        handlePde(data.order_no, data.start_date, data.end_date);
       }
-    };
-    fetchData();
-  }, [props.batchNo]);
-
-  useEffect(() => {
-    const fetchSavedData = async () => {
-      try {
-        const response = await axios.get(
-          `${API.prodUrl}/Precot/api/cottonBall/getReconillationByBatchNo`,
-          {
-            params: {
-              batchNo: props.batchNo,
-            },
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        if (response.status === 200 && response.data) {
-          if (response.data.length === 1) {
-            setIsDisabled(true);
-          } else {
-            setIsDisabled(false);
-          }
-
-          const { input_quantity, output_quantity, yield_quantity } =
-            response.data[0];
-          setPdeData({
-            input_quantity: input_quantity || "",
-            output_quantity: output_quantity || "",
-            yield_quantity: yield_quantity || "",
-          });
-        } else {
-          message.warning("No reconciliation data found for the batch.");
-        }
-      } catch (error) {
-        message.error(
-          error.response?.data?.message ||
-            "Failed to fetch reconciliation data."
-        );
-      }
-    };
-
-    if (props.batchNo) {
-      fetchSavedData();
+    } catch (error) {
+      message.error(error.response.data.message);
     }
-  }, [props.batchNo, token]);
+  };
+
 
   const handlePde = async (orderNo, startDate, endDate) => {
+
     if (orderNo && startDate && endDate) {
       try {
         const response = await axios.get(
@@ -169,16 +168,22 @@ const Product_Reconciliation = (props) => {
         if (response.data) {
           setPdeData((prevState) => ({
             ...prevState,
-            input: response.data.input,
-            output: response.data.output,
-            yield: response.data.yield,
+
+            input_quantity: response.data.input,
+            output_quantity: response.data.output,
+            yield_quantity: response.data.yield,
           }));
         }
       } catch (error) {
         // message.error(error.response.data.message);
       }
     }
+
+
   };
+
+
+
 
   return (
     <div>

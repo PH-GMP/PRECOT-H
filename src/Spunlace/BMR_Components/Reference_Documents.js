@@ -1,4 +1,3 @@
-import React from "react";
 
 const Reference_Documents = () => {
   return (
@@ -28,10 +27,10 @@ const Reference_Documents = () => {
             1
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            Good Documentation Practices{" "}
+            Good Documentation Practices
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            QAD01-D-50{" "}
+            PH-QAD01-D-10
           </td>
         </tr>
         <tr>
@@ -39,10 +38,10 @@ const Reference_Documents = () => {
             2
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            INSTRUCTION FOR CLEANING
+            Spunlace Operation
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            PRD02-D-26
+            PH-PRD02-D-03
           </td>
         </tr>
         <tr>
@@ -50,10 +49,10 @@ const Reference_Documents = () => {
             3
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            INSTRUCTION FOR BALE FEEDING AREA
+            Cleaning
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            PRD02-D-06
+            PH-PRD02-D-04
           </td>
         </tr>
         <tr>
@@ -61,10 +60,10 @@ const Reference_Documents = () => {
             4
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            INSTRUCTION FOR BALE OPENER
+            Sharp Tool Policy
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            PRD02-D-07
+            PH-QAD01-D-43
           </td>
         </tr>
         <tr>
@@ -72,10 +71,10 @@ const Reference_Documents = () => {
             5
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            INSTRUCTION FOR WEIGHING BALE OPENER
+            Deviations Management
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            PRD02/D-08
+            PH-QAD01-D-41
           </td>
         </tr>
         <tr>
@@ -83,122 +82,13 @@ const Reference_Documents = () => {
             6
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            CALIBRATION AND VERIFICATION OF WEIGHING SCALE
+            Change Control
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-            PRD02-D-09
+            PH-QAD01-D-37
           </td>
         </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            7
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR AIR LAY CARDING MACHINE
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-10
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            8
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR REITER CARDING MACHINE
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-11
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            9
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR JETLACE
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-14
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            10
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR DRYER
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-15
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            11
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR WINDER
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-16
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            12
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            INSTRUCTION FOR MAHLO
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-18
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            13
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            WORK INSTRUCTION FOR LUCID
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            PRD02-D-19
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            14
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            OUT-OF-SPECIFICATION
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            QCL01-D-22
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            15
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            DEVIATIONS MANAGEMENT
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            QAD01-D-43
-          </td>
-        </tr>
-        <tr>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            16
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            CHANGE CONTROL
-          </td>
-          <td colSpan="1" style={{ textAlign: "center", padding: "0.4em" }}>
-            QAD01-D-41
-          </td>
-        </tr>
+
       </table>
     </div>
   );

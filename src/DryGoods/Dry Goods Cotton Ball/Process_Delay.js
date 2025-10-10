@@ -3,6 +3,7 @@ import moment from "moment";
 import { Button, Input, message, Select, Spin, Empty, Checkbox } from "antd";
 import axios from "axios";
 import API from "../../baseUrl.json";
+import { display } from "@mui/system";
 
 const Process_Delay = (props) => {
   const [data, setData] = useState([]);
@@ -32,6 +33,9 @@ const Process_Delay = (props) => {
     { value: "BL2", label: "BL2" },
   ];
 
+  const role = localStorage.getItem("role");
+
+
   useEffect(() => {
     if (props.batchNo) {
       clearFields();
@@ -48,6 +52,12 @@ const Process_Delay = (props) => {
     setDates({});
     setSelectedRows(new Set());
   };
+
+
+  const usernameSupervisor =
+    role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+
+
 
   const fetchProcessDelayData = (batchNo) => {
     setLoading(true);
@@ -134,7 +144,7 @@ const Process_Delay = (props) => {
           total_hour:
             selectedRecord.totalTime || data1.detailsDly[0]?.total_hour,
           remarks: selectedRecord.remarks || data1.detailsDly[0]?.remarks,
-          sign: signatures[rowIndex] || data1.detailsDly[0]?.sign,
+          sign: signatures[rowIndex] || data1?.detailsDly[0]?.sign || usernameSupervisor,
           // sign_date:
           //   moment(dates[rowIndex]).format("YYYY-MM-DD") ||
           //   data1.detailsDly[0]?.sign_date,
@@ -231,7 +241,7 @@ const Process_Delay = (props) => {
           total_hour:
             selectedRecord.totalTime || data1.detailsDly[0]?.total_hour,
           remarks: selectedRecord.remarks || data1.detailsDly[0]?.remarks,
-          sign: signatures[rowIndex] || data1.detailsDly[0]?.sign,
+          sign: signatures[rowIndex] || data1.detailsDly[0]?.sign || usernameSupervisor,
           // sign_date:
           //   moment(dates[rowIndex]).format("YYYY-MM-DD") ||
           //   data1.detailsDly[0]?.sign_date,
@@ -305,7 +315,7 @@ const Process_Delay = (props) => {
         })
         .catch((error) => {
           console.error("Error submitting data", error);
-          message.error(error.response.data.message);
+          message.error(error.response.data?.message);
         });
     } else {
       message.warning(
@@ -348,6 +358,15 @@ const Process_Delay = (props) => {
     });
   };
 
+  const handleSelectAll = () => {
+    const allRowIndexes = new Set(data.map((_, index) => index));
+    setSelectedRows(allRowIndexes);
+  };
+
+  const handleDeselectAll = () => {
+    setSelectedRows(new Set());
+  };
+
   return (
     <>
       <Spin spinning={loading}>
@@ -382,26 +401,39 @@ const Process_Delay = (props) => {
             Fetch Data
           </Button>
         </div>
-        <Button
-          type="primary"
-          onClick={handleSave}
-          disabled={isSubmitDisabled || fieldsDisabled}
-          style={{
-            marginTop: "0.4em",
-            marginBottom: "0.4em",
-            marginRight: "1em",
-          }}
-        >
-          Save
-        </Button>
-        <Button
-          type="primary"
-          onClick={handleSubmit}
-          disabled={isSubmitDisabled || fieldsDisabled}
-          style={{ marginTop: "0em" }}
-        >
-          Submit
-        </Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+            <Button
+              type="primary"
+              onClick={handleSave}
+              disabled={isSubmitDisabled || fieldsDisabled}
+              style={{
+                marginTop: "0.4em",
+                marginBottom: "0.4em",
+                marginRight: "1em",
+              }}
+            >
+              Save
+            </Button>
+            <Button
+              type="primary"
+              onClick={handleSubmit}
+              disabled={isSubmitDisabled || fieldsDisabled}
+              style={{ marginTop: "0em" }}
+            >
+              Submit
+            </Button>
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <Button onClick={handleSelectAll} disabled={fieldsDisabled}>
+              Select All
+            </Button>
+            <Button onClick={handleDeselectAll} disabled={fieldsDisabled} style={{ marginLeft: "10px" }}>
+              Deselect All
+            </Button>
+          </div>
+        </div>
+
 
         {data.length === 0 ? (
           <Empty description="No data available" />
@@ -442,7 +474,7 @@ const Process_Delay = (props) => {
                     <Select
                       options={props.supLov}
                       style={{ width: "100%" }}
-                      value={signatures[index] || record.sign || ""}
+                      value={signatures[index] || record.sign || usernameSupervisor}
                       onChange={(value) => {
                         setSignatures((prevSignatures) => ({
                           ...prevSignatures,
@@ -452,14 +484,27 @@ const Process_Delay = (props) => {
                       }}
                       disabled={fieldsDisabled}
                     />
-                 
+                    {/* <Input
+                      type="date"
+                      max={today}
+                      style={{ width: "50%" }}
+                      value={dates[index] || record.sign_date || ""}
+                      disabled={fieldsDisabled}
+                      onChange={(e) => {
+                        setDates((prevDates) => ({
+                          ...prevDates,
+                          [index]: e.target.value,
+                        }));
+                        handleDateChange(e.target.value);
+                      }}
+                    /> */}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-      </Spin>
+      </Spin >
     </>
   );
 };

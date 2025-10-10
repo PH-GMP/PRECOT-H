@@ -2,43 +2,40 @@
 /* eslint-disable react/jsx-pascal-case */
 import {
   Button,
-  Tabs,
-  Tooltip,
-  Row,
-  Select,
+  Input,
   message,
   Modal,
-  Input,
+  Row,
+  Select,
+  Tabs,
+  Tooltip,
 } from "antd";
-import React, { useEffect, useState } from "react";
-import Production_Details from "./Dry Goods Cotton Ball/Production_Details";
-import BleachingHeader from "../Components/BleachingHeader";
-import { TbMenuDeep } from "react-icons/tb";
+import useMessage from "antd/es/message/useMessage";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { BiNavigation } from "react-icons/bi";
-import { FaLock } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
-import { FaPrint } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { FaLock, FaPrint } from "react-icons/fa6";
 import { GoArrowLeft } from "react-icons/go";
-import Bale_Consumption_For_MiniRoll from "./Dry Goods Cotton Ball/Bale_Consumption_For_MiniRoll";
-import Packing_Material_Issue from "./Dry Goods Cotton Ball/Packing_Material_Issue";
-import Reference_Documents from "./Dry Goods Cotton Ball/Reference_Documents";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 import Equipment_Used_Process from "./Dry Goods Cotton Ball/Equipment_Used_Process";
-import Verification_Of_Records from "./Dry Goods Cotton Ball/Verification_Of_Records";
+import List_Of_Enclosure from "./Dry Goods Cotton Ball/List_Of_Enclosure";
 import Manufacturing_Steps from "./Dry Goods Cotton Ball/Manufacturing_Steps";
-import Product_Reconciliation from "./Dry Goods Cotton Ball/Product_Reconciliation";
+import Packing_Material_Issue from "./Dry Goods Cotton Ball/Packing_Material_Issue";
+import Post_Production from "./Dry Goods Cotton Ball/Post_Production";
 import Process_Delay from "./Dry Goods Cotton Ball/Process_Delay";
 import Process_Deviation from "./Dry Goods Cotton Ball/Process_Deviation";
-import List_Of_Enclosure from "./Dry Goods Cotton Ball/List_Of_Enclosure";
-import Post_Production from "./Dry Goods Cotton Ball/Post_Production";
-import Qa_Release from "./Dry Goods Cotton Ball/Qa_Release";
+import Product_Reconciliation from "./Dry Goods Cotton Ball/Product_Reconciliation";
 import Product_Release from "./Dry Goods Cotton Ball/Product_Release";
+import Production_Details from "./Dry Goods Cotton Ball/Production_Details";
+import Qa_Release from "./Dry Goods Cotton Ball/Qa_Release";
+import Reference_Documents from "./Dry Goods Cotton Ball/Reference_Documents";
 import Rework from "./Dry Goods Cotton Ball/Rework";
-import API from "../baseUrl.json";
-import axios from "axios";
-import logo from "../Assests/logo.png";
-import useMessage from "antd/es/message/useMessage";
-import moment from "moment";
+import Verification_Of_Records from "./Dry Goods Cotton Ball/Verification_Of_Records";
 
 const DryGoods_BMR_CottonBall = () => {
   const [open, setOpen] = useState(false);
@@ -82,36 +79,23 @@ const DryGoods_BMR_CottonBall = () => {
     bmr13goodsqarelease: [],
     bmr14goodsproductrelease: [],
     bmr03goodspackingmeterialissue: [],
+    productReconillation: [],
     reworkList: [],
   });
+
+  console.log("printData", printData)
+
   const [pdeData, setPdeData] = useState({
     output: "",
     input: "",
     yield: "",
   });
-  console.log("PDE", pdeData);
+  console.log("pdeData", pdeData);
   //All states for API here
   const machineNameLov = [
     { value: "TC10-1", label: "TC10-1 " },
     { value: "TC10-2", label: "TC10-2" },
   ];
-
-  const [apiData, setApiData] = useState({
-    baleConsumption: [],
-    equipmentUsedProcess: [],
-    listOfEnclosures: [],
-    ManufacturingSteps: [],
-    PackingMaterialIssue: [],
-    PostProduction: [],
-    ProcessDelay: [],
-    ProcessDeviation: [],
-    ProductReconciliation: [],
-    ProductRelease: [],
-    ProductionDetails: [],
-    QaRelease: [],
-    VerificationOfRecords: [],
-    Rework: [],
-  });
 
   //All States for LOV Here
   const [Lov, setLov] = useState({
@@ -125,25 +109,9 @@ const DryGoods_BMR_CottonBall = () => {
     setOpen(true);
   };
 
-  const onClose = () => {
-    setOpen(false);
-  };
 
-  const onChange = (key) => {};
+  const onChange = (key) => { };
 
-  const updateAPIData = (updates) => {
-    setApiData((prevState) => ({
-      ...prevState,
-      ...updates,
-    }));
-  };
-
-  const updateLovData = (updates) => {
-    setLov((prevState) => ({
-      ...prevState,
-      ...updates,
-    }));
-  };
 
   const onBatchChange = (selectedBatch) => {
     setNew(selectedBatch);
@@ -233,7 +201,7 @@ const DryGoods_BMR_CottonBall = () => {
         });
       });
 
-    const handleKeyDown = (event) => {};
+    const handleKeyDown = (event) => { };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -244,7 +212,7 @@ const DryGoods_BMR_CottonBall = () => {
     setSelectedBatchNo(New);
   };
   //    setSelectedBatchNo(selectedOrder);
-  useEffect(() => {}, [orderNo]);
+  useEffect(() => { }, [orderNo]);
 
   const items = [
     {
@@ -264,7 +232,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -290,7 +258,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -317,7 +285,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -344,7 +312,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -370,7 +338,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -396,7 +364,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -422,7 +390,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -449,7 +417,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -475,7 +443,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -501,7 +469,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -526,13 +494,13 @@ const DryGoods_BMR_CottonBall = () => {
           role={localStorage.getItem("role")}
           loggedInQaManQADes={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -557,13 +525,13 @@ const DryGoods_BMR_CottonBall = () => {
           role={localStorage.getItem("role")}
           loggedInQaManQADes={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -589,7 +557,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -615,7 +583,7 @@ const DryGoods_BMR_CottonBall = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -648,7 +616,7 @@ const DryGoods_BMR_CottonBall = () => {
           }));
           setLaydownLov(a);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, [selectedBatchNo]);
@@ -680,23 +648,6 @@ const DryGoods_BMR_CottonBall = () => {
   }, [printData]);
 
   const [reworkList, setreworkList] = useState([]);
-
-  // const handlePrint1 = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${API.prodUrl}/Precot/api/cottonBall/GetCottonBallPrint?batch_no=95277810-1`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     setreworkList(response.data.reworkList);
-  //     window.print(); // Trigger print after data is set
-  //   } catch (error) {
-  //     console.error("Error fetching print data:", error);
-  //   }
-  // };
 
   const handlePrint = async () => {
     if (printParams.batchNo == "") {
@@ -777,6 +728,7 @@ const DryGoods_BMR_CottonBall = () => {
       message.error(error?.response?.data?.message);
     }
   };
+  console.log("setPrintData", printData)
 
   const handlePrint2 = async () => {
     if (
@@ -1741,7 +1693,7 @@ const DryGoods_BMR_CottonBall = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                On date packed Qty.in No of Bags:
+                On date packed Qty.in No of Boxes:
               </td>
               <td
                 colspan="5"
@@ -2460,20 +2412,20 @@ const DryGoods_BMR_CottonBall = () => {
             </tr>
             {printData && printData.bmr03goodspackingmeterialissue.length > 0
               ? printData.bmr03goodspackingmeterialissue[0].pckdetails.map(
-                  (x, i) => {
-                    return (
-                      <tr>
-                        <td colSpan="2">{i + 1}</td>
-                        <td colSpan="4">{x.date}</td>
-                        <td colSpan="3">{x.packing_batch_no}</td>
-                        <td colSpan="3">{x.name_of_the_meterial}</td>
-                        <td colSpan="3">{x.qty}</td>
-                        <td colSpan="3">{x.unit}</td>
-                        <td colSpan="2">{x.remarks}</td>
-                      </tr>
-                    );
-                  }
-                )
+                (x, i) => {
+                  return (
+                    <tr>
+                      <td colSpan="2">{i + 1}</td>
+                      <td colSpan="4">{x.date}</td>
+                      <td colSpan="3">{x.packing_batch_no}</td>
+                      <td colSpan="3">{x.name_of_the_meterial}</td>
+                      <td colSpan="3">{x.qty}</td>
+                      <td colSpan="3">{x.unit}</td>
+                      <td colSpan="2">{x.remarks}</td>
+                    </tr>
+                  );
+                }
+              )
               : null}
             <br />
             <tr>
@@ -2576,7 +2528,7 @@ const DryGoods_BMR_CottonBall = () => {
                   fontSize: "10pt",
                   fontFamily: "Times New Roman, Times, serif",
                 }}
-              ></td>
+              >Dry Goods Operation</td>
               <td
                 colspan="5"
                 style={{
@@ -2585,7 +2537,7 @@ const DryGoods_BMR_CottonBall = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PH-PRD03-D-03
+                PH-PRD04-D-03
               </td>
             </tr>
             <tr>
@@ -2617,7 +2569,7 @@ const DryGoods_BMR_CottonBall = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PH-PRD03-D-04
+                PH-PRD04-D-04
               </td>
             </tr>
             <tr>
@@ -2714,6 +2666,70 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 PH-QAD01-D-37
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                7
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Sharp Tool Policy
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PH-QAD01-D-43
+              </td>
+            </tr>
+            <tr>
+              <td
+                colspan="3"
+                style={{
+                  textAlign: "center",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                8
+              </td>
+              <td
+                colspan="12"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                Metal Detection System
+              </td>
+              <td
+                colspan="5"
+                style={{
+                  textAlign: "left",
+                  fontSize: "10pt",
+                  fontFamily: "Times New Roman, Times, serif",
+                }}
+              >
+                PH-QAD01-D-42
               </td>
             </tr>
 
@@ -2911,9 +2927,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[0]?.activity ==
+                    ?.detailsVerificationRecords[0]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -2941,9 +2957,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[0]?.activity ==
+                    ?.detailsVerificationRecords[0]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3018,9 +3034,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords?.length > 0
+                  printData.bmr06goodsverificationofrecords?.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[1]?.activity ==
+                    ?.detailsVerificationRecords[1]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3048,9 +3064,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[1]?.activity ==
+                    ?.detailsVerificationRecords[1]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3125,9 +3141,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[2]?.activity ==
+                    ?.detailsVerificationRecords[2]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3155,9 +3171,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[2]?.activity ==
+                    ?.detailsVerificationRecords[2]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3232,9 +3248,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[3]?.activity ==
+                    ?.detailsVerificationRecords[3]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3262,9 +3278,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[2]?.activity ==
+                    ?.detailsVerificationRecords[2]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3339,9 +3355,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[3]?.activity ==
+                    ?.detailsVerificationRecords[3]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3369,9 +3385,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[3]?.activity ==
+                    ?.detailsVerificationRecords[3]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3446,9 +3462,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[4]?.activity ==
+                    ?.detailsVerificationRecords[4]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3476,9 +3492,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[4]?.activity ==
+                    ?.detailsVerificationRecords[4]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3552,9 +3568,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[5]?.activity ==
+                    ?.detailsVerificationRecords[5]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3582,9 +3598,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[5]?.activity ==
+                    ?.detailsVerificationRecords[5]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3658,9 +3674,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[7]?.activity ==
+                    ?.detailsVerificationRecords[7]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3687,9 +3703,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[7]?.activity ==
+                    ?.detailsVerificationRecords[7]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3763,9 +3779,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[6]?.activity ==
+                    ?.detailsVerificationRecords[6]?.activity ==
                     "SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3793,9 +3809,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr06goodsverificationofrecords.length > 0
+                  printData.bmr06goodsverificationofrecords.length > 0
                   ? printData.bmr06goodsverificationofrecords[0]
-                      ?.detailsVerificationRecords[6]?.activity ==
+                    ?.detailsVerificationRecords[6]?.activity ==
                     "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
@@ -3863,9 +3879,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy01 == "Ready"
+                    ?.rdyNoRdy01 == "Ready"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -3925,9 +3941,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy01 == "NotReady"
+                    ?.rdyNoRdy01 == "NotReady"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -3977,9 +3993,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy02 == "Ready"
+                    ?.rdyNoRdy02 == "Ready"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4039,9 +4055,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy02 == "Ready"
+                    ?.rdyNoRdy02 == "Ready"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4367,9 +4383,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy07 == "Checked"
+                    ?.rdyNoRdy07 == "Checked"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4429,9 +4445,9 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
               >
                 {printData &&
-                printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
+                  printData.bmr07goodsmanufacturingstepscottonballs?.length > 0
                   ? printData.bmr07goodsmanufacturingstepscottonballs[0]
-                      ?.rdyNoRdy07 == "Not Checked"
+                    ?.rdyNoRdy07 == "Not Checked"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4543,7 +4559,7 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
                 align="center"
               >
-                {pdeData.input}
+                {printData && printData?.productReconillation?.length > 0 ? printData?.productReconillation[0]?.input_quantity : ""}
               </td>
               <td
                 colspan="4"
@@ -4564,7 +4580,7 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
                 align="center"
               >
-                {pdeData.output}
+                {printData && printData?.productReconillation?.length > 0 ? printData?.productReconillation[0]?.output_quantity : ""}
               </td>
               <td
                 colspan="3"
@@ -4585,7 +4601,7 @@ const DryGoods_BMR_CottonBall = () => {
                 }}
                 align="center"
               >
-                {pdeData.yield}
+                {printData && printData?.productReconillation?.length > 0 ? printData?.productReconillation[0]?.yield_quantity : ""}
               </td>
             </tr>
             <br />
@@ -5197,7 +5213,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[0]
-                      ?.remarks == "ATTACHED"
+                    ?.remarks == "ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -5225,7 +5241,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[0]
-                      ?.remarks == "NOT ATTACHED"
+                    ?.remarks == "NOT ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -5275,7 +5291,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[1]
-                      ?.remarks == "ATTACHED"
+                    ?.remarks == "ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -5303,7 +5319,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[1]
-                      ?.remarks == "NOT ATTACHED"
+                    ?.remarks == "NOT ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -5330,8 +5346,7 @@ const DryGoods_BMR_CottonBall = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                {printData.bmr11goodslistofenclouser[0]?.detailsEncloser[2]
-                  ?.title || "NA"}
+                {printData.bmr11goodslistofenclouser[0]?.detailsEncloser[2]?.title || "NA"}
               </td>
               <td
                 colspan="4"
@@ -5353,7 +5368,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[2]
-                      ?.remarks == "ATTACHED"
+                    ?.remarks == "ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -5381,7 +5396,7 @@ const DryGoods_BMR_CottonBall = () => {
               >
                 {printData && printData.bmr11goodslistofenclouser.length > 0
                   ? printData.bmr11goodslistofenclouser[0]?.detailsEncloser[2]
-                      ?.remarks == "NOT ATTACHED"
+                    ?.remarks == "NOT ATTACHED"
                     ? "✓"
                     : "NA"
                   : "NA"}

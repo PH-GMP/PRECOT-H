@@ -821,7 +821,7 @@ const ChoosenScreen = () => {
           },
           {
             value: "PH-PRD01/F-016 RE-PROCESSING REPORT",
-            label: " PH-PRD01/F-016 RE-PROCESSING REPORT",
+            label: "PH-PRD01/F-016 RE-PROCESSING REPORT",
           },
         ],
       },
@@ -1006,8 +1006,8 @@ const ChoosenScreen = () => {
               label: "PH-PRD03/F-005 MACHINE CLEANING CHECK LIST",
             },
             {
-              value: " PH-HRD01-F-023",
-              label: " PH-HRD01-F-023 HAND SANITISATION REPORT",
+              value: "PH-HRD01-F-023",
+              label: "PH-HRD01-F-023 HAND SANITISATION REPORT",
             },
             {
               value: "PH-PRD03-F-006",
@@ -2968,7 +2968,7 @@ const ChoosenScreen = () => {
         },
         {
           value: "PH-PRD01/F-016 RE-PROCESSING REPORT",
-          label: " PH-PRD01/F-016 RE-PROCESSING REPORT",
+          label: "PH-PRD01/F-016 RE-PROCESSING REPORT",
         },
       ],
     },
@@ -3153,8 +3153,8 @@ const ChoosenScreen = () => {
               label: "PH-PRD03/F-005 MACHINE CLEANING CHECK LIST",
             },
             {
-              value: " PH-HRD01-F-023",
-              label: " PH-HRD01-F-023 HAND SANITISATION REPORT",
+              value: "PH-HRD01-F-023",
+              label: "PH-HRD01-F-023 HAND SANITISATION REPORT",
             },
             {
               value: "PH-PRD03-F-006",
@@ -5148,7 +5148,7 @@ const ChoosenScreen = () => {
       case "PH-HRD01-F-023":
         setenableBmr(false);
         setbtnenable(false);
-        setFormNo(" PH-HRD01-F-023");
+        setFormNo("PH-HRD01-F-023");
         setRoutePath("/Precot/PadPunching/F-06/Summary");
         break;
 

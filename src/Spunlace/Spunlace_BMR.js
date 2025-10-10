@@ -141,7 +141,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -175,7 +175,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -209,7 +209,7 @@ const Spunlace_BMR = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printResponseData,API.prodUrl, localStorage.getItem("token")]);
+  }, [printResponseData, API.prodUrl, localStorage.getItem("token")]);
 
   const formattedDate = () => {
     if (printResponseData?.operator_submitted_on) {
@@ -253,9 +253,8 @@ const Spunlace_BMR = () => {
     setDatePrint(value);
     // formateddateprint(value);
     const date = new Date(value);
-    const formattedDate = `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()}`;
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1
+      }/${date.getFullYear()}`;
     setformateddateprint(formattedDate);
     // console.log("date value", formateddateprint);
   };
@@ -698,7 +697,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -724,7 +723,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -765,7 +764,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -791,7 +790,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -817,7 +816,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -843,7 +842,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -870,7 +869,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -896,7 +895,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -921,13 +920,13 @@ const Spunlace_BMR = () => {
           role={localStorage.getItem("role")}
           loggedInQAManagerAndQADesignee={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -952,13 +951,13 @@ const Spunlace_BMR = () => {
           role={localStorage.getItem("role")}
           loggedInQAManagerAndQADesignee={
             localStorage.getItem("role") == "QA_MANAGER" ||
-            localStorage.getItem("role") == "QA_DESIGNEE"
+              localStorage.getItem("role") == "QA_DESIGNEE"
               ? true
               : false
           }
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -984,7 +983,7 @@ const Spunlace_BMR = () => {
           loggedInQa={localStorage.getItem("role") == "ROLE_QA" ? true : false}
           loggedInHod={
             localStorage.getItem("role") == "ROLE_HOD" ||
-            localStorage.getItem("role") == "ROLE_DESIGNEE"
+              localStorage.getItem("role") == "ROLE_DESIGNEE"
               ? true
               : false
           }
@@ -1045,121 +1044,121 @@ const Spunlace_BMR = () => {
               items={
                 localStorage.getItem("role") === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Generation
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Generate"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Generation
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Generate"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
 
-                      {
-                        key: "4",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Mapping
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Mapping"),
-                      },
-                      {
-                        key: "5",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Closing
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Closing"),
-                      },
-                      {
-                        key: "6",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "7",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "6",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "7",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : localStorage.getItem("role") === "ROLE_SUPERVISOR" ||
                     localStorage.getItem("role") === "ROLE_HOD" ||
                     localStorage.getItem("role") === "ROLE_DESIGNEE" ||
                     localStorage.getItem("role") === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1256,7 +1255,7 @@ const Spunlace_BMR = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1337,79 +1336,79 @@ const Spunlace_BMR = () => {
               items={
                 localStorage.getItem("role") === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
 
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "4",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "4",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : localStorage.getItem("role") === "ROLE_SUPERVISOR" ||
                     localStorage.getItem("role") === "ROLE_HOD" ||
                     localStorage.getItem("role") === "ROLE_DESIGNEE" ||
                     localStorage.getItem("role") === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1464,7 +1463,7 @@ const Spunlace_BMR = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1561,78 +1560,78 @@ const Spunlace_BMR = () => {
               items={
                 localStorage.getItem("role") === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "4",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "4",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : localStorage.getItem("role") === "ROLE_SUPERVISOR" ||
                     localStorage.getItem("role") === "ROLE_HOD" ||
                     localStorage.getItem("role") === "ROLE_DESIGNEE" ||
                     localStorage.getItem("role") === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1673,7 +1672,7 @@ const Spunlace_BMR = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1754,121 +1753,121 @@ const Spunlace_BMR = () => {
               items={
                 localStorage.getItem("role") === "ROLE_QA"
                   ? [
-                      {
-                        key: "1",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Form Browser
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/choosenScreen"),
-                      },
-                      {
-                        key: "2",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Generation
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Generate"),
-                      },
-                      {
-                        key: "3",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Audit
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Report/Generation"),
-                      },
+                    {
+                      key: "1",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Form Browser
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Generation
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Generate"),
+                    },
+                    {
+                      key: "3",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Audit
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Report/Generation"),
+                    },
 
-                      {
-                        key: "4",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Mapping
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Mapping"),
-                      },
-                      {
-                        key: "5",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Closing
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Closing"),
-                      },
-                      {
-                        key: "6",
-                        icon: <IoCreate color="#151718" />,
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Traceability
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot/Traceability"),
-                      },
-                      {
-                        key: "7",
-                        icon: (
-                          <FaLock
-                            color="#151718"
-                            onClick={() => {
-                              if (confirm("Are you sure want to logout")) {
-                                localStorage.removeItem("token");
-                                navigate("/Precot");
-                              }
-                            }}
-                          />
-                        ),
-                        label: (
-                          <b
-                            style={{
-                              color: "#151718",
-                            }}
-                          >
-                            Logout
-                          </b>
-                        ),
-                        onClick: () => navigate("/Precot"),
-                      },
-                    ]
+                    {
+                      key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Mapping
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Mapping"),
+                    },
+                    {
+                      key: "5",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Closing
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Closing"),
+                    },
+                    {
+                      key: "6",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Traceability
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/Traceability"),
+                    },
+                    {
+                      key: "7",
+                      icon: (
+                        <FaLock
+                          color="#151718"
+                          onClick={() => {
+                            if (confirm("Are you sure want to logout")) {
+                              localStorage.removeItem("token");
+                              navigate("/Precot");
+                            }
+                          }}
+                        />
+                      ),
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Logout
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot"),
+                    },
+                  ]
                   : localStorage.getItem("role") === "ROLE_SUPERVISOR" ||
                     localStorage.getItem("role") === "ROLE_HOD" ||
                     localStorage.getItem("role") === "ROLE_DESIGNEE" ||
                     localStorage.getItem("role") === "ROLE_HR"
-                  ? [
+                    ? [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -1909,7 +1908,7 @@ const Spunlace_BMR = () => {
                         onClick: () => navigate("/Precot"),
                       },
                     ]
-                  : [
+                    : [
                       {
                         key: "1",
                         icon: <IoCreate color="#151718" />,
@@ -2459,7 +2458,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr01productiondetailsSap.length > 0
                   ? printData.bmr01productiondetailsSap[0]
-                      .Shaft_Number_Start_From
+                    .Shaft_Number_Start_From
                   : "NA"}
               </td>
             </tr>
@@ -2620,9 +2619,9 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr01productiondetailsSap.length > 0
                   ? moment(
-                      printData &&
-                        printData.bmr01productiondetails[0].start_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData &&
+                    printData.bmr01productiondetails[0].start_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2667,8 +2666,8 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr01productiondetailsSap.length > 0
                   ? moment(
-                      printData && printData.bmr01productiondetails[0].end_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData && printData.bmr01productiondetails[0].end_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -2754,8 +2753,8 @@ const Spunlace_BMR = () => {
                   <br></br>
                   {printData && printData.bmr01productiondetails.length > 0
                     ? moment(
-                        printData.bmr01productiondetails[0].issued_on
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData.bmr01productiondetails[0].issued_on
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"}
                 </div>{" "}
               </td>
@@ -2776,9 +2775,9 @@ const Spunlace_BMR = () => {
                   <br></br>
                   {printData && printData.bmr01productiondetails.length > 0
                     ? moment(
-                        printData &&
-                          printData.bmr01productiondetails[0].received_on
-                      ).format("DD/MM/YYYY - HH:mm")
+                      printData &&
+                      printData.bmr01productiondetails[0].received_on
+                    ).format("DD/MM/YYYY - HH:mm")
                     : "NA"}
                 </div>
               </td>
@@ -3178,21 +3177,21 @@ const Spunlace_BMR = () => {
             </tr>
             {printData && printData.bmr03packingmeterialissue.length > 0
               ? printData.bmr03packingmeterialissue[0].detailsRecords03.map(
-                  (x, i) => {
-                    return (
-                      <tr>
-                        <td colSpan="2">{i + 1}</td>
-                        <td colSpan="4">{x.particulars}</td>
-                        <td colSpan="4">{x.batch_no}</td>
-                        <td colSpan="4">{x.quantity}</td>
-                        <td colSpan="4">
-                          {x.remarks.length > 0 ? x.remarks : "NA"}
-                        </td>
-                        <td colSpan="2">{x.unit}</td>
-                      </tr>
-                    );
-                  }
-                )
+                (x, i) => {
+                  return (
+                    <tr>
+                      <td colSpan="2">{i + 1}</td>
+                      <td colSpan="4">{x.particulars}</td>
+                      <td colSpan="4">{x.batch_no}</td>
+                      <td colSpan="4">{x.quantity}</td>
+                      <td colSpan="4">
+                        {x.remarks.length > 0 ? x.remarks : "NA"}
+                      </td>
+                      <td colSpan="2">{x.unit}</td>
+                    </tr>
+                  );
+                }
+              )
               : null}
             <br />
             <tr>
@@ -3264,7 +3263,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                GOOD DOCUMENTATION PRACTICES{" "}
+                GOOD DOCUMENTATION PRACTICES
               </td>
               <td
                 colspan="5"
@@ -3274,7 +3273,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                QAD01-D-50
+                PH-QAD01-D-10
               </td>
             </tr>
             <tr>
@@ -3296,7 +3295,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                INSTRUCTION FOR CLEANING
+                SPUNLACE OPERATION
               </td>
               <td
                 colspan="5"
@@ -3306,7 +3305,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PRD02-D-26
+                PH-PRD02-D-03
               </td>
             </tr>
             <tr>
@@ -3328,7 +3327,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                INSTRUCTION FOR BALE FEEDING AREA{" "}
+                CLEANING
               </td>
               <td
                 colspan="5"
@@ -3338,7 +3337,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PRD02-D-06
+                PH-PRD02-D-04
               </td>
             </tr>
             <tr>
@@ -3360,7 +3359,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                INSTRUCTION FOR BALE OPENER{" "}
+                SHARP TOOL POLICY
               </td>
               <td
                 colspan="5"
@@ -3370,7 +3369,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PRD02-D-07
+                PH-QAD01-D-43
               </td>
             </tr>
             <tr>
@@ -3392,7 +3391,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                INSTRUCTION FOR WEIGHING BALE OPENER{" "}
+                DEVIATIONS MANAGEMENT
               </td>
               <td
                 colspan="5"
@@ -3402,7 +3401,7 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                PRD02/D-08
+                PH-QAD01-D-41
               </td>
             </tr>
             <tr>
@@ -3424,328 +3423,6 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                CALIBRATION AND VERIFICATION OF WEIGHING SCALE{" "}
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-09
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                7
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR AIR LAY CARDING MACHINE
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-10
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                8
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR REITER CARDING MACHINE{" "}
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-11
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                9
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR JETLACE
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-14
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                10
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR DRYER
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                {" "}
-                PRD02-D-15
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                11
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR WINDER
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-16
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                12
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                INSTRUCTION FOR MAHLO{" "}
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-18
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                13
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                WORK INSTRUCTION FOR LUCID{" "}
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                PRD02-D-19
-              </td>
-            </tr>
-
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                14
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                OUT-OF-SPECIFICATION
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                QCL01-D-22
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                15
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                DEVIATIONS MANAGEMENT
-              </td>
-              <td
-                colspan="5"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                QAD01-D-43
-              </td>
-            </tr>
-            <tr>
-              <td
-                colspan="3"
-                style={{
-                  textAlign: "center",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
-                16
-              </td>
-              <td
-                colspan="12"
-                style={{
-                  textAlign: "left",
-                  fontSize: "10pt",
-                  fontFamily: "Times New Roman, Times, serif",
-                }}
-              >
                 CHANGE CONTROL
               </td>
               <td
@@ -3756,9 +3433,10 @@ const Spunlace_BMR = () => {
                   fontFamily: "Times New Roman, Times, serif",
                 }}
               >
-                QAD01-D-41{" "}
+                PH-QAD01-D-37
               </td>
             </tr>
+
 
             <tr>
               <td
@@ -3856,14 +3534,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[0].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[0].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -3877,14 +3555,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[0].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[0].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -3907,7 +3585,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -3935,7 +3613,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[0]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -3965,14 +3643,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[1].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[1].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -3986,14 +3664,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[1].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[1].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4016,7 +3694,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4044,7 +3722,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[1]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4074,14 +3752,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[2].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[2].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4095,14 +3773,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[2].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[2].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4125,7 +3803,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4153,7 +3831,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[2]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4183,14 +3861,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[3].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[3].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4204,14 +3882,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[3].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[3].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4234,7 +3912,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4262,7 +3940,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[3]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4292,14 +3970,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[4].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[4].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4313,14 +3991,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[4].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[4].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4343,7 +4021,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4371,7 +4049,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[4]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4401,14 +4079,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[5].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[5].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4422,14 +4100,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[5].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[5].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4452,7 +4130,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4480,7 +4158,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[5]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4509,14 +4187,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[6].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[6].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4530,14 +4208,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[6].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[6].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4560,7 +4238,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4588,7 +4266,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[6]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4617,14 +4295,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
-                      .checked_sign
+                    .checked_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[7].checked_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[7].checked_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4638,14 +4316,14 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
-                      .verified_sign
+                    .verified_sign
                   : "NA"}
                 <br></br>
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? moment(
-                      printData.bmr06verificationofrecords[0]
-                        .detailsRecords06[7].verified_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr06verificationofrecords[0]
+                      .detailsRecords06[7].verified_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4668,7 +4346,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
-                      .details == "SATISFACTORY"
+                    .details == "SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4696,7 +4374,7 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr06verificationofrecords.length > 0
                   ? printData.bmr06verificationofrecords[0].detailsRecords06[7]
-                      .details == "NOT SATISFACTORY"
+                    .details == "NOT SATISFACTORY"
                     ? "✓"
                     : "NA"
                   : "NA"}
@@ -4829,8 +4507,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].wbo_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].wbo_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4847,8 +4525,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].wbo_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].wbo_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -4902,8 +4580,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4920,8 +4598,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -4975,8 +4653,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -4993,8 +4671,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5048,8 +4726,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5066,8 +4744,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5122,8 +4800,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5140,8 +4818,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].alc2_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].alc2_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5246,8 +4924,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].jetlace_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].jetlace_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5264,8 +4942,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].jetlace_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].jetlace_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5328,13 +5006,13 @@ const Spunlace_BMR = () => {
                 Inlet Damper setting:{" "}
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? printData.bmr07manufacturingsteps[0]
-                      .dryera__intel_drum_speed
+                    .dryera__intel_drum_speed
                   : "NA"}{" "}
                 <br />
                 Outlet damper setting:{" "}
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? printData.bmr07manufacturingsteps[0]
-                      .dryera__outlet_drum_speed
+                    .dryera__outlet_drum_speed
                   : "NA"}{" "}
                 <br />
               </td>
@@ -5352,8 +5030,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].dryera_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].dryera_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5370,8 +5048,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].dryera_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].dryera_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5434,13 +5112,13 @@ const Spunlace_BMR = () => {
                 Inlet Damper setting:
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? printData.bmr07manufacturingsteps[0]
-                      .dryerb__intel_drum_speed
+                    .dryerb__intel_drum_speed
                   : "NA"}{" "}
                 <br />
                 Outlet damper setting:
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? printData.bmr07manufacturingsteps[0]
-                      .dryerb__outlet_drum_speed
+                    .dryerb__outlet_drum_speed
                   : "NA"}
                 <br />
               </td>
@@ -5458,8 +5136,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].dryerb_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].dryerb_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5476,8 +5154,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].dryerb_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].dryerb_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5549,8 +5227,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].winder_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].winder_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5567,8 +5245,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].winder_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].winder_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5640,8 +5318,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].mahlo_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].mahlo_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5658,8 +5336,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].mahlo_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].mahlo_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5714,8 +5392,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].liucid_date_prod
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].liucid_date_prod
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -5732,8 +5410,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr07manufacturingsteps.length > 0
                   ? moment(
-                      printData.bmr07manufacturingsteps[0].lucid_date_qa
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr07manufacturingsteps[0].lucid_date_qa
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
             </tr>
@@ -5878,8 +5556,8 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr08productionreconciliation.length > 0
                   ? Number(
-                      printData.bmr08productionreconciliation[0].calculation
-                    ).toFixed(2)
+                    printData.bmr08productionreconciliation[0].calculation
+                  ).toFixed(2)
                   : "NA"}
               </td>
             </tr>
@@ -5990,85 +5668,85 @@ const Spunlace_BMR = () => {
 
             {printData && printData.bmr09processdlyequpbrkdwnrecord.length > 0
               ? printData.bmr09processdlyequpbrkdwnrecord[0].spunlacrdetails.map(
-                  (x, i) => {
-                    return (
-                      <tr>
-                        <td
-                          colspan="2"
-                          style={{
-                            textAlign: "center",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {i + 1}
-                        </td>
-                        <td
-                          colspan="2"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.prod_date}
-                        </td>
-                        <td
-                          colspan="3"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.pde_from_hr}
-                        </td>
-                        <td
-                          colspan="3"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.pde_to_hr}
-                        </td>
-                        <td
-                          colspan="3"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.pde_total_hr}
-                        </td>
-                        <td
-                          colspan="4"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.remarks}
-                        </td>
-                        <td
-                          colspan="3"
-                          style={{
-                            textAlign: "left",
-                            fontSize: "10pt",
-                            fontFamily: "Times New Roman, Times, serif",
-                          }}
-                        >
-                          {x.prod_sign.length > 0 ? x.prod_sign : "NA"}
-                          <br></br>
-                          {x.pde_date.length > 0 ? x.pde_date : "NA"}
-                        </td>
-                      </tr>
-                    );
-                  }
-                )
+                (x, i) => {
+                  return (
+                    <tr>
+                      <td
+                        colspan="2"
+                        style={{
+                          textAlign: "center",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {i + 1}
+                      </td>
+                      <td
+                        colspan="2"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.prod_date}
+                      </td>
+                      <td
+                        colspan="3"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.pde_from_hr}
+                      </td>
+                      <td
+                        colspan="3"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.pde_to_hr}
+                      </td>
+                      <td
+                        colspan="3"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.pde_total_hr}
+                      </td>
+                      <td
+                        colspan="4"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.remarks}
+                      </td>
+                      <td
+                        colspan="3"
+                        style={{
+                          textAlign: "left",
+                          fontSize: "10pt",
+                          fontFamily: "Times New Roman, Times, serif",
+                        }}
+                      >
+                        {x.prod_sign.length > 0 ? x.prod_sign : "NA"}
+                        <br></br>
+                        {x.pde_date.length > 0 ? x.pde_date : "NA"}
+                      </td>
+                    </tr>
+                  );
+                }
+              )
               : null}
 
             <br />
@@ -6603,8 +6281,8 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr12postprodreview.length > 0
                   ? moment(printData.bmr12postprodreview[0].sup_date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
               <td
@@ -6617,8 +6295,8 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr12postprodreview.length > 0
                   ? moment(
-                      printData.bmr12postprodreview[0].designee_date
-                    ).format("DD/MM/YYYY - HH:mm")
+                    printData.bmr12postprodreview[0].designee_date
+                  ).format("DD/MM/YYYY - HH:mm")
                   : "NA"}
               </td>
               <td
@@ -6631,8 +6309,8 @@ const Spunlace_BMR = () => {
               >
                 {printData && printData.bmr12postprodreview.length > 0
                   ? moment(printData.bmr12postprodreview[0].qa_date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -6756,8 +6434,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr13qarelease.length > 0
                   ? moment(printData.bmr13qarelease[0].details[0].date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -6854,8 +6532,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr13qarelease.length > 0
                   ? moment(printData.bmr13qarelease[0].details[1].date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -6951,8 +6629,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr13qarelease.length > 0
                   ? moment(printData.bmr13qarelease[0].details[2].date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -7049,8 +6727,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr13qarelease.length > 0
                   ? moment(printData.bmr13qarelease[0].details[3].date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -7147,8 +6825,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr13qarelease.length > 0
                   ? moment(printData.bmr13qarelease[0].details[4].date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>
@@ -7306,8 +6984,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr14productrelease.length > 0
                   ? moment(printData.bmr14productrelease[0].chk_qa_date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
               <td
@@ -7324,8 +7002,8 @@ const Spunlace_BMR = () => {
                 <br></br>
                 {printData && printData.bmr14productrelease.length > 0
                   ? moment(printData.bmr14productrelease[0].apr_qa_date).format(
-                      "DD/MM/YYYY - HH:mm"
-                    )
+                    "DD/MM/YYYY - HH:mm"
+                  )
                   : "NA"}
               </td>
             </tr>

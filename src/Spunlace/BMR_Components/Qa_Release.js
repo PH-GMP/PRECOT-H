@@ -37,7 +37,10 @@ const Qa_Release = (props) => {
 
   const [qaSaved, setQaSaved] = useState(false);
   const [qaApproved, setQaApproved] = useState(false);
-  const usernameQA = role === "ROLE_QA" ? localStorage.getItem("username") : "";
+  const usernameQA =
+    role === "QA_MANAGER" || role === "QA_DESIGNEE"
+      ? localStorage.getItem("username")
+      : "";
 
   const [currentDateTimeQA, setCurrentDateTimeQA] = useState("");
 
@@ -49,10 +52,10 @@ const Qa_Release = (props) => {
     const minutes = String(date.getMinutes()).padStart(2, "0");
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
+
   useEffect(() => {
     const now = new Date();
-
-    if (role === "ROLE_QA") {
+    if (role === "QA_MANAGER" || role === "QA_DESIGNEE") {
       const formattedDateQA = formatDateTime(now);
       setCurrentDateTimeQA(formattedDateQA);
     }
@@ -71,6 +74,7 @@ const Qa_Release = (props) => {
       ...updates,
     }));
   };
+  
   const onChange1 = (values) => {
     updateQaRelease({ sign1: values });
   };
@@ -86,6 +90,7 @@ const Qa_Release = (props) => {
   const onChange5 = (values) => {
     updateQaRelease({ sign5: values });
   };
+
   useEffect(() => {
     axios
       .get(
@@ -476,7 +481,10 @@ const Qa_Release = (props) => {
               backgroundColor: "#E5EEF9",
               color: "#00308F",
               fontWeight: "bold",
-              display: !props.loggedInQa || qaApproved ? "none" : "block",
+              display:
+                !props.loggedInQAManagerAndQADesignee || qaApproved
+                  ? "none"
+                  : "block",
             }}
             shape="round"
             onClick={saveQaRelease}
@@ -489,7 +497,10 @@ const Qa_Release = (props) => {
               backgroundColor: "#E5EEF9",
               color: "#00308F",
               fontWeight: "bold",
-              display: !props.loggedInQa || qaApproved ? "none" : "block",
+              display:
+                !props.loggedInQAManagerAndQADesignee || qaApproved
+                  ? "none"
+                  : "block",
             }}
             shape="round"
             onClick={w}
@@ -552,7 +563,7 @@ const Qa_Release = (props) => {
                   })
                 }
                 value={QaRelease.observation1}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               >
                 <Radio value="REVIEWED">Reviewed</Radio>
                 <Radio value="NOT REVIEWED">Not Reviewed</Radio>
@@ -567,7 +578,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
               <Input
                 type="datetime-local"
@@ -576,7 +587,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
             </td>
           </tr>
@@ -602,7 +613,7 @@ const Qa_Release = (props) => {
                   })
                 }
                 value={QaRelease.observation2}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               >
                 <Radio value="REVIEWED">Reviewed</Radio>
                 <Radio value="NOT REVIEWED">Not Reviewed</Radio>
@@ -617,7 +628,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
               <Input
                 type="datetime-local"
@@ -626,7 +637,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
             </td>
           </tr>
@@ -650,7 +661,7 @@ const Qa_Release = (props) => {
                   })
                 }
                 value={QaRelease.observation3}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               >
                 <Radio value="REVIEWED">Reviewed</Radio>
                 <Radio value="NOT REVIEWED">Not Reviewed</Radio>
@@ -665,7 +676,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
               <Input
                 type="datetime-local"
@@ -674,7 +685,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
             </td>
           </tr>
@@ -696,7 +707,7 @@ const Qa_Release = (props) => {
                   })
                 }
                 value={QaRelease.observation4}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               >
                 <Radio value="REVIEWED">Reviewed</Radio>
                 <Radio value="NOT REVIEWED">Not Reviewed</Radio>
@@ -711,7 +722,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
               <Input
                 type="datetime-local"
@@ -720,7 +731,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
             </td>
           </tr>
@@ -744,7 +755,7 @@ const Qa_Release = (props) => {
                   })
                 }
                 value={QaRelease.observation5}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               >
                 <Radio value="REVIEWED">Reviewed</Radio>
                 <Radio value="NOT REVIEWED">Not Reviewed</Radio>
@@ -759,7 +770,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
               <Input
                 type="datetime-local"
@@ -768,7 +779,7 @@ const Qa_Release = (props) => {
                 style={{
                   width: "50%",
                 }}
-                disabled={!props.loggedInQa || qaApproved}
+                disabled={!props.loggedInQAManagerAndQADesignee || qaApproved}
               />
             </td>
           </tr>

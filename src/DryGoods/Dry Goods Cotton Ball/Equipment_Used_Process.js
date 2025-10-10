@@ -12,10 +12,10 @@ const Equipment_Used_Process = (props) => {
   const [data, setData] = useState("");
   const [data1, setData1] = useState("");
   const username =
-  role === "ROLE_QA" ? localStorage.getItem("username") : "";
+    role === "ROLE_QA" ? localStorage.getItem("username") : "";
 
   const usernameSupervisor =
-  role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+    role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
   const [equipmentData, setEquipmentData] = useState([
     {
       equipmentName: "BALE PLUCKER",
@@ -75,23 +75,15 @@ const Equipment_Used_Process = (props) => {
     },
     {
       equipmentName: "WEIGHING SCALE",
-      equipmentCode: "PH-E/I-BAL08&09",
+      equipmentCode: "PH-WM-15,17,18,20",
       calibrationDate: "",
       dueDate: "",
       checked_by: "",
       remarks: "",
     },
     {
-      equipmentName: "WEIGHING SCALE",
-      equipmentCode: "PH-WM-12",
-      calibrationDate: "",
-      dueDate: "",
-      checked_by: "",
-      remarks: "",
-    },
-    {
-      equipmentName: "Metal Detector",
-      equipmentCode: "PH-E/I-WRL/PLT17",
+      equipmentName: "METAL DETECTOR CALIBRATION TEXCORE & LINK",
+      equipmentCode: "PH CCP-11 & 12",
       calibrationDate: "",
       dueDate: "",
       checked_by: "",
@@ -239,25 +231,18 @@ const Equipment_Used_Process = (props) => {
                 checked_by: "",
                 remarks: "",
               },
+
               {
                 equipmentName: "WEIGHING SCALE",
-                equipmentCode: "PH-E/I-BAL08&09",
+                equipmentCode: "PH-WM-15,17,18,20",
                 calibrationDate: "",
                 dueDate: "",
                 checked_by: "",
                 remarks: "",
               },
               {
-                equipmentName: "WEIGHING SCALE",
-                equipmentCode: "PH-WM-12",
-                calibrationDate: "",
-                dueDate: "",
-                checked_by: "",
-                remarks: "",
-              },
-              {
-                equipmentName: "Metal Detector",
-                equipmentCode: "PH-E/I-WRL/PLT17",
+                equipmentName: "Metal Detector Calibration TEXCORE & LINK",
+                equipmentCode: "PH-CCP-11 & 12",
                 calibrationDate: "",
                 dueDate: "",
                 checked_by: "",
@@ -331,7 +316,7 @@ const Equipment_Used_Process = (props) => {
             equipmentCode: detail.equipmentCode,
             calibrationDate: detail.calibrationDate,
             dueDate: detail.dueDate,
-            checked_by: detail.checked_by,
+            checked_by: detail.checked_by || usernameSupervisor,
             remarks: detail.remarks || "",
           };
           return details;
@@ -401,7 +386,7 @@ const Equipment_Used_Process = (props) => {
             equipmentCode: detail.equipmentCode,
             calibrationDate: detail.calibrationDate,
             dueDate: detail.dueDate,
-            checked_by: detail.checked_by,
+            checked_by: detail.checked_by || usernameSupervisor,
             remarks: detail.remarks || "NA",
           };
           return details;

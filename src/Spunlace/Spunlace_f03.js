@@ -1,32 +1,22 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import { Button, Col, Input, Row, Tabs, Select, message, Tooltip } from "antd";
-import React, { useEffect, useState,useRef } from "react";
-import axios from "axios";
-import { Radio, Form, DatePicker } from "antd";
-import logo from "../Assests/logo.png"
-import API from "../baseUrl.json";
-import { useNavigate, useLocation } from "react-router-dom";
-import BleachingHeader from "../Components/BleachingHeader";
-import { BiFontSize, BiLock } from "react-icons/bi";
-import { IoChevronBackSharp, IoCreate, IoSave } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
-import { GrDocumentStore } from "react-icons/gr";
-import moment from 'moment';
-import gif from '../Assests/gif.gif'
-import { FaPrint } from "react-icons/fa6";
-import { Table, Modal, Drawer, Menu, Avatar } from "antd";
-import { FaLock } from "react-icons/fa6";
-import { TbMenuDeep } from "react-icons/tb";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+import moment from 'moment';
+import { useEffect, useRef, useState } from "react";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { GrDocumentStore } from "react-icons/gr";
+import { IoSave } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
-import { GoArrowLeft } from "react-icons/go";
-import {
-    LoadingOutlined,
-
-    PrinterOutlined,
-} from "@ant-design/icons";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const Spunlace_03 = () => {

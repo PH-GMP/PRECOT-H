@@ -28,10 +28,10 @@ const Reference_Documents = () => {
             1
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          Good Documentation Practices
+            Good Documentation Practices
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-QAD01-D-10
+            PH-QAD01-D-10
           </td>
         </tr>
         <tr>
@@ -39,10 +39,10 @@ const Reference_Documents = () => {
             2
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-         
+            Dry Goods Operation
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-PRD03-D-03
+            PH-PRD04-D-03
           </td>
         </tr>
         <tr>
@@ -50,10 +50,10 @@ const Reference_Documents = () => {
             3
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          Cleaning Machine & Sanitization
+            Cleaning Machine & Sanitization
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-PRD03-D-04
+            PH-PRD04-D-04
           </td>
         </tr>
         <tr>
@@ -61,10 +61,21 @@ const Reference_Documents = () => {
             4
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          Control of Non-Conforming 
+            Control of Non-Conforming
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-QAD01-D-20
+            PH-QAD01-D-20
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            5
+          </td>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            Deviation Management
+          </td>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            PH-QAD01-D-41
           </td>
         </tr>
         <tr>
@@ -72,10 +83,10 @@ const Reference_Documents = () => {
             6
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          Deviation Management
+            Change Control
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-QAD01-D-41
+            PH-QAD01-D-37
           </td>
         </tr>
         <tr>
@@ -83,10 +94,21 @@ const Reference_Documents = () => {
             7
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          Change Control
+            Sharp Tool Policy
           </td>
           <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
-          PH-QAD01-D-37
+            PH-QAD01-D-43
+          </td>
+        </tr>
+        <tr>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            8
+          </td>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            Metal Detection System
+          </td>
+          <td colSpan="1" style={{ textAlign: "center", padding: "0.5em" }}>
+            PH-QAD01-D-42
           </td>
         </tr>
       </table>

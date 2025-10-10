@@ -903,42 +903,42 @@ const Pad_Punching_BMR = () => {
           alignItems: "center",
         }}
       >
-        <label>
-          Select Batch No :
-          <Select
-            showSearch
-            onChange={onOrderChange}
-            options={orderList}
-            placeholder="Select Batch No"
-            style={{
-              marginRight: "2em",
-            }}
-          />
-          Select Order No :
-          <Select
-            showSearch
-            onChange={(value) => setOrder(value)}
-            options={oderNoLovs}
-            placeholder="Select Batch No"
-            style={{
-              width: "180px",
-              marginRight: "2em",
-            }}
-          />
-          <Button
-            type="primary"
-            style={{
-              backgroundColor: "#E5EEF9",
-              color: "#00308F",
-              fontWeight: "bold",
-              // display: saveBtnStatus ? "block" : "none",
-            }}
-            shape="round"
-            onClick={sendOrderNo}
-          >
-            Go
-          </Button>
-        </label>
+
+        Select Batch No :
+        <Select
+          showSearch
+          onChange={onOrderChange}
+          options={orderList}
+          placeholder="Select Batch No"
+          style={{
+            marginRight: "2em",
+          }}
+        />
+        Select Order No :
+        <Select
+          showSearch
+          onChange={(value) => setOrder(value)}
+          options={oderNoLovs}
+          placeholder="Select Batch No"
+          style={{
+            width: "180px",
+            marginRight: "2em",
+          }}
+        />
+        <Button
+          type="primary"
+          style={{
+            backgroundColor: "#E5EEF9",
+            color: "#00308F",
+            fontWeight: "bold",
+            // display: saveBtnStatus ? "block" : "none",
+          }}
+          shape="round"
+          onClick={sendOrderNo}
+        >
+          Go
+        </Button>
+
       </Row>
       <Tabs
         style={{

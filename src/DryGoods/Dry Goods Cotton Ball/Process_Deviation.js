@@ -8,6 +8,7 @@ const Process_Deviation = (props) => {
   const [data, setData] = useState("");
   const [data1, setDat1] = useState("");
   const [devData, setDevData] = useState({
+
     batch_no: props.batchNo,
     order_no: "",
     form_no: "",
@@ -55,12 +56,12 @@ const Process_Deviation = (props) => {
   const [fieldStatus, setFieldStatus] = useState(false)
   const role = localStorage.getItem("role");
 
-  const username =
-  role === "ROLE_QA" ? localStorage.getItem("username") : "";
+  const usernameQA =
+    role === "ROLE_QA" ? localStorage.getItem("username") : "";
 
   const usernameSupervisor =
-  role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
- const getCurrentDateTime = () => {
+    role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+  const getCurrentDateTime = () => {
     const today = new Date();
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -163,8 +164,11 @@ const Process_Deviation = (props) => {
     };
     fetchData();
   }, [props.batchNo]);
-
+  console.log("dev id", data)
   const handleSave = async () => {
+    console.log("dev data", devData)
+
+    console.log("dev id", data);
     if (props.batchNo == "") {
       message.warning("Please Select Batch No");
       return;
@@ -172,44 +176,42 @@ const Process_Deviation = (props) => {
     let payload;
     if (props.loggedInSupervisor) {
       payload = {
-        dev_id: data,
+        dev_id: devData.dev_id || null,
         batch_no: props.batchNo,
         order_no: props.orderNo,
         form_no: "",
         detailsDevRecords: devData.detailsDevRecords.map((detail) => {
           const detailsDevRecords = {
             id: detail.id,
-            dev_id: detail.dev_id,
+            dev_id: devData.dev_id || null,
             step_no: detail.step_no,
             deviation: detail.deviation || "",
-            signature: detail.signature,
+            signature: detail.signature || usernameSupervisor,
             qa_remarks: detail.qa_remarks,
             sig_date: detail.sig_date,
-            signature2: detail.signature2,
+            signature2: detail.signature2 || usernameQA,
             sig_date2: detail.sig_date2,
           };
           return detailsDevRecords;
         }),
       };
-      if (devData.dev_id) {
-        payload.dev_id = devData.dev_id;
-      }
+
     } else if (props.loggedInQa) {
       payload = {
-        dev_id: data,
+        dev_id: devData.dev_id || null,
         batch_no: props.batchNo,
         order_no: props.orderNo,
         form_no: "",
         detailsDevRecords: devData.detailsDevRecords.map((detail) => {
           const detailsDevRecords = {
             id: detail.id,
-            dev_id: detail.dev_id,
+            dev_id: devData.dev_id || null,
             step_no: detail.step_no,
             deviation: detail.deviation,
-            signature: detail.signature,
+            signature: detail.signature || usernameSupervisor,
             qa_remarks: detail.qa_remarks || "",
             sig_date: detail.sig_date,
-            signature2: detail.signature2,
+            signature2: detail.signature2 || usernameQA,
             sig_date2: detail.sig_date2,
           };
           return detailsDevRecords;
@@ -331,20 +333,20 @@ const Process_Deviation = (props) => {
     let payload;
     if (props.loggedInSupervisor) {
       payload = {
-        dev_id: data,
+        dev_id: devData.dev_id || null,
         batch_no: props.batchNo,
         order_no: props.orderNo,
         form_no: "",
         detailsDevRecords: devData.detailsDevRecords.map((detail) => {
           const detailsDevRecords = {
             id: detail.id,
-            dev_id: detail.dev_id,
+            dev_id: devData.dev_id || null,
             step_no: detail.step_no,
             deviation: detail.deviation || "NA",
-            signature: detail.signature,
+            signature: detail.signature || usernameSupervisor,
             qa_remarks: detail.qa_remarks,
             sig_date: detail.sig_date,
-            signature2: detail.signature2,
+            signature2: detail.signature2 || usernameQA,
             sig_date2: detail.sig_date2,
           };
           return detailsDevRecords;
@@ -355,20 +357,20 @@ const Process_Deviation = (props) => {
       }
     } else if (props.loggedInQa) {
       payload = {
-        dev_id: data,
+        dev_id: devData.dev_id || null,
         batch_no: props.batchNo,
         order_no: props.orderNo,
         form_no: "",
         detailsDevRecords: devData.detailsDevRecords.map((detail) => {
           const detailsDevRecords = {
             id: detail.id,
-            dev_id: detail.dev_id,
+            dev_id: devData.dev_id || null,
             step_no: detail.step_no,
             deviation: detail.deviation,
-            signature: detail.signature,
+            signature: detail.signature || usernameSupervisor,
             qa_remarks: detail.qa_remarks || "NA",
             sig_date: detail.sig_date,
-            signature2: detail.signature2,
+            signature2: detail.signature2 || usernameQA,
             sig_date2: detail.sig_date2,
           };
           return detailsDevRecords;
@@ -379,6 +381,7 @@ const Process_Deviation = (props) => {
       }
     }
     setButtonLoader(true);
+    console.log("payload", payload)
     try {
       const response = await axios.post(
         `${API.prodUrl}/Precot/api/cottonBall/09.SubmitProcessDevRecord`,
@@ -483,9 +486,9 @@ const Process_Deviation = (props) => {
   };
 
   const handleKeyDown_text = (e) => {
-   
+    // Allow only numbers, letters, underscore, and dot
     if (
-      !/[0-9a-zA-Z._]/.test(e.key) &&  
+      !/[0-9a-zA-Z._]/.test(e.key) && // Exclude the space character from the regex pattern
       e.key !== "Backspace" &&
       e.key !== "Delete" &&
       e.key !== "ArrowLeft" &&
@@ -692,7 +695,7 @@ const Process_Deviation = (props) => {
               value={
                 devData.detailsDevRecords.find(
                   (details) => details.step_no == "STEP1"
-                )?.signature2 || username
+                )?.signature2 || usernameQA
               }
               onChange={(e) => {
                 handleInput(e, "STEP1", "signature2", "select");
@@ -796,7 +799,7 @@ const Process_Deviation = (props) => {
               value={
                 devData.detailsDevRecords.find(
                   (details) => details.step_no == "STEP2"
-                )?.signature2 || username
+                )?.signature2 || usernameQA
               }
               onChange={(e) => {
                 handleInput(e, "STEP2", "signature2", "select");
@@ -900,7 +903,7 @@ const Process_Deviation = (props) => {
               value={
                 devData.detailsDevRecords.find(
                   (details) => details.step_no == "STEP3"
-                )?.signature2 || username
+                )?.signature2 || usernameQA
               }
               onChange={(e) => {
                 handleInput(e, "STEP3", "signature2", "select");
@@ -1003,7 +1006,7 @@ const Process_Deviation = (props) => {
               value={
                 devData.detailsDevRecords.find(
                   (details) => details.step_no == "STEP4"
-                )?.signature2 || username
+                )?.signature2 || usernameQA
               }
               onChange={(e) => {
                 handleInput(e, "STEP4", "signature2", "select");

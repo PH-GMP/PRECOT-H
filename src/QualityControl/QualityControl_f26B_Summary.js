@@ -212,7 +212,7 @@ const QualityControl_f26B_Summary = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${API.prodUrl}/Precot/api/QcForm/F26BCottonPadSummary`,
+            `${API.prodUrl}/Precot/api/QcForm/F26BSummary`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,

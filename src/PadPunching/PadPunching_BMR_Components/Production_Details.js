@@ -536,15 +536,14 @@ const Production_Details = (props) => {
       )
       .then((response) => {
         console.log("Res", response.data);
-        // setProductionId(response.data[0].productionId);
-        // console.log("3", productionId);
+
         if (response.data.length > 0) {
           // setNewSave(false);
           updateProductionDetails({
             Product_Description: response.data[0].productionDescription,
             PO_No: response.data[0].poNumber,
             PO_quantity: response.data[0].quantity,
-            Product_Code: "",
+            Product_Code: response.data[0].material,
             No_Of_Bags: response.data[0].quantity / response.data[0].bags,
             orderNo: response.data[0].orderNumber,
             SFQ_Bags: response.data[0].bagPackQty,

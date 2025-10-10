@@ -697,15 +697,15 @@ function Bleaching_Bmr_Summary() {
       id: 2,
       name: "Metal Detector",
       code: "PH-E/I-BR24",
-      startDate: "2024-09-18",
-      endDate: "2025-09-17",
+      startDate: "2025-09-21",
+      endDate: "2026-09-20",
     },
     {
       id: 3,
       name: "Fire Detector",
       code: "PH-E/I-BR25",
-      startDate: "2024-09-18",
-      endDate: "2025-09-17",
+      startDate: "2025-09-21",
+      endDate: "2026-09-20"
     },
     {
       id: 4,
@@ -907,15 +907,15 @@ function Bleaching_Bmr_Summary() {
       id: 32,
       name: "Metal Detector",
       code: "PH-E/I-BL21",
-      startDate: "2024-09-18",
-      endDate: "2025-09-17",
+      startDate: "2025-09-21",
+      endDate: "2026-09-20"
     },
     {
       id: 33,
       name: "Fire Detector",
       code: "PH-E/I-BL23",
-      startDate: "2024-09-18",
-      endDate: "2025-09-17",
+      startDate: "2025-09-21",
+      endDate: "2026-09-20"
     },
     {
       id: 34,

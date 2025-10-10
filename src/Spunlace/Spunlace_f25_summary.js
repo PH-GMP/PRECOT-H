@@ -1,51 +1,35 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-unused-expressions */
-import React, { useState, useEffect } from "react";
 import {
-  Table,
-  Button,
-  Modal,
-  DatePicker,
-  Select,
-  Input,
-  Form,
-  Col,
-  Drawer,
-  Row,
-  Menu,
-  Avatar,
-  message,
-} from "antd";
-import {
-  EyeOutlined,
-  EditOutlined,
-  PlusOutlined,
-  LeftOutlined,
+  EditOutlined
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
-import { BiLock } from "react-icons/bi";
-import Spunlace_f25_edit from "./Spunlace_f25_edit";
-import BleachingHeader from "../Components/BleachingHeader";
-import { createGlobalStyle } from "styled-components";
+import {
+  Button,
+  Input,
+  message,
+  Modal,
+  Select,
+  Table,
+  Tooltip
+} from "antd";
 import axios from "axios";
-import { IoSave, IoPrint, IoCreate } from "react-icons/io5";
-import { GrDocumentStore } from "react-icons/gr";
-import { Tooltip } from "antd";
-import { MdLockOutline } from "react-icons/md";
-import { FaArrowRight } from "react-icons/fa";
-import { GoArrowLeft } from "react-icons/go";
-import { FaUserCircle } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
-import { BiEdit, BiNavigation } from "react-icons/bi";
-import { FaLock } from "react-icons/fa6";
-import { TbMenuDeep } from "react-icons/tb";
 import { jwtDecode } from "jwt-decode";
+import { useEffect, useState } from "react";
+import { BiLock, BiNavigation } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { IoPrint } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import logo from "../Assests/logo.png";
+import BleachingHeader from "../Components/BleachingHeader";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
+import Spunlace_f25_edit from "./Spunlace_f25_edit";
 
 // import "./Giridharan.css";
-import API from "../baseUrl.json";
 import moment from "moment";
+import API from "../baseUrl.json";
 
 const { Option } = Select;
 

@@ -15,11 +15,11 @@ const Product_Release = (props) => {
   const [disabled, setDisabled] = useState(false);
   const role = localStorage.getItem("role");
   const username =
-  role === "ROLE_QA" ? localStorage.getItem("username") : "";
+    role === "ROLE_QA" ? localStorage.getItem("username") : "";
 
   const usernameSupervisor =
-  role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
- const getCurrentDateTime = () => {
+    role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+  const getCurrentDateTime = () => {
     const today = new Date();
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -83,26 +83,26 @@ const Product_Release = (props) => {
       message.warning("Please Select Batch No");
       return;
     }
-    if (
-      ProductRelease.qaDate == "" ||
-      ProductRelease.qaManager == "" ||
-      ProductRelease.qaManagerDate == "" ||
-      ProductRelease.qaName == ""
-    ) {
-      message.error("Please select all fields");
-      return;
-    }
+    // if (
+    //   ProductRelease.qaDate == "" ||
+    //   ProductRelease.qaManager == "" ||
+    //   ProductRelease.qaManagerDate == "" ||
+    //   ProductRelease.qaName == ""
+    // ) {
+    //   message.error("Please select all fields");
+    //   return;
+    // }
     const payload = {
       batch_no: props.batchNo,
       order_no: props.orderNo,
       chk_qa_name: "",
       chk_qa_date: ProductRelease.qaDate,
       chk_qa_time: "",
-      chk_qa_sign: ProductRelease.qaName,
+      chk_qa_sign: ProductRelease.qaName || username,
       apr_qa_name: "",
       apr_qa_date: ProductRelease.qaManagerDate,
       apr_qa_time: "",
-      apr_qa_sign: ProductRelease.qaManager,
+      apr_qa_sign: ProductRelease.qaManager || username,
     };
     axios
       .post(

@@ -25,7 +25,7 @@ const Process_Delay = (props) => {
 
     return `${year}-${month}-${day}`;
   };
-  const today = getCurrentDate();  console.log("2345", data1);
+  const today = getCurrentDate(); console.log("2345", data1);
 
   const machineLov = [
     { value: "PL1", label: "PL1" },
@@ -216,7 +216,7 @@ const Process_Delay = (props) => {
     }
   };
 
-  
+
   const handleSubmit = () => {
     if (selectedRows.size > 0 && props.batchNo) {
       const recordsToSubmit = Array.from(selectedRows).map((rowIndex) => {
@@ -232,7 +232,7 @@ const Process_Delay = (props) => {
             selectedRecord.totalTime || data1.detailsDly[0]?.total_hour,
           remarks: selectedRecord.remarks || data1.detailsDly[0]?.remarks,
           sign: signatures[rowIndex] || data1.detailsDly[0]?.sign,
-    
+
         };
       });
 
@@ -448,7 +448,7 @@ const Process_Delay = (props) => {
                       }}
                       disabled={fieldsDisabled}
                     />
-             
+
                   </td>
                 </tr>
               ))}

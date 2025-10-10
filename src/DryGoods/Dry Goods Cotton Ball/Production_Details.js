@@ -7,7 +7,7 @@ import useMessage from "antd/es/message/useMessage";
 
 const { TextArea } = Input;
 const Production_Details = (props) => {
- 
+  //All states entered here
 
   const [messageApi, contextHolder] = useMessage();
   const [loading, setLoading] = useState(false);
@@ -86,11 +86,20 @@ const Production_Details = (props) => {
   const role = localStorage.getItem("role");
   const [idData, setIdData] = useState("");
   console.log("idData", idData.prod_id);
-  const username =
-  role === "ROLE_QA" ? localStorage.getItem("username") : "";
+  const username = role === "ROLE_QA" ? localStorage.getItem("username") : "";
 
   const usernameSupervisor =
-  role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+    role === "ROLE_SUPERVISOR" ? localStorage.getItem("username") : "";
+
+  let supervisorDate = "";
+  if (role === "ROLE_SUPERVISOR") {
+    supervisorDate = todayDateTime;
+  }
+
+  let qaDate = "";
+  if (role === "ROLE_QA") {
+    qaDate = todayDateTime;
+  }
 
   console.log("LOV FOR Pleat", props);
   // ------------------ Cody By Me -------------------------
@@ -218,7 +227,7 @@ const Production_Details = (props) => {
           };
           fetchData();
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     fetchData();
   }, [props.batchNo]);
@@ -269,7 +278,7 @@ const Production_Details = (props) => {
       }
     }
   };
-  useEffect(() => {}, [batchNo, productionDetails.order_no]);
+  useEffect(() => { }, [batchNo, productionDetails.order_no]);
 
   const handleProductionDetails = (e, name, type) => {
     if (
@@ -304,15 +313,9 @@ const Production_Details = (props) => {
     }
   };
 
-  useEffect(() => {}, [productionDetails]);
+  useEffect(() => { }, [productionDetails]);
 
   // ------------------------------------------------------------
-  const updateProductionDetails = (updates) => {
-    setProductionDetails((prevState) => ({
-      ...prevState,
-      ...updates,
-    }));
-  };
 
   const SaveProductionDetails = async () => {
     setLoading(true);
@@ -331,14 +334,14 @@ const Production_Details = (props) => {
       start_time: productionDetails.start_time,
       end_date: productionDetails.end_date,
       end_time: productionDetails.end_time,
-      manufactureCompletionDate:productionDetails.manufactureCompletionDate,
-      manufactureCompletionTime:productionDetails.manufactureCompletionTime,
-      issued_by: productionDetails.issued_by,
-      issued_on: productionDetails.issued_on,
-      issued_name: productionDetails.issued_name,
-      received_by: productionDetails.received_by,
-      received_on: productionDetails.received_on,
-      received_name: productionDetails.received_name,
+      manufactureCompletionDate: productionDetails.manufactureCompletionDate,
+      manufactureCompletionTime: productionDetails.manufactureCompletionTime,
+      issued_by: productionDetails.issued_by || username,
+      issued_on: productionDetails.issued_on || qaDate,
+      issued_name: productionDetails.issued_name || username,
+      received_by: productionDetails.received_by || usernameSupervisor,
+      received_on: productionDetails.received_on || supervisorDate,
+      received_name: productionDetails.received_name || usernameSupervisor,
       po_no: productionDetails.po_no,
       prod_desc: productionDetails.prod_desc,
       prod_code: productionDetails.prod_code,
@@ -417,7 +420,7 @@ const Production_Details = (props) => {
             setSupervisorApproved(false);
             setQaApproved(true);
           }
-        } catch (err) {}
+        } catch (err) { }
       }
     } catch (error) {
       setLoading(false);
@@ -440,8 +443,6 @@ const Production_Details = (props) => {
         "start_time",
         "end_date",
         "end_time",
-        "received_by",
-        "received_on",
         "po_comp_status",
       ];
       for (let key of keysToCheck) {
@@ -464,14 +465,14 @@ const Production_Details = (props) => {
       start_time: productionDetails.start_time,
       end_date: productionDetails.end_date,
       end_time: productionDetails.end_time,
-      manufactureCompletionDate:productionDetails.manufactureCompletionDate,
-      manufactureCompletionTime:productionDetails.manufactureCompletionTime,
-      issued_by: productionDetails.issued_by,
-      issued_on: productionDetails.issued_on,
-      issued_name: productionDetails.issued_name,
-      received_by: productionDetails.received_by,
-      received_on: productionDetails.received_on,
-      received_name: productionDetails.received_name,
+      manufactureCompletionDate: productionDetails.manufactureCompletionDate,
+      manufactureCompletionTime: productionDetails.manufactureCompletionTime,
+      issued_by: productionDetails.issued_by || username,
+      issued_on: productionDetails.issued_on || qaDate,
+      issued_name: productionDetails.issued_name || username,
+      received_by: productionDetails.received_by || usernameSupervisor,
+      received_on: productionDetails.received_on || supervisorDate,
+      received_name: productionDetails.received_name || usernameSupervisor,
       po_no: productionDetails.po_no,
       prod_desc: productionDetails.prod_desc,
       prod_code: productionDetails.prod_code,
@@ -552,7 +553,7 @@ const Production_Details = (props) => {
             setSupervisorApproved(false);
             setQaApproved(true);
           }
-        } catch (err) {}
+        } catch (err) { }
       }
     } catch (error) {
       setLoading(false);
@@ -566,21 +567,6 @@ const Production_Details = (props) => {
     }
   }, [productionDetails.start_date, productionDetails.end_date]);
 
-  
-  const handleKeyDown_text = (e) => {
-    if (
-      !/[0-9a-zA-Z._]/.test(e.key) &&
-      e.key !== "Backspace" &&
-      e.key !== "Delete" &&
-      e.key !== "ArrowLeft" &&
-      e.key !== "ArrowRight" &&
-      e.key !== "Tab"
-    ) {
-      e.preventDefault();
-    }
-  };
-
- 
   const machineOptions = [
     { value: "Texkor(BL1)", label: "Texkor(BL1)" },
     { value: "Links(BL2)", label: "Links(BL2)" },
@@ -591,28 +577,8 @@ const Production_Details = (props) => {
     console.log("Submit Status", submitStatus);
   }, [hadData, submitStatus]);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
-  const formatDateTime = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-  };
-
   return (
     <div>
-      
       <div>
         <Spin spinning={loading}>
           <div
@@ -659,9 +625,9 @@ const Production_Details = (props) => {
                   fontWeight: "bold",
                   display:
                     props.loggedInHod ||
-                    props.loggedInQa ||
-                    productionDetails.status == "QA_APPROVED" ||
-                    (props.loggedInSupervisor && supervisorApproved)
+                      props.loggedInQa ||
+                      productionDetails.status == "QA_APPROVED" ||
+                      (props.loggedInSupervisor && supervisorApproved)
                       ? "none"
                       : "flex",
                 }}
@@ -682,10 +648,10 @@ const Production_Details = (props) => {
                   fontWeight: "bold",
                   display:
                     props.loggedInHod ||
-                    (props.loggedInQa && qaApproved) ||
-                    (props.loggedInSupervisor && supervisorApproved) ||
-                    productionDetails.status == "QA_APPROVED" ||
-                    (qaApproved && supervisorApproved)
+                      (props.loggedInQa && qaApproved) ||
+                      (props.loggedInSupervisor && supervisorApproved) ||
+                      productionDetails.status == "QA_APPROVED" ||
+                      (qaApproved && supervisorApproved)
                       ? "none"
                       : "block",
                 }}
@@ -1077,7 +1043,7 @@ const Production_Details = (props) => {
               />
             </td>
           </tr> */}
-          
+
           <tr>
             <td
               colSpan="1"
@@ -1091,7 +1057,7 @@ const Production_Details = (props) => {
               colSpan="2"
               style={{
                 padding: "1em",
-                position:"center"
+                position: "center",
               }}
             >
               Manufacturing End Date
@@ -1100,7 +1066,6 @@ const Production_Details = (props) => {
               colSpan="1"
               style={{
                 padding: "1em",
-                
               }}
             >
               Manufacturing Completion Date
@@ -1151,7 +1116,11 @@ const Production_Details = (props) => {
                 value={productionDetails.manufactureCompletionDate}
                 max={today}
                 onChange={(e) => {
-                  handleProductionDetails(e, "manufactureCompletionDate", "input");
+                  handleProductionDetails(
+                    e,
+                    "manufactureCompletionDate",
+                    "input"
+                  );
                 }}
                 readOnly={
                   props.loggedInHod ||
@@ -1204,7 +1173,11 @@ const Production_Details = (props) => {
                 type="time"
                 value={productionDetails.manufactureCompletionTime}
                 onChange={(e) => {
-                  handleProductionDetails(e, "manufactureCompletionTime", "input");
+                  handleProductionDetails(
+                    e,
+                    "manufactureCompletionTime",
+                    "input"
+                  );
                 }}
                 readOnly={
                   props.loggedInHod ||
@@ -1243,7 +1216,7 @@ const Production_Details = (props) => {
               <br />
               <Input
                 type="datetime-local"
-                value={productionDetails.issued_on}
+                value={productionDetails.issued_on || qaDate}
                 onChange={(e) => {
                   handleProductionDetails(e, "issued_on", "input");
                 }}
@@ -1266,7 +1239,6 @@ const Production_Details = (props) => {
                 onChange={(e) => {
                   handleProductionDetails(e, "received_by", "select");
                 }}
-                // disabled={hadData || !props.loggedInSupervisor}
                 disabled={
                   props.loggedInHod ||
                   props.loggedInQa ||
@@ -1277,7 +1249,7 @@ const Production_Details = (props) => {
               <br />
               <Input
                 type="datetime-local"
-                value={productionDetails.received_on}
+                value={productionDetails.received_on || supervisorDate}
                 onChange={(e) => {
                   handleProductionDetails(e, "received_on", "input");
                 }}
