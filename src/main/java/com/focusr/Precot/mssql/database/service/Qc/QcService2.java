@@ -86,6 +86,7 @@ import com.focusr.Precot.util.BleachHodHrQaDetails;
 import com.focusr.Precot.util.IdAndValuePair;
 import com.focusr.Precot.util.SCAUtil;
 import com.focusr.Precot.util.Qc.AppConstantsQc;
+import com.focusr.Precot.util.Qc.CoaAbCottonF26BSummaryDTO;
 import com.focusr.Precot.util.Qc.QcMailFunction;
 
 @Service
@@ -1950,6 +1951,30 @@ public class QcService2 {
 		}
 	}
 
+	
+	public ResponseEntity<?> F26BSummary(HttpServletRequest http) {
+	    try {
+	        String userRole = scaUtil.getUserRoleFromRequest(http, tokenProvider);
+
+	        List<CoaAbCottonF26BSummaryDTO> details;
+
+	        if (userRole.equals("ROLE_CHEMIST")) {
+	            details = coaCottonBallsF26BRepo.chemistSummaryF26B();
+	        } else if (userRole.equalsIgnoreCase("QA_EXECUTIVE") 
+	                || userRole.equalsIgnoreCase("QC_MANAGER")
+	                || userRole.equalsIgnoreCase("QA_MANAGER")) {
+	            details = coaCottonBallsF26BRepo.exeManagerSummaryF26B();
+	        } else {
+	            return new ResponseEntity<>(new ApiResponse(false, userRole + " is not authorize to access the form."),
+	                                        HttpStatus.FORBIDDEN);
+	        }
+
+	        return new ResponseEntity<>(details, HttpStatus.OK);
+	    } catch (Exception e) {
+	        log.error("Unable to get Details!", e);
+	        return new ResponseEntity<>("Unable to get Details! ", HttpStatus.BAD_REQUEST);
+	    }
+	}
 //	=============================  F026-C COTTON WOOL ROLL ============================
 
 	public ResponseEntity<?> SaveCottonWoolRollF26C(CoaCottonWoolRollF26C abCotton, HttpServletRequest http) {

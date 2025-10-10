@@ -600,7 +600,10 @@ public class BleachingService3 {
 	        if (sanitization.getSms_id() != null) {
 	            newSanitization = bleachsanitizationofmechineandsurfacef01repository.findById(sanitization.getSms_id())
 	                    .orElseThrow(() -> new ResourceNotFoundException("Sanitization Log", "id",
-	                            sanitization.getSms_id()));
+	                            sanitization.getSms_id())); 
+	            
+				newSanitization.setCreatedAt(newSanitization.getCreatedAt());
+				newSanitization.setCreatedBy(newSanitization.getCreatedBy());
 
 	            // Update existing activities
 	            if (sanitization.getActivitesf01() != null) {
@@ -832,6 +835,9 @@ public class BleachingService3 {
 	        	sanitizationLog = bleachsanitizationofmechineandsurfacef01repository.findById(approveResponse.getSms_id())
 	                    .orElseThrow(() -> new ResourceNotFoundException("Sanitization Log", "id",
 	                    		approveResponse.getSms_id()));
+	        	
+				sanitizationLog.setCreatedAt(sanitizationLog.getCreatedAt());
+				sanitizationLog.setCreatedBy(sanitizationLog.getCreatedBy());
  
 	            // Update existing activities
 	            if (approveResponse.getActivitesf01() != null) {

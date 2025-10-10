@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.focusr.Precot.mssql.database.model.Qc.CoaCottonBallsF26B;
+import com.focusr.Precot.util.Qc.CoaAbCottonF26BSummaryDTO;
 
 @Repository
 public interface CoaCottonBallsF26BRepo extends JpaRepository<CoaCottonBallsF26B, Long> {
@@ -34,5 +35,25 @@ public interface CoaCottonBallsF26BRepo extends JpaRepository<CoaCottonBallsF26B
 	
 	@Query(value = "SELECT DISTINCT PRODUCT FROM precot.COA_COTTON_BALLS_F26B WHERE MANAGER_STATUS IN ('QA_APPROVED','QC_APPROVED') AND CUSTOMER  = :customer", nativeQuery = true)
 	List<String> ProductF26B(@Param("customer") String customer);
+	
+		   // CHEMIST SUMMARY
+	@Query(value = "SELECT CUSTOMER as customer, PRODUCT as product, CHEMIST_STATUS as chemistStatus, " +
+	             "QA_EXE_STATUS as qaExeStatus, MANAGER_STATUS as managerStatus, REASON as reason " +
+	             "FROM precot.COA_COTTON_BALLS_F26B " +
+	             "WHERE CHEMIST_STATUS = 'CHEMIST_SAVED' " +
+	             "OR MANAGER_STATUS NOT IN ('QC_APPROVED', 'QA_APPROVED') " +
+	             "ORDER BY ID DESC",
+	     nativeQuery = true)
+	List<CoaAbCottonF26BSummaryDTO> chemistSummaryF26B();
+	
+	// MANAGER SUMMARY
+	@Query(value = "SELECT CUSTOMER as customer, PRODUCT as product, CHEMIST_STATUS as chemistStatus, " +
+	             "QA_EXE_STATUS as qaExeStatus, MANAGER_STATUS as managerStatus, REASON as reason " +
+	             "FROM precot.COA_COTTON_BALLS_F26B " +
+	             "WHERE CHEMIST_STATUS = 'CHEMIST_APPROVED' " +
+	             "  AND MANAGER_STATUS NOT IN ('QC_APPROVED', 'QA_APPROVED') " +
+	             "ORDER BY ID DESC",
+	     nativeQuery = true)
+	List<CoaAbCottonF26BSummaryDTO> exeManagerSummaryF26B();
 
 }

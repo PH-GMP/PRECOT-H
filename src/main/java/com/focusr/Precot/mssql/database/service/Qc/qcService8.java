@@ -5922,6 +5922,9 @@ public ResponseEntity<?> weighScalePDE() {
 	            if (id != null) {
 	                physicalobject = absorbentbleachedcottonreportCLF005ParentRepo.findById(id)
 	                        .orElseThrow(() -> new EntityNotFoundException("Test not found"));
+	                
+	                physicalobject.setCreatedAt(physicalobject.getCreatedAt());
+					physicalobject.setCreatedBy(physicalobject.getCreatedBy());
 	            }
 	            BeanUtils.copyProperties(absorbentbleachedcottonreportCLF005, physicalobject, IgnoreProps);
 
@@ -6007,6 +6010,9 @@ public ResponseEntity<?> weighScalePDE() {
 	            if (id != null) {
 	                physicalobject = absorbentbleachedcottonreportCLF005ParentRepo.findById(id)
 	                        .orElseThrow(() -> new EntityNotFoundException("Test not found"));
+	                
+					physicalobject.setCreatedAt(physicalobject.getCreatedAt());
+					physicalobject.setCreatedBy(physicalobject.getCreatedBy());
 	            }
 	            BeanUtils.copyProperties(absorbentbleachedcottonreportCLF005, physicalobject, IgnoreProps);
 

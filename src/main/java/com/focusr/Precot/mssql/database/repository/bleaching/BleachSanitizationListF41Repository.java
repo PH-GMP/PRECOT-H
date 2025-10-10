@@ -275,7 +275,7 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     long countAbsorbentBleachedCotton(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     // Chemical Analysis
-    @Query(value = "SELECT COUNT(*) FROM precot.CHEMICAL_ANALYSIS_REPORT_AR_F003 WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.CHEMICAL_ANALYSIS_REPORT_AR_F003 WHERE createdAt BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countChemicalAnalysis(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     // Exfoliating Fabric Analysis

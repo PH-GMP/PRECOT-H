@@ -47,6 +47,9 @@ public class DailyProductionDetailsPleateAndWoolRollHistoryF006 extends Spulance
 	@Column(name = "PRODUCT_NAME")
 	private String product_name;
 	
+	@Column(name = "MACHINE_NAME")
+	private String machine_name;
+	
 	@Column(name = "ORDER_NO")
 	private String order_no;
 	

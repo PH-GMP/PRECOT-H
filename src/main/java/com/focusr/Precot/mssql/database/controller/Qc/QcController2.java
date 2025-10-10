@@ -260,6 +260,12 @@ public class QcController2 {
 	public ResponseEntity<?> F26BCottonPadSummary(HttpServletRequest http) {
 		return qcService2.F26BCottonPadSummary(http);
 	}
+	
+	
+	@GetMapping("/F26BSummary")
+	public ResponseEntity<?> F26BSummary(HttpServletRequest http) {
+		return qcService2.F26BSummary(http);
+	}
 
 	@PutMapping("/ApproveOrRejectF26B")
 	public ResponseEntity<?> ApproveOrRejectF26B(@Valid @RequestBody ApproveResponse approvalResponse,

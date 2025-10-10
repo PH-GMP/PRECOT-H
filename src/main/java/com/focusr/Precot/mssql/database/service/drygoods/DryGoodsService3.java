@@ -677,7 +677,7 @@ public class DryGoodsService3 {
 						cottonBalls.setOperator_save_by(userName);
 						cottonBalls.setOperator_save_on(date);
 						cottonBalls.setOperator_save_id(userId);
-						cottonBalls.setSupervisor_status(AppConstants.waitingStatus);
+//						cottonBalls.setSupervisor_status(AppConstants.waitingStatus);
 						cottonBalls.setHod_status("");
 
 						dailyproductioncottonballsf003repository.save(cottonBalls);
@@ -712,7 +712,7 @@ public class DryGoodsService3 {
 					cottonBalls.setOperator_save_by(userName);
 					cottonBalls.setOperator_save_on(date);
 					cottonBalls.setOperator_save_id(userId);
-					cottonBalls.setSupervisor_status(AppConstants.waitingStatus);
+//					cottonBalls.setSupervisor_status(AppConstants.waitingStatus);
 					cottonBalls.setHod_status("");
 
 					dailyproductioncottonballsf003repository.save(cottonBalls);
