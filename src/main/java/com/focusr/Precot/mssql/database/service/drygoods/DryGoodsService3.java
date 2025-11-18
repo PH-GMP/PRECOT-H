@@ -212,33 +212,43 @@ public class DryGoodsService3 {
 
 	// AMC
 
-	public ResponseEntity<?> getHeaderDetailsBag(String orderNo, String date, String shift) {
+	public ResponseEntity<?> getHeaderDetailsBag(String orderNo) {
 
 		List<Map<String, Object>> responseList = new ArrayList<>();
 
 		try {
-			List<Object[]> orderResponse = baleconsumptionreportdrygoodsf001repository
-					.fetchheaderdetailsForF006Bag(orderNo, date, shift);
-
-			// Convert each Object[] to a Map<String, Object>
-			for (Object[] record : orderResponse) {
-				Map<String, Object> map = new HashMap<>();
-
-				if (record[0] != null) {
-					try {
-						// Convert to integer and divide by 12
-						int originalBag = Integer.parseInt(record[0].toString());
-						int dividedBag = originalBag / 12;
-						map.put("Bag", dividedBag);
-					} catch (NumberFormatException e) {
-						map.put("Bag", "Invalid number format");
-					}
-				} else {
-					map.put("Bag", "No value");
-				}
-
-				responseList.add(map);
+			
+//			List<Object[]> orderResponse = baleconsumptionreportdrygoodsf001repository
+//					.fetchheaderdetailsForF006Bag(orderNo, date, shift);
+//
+//			// Convert each Object[] to a Map<String, Object>
+//			for (Object[] record : orderResponse) {
+//				Map<String, Object> map = new HashMap<>();
+//
+//				if (record[0] != null) {
+//					try {
+//						// Convert to integer and divide by 12
+//						int originalBag = Integer.parseInt(record[0].toString());
+//						int dividedBag = originalBag / 12;
+//						map.put("Bag", dividedBag);
+//					} catch (NumberFormatException e) {
+//						map.put("Bag", "Invalid number format");
+//					}
+//				} else {
+//					map.put("Bag", "No value");
+//				}
+//
+//				responseList.add(map);
+//			}
+			
+			List<Object[]> results = baleconsumptionreportdrygoodsf001repository.fetchpdeF006(orderNo);
+			
+			for (Object[] result : results) {
+				Map<String, Object> rowMap = new HashMap<>();
+				rowMap.put("Bag", result[0]);
+				responseList.add(rowMap);
 			}
+			
 
 		} catch (Exception ex) {
 			String msg = ex.getMessage();

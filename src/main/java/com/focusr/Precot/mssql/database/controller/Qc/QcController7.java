@@ -2,6 +2,7 @@ package com.focusr.Precot.mssql.database.controller.Qc;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -1677,5 +1678,16 @@ public class QcController7 {
 			return qcService.getMediaPrepRecordF019ReportForPrint(preparationDate,loadNo,month, year);
 		}	
 		
+		// CR
+		
+		@GetMapping("/ReceivedQuantity")
+		public ResponseEntity<?> getProductName(@RequestParam Map<String, String> requestParams) {
+
+			String materialDoc = requestParams.get("materialDoc");
+			String chemical = requestParams.get("chemical");
+
+			ResponseEntity<?> responseList = qcService.getReceivedQuantity(materialDoc,chemical);
+			return responseList;
+		}
 }
 

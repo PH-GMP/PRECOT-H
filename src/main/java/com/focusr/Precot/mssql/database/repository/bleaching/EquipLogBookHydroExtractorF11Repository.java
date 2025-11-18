@@ -69,4 +69,13 @@ public interface EquipLogBookHydroExtractorF11Repository extends JpaRepository<E
 	
 	@Query(value = "SELECT SUB_BATCH_NO FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_HYDRO_EXTRACTOR_F11 WHERE BMR_NO=:bmr_no AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED'", nativeQuery = true)
 	List<String> getBatchByBMRForHydroExtractor(@Param("bmr_no") String bmr_no);
+	
+	
+	//  CR
+	
+	@Query(value = "SELECT * FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_HYDRO_EXTRACTOR_F11 WHERE BMR_NO=:bmr_no", nativeQuery = true)
+	List<EquipLogBookHydroExtractorF11> getDetailsByBMR(@Param("bmr_no") String bmr_no);
+	
+	@Query(value = "SELECT * FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_HYDRO_EXTRACTOR_F11 WHERE BMR_NO=:bmr_no AND SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED'", nativeQuery = true)
+	List<EquipLogBookHydroExtractorF11> getBmrDetails(@Param("bmr_no") String bmr_no);
 }

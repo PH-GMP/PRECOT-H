@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.focusr.Precot.Buds.model.bmr.BudsBmrRework;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssue;
+import com.focusr.Precot.mssql.database.model.padpunching.bmr.BMRPunchingProductReconillation;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEnclosureList;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetails;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrManufacturingSteps;
@@ -44,6 +45,8 @@ public class PadPunchingBmrRequest {
 	private List<DailyProductionDetailsBmrResponse> dailyProductionDetailsBmrResponses;
 	
 	private Map<String, String> reconillation;
+	
+	private List<BMRPunchingProductReconillation> productReconcilation;
 	
 	private List<BMR03GoodsPackingMeterialIssue> packingMaterial;
 	

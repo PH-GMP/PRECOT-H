@@ -190,4 +190,21 @@ List<Object[]> fetchfleecetReceiptForF006(
 		+ "    AND (:machine_name IS NULL OR sm.MCN = :machine_name)", nativeQuery = true)
 List<Object[]> fetchStoppagedetailsForF006(@Param("date") String date, @Param("shift") String shift,@Param("order_no") String order_no,@Param("machine_name") String machine_name);
 
+
+		@Query(value = "    SELECT \r\n"
+				+ "    P.Bags,\r\n"
+				+ "    O.Material, \r\n"
+				+ "    O.POrder ,\r\n"
+				+ "    P.Brand AS customer_name, \r\n"
+				+ "    O.Qty, \r\n"
+				+ "    O.Saleorder\r\n"
+				+ "FROM \r\n"
+				+ "    PDE.dbo.TblOrderInfo O\r\n"
+				+ "JOIN \r\n"
+				+ "    PDE.dbo.TblProduct P\r\n"
+				+ "    ON O.Material = P.Product\r\n"
+				+ "WHERE \r\n"
+				+ "    O.POrder = :orderNo", nativeQuery = true)
+		List<Object[]> fetchpdeF006(@Param("orderNo") String order_no);
+		
 }

@@ -1,5 +1,6 @@
 package com.focusr.Precot.mssql.database.repository.Qc;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,5 +53,11 @@ public interface ChemicalAnalysisReportARF003Repository extends JpaRepository<Ch
 
 	@Query(value = "SELECT * FROM precot.CHEMICAL_SPECIFICATION_F003 WHERE CHEMICAL = :chemical", nativeQuery = true)
 	List<Object[]> fetchChemicalData(@Param("chemical") String chemical);
+	
+	// CR
+
+	@Query(value = "SELECT SUM(CAST(Weight AS DECIMAL(18, 2))) FROM tblsup WHERE MATDOC = :materialDoc AND Mat_DEC = :chemical", nativeQuery = true)
+	BigDecimal getReceivedQuantity(@Param("materialDoc") String materialDoc, @Param("chemical") String chemical);
+
 
 }

@@ -15,4 +15,8 @@ public interface ProductionDetailLogBookLines01Repo extends JpaRepository<Produc
 	@Query(value = "SELECT * FROM precot.PRODUCTION_DETAIL_LOG_BOOK_LINES_F01 WHERE LINE_ID =:lineId", nativeQuery = true)
 	ProductionDetailLogBookLines01 getLinesById(@Param("lineId") Long lineId);
 	
+	@Query(value = "SELECT TOP 1 * \r\n"
+			+ "FROM precot.PRODUCTION_DETAIL_LOG_BOOK_LINES_F01 WHERE RUNNING_ORDER_NO = :orderNo OR NEXT_ORDER_NO = :orderNo ORDER BY LINE_ID DESC",nativeQuery = true)
+	ProductionDetailLogBookLines01 findTopByOrderNo(@Param("orderNo") String orderNo);
+	
 }

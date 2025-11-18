@@ -36,6 +36,7 @@ import com.focusr.Precot.Buds.repository.bmr.BudsBmrReworkRepository;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummary;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssue;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssueLine;
+import com.focusr.Precot.mssql.database.model.padpunching.bmr.BMRPunchingProductReconillation;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEnclosureList;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetails;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetailsLine;
@@ -58,6 +59,7 @@ import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrLaydownMap
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrSummaryRepository;
 import com.focusr.Precot.mssql.database.repository.drygoods.BMR03GoodsPackingMeterialIssueLineRepository;
 import com.focusr.Precot.mssql.database.repository.drygoods.BMR03GoodsPackingMeterialIssueRepository;
+import com.focusr.Precot.mssql.database.repository.padpunching.bmr.BMRPadPunchingProductReconillationRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrDeviationRecordHeaderRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrEnclosureListRepository;
 import com.focusr.Precot.mssql.database.repository.padpunching.bmr.PunchingBmrEquipmentDetailsLineRepository;
@@ -157,6 +159,11 @@ public class PunchingBmrService {
 
 	@Autowired
 	private PunchingBmrEquipmentSAPRepository equipmentSAPRepository;
+	
+	// FOR PRODUCT RECONILLATION
+
+	@Autowired
+	private BMRPadPunchingProductReconillationRepository bmrPadPunchingProductReconillationRepository;
 
 	public ResponseEntity<?> saveProductRelease(PunchingBmrProductRelease productRelease, HttpServletRequest http) {
 
@@ -4003,6 +4010,9 @@ public class PunchingBmrService {
 			// 01. PRODUCTION DETAILS
 			PunchingBmrProductionDetails productionDetails = productionDetailsRepository
 					.fetchProductionByBatch(batchNo);
+			
+			List<BMRPunchingProductReconillation> productReconcilation = bmrPadPunchingProductReconillationRepository
+					.fetchProductReconillation(batchNo);
 
 			String manStartDate = "";
 			String manEndDate = "";
@@ -4031,6 +4041,7 @@ public class PunchingBmrService {
 			bmrPrintRequest.setStoppage(stoppage);
 			bmrPrintRequest.setQualityRelease(qualityRelease);
 			bmrPrintRequest.setProductRelease(productRelease);
+			bmrPrintRequest.setProductReconcilation(productReconcilation);
 			bmrPrintRequest.setReconillation(productRecMap);
 			bmrPrintRequest.setDailyProductionDetailsBmrResponses(dailyprodResponse);
 			bmrPrintRequest.setReworkList(reworkList);
@@ -4235,6 +4246,14 @@ public class PunchingBmrService {
 		try {
 			GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository.getpackingmeterialpde(batch_no, fromdate,
 					todate);
+			
+			if (GetPackingMeterialPde == null || GetPackingMeterialPde.isEmpty()) {
+	            if (batch_no != null && !batch_no.isEmpty()) {
+	                batch_no = "000" + batch_no.trim();
+	                GetPackingMeterialPde = bmr03goodspackingmeterialissuerepository
+	                        .getpackingmeterialpde(batch_no, fromdate, todate);
+	            }
+	        }
 
 			return new ResponseEntity<>(GetPackingMeterialPde, HttpStatus.OK);
 
@@ -4423,6 +4442,56 @@ public class PunchingBmrService {
 	    	    }
 
 	    	    return new ResponseEntity(equipmentDetails, HttpStatus.OK);
+	    	}
+	        
+	    	// CR
+
+	    	public ResponseEntity<?> submitProductReconillation(BMRPunchingProductReconillation productReconillation,
+	    			HttpServletRequest http) {
+
+	    		SCAUtil scaUtil = new SCAUtil();
+
+	    		try {
+
+	    			productReconillation.setForm_no("PH-QAD01/F-070");
+
+	    			bmrPadPunchingProductReconillationRepository.save(productReconillation);
+
+	    		} catch (Exception ex) {
+
+	    			logger.error("***!!! Unable to Submit Product Reconillation !!! ***" + ex.getMessage());
+	    			ex.printStackTrace();
+	    			;
+
+	    			return new ResponseEntity(
+	    					new ApiResponse(false, "Unable to submit product Reconillation" + ex.getMessage()),
+	    					HttpStatus.BAD_REQUEST);
+
+	    		}
+
+	    		return new ResponseEntity(productReconillation, HttpStatus.OK);
+	    	}
+
+	    	// Fecth reconillation details by Batch Number
+
+	    	public ResponseEntity<?> getProductReconillationByBatchNumber(String batchNo) {
+
+	    		List<BMRPunchingProductReconillation> reconillationList = new ArrayList<BMRPunchingProductReconillation>();
+
+	    		try {
+
+	    			reconillationList = bmrPadPunchingProductReconillationRepository.fetchProductReconillation(batchNo);
+
+	    		} catch (Exception ex) {
+	    			logger.error("***!!! Unable to get Product Reconillation !!! ***" + ex.getMessage());
+	    			ex.printStackTrace();
+	    			;
+
+	    			return new ResponseEntity(new ApiResponse(false, "Unable to get product Reconillation" + ex.getMessage()),
+	    					HttpStatus.BAD_REQUEST);
+	    		}
+
+	    		return new ResponseEntity(reconillationList, HttpStatus.OK);
 	    	}
 
 	// GET USER ROLE

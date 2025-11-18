@@ -10,6 +10,7 @@ import com.focusr.Precot.mssql.database.model.drygoods.BMR06GoodsVerificationOfR
 import com.focusr.Precot.mssql.database.model.drygoods.BMR07GoodsManufacturingStepsCottonBalls;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR09GoodsProcessDevRecord;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR10GoodsProcessDelayEqupment;
+import com.focusr.Precot.mssql.database.model.drygoods.BMR10GoodsProductReconillation;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR11GoodsListOfEnclouser;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR12GoodsPostProdReview;
 import com.focusr.Precot.mssql.database.model.drygoods.BMR13GoodsQaRelease;
@@ -31,6 +32,7 @@ public class BMRCottonPleatResponsePrint {
 	List<BMR12GoodsPostProdReview> bmr12goodspostprodreview;
 	List<BMR13GoodsQaRelease> bmr13goodsqarelease;
 	List<BMR14GoodsProductRelease> bmr14goodsproductrelease;
+	List<BMR10GoodsProductReconillation> productReconillation;
 	List<BudsBmrRework> reworkList;
 	public BMRCottonPleatResponsePrint(List<BMR001GoodsProductionDetails> bmr001goodsproductiondetails,
 			List<BMR03GoodsPackingMeterialIssue> bmr03goodspackingmeterialissue,
@@ -41,7 +43,9 @@ public class BMRCottonPleatResponsePrint {
 			List<BMR10GoodsProcessDelayEqupment> bmr10goodsprocessdelayequpment,
 			List<BMR11GoodsListOfEnclouser> bmr11goodslistofenclouser,
 			List<BMR12GoodsPostProdReview> bmr12goodspostprodreview, List<BMR13GoodsQaRelease> bmr13goodsqarelease,
-			List<BMR14GoodsProductRelease> bmr14goodsproductrelease, List<BudsBmrRework> reworkList) {
+			List<BMR14GoodsProductRelease> bmr14goodsproductrelease,
+			List<BMR10GoodsProductReconillation> productReconillation,
+			List<BudsBmrRework> reworkList) {
 		super();
 		this.bmr001goodsproductiondetails = bmr001goodsproductiondetails;
 		this.bmr03goodspackingmeterialissue = bmr03goodspackingmeterialissue;
@@ -54,6 +58,7 @@ public class BMRCottonPleatResponsePrint {
 		this.bmr12goodspostprodreview = bmr12goodspostprodreview;
 		this.bmr13goodsqarelease = bmr13goodsqarelease;
 		this.bmr14goodsproductrelease = bmr14goodsproductrelease;
+		this.productReconillation = productReconillation;
 		this.reworkList = reworkList;
 	}
 	

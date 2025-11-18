@@ -1,5 +1,6 @@
 package com.focusr.Precot.mssql.database.service.Qc;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10456,6 +10457,32 @@ public class QcService7 {
 				throw new Exception("Mandatory fields missing in SampleInwardBookDetail");
 			}
 		}
+	}
+	
+	// GET RECEIVED QTY FROM PDE
+	
+	public ResponseEntity<?> getReceivedQuantity(String materialDoc, String chemical) {
+	    try {
+	    	
+	        BigDecimal totalWeight = chemicalAnalysisRepo.getReceivedQuantity(materialDoc, chemical);
+
+	        if (totalWeight == null) {
+	            totalWeight = BigDecimal.ZERO;
+	        }
+
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("materialDoc", materialDoc);
+	        response.put("chemical", chemical);
+	        response.put("totalWeight", totalWeight);
+
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+
+	    } catch (Exception ex) {
+	        log.error("Error fetching received quantity: {}", ex.getMessage());
+	        return new ResponseEntity<>(
+	                new ApiResponse(false, "Failed to get received quantity."),
+	                HttpStatus.BAD_REQUEST);
+	    }
 	}
 
 

@@ -17,8 +17,11 @@ import com.focusr.Precot.model.audit.UserDateAudit;
 import com.focusr.Precot.util.AppConstants;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "WATER_ANALYSIS_REPORT_F007", schema = AppConstants.schema, uniqueConstraints = {
 		@UniqueConstraint(columnNames = "DATE") })

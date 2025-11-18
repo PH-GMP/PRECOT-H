@@ -834,7 +834,7 @@ public class BmrCottonPleatService {
 //						//new
 //						checkObj = details;
 
-						checkObj.setForm_no("PH-PRD04/F-004");
+						checkObj.setForm_no("PH-PRD04/F-007");
 						checkObj.setQa_sign(userName);
 						checkObj.setQa_submit_by(userName);
 						checkObj.setQa_submit_on(date);
@@ -1892,6 +1892,7 @@ public class BmrCottonPleatService {
 		List<BMR12GoodsPostProdReview> bmr12goodspostprodreview;
 		List<BMR13GoodsQaRelease> bmr13goodsqarelease;
 		List<BMR14GoodsProductRelease> bmr14goodsproductrelease;
+		List<BMR10GoodsProductReconillation> bmrReconillation;
 		
 		List<BudsBmrRework> reworkList;
 
@@ -1908,13 +1909,13 @@ public class BmrCottonPleatService {
 			bmr12goodspostprodreview = bmr12goodspostprodreviewrepository.getDetailscp(batch_no);
 			bmr13goodsqarelease = bmr13goodsqareleaserrepository.getDetailscp(batch_no);
 			bmr14goodsproductrelease = bmr14goodsproductreleaserepository.getDetailscp(batch_no);
-			
+			bmrReconillation = reconillationRepository.fetchReconillationPleats(batch_no);
 			reworkList = reworkRepository.reworkListByBmrNumber(batch_no);
 
 			BMRCottonPleatResponsePrint response = new BMRCottonPleatResponsePrint(bmr001goodsproductiondetails,bmr03goodspackingmeterialissue,
 					bmr05goodsequipmentused, bmr06goodsverificationofrecords, bmr07goodsmanufacturingstepscottonballs,
 					bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment, bmr11goodslistofenclouser,
-					bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease, reworkList);
+					bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease,bmrReconillation, reworkList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
 

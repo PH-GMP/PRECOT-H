@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.focusr.Precot.mssql.database.model.drygoods.BMR03GoodsPackingMeterialIssue;
+import com.focusr.Precot.mssql.database.model.padpunching.bmr.BMRPunchingProductReconillation;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEnclosureList;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentDetails;
 import com.focusr.Precot.mssql.database.model.padpunching.bmr.PunchingBmrEquipmentSAP;
@@ -319,6 +320,22 @@ public class PunchingBmrController {
 		String todate = requestParams.get("todate");
 		String batchNo = requestParams.get("batchNo");
 		ResponseEntity<?> resp = bmrService.productReconillation(batchNo, order, fromdate, todate);
+		return resp;
+	}
+	
+	@PostMapping("/SubmitProductReconillation")
+	public ResponseEntity<?> SubmitProductReconillation(@Valid @RequestBody BMRPunchingProductReconillation details,
+			HttpServletRequest http) {
+
+		ResponseEntity<?> resp = bmrService.submitProductReconillation(details, http);
+		return resp;
+	}
+	
+	@GetMapping("/getReconillationByBatchNo")
+	public ResponseEntity<?> getReconillationByBatchNo(@RequestParam Map<String, String> requestParams, Principal principal) {
+
+		String batchNo = requestParams.get("batchNo");
+		ResponseEntity<?> resp = bmrService.getProductReconillationByBatchNumber(batchNo);
 		return resp;
 	}
 

@@ -1591,6 +1591,8 @@ public class BmrCottonWoolRollService {
 		List<BMR13GoodsQaRelease> bmr13goodsqarelease;
 
 		List<BMR14GoodsProductRelease> bmr14goodsproductrelease;
+		
+		List<BMR10GoodsProductReconillation> bmrReconillation;
 
 		List<BudsBmrRework> reworkList;
 
@@ -1619,14 +1621,15 @@ public class BmrCottonWoolRollService {
 			bmr13goodsqarelease = bmr13goodsqareleaserrepository.GetQaReleaseWool(batch_no);
 
 			bmr14goodsproductrelease = bmr14goodsproductreleaserepository.GetProductReleaseWool(batch_no);
+			
+			bmrReconillation = reconillationRepository.fetchReconillationRolls(batch_no);
 
 			reworkList = reworkRepository.reworkListByBmrNumber(batch_no);
 
-			BMRCottonWollRollResponcePrint response = new BMRCottonWollRollResponcePrint(bmr001goodsproductiondetails,
-					bmr03goodspackingmeterialissue, bmr05goodsequipmentused, bmr06goodsverificationofrecords,
-					bmr07manufacturingstepscottonwoolroll, bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment,
-					bmr11goodslistofenclouser, bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease,
-					reworkList);
+			BMRCottonWollRollResponcePrint response = new BMRCottonWollRollResponcePrint(bmr001goodsproductiondetails,bmr03goodspackingmeterialissue,
+					bmr05goodsequipmentused, bmr06goodsverificationofrecords,bmr07manufacturingstepscottonwoolroll,
+					bmr09goodsprocessdevrecord, bmr10goodsprocessdelayequpment,bmr11goodslistofenclouser, 
+					bmr12goodspostprodreview, bmr13goodsqarelease, bmr14goodsproductrelease,bmrReconillation,reworkList);
 
 //			
 

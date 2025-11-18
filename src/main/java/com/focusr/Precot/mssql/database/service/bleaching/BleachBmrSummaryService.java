@@ -17,13 +17,11 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.system.ApplicationPid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -48,6 +46,7 @@ import com.focusr.Precot.mssql.database.model.bleaching.BleachBmrLaydownMapping;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachHouseKeepingCheckListF02;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachMixingChangeMachineCleaningF38;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachShiftLogBookF36;
+import com.focusr.Precot.mssql.database.model.bleaching.BleachingBmrEquipmentSAP;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrManufacturingOperations;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummary;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummaryEnclosureList;
@@ -81,6 +80,7 @@ import com.focusr.Precot.mssql.database.repository.bleaching.BleachJobCard13Repo
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachLayDownCheckListF42Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachMixingChangeMachineCleaningF38Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachShiftLogBookF36Repository;
+import com.focusr.Precot.mssql.database.repository.bleaching.BleachingBmrEquipmentSAPRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachingBmrGenerationRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BmrManufacturingOperationsRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BmrSummaryEnclosureListRepository;
@@ -183,19 +183,19 @@ public class BleachBmrSummaryService {
 
 	@Autowired
 	private BmrSummaryEnclosureListRepository bmrsummaryenclosurelistrepository;
-	
+
 	@Autowired
 	private BleachEquipmentUsageLogBookCakePressF09Repository cakePressF09Repository;
-	
+
 	@Autowired
 	private BleachLayDownCheckListF42Repository laydownChecklistRepository;
 
 	@Autowired
 	private BleachEquipmentUsageLogbookBlowroomAndCardingF34Repository cardingRepository;
-	
+
 	@Autowired
 	private BleachJobCard13Repository jobCardRepository;
-	
+
 	@Autowired
 	UserImageDetailsRepository imageRepository;
 
@@ -213,33 +213,27 @@ public class BleachBmrSummaryService {
 
 	@Autowired
 	private BMR_ProcessDelayEqupmentLineRepository bmr_processdelayequpmentlinerepository;
-	
+
 	@Autowired
 	private BleachAppliedContRawCottonF04Repository appliedRawCottonRepository;
 
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	
-	//Applied Contamination report 11 
+
+	// Applied Contamination report 11
 	@Autowired
 	private BleachContRawCottonF05Repository contRawCottonRepository;
-	
-	
-	
+
 //	Bleach contamination check list 12
-	
+
 	@Autowired
 	private BleachContAbsBleachedCottonF18Repository bleachContAbsBleachedCottonF18Repository;
-	
-	
-	
-	
+
 	@Autowired
 	private BleachAppliedContAbCottonF08Repository bleachappliedcontabcottonf08repository;
 
-
-	
+	@Autowired
+	private BleachingBmrEquipmentSAPRepository bleachingBmrEquipmentSAPRepository;
 
 	@SuppressWarnings("unchecked")
 	public ResponseEntity<?> getBatchByBMR(String bmr_no) {
@@ -654,11 +648,11 @@ public class BleachBmrSummaryService {
 	public ResponseEntity<?> submitProductionDetails(BmrSummaryProductionDetails bmrSummaryProductionDetails) {
 
 		SCAUtil sca = new SCAUtil();
-		
+
 		String userRole = getUserRole();
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
 
 			String value = "";
@@ -666,38 +660,37 @@ public class BleachBmrSummaryService {
 			if (bmrSummaryProductionDetails.getStartSubBatch() == null) {
 				value = "startSubBatch";
 			}
-			
-			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
-				
-			    BmrSummaryProductionDetails existing =
-			        productionDetailsRepository.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
 
-			    if (existing != null) {
-			    	
-			        bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
-			        bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
-			    }
+			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
+
+				BmrSummaryProductionDetails existing = productionDetailsRepository
+						.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
+
+				if (existing != null) {
+
+					bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
+					bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
+				}
 			}
 
-			
-			if(userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
-				
+			if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
+
 				bmrSummaryProductionDetails.setStatus(AppConstants.supervisorApprovedStatus);
 				bmrSummaryProductionDetails.setSupervisiorStatus(AppConstants.supervisorApprovedStatus);
 				productionDetailsRepository.save(bmrSummaryProductionDetails);
-				
-			} else if(userRole.equals("ROLE_QA")) {
+
+			} else if (userRole.equals("ROLE_QA")) {
 				bmrSummaryProductionDetails.setStatus(AppConstants.qaApprovedStatus);
 				bmrSummaryProductionDetails.setQaStatus(AppConstants.qaApprovedStatus);
 				productionDetailsRepository.save(bmrSummaryProductionDetails);
+			} else {
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to Submit production details"),
+						HttpStatus.BAD_REQUEST);
 			}
-			else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to Submit production details"), HttpStatus.BAD_REQUEST);
-			}
-
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Submit Production Details For BMR *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Submit Production Details for BMR: "),
@@ -707,18 +700,18 @@ public class BleachBmrSummaryService {
 		return new ResponseEntity(bmrSummaryProductionDetails, HttpStatus.OK);
 
 	}
-	
-	
-	public ResponseEntity<?> saveProductionDetails(BmrSummaryProductionDetails bmrSummaryProductionDetails, HttpServletRequest http) {
+
+	public ResponseEntity<?> saveProductionDetails(BmrSummaryProductionDetails bmrSummaryProductionDetails,
+			HttpServletRequest http) {
 
 		SCAUtil sca = new SCAUtil();
-		
+
 		String userRole = getUserRole();
 		Long userId = sca.getUserIdFromRequest(http, tokenProvider);
 		String userName = userRepository.getUserName(userId);
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
 
 			String value = "";
@@ -726,37 +719,37 @@ public class BleachBmrSummaryService {
 			if (bmrSummaryProductionDetails.getStartSubBatch() == null) {
 				value = "startSubBatch";
 			}
-			
-			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
-				
-			    BmrSummaryProductionDetails existing =
-			        productionDetailsRepository.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
 
-			    if (existing != null) {
-			    	
-			        bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
-			        bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
-			    }
+			if (bmrSummaryProductionDetails.getProdDetailsId() != null) {
+
+				BmrSummaryProductionDetails existing = productionDetailsRepository
+						.findById(bmrSummaryProductionDetails.getProdDetailsId()).orElse(null);
+
+				if (existing != null) {
+
+					bmrSummaryProductionDetails.setCreatedAt(existing.getCreatedAt());
+					bmrSummaryProductionDetails.setCreatedBy(existing.getCreatedBy());
+				}
 			}
-			
-			if(userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
-				
+
+			if (userRole.equals("ROLE_SUPERVISOR") || userRole.equals("ROLE_HOD") || userRole.equals("ROLE_DESIGNEE")) {
+
 				bmrSummaryProductionDetails.setStatus(AppConstants.supervisorSave);
 				bmrSummaryProductionDetails.setSupervisiorStatus(AppConstants.supervisorSave);
 				productionDetailsRepository.save(bmrSummaryProductionDetails);
-				
-			} else if(userRole.equals("ROLE_QA")) {
+
+			} else if (userRole.equals("ROLE_QA")) {
 				bmrSummaryProductionDetails.setStatus(AppConstants.qaSave);
 				bmrSummaryProductionDetails.setQaStatus(AppConstants.qaSave);
 				productionDetailsRepository.save(bmrSummaryProductionDetails);
+			} else {
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to save production details"),
+						HttpStatus.BAD_REQUEST);
 			}
-			else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save production details"), HttpStatus.BAD_REQUEST);
-			}
-
 
 		} catch (Exception ex) {
-			
+
 			log.error("*** Unable to Save Production Details For BMR *** " + ex);
 			String msg = sca.getErrorMessage(ex);
 			return new ResponseEntity(new ApiResponse(false, "Unable to Save Production Details for BMR: "),
@@ -766,7 +759,6 @@ public class BleachBmrSummaryService {
 		return new ResponseEntity(bmrSummaryProductionDetails, HttpStatus.OK);
 
 	}
-	
 
 	// GET PROUCTION DETAILS STEPS
 	@SuppressWarnings("unchecked")
@@ -1144,7 +1136,7 @@ public class BleachBmrSummaryService {
 
 			if (id != null) {
 				checkObj = summaryBleachRepository.findSummaryBleachById(id);
-			} 
+			}
 
 			String[] ignoreProps = { "id", "createdBy", "createdAt", "supervisor_status", "supervisor_save_on",
 					"supervisor_save_by", "supervisor_save_id", "supervisor_submit_on", "supervisor_submit_by",
@@ -1167,7 +1159,8 @@ public class BleachBmrSummaryService {
 
 				summaryBleachRepository.save(checkObj);
 
-				if (checkObj.getQualityRelease() != null && !checkObj.getQualityRelease().isEmpty() && !summary_Bleach.getKey().equals("VERIFICATION")) {
+				if (checkObj.getQualityRelease() != null && !checkObj.getQualityRelease().isEmpty()
+						&& !summary_Bleach.getKey().equals("VERIFICATION")) {
 					for (BMR_QualityRelease summary : checkObj.getQualityRelease()) {
 						Long summaryId = summary.getQualityId();
 						BMR_QualityRelease summaryObj = (summaryId != null)
@@ -1181,8 +1174,6 @@ public class BleachBmrSummaryService {
 						summaryObj.setSignatureId(summary.getSignatureId());
 						summaryObj.setDate(summary.getDate());
 						summaryObj.setSummaryId(checkObj.getSummaryId());
-						
-						
 
 						bmrQualityReleaseRepository.save(summaryObj);
 					}
@@ -1212,7 +1203,8 @@ public class BleachBmrSummaryService {
 					bleachBmrCompletionTableRepository.save(bmrCompletionTable2);
 				}
 
-			} else if (role.equals("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE") || role.equalsIgnoreCase("QA_INSPECTOR")) {
+			} else if (role.equals("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER")
+					|| role.equalsIgnoreCase("QA_DESIGNEE") || role.equalsIgnoreCase("QA_INSPECTOR")) {
 //				if (checkObj.getSupervisor_status().equalsIgnoreCase(AppConstants.supervisorApprovedStatus)) {} else {
 //					return new ResponseEntity<>(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 //				}
@@ -1221,22 +1213,19 @@ public class BleachBmrSummaryService {
 				checkObj.setQa_submit_id(userId);
 				checkObj.setQa_status(AppConstants.qaApprovedStatus);
 
-				
-				if(!checkObj.getQualityRelease().isEmpty() || checkObj.getQualityRelease() != null) {
-					
-					for(BMR_QualityRelease qualityRelease : checkObj.getQualityRelease()) {
+				if (!checkObj.getQualityRelease().isEmpty() || checkObj.getQualityRelease() != null) {
+
+					for (BMR_QualityRelease qualityRelease : checkObj.getQualityRelease()) {
 						qualityRelease.setStatus(AppConstants.qaSave);
-						
+
 //						bmrQualityReleaseRepository.save(qualityRelease);
-						
+
 					}
-					
+
 				}
-				
-				
+
 				summaryBleachRepository.save(checkObj);
-			
-				
+
 			}
 
 		} catch (Exception ex) {
@@ -1250,19 +1239,17 @@ public class BleachBmrSummaryService {
 
 		return new ResponseEntity<>(checkObj, HttpStatus.CREATED);
 	}
-	
-	
-	
-		// Machine Operations Save 
-	
-	
-	public ResponseEntity<?> machineOperationsQualitySaveForm(BMR_Summary_Bleach summaryOperationBleach, HttpServletRequest http) {
-		
+
+	// Machine Operations Save
+
+	public ResponseEntity<?> machineOperationsQualitySaveForm(BMR_Summary_Bleach summaryOperationBleach,
+			HttpServletRequest http) {
+
 		Long id = summaryOperationBleach.getSummaryId();
 		BMR_Summary_Bleach checkObj = new BMR_Summary_Bleach();
-		
+
 		try {
-			
+
 			LocalDateTime currentDate = LocalDateTime.now();
 			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 			Long userId = scaUtil.getUserIdFromRequest(http, tokenProvider);
@@ -1271,8 +1258,8 @@ public class BleachBmrSummaryService {
 
 			if (id != null) {
 				checkObj = summaryBleachRepository.findSummaryBleachById(id);
-			} 
-			
+			}
+
 			String[] ignoreProps = { "id", "createdBy", "createdAt", "supervisor_status", "supervisor_save_on",
 					"supervisor_save_by", "supervisor_save_id", "supervisor_submit_on", "supervisor_submit_by",
 					"supervisor_submit_id", "supervisor_sign", "qa_status", "qa_save_on", "qa_save_by", "qa_save_id",
@@ -1280,21 +1267,20 @@ public class BleachBmrSummaryService {
 					"supervisor_signature_image", "qa_signature_image", "form_no" };
 
 			BeanUtils.copyProperties(summaryOperationBleach, checkObj, ignoreProps);
-			
-			if(summaryOperationBleach.getKey().equalsIgnoreCase("VERIFICATION")) {
-				
+
+			if (summaryOperationBleach.getKey().equalsIgnoreCase("VERIFICATION")) {
+
 				// For Manufacturing Operations
-				
-				if(role.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-					
+
+				if (role.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
 					BleachBmrCompletionTable bmrCompletionTable2 = null;
-					
-					if(id != null) {
+
+					if (id != null) {
 						bmrCompletionTable2 = bleachBmrCompletionTableRepository
 								.getVerificationRecordForBMR(summaryOperationBleach.getBmrNo());
 					}
-					
-					
+
 					if (summaryOperationBleach.getKey().equals("VERIFICATION")) {
 						checkObj.setSupervisor_submit_by(userName);
 						checkObj.setSupervisor_submit_on(date);
@@ -1303,8 +1289,7 @@ public class BleachBmrSummaryService {
 					}
 
 					summaryBleachRepository.save(checkObj);
-					
-					
+
 					if (checkObj.getOperations() != null && !checkObj.getOperations().isEmpty()) {
 						for (BMR_MachineOpeartionParameters enclosure : checkObj.getOperations()) {
 							Long enclosureId = enclosure.getMachineOperationId();
@@ -1321,33 +1306,35 @@ public class BleachBmrSummaryService {
 							bmrMachineOpeartionParametersRepository.save(enclosureObj);
 						}
 					}
-					
+
 					if (bmrCompletionTable2 == null) {
 						bmrCompletionTable2 = new BleachBmrCompletionTable();
 						bmrCompletionTable2.setBmrNo(summaryOperationBleach.getBmrNo());
 						bmrCompletionTable2.setForm("VERIFICATION OF RECORDS");
 						bleachBmrCompletionTableRepository.save(bmrCompletionTable2);
 					}
-					
-				} else if (role.equalsIgnoreCase("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")) {
-					
+
+				} else if (role.equalsIgnoreCase("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER")
+						|| role.equalsIgnoreCase("QA_DESIGNEE")) {
+
 					checkObj.setQa_submit_by(userName);
 					checkObj.setQa_submit_on(date);
 					checkObj.setQa_submit_id(userId);
 					checkObj.setQa_status(AppConstants.qaApprovedStatus);
-					
+
 					summaryBleachRepository.save(checkObj);
-					
+
 				} else {
-					return new ResponseEntity(new ApiResponse(false, role + " cannot save machine operations for bmr"), HttpStatus.BAD_REQUEST);
+					return new ResponseEntity(new ApiResponse(false, role + " cannot save machine operations for bmr"),
+							HttpStatus.BAD_REQUEST);
 				}
-				
+
 			} else {
-				
+
 				// For Quality Release
-				
-				if(role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")) {
-					
+
+				if (role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")) {
+
 					if (checkObj.getQualityRelease() != null && !checkObj.getQualityRelease().isEmpty()) {
 						for (BMR_QualityRelease summary : checkObj.getQualityRelease()) {
 							Long summaryId = summary.getQualityId();
@@ -1362,17 +1349,17 @@ public class BleachBmrSummaryService {
 							summaryObj.setSignatureId(summary.getSignatureId());
 							summaryObj.setDate(summary.getDate());
 							summaryObj.setSummaryId(checkObj.getSummaryId());
-							
+
 							summaryObj.setStatus(AppConstants.qaSave);
 
 							bmrQualityReleaseRepository.save(summaryObj);
 						}
 					}
-					
+
 				}
-				
+
 			}
-			
+
 		} catch (Exception ex) {
 			SCAUtil sca = new SCAUtil();
 			log.error("***  Unable to Save Machine Operation Details For BMR *** " + ex);
@@ -1381,13 +1368,11 @@ public class BleachBmrSummaryService {
 					new ApiResponse(false, "Unable to Save Machine Operation Details For BMR" + msg),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity<>(checkObj, HttpStatus.CREATED);
-		
+
 	}
-	
-	
-	
+
 	// SUBMIT MACHINE OPERATIONS
 
 	public ResponseEntity<?> submitMachineOperations(BMR_Summary_Bleach summary_Bleach, HttpServletRequest http) {
@@ -1520,7 +1505,8 @@ public class BleachBmrSummaryService {
 
 				}
 
-			} else if (role.equals("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE") || role.equalsIgnoreCase("QA_INSPECTOR")) {
+			} else if (role.equals("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER")
+					|| role.equalsIgnoreCase("QA_DESIGNEE") || role.equalsIgnoreCase("QA_INSPECTOR")) {
 
 				checkObj.setQa_submit_by(userName);
 
@@ -1537,7 +1523,7 @@ public class BleachBmrSummaryService {
 				byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 
 				checkObj.setQa_signature_image(signature);
-				
+
 				if (!checkObj.getQualityRelease().isEmpty() || checkObj.getQualityRelease() != null) {
 
 					for (BMR_QualityRelease qualityRelease : checkObj.getQualityRelease()) {
@@ -1547,8 +1533,6 @@ public class BleachBmrSummaryService {
 				}
 
 				summaryBleachRepository.save(checkObj);
-
-			
 
 //				if (checkObj.getSupervisor_status().equalsIgnoreCase(AppConstants.supervisorApprovedStatus)) {} else {
 //
@@ -1579,7 +1563,7 @@ public class BleachBmrSummaryService {
 	}
 
 //		/ SAVE RECORD VERIFICATION 
-	
+
 	public ResponseEntity<?> SaveRecordVerification(BmrSummaryRecordVerification summaryRecordVerification,
 			HttpServletRequest http) {
 
@@ -1657,7 +1641,7 @@ public class BleachBmrSummaryService {
 						enclosureObj.setSummary_record_id(checkObj.getSummaryRecordId());
 
 //						enclosureObj = entityManager.merge(enclosureObj);
-						
+
 						bmrsummaryenclosurelistrepository.save(enclosureObj);
 					}
 				}
@@ -1676,10 +1660,8 @@ public class BleachBmrSummaryService {
 					checkObj.setQa_submit_id(userId);
 					checkObj.setQa_status(AppConstants.qaApprovedStatus);
 
-					
-					
 					recordVerificationRepository.save(checkObj);
-					
+
 				} else {
 					return new ResponseEntity<>(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
 				}
@@ -1698,7 +1680,7 @@ public class BleachBmrSummaryService {
 	}
 
 	// SUBMIT RECORD VERIFICATION
-	
+
 	public ResponseEntity<?> SubmitRecordVerification(BmrSummaryRecordVerification summaryRecordVerification,
 			HttpServletRequest http) {
 
@@ -1761,8 +1743,6 @@ public class BleachBmrSummaryService {
 						summaryObj.setSupervisorStatus("RECORD_VERIFICATION_DONE");
 						summaryObj.setSupervisiorSubmittedOn(date);
 						summaryObj.setSummary_record_id(checkObj.getSummaryRecordId());
-						
-						
 
 						bmrsummaryverificationrepository.save(summaryObj);
 					}
@@ -1782,7 +1762,7 @@ public class BleachBmrSummaryService {
 						enclosureObj.setSummary_record_id(checkObj.getSummaryRecordId());
 
 //						enclosureObj = entityManager.merge(enclosureObj);
-						
+
 						bmrsummaryenclosurelistrepository.save(enclosureObj);
 					}
 				}
@@ -1805,7 +1785,6 @@ public class BleachBmrSummaryService {
 					byte[] signature = imageDetailsOpt.map(UserImageDetails::getImage).orElse(null);
 					checkObj.setQa_signature_image(signature);
 
-					
 //					if (checkObj.getEnclosureList() != null && !checkObj.getEnclosureList().isEmpty()) {
 //						for (BmrSummaryEnclosureList enclosure : checkObj.getEnclosureList()) {
 //							Long enclosureId = enclosure.getEnclosureId();
@@ -1824,18 +1803,18 @@ public class BleachBmrSummaryService {
 //							bmrsummaryenclosurelistrepository.save(enclosureObj);
 //						}
 //					}
-					
-					if(!checkObj.getEnclosureList().isEmpty() || checkObj.getEnclosureList() != null) {
-						
-						for(BmrSummaryEnclosureList enclosure : checkObj.getEnclosureList()) {
-							
+
+					if (!checkObj.getEnclosureList().isEmpty() || checkObj.getEnclosureList() != null) {
+
+						for (BmrSummaryEnclosureList enclosure : checkObj.getEnclosureList()) {
+
 							enclosure.setStatus(AppConstants.qaApprovedStatus);
-							
+
 //							bmrsummaryenclosurelistrepository.save(enclosure);
 						}
-						
+
 					}
-					
+
 					recordVerificationRepository.save(checkObj);
 				} else {
 					return new ResponseEntity<>(new ApiResponse(false, "Invalid Status"), HttpStatus.BAD_REQUEST);
@@ -1918,35 +1897,35 @@ public class BleachBmrSummaryService {
 //			User supervisor = userRepository.getDetailsByUserName(bleachBmrCompletion.getSupervisorName());
 //
 //			bleachBmrCompletion.setSupervisorId(supervisor.getId());
-			
+
 			String role = getUserRole();
 
 			BleachBmrGeneration bmrGeneration = new BleachBmrGeneration();
 			BleachBmrLaydownMapping bmrMapping = new BleachBmrLaydownMapping();
 
 			if (bleachBmrCompletion.getForm().equalsIgnoreCase("PRODUCTION RELEASE")) {
-				
-				if(role.equalsIgnoreCase("ROLE_QA")) {
-					
+
+				if (role.equalsIgnoreCase("ROLE_QA")) {
+
 					bleachBmrCompletion.setStatus("QA_INSPECTOR_SUBMITTED");
-					
+
 					bleachBmrCompletionTableRepository.save(bleachBmrCompletion);
-					
-				} else if(role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")) {
-					
-					if(bleachBmrCompletion.getStatus().equalsIgnoreCase("QA_INSPECTOR_SUBMITTED")) {
-						
+
+				} else if (role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")) {
+
+					if (bleachBmrCompletion.getStatus().equalsIgnoreCase("QA_INSPECTOR_SUBMITTED")) {
+
 						System.out.println("Hii there i am using Precot");
-						
-						BleachBmrCompletionTable completionTableObj = bleachBmrCompletionTableRepository.getProductReleaseForBMR(bleachBmrCompletion.getBmrNo());
-						
+
+						BleachBmrCompletionTable completionTableObj = bleachBmrCompletionTableRepository
+								.getProductReleaseForBMR(bleachBmrCompletion.getBmrNo());
+
 						System.out.println("Completion Table" + completionTableObj.getBmrNo());
-						
-						
+
 						completionTableObj.setQaName(bleachBmrCompletion.getQaName());
 						completionTableObj.setShoppageDate2(bleachBmrCompletion.getShoppageDate2());
 						completionTableObj.setStatus("QA_MANAGER_APPROVED");
-						
+
 						String bmrNumber = completionTableObj.getBmrNo();
 						bmrGeneration = bmrGenerationRepository.getBMR(bmrNumber);
 						bmrMapping = bmrMappingRepository.getBMRNoResponse(bmrNumber);
@@ -1956,40 +1935,41 @@ public class BleachBmrSummaryService {
 
 						bmrGenerationRepository.save(bmrGeneration);
 						bmrMappingRepository.save(bmrMapping);
-						
+
 						bleachBmrCompletionTableRepository.save(completionTableObj);
-						
+
 					} else {
-						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "QA inspector not yet submitted !!!"));
+						return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+								.body(new ApiResponse(false, "QA inspector not yet submitted !!!"));
 					}
-					
+
 				}
-				
-			} else if(bleachBmrCompletion.getForm().equalsIgnoreCase("POST PRODUCTOIN DETAILS")) {
-			
-				if(role.equalsIgnoreCase("ROLE_SUPERVISOR")) {
-					
+
+			} else if (bleachBmrCompletion.getForm().equalsIgnoreCase("POST PRODUCTOIN DETAILS")) {
+
+				if (role.equalsIgnoreCase("ROLE_SUPERVISOR")) {
+
 					bleachBmrCompletion.setStatus("SUPERVISOR_APPROVED");
 					bleachBmrCompletionTableRepository.save(bleachBmrCompletion);
-				} else if(role.equalsIgnoreCase("ROLE_HOD") || role.equalsIgnoreCase("ROLE_DESIGNEE") && bleachBmrCompletion.getStatus().equalsIgnoreCase("SUPERVISOR_APPROVED")) {
-					
+				} else if (role.equalsIgnoreCase("ROLE_HOD") || role.equalsIgnoreCase("ROLE_DESIGNEE")
+						&& bleachBmrCompletion.getStatus().equalsIgnoreCase("SUPERVISOR_APPROVED")) {
+
 					bleachBmrCompletion.setStatus("HOD_APPROVED");
 					bleachBmrCompletionTableRepository.save(bleachBmrCompletion);
-				} 
-				else if(role.equalsIgnoreCase("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER") || role.equalsIgnoreCase("QA_DESIGNEE")  && bleachBmrCompletion.getStatus().equalsIgnoreCase("HOD_APPROVED")) {
-					
+				} else if (role.equalsIgnoreCase("ROLE_QA") || role.equalsIgnoreCase("QA_MANAGER")
+						|| role.equalsIgnoreCase("QA_DESIGNEE")
+								&& bleachBmrCompletion.getStatus().equalsIgnoreCase("HOD_APPROVED")) {
+
 					bleachBmrCompletion.setStatus("QA_APPROVED");
 					bleachBmrCompletionTableRepository.save(bleachBmrCompletion);
+				} else {
+					return new ResponseEntity(new ApiResponse(false, role + "cannot submit post production details"),
+							HttpStatus.BAD_REQUEST);
 				}
-				else {
-					return new ResponseEntity(new ApiResponse(false, role + "cannot submit post production details"), HttpStatus.BAD_REQUEST);
-				}
-			}
-			else {
-				
+			} else {
+
 				bleachBmrCompletionTableRepository.save(bleachBmrCompletion);
 			}
-
 
 		} catch (Exception ex) {
 			SCAUtil sca = new SCAUtil();
@@ -2031,54 +2011,54 @@ public class BleachBmrSummaryService {
 
 		return new ResponseEntity(annexureList, HttpStatus.OK);
 	}
-	
-		// SAVE BMR ANNEXURE
-	
+
+	// SAVE BMR ANNEXURE
+
 	public ResponseEntity<?> saveAnnexureBmr(BleachBmrAnnexureList annexureList, HttpServletRequest http) {
 
-	    SCAUtil sca = new SCAUtil();
-	    String userRole = getUserRole();
-	    LocalDateTime currentDate = LocalDateTime.now();
-	    Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+		SCAUtil sca = new SCAUtil();
+		String userRole = getUserRole();
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
 
-	    try {
-	        Long id = annexureList.getId();
+		try {
+			Long id = annexureList.getId();
 
-	        if (userRole.equals("ROLE_SUPERVISOR") || userRole.equalsIgnoreCase("ROLE_QA")) {
+			if (userRole.equals("ROLE_SUPERVISOR") || userRole.equalsIgnoreCase("ROLE_QA")) {
 
-	            if (id != null) {
-	                BleachBmrAnnexureList annexureExistingObj = annexureRepository.fetchAnnexureById(id);
-	                annexureList.setCreatedAt(annexureExistingObj.getCreatedAt());
-	                annexureList.setCreatedBy(annexureExistingObj.getCreatedBy());
-	            }
+				if (id != null) {
+					BleachBmrAnnexureList annexureExistingObj = annexureRepository.fetchAnnexureById(id);
+					annexureList.setCreatedAt(annexureExistingObj.getCreatedAt());
+					annexureList.setCreatedBy(annexureExistingObj.getCreatedBy());
+				}
 
-	            annexureList.setStatus(AppConstants.supervisorSave);
-	            log.info("**** Saving Annexure List ****" + annexureList);
+				annexureList.setStatus(AppConstants.supervisorSave);
+				log.info("**** Saving Annexure List ****" + annexureList);
 
+				if (annexureList.getAnnexureDates() != null) {
+					for (BleachBmrAnnexureDates dates : annexureList.getAnnexureDates()) {
+						dates.setAnnexureList(annexureList);
+					}
+				}
 
-	            
-	            if (annexureList.getAnnexureDates() != null) {
-	                for (BleachBmrAnnexureDates dates : annexureList.getAnnexureDates()) {
-	                   dates.setAnnexureList(annexureList);
-	                }
-	            }
-	            
-	            annexureRepository.save(annexureList);
+				annexureRepository.save(annexureList);
 
-	        } else {
-	            return new ResponseEntity<>(new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"), HttpStatus.BAD_REQUEST);
-	        }
+			} else {
+				return new ResponseEntity<>(
+						new ApiResponse(false, userRole + " not authorized to save equipment Annexure form"),
+						HttpStatus.BAD_REQUEST);
+			}
 
-	    } catch (Exception ex) {
-	        log.error("*** Unable to Save Annexure Details ***", ex);
-	        String msg = sca.getErrorMessage(ex);
-	        return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Annexure Details: " + msg), HttpStatus.BAD_REQUEST);
-	    }
+		} catch (Exception ex) {
+			log.error("*** Unable to Save Annexure Details ***", ex);
+			String msg = sca.getErrorMessage(ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Annexure Details: " + msg),
+					HttpStatus.BAD_REQUEST);
+		}
 
-	    return new ResponseEntity<>(new ApiResponse(true, "Annexure BMR saved successfully"), HttpStatus.OK);
+		return new ResponseEntity<>(new ApiResponse(true, "Annexure BMR saved successfully"), HttpStatus.OK);
 	}
-	
-	
+
 	// SUBMIT BMR ANNEXURE
 
 	public ResponseEntity<?> submitAnnexureBmr(BleachBmrAnnexureList annexureList, HttpServletRequest http) {
@@ -2125,7 +2105,6 @@ public class BleachBmrSummaryService {
 		return new ResponseEntity<>(new ApiResponse(true, "Annexure BMR Submitted successfully"), HttpStatus.OK);
 	}
 
-
 	public ResponseEntity<?> getAnnexureByBmr(String bmr_no) {
 
 		List<BleachBmrAnnexureList> annexureListBmr = new ArrayList<>();
@@ -2145,35 +2124,32 @@ public class BleachBmrSummaryService {
 		return new ResponseEntity(annexureListBmr, HttpStatus.OK);
 
 	}
-	
-	
-	
-		// GET DISTINCT VERIFIED NAME BY ANNEXURE BMR 
-	
-	
+
+	// GET DISTINCT VERIFIED NAME BY ANNEXURE BMR
+
 	public ResponseEntity<?> getDistinctAnnexureVerifiedNames() {
-		
+
 		List<String> annexureList = new ArrayList<String>();
-		
+
 		List<IdAndValuePair> annexureValueList = new ArrayList<IdAndValuePair>();
-		
+
 		try {
-			
+
 			annexureList = annexureRepository.annexureVerfier();
-			
+
 			Long id = (long) 1;
-			
-			for(String temp : annexureList) {
-				
+
+			for (String temp : annexureList) {
+
 				IdAndValuePair valueList = new IdAndValuePair();
 				valueList.setValue(temp);
 				valueList.setId(id);
-				
+
 				annexureValueList.add(valueList);
 			}
-			
+
 			id++;
-			
+
 		} catch (Exception ex) {
 			SCAUtil sca = new SCAUtil();
 			log.error("*** Unable to get Annexure Verifier Details *** " + ex);
@@ -2181,11 +2157,9 @@ public class BleachBmrSummaryService {
 			return new ResponseEntity(new ApiResponse(false, "Unable to Get Annexure Verifier Details: "),
 					HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(annexureValueList, HttpStatus.OK);
 	}
-	
-	
 
 	// K
 	public List<BMRProcessDeviationRecord> submitProcessDeviationRecord(List<BMRProcessDeviationRecord> request) {
@@ -2200,85 +2174,87 @@ public class BleachBmrSummaryService {
 		}
 		return request;
 	}
-	
-	
-	
-	
-		// SAVE PROCESS DEVIATION RECORD - CR
-	
+
+	// SAVE PROCESS DEVIATION RECORD - CR
+
 	public ResponseEntity<?> saveProcessDeviationRecord(List<BMRProcessDeviationRecord> record) {
-		
+
 		SCAUtil sca = new SCAUtil();
 		String userRole = getUserRole();
 		LocalDateTime currentDate = LocalDateTime.now();
 		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+
 		try {
-			
+
 			BMRProcessDeviationRecord deviationRecord;
-			
-			if(userRole.equals("ROLE_SUPERVISOR")) {
-				
-				if(!record.isEmpty() || record != null) {
-					
-					for(BMRProcessDeviationRecord deviation : record) {
-						if("".equals(deviation.getDeviationLogNo()) || deviation.getDeviationLogNo() == null) {
-							return new ResponseEntity(new ApiResponse(false, "Deviation Log Number should be mandatory"), HttpStatus.BAD_REQUEST);
+
+			if (userRole.equals("ROLE_SUPERVISOR")) {
+
+				if (!record.isEmpty() || record != null) {
+
+					for (BMRProcessDeviationRecord deviation : record) {
+						if ("".equals(deviation.getDeviationLogNo()) || deviation.getDeviationLogNo() == null) {
+							return new ResponseEntity(
+									new ApiResponse(false, "Deviation Log Number should be mandatory"),
+									HttpStatus.BAD_REQUEST);
 						}
-						
-						if(deviation.getId() != null) {
+
+						if (deviation.getId() != null) {
 							deviationRecord = bmrprocessdeviationrecordrepository.fetchByDeviationId(deviation.getId());
 							deviation.setCreatedAt(deviationRecord.getCreatedAt());
 							deviation.setCreatedBy(deviation.getCreatedBy());
 						}
-						
+
 						deviation.setStatus(AppConstants.supervisorSave);
-						
+
 						bmrprocessdeviationrecordrepository.save(deviation);
-						
+
 					}
-					
+
 				}
-				
-			} else if(userRole.equals("ROLE_QA")) {
-				
-				if(!record.isEmpty() || record != null) {
-					
-					for(BMRProcessDeviationRecord deviation : record) {
-						if("".equals(deviation.getDeviationLogNo()) || deviation.getDeviationLogNo() == null) {
-							return new ResponseEntity(new ApiResponse(false, "Deviation Log Number should be mandatory"), HttpStatus.BAD_REQUEST);
+
+			} else if (userRole.equals("ROLE_QA")) {
+
+				if (!record.isEmpty() || record != null) {
+
+					for (BMRProcessDeviationRecord deviation : record) {
+						if ("".equals(deviation.getDeviationLogNo()) || deviation.getDeviationLogNo() == null) {
+							return new ResponseEntity(
+									new ApiResponse(false, "Deviation Log Number should be mandatory"),
+									HttpStatus.BAD_REQUEST);
 						}
-						
-						if(deviation.getId() != null) {
+
+						if (deviation.getId() != null) {
 							deviationRecord = bmrprocessdeviationrecordrepository.fetchByDeviationId(deviation.getId());
 							deviation.setCreatedAt(deviationRecord.getCreatedAt());
 							deviation.setCreatedBy(deviation.getCreatedBy());
 						}
-						
+
 						deviation.setStatus(AppConstants.qaSave);
-						
+
 						bmrprocessdeviationrecordrepository.save(deviation);
-						
+
 					}
-					
+
 				}
-				
+
 			} else {
-				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save process deviation"), HttpStatus.BAD_REQUEST);
+				return new ResponseEntity(
+						new ApiResponse(false, userRole + " not authroized to save process deviation"),
+						HttpStatus.BAD_REQUEST);
 			}
-			
-		} catch(Exception ex) {
-			
+
+		} catch (Exception ex) {
+
 			String msg = ex.getMessage();
 			log.error("*** !!! Unable to save process deviation record !!!***" + ex);
 			return new ResponseEntity(new ApiResponse(false, msg), HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return new ResponseEntity(new ApiResponse(true, "Process Deviation Record Saved Successfully"), HttpStatus.OK);
-		
+
 	}
-	
-	
+
 	// SUBMIT PROCESS DEVIATION RECORD - CR
 
 	public ResponseEntity<?> submitProcessDeviationRecords(List<BMRProcessDeviationRecord> record) {
@@ -2358,8 +2334,6 @@ public class BleachBmrSummaryService {
 		return new ResponseEntity(new ApiResponse(true, "Process Deviation Record Saved Successfully"), HttpStatus.OK);
 
 	}
-	
-	
 
 //	public ResponseEntity<?> getProductReconillation(String bmr_no) {
 //
@@ -2680,7 +2654,7 @@ public class BleachBmrSummaryService {
 	public ResponseEntity<?> getFullSummary(String bmr_no) {
 
 		BmrSummaryApprovalResponse bmrApprovalResponse = new BmrSummaryApprovalResponse();
-		
+
 		List<BmrSummaryProductionDetails> productionDetailsList = new ArrayList<>();
 
 		List<BleachingProductionDetailsResponse> tempResponse = new ArrayList<>();
@@ -2706,7 +2680,7 @@ public class BleachBmrSummaryService {
 		List<BleachBmrCompletionTable> bmrCompletionTable = new ArrayList<>();
 		BmrSummaryRecordVerification summaryRecordVerificationList = new BmrSummaryRecordVerification();
 		List<BMRProcessDeviationRecord> processDeviationList = new ArrayList<>();
-		
+
 		BmrSummaryShoppageDetails bmrSummaryShoppageDetailsObject = new BmrSummaryShoppageDetails();
 
 		try {
@@ -2769,8 +2743,7 @@ public class BleachBmrSummaryService {
 //			}
 
 			stoppageDetailsList = bmr_processdelayequpmentrepository.getprocessDelayEqupment(bmr_no);
-			
-			
+
 			manufacturingStepsList = bmr_ManufacturingStepsRepository.manufactureStepsBMR(bmr_no);
 			manufacturingOperationsList = summaryBleachRepository.getBMRSummaryByBMR(bmr_no);
 			bmrCompletionTable = bleachBmrCompletionTableRepository.getCompletionTable(bmr_no);
@@ -2778,9 +2751,9 @@ public class BleachBmrSummaryService {
 			processDeviationList = processDeviationRecordRepository.getBYBMR(bmr_no);
 
 			if (bmrStatus.equals(AppConstants.bmrClosed) || bmrStatus.equals(AppConstants.bmrSummaryCompletion)) {
-				
+
 				bmrSummary = bleachSummaryRepository.getSummaryByBMR(bmr_no);
-				
+
 				Object resp1 = getProductionDetails(bmr_no).getBody();
 
 				System.out.println("RRRR111" + resp1);
@@ -2796,11 +2769,11 @@ public class BleachBmrSummaryService {
 
 				System.out.println("BBBB" + bmrCompletionTable2);
 				productionDetailsList = productionDetailsRepository.productionDetailsBMR(bmr_no);
-				
-				if(productionDetailsList.isEmpty() || productionDetailsList == null) {
-					
+
+				if (productionDetailsList.isEmpty() || productionDetailsList == null) {
+
 					BmrSummaryProductionDetails summaryProductions = new BmrSummaryProductionDetails();
-					
+
 					summaryProductions.setBaleCount(response.getBaleCount());
 					summaryProductions.setBatchNo(bmr_no);
 					summaryProductions.setBmr_no(bmr_no);
@@ -2817,11 +2790,12 @@ public class BleachBmrSummaryService {
 					summaryProductions.setEndDate(response.getEndDate());
 					summaryProductions.setStartTime(response.getStartTime());
 					summaryProductions.setEndTime(response.getEndTime());
-					
+
 					productionDetailsList.add(summaryProductions);
-					
-					System.out.println("From Date and To Date" + summaryProductions.getStartDate() + summaryProductions.getEndDate());
-					
+
+					System.out.println("From Date and To Date" + summaryProductions.getStartDate()
+							+ summaryProductions.getEndDate());
+
 //					DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //			        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //			        
@@ -2844,9 +2818,9 @@ public class BleachBmrSummaryService {
 //						System.out.println(shoppageDetails.size());
 //						
 //					}
-					
+
 				}
-				
+
 //				List<BmrSummaryProductionDetails> summaryProdDetailsObj = productionDetailsRepository.productionDetailsBMR(bmr_no);
 //				
 //				if(!summaryProdDetailsObj.isEmpty() || summaryProdDetailsObj != null) {
@@ -2974,9 +2948,9 @@ public class BleachBmrSummaryService {
 					rawCottonResponseBMRList.add(rawCottonResponseObject);
 
 				}
-				
-				// stoppage 
-				
+
+				// stoppage
+
 //				DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //		        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //		        
@@ -2997,7 +2971,6 @@ public class BleachBmrSummaryService {
 //					System.out.println(shoppageDetails.size());
 //					
 //				}
-				
 
 			}
 
@@ -3104,7 +3077,7 @@ public class BleachBmrSummaryService {
 //			}
 
 			System.out.println("Stoppage List " + stoppageDetailsList.size());
-			
+
 			bmrApprovalResponse.setProductionDetailsResponses(productDetailsRequestList); // Step 1
 			bmrApprovalResponse.setProductionDetails(productionDetailsList); // STEP 1
 			bmrApprovalResponse.setRawCottonResponse(rawCottonResponseBMRList); // Step 2
@@ -3296,247 +3269,266 @@ public class BleachBmrSummaryService {
 			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get" + msg), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-	// SAVE STOPPAGE 
-		public ResponseEntity<?> saveStoppage(BMR_ProcessDelayEqupment delayEquipments) {
-			SCAUtil sca = new SCAUtil();
-			String userRole = getUserRole();
-			LocalDateTime currentDate = LocalDateTime.now();
-			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-			try {
-				if(userRole.equals("ROLE_SUPERVISOR")) {
-					if(delayEquipments.getBmr_no() == null || "".equals(delayEquipments.getBmr_no())) {
-						return new ResponseEntity(new ApiResponse(false, "Bmr Should be mandatory"), HttpStatus.BAD_REQUEST);
-					}
-					delayEquipments.setStatus(AppConstants.supervisorSave);
-					if(delayEquipments.getDetails() != null || !delayEquipments.getDetails().isEmpty()) {
-						for(BMR_ProcessDelayEqupmentLine stoppageLine : delayEquipments.getDetails()) {
-							stoppageLine.setDelayDetails(delayEquipments);
-						}
-					}
-					bmr_processdelayequpmentrepository.save(delayEquipments);
-				} else {
-					return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save stoppage reports"), HttpStatus.BAD_REQUEST);
-				}
-			} catch (Exception ex) {
-				log.error("*** Unable to Save Stoppage Details *** " + ex);
-				String msg = sca.getErrorMessage(ex);
-				return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Stoppage Details " + msg), HttpStatus.BAD_REQUEST);
-			}
-			return new ResponseEntity(delayEquipments, HttpStatus.OK);
-		}
 
-		// SUBMIT STOPPAGE
-	 
-		public ResponseEntity<?> submitStoppage(BMR_ProcessDelayEqupment delayEquipments) {
-	 
-			SCAUtil sca = new SCAUtil();
-			String userRole = getUserRole();
-			LocalDateTime currentDate = LocalDateTime.now();
-			Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
-	 
-			try {
-	 
-				if (userRole.equals("ROLE_SUPERVISOR")) {
-	 
-					if (delayEquipments.getBmr_no() == null || "".equals(delayEquipments.getBmr_no())) {
-						return new ResponseEntity(new ApiResponse(false, "Bmr Should be mandatory"),
-								HttpStatus.BAD_REQUEST);
-					}
-	 
-					delayEquipments.setStatus(AppConstants.supervisorApprovedStatus);
-	 
-					if (delayEquipments.getDetails() != null || !delayEquipments.getDetails().isEmpty()) {
-						for (BMR_ProcessDelayEqupmentLine stoppageLine : delayEquipments.getDetails()) {
-							stoppageLine.setDelayDetails(delayEquipments);
-						}
-					}
-	 
-					bmr_processdelayequpmentrepository.save(delayEquipments);
-	 
-				} else {
-					return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save stoppage reports"),
+	// SAVE STOPPAGE
+	public ResponseEntity<?> saveStoppage(BMR_ProcessDelayEqupment delayEquipments) {
+		SCAUtil sca = new SCAUtil();
+		String userRole = getUserRole();
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+		try {
+			if (userRole.equals("ROLE_SUPERVISOR")) {
+				if (delayEquipments.getBmr_no() == null || "".equals(delayEquipments.getBmr_no())) {
+					return new ResponseEntity(new ApiResponse(false, "Bmr Should be mandatory"),
 							HttpStatus.BAD_REQUEST);
 				}
-	 
-			} catch (Exception ex) {
-	 
-				log.error("*** Unable to Save Stoppage Details *** " + ex);
-				String msg = sca.getErrorMessage(ex);
-				return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Stoppage Details " + msg),
+				delayEquipments.setStatus(AppConstants.supervisorSave);
+				if (delayEquipments.getDetails() != null || !delayEquipments.getDetails().isEmpty()) {
+					for (BMR_ProcessDelayEqupmentLine stoppageLine : delayEquipments.getDetails()) {
+						stoppageLine.setDelayDetails(delayEquipments);
+					}
+				}
+				bmr_processdelayequpmentrepository.save(delayEquipments);
+			} else {
+				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save stoppage reports"),
 						HttpStatus.BAD_REQUEST);
 			}
-	 
-			return new ResponseEntity(delayEquipments, HttpStatus.OK);
+		} catch (Exception ex) {
+			log.error("*** Unable to Save Stoppage Details *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Stoppage Details " + msg),
+					HttpStatus.BAD_REQUEST);
 		}
-	
+		return new ResponseEntity(delayEquipments, HttpStatus.OK);
+	}
+
+	// SUBMIT STOPPAGE
+
+	public ResponseEntity<?> submitStoppage(BMR_ProcessDelayEqupment delayEquipments) {
+
+		SCAUtil sca = new SCAUtil();
+		String userRole = getUserRole();
+		LocalDateTime currentDate = LocalDateTime.now();
+		Date date = Date.from(currentDate.atZone(ZoneId.systemDefault()).toInstant());
+
+		try {
+
+			if (userRole.equals("ROLE_SUPERVISOR")) {
+
+				if (delayEquipments.getBmr_no() == null || "".equals(delayEquipments.getBmr_no())) {
+					return new ResponseEntity(new ApiResponse(false, "Bmr Should be mandatory"),
+							HttpStatus.BAD_REQUEST);
+				}
+
+				delayEquipments.setStatus(AppConstants.supervisorApprovedStatus);
+
+				if (delayEquipments.getDetails() != null || !delayEquipments.getDetails().isEmpty()) {
+					for (BMR_ProcessDelayEqupmentLine stoppageLine : delayEquipments.getDetails()) {
+						stoppageLine.setDelayDetails(delayEquipments);
+					}
+				}
+
+				bmr_processdelayequpmentrepository.save(delayEquipments);
+
+			} else {
+				return new ResponseEntity(new ApiResponse(false, userRole + " not authroized to save stoppage reports"),
+						HttpStatus.BAD_REQUEST);
+			}
+
+		} catch (Exception ex) {
+
+			log.error("*** Unable to Save Stoppage Details *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to Save Stoppage Details " + msg),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity(delayEquipments, HttpStatus.OK);
+	}
 
 	// GET USER ROLE
-		private String getUserRole() {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if (authentication != null && authentication.isAuthenticated()) {
-				return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
-						.orElse(null);
-			}
-			return null;
+	private String getUserRole() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst()
+					.orElse(null);
 		}
-	
-		
-			// GET LOV OF QA INSPECTOR
-		
-		public ResponseEntity<?> getQAInspectorLOV(Long dept_id) {
-			
-			List<String> inspectorList = new ArrayList<String>();
-			
-			List<IdAndValuePair> inspectorValueList = new ArrayList<IdAndValuePair>();
-			
-			try {
-				
-				inspectorList = bmrQualityReleaseRepository.getQaInspectorByDepartment(dept_id);
-				
-				Long id =  (long) 1;
-				
-				for(String temp : inspectorList) {
-					
-					IdAndValuePair value = new IdAndValuePair();
-					value.setValue(temp);
-					value.setId(id);
-					
-					id++;
-					
-					inspectorValueList.add(value);
-				}
-				
-			} catch(Exception ex) {
-				
-				SCAUtil sca = new SCAUtil();
-				
-				log.error("*** Unable to get QA inspector Details *** " + ex);
-				String msg = sca.getErrorMessage(ex);
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "Unable to get QA inspector Details !!!") + ex.getMessage());
-				
+		return null;
+	}
+
+	// GET LOV OF QA INSPECTOR
+
+	public ResponseEntity<?> getQAInspectorLOV(Long dept_id) {
+
+		List<String> inspectorList = new ArrayList<String>();
+
+		List<IdAndValuePair> inspectorValueList = new ArrayList<IdAndValuePair>();
+
+		try {
+
+			inspectorList = bmrQualityReleaseRepository.getQaInspectorByDepartment(dept_id);
+
+			Long id = (long) 1;
+
+			for (String temp : inspectorList) {
+
+				IdAndValuePair value = new IdAndValuePair();
+				value.setValue(temp);
+				value.setId(id);
+
+				id++;
+
+				inspectorValueList.add(value);
 			}
-			
-			return ResponseEntity.status(HttpStatus.OK).body(inspectorValueList);
-			
+
+		} catch (Exception ex) {
+
+			SCAUtil sca = new SCAUtil();
+
+			log.error("*** Unable to get QA inspector Details *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ApiResponse(false, "Unable to get QA inspector Details !!!") + ex.getMessage());
+
 		}
-		
-		
-		// GET LOV OF QA INSPECTOR
-		
-				public ResponseEntity<?> getQAManagerLOV(Long dept_id) {
-					
-					List<String> inspectorList = new ArrayList<String>();
-					
-					List<IdAndValuePair> inspectorValueList = new ArrayList<IdAndValuePair>();
-					
-					try {
-						
-						inspectorList = bmrQualityReleaseRepository.getQaManagerByDepartment(dept_id);
-						
-						Long id =  (long) 1;
-						
-						for(String temp : inspectorList) {
-							
-							IdAndValuePair value = new IdAndValuePair();
-							value.setValue(temp);
-							value.setId(id);
-							
-							id++;
-							
-							inspectorValueList.add(value);
-						}
-						
-					} catch(Exception ex) {
-						
-						SCAUtil sca = new SCAUtil();
-						
-						log.error("*** Unable to get QA Manager Details *** " + ex);
-						String msg = sca.getErrorMessage(ex);
-						return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse(false, "Unable to get QA Manager Details !!!") + ex.getMessage());
-						
-					}
-					
-					return ResponseEntity.status(HttpStatus.OK).body(inspectorValueList);
-					
-				}
-		
-		
-		// LOV OF APPROVED RECORDS
 
-		public ResponseEntity<?> approvedBMR(String formNumber) {
+		return ResponseEntity.status(HttpStatus.OK).body(inspectorValueList);
 
-			List<IdAndValuePair> bmrList = new ArrayList<>();
-			List<String> rawCottonList = new ArrayList<>();
+	}
 
-			try {
+	// GET LOV OF QA INSPECTOR
 
-				if (formNumber.equals("PRD01/F04")) {
-					rawCottonList = appliedRawCottonRepository.approvedBMRforAppliedRawCottonF04();
+	public ResponseEntity<?> getQAManagerLOV(Long dept_id) {
 
-				}
-				
-				else if (formNumber.equals("PRD01/F05")) {
-					rawCottonList = contRawCottonRepository.findApprovedPH();
-				}
-				
-				else if(formNumber.equals("PH-PRD01/F09")) {
-					System.out.println("Cakepress");
-					rawCottonList = cakePressF09Repository.getHodApproveBmr();
-					
-					System.out.println("Cakepres 8899s");
-				}
-				
-				else if (formNumber.equals("PH-PRD01/F-011")) {
-					
-					System.out.println("System");
-					
-					rawCottonList = bleachappliedcontabcottonf08repository.findApprovedPH();
-					
+		List<String> inspectorList = new ArrayList<String>();
+
+		List<IdAndValuePair> inspectorValueList = new ArrayList<IdAndValuePair>();
+
+		try {
+
+			inspectorList = bmrQualityReleaseRepository.getQaManagerByDepartment(dept_id);
+
+			Long id = (long) 1;
+
+			for (String temp : inspectorList) {
+
+				IdAndValuePair value = new IdAndValuePair();
+				value.setValue(temp);
+				value.setId(id);
+
+				id++;
+
+				inspectorValueList.add(value);
+			}
+
+		} catch (Exception ex) {
+
+			SCAUtil sca = new SCAUtil();
+
+			log.error("*** Unable to get QA Manager Details *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ApiResponse(false, "Unable to get QA Manager Details !!!") + ex.getMessage());
+
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(inspectorValueList);
+
+	}
+
+	// LOV OF APPROVED RECORDS
+
+	public ResponseEntity<?> approvedBMR(String formNumber) {
+
+		List<IdAndValuePair> bmrList = new ArrayList<>();
+		List<String> rawCottonList = new ArrayList<>();
+
+		try {
+
+			if (formNumber.equals("PRD01/F04")) {
+				rawCottonList = appliedRawCottonRepository.approvedBMRforAppliedRawCottonF04();
+
+			}
+
+			else if (formNumber.equals("PRD01/F05")) {
+				rawCottonList = contRawCottonRepository.findApprovedPH();
+			}
+
+			else if (formNumber.equals("PH-PRD01/F09")) {
+				System.out.println("Cakepress");
+				rawCottonList = cakePressF09Repository.getHodApproveBmr();
+
+				System.out.println("Cakepres 8899s");
+			}
+
+			else if (formNumber.equals("PH-PRD01/F-011")) {
+
+				System.out.println("System");
+
+				rawCottonList = bleachappliedcontabcottonf08repository.findApprovedPH();
+
 //					rawCottonList = bleachContAbsBleachedCottonF18Repository.findApprovedPH();
-					
-				}
-				
-				else if (formNumber.equals("PH-PRD01/F-012")) {
-					
-					rawCottonList = bleachContAbsBleachedCottonF18Repository.findApprovedPH();
-				}
-				
-				else if(formNumber.equalsIgnoreCase("PH-PRD01/F01")) {
-					
-					rawCottonList = laydownChecklistRepository.getLayDownNumberList();
-				} else if(formNumber.equals("PH-PRD01/F34")) {
-					
-					rawCottonList = cardingRepository.approvedBMR();
-					
-				} else if(formNumber.equals("PH-PRD01/F13")) {
-					
-					rawCottonList = jobCardRepository.approvedBmr();
-				}
-				
-				Long id = (long) 1;
-				for (String list : rawCottonList) {
 
-					IdAndValuePair mail = new IdAndValuePair();
-					mail.setValue(list);
-					mail.setId(id);
-					id++;
-
-					bmrList.add(mail);
-				}
-
-			} catch (Exception ex) {
-				SCAUtil sca = new SCAUtil();
-				log.error("*** Unable to Get BMR for Selected Form *** " + ex);
-				String msg = sca.getErrorMessage(ex);
-				return new ResponseEntity<>(new ApiResponse(false, "Unable to Get" + msg), HttpStatus.BAD_REQUEST);
 			}
 
-			return new ResponseEntity(bmrList, HttpStatus.OK);
+			else if (formNumber.equals("PH-PRD01/F-012")) {
 
+				rawCottonList = bleachContAbsBleachedCottonF18Repository.findApprovedPH();
+			}
+
+			else if (formNumber.equalsIgnoreCase("PH-PRD01/F01")) {
+
+				rawCottonList = laydownChecklistRepository.getLayDownNumberList();
+			} else if (formNumber.equals("PH-PRD01/F34")) {
+
+				rawCottonList = cardingRepository.approvedBMR();
+
+			} else if (formNumber.equals("PH-PRD01/F13")) {
+
+				rawCottonList = jobCardRepository.approvedBmr();
+			}
+
+			Long id = (long) 1;
+			for (String list : rawCottonList) {
+
+				IdAndValuePair mail = new IdAndValuePair();
+				mail.setValue(list);
+				mail.setId(id);
+				id++;
+
+				bmrList.add(mail);
+			}
+
+		} catch (Exception ex) {
+			SCAUtil sca = new SCAUtil();
+			log.error("*** Unable to Get BMR for Selected Form *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to Get" + msg), HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		
+
+		return new ResponseEntity(bmrList, HttpStatus.OK);
+
+	}
+
+	// BLEACH BMR CALIBRATION DETIALS
+
+	public ResponseEntity<?> getEquipmentDetails() {
+
+		List<BleachingBmrEquipmentSAP> equipmentList = new ArrayList<BleachingBmrEquipmentSAP>();
+
+		try {
+
+			equipmentList = bleachingBmrEquipmentSAPRepository.fetchEquipmentDetails();
+
+		} catch (Exception ex) {
+			SCAUtil sca = new SCAUtil();
+			log.error("*** Unable to get Equipment Annexure Master *** " + ex);
+			String msg = sca.getErrorMessage(ex);
+			return new ResponseEntity<>(new ApiResponse(false, "Unable to get equipment annexure master !!!" + msg),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity(equipmentList, HttpStatus.OK);
+	}
+
 }

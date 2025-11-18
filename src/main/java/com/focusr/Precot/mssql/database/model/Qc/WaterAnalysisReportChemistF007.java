@@ -14,8 +14,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.focusr.Precot.util.AppConstants;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "WATER_ANALYSIS_REPORT_CHEMIST_F007", schema = AppConstants.schema)
 public class WaterAnalysisReportChemistF007 {

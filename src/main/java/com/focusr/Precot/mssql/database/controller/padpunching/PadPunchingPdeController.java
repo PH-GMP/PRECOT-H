@@ -236,5 +236,12 @@ public class PadPunchingPdeController {
 	            @RequestParam String packDate) {
 	        return padPunchingPdeService.getOpeningQty(orderNo, packDate);
 	    }
+	 
+	 @GetMapping("/opening-qtyPde")
+	    public ResponseEntity<?> getOpeningQtyPde(
+	            @RequestParam String orderNo,
+	            @RequestParam String packDate) {
+	        return padPunchingPdeService.getOpeningQtyPde(orderNo, packDate);
+	    }
 
 }

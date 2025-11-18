@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.focusr.Precot.mssql.database.model.padpunching.ProductionDetailLogBookLines01;
 import com.focusr.Precot.mssql.database.repository.bleaching.DepartmentRepository;
+import com.focusr.Precot.mssql.database.repository.padpunching.ProductionDetailLogBookLines01Repo;
 import com.focusr.Precot.payload.ApiResponse;
 import com.focusr.Precot.payload.padpunching.PackingDetailsResponse;
 import com.focusr.Precot.util.IdAndValuePair;
@@ -25,6 +27,9 @@ public class PadPunchingPdeService {
 
 	@Autowired
 	private DepartmentRepository padPunchingPdeRepository;
+	
+	@Autowired
+	private ProductionDetailLogBookLines01Repo productionDetailLogBookLines01Repo ;
 
 	// F004
 	public ResponseEntity<?> getProductionpackingDetails(String date, String shift) {
@@ -443,6 +448,67 @@ return new ResponseEntity<>(responseList,HttpStatus.OK);
 	        }
 
 	        // Success response
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("Opening_Qty", openingQty);
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+
+	    } catch (ClassCastException e) {
+	        log.error("ClassCastException: {}", e.getMessage());
+	        Map<String, Object> errorResponse = new HashMap<>();
+	        errorResponse.put("success", false);
+	        errorResponse.put("message", "Unexpected data type returned by query.");
+	        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+
+	    } catch (Exception e) {
+	        log.error("Error fetching Opening_Qty: {}", e.getMessage(), e);
+	        Map<String, Object> errorResponse = new HashMap<>();
+	        errorResponse.put("success", false);
+	        errorResponse.put("message", "Error fetching data: " + e.getMessage());
+	        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+
+	public ResponseEntity<?> getOpeningQtyPde(String orderNo, String packDate) {
+	    try {
+	        log.info("Fetching Opening_Qty for OrderNo: {}, PackDate: {}", orderNo, packDate);
+
+	        // Step 1: Execute new query
+	        ProductionDetailLogBookLines01 ss = productionDetailLogBookLines01Repo.findTopByOrderNo(orderNo);
+
+	        BigDecimal openingQty = null;
+
+	        // Step 2: Determine Opening_Qty based on matching condition
+	        if (ss != null) {
+	            if (orderNo.equalsIgnoreCase(ss.getNext_order_no())) {
+	                openingQty = BigDecimal.valueOf(ss.getNext_balance_qty()) ;
+	                log.info("Opening Qty fetched from NEXT_BALANCE_QTY: {}", openingQty);
+	            } else if (orderNo.equalsIgnoreCase(ss.getRunning_order_no())) {
+	                openingQty = BigDecimal.valueOf(ss.getRunning_balancr_qty());
+	                log.info("Opening Qty fetched from RUNNING_BALANCE_QTY: {}", openingQty);
+	            }
+	        }
+
+	        // Step 3: Fallback to old logic if openingQty is null
+	        if (openingQty == null) {
+	            log.info("No Opening Qty found in new query. Falling back to old logic.");
+
+	            openingQty = padPunchingPdeRepository.findOpeningQtyForOrderAndDate(orderNo, packDate);
+
+	            if (openingQty == null) {
+	                log.info("Fallback 1 failed, checking TblOrderInfo.");
+	                openingQty = padPunchingPdeRepository.findOpeningQtyForTblOrderInfo(orderNo, packDate);
+
+	                if (openingQty == null) {
+	                    log.info("No data found for OrderNo: {} in fallback methods.", orderNo);
+	                    Map<String, Object> response = new HashMap<>();
+	                    response.put("success", false);
+	                    response.put("message", "No data found for the given POrder.");
+	                    return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	                }
+	            }
+	        }
+
+	        // Step 4: Return success response
 	        Map<String, Object> response = new HashMap<>();
 	        response.put("Opening_Qty", openingQty);
 	        return new ResponseEntity<>(response, HttpStatus.OK);

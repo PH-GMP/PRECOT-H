@@ -65,6 +65,12 @@ public class ChemicalAnalysisReportARF003 extends UserDateAudit {
 	@Column(name = "SAMPLE_DATE")
 	private String sampleDate;
 	
+	@Column(name = "SAMPLE_SIZE")
+	private String sampleSize;
+	
+	@Column(name = "RECEIVED_QUANTITY")
+	private String receivedQuantity;
+	
 	@Column(name = "APPEARANCE_SPEC")
 	private String appearanceSpec;
 	

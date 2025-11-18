@@ -33,6 +33,7 @@ import com.focusr.Precot.mssql.database.model.bleaching.BleachLaydownGeneration;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachMixingChangeMachineCleaningF38;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummary;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummaryProductionDetails;
+import com.focusr.Precot.mssql.database.model.bleaching.EquipLogBookHydroExtractorF11;
 import com.focusr.Precot.mssql.database.repository.bleaching.BMRSummaryBleachRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachAppliedContRawCottonF04Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrLaydownMappingRepository;
@@ -46,6 +47,7 @@ import com.focusr.Precot.mssql.database.repository.bleaching.BleachLayDownCheckL
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachLaydownGenerationRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachMixingChangeMachineCleaningF38Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachingBmrGenerationRepository;
+import com.focusr.Precot.mssql.database.repository.bleaching.EquipLogBookHydroExtractorF11Repository;
 import com.focusr.Precot.mssql.database.repository.drygoods.GoodsHandSanitationRepositoryF13;
 import com.focusr.Precot.mssql.database.repository.padpunching.PunchingHandSanitationRepositoryF24;
 import com.focusr.Precot.mssql.database.repository.splunance.SpunlaceHandSanitizationReportF025Repository;
@@ -107,6 +109,9 @@ public class GenerationService {
 	
 	@Autowired
 	private BleachJobCard13Repository jobCardRepository;
+	
+	@Autowired
+	private EquipLogBookHydroExtractorF11Repository equipLogBookHydroExtractorF11Repository ;
 	
 	@Autowired
 	private BleachEquipmentUsageLogBookCakePressF09Repository cakePressF09Repository;
@@ -859,6 +864,8 @@ public class GenerationService {
 		
 		List<BleachJobCardF13> jobcardList = new ArrayList<BleachJobCardF13>();
 		
+		List<EquipLogBookHydroExtractorF11> hydroExtractor = new ArrayList<EquipLogBookHydroExtractorF11>();
+		
 		
 		try {
 
@@ -881,6 +888,8 @@ public class GenerationService {
 			cakepressList = cakePressF09Repository.getDetailsByBMR(request.getBmrNo());
 			
 			jobcardList = jobCardRepository.getBmrDetails(request.getBmrNo());
+			
+			hydroExtractor = equipLogBookHydroExtractorF11Repository.getDetailsByBMR(request.getBmrNo());
 			
 			if(chemicalMaterialList.isEmpty() || chemicalMaterialList == null) {
 				return new ResponseEntity(new ApiResponse(false, "Chemical Material not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
@@ -912,6 +921,23 @@ public class GenerationService {
 				return new ResponseEntity(new ApiResponse(false, " Please select the Batch No for closing Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
 				
 			}
+			
+			if(hydroExtractor.isEmpty()) {
+				
+				return new ResponseEntity(new ApiResponse(false, "Equipment Log Book Hydro Extractor not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
+		    }
+			
+			else
+			{
+				hydroExtractor = equipLogBookHydroExtractorF11Repository.getBmrDetails(request.getBmrNo());
+				
+				if(!hydroExtractor.isEmpty()) {
+
+				return new ResponseEntity(new ApiResponse(false, "Equipment Log Book Hydro Extractor not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
+				
+				}
+				
+			}	
 			
 			try {
 				

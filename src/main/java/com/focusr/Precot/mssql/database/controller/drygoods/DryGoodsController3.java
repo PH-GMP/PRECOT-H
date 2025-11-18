@@ -72,16 +72,12 @@ public class DryGoodsController3 {
 		return resp;
 	}
 	
-	// AMC
-	
 		@GetMapping("/getHeaderDetailsbyOrderNoF006Bag")
 		public ResponseEntity<?> getHeaderDetailsbyOrderNoF006Bag(@RequestParam Map<String, String> requestParams) {
 
 			String orderNo = requestParams.get("orderNo");
-			String date = requestParams.get("date");
-			String shift = requestParams.get("shift");
 
-			ResponseEntity<?> resp = drygoodsservice3.getHeaderDetailsBag(orderNo,date,shift);
+			ResponseEntity<?> resp = drygoodsservice3.getHeaderDetailsBag(orderNo);
 			return resp;
 		}
 	

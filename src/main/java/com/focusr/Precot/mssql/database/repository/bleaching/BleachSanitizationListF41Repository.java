@@ -267,7 +267,7 @@ long punchBagMakingF01(@Param("fromDate") String fromDate, @Param("toDate") Stri
     long countAbsorbentBleachedCottonParent(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     // Raw Cotton Analysis
-    @Query(value = "SELECT COUNT(*) FROM precot.RAW_COTTON_ANALYSIS_REPORT_AR_F001 WHERE DATE BETWEEN :fromDate AND :toDate", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM precot.RAW_COTTON_ANALYSIS_REPORT_AR_F001 WHERE createdAt BETWEEN :fromDate AND :toDate", nativeQuery = true)
     long countRawCottonAnalysis(@Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     // Absorbent Bleached Cotton

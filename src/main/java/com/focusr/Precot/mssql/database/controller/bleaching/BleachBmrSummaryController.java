@@ -417,4 +417,12 @@ public class BleachBmrSummaryController {
         return resp;
     }
 
+    // BLEACH BMR CALIBRATION
+    
+	@GetMapping("/getEquipmentDetails")
+	public ResponseEntity<?> getEquipmentDetails() {
+
+		ResponseEntity<?> resp = bmrSummaryService.getEquipmentDetails();
+		return resp;
+	}
 }
