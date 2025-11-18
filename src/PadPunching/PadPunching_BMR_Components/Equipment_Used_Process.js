@@ -23,6 +23,7 @@ const Equipment_Used_Process = (props) => {
   console.log("EquipmentData", EquipmentData)
 
   const [disable, setDisable] = useState(false);
+
   const equipmentLov = [
     { value: "HCI-700", label: "HCI-700" },
     { value: "ACE-500", label: "ACE-500" },
@@ -30,14 +31,17 @@ const Equipment_Used_Process = (props) => {
     { value: "ACE-300-02", label: "ACE-300-02" },
     { value: "ACE-300-03", label: "ACE-300-03" },
     { value: "ACE-300-04", label: "ACE-300-04" },
+    { value: "ACE-500-01", label: "ACE-500-01" },
+    { value: "ACE-500-02", label: "ACE-500-02" },
+    { value: "ACE-500-03", label: "ACE-500-03" },
     { value: "FALU-01", label: "FALU-01" },
     { value: "FALU-02", label: "FALU-02" },
     { value: "FINGER PAD-02", label: "FINGER PAD-02" },
     { value: "TEXKOR 5*6", label: "TEXKOR 5*6" },
     { value: "PUFF-01", label: "PUFF-01" },
     { value: "PUFF-02", label: "PUFF-02" },
-
   ];
+
   const [mainId, setMainId] = useState("");
   const [supApproved, setSupApproved] = useState(false);
   const [qaApproved, setQaApproved] = useState(false);

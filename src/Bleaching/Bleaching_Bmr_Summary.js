@@ -117,7 +117,6 @@ function Bleaching_Bmr_Summary() {
 
   //States for Verification Records Ended Here
 
-  const [signatures, setSignatures] = useState({});
   //Machine Operating Parameters starts
   const [MOP_ASB_Observation, setMOP_ASB_Observation] = useState("");
   const [MOP_FDS_Observation, setMOP_FDS_Observation] = useState("");
@@ -249,8 +248,6 @@ function Bleaching_Bmr_Summary() {
     role === "ROLE_HOD" || role === "ROLE_DESIGNEE"
       ? localStorage.getItem("username")
       : "";
-
-
 
   let usernameQADESANDMAN = "";
   if (role == "QA_DESIGNEE" || role == "QA_MANAGER") {
@@ -685,246 +682,246 @@ function Bleaching_Bmr_Summary() {
     "Refer SOP No. PRD01-D-09",
   ];
 
-  const machineData = [
-    {
-      id: 1,
-      name: "BLENDOMAT",
-      code: "PH-E/I-BR01",
-      startDate: "NA",
-      endDate: "NA",
-    },
-    {
-      id: 2,
-      name: "Metal Detector",
-      code: "PH-E/I-BR24",
-      startDate: "2025-09-21",
-      endDate: "2026-09-20",
-    },
-    {
-      id: 3,
-      name: "Fire Detector",
-      code: "PH-E/I-BR25",
-      startDate: "2025-09-21",
-      endDate: "2026-09-20"
-    },
-    {
-      id: 4,
-      name: "CL-P 1",
-      code: "PH-E/I-BR02",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 5,
-      name: "CL-P 2",
-      code: "PH-E/I-BR03",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 6,
-      name: "SPH 1",
-      code: "PH-E/I-BR04",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 7,
-      name: "SPH 2",
-      code: "PH-E/I-BR05",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 8,
-      name: "MPM 1",
-      code: "PH-E/I-BR06",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 9,
-      name: "MPM 2",
-      code: "PH-E/I-BR07",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 10,
-      name: "Applied1",
-      code: "PH-E/I-BR08",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 11,
-      name: "Applied2",
-      code: "PH-E/I-BR09",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 12,
-      name: "ERM1",
-      code: "PH-E/I-BR10",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 13,
-      name: "ERM2",
-      code: "PH-E/I-BR11",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 14,
-      name: "XPI 1",
-      code: "PH-E/I-BR12",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 15,
-      name: "XPI 2",
-      code: "PH-E/I-BR13",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 16,
-      name: "Dustex 1",
-      code: "PH-E/I-BR14",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 17,
-      name: "Dustex 2",
-      code: "PH-E/I-BR15",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 18,
-      name: "Cake Press 1",
-      code: "PH-E/I-BL01",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 19,
-      name: "Cake Press 2",
-      code: "PH-E/I-BL02",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 20,
-      name: "Kier 1",
-      code: "PH-E/I-BL03",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 21,
-      name: "Kier 2",
-      code: "PH-E/I-BL04",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 22,
-      name: "Kier 3",
-      code: "PH-E/I-BL05",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 23,
-      name: "Weighing Machine",
-      code: "PH-WM-24",
-      startDate: "2025-02-08",
-      endDate: "2026-02-07",
-    },
-    {
-      id: 24,
-      name: "Hydro Extractor1",
-      code: "PH-E/I-BL06",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 25,
-      name: "Hydro Extractor 2",
-      code: "PH-E/I-BL07",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 26,
-      name: "Cake opener",
-      code: "PH-E/I-BL08",
-      startDate: "NA",
-      endDate: "NA",
-    },
-    {
-      id: 27,
-      name: "Dryer",
-      code: "PH-E/I-BL09",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-    {
-      id: 28,
-      name: "Rieter 1",
-      code: "PH-E/I-BL10",
-      startDate: "NA",
-      endDate: "NA",
-    },
-    {
-      id: 29,
-      name: "Rieter 2",
-      code: "PH-E/I-BL11",
-      startDate: "NA",
-      endDate: "NA",
-    },
-    {
-      id: 30,
-      name: "Applied 1",
-      code: "PH-E/I-BL12",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 31,
-      name: "Applied 2",
-      code: "PH-E/I-BL13",
-      startDate: "2024-10-16",
-      endDate: "2025-10-15",
-    },
-    {
-      id: 32,
-      name: "Metal Detector",
-      code: "PH-E/I-BL21",
-      startDate: "2025-09-21",
-      endDate: "2026-09-20"
-    },
-    {
-      id: 33,
-      name: "Fire Detector",
-      code: "PH-E/I-BL23",
-      startDate: "2025-09-21",
-      endDate: "2026-09-20"
-    },
-    {
-      id: 34,
-      name: "Bale Press",
-      code: "PH-E/I-BL14",
-      startDate: "2025-02-01",
-      endDate: "2027-01-31",
-    },
-  ];
+  // const machineData = [
+  //   {
+  //     id: 1,
+  //     name: "BLENDOMAT",
+  //     code: "PH-E/I-BR01",
+  //     startDate: "NA",
+  //     endDate: "NA",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Metal Detector",
+  //     code: "PH-E/I-BR24",
+  //     startDate: "2025-09-21",
+  //     endDate: "2026-09-20",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Fire Detector",
+  //     code: "PH-E/I-BR25",
+  //     startDate: "2025-09-21",
+  //     endDate: "2026-09-20"
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "CL-P 1",
+  //     code: "PH-E/I-BR02",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "CL-P 2",
+  //     code: "PH-E/I-BR03",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "SPH 1",
+  //     code: "PH-E/I-BR04",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "SPH 2",
+  //     code: "PH-E/I-BR05",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "MPM 1",
+  //     code: "PH-E/I-BR06",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "MPM 2",
+  //     code: "PH-E/I-BR07",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 10,
+  //     name: "Applied1",
+  //     code: "PH-E/I-BR08",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 11,
+  //     name: "Applied2",
+  //     code: "PH-E/I-BR09",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 12,
+  //     name: "ERM1",
+  //     code: "PH-E/I-BR10",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 13,
+  //     name: "ERM2",
+  //     code: "PH-E/I-BR11",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 14,
+  //     name: "XPI 1",
+  //     code: "PH-E/I-BR12",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 15,
+  //     name: "XPI 2",
+  //     code: "PH-E/I-BR13",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 16,
+  //     name: "Dustex 1",
+  //     code: "PH-E/I-BR14",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 17,
+  //     name: "Dustex 2",
+  //     code: "PH-E/I-BR15",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 18,
+  //     name: "Cake Press 1",
+  //     code: "PH-E/I-BL01",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 19,
+  //     name: "Cake Press 2",
+  //     code: "PH-E/I-BL02",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 20,
+  //     name: "Kier 1",
+  //     code: "PH-E/I-BL03",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 21,
+  //     name: "Kier 2",
+  //     code: "PH-E/I-BL04",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 22,
+  //     name: "Kier 3",
+  //     code: "PH-E/I-BL05",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 23,
+  //     name: "Weighing Machine",
+  //     code: "PH-WM-24",
+  //     startDate: "2025-02-08",
+  //     endDate: "2026-02-07",
+  //   },
+  //   {
+  //     id: 24,
+  //     name: "Hydro Extractor1",
+  //     code: "PH-E/I-BL06",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 25,
+  //     name: "Hydro Extractor 2",
+  //     code: "PH-E/I-BL07",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 26,
+  //     name: "Cake opener",
+  //     code: "PH-E/I-BL08",
+  //     startDate: "NA",
+  //     endDate: "NA",
+  //   },
+  //   {
+  //     id: 27,
+  //     name: "Dryer",
+  //     code: "PH-E/I-BL09",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  //   {
+  //     id: 28,
+  //     name: "Rieter 1",
+  //     code: "PH-E/I-BL10",
+  //     startDate: "NA",
+  //     endDate: "NA",
+  //   },
+  //   {
+  //     id: 29,
+  //     name: "Rieter 2",
+  //     code: "PH-E/I-BL11",
+  //     startDate: "NA",
+  //     endDate: "NA",
+  //   },
+  //   {
+  //     id: 30,
+  //     name: "Applied 1",
+  //     code: "PH-E/I-BL12",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 31,
+  //     name: "Applied 2",
+  //     code: "PH-E/I-BL13",
+  //     startDate: "2024-10-16",
+  //     endDate: "2025-10-15",
+  //   },
+  //   {
+  //     id: 32,
+  //     name: "Metal Detector",
+  //     code: "PH-E/I-BL21",
+  //     startDate: "2025-09-21",
+  //     endDate: "2026-09-20"
+  //   },
+  //   {
+  //     id: 33,
+  //     name: "Fire Detector",
+  //     code: "PH-E/I-BL23",
+  //     startDate: "2025-09-21",
+  //     endDate: "2026-09-20"
+  //   },
+  //   {
+  //     id: 34,
+  //     name: "Bale Press",
+  //     code: "PH-E/I-BL14",
+  //     startDate: "2025-02-01",
+  //     endDate: "2027-01-31",
+  //   },
+  // ];
 
 
   const [machineOpsPerformedBy, setMachineOpsPerformedBy] = useState("");
@@ -932,9 +929,28 @@ function Bleaching_Bmr_Summary() {
   const [machineOpsPerformedByDate, setMachineOpsPerformedByDate] =
     useState("");
   const [machineOpsCheckedByDate, setMachineOpsCheckedByDate] = useState("");
-  const [machines, setMachines] = useState(machineData);
-  const [ProcessDelay, setProcessDelay] = useState([]);
+  const [machines, setMachines] = useState();
   const [pecs_verified, setPecsVerified] = useState("");
+
+
+
+  const fetchMachineData = async () => {
+    try {
+      const response = await axios.get(`${API.prodUrl}/Precot/api/bleaching/summary/getEquipmentDetails`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      setMachines(response.data)
+    }
+    catch (error) {
+      console.log("error", error)
+    }
+  }
+
+
 
   const handleSelectText = (e, name) => {
     if (
@@ -975,8 +991,8 @@ function Bleaching_Bmr_Summary() {
     } else {
       event.preventDefault();
       const validatedMachines = machines.map((machine) => ({
-        equipmentName: machine.name,
-        equipmentCode: machine.code,
+        equipmentName: machine.equipmentName,
+        equipmentCode: machine.equipmentCode,
         calibrationDate: machine.startDate || "NA",
         dueDate: machine.endDate || "NA",
       }));
@@ -1694,6 +1710,7 @@ function Bleaching_Bmr_Summary() {
           case "6":
             if (res.data.annexureBleachBmrAnnexureLists.length == 0) {
               setPecs_State(false);
+              fetchMachineData()
             } else {
               setPecs_State(true);
               setPecsStateArray(
@@ -8574,11 +8591,11 @@ function Bleaching_Bmr_Summary() {
                 </>
               ) : (
                 <>
-                  {machines.map((machine) => (
+                  {machines?.map((machine) => (
                     <tr key={machine.id}>
                       <td align="center">{machine.id}</td>
-                      <td align="center">{machine.name}</td>
-                      <td align="center">{machine.code}</td>
+                      <td align="center">{machine.equipmentName}</td>
+                      <td align="center">{machine.equipmentCode}</td>
                       <td align="center">
                         <input
                           type={machine.startDate == "NA" ? "input" : "date"}

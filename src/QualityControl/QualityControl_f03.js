@@ -13,7 +13,7 @@ import {
 import TextArea from "antd/es/input/TextArea.js";
 import axios from "axios";
 import moment from "moment";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiLock } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
@@ -59,8 +59,10 @@ const QualityControl_f03 = () => {
   const [materialDocNo, setMaterialDocNo] = useState("");
   const [chemicalBatchNo, setChemicalBatchNo] = useState("");
   const [analyticalRequest, setAnalyticalRequest] = useState("");
+  const [receivedQuantity, setReceivedQuantity] = useState("");
   const [testedDate, setTestedDate] = useState("");
   const [sampleDate, setSampleDate] = useState("");
+  const [sampleSize, setSampleSize] = useState("");
   const [appearanceSpecification, setAppearanceSpecification] = useState("");
   const [appearanceObservation, setappearanceObservation] = useState("");
   const [colourSpecification, setColourSpecification] = useState("");
@@ -90,7 +92,6 @@ const QualityControl_f03 = () => {
   const [qtyAcceptedInKg, setQtyAcceptedInKg] = useState("");
   const [qtyRejectedInKg, setQtyRejectedInKg] = useState("");
   const [qtyAcceptedDevInKg, setQtyAcceptedDevInKg] = useState("");
-  const [messageApi, contextHolder] = message.useMessage();
   const initialized = useRef(false);
   const [sampleWeight, setSampleWeight] = useState("");
   const [buretteReading, setBuretteReading] = useState("");
@@ -176,7 +177,7 @@ const QualityControl_f03 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -210,10 +211,14 @@ const QualityControl_f03 = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   // Get the PDE details.....
   useEffect(() => {
+    getPDE()
+  }, []);
+
+  const getPDE = () => {
     const { materialDoc } = state || {};
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -236,9 +241,28 @@ const QualityControl_f03 = () => {
         setChemicalBatchNo(m[0].batchNo);
         console.log("filtered data", m[0].suplier);
       })
-      .catch(() => {});
-    console.log("material doc", materialDoc);
-  }, []);
+      .catch(() => { });
+  }
+
+  //recieved quantity api
+  const fetchReceivedQuantity = (chemical) => {
+    const { materialDoc } = state || {};
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+    axios
+      .get(
+        `${API.prodUrl}/Precot/api/qc/ReceivedQuantity?materialDoc=${materialDoc}&chemical=${chemical}`,
+        {
+          headers,
+        }
+      )
+      .then((res) => {
+        setReceivedQuantity(res.data.totalWeight)
+      })
+      .catch(() => { });
+  }
 
   const chemicalBasedSpecifications = (chemical) => {
     if (chemical) {
@@ -264,10 +288,9 @@ const QualityControl_f03 = () => {
           setrelativeSpecification(data.relativeDensity || "");
           setspecificSpecification(data.specificGravity || "");
           setTotalSolidsSpecification(data.totalSolids || "");
+        }).catch((error) => {
+          console.log("Error", error)
         })
-        .catch((error) => {
-          console.log(error);
-        });
     }
   };
 
@@ -310,16 +333,22 @@ const QualityControl_f03 = () => {
                 }
               )
               .then((res) => {
+                console.log(".then((res) => {")
                 const m = res.data.filter((x, i) => {
                   return x.matDoc == materialDoc;
                 });
-
+                setSupplier(m[0].suplier);
+                setChemicalName(m[0].matDec);
+                setChemicalBatchNo(m[0].batchNo);
+                fetchReceivedQuantity(m[0].matDec);
                 chemicalBasedSpecifications(m[0].matDec);
               })
-              .catch(() => {});
+              .catch((error) => {
+                console.log("ChemicalAnalysisReport error", error)
+              });
           }
 
-          if (response.data.length !== 0) {
+          if (response.data.length > 0) {
             if (role === "QA_MANAGER" || role === "QC_MANAGER") {
               if (
                 (response.data[0]?.chemist_status === "CHEMIST_APPROVED" &&
@@ -341,6 +370,8 @@ const QualityControl_f03 = () => {
             setChemicalName(response.data[0].chemicalName);
             setChemicalBatchNo(response.data[0].chemicalBatchNo);
             setAnalyticalRequest(response.data[0].analyticalRequestNo);
+            setReceivedQuantity(response.data[0].receivedQuantity)
+            setSampleSize(response.data[0].sampleSize)
             setTestedDate(response.data[0].testedDate);
             setSampleDate(response.data[0].sampleDate);
             setappearanceObservation(response.data[0].appearanceObsr);
@@ -455,6 +486,7 @@ const QualityControl_f03 = () => {
               setDisable(true);
             }
           } else {
+
             console.log(" Response in else section", response.data);
             setDate("");
             setSupplier("");
@@ -493,7 +525,7 @@ const QualityControl_f03 = () => {
             setQtyAcceptedDevInKg("");
           }
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   }, []);
 
@@ -529,14 +561,7 @@ const QualityControl_f03 = () => {
     setpHObservation(inputValue);
   };
 
-  const handle_blur_pHSP = () => {
-    if (pHSpecification < 6.5 || pHSpecification > 7.5) {
-      message.error("Please enter a number between 6.5 and 7.5 for pH");
-    }
-  };
-  // const handleInput_pHSP = (e) => {
-  //   const inputValue = e.target.value;
-  // };
+
   const handleChange_pHSP = (e) => {
     const inputValue = e.target.value;
     setpHSpecification(inputValue);
@@ -547,14 +572,7 @@ const QualityControl_f03 = () => {
     setpurityObservation(inputValue);
   };
 
-  // Purity Specification
-  const handle_blur_puritySP = () => {
-    if (puritySpecification < 6.5 || puritySpecification > 7.5) {
-      message.error(
-        "Please enter a number between 6.5 and 7.5 for for Purity Specification"
-      );
-    }
-  };
+
 
   const handleChange_puritySP = (e) => {
     const inputValue = e.target.value;
@@ -701,8 +719,10 @@ const QualityControl_f03 = () => {
       chemicalName: chemicalName,
       chemicalBatchNo: chemicalBatchNo,
       analyticalRequestNo: analyticalRequest,
+      receivedQuantity: receivedQuantity,
       testedDate: testedDate,
       sampleDate: sampleDate,
+      sampleSize: sampleSize,
       appearanceSpec: appearanceSpecification,
       appearanceObsr: appearanceObservation,
       colorSpec: colourSpecification,
@@ -786,8 +806,10 @@ const QualityControl_f03 = () => {
         chemicalName: chemicalName,
         chemicalBatchNo: chemicalBatchNo,
         analyticalRequestNo: analyticalRequest || "NA",
+        receivedQuantity: receivedQuantity,
         testedDate: testedDate,
         sampleDate: sampleDate,
+        sampleSize: sampleSize,
         appearanceSpec: appearanceSpecification || "NA",
         appearanceObsr: appearanceObservation || "NA",
         colorSpec: colourSpecification || "NA",
@@ -914,9 +936,11 @@ const QualityControl_f03 = () => {
                 </span>
                 {/* <Input  className= "inp-new" type="text" /> */}
               </td>
+
             </tr>
             <tr>
-              <td colSpan="25" style={{ textAlign: "left" }}>
+
+              <td colSpan="50" style={{ textAlign: "left" }}>
                 Analytical Reference No:
                 <Input
                   className="inp-new"
@@ -926,6 +950,22 @@ const QualityControl_f03 = () => {
                   onChange={(e) => setAnalyticalRequest(e.target.value)}
                 />
               </td>
+
+
+              <td colSpan="50" style={{ textAlign: "left" }}>
+                Received quantity (Bag/drum/pack & Kg. or Lt.) :
+                <Input
+                  className="inp-new"
+                  type="text"
+                  readOnly
+                  value={receivedQuantity}
+                  disabled={disable}
+                  onChange={(e) => setReceivedQuantity(e.target.value)}
+                />
+              </td>
+            </tr>
+            <tr>
+
               <td colSpan="40" style={{ textAlign: "left" }}>
                 Tested Date :
                 <Input
@@ -934,7 +974,7 @@ const QualityControl_f03 = () => {
                   value={testedDate}
                   disabled={disable}
                   onChange={(e) => setTestedDate(e.target.value)}
-                />{" "}
+                />
               </td>
 
               <td colSpan="30" style={{ textAlign: "left" }}>
@@ -945,6 +985,17 @@ const QualityControl_f03 = () => {
                   value={sampleDate}
                   disabled={disable}
                   onChange={(e) => setSampleDate(e.target.value)}
+                />
+              </td>
+
+              <td colSpan="30" style={{ textAlign: "left" }}>
+                Sample Size :
+                <Input
+                  className="inp-new"
+                  type="type"
+                  value={sampleSize}
+                  disabled={disable}
+                  onChange={(e) => setSampleSize(e.target.value)}
                 />
               </td>
             </tr>
@@ -1461,7 +1512,7 @@ const QualityControl_f03 = () => {
                 colSpan="10"
                 style={{ textAlign: "center", padding: "10px", height: "35px" }}
               >
-                Qty. Accepted in Kg:{" "}
+                Qty. Accepted in (Kg. or Lt.):{" "}
               </td>
               <td colSpan="20">
                 {" "}
@@ -1474,7 +1525,7 @@ const QualityControl_f03 = () => {
                 />
               </td>
               <td colSpan="10" style={{ textAlign: "center", padding: "10px" }}>
-                Qty. Rejected in Kg:{" "}
+                Qty. Rejected in (Kg. or Lt.):{" "}
               </td>
               <td colSpan="20">
                 {" "}
@@ -1487,7 +1538,7 @@ const QualityControl_f03 = () => {
                 />
               </td>
               <td colSpan="10" style={{ textAlign: "center", padding: "10px" }}>
-                Qty. Accepted under Deviation in Kg:{" "}
+                Qty. Accepted under Deviation in (Kg. or Lt.):{" "}
               </td>
               <td colSpan="30">
                 {" "}
@@ -1568,15 +1619,15 @@ const QualityControl_f03 = () => {
                   printData?.qc_status === "QC_APPROVED" ||
                   printData?.qc_status === "QA_REJECTED" ||
                   printData?.qc_status === "QA_APPROVED") && (
-                  <>
-                    {getImage1 !== "" && (
-                      <img className="signature" src={getImage1} alt="QC" />
-                    )}
-                    <br />
-                    {printData.qc_sign} <br />
-                    {formattedQCDate}
-                  </>
-                )}
+                    <>
+                      {getImage1 !== "" && (
+                        <img className="signature" src={getImage1} alt="QC" />
+                      )}
+                      <br />
+                      {printData.qc_sign} <br />
+                      {formattedQCDate}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
@@ -1799,4 +1850,4 @@ const QualityControl_f03 = () => {
   );
 };
 
-export default QualityControl_f03;
+export default QualityControl_f03; 

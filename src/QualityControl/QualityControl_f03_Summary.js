@@ -169,7 +169,7 @@ const QualityControl_f03_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -203,7 +203,7 @@ const QualityControl_f03_Summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   // Get the PDE details.....
   useEffect(() => {
@@ -227,21 +227,11 @@ const QualityControl_f03_Summary = () => {
             return x.matDoc;
           })
         );
-        setPdeResponse(
-          res.data.map((x, i) => {
-            return x.matDoc;
-          })
-        );
+        setPdeResponse([...new Set(res.data.map(x => x.matDoc))]);
 
-        // const m = res.data.map((x,i) => {
-        //   return x.weight
-        // })
-        // const n = res.data.filter((x,i) => {
-        //   return x.weight = m[2]
-        // })
-        // console.log("filtered",n[0].invoice)
+
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   // Get the All Summary.....
@@ -291,7 +281,7 @@ const QualityControl_f03_Summary = () => {
           setShowReasonColumn(hasRejectedStatus);
           // setSummary(a);
         })
-        .catch(() => {});
+        .catch(() => { });
     } else if (
       localStorage.getItem("role") == "QC_MANAGER" ||
       localStorage.getItem("role") == "QA_MANAGER"
@@ -335,7 +325,7 @@ const QualityControl_f03_Summary = () => {
           setShowReasonColumn(hasRejectedStatus);
           // setSummary(a);
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, []);
 
@@ -495,14 +485,14 @@ const QualityControl_f03_Summary = () => {
     },
     ...(showReasonColumn
       ? [
-          {
-            title: "Reason",
-            dataIndex: "reason",
-            key: "reason",
-            align: "center",
-            render: (text) => text || "NA", // Set default value to "nA" if text is falsy
-          },
-        ]
+        {
+          title: "Reason",
+          dataIndex: "reason",
+          key: "reason",
+          align: "center",
+          render: (text) => text || "NA", // Set default value to "nA" if text is falsy
+        },
+      ]
       : []),
     {
       title: "Action",
@@ -530,6 +520,7 @@ const QualityControl_f03_Summary = () => {
         onClose={onClose}
         role={localStorage.getItem("role")}
       />
+
       <BleachingHeader
         unit={unit}
         formName={formatName}
@@ -634,7 +625,7 @@ const QualityControl_f03_Summary = () => {
           onChange={(value) => setMaterialDoc(value)}
           style={{ width: 120, fontWeight: "bold" }}
           showSearch
-          // options={pdeResponse}
+        // options={pdeResponse}
         >
           {pdeResponse.map((pdeResponse) => (
             <Option value={pdeResponse}>{pdeResponse}</Option>
@@ -698,7 +689,7 @@ const QualityControl_f03_Summary = () => {
             value={printmaterialDoc}
             onChange={(value) => setPrintMaterialDoc(value)}
             style={{ width: 120, fontWeight: "bold" }}
-            // options={values_Specification}
+          // options={values_Specification}
           >
             {pdeResponse.map((pdeResponse) => (
               <Option value={pdeResponse}>{pdeResponse}</Option>
@@ -706,6 +697,7 @@ const QualityControl_f03_Summary = () => {
           </Select>
         </div>
       </Modal>
+
       <Table
         bordered
         style={{
@@ -719,365 +711,415 @@ const QualityControl_f03_Summary = () => {
       {/* print started here */}
       {/* <GlobalStyle /> */}
       <div id="section-to-print">
-        <header className="no-print" />
-        <main>
-          <table
-            style={{ marginTop: "5px", width: "90%", tableLayout: "fixed" }}
-          >
-            <br /> <br /> <br /> <br />
-            <tbody>
-              <tr>
-                <td colSpan="15" rowspan="4 " style={{ textAlign: "center" }}>
-                  <img
-                    src={logo}
-                    alt="Logo"
-                    style={{ width: "100px", height: "auto" }}
-                  />
-                  <br></br>
-                  {unit}
-                </td>
-                <th colSpan="45" rowSpan="4" style={{ textAlign: "center" }}>
-                  {formatName}
-                </th>
-                <td colSpan="20">Format No.:</td>
-                <td colSpan="20">{formatNo}</td>
-              </tr>
-              <tr>
-                <td colSpan="20">Revision No.:</td>
-                <td colSpan="20">{revisionNo}</td>
-              </tr>
-              <td colSpan="20">Ref. SOP No.:</td>
-              <td colSpan="20">{sopNo}</td>
-              <tr>
-                <td colSpan="20">Page No.:</td>
-                <td colSpan="20">1 of 2</td>
-              </tr>
-              <br />
-              <tr>
-                <th rowSpan="3" colSpan="60">
-                  Supplier : {printData.supplier}
-                </th>
-                <th colSpan="40">
-                  Material Doc.No/GRN: {printData.materialDocNo}
-                </th>
-              </tr>
-              <tr>
-                {" "}
-                <th colSpan="40">
-                  Chemical Batch No/ Lot No: {printData.chemicalBatchNo}{" "}
-                </th>
-              </tr>
-              <tr>
-                {" "}
-                <th colSpan="40">
-                  Analytical Reference No: {printData.analyticalRequestNo}{" "}
-                </th>
-              </tr>
-              <tr>
-                <th rowSpan="2" colSpan="60">
-                  Chemical Name : {printData.chemicalName}
-                </th>
-                <th colSpan="40">
-                  Tested Date :{" "}
-                  {moment(printData.testedDate).format("DD/MM/YYYY")}{" "}
-                </th>
-              </tr>
-              <tr>
-                {" "}
-                <th colSpan="40">
-                  Sample Date :{" "}
-                  {moment(printData.sampleDate).format("DD/MM/YYYY")}{" "}
-                </th>
-              </tr>
-              <tr>
-                <th colSpan="5">S.No.</th>
-                <th colSpan="20">Parameter</th>
-                <th colSpan="20">Specification</th>
-                <th colSpan="15">Observation/Test Results</th>
-                <th colSpan="40" style={{ textAlign: "center" }}>
-                  Calculation
-                </th>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  1
-                </td>
-                <td colSpan="20">Appearance</td>
-                <td colSpan="20"> {printData.appearanceSpec}</td>
-                <td colSpan="15"> {printData.appearanceObsr}</td>
-                <th colSpan="40">
-                  Standardized Chemical Lot no:{" "}
-                  {printData.standardizedChemicalLotNo}{" "}
-                </th>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  2
-                </td>
-                <td colSpan="20">Colour</td>
-                <td colSpan="20">{printData.colorSpec}</td>
-                <td colSpan="15"> {printData.colorObsr}</td>
-                <th colSpan="40" rowSpan="10" style={{ height: "50px" }}>
-                  {" "}
-                  <div
-                    style={{ maxWidth: 600, margin: "0 auto", padding: "10px" }}
-                  >
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td style={{ padding: "10px" }}>
-                            Sample weight (g):
-                          </td>
-                          <td style={{ padding: "10px" }}>
-                            {printData.sampleWeight}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style={{ padding: "10px" }}>Burette Reading:</td>
-                          <td style={{ padding: "10px" }}>
-                            {printData.buretteReading}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style={{ padding: "10px" }}>
-                            Normality of the standard solution:
-                          </td>
-                          <td style={{ padding: "10px" }}>
-                            {printData.normalityStandardSolution}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style={{ padding: "10px" }}>
-                            Equivalent weight Testing chemical:
-                          </td>
-                          <td style={{ padding: "10px" }}>
-                            {printData.testingChemical}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td
-                            colSpan="2"
-                            style={{
-                              textAlign: "center",
-                              margin: "10px 0",
-                              padding: "10px",
-                            }}
-                          >
-                            <p>
-                              Purity(%) = (Burette Reading × Normality of the
-                              standard solution × Equivalent weight Testing
-                              chemical) / (Sample Weight × 10)
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style={{ padding: "10px" }}>Purity (%):</td>
-                          <td
-                            style={{ padding: "10px" }}
-                          >{`${printData.purity}%`}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </th>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  3
-                </td>
-                <td colSpan="20">Odour</td>
-                <td colSpan="20">{printData.odourSpec}</td>
-                <td colSpan="15">{printData.odourObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  4
-                </td>
-                <td colSpan="20">Solubility in Water</td>
-                <td colSpan="20">{printData.solubilityInWaterSpec}</td>
-                <td colSpan="15">{printData.solubilityInWaterObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  5
-                </td>
-                <td colSpan="20">Visible / insoluble Impurities</td>
-                <td colSpan="20">{printData.visibleSpec}</td>
-                <td colSpan="15">{printData.visibleObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  6
-                </td>
-                <td colSpan="20">pH</td>
-                <td colSpan="20">{printData.phSpec}</td>
-                <td colSpan="15">{printData.phObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  7
-                </td>
-                <td colSpan="20">Purity%</td>
-                <td colSpan="20">{printData.puritySpec}</td>
-                <td colSpan="15">{printData.purityObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  8
-                </td>
-                <td colSpan="20">Relative density (Kg/Lt)</td>
-                <td colSpan="20">{printData.relativeDensitySpec}</td>
-                <td colSpan="15">{printData.relativeDensityObsr}</td>
-              </tr>
 
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  9
-                </td>
-                <td colSpan="20">Specific Gravity</td>
-                <td colSpan="20">{printData.specificGravitySpec}</td>
-                <td colSpan="15">{printData.specificGravityObsr}</td>
-              </tr>
+        <table
+          className="f18table"
+          style={{ width: "90%", marginTop: "1%" }}
+        >
+          <tbody>
+            <tr>
+              <td colSpan="15" rowspan="4 " style={{ textAlign: "center", padding: ".3em" }}>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  style={{ width: "100px", height: "auto" }}
+                />
+                <br></br>
+                {unit}
+              </td>
+              <th colSpan="45" rowSpan="4" style={{ textAlign: "center", padding: ".3em" }}>
+                {formatName}
+              </th>
+              <td style={{ padding: ".3em" }} colSpan="20">Format No.:</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{formatNo}</td>
+            </tr>
+            <tr>
+              <td style={{ padding: ".3em" }} colSpan="20">Revision No.:</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{revisionNo}</td>
+            </tr>
+            <td style={{ padding: ".3em" }} colSpan="20">Ref. SOP No.:</td>
+            <td style={{ padding: ".3em" }} colSpan="20">{sopNo}</td>
+            <tr>
+              <td style={{ padding: ".3em" }} colSpan="20">Page No.:</td>
+              <td style={{ padding: ".3em" }} colSpan="20">1 of 2</td>
+            </tr>
+          </tbody>
+        </table>
 
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  10
-                </td>
-                <td colSpan="20">
-                  Total Solids % [Non- Volatile matter by weight(g)]
-                </td>
-                <td colSpan="20">{printData.totalSolidsSpec}</td>
-                <td colSpan="15">{printData.totalSolidsObsr}</td>
-              </tr>
-              <tr>
-                <td colSpan="5" style={{ textAlign: "center" }}>
-                  11
-                </td>
-                <td colSpan="20">Moisture %</td>
-                <td colSpan="20">{printData.moistureSpec}</td>
-                <td colSpan="15">{printData.moistureObsr}</td>
-              </tr>
-              <br />
-              <tr style={{ height: "150px" }}>
-                <td colSpan="10" style={{ border: "none" }}></td>
-              </tr>
-              <tr>
-                {/* <td style={{padding:'5px', border:'none'}}></td> */}
+        <table style={{ marginTop: "1%", width: "90%" }}>
+          <tbody>
+            <tr>
+              <th style={{ padding: ".3em" }} rowSpan="4" colSpan="60">
+                Supplier : {printData.supplier}
+              </th>
+              <th style={{ padding: ".3em" }} colSpan="30">
+                Material Doc.No/GRN: {printData.materialDocNo}
+              </th>
+            </tr>
+            <tr>
+              {" "}
+              <th style={{ padding: ".3em" }} colSpan="30">
+                Chemical Batch No/ Lot No: {printData.chemicalBatchNo}{" "}
+              </th>
+            </tr>
+            <tr>
+              {" "}
+              <th style={{ padding: ".3em" }} colSpan="30">
+                Analytical Reference No: {printData.analyticalRequestNo}{" "}
+              </th>
+            </tr>
+            <tr>
+              {" "}
+              <th style={{ padding: ".3em" }} colSpan="30">
+                Received quantity (Bag/drum/pack & Kg. or Lt.) : {printData.receivedQuantity}{" "}
+              </th>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} rowSpan="3" colSpan="60">
+                Chemical Name : {printData.chemicalName}
+              </th>
+              <th style={{ padding: ".3em" }} colSpan="40">
+                Tested Date :{" "}
+                {moment(printData.testedDate).format("DD/MM/YYYY")}{" "}
+              </th>
+            </tr>
+            <tr>
+              {" "}
+              <th style={{ padding: ".3em" }} colSpan="40">
+                Sample Date :{" "}
+                {moment(printData.sampleDate).format("DD/MM/YYYY")}{" "}
+              </th>
+            </tr>
 
-                <th
-                  colSpan="15"
-                  rowSpan="4"
-                  printDateSubmit
-                  style={{
-                    textAlign: "center",
-                    height: "80px",
-                    paddingTop: "20px",
-                  }}
+            <tr>
+              {" "}
+              <th style={{ padding: ".3em" }} colSpan="40">
+                Sample Size :{" "}
+                {printData.sampleSize}
+              </th>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="5">S.No.</th>
+              <th style={{ padding: ".3em" }} colSpan="20">Parameter</th>
+              <th style={{ padding: ".3em" }} colSpan="20">Specification</th>
+              <th style={{ padding: ".3em" }} colSpan="15">Observation/Test Results</th>
+              <th colSpan="40" style={{ textAlign: "center", padding: ".3em" }}>
+                Calculation
+              </th>
+            </tr>
+            <tr>
+              <td colSpan="5" style={{ textAlign: "center", padding: ".3em" }}>
+                1
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Appearance</td>
+              <td style={{ padding: ".3em" }} colSpan="20"> {printData.appearanceSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15"> {printData.appearanceObsr}</td>
+              <th style={{ padding: ".3em" }} colSpan="40">
+                Standardized Chemical Lot no:{" "}
+                {printData.standardizedChemicalLotNo}{" "}
+              </th>
+            </tr>
+            <tr>
+              <td colSpan="5" style={{ textAlign: "center", padding: ".3em" }}>
+                2
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Colour</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.colorSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15"> {printData.colorObsr}</td>
+              <th style={{ padding: ".3em", height: "50px" }} colSpan="40" rowSpan="10"  >
+                {" "}
+                <div
+                  style={{ maxWidth: 600, margin: "0 auto", padding: ".3em" }}
                 >
-                  <img
-                    src={logo}
-                    alt="Logo"
-                    style={{ width: "100px", height: "auto" }}
-                  />{" "}
-                  <br></br>
-                  {unit}
-                </th>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td style={{ padding: ".3em" }}>
+                          Sample weight (g):
+                        </td>
+                        <td style={{ padding: ".3em" }}>
+                          {printData.sampleWeight}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: ".3em" }}>Burette Reading:</td>
+                        <td style={{ padding: ".3em" }}>
+                          {printData.buretteReading}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: ".3em" }}>
+                          Normality of the standard solution:
+                        </td>
+                        <td style={{ padding: ".3em" }}>
+                          {printData.normalityStandardSolution}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: ".3em" }}>
+                          Equivalent weight Testing chemical:
+                        </td>
+                        <td style={{ padding: ".3em" }}>
+                          {printData.testingChemical}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          colSpan="2"
+                          style={{
+                            textAlign: "center",
+                            margin: "10px 0",
+                            padding: "10px",
+                          }}
+                        >
+                          <p>
+                            Purity(%) = (Burette Reading × Normality of the
+                            standard solution × Equivalent weight Testing
+                            chemical) / (Sample Weight × 10)
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style={{ padding: ".3em" }}>Purity (%):</td>
+                        <td
+                          style={{ padding: ".3em" }}
+                        >{`${printData.purity}%`}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                3
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Odour</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.odourSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.odourObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                4
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Solubility in Water</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.solubilityInWaterSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.solubilityInWaterObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                5
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Visible / insoluble Impurities</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.visibleSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.visibleObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                6
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">pH</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.phSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.phObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                7
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Purity%</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.puritySpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.purityObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                8
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Relative density (Kg/Lt)</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.relativeDensitySpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.relativeDensityObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                9
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Specific Gravity</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.specificGravitySpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.specificGravityObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                10
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">
+                Total Solids % [Non- Volatile matter by weight(g)]
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.totalSolidsSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.totalSolidsObsr}</td>
+            </tr>
+            <tr>
+              <td style={{ textAlign: "center", padding: ".3em" }}>
+                11
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="20">Moisture %</td>
+              <td style={{ padding: ".3em" }} colSpan="20">{printData.moistureSpec}</td>
+              <td style={{ padding: ".3em" }} colSpan="15">{printData.moistureObsr}</td>
+            </tr>
+          </tbody>
+        </table>
 
-                <th colSpan="45" rowSpan="4" style={{ textAlign: "center" }}>
-                  {formatName}
-                </th>
-                <td colSpan="20">Format No.:</td>
-                <td colSpan="20">{formatNo}</td>
-              </tr>
-              <tr>
-                <td colSpan="20">Revision No.:</td>
-                <td colSpan="20">{revisionNo}</td>
-              </tr>
-              <td colSpan="20">Ref. SOP No.:</td>
-              <td colSpan="20">{sopNo}</td>
-              <tr>
-                <td colSpan="20">Page No.:</td>
-                <td colSpan="20">2 of 2</td>
-              </tr>
-              <br />
-              <tr>
-                <td colSpan="100">
-                  Disposal Method : {printData.disposalMethod}
-                </td>
-              </tr>
-              <tr>
-                {" "}
-                <td colSpan="100">Remark : {printData.remark} </td>{" "}
-              </tr>
-              <tr>
-                <td colSpan="33">
-                  Qty. Accepted in Kg: {printData.qtyAcceptedInKg}
-                </td>
-                <td colSpan="33">
-                  Qty. Rejected in Kg: {printData.qtyRejectedInKg}
-                </td>
-                <td colSpan="34">
-                  Qty. Accepted under Deviation in Kg:{" "}
-                  {printData.qtyAcceptedUnderDeviation}{" "}
-                </td>
-              </tr>
-              <tr>
-                <td colSpan="50">
-                  Tested By (Chemist) :
-                  <br />
-                  {getImage !== "" && (
-                    <img className="signature" src={getImage} alt="Chemist" />
-                  )}
-                  <br />
-                  {printData.chemist_sign} <br />
-                  {formattedChemistDate}
-                </td>
-                <td colSpan="50">
-                  Approved By:
-                  <br />
-                  {getImage1 !== "" && (
-                    <img className="signature" src={getImage1} alt="QC" />
-                  )}
-                  <br />
-                  {printData.qc_sign} <br />
-                  {formattedQCDate}
-                </td>
-              </tr>
-            </tbody>
-            <br />
-            <tfoot>
-              <tr>
-                <th colSpan="25">Particulars</th>
-                <th colSpan="25" style={{ textAlign: "center" }}>
-                  Prepared by
-                </th>
-                <th colSpan="25" style={{ textAlign: "center" }}>
-                  Reviewed by
-                </th>
-                <th colSpan="25" style={{ textAlign: "center" }}>
-                  Approved by
-                </th>
-              </tr>
-              <tr>
-                <th colSpan="25">Name</th>
-                <td colSpan="25"></td>
-                <td colSpan="25"></td>
-                <td colSpan="25"></td>
-              </tr>
-              <tr>
-                <th colSpan="25">Signature & Date</th>
-                <td colSpan="25"></td>
-                <td colSpan="25"></td>
-                <td colSpan="25"></td>
-              </tr>
-            </tfoot>
-          </table>
-        </main>
-        <footer className="no-print" />
+        <table style={{ marginTop: "1%", width: "90%" }}>
+          <tbody>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Particulars</th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Prepared by
+              </th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Reviewed by
+              </th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Approved by
+              </th>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Name</th>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Signature & Date</th>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* //page 2 tables */}
+        <div style={{ marginTop: "50px" }}>
+          <tr style={{ border: "none" }}>
+            <td style={{ border: "none", padding: "40px" }}></td>
+          </tr>
+        </div>
+        <table style={{ marginTop: "10%", width: "90%" }}>
+          <tr>
+            <th
+              colSpan="15"
+              rowSpan="4"
+              printDateSubmit
+              style={{
+                textAlign: "center",
+                height: "80px",
+              }}
+            >
+              <img
+                src={logo}
+                alt="Logo"
+                style={{ width: "100px", height: "auto" }}
+              />
+              <br></br>
+              {unit}
+            </th>
+
+            <th colSpan="45" rowSpan="4" style={{ textAlign: "center", padding: ".3em" }}>
+              {formatName}
+            </th>
+            <td style={{ padding: ".3em" }} colSpan="20">Format No.:</td>
+            <td style={{ padding: ".3em" }} colSpan="20">{formatNo}</td>
+          </tr>
+          <tr>
+            <td style={{ padding: ".3em" }} colSpan="20">Revision No.:</td>
+            <td style={{ padding: ".3em" }} colSpan="20">{revisionNo}</td>
+          </tr>
+          <td style={{ padding: ".3em" }} colSpan="20">Ref. SOP No.:</td>
+          <td style={{ padding: ".3em" }} colSpan="20">{sopNo}</td>
+          <tr>
+            <td style={{ padding: ".3em" }} colSpan="20">Page No.:</td>
+            <td style={{ padding: ".3em" }} colSpan="20">2 of 2</td>
+          </tr>
+
+        </table>
+
+        <table style={{ marginTop: "1%", width: "90%" }}>
+          <tbody>
+            <tr>
+              <td style={{ padding: ".3em" }} colSpan="100">
+                Disposal Method : {printData.disposalMethod}
+              </td>
+            </tr>
+            <tr>
+              {" "}
+              <td style={{ padding: ".3em" }} colSpan="100">Remark : {printData.remark} </td>{" "}
+            </tr>
+            <tr>
+              <td style={{ padding: ".3em" }} colSpan="33">
+                Qty. Accepted in (Kg. or Lt.): {printData.qtyAcceptedInKg}
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="33">
+                Qty. Rejected in (Kg. or Lt.): {printData.qtyRejectedInKg}
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="34">
+                Qty. Accepted under Deviation in (Kg. or Lt.):{" "}
+                {printData.qtyAcceptedUnderDeviation}{" "}
+              </td>
+            </tr>
+            <tr>
+              <td style={{ padding: ".3em" }} colSpan="50">
+                Tested By (Chemist) :
+                <br />
+                {getImage !== "" && (
+                  <img className="signature" src={getImage} alt="Chemist" />
+                )}
+                <br />
+                {printData.chemist_sign} <br />
+                {formattedChemistDate}
+              </td>
+              <td style={{ padding: ".3em" }} colSpan="50">
+                Approved By:
+                <br />
+                {getImage1 !== "" && (
+                  <img className="signature" src={getImage1} alt="QC" />
+                )}
+                <br />
+                {printData.qc_sign} <br />
+                {formattedQCDate}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table style={{ marginTop: "1%", width: "90%" }}>
+          <tbody>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Particulars</th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Prepared by
+              </th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Reviewed by
+              </th>
+              <th colSpan="25" style={{ textAlign: "center", padding: ".3em" }}>
+                Approved by
+              </th>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Name</th>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+            </tr>
+            <tr>
+              <th style={{ padding: ".3em" }} colSpan="25">Signature & Date</th>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+              <td style={{ padding: ".3em" }} colSpan="25"></td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
-
-      {/* print ended here */}
-    </div>
+    </div >
   );
 };
 

@@ -381,7 +381,7 @@ const PadPunching_f01 = () => {
       };
 
       // API Call 2: Fetch Opening Quantity
-      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qty`;
+      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qtyPde`;
 
       axios
         .get(apiEndpoint2, { params: params2, headers })
@@ -455,7 +455,7 @@ const PadPunching_f01 = () => {
       };
 
       // API Call 2: Fetch Opening Quantity
-      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qty`;
+      const apiEndpoint2 = `${API.prodUrl}/Precot/api/padpunching/opening-qtyPde`;
 
       axios
         .get(apiEndpoint2, { params: params2, headers })
@@ -518,30 +518,7 @@ const PadPunching_f01 = () => {
 
         // Get the most recent previous entry (if any)
         const lastEntry = previousEntries[previousEntries.length - 1];
-        // if (existingEntry) {
 
-        //     // If the order number exists, set the previous balance qty to the present opening qty
-        //     updatedFormData[index] = {
-        //         ...updatedFormData[index],
-        //         ...(field === "running_order_no"
-        //             ? {
-        //                   running_order_no: value,
-        //                   running_opening_qty: existingEntry.running_balancr_qty, // Use previous balance qty
-        //                   running_packed_qty: existingEntry.running_packed_qty || 0,
-        //                   running_product_name: existingEntry.running_product_name || "",
-        //                   running_po_number: existingEntry.running_po_number || "",
-        //                   running_balancr_qty: ( existingEntry.running_balancr_qty ?? 0) - (existingEntry.running_packed_qty ?? 0), // Balance remains the same
-        //               }
-        //             : {
-        //                   next_order_no: value,
-        //                   next_opening_qty: existingEntry.running_balancr_qty,
-        //                   next_packed_qty: existingEntry.running_packed_qty || 0,
-        //                   next_product_name: existingEntry.running_product_name || "",
-        //                   next_po_number: existingEntry.running_po_number || "",
-        //                   next_balance_qty: existingEntry.running_balancr_qty,
-        //               }),
-        //     };
-        // }
         if (lastEntry) {
           // If a previous entry exists, set the previous balance qty as the current opening qty
           updatedFormData[index] = {
@@ -555,7 +532,7 @@ const PadPunching_f01 = () => {
                   running_po_number: lastEntry.running_po_number || "",
                   running_balancr_qty:
                     (lastEntry.running_balancr_qty ?? 0) -
-                    (lastEntry.running_packed_qty ?? 0), // Balance remains unchanged
+                    (lastEntry.running_packed_qty ?? 0),
                 }
               : {
                   next_order_no: value,
@@ -653,15 +630,17 @@ const PadPunching_f01 = () => {
 
   const handleSave = () => {
     setLoading(true);
-    console.log("formData in console", formData);
-
-    // let updatedSaveData;
-    // setSaveData(prevSaveData => {
-    //     updatedSaveData = {
-    //         ...prevSaveData,
-    //         details: formData
-    //     }
-    // };
+    console.log("formData in console", formData[0].running_packed_qty);
+    if (
+      formData[0].running_packed_qty === 0 ||
+      formData[0].running_packed_qty === "" ||
+      formData[0].running_packed_qty === null
+    ) {
+      console.log("entered in conditon");
+      message.error("Running packed quantity cannot be empty or zero");
+      setLoading(false);
+      return;
+    }
 
     const updatedSaveData = {
       ...saveData, // assuming saveData is in the current state
@@ -707,7 +686,20 @@ const PadPunching_f01 = () => {
   const handleSubmit = () => {
     setLoading(true);
     let updatedSaveData = null;
+    console.log("formData in console", formData[0].running_packed_qty);
+
     console.log("save data before submit", saveData);
+
+    if (
+      formData[0].running_packed_qty === 0 ||
+      formData[0].running_packed_qty === "" ||
+      formData[0].running_packed_qty === null
+    ) {
+      console.log("entered in conditon");
+      message.error("Running packed quantity cannot be empty or zero");
+      setLoading(false);
+      return;
+    }
 
     updatedSaveData = {
       ...saveData,
@@ -853,6 +845,7 @@ const PadPunching_f01 = () => {
         console.error("API error:", error);
       });
   };
+
   const handleCancel = () => {
     setRejectModal(false);
   };
@@ -1592,7 +1585,7 @@ const PadPunching_f01 = () => {
   return (
     <>
       <BleachingHeader
-        formName={"Production Details - Log Book "}
+        formName={"Production Details - Log Book"}
         formatNo={"PH-QAD01-F-054"}
         unit={"UNIT H"}
         MenuBtn={

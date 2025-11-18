@@ -2,40 +2,40 @@
 /* eslint-disable react/jsx-pascal-case */
 import {
   Button,
-  Tabs,
-  Tooltip,
-  Row,
-  Select,
-  message,
-  Modal,
   Form,
   Input,
+  message,
+  Modal,
+  Row,
+  Select,
+  Tabs,
+  Tooltip,
 } from "antd";
-import React, { useEffect, useState } from "react";
-import BleachingHeader from "../Components/BleachingHeader";
-import { TbMenuDeep } from "react-icons/tb";
-import { FaLock } from "react-icons/fa6";
-import { FaUserCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { GoArrowLeft } from "react-icons/go";
-import API from "../baseUrl.json";
-import axios from "axios";
 import useMessage from "antd/es/message/useMessage";
+import axios from "axios";
 import moment from "moment";
-import Production_Details from "./PadPunching_BMR_Components/Production_Details";
-import Packing_Material_Issue from "./PadPunching_BMR_Components/Packing_Material_Issue";
-import Reference_Documents from "./PadPunching_BMR_Components/Reference_Documents";
-import Verification_Records from "./PadPunching_BMR_Components/Verification_Records";
+import { useEffect, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { FaLock } from "react-icons/fa6";
+import { GoArrowLeft } from "react-icons/go";
+import { TbMenuDeep } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
+import Equipment_Used_Process from "./PadPunching_BMR_Components/Equipment_Used_Process";
+import List_Of_Enclosures from "./PadPunching_BMR_Components/List_Of_Enclosures";
 import Manufacturing_Steps from "./PadPunching_BMR_Components/Manufacturing_Steps";
-import Product_Reconciliation from "./PadPunching_BMR_Components/Product_Reconciliation";
+import Packing_Material_Issue from "./PadPunching_BMR_Components/Packing_Material_Issue";
+import Post_Production from "./PadPunching_BMR_Components/Post_Production";
 import Process_Delay from "./PadPunching_BMR_Components/Process_Delay";
 import Process_Deviation from "./PadPunching_BMR_Components/Process_Deviation";
-import List_Of_Enclosures from "./PadPunching_BMR_Components/List_Of_Enclosures";
-import Post_Production from "./PadPunching_BMR_Components/Post_Production";
-import Qa_release from "./PadPunching_BMR_Components/Qa_release";
+import Product_Reconciliation from "./PadPunching_BMR_Components/Product_Reconciliation";
 import Product_Release from "./PadPunching_BMR_Components/Product_Release";
-import Equipment_Used_Process from "./PadPunching_BMR_Components/Equipment_Used_Process";
+import Production_Details from "./PadPunching_BMR_Components/Production_Details";
+import Qa_release from "./PadPunching_BMR_Components/Qa_release";
+import Reference_Documents from "./PadPunching_BMR_Components/Reference_Documents";
 import Rework from "./PadPunching_BMR_Components/Rework";
+import Verification_Records from "./PadPunching_BMR_Components/Verification_Records";
 
 const Pad_Punching_BMR = () => {
   const [open, setOpen] = useState(false);
@@ -56,8 +56,8 @@ const Pad_Punching_BMR = () => {
     stoppage: [],
     manufactureSteps: [],
     qualityRelease: [],
+    productReconcilation: [],
     dailyProductionDetailsBmrResponses: [],
-    reconillation: [],
     packingMaterial: [],
     rework: [],
   });
@@ -161,8 +161,8 @@ const Pad_Punching_BMR = () => {
         console.log("Response", res.data);
         const options = res.data.map((x, i) => {
           return {
-            value: x.value, // Ensure these keys exist in the API response
-            label: x.value,
+            value: x?.value, // Ensure these keys exist in the API response
+            label: x?.value,
           };
         });
         updateLovData({ orderNoLov: options });
@@ -265,12 +265,12 @@ const Pad_Punching_BMR = () => {
         //   label: option.username,
         // }));
         const b = res.data.filter(
-          (x) => x.role == "ROLE_DESIGNEE" || x.role == "ROLE_HOD"
+          (x) => x?.role == "ROLE_DESIGNEE" || x?.role == "ROLE_HOD"
         );
         console.log("b", b);
         const a = b.map((x) => ({
-          value: x.name,
-          label: x.name,
+          value: x?.name,
+          label: x?.name,
         }));
         updateLovData({ HodLov: a });
       })
@@ -903,42 +903,43 @@ const Pad_Punching_BMR = () => {
           alignItems: "center",
         }}
       >
-
-        Select Batch No :
-        <Select
-          showSearch
-          onChange={onOrderChange}
-          options={orderList}
-          placeholder="Select Batch No"
-          style={{
-            marginRight: "2em",
-          }}
-        />
-        Select Order No :
-        <Select
-          showSearch
-          onChange={(value) => setOrder(value)}
-          options={oderNoLovs}
-          placeholder="Select Batch No"
-          style={{
-            width: "180px",
-            marginRight: "2em",
-          }}
-        />
-        <Button
-          type="primary"
-          style={{
-            backgroundColor: "#E5EEF9",
-            color: "#00308F",
-            fontWeight: "bold",
-            // display: saveBtnStatus ? "block" : "none",
-          }}
-          shape="round"
-          onClick={sendOrderNo}
-        >
-          Go
-        </Button>
-
+        <div>
+          Select Batch No :
+          <Select
+            showSearch
+            onChange={onOrderChange}
+            options={orderList}
+            placeholder="Select Batch No"
+            style={{
+              marginRight: "2em",
+            }}
+          />
+          Select Order No :
+          <Select
+            showSearch
+            onChange={(value) => setOrder(value)}
+            value={order}
+            options={oderNoLovs}
+            placeholder="Select Batch No"
+            style={{
+              width: "180px",
+              marginRight: "2em",
+            }}
+          />
+          <Button
+            type="primary"
+            style={{
+              backgroundColor: "#E5EEF9",
+              color: "#00308F",
+              fontWeight: "bold",
+              // display: saveBtnStatus ? "block" : "none",
+            }}
+            shape="round"
+            onClick={sendOrderNo}
+          >
+            Go
+          </Button>
+        </div>
       </Row>
       <Tabs
         style={{
@@ -1487,7 +1488,7 @@ const Pad_Punching_BMR = () => {
                 }}
               >
                 {printData && printData.productionDetails.length > 0
-                  ? printData.productionDetails[0].packDateQtyBox.length > 0
+                  ? printData.productionDetails[0].packDateQtyBox?.length > 0
                     ? printData.productionDetails[0].packDateQtyBox
                     : "NA"
                   : "NA"}
@@ -1920,11 +1921,11 @@ const Pad_Punching_BMR = () => {
                 return (
                   <tr>
                     <td colSpan="2">{i + 1}</td>
-                    <td colSpan="4">{x.name_of_the_meterial}</td>
-                    <td colSpan="4">{x.packing_batch_no}</td>
-                    <td colSpan="4">{x.quantity}</td>
-                    <td colSpan="4">{x.remarks}</td>
-                    <td colSpan="2">{x.unit}</td>
+                    <td colSpan="4">{x?.name_of_the_meterial}</td>
+                    <td colSpan="4">{x?.packing_batch_no}</td>
+                    <td colSpan="4">{x?.quantity}</td>
+                    <td colSpan="4">{x?.remarks}</td>
+                    <td colSpan="2">{x?.unit}</td>
                   </tr>
                 );
               })
@@ -2165,22 +2166,22 @@ const Pad_Punching_BMR = () => {
                 return (
                   <tr>
                     <td colSpan="4">{i + 1}</td>
-                    <td colSpan="2">{x.equipmentName}</td>
-                    <td colSpan="2">{x.equipmentCode}</td>
+                    <td colSpan="2">{x?.equipmentName}</td>
+                    <td colSpan="2">{x?.equipmentCode}</td>
                     <td colSpan="4">
-                      {moment(x.dateOfCalibration).format(
+                      {moment(x?.dateOfCalibration).format(
                         "DD/MM/YYYY - HH:mm"
                       )}
                     </td>
                     <td colSpan="4">
-                      {moment(x.calibrationDueOn).format(
+                      {moment(x?.calibrationDueOn).format(
                         "DD/MM/YYYY - HH:mm"
                       )}
                     </td>
                     <td colSpan="4">
-                      {x.checked_name}
+                      {x?.checked_name}
                       <br />
-                      {moment(x.checked_date).format("DD/MM/YYYY - HH:mm")}
+                      {moment(x?.checked_date).format("DD/MM/YYYY - HH:mm")}
                     </td>
                   </tr>
                 );
@@ -4078,18 +4079,11 @@ const Pad_Punching_BMR = () => {
                 }}
                 align="center"
               >
-                {/* {printData && printData.reconillation.length > 0
-                  ? printData.reconillation[0].input_quantity
-                   "output": "0",
-            "input": "0",
-            "batchNo": "948644120-1",
-            "yield": "0",
-            "order": "800012843"
-                  : "NA"} */}
-                {printData.reconillation[0]?.input !== null ||
-                  printData.reconillation[0]?.input.length > 0
-                  ? printData.reconillation[0]?.input
-                  : "NA"}
+                {
+                  printData?.productReconcilation?.[0]?.input_quantity
+                    ? printData.productReconcilation[0].input_quantity
+                    : "NA"
+                }
               </td>
               <td
                 colspan="4"
@@ -4113,10 +4107,11 @@ const Pad_Punching_BMR = () => {
                 {/* {printData && printData.reconillation.length > 0
                   ? printData.reconillation[0].output_quantity
                   : "NA"} */}
-                {printData.reconillation[0]?.output !== null ||
-                  printData.reconillation[0]?.output.length > 0
-                  ? printData.reconillation[0]?.output
-                  : "NA"}
+                {
+                  printData?.productReconcilation?.[0]?.output_quantity
+                    ? printData.productReconcilation[0].output_quantity
+                    : "NA"
+                }
               </td>
               <td
                 colspan="3"
@@ -4140,10 +4135,11 @@ const Pad_Punching_BMR = () => {
                 {/* {printData && printData.reconillation.length > 0
                   ? printData.reconillation[0].calculation
                   : "NA"} */}
-                {printData.reconillation[0]?.calculation !== null ||
-                  printData.reconillation[0]?.calculation.length > 0
-                  ? printData.reconillation[0]?.calculation
-                  : "NA"}
+                {
+                  printData?.productReconcilation?.[0]?.yield_quantity
+                    ? printData.productReconcilation[0].yield_quantity
+                    : "NA"
+                }
               </td>
             </tr>
             <br />
@@ -4272,7 +4268,7 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {moment(x.date).format("DD/MM/YYYY")}
+                      {moment(x?.date).format("DD/MM/YYYY")}
                     </td>
                     <td
                       colspan="3"
@@ -4282,7 +4278,7 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {x.fromTime}
+                      {x?.fromTime}
                     </td>
                     <td
                       colspan="3"
@@ -4292,7 +4288,7 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {x.toTime}
+                      {x?.toTime}
                     </td>
                     <td
                       colspan="3"
@@ -4302,7 +4298,7 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {x.totalTime}
+                      {x?.totalTime}
                     </td>
                     <td
                       colspan="4"
@@ -4312,7 +4308,7 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {x.remarks}
+                      {x?.remarks}
                     </td>
                     <td
                       colspan="3"
@@ -4322,14 +4318,14 @@ const Pad_Punching_BMR = () => {
                         fontFamily: "Times New Roman, Times, serif",
                       }}
                     >
-                      {x.supervisorName.length > 0 ||
-                        x.supervisorName !== null
-                        ? x.supervisorName
+                      {x?.supervisorName?.length > 0 ||
+                        x?.supervisorName !== null
+                        ? x?.supervisorName
                         : "NA"}
                       <br></br>
-                      {x.supervisorDate.length > 0 ||
-                        x.supervisorDate !== null
-                        ? x.supervisorDate
+                      {x?.supervisorDate?.length > 0 ||
+                        x?.supervisorDate !== null
+                        ? x?.supervisorDate
                         : "NA"}
                     </td>
                   </tr>

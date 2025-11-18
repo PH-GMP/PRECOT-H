@@ -1,359 +1,17 @@
-// import React, { useEffect, useState } from "react";
-// import moment from "moment";
-// import { Button, Form, Input, message, Select, Spin } from "antd";
-// import axios from "axios";
-// import API from "../../baseUrl.json";
 
-// const Process_Delay = (props) => {
-//   const [data, setData] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const [checkedItems, setCheckedItems] = useState({});
-//   const [userLov, setUserLov] = useState({
-//     prodlov: "",
-//     qalov: "",
-//   });
-//   const [primaryKeys, setPrimaryKeys] = useState({
-//     fromDate: "",
-//     toDate: "",
-//     Machine: "",
-//   });
-//   const [pdeSignatureNew, setPdeSignatureNew] = useState({});
-//   const [pdeDateNew, setPdeDateNew] = useState({});
-//   const [disable, setDisable] = useState(false);
-//   const [hadData, setHadData] = useState(true);
-
-//   const onchangePdeSign = (val, index) => {
-//     setPdeSignatureNew((prev) => ({
-//       ...prev,
-//       [index]: val,
-//     }));
-//   };
-
-//   const onchangePdeDate = (val, index) => {
-//     setPdeDateNew((prev) => ({
-//       ...prev,
-//       [index]: val,
-//     }));
-//   };
-
-//   const updateState = (updates) => {
-//     setPrimaryKeys((prevState) => ({
-//       ...prevState,
-//       ...updates,
-//     }));
-//   };
-
-//   const handleCheckboxChange = (e, index) => {
-//     setCheckedItems((prevCheckedItems) => ({
-//       ...prevCheckedItems,
-//       [index]: e.target.checked,
-//     }));
-//   };
-
-//   useEffect(() => {
-//     axios
-//       .get(`${API.prodUrl}/Precot/api/padpunching/MachineLov`, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         },
-//       })
-//       .then((res) => {
-//         console.log("Res", res.data);
-//         const a = res.data.map((option) => ({
-//           value: option.MCN,
-//           label: option.MCN,
-//         }));
-//         console.log("User Lov", a);
-//       })
-//       .catch((err) => {
-//         console.log("ERRor", err);
-//       });
-
-//     //getStoppagesBybatch
-//     axios
-//       .get(
-//         `${API.prodUrl}/Precot/api/punching/bmr/getStoppagesBybatch?batchNo=${props.batchNo}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//           },
-//         }
-//       )
-//       .then((res) => {
-//         console.log("Res", res.data);
-//         if (res.data.length > 0) {
-//           setDisable(true);
-//           setHadData(false);
-//           setData(res.data[0].details);
-//           res.data[0].details.map((x, i) => {
-//             return () => {
-//               onchangePdeDate(x.supervisorDate, i);
-//               onchangePdeSign(x.supervisorName, i);
-//             };
-//           });
-//         } else {
-//           setDisable(false);
-//           setHadData(true);
-//         }
-//       })
-//       .catch((err) => {
-//         console.log("ERRor", err);
-//       });
-//   }, []);
-
-//   const fetchData = () => {
-//     setLoading(true);
-//     axios
-//       .get(
-//         `${API.prodUrl}/Precot/api/punching/bmr/stoppageReports?fromdate=${moment(
-//           primaryKeys.fromDate
-//         ).format("YYYY-MM-DD")}&todate=${moment(primaryKeys.toDate).format(
-//           "YYYY-MM-DD"
-//         )}&machine=${primaryKeys.Machine}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//           },
-//         }
-//       )
-//       .then((response) => {
-//         setLoading(false);
-//         console.log("Response Data :", response.data);
-//         setData(response.data);
-//         if (response.data.length > 0) {
-//           //setDisable(true);
-//           setHadData(false);
-//         } else {
-//           //setDisable(false);
-//           setHadData(true);
-//         }
-//       })
-//       .catch((err) => {
-//         console.log("Error", err);
-//         setLoading(false);
-//         message.error("Unable to fetch data due to network error");
-//       });
-//   };
-
-//   const handleSubmit = () => {
-//     const checkedData = data.filter((_, index) => checkedItems[index]);
-
-//     const payload = {
-//       department: "Punching Department",
-//       orderNo: "ORD123456",
-//       batchNo: props.batchNo,
-//       fromdate: moment(primaryKeys.fromDate).format("YYYY-MM-DD"),
-//       todate: moment(primaryKeys.toDate).format("YYYY-MM-DD"),
-//       machineName: primaryKeys.Machine,
-//       details: checkedData.map((x, i) => {
-//         return {
-//           date: x.packdate,
-//           fromTime: x.fromTime,
-//           toTime: x.toTime,
-//           totalTime: x.totalTime,
-//           remarks: x.remarks,
-//           supervisorName: pdeSignatureNew[i] || "", // Assigning value for each index
-//           supervisorDate: pdeDateNew[i] || "", // Assigning date for each index
-//         };
-//       }),
-//     };
-//     axios
-//       .post(`${API.prodUrl}/Precot/api/punching/bmr/saveStoppage`, payload, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         },
-//       })
-//       .then((response) => {
-//         console.log(response.data);
-//         message.success(
-//           "Process Delay Equipment Breakdown Record Submitted Successfully!"
-//         );
-//       })
-//       .catch((error) => {
-//         console.error("There was an error making the request!", error);
-//         message.error(
-//           "Failed to Submit Process Delay Equipment Breakdown Record"
-//         );
-//       });
-//   };
-
-//   return (
-//     <>
-//       <Spin spinning={loading}>
-//         <div
-//           style={{
-//             width: "100%",
-//             display: "flex",
-//             justifyContent: "flex-end",
-//             marginBottom: "0.5em",
-//             alignItems: "center",
-//           }}
-//         >
-//           <Button
-//             type="primary"
-//             style={{
-//               backgroundColor: "#E5EEF9",
-//               color: "#00308F",
-//               fontWeight: "bold",
-//               display: !props.loggedInSupervisor || disable ? "none" : "block",
-//             }}
-//             onClick={handleSubmit}
-//             shape="round"
-//           >
-//             Submit
-//           </Button>
-//         </div>
-//         {hadData ? (
-//           <>
-//             <Form>
-//               <Form.Item label="From Date">
-//                 <Input
-//                   type="date"
-//                   value={primaryKeys.fromDate}
-//                   onChange={(e) => updateState({ fromDate: e.target.value })}
-//                 />
-//               </Form.Item>
-//               <Form.Item label="To Date">
-//                 <Input
-//                   type="date"
-//                   value={primaryKeys.toDate}
-//                   onChange={(e) => updateState({ toDate: e.target.value })}
-//                 />
-//               </Form.Item>
-//               <Form.Item label="Machines">
-//                 <Select
-//                   options={props.machineLov}
-//                   value={primaryKeys.Machine}
-//                   onChange={(e) => updateState({ Machine: e })}
-//                 />
-//               </Form.Item>
-//               <Form.Item>
-//                 <Button type="primary" onClick={fetchData}>
-//                   Fetch PDE
-//                 </Button>
-//               </Form.Item>
-//             </Form>
-//           </>
-//         ) : (
-//           <>
-//             <table style={{ padding: "100px", width: "100%" }}>
-//               <th colSpan="8"> PROCESS DELAY / EQUIPMENT BREAK DOWN RECORD</th>
-//               <tr>
-//                 <th colSpan="1" rowSpan="2">
-//                   Check
-//                 </th>
-//                 <th colSpan="1" rowSpan="2">
-//                   S.No
-//                 </th>
-//                 <th colSpan="1" rowSpan="2">
-//                   Date
-//                 </th>
-//                 <th colSpan="3">Process Delay / Down Time </th>
-//                 <th colSpan="1" rowSpan="2">
-//                   Remarks{" "}
-//                 </th>
-//                 <th colSpan="1" rowSpan="2">
-//                   Sign and Date{" "}
-//                 </th>
-//               </tr>
-//               <tr>
-//                 <th colSpan="1">From (hours: Minutes) </th>
-//                 <th colSpan="1">To (hours: Minutes) </th>
-//                 <th colSpan="1">Total (hours: Minutes) </th>
-//               </tr>
-//               {data &&
-//                 data.map((record, index) => (
-//                   <tr key={index}>
-//                     <td colSpan="1" align="center">
-//                       <input
-//                         type="checkbox"
-//                         checked={checkedItems[index] || false}
-//                         onChange={(e) => handleCheckboxChange(e, index)}
-//                         disabled={disable}
-//                       />
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {index + 1}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {moment(record.packdate).format("DD/MM/YYYY")}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {record.fromTime}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {record.toTime}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {record.totalTime}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{ padding: "0.4em", textAlign: "center" }}
-//                     >
-//                       {record.remarks}
-//                     </td>
-//                     <td
-//                       colSpan="1"
-//                       style={{
-//                         padding: "0.4em",
-//                         textAlign: "center",
-//                         display: "flex",
-//                         justifyContent: "space-evenly",
-//                       }}
-//                     >
-//                       <Select
-//                         style={{ width: "12em" }}
-//                         options={props.supLov}
-//                         onChange={(val) => onchangePdeSign(val, index)}
-//                         value={pdeSignatureNew[index] || undefined}
-//                         disabled={disable}
-//                       />
-//                       <input
-//                         type="datetime-local"
-//                         onChange={(e) => onchangePdeDate(e.target.value, index)}
-//                         value={pdeDateNew[index] || ""}
-//                         disabled={disable}
-//                       />
-//                     </td>
-//                   </tr>
-//                 ))}
-//             </table>
-//           </>
-//         )}
-//       </Spin>
-//     </>
-//   );
-// };
-
-// export default Process_Delay;
 
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Button, Input, message, Select, Spin, Empty, Checkbox } from "antd";
+import { Button, Input, message, Spin, Select, Empty, Checkbox } from "antd";
 import axios from "axios";
 import API from "../../baseUrl.json";
+
 
 const Process_Delay = (props) => {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState();
   const [loading, setLoading] = useState(false);
-  const [selectedMachine, setSelectedMachine] = useState(null);
+  const [selectedMachine, setSelectedMachine] = useState([]);
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [signatures, setSignatures] = useState({});
@@ -361,6 +19,7 @@ const Process_Delay = (props) => {
   const [selectedRows, setSelectedRows] = useState(new Set());
   const [fieldsDisabled, setFieldsDisabled] = useState(false);
   console.log("2345", data1);
+
 
   useEffect(() => {
     if (props.batchNo) {
@@ -373,7 +32,7 @@ const Process_Delay = (props) => {
     setData([]);
     setFromDate(null);
     setToDate(null);
-    setSelectedMachine(null);
+    setSelectedMachine([]);
     setSignatures({});
     setDates({});
     setSelectedRows(new Set());
@@ -416,7 +75,7 @@ const Process_Delay = (props) => {
         setData1(response.data[0]);
         if (response.data && response.data.length > 0) {
           const processDelayData = response.data[0];
-          if (processDelayData.details && processDelayData.details.length > 0) {
+          if (processDelayData.details && processDelayData?.details.length > 0) {
             setData(processDelayData.details);
             // setFieldsDisabled(true);
             if (processDelayData.status === "SUPERVISOR_APPROVED") {
@@ -444,12 +103,16 @@ const Process_Delay = (props) => {
   const fetchStoppageData = () => {
     if (fromDate && toDate && selectedMachine) {
       setLoading(true);
+
+      const machineList = selectedMachine.join(",");
+
+
       axios
-        .get(`${API.prodUrl}/Precot/api/punching/bmr/stoppageReports`, {
+        .get(`${API.prodUrl}/Precot/api/punching/bmr/stoppageReportsMultiple`, {
           params: {
             fromdate: moment(fromDate).format("YYYY-MM-DD"),
             todate: moment(toDate).format("YYYY-MM-DD"),
-            machine: selectedMachine,
+            machine: machineList,
           },
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -477,17 +140,17 @@ const Process_Delay = (props) => {
           id: selectedRecord.id,
           date:
             moment(selectedRecord.packdate).format("YYYY-MM-DD") ||
-            data1.details[0]?.date,
-          fromTime: selectedRecord.fromTime || data1.details[0]?.fromTime,
-          toTime: selectedRecord.toTime || data1.details[0]?.toTime,
+            data1?.details[0]?.date,
+          fromTime: selectedRecord.fromTime || data1?.details[0]?.fromTime,
+          toTime: selectedRecord.toTime || data1?.details[0]?.toTime,
           totalTime:
             (parseFloat(selectedRecord.totalTime) / 60).toFixed(1) ||
-            (parseFloat(data1.details[0]?.totalTime) / 60).toFixed(1),
-          remarks: selectedRecord.remarks || data1.details.remarks,
-          supervisorName: signatures[rowIndex] || data1.details.supervisorName,
+            (parseFloat(data1?.details[0]?.totalTime) / 60).toFixed(1),
+          remarks: selectedRecord.remarks || data1?.details.remarks,
+          supervisorName: signatures[rowIndex] || data1?.details.supervisorName,
           supervisorDate:
             moment(dates[rowIndex]).format("YYYY-MM-DD") ||
-            data1.details.supervisorDate,
+            data1?.details.supervisorDate,
           // supervisorName: signatures[rowIndex] || "",
           // supervisorDate: dates[rowIndex] || "",
         };
@@ -500,7 +163,7 @@ const Process_Delay = (props) => {
         department: "Punching Department",
         fromdate: fromDate || data1?.fromdate,
         todate: toDate || data1?.todate,
-        machineName: selectedMachine,
+        // machineName: selectedMachine,
         details: recordsToSubmit,
       };
 
@@ -525,12 +188,13 @@ const Process_Delay = (props) => {
               }
             )
             .then((response) => {
+              setData1(response.data[0]);
               setLoading(false);
               if (response.data && response.data.length > 0) {
                 const processDelayData = response.data[0];
                 if (
                   processDelayData.details &&
-                  processDelayData.details.length > 0
+                  processDelayData?.details.length > 0
                 ) {
                   setData(processDelayData.details);
                   // setFieldsDisabled(true);
@@ -574,16 +238,16 @@ const Process_Delay = (props) => {
           id: selectedRecord.id,
           date:
             moment(selectedRecord.packdate).format("YYYY-MM-DD") ||
-            data1.details[0]?.date,
-          fromTime: selectedRecord.fromTime || data1.details[0]?.fromTime,
-          toTime: selectedRecord.toTime || data1.details[0]?.toTime,
-          totalTime: selectedRecord.totalTime || data1.details[0]?.totalTime,
-          remarks: selectedRecord.remarks || data1.details[0]?.remarks,
+            data1?.details[0]?.date,
+          fromTime: selectedRecord.fromTime || data1?.details[0]?.fromTime,
+          toTime: selectedRecord.toTime || data1?.details[0]?.toTime,
+          totalTime: selectedRecord.totalTime || data1?.details[0]?.totalTime,
+          remarks: selectedRecord.remarks || data1?.details[0]?.remarks,
           supervisorName:
-            signatures[rowIndex] || data1.details[0]?.supervisorName,
+            signatures[rowIndex] || data1?.details[0]?.supervisorName,
           supervisorDate:
             moment(dates[rowIndex]).format("YYYY-MM-DD") ||
-            data1.details[0]?.supervisorDate,
+            data1?.details[0]?.supervisorDate,
         };
       });
 
@@ -594,7 +258,7 @@ const Process_Delay = (props) => {
         department: "Punching Department",
         fromdate: fromDate || data1?.fromdate,
         todate: toDate || data1?.todate,
-        machineName: selectedMachine || data1?.machineName,
+        // machineName: selectedMachine || data1?.machineName,
         details: recordsToSubmit,
       };
 
@@ -619,12 +283,13 @@ const Process_Delay = (props) => {
               }
             )
             .then((response) => {
+              setData1(response.data[0]);
               setLoading(false);
               if (response.data && response.data.length > 0) {
                 const processDelayData = response.data[0];
                 if (
                   processDelayData.details &&
-                  processDelayData.details.length > 0
+                  processDelayData?.details.length > 0
                 ) {
                   setData(processDelayData.details);
                   // setFieldsDisabled(true);
@@ -702,6 +367,7 @@ const Process_Delay = (props) => {
             type="date"
             onChange={(e) => setFromDate(e.target.value)}
             placeholder="Select From Date"
+            style={{ width: "150px" }}
             value={fromDate || ""}
             disabled={fieldsDisabled}
           />
@@ -709,15 +375,22 @@ const Process_Delay = (props) => {
             type="date"
             onChange={(e) => setToDate(e.target.value)}
             placeholder="Select To Date"
+            style={{ width: "150px" }}
+
             value={toDate || ""}
             disabled={fieldsDisabled}
           />
           <Select
+            mode="multiple"
+            allowClear
+            style={{ width: "300px" }}
+            placeholder="Select Machines"
+            value={selectedMachine}
+            onChange={(value) => {
+              console.log("Selected Machines: ", value);
+              setSelectedMachine(value);
+            }}
             options={props.machineLov}
-            placeholder="Select Machine"
-            onChange={(value) => setSelectedMachine(value)}
-            value={selectedMachine || ""}
-            style={{ width: "200px" }}
             disabled={fieldsDisabled}
           />
           <Button
