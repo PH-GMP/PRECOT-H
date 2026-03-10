@@ -95,8 +95,8 @@ public interface BleachBmrLaydownMappingRepository extends JpaRepository<BleachB
 	@Query(value = "SELECT FormattedBatchNo\r\n" + "FROM (\r\n" + "    SELECT DISTINCT \r\n"
 			+ "        RIGHT(CAST(PackYear AS VARCHAR), 2) + '/' + FORMAT(BatchNo, '0000') AS FormattedBatchNo,\r\n"
 			+ "        PackYear,\r\n" + "        BatchNo\r\n" + "    FROM tblBalePack  \r\n"
-			+ "    WHERE BMR_NO IS NULL \r\n"
-			+ "      AND ((PackYear = 2024 AND BatchNo > 1464) OR (PackYear = 2025))\r\n" + ") AS SubQuery\r\n"
+			+ "    WHERE BMR_NO IS NULL AND BaleType != 'O' \r\n"
+			+ "      AND ((PackYear = 2024 AND BatchNo > 1464) OR (PackYear = 2025) OR (PackYear = 2026))\r\n" + ") AS SubQuery\r\n"
 			+ "ORDER BY PackYear DESC, BatchNo ASC;", nativeQuery = true)
 	List<String> fetchBatchwithYear();
 

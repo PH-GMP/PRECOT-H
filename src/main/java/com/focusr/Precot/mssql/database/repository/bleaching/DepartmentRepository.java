@@ -915,7 +915,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
 			+ "        WHEN CHARINDEX('-', REVERSE(o.Material)) > 0\r\n"
 			+ "        THEN RIGHT(o.Material, CHARINDEX('-', REVERSE(o.Material)) - 1)\r\n"
 			+ "        ELSE o.Material\r\n" + "    END AS rawPadsPerBag,\r\n" + "    (\r\n"
-			+ "        SELECT t.PIECE\r\n" + "        FROM PDE.dbo.tblOrderInfo toi\r\n"
+			+ "        SELECT TOP 1 t.PIECE\r\n" + "        FROM PDE.dbo.tblOrderInfo toi\r\n"
 			+ "        INNER JOIN PDE.dbo.tblProduct tp ON toi.Material = tp.Product\r\n"
 			+ "        INNER JOIN PDE.dbo.tblcusinfo t ON toi.Material = t.MATERIAL\r\n"
 			+ "        WHERE tp.Cat = 'Pads' AND toi.POrder = r.POrder\r\n"

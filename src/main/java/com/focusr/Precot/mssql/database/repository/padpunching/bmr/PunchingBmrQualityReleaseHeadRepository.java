@@ -34,4 +34,9 @@ public interface PunchingBmrQualityReleaseHeadRepository extends JpaRepository<P
 	@Query(value = "SELECT f.PackDt AS packdate, f.ShiftID AS shiftId, f.JulianDay AS julianday, f.MCN AS machine, f.POrder AS orderNo, f.NCB AS ncb, f.NOC AS noc, f.NBAG AS bags, O.PoNo AS poNumber, O.Material AS material FROM tblFPpack f JOIN tblOrderinfo O ON f.POrder =O.POrder WHERE f.PackDt BETWEEN :fromdate AND :todate AND f.POrder=:order", nativeQuery = true)
 	List<Object[]> productionDetailsSAP(@Param("fromdate") String fromdate, @Param("todate") String todate, @Param("order") String orderNo);
 	
+	
+	// DASHBOARD
+	
+ 	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.PADPUNCHING_BMR_QUALITY_RELEASE_HEADER WHERE STATUS = 'QA_APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getAllApprovedQaBmrNos(@Param("allBmrNos") List<String> allBmrNos);
 }

@@ -386,6 +386,18 @@ public class SpunlaceBmrRpSummaryController {
 			
 		}
 		
+		@GetMapping("/GetBatchQtyOrderDate")
+		public ResponseEntity<?> GetBatchQtyOrderDate(@RequestParam Map<String, String> requestParams,
+				Principal principal) {
+
+			String orderNumber = requestParams.get("order_no");
+			String fromdate = requestParams.get("fromdate");
+			String todate = requestParams.get("todate");
+			
+			ResponseEntity<?> resp = supulacerpbmrsummaryservice.GetBatchQtyOrderDate(orderNumber, fromdate, todate);
+			return resp;
+		}
+		
 		
 		@GetMapping("/getProductionDetailsByBaleOrderDate")
 		public ResponseEntity<?> getProductionDetailsByBaleDateOrder(@RequestParam Map<String, String> requestParams,

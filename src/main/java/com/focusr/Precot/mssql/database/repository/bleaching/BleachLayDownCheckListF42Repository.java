@@ -140,6 +140,156 @@ public interface BleachLayDownCheckListF42Repository extends JpaRepository<Bleac
             + " SUM(CASE WHEN HOD_STATUS != 'HOD_APPROVED' AND SUPERVISOR_STATUS != 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS hodCount"
             + " FROM precot.BLEACH_LAY_DOWN_CHECK_LIST_F42", nativeQuery = true)
     List<Object[]> getStatusCounts();
+    
+    // DASHBOARD FOR BLEACHING
+    
+//	Form 2
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.METAL_DETECTOR_CHECK_LIST_F03", nativeQuery = true)
+	List<Object[]> getMetalDetectorCheckListF03StatusCounts();
+
+//	Form 3
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_APPLIED_CONT_RAW_COTTON_F04", nativeQuery = true)
+	List<Object[]> getBleachAppliedContRawCottonF04StatusCounts();
+
+//	Form 4
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_CONT_RAWCOTTON_F05", nativeQuery = true)
+	List<Object[]> getBleachContRawCottonF05StatusCounts();
+
+//	Form 5
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_BLOWROOM_AND_CARDING_F34", nativeQuery = true)
+	List<Object[]> getEquipmentUsageLogBookBlowRoomCardingStatusCounts();
+
+//	Form 6
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_CAKE_PRESS_F09", nativeQuery = true)
+	List<Object[]> getEquipmentUsageLogBookCakePressStatusCounts();
+
+	// FORM 1 TO 6
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM = :tableName", nativeQuery = true)
+	List<Object[]> getOneToSixStatusCounts(@Param("tableName") String tableName);
+
+//	Form 7
+
+	@Query(value = "SELECT\r\n"
+			+ "	SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')\r\n"
+			+ "OR (QA_STATUS = 'QA_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "	SUM(CASE WHEN QA_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS qaCount,\r\n"
+			+ "	SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n" + "FROM\r\n"
+			+ "	precot.BLEACH_JOB_CARD_F13 ;", nativeQuery = true)
+	List<Object[]> getBleachingJobCardStatusCounts();
+
+	// FORM 8
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_EQUIPMENT_USAGE_LOGBOOK_HYDRO_EXTRACTOR_F11", nativeQuery = true)
+	List<Object[]> getEquipmentUsageLogBookHydroExtractorStatusCounts();
+
+	// FORM 9
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_SANITIZATION_OF_MECHINE_AND_SURFACE_F01", nativeQuery = true)
+	List<Object[]> getSanitizationOfMachineAndSurfacesStatusCounts();
+
+	// FORM 10
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_HAND_SANITIZATION_AB_PRESS_F41", nativeQuery = true)
+	List<Object[]> getSanitizationReportAbBalePressMachineStatusCounts();
+
+	// FORM 11
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08", nativeQuery = true)
+	List<Object[]> getAppliedContReportAbCottonStatusCounts();
+
+	// FORM 12
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_CONT_ABS_BLEACHED_COTTON_F18", nativeQuery = true)
+	List<Object[]> getContCheckingReportAbCottonStatusCounts();
+
+	// FORM 13
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_SHIFT_LOGBOOK_F36", nativeQuery = true)
+	List<Object[]> getShiftLogBookStatusCounts();
+
+	// FORM 14
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_MIXCHANGE_MACHINECLEAN_F38", nativeQuery = true)
+	List<Object[]> getMixingChangeOverAndMachineCheckListStatusCounts();
+
+	// FORM 15
+
+	@Query(value = "WITH UniqueRecords AS (\r\n" + "    SELECT *,\r\n"
+			+ "           ROW_NUMBER() OVER (PARTITION BY date ORDER BY date) AS rn\r\n"
+			+ "    FROM precot.BLEACH_EQUIP_USAGE_LOG_BOOK_F33\r\n" + ")\r\n" + "SELECT \r\n"
+			+ "    SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED') THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "    SUM( CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END ) AS hodCount\r\n"
+			+ "FROM UniqueRecords\r\n" + "WHERE rn = 1;", nativeQuery = true)
+	List<Object[]> getEquipmentUsageLogBookWasteBalePressStatusCounts();
+
+	// FORM 16
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_MACHINE_CLEANING_RECORD_F16", nativeQuery = true)
+	List<Object[]> getMachineCleaningRecordStatusCounts();
+
+	// FORM 17 F02
+
+	@Query(value = "SELECT\r\n" + "	SUM(CASE WHEN HR_STATUS != 'HR_APPROVED' \r\n"
+			+ "OR (SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' AND HR_STATUS = 'HR_APPROVED')\r\n"
+			+ "OR (HOD_STATUS = 'HOD_REJECTED' AND HR_STATUS = 'HR_APPROVED')THEN 1 ELSE 0 END) AS hrCount,\r\n"
+			+ "	SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "	SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n" + "FROM\r\n"
+			+ "	precot.BLEACH_HOUSE_KEEP_CLEAN_CHECK_LIST_F02", nativeQuery = true)
+	List<Object[]> getHouseKeepingCleaninfCheckListF02StatusCounts();
+
+	// FORM 18 FO2A
+
+	@Query(value = "SELECT\r\n" + "	SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' \r\n"
+			+ "OR (HR_STATUS = 'HR_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')\r\n"
+			+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "	SUM(CASE WHEN HR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hrCount,\r\n"
+			+ "	SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BLEACH_HOUSE_KEEP_CLEAN_CHECK_LIST_F02A", nativeQuery = true)
+	List<Object[]> getHouseKeepingCleaninfCheckListF02AStatusCounts();
+
+	// FORM 19
+
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' \r\n"
+			+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')\r\n"
+			+ "OR (QA_STATUS = 'QA_REJECTED' AND SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "	SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount,\r\n"
+			+ "	SUM(CASE WHEN  QA_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS qaCount\r\n"
+			+ "FROM precot.BLEACH_REPROCESS_REPORT_F16", nativeQuery = true)
+	List<Object[]> getReProcessingReportStatusCounts();
 
 	
 	

@@ -315,5 +315,14 @@ public interface PunchingBmrProductionDetailsRepository extends JpaRepository<Pu
 
 	@Query(value = "SELECT BATCH_NO FROM PDE.precot.PUNCHING_BMR_PROD_DETAILS", nativeQuery = true)
 	List<String> findAllByBatchNo();
+	
+	// BMR DASHBOARD
+	
+	 @Query(value = "SELECT DISTINCT BATCH_NO FROM precot.PUNCHING_BMR_PROD_DETAILS WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL",nativeQuery = true)
+	 List<String> getPunchingBmrNumbers();
+	 
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.PUNCHING_BMR_PROD_DETAILS \r\n"
+				+ "WHERE QA_STATUS = 'QA_APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getApprovedBmr(@Param("allBmrNos") List<String> allBmrNos);
 
 }

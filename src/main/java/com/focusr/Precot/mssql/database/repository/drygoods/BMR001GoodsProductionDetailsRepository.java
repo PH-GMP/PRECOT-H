@@ -297,5 +297,35 @@ public interface BMR001GoodsProductionDetailsRepository extends JpaRepository<BM
 			+ "WHERE toi.POrder =:orderNumber", nativeQuery = true)
 	List<String> getProductCode(@Param("orderNumber") String orderNumber);
 	
+	// BMR DASHBOARD
+	
+	
+	 @Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS\r\n"
+	 		+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND FORM_NO = 'PH-PRD04/F-004'",nativeQuery = true)
+	 List<String> getDryGoodsBmrNumbersF004();
+	 
+	 @Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS\r\n"
+		 	+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND FORM_NO = 'PH-PRD04/F-007'",nativeQuery = true)
+	 List<String> getDryGoodsBmrNumbersF007();
+	 
+	 @Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS\r\n"
+		 	+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND FORM_NO = 'PH-PRD04/F-008'",nativeQuery = true)
+	 List<String> getDryGoodsBmrNumbersF008();
+	 
+	 // UPDATED 
+	 
+	 
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS \r\n"
+				+ "WHERE STATUS = 'QA_APPROVED' AND BATCH_NO IN (:cottonBmrNos) AND FORM_NO = 'PH-PRD04/F-004'", nativeQuery = true)
+	List<String> getApprovedBmrCottonBalls(@Param("cottonBmrNos") List<String> cottonBmrNos);
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS \r\n"
+			    + "WHERE STATUS = 'QA_APPROVED' AND BATCH_NO IN (:pleatBmrNos) AND FORM_NO = 'PH-PRD04/F-007'", nativeQuery = true)
+	List<String> getApprovedBmrPleat(@Param("pleatBmrNos") List<String> pleatBmrNos);
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BMR_DRYGOODS_01_PRODUCTION_DETAILS \r\n"
+				+ "WHERE STATUS = 'QA_APPROVED' AND BATCH_NO IN (:woolrollBmrNos) AND FORM_NO = 'PH-PRD04/F-008'", nativeQuery = true)
+	List<String> getApprovedBmrWoolRoll(@Param("woolrollBmrNos") List<String> woolrollBmrNos);
+	
 
 }

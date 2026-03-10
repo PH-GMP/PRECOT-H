@@ -138,6 +138,10 @@ public interface AppConstantsSplunance {
 
 	public static final String PDFPATHLOCAL = "C:\\Users\\m1293\\Desktop\\Reports\\Mahlo";
 	public static final String PDFPATHSECURE = "/apps/tomcat/dev/tender_management/tm_documents/";
-	public static final String PDFPATHPROD = "\\\\172.25.0.103\\Share\\Mahlo\\Reports\\";
+//	public static final String PDFPATHPROD = "\\\\172.25.0.103\\Share\\Mahlo\\Reports\\";
+	
+//	public static final String PDFPATHPROD = "\\\\172.20.0.150\\Share\\Mahlo\\Reports";
+	
+	public static final String PDFPATHPROD = "\\\\172.25.0.13\\Share\\Mahlo\\Reports";
 
 }

@@ -1925,6 +1925,38 @@ public class SupulaceRpBmrSummaryService {
 			
 		}
 		
+		public ResponseEntity<?> GetBatchQtyOrderDate(String orderNumber, String fromdate, String todate) {
+
+			Double result = 0.0; 
+
+			try {
+
+				String[] order_number = orderNumber.split("-");
+
+				String orderNo = order_number[0];
+
+				result = bmr_01_productiondetailsrepository.getBatchQuantity(orderNo, fromdate, todate);
+
+				if (result == null) {
+
+					return new ResponseEntity(new ApiResponse(true, "No record found for the OrderNo :" + orderNo + " From :" + fromdate + " To :" +todate),
+							HttpStatus.OK);
+				}
+
+			} catch (Exception ex) {
+
+				String msg = ex.getMessage();
+				log.error("Unable to Get Batch Qty :" + msg);
+				ex.printStackTrace();
+				return new ResponseEntity(new ApiResponse(false, "Failed to Get Batch Qty :" + msg),
+						HttpStatus.BAD_REQUEST);
+			}
+
+			return new ResponseEntity(result, HttpStatus.OK);
+
+		}
+
+		
 		
 			// GET PRODUCTION DETAILS BY BALE, DATE AND ORDER
 		

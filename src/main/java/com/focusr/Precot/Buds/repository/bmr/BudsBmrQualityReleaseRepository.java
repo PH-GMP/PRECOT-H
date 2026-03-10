@@ -15,4 +15,9 @@ public interface BudsBmrQualityReleaseRepository extends JpaRepository<BudsBmrQu
 	@Query(value = "SELECT * FROM precot.BUDS_QUALITY_RELEASE_HEADER WHERE BATCH_NO=:batchNumber", nativeQuery = true)
 	List<BudsBmrQualityReleaseHeader> qualityReleaseByBatchNo(@Param("batchNumber") String batchNumber);
 	
+	// BMR DASHBOARD
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BUDS_QUALITY_RELEASE_HEADER WHERE STATUS = 'QA_APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getAllApprovedQaBmrNos(@Param("allBmrNos") List<String> allBmrNos);
+	
 }

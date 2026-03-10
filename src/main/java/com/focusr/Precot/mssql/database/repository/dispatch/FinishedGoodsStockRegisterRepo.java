@@ -136,6 +136,22 @@ List<Integer> findClosingStock(@Param("product") String product,
 		
 		@Query(value = "SELECT DISTINCT MATERIAL from tblcusinfo WHERE CUST_NAME = :customer", nativeQuery = true)
 		List<String> getMaterialByCustomer(@Param("customer") String customer);
+		
+		// DASHBOARD
+		
+		//	-- 001
+		
+		@Query(value = "SELECT SUM(CASE WHEN DISPATCH_SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS dispatchSupervisorCount\r\n"
+				+ "FROM precot.DISPATCH_FINISHED_GOODS_STOCK_REGISTER_F001", nativeQuery = true)
+		List<Object[]> getFinishedGoodsStockRegisterStatusCounts();
+		
+		//	-- 002
+		
+		@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS = 'OPERATOR_SAVED'\r\n"
+				+ "OR (OPERATOR_STATUS = 'OPERATOR_APPROVED' AND STORE_IN_CHARGE_STATUS = 'INCHARGE_REJECTED')THEN 1 ELSE 0 END) AS operatorCount ,\r\n"
+				+ "SUM(CASE WHEN STORE_IN_CHARGE_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS storeInchargeCount\r\n"
+				+ "FROM precot.STORE_FORKLIFT_MOVEMENT_CHECKLIST_F008", nativeQuery = true)
+		List<Object[]> getForkLiftMovementCheckListStatusCounts();
 
 
 }

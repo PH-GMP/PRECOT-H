@@ -21,4 +21,15 @@ public interface BmrSummaryProductionDetailsRepository extends JpaRepository<Bmr
 	@Query(value = "SELECT BMR_NO FROM precot.BLEACH_BMR_LAYDOWN_MAPPING WHERE STATUS NOT IN ('CREATED')", nativeQuery = true)
     List<String> findAllByBmrNoBleaching();
 	
+	// DASHBOARD
+	
+	@Query(value = "SELECT BMR_NO FROM precot.BMR_SUMMARY_PROD_DETAILS WHERE BMR_NO IS NOT NULL", nativeQuery = true)
+    List<String> getBmrNumbers();
+	
+	@Query(value = "SELECT DISTINCT BMR_NO FROM precot.BMR_SUMMARY_PROD_DETAILS WHERE NULLIF(LTRIM(RTRIM(BMR_NO)), '') IS NOT NULL", nativeQuery = true)
+    List<String> getBleachingBmrNumbers();
+	
+	@Query(value = "SELECT DISTINCT BMR_NO FROM precot.BMR_SUMMARY_PROD_DETAILS WHERE STATUS = 'QA_APPROVED' AND BMR_NO IN (:bmrNos)", nativeQuery = true)
+	List<String> getApprovedBmr(@Param("bmrNos") List<String> bmrNos);
+	
 }

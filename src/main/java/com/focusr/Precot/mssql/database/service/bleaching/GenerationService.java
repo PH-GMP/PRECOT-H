@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.focusr.Precot.mssql.database.model.bleaching.BleachAppliedContAbCottonF08;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachAppliedContRawCottonF04;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachBmrGeneration;
 import com.focusr.Precot.mssql.database.model.bleaching.BleachBmrLaydownMapping;
@@ -35,6 +36,8 @@ import com.focusr.Precot.mssql.database.model.bleaching.BmrSummary;
 import com.focusr.Precot.mssql.database.model.bleaching.BmrSummaryProductionDetails;
 import com.focusr.Precot.mssql.database.model.bleaching.EquipLogBookHydroExtractorF11;
 import com.focusr.Precot.mssql.database.repository.bleaching.BMRSummaryBleachRepository;
+import com.focusr.Precot.mssql.database.repository.bleaching.BleachAppliedContAbCottonF08Repository;
+import com.focusr.Precot.mssql.database.repository.bleaching.BleachAppliedContAbCottonTypesF08Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachAppliedContRawCottonF04Repository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrLaydownMappingRepository;
 import com.focusr.Precot.mssql.database.repository.bleaching.BleachBmrSummaryRepository;
@@ -112,6 +115,9 @@ public class GenerationService {
 	
 	@Autowired
 	private EquipLogBookHydroExtractorF11Repository equipLogBookHydroExtractorF11Repository ;
+	
+	@Autowired
+	private BleachAppliedContAbCottonF08Repository bleachappliedcontabcottonf08repository;
 	
 	@Autowired
 	private BleachEquipmentUsageLogBookCakePressF09Repository cakePressF09Repository;
@@ -866,6 +872,8 @@ public class GenerationService {
 		
 		List<EquipLogBookHydroExtractorF11> hydroExtractor = new ArrayList<EquipLogBookHydroExtractorF11>();
 		
+		List<BleachAppliedContAbCottonF08> appliedCottonF08 = new ArrayList<BleachAppliedContAbCottonF08>();
+		
 		
 		try {
 
@@ -891,6 +899,10 @@ public class GenerationService {
 			
 			hydroExtractor = equipLogBookHydroExtractorF11Repository.getDetailsByBMR(request.getBmrNo());
 			
+			// CR
+			
+			appliedCottonF08 = bleachappliedcontabcottonf08repository.getF08BmrDetails(request.getBmrNo());
+			
 			if(chemicalMaterialList.isEmpty() || chemicalMaterialList == null) {
 				return new ResponseEntity(new ApiResponse(false, "Chemical Material not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
 			}
@@ -913,6 +925,10 @@ public class GenerationService {
 			
 			if(jobcardList.isEmpty() || jobcardList == null) {
 				return new ResponseEntity(new ApiResponse(false, "Job card not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
+			}
+			
+			if(appliedCottonF08.isEmpty() || appliedCottonF08 == null) {
+				return new ResponseEntity(new ApiResponse(false, "Applied Contamination Report (Absorbent Bleached Cotton) not yet submitted for Bmr " + request.getBmrNo()), HttpStatus.BAD_REQUEST);
 			}
 			
 			

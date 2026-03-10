@@ -62,5 +62,32 @@ public interface ContractReviewMeetingRepositoryF003 extends JpaRepository<Contr
 
 	@Query(value = "SELECT CUSTOMER_NAME from precot.PPC_CONTRACT_REVIEW_MEETING_F003", nativeQuery = true)
 	List<String> getCustomerName();
+	
+	// DASHBOARD
+	
+	
+	// FORM1 
+	
+	@Query(value = "SELECT SUM(CASE WHEN MARKET_REPRESENTATIVE_STATUS = 'MARKET_REPRESENTATIVE_SAVED' THEN 1 ELSE 0 END) AS marketRepCount,\r\n"
+			+ "SUM(CASE WHEN ASSISTANT_STATUS != 'ASSISANT_APPROVED' OR ASSISTANT_STATUS IS NULL THEN 1 ELSE 0 END) AS ppcAssisCount\r\n"
+			+ "FROM precot.PPC_CONTRACT_REVIEW_MEETING_F003", nativeQuery = true)
+	List<Object[]> getContractReviewMeetingStatusCounts();
+	
+	
+	// FORM 2
+	
+	@Query(value = "SELECT SUM(CASE WHEN ASSISTANT_STATUS = 'ASSISANT_SAVED'\r\n"
+			+ "OR (ASSISTANT_STATUS = 'ASSISANT_APPROVED' AND PPC_INCHARGE_STATUS = 'INCHARGE_REJECTED')THEN 1 ELSE 0 END) AS ppcAssisCount,\r\n"
+			+ "SUM(CASE WHEN PPC_INCHARGE_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS ppcInchargeCount\r\n"
+			+ "FROM precot.PPC_MONTHLY_PLAN_SUMMARY_F002", nativeQuery = true)
+	List<Object[]> getMonthlyPlanSummaryStatusCounts();
+	
+	
+	// FORM 3
+	
+	@Query(value = "SELECT SUM(CASE WHEN ASSISTANT_STATUS = 'ASSISANT_SAVED' THEN 1 ELSE 0 END) AS qaCount\r\n"
+			+ "FROM precot.PPC_PRE_PRODUCTIONS_F004", nativeQuery = true)
+	List<Object[]> getPreProductionMeetingStatusCounts();
+
 
 }

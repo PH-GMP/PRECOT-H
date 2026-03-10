@@ -63,4 +63,9 @@ public interface BudsBmrProductReleaseRepository extends JpaRepository<BudsBmrPr
 	@Query(value = "SELECT P.ProdDesc AS product, O.Qty AS quantity, (O.Qty/P.bags) AS bags, O.POrder AS bmrNo FROM tblOrderInfo O JOIN tblProduct P ON O.Material = P.Product WHERE O.Sts = 1 AND P.Cat = 'Buds' AND O.POrder=:orderNumber", nativeQuery = true)
 	List<Map<String, Object>> productChangeDetails(@Param("orderNumber") String orderNumber);
 	
+	// DASHBOARD
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BUDS_BMR_PRODUCT_RELEASE WHERE APPROVER_STATUS = 'APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getAllApprovedProductBmrNos(@Param("allBmrNos") List<String> allBmrNos);
+	
 }

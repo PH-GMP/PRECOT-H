@@ -49,12 +49,16 @@ public interface BleachAppliedContAbCottonF08Repository extends JpaRepository<Bl
 	List<BleachAppliedContAbCottonF08> getBmrDetailsF08(@Param("bmr") String bmr);
 	
 	// Bmr Lov
-	 
-		@Query(value = "SELECT DISTINCT BMR_NUMBER FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08 WHERE HOD_STATUS = 'HOD_APPROVED'", nativeQuery = true)
-		List<String> bmrLov();
-		
-		
-		@Query(value = "SELECT DISTINCT BMR_NUMBER FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08 WHERE HOD_STATUS = 'HOD_APPROVED'", nativeQuery = true)
-		List<String> findApprovedPH();
+
+	@Query(value = "SELECT DISTINCT BMR_NUMBER FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08 WHERE HOD_STATUS = 'HOD_APPROVED'", nativeQuery = true)
+	List<String> bmrLov();
+
+	@Query(value = "SELECT DISTINCT BMR_NUMBER FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08 WHERE HOD_STATUS = 'HOD_APPROVED'", nativeQuery = true)
+	List<String> findApprovedPH();
+
+	// BEFORE CLOSING BMR
+
+	@Query(value = "SELECT * FROM precot.BLEACH_APPLIED_CONT_AB_COTTON_F08 WHERE BMR_NUMBER =:bmr_no", nativeQuery = true)
+	List<BleachAppliedContAbCottonF08> getF08BmrDetails(@Param("bmr_no") String bmr_no);
 
 }

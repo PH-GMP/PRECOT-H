@@ -148,14 +148,9 @@ List<Object[]> fetchheaderdetailsForF006Bag(@Param("orderNo") String order_no,@P
         "WHERE (:order_no IS NULL OR R.POrder = :order_no) " +
         "AND (:date IS NULL OR CONVERT(DATE, R.ConsDt) = CONVERT(DATE, :date)) " +
         "AND (:shift IS NULL OR R.ShiftID = CAST(:shift AS NUMERIC))", 
-nativeQuery = true)
-List<Object[]> fetchfleecetReceiptForF006(
-@Param("date") String date,
-@Param("shift") String shift,
-@Param("order_no") String order_no);
-
-
-
+		nativeQuery = true)
+List<Object[]> fetchfleecetReceiptForF006(@Param("date") String date, @Param("shift") String shift,
+		@Param("order_no") String order_no);
 
 @Query(value = "  WITH RunTimes AS (\r\n"
 		+ "    SELECT \r\n"
@@ -188,7 +183,7 @@ List<Object[]> fetchfleecetReceiptForF006(
 		+ "    AND (:shift IS NULL OR sm.ShiftID = :shift) \r\n"
 		+ "    AND sm.Stype IN ('Stop', 'F.Stop') \r\n"
 		+ "    AND (:machine_name IS NULL OR sm.MCN = :machine_name)", nativeQuery = true)
-List<Object[]> fetchStoppagedetailsForF006(@Param("date") String date, @Param("shift") String shift,@Param("order_no") String order_no,@Param("machine_name") String machine_name);
+	List<Object[]> fetchStoppagedetailsForF006(@Param("date") String date, @Param("shift") String shift,@Param("order_no") String order_no,@Param("machine_name") String machine_name);
 
 
 		@Query(value = "    SELECT \r\n"
@@ -206,5 +201,100 @@ List<Object[]> fetchStoppagedetailsForF006(@Param("date") String date, @Param("s
 				+ "WHERE \r\n"
 				+ "    O.POrder = :orderNo", nativeQuery = true)
 		List<Object[]> fetchpdeF006(@Param("orderNo") String order_no);
+		
+		// DASHBOARD
+		
+				//--001
+				
+				@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS opearatorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_BALE_CONSUMPTION_REPORT_F001", nativeQuery = true)
+				List<Object[]> getBaleConsumptionReportStatusCounts();
+				
+				//--002
+				
+				@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS opearatorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_SLIVER_MAKING", nativeQuery = true)
+				List<Object[]> getDailyProductionSliverMakingStatusCounts();
+				
+				//--003
+				
+				@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED') \r\n"
+						+ "OR (SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS operatorCount,\r\n"
+						+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_DAILY_PRODUCTION_COTTONBALLS_F003", nativeQuery = true)
+				List<Object[]> getDailyProductionCottonBallsStatusCounts();
+				
+				//--004
+				
+				@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS opearatorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.MINI_ROLL_F05", nativeQuery = true)
+				List<Object[]> getProductionReportMiniRollStatusCounts();
+				
+				//--005
+				
+				@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED') \r\n"
+						+ "OR (SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS operatorCount,\r\n"
+						+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_DAILY_PRODUCTION_PLEATE_AND_WOOL_ROLL_F006", nativeQuery = true)
+				List<Object[]> getDailyProductionPleatWoolRollStatusCounts();
+				
+				
+				//--006
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED'OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED') \r\n"
+						+ "OR (QA_STATUS = 'QA_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount,\r\n"
+						+ "SUM(CASE WHEN QA_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS qaCount\r\n"
+						+ "FROM precot.GOODS_PROD_CHANGE_OVER_F09", nativeQuery = true)
+				List<Object[]> getProductChangeOverDryGoodsStatusCounts();
+				
+				
+				//--007
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_LOGBOOK_DETAILS", nativeQuery = true)
+				List<Object[]> getLogBookDryGoodsStatusCounts();
+				
+				
+				//--008
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' THEN 1 ELSE 0 END) AS supervisorCount\r\n"
+						+ "FROM precot.DRYGOODS_BALLPLEATE_AND_FINISHED_GOODS_TRANSFER_RECORD_F011", nativeQuery = true)
+				List<Object[]> getBallPleatWoolRollFinishedGoodsTransferRecordStatusCounts();
+				
+				//--009
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRYGOODS_MC_SANITIZATION", nativeQuery = true)
+				List<Object[]> getSanitizationOfMachineAndSurfacesStatusCounts();
+				
+				//--010
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED' \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.GOODS_HAND_SANITIZATION_AB_PRESS_F13", nativeQuery = true)
+				List<Object[]> getHandSanitizationReportDryGoodsStatusCounts();
+				
+				//--011
+				
+				@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS != 'SUPERVISOR_APPROVED'OR (HR_STATUS = 'HR_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED') \r\n"
+						+ "OR (HOD_STATUS = 'HOD_REJECTED' AND SUPERVISOR_STATUS ='SUPERVISOR_APPROVED')THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+						+ "SUM(CASE WHEN HR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hrCount,\r\n"
+						+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+						+ "FROM precot.DRY_GOODS_HOUSE_KEEP_CLEAN_CHECK_LIST_F14", nativeQuery = true)
+				List<Object[]> getHouseKeepingCleaningCheckListDtyGoodsStatusCounts();
 		
 }

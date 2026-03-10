@@ -134,23 +134,51 @@ List<String> findDistinctBisNoExcludingSupervisorStatus();
 //	  @Param("bisNo") String bisNo);
 
 	  
-	  @Query(value = "SELECT * FROM precot.ENG_BREAKDOWN_INTIMANTIONSLIP_F003 f " +
-              "WHERE (:fromDate IS NULL OR f.DATE >= :fromDate) " +
-              "AND (:toDate IS NULL OR f.DATE <= :toDate) " +
-              "AND (:bisNo IS NULL OR f.BIS_NO = :bisNo)", 
-      nativeQuery = true)
-List<BreakdownIntimationSlipF003> findByParams003(
-   @Param("fromDate") LocalDate fromDate,
-   @Param("toDate") LocalDate toDate,
-   @Param("bisNo") String bisNo);
-
-
-	  
+	@Query(value = "SELECT * FROM precot.ENG_BREAKDOWN_INTIMANTIONSLIP_F003 f "
+			+ "WHERE (:fromDate IS NULL OR f.DATE >= :fromDate) " + "AND (:toDate IS NULL OR f.DATE <= :toDate) "
+			+ "AND (:bisNo IS NULL OR f.BIS_NO = :bisNo)", nativeQuery = true)
+	List<BreakdownIntimationSlipF003> findByParams003(@Param("fromDate") LocalDate fromDate,
+			@Param("toDate") LocalDate toDate, @Param("bisNo") String bisNo);
 	  
 
 	
 	@Query(value = "SELECT BIS_NO FROM precot.ENG_BREAKDOWN_INTIMANTIONSLIP_F003  WHERE ISSUER_DEPARTMENT = :issuerDepartment",nativeQuery = true)
     List<String> findBisNoByIssuerDepartment(@Param("issuerDepartment") String issuerDepartment);
+	
+	// DASHBOARD
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS supervisorCount ,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND ENGINEER_ISSUER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Engineering' THEN 1 ELSE 0 END ) AS enggEngIssuerCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND ENGINEER_ISSUER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Mechanical' THEN 1 ELSE 0 END ) AS mechEngIssuerCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND ENGINEER_ISSUER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Electrical' THEN 1 ELSE 0 END ) AS eleEngIssuerCount,\r\n"
+			+ "SUM(CASE WHEN ENGINEER_ISSUER_STATUS = 'ACCEPTED' AND RECEIVER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Engineering'  THEN 1 ELSE 0 END) AS engReceiverCount,\r\n"
+			+ "SUM(CASE WHEN ENGINEER_ISSUER_STATUS = 'ACCEPTED' AND RECEIVER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Mechanical'  THEN 1 ELSE 0 END) AS mechReceiverCount,\r\n"
+			+ "SUM(CASE WHEN ENGINEER_ISSUER_STATUS = 'ACCEPTED' AND RECEIVER_STATUS IS NULL AND RECEIVER_DEPARTMENT ='Electrical'  THEN 1 ELSE 0 END) AS eleReceiverCount,\r\n"
+			+ "SUM(CASE WHEN RECEIVER_STATUS = 'RECEIVER_APPROVED' AND CLOSURE_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS closureCount\r\n"
+			+ "FROM precot.ENG_BREAKDOWN_INTIMANTIONSLIP_F003", nativeQuery = true)
+	List<Object[]> getBrakDownIntimationSlipStatusCounts();
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' AND ASSIGNED_DEPARTMENT ='Engineering' THEN 1 ELSE 0 END) AS enggCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' AND ASSIGNED_DEPARTMENT ='Mechanical' THEN 1 ELSE 0 END) AS mechCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' AND ASSIGNED_DEPARTMENT ='Electrical' THEN 1 ELSE 0 END) AS eleCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' AND ASSIGNED_DEPARTMENT ='Engineering' THEN 1 ELSE 0 END ) AS hodCount\r\n"
+			+ "FROM precot.ENG_ROOT_CAUSE_ANALYSIS_FOO4", nativeQuery = true)
+	List<Object[]> getRootCauseAnalysisStatusCounts();
+	
+	
+	@Query(value = "SELECT SUM(CASE WHEN ENGINEERINGSUPERVISOR_STATUS = 'SUPERVISOR_SAVED' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.ENG_WEIGHING_SCALES_CALIBRATION_RECORD_F016 WHERE DEPARTMENT = 'Bleaching'", nativeQuery = true)
+	List<Object[]> getWeighingScaleCalibrationRecordStatusCounts();
+	
+	@Query(value = "SELECT SUM(CASE WHEN REQUESTER_STATUS = 'REQUESTER_SAVED' THEN 1 ELSE 0 END) AS reqHodCount,\r\n"
+			+ "SUM(CASE WHEN RECEIVER_STATUS = 'WAITING_FOR_APPROVAL' OR RECEIVER_STATUS IS NULL AND ASSIGNED_DEPARTMENT = 'Engineering' THEN 1 ELSE 0 END) AS EngReceiverCount,\r\n"
+			+ "SUM(CASE WHEN ( RECEIVER_STATUS = 'WAITING_FOR_APPROVAL' OR RECEIVER_STATUS IS NULL ) AND ASSIGNED_DEPARTMENT = 'Mechanical' THEN 1 ELSE 0 END) AS mechReceiverCount,\r\n"
+			+ "SUM(CASE WHEN ( RECEIVER_STATUS = 'WAITING_FOR_APPROVAL' OR RECEIVER_STATUS IS NULL ) AND ASSIGNED_DEPARTMENT = 'Electrical' THEN 1 ELSE 0 END) AS EleReceiverCount,\r\n"
+			+ "SUM(CASE WHEN ( RECEIVER_STATUS = 'WAITING_FOR_APPROVAL' OR RECEIVER_STATUS IS NULL ) AND ASSIGNED_DEPARTMENT = 'Civil' THEN 1 ELSE 0 END) AS civilReceiverCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' AND RECEIVER_STATUS = 'RECEIVER_COMPLETED' THEN 1 ELSE 0 END) hodCount\r\n"
+			+ "FROM precot.ENG_WORK_ORDER_REQUEST_FORM_FO20 WHERE DEPARTMENT  = 'Bleaching'", nativeQuery = true)
+	List<Object[]> getWorkOrderRequestStatusCounts();
 
 
 }

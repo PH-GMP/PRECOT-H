@@ -92,4 +92,13 @@ public interface BudsBmrProductionDetailsRepository extends JpaRepository<BudsBm
 	@Query(value = "SELECT SUM(tf.NBAG * tp.bwgt) FROM tblFPPack tf JOIN tblOrderInfo toi ON toi.POrder = tf.POrder JOIN tblProduct tp ON tp.Product = toi.Material WHERE toi.POrder=:orderNumber AND tf.PackDt BETWEEN :startDate AND :endDate", nativeQuery = true)
 	BigDecimal outputQuantity(@Param("orderNumber") String orderNumber, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 	
+	
+	// BMR DASHBOARD
+	
+	 @Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BUDS_BMR_PRODUCTION_DETAILS WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL",nativeQuery = true)
+	 List<String> getBudsBmrNumbers();
+	 
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.BUDS_BMR_PRODUCTION_DETAILS \r\n"
+				+ "WHERE QA_STATUS = 'QA_APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getApprovedBmr(@Param("allBmrNos") List<String> allBmrNos);
 }

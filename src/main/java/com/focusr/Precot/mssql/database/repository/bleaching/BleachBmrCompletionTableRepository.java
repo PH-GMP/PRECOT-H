@@ -38,4 +38,18 @@ public interface BleachBmrCompletionTableRepository extends JpaRepository<Bleach
 	@Query(value = "SELECT * FROM precot.BLEACH_BMR_COMPLETION_TABLE WHERE BMR_NO=:bmr_no AND FORM IN ('PRODUCTION RELEASE')", nativeQuery = true)
 	BleachBmrCompletionTable getProductReleaseForBMR(@Param("bmr_no") String bmr_no);
 	
+	// BMR DASHBOARD
+	
+	@Query(value = "SELECT * FROM precot.BLEACH_BMR_COMPLETION_TABLE WHERE BMR_NO = :bmrNo AND FORM = 'PRODUCTION RELEASE' AND STATUS = 'QA_MANAGER_APPROVED'", nativeQuery = true)
+	BleachBmrCompletionTable getStatus(@Param("bmrNo") String bmrNo);
+	
+	// DASHBOARD
+	
+	@Query(value = "SELECT DISTINCT BMR_NO \r\n"
+			+ "    FROM precot.BLEACH_BMR_COMPLETION_TABLE\r\n"
+			+ "    WHERE FORM = 'PRODUCTION RELEASE'\r\n"
+			+ "      AND STATUS = 'QA_MANAGER_APPROVED'\r\n"
+			+ "      AND BMR_NO IN (:bmrNos)", nativeQuery = true)
+	List<String> getAllProdReleaseStatus(@Param("bmrNos") List<String> bmrNos);	
+	
 }

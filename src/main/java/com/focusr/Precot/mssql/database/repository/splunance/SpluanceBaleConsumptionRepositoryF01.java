@@ -40,4 +40,13 @@ public interface SpluanceBaleConsumptionRepositoryF01 extends JpaRepository<Splu
 	
 	@Query(value = "SELECT * FROM precot.SPL_BALE_CONSUMPTION_F01 WHERE ORDER_NO=:order", nativeQuery = true)
 	List<SplunanceBaleConsumptionF01> getBaleConsumptionDetails(@Param("order") String order);
+	
+	// DASHBOARD
+
+	@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS != 'OPERATOR_APPROVED' OR (HOD_STATUS = 'HOD_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED') \r\n"
+			+ "OR (SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' AND OPERATOR_STATUS ='OPERATOR_APPROVED')THEN 1 ELSE 0 END) AS operatorCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.SPL_BALE_CONSUMPTION_F01", nativeQuery = true)
+	List<Object[]> getStatusCounts();
 }

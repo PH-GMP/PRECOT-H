@@ -360,5 +360,38 @@ List<Map<String, Object>> productionDetailsByShaftDate1(
 	 List<Map<String, Object>> getProductionDetailsRpbaleBaleOrderDate(@Param("pOrder") String pOrder, @Param("fromdate") String fromdate, @Param("todate") String todate,
 			 @Param("frombale") String frombale, @Param("tobale") String tobale);
 	 
+	 // CR
+	 
+	 // GET BATCH QTY BY PASSING ORDER NO FROM DATE AND TO DATE
+	 
+	 @Query(value = "SELECT SUM(NetWt) AS Batch_Quantity FROM tblRPBALE WHERE POrder=:orderNo AND PackDt BETWEEN :fromdate AND :todate", nativeQuery = true)
+	 Double getBatchQuantity(@Param("orderNo") String orderNumber, @Param("fromdate") String fromdate, @Param("todate") String todate);
+	 
+	 
+	 // DASHBOARD
+	 	 
+	 @Query(value = "SELECT BATCH_NO FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS\r\n"
+		 		+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND FORM_NO = 'PRD02/F-26'",nativeQuery = true)
+	 List<String> getBmrNumbersForSpunlace();
+	 
+	 @Query(value = "SELECT BATCH_NO FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS\r\n"
+		 		+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND FORM_NO = 'PRD02/F-27'",nativeQuery = true)
+	 List<String> getBmrNumbersForSpunlaceRpBale();
+	 
+	@Query(value = "SELECT DISTINCT BATCH_NO  FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS WHERE STATUS  = 'QA_APPROVED' AND BATCH_NO IN (:bmrNos) AND FORM_NO = 'PRD02/F-26'", nativeQuery = true)
+	List<String> getApprovedBmrF26(@Param("bmrNos") List<String> bmrNos);
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO  FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS WHERE STATUS  = 'QA_APPROVED' AND BATCH_NO IN (:bmrNos) AND FORM_NO = 'PRD02/F-27'", nativeQuery = true)
+	List<String> getApprovedBmrF27(@Param("bmrNos") List<String> bmrNos);
+	
+	// TEST
+	
+	@Query(value = "SELECT BATCH_NO, ORDER_NO FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS\r\n"
+			+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND NULLIF(LTRIM(RTRIM(ORDER_NO)), '') IS NOT NULL AND FORM_NO = 'PRD02/F-26'", nativeQuery = true)
+	List<Object[]> getBmrNumbersForSpunlaceForm1();
 
+	@Query(value = "SELECT BATCH_NO, ORDER_NO FROM precot.SPUNLACE_BMR_B01_R01_PRODUCTION_DETAILS\r\n"
+			+ "WHERE NULLIF(LTRIM(RTRIM(BATCH_NO)), '') IS NOT NULL AND NULLIF(LTRIM(RTRIM(ORDER_NO)), '') IS NOT NULL AND FORM_NO = 'PRD02/F-27'", nativeQuery = true)
+	List<Object[]> getBmrNumbersForSpunlaceForm2();
+				
 }

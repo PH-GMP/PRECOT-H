@@ -20,5 +20,17 @@ public interface BMR13GoodsQaReleaserRepository extends JpaRepository<BMR13Goods
 	
 	@Query(value = "SELECT * FROM precot.DRYGOODS_BMR_13_QA_RELEASE WHERE BATCH_NO=:batch_no AND FORM_NO ='PH-PRD04/F-008'", nativeQuery = true)
 	List<BMR13GoodsQaRelease> GetQaReleaseWool(@Param("batch_no") String batch_no);
+	
+	
+	// BMR DASHBOARD
+	
+ 	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.DRYGOODS_BMR_13_QA_RELEASE WHERE STATUS = 'QA_APPROVED' AND FORM_NO = 'PH-PRD04/F-004' AND BATCH_NO IN (:bmrNos)", nativeQuery = true)
+	List<String> getAllApprovedQaBmrNosForDryGoodsF004(@Param("bmrNos") List<String> bmrNos);
+ 	
+ 	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.DRYGOODS_BMR_13_QA_RELEASE WHERE STATUS = 'QA_APPROVED' AND FORM_NO = 'PH-PRD04/F-007'", nativeQuery = true)
+	List<String> getAllApprovedQaBmrNosForDryGoodsF007(@Param("pleatBmrNos") List<String> pleatBmrNos);
+ 	
+ 	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.DRYGOODS_BMR_13_QA_RELEASE WHERE STATUS = 'QA_APPROVED' AND FORM_NO = 'PH-PRD04/F-008'", nativeQuery = true)
+	List<String> getAllApprovedQaBmrNosForDryGoodsF008(@Param("woolrollBmrNos") List<String> woolrollBmrNos);
 
 }

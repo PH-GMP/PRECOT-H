@@ -23,4 +23,9 @@ public interface PunchingBmrProductReleaseRepository extends JpaRepository<Punch
 	
 	@Query(value = "SELECT * FROM precot.PUNCHING_BMR_PRODUCT_RELEASE WHERE BATCH_NO=:batchNo", nativeQuery = true)
 	List<PunchingBmrProductRelease> productReleaseListByBatchNo(@Param("batchNo") String batchNo);
+	
+	// BMR DASHBOARD
+	
+	@Query(value = "SELECT DISTINCT BATCH_NO FROM precot.PUNCHING_BMR_PRODUCT_RELEASE WHERE APPROVER_STATUS = 'APPROVED' AND BATCH_NO IN (:allBmrNos)", nativeQuery = true)
+	List<String> getAllApprovedProductBmrNos(@Param("allBmrNos") List<String> allBmrNos);	
 }

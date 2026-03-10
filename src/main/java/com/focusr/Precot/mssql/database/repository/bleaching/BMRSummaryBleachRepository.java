@@ -17,5 +17,18 @@ public interface BMRSummaryBleachRepository extends JpaRepository<BMR_Summary_Bl
 	
 	@Query(value = "SELECT * FROM precot.BMR_SUMMARY_BLEACH WHERE SUMMARY_ID=:id", nativeQuery = true)
 	BMR_Summary_Bleach findSummaryBleachById(@Param("id") Long id);
+	
+	// DASHBOARD
+	
+	@Query(value = "SELECT * FROM precot.BMR_SUMMARY_BLEACH WHERE BMR_NO = :bmrNo AND FORM_KEY ='QUALITY'", nativeQuery = true)
+	BMR_Summary_Bleach getStatus1(@Param("bmrNo") String bmrNo);
+	
+	@Query(value = "SELECT DISTINCT BMR_NO\r\n"
+			+ "FROM precot.BMR_SUMMARY_BLEACH b\r\n"
+			+ "JOIN precot.BMR_QUALITY_RELEASE q ON b.SUMMARY_ID = q.SUMMARY_ID\r\n"
+			+ "WHERE b.FORM_KEY = 'QUALITY'\r\n"
+			+ "  AND q.STATUS = 'QA_APPROVED'\r\n"
+			+ "  AND b.BMR_NO IN (:bmrNos)", nativeQuery = true)
+	List<String> getAllQualityReleaseStatus(@Param("bmrNos") List<String> bmrNos);
 
 }

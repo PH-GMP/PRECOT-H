@@ -56,6 +56,35 @@ public interface BudsEquipmentUsuageHeaderRepository extends JpaRepository<BudsE
 //	        @Param("shift") String shift,
 //	        @Param("year") Integer year, 
 //	        @Param("month") Integer month);
+	
+	// DASHBOARD
+	
+	@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS = 'OPERATOR_SAVED' OR \r\n"
+			+ "(OPERATOR_STATUS = 'OPERATOR_APPROVED' AND ( SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' OR HOD_STATUS = 'HOD_REJECTED')) THEN 1 ELSE 0 END) AS operatorCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BUDS_EQUIPMENT_USUAGE_HEADER", nativeQuery = true)
+	List<Object[]> getEquipmentUsageLogBookStatusCounts();
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' OR \r\n"
+			+ "(SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND HOD_STATUS = 'HOD_REJECTED') THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BUDS_EQUIPMENT_USUAGE_HEADER", nativeQuery = true)
+	List<Object[]> getLogBookCottonBudsStatusCounts();
+	
+	@Query(value = "SELECT SUM(CASE WHEN OPERATOR_STATUS = 'OPERATOR_SAVED' OR \r\n"
+			+ "(OPERATOR_STATUS = 'OPERATOR_APPROVED' AND ( SUPERVISOR_STATUS = 'SUPERVISOR_REJECTED' OR HOD_STATUS = 'HOD_REJECTED')) THEN 1 ELSE 0 END) AS operatorCount,\r\n"
+			+ "SUM(CASE WHEN SUPERVISOR_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BUDS_DAILY_PRODUCTION_SLIVER_HEAD", nativeQuery = true)
+	List<Object[]> getDailyProductionSliverMakingStatusCounts();
+	
+	@Query(value = "SELECT SUM(CASE WHEN SUPERVISOR_STATUS = 'SUPERVISOR_SAVED' OR \r\n"
+			+ "(SUPERVISOR_STATUS = 'SUPERVISOR_APPROVED' AND (HOD_STATUS = 'HOD_REJECTED' OR QA_STATUS = 'QA_INSPECTOR_REJECTED')) THEN 1 ELSE 0 END) AS supervisorCount,\r\n"
+			+ "SUM(CASE WHEN QA_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS qaCount,\r\n"
+			+ "SUM(CASE WHEN HOD_STATUS = 'WAITING_FOR_APPROVAL' THEN 1 ELSE 0 END) AS hodCount\r\n"
+			+ "FROM precot.BUDS_PRODUCT_CHANGE_OVER", nativeQuery = true)
+	List<Object[]> getProductChangeOverStatusCounts();
 
 
 	
