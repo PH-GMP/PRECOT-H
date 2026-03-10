@@ -40,9 +40,9 @@ const Spunlace_03 = () => {
     const [VACCUM, setVACCUM] = useState("");
     const [INJ_01_Strip, setINJ_01_Strip] = useState("Select INJ-01 Strip Specification");
     const [INJ_IPA_Strip, setINJ_IPA_Strip] = useState("Select INJ_IPA Strip Specification");
-    const [INJ_11_Strip , setINJ_11_Strip] = useState("Select INJ_11  Strip Specification");
-    const [INJ_12_Strip , setINJ_12_Strip] = useState("Select INJ_12  Strip Specification");
-    const [INJ_21_Strip , setINJ_21_Strip] = useState("Select INJ_21  Strip Specification");
+    const [INJ_11_Strip, setINJ_11_Strip] = useState("Select INJ_11  Strip Specification");
+    const [INJ_12_Strip, setINJ_12_Strip] = useState("Select INJ_12  Strip Specification");
+    const [INJ_21_Strip, setINJ_21_Strip] = useState("Select INJ_21  Strip Specification");
     const [CPA_Drum_speed, setCPA_Drum_speed] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [C_1_Drum_speed, setC_1_Drum_speed] = useState("");
@@ -105,12 +105,12 @@ const Spunlace_03 = () => {
     const [QA_date, setQA_date] = useState("");
     const [loading, setLoading] = useState(true);
     const [bmrNumber, setBmrNumber] = useState("");
-  
+
     const [newDate, setNewDate] = useState("");
     const [batchNolist, setBatchNolist] = useState("Select BatchNo");
     //   const [shift, setShift] = useState("");
     const [startTime, setStartTime] = useState("");
-      const [orderNo, setOrderNo] = useState("");
+    const [orderNo, setOrderNo] = useState("");
     const [customername, setcustomername] = useState("");
     const [Mixing, setMixing] = useState("");
     const [Material, setMaterial] = useState("");
@@ -180,7 +180,7 @@ const Spunlace_03 = () => {
         { value: "1J7", label: "1J7" },
         { value: "1J18", label: "1J18" },
         { value: "2J14", label: "2J14" },
-        { value: "NA", label:"NA"},
+        { value: "NA", label: "NA" },
     ];
     const [saveBtnStatus, setSaveBtnStatus] = useState(true);
     const [submitBtnStatus, setSubmitBtnStatus] = useState(true);
@@ -256,7 +256,7 @@ const Spunlace_03 = () => {
         // window.print()
         // console.log("print screen works");
         // Add any other print-related logic here
-      };
+    };
     const handleLogout = () => {
         // eslint-disable-next-line no-restricted-globals
         if (confirm("You want to log out")) {
@@ -289,195 +289,195 @@ const Spunlace_03 = () => {
     };
     const canDisplayButtons = () => {
         if (roleBase === "ROLE_OPERATOR") {
-          if (
-            selectedRow &&
-            selectedRow?.operator_status === "OPERATOR_APPROVED" &&
-            selectedRow?.hod_status !== "HOD_REJECTED" &&
-            selectedRow?.supervisor_status !== "SUPERVISOR_REJECTED"
-          ) {
-            return "none"; // Hide button if operator has approved and neither supervisor nor HOD has rejected
-          }
-          return "block";
+            if (
+                selectedRow &&
+                selectedRow?.operator_status === "OPERATOR_APPROVED" &&
+                selectedRow?.hod_status !== "HOD_REJECTED" &&
+                selectedRow?.supervisor_status !== "SUPERVISOR_REJECTED"
+            ) {
+                return "none"; // Hide button if operator has approved and neither supervisor nor HOD has rejected
+            }
+            return "block";
         }
         else if (roleBase == "ROLE_SUPERVISOR") {
-          if (
-            selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" &&
-            selectedRow?.hod_status === "HOD_REJECTED"
-          ) {
-            return "block";
-          } else if (
-            (selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
-              selectedRow?.hod_status == "WAITING_FOR_APPROVAL") ||
-            selectedRow?.hod_status == "HOD_APPROVED"
-          ) {
-            return "none";
-          } else if (
-            (selectedRow?.supervisor_status == "SUPERVISOR_REJECTED" &&
-              selectedRow?.hod_status == "WAITING_FOR_APPROVAL")
-          ) {
-            return "none";
-          }
+            if (
+                selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" &&
+                selectedRow?.hod_status === "HOD_REJECTED"
+            ) {
+                return "block";
+            } else if (
+                (selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
+                    selectedRow?.hod_status == "WAITING_FOR_APPROVAL") ||
+                selectedRow?.hod_status == "HOD_APPROVED"
+            ) {
+                return "none";
+            } else if (
+                (selectedRow?.supervisor_status == "SUPERVISOR_REJECTED" &&
+                    selectedRow?.hod_status == "WAITING_FOR_APPROVAL")
+            ) {
+                return "none";
+            }
         } else if (roleBase == "ROLE_HOD" || roleBase == "ROLE_DESIGNEE") {
-          if (
-            selectedRow?.supervisor_status === "SUPERVISOR_REJECTED" ||
-            selectedRow?.hod_status == "HOD_APPROVED" ||
-            selectedRow?.hod_status == "HOD_REJECTED"
-          ) {
-            return "none";
-          }
-          return "block";
+            if (
+                selectedRow?.supervisor_status === "SUPERVISOR_REJECTED" ||
+                selectedRow?.hod_status == "HOD_APPROVED" ||
+                selectedRow?.hod_status == "HOD_REJECTED"
+            ) {
+                return "none";
+            }
+            return "block";
         } else {
-          if (
-            selectedRow?.hod_status == "HOD_APPROVED" ||
-            selectedRow?.hod_status == "HOD_REJECTED"
-          ) {
-            return "none";
-          }
-          return "block";
+            if (
+                selectedRow?.hod_status == "HOD_APPROVED" ||
+                selectedRow?.hod_status == "HOD_REJECTED"
+            ) {
+                return "none";
+            }
+            return "block";
         }
-      };
-      const canDisplayButton2 = () => {
+    };
+    const canDisplayButton2 = () => {
         if (roleBase == "ROLE_OPERATOR") {
-          if (
-            selectedRow?.operator_status == "OPERATOR_APPROVED"
-          ) {
-            return "none"; 
-          } else if (
-            selectedRow?.operator_status == "OPERATOR_APPROVED" &&
-            selectedRow?.supervisor_status == "WAITING_FOR_APPROVAL" &&
-            (selectedRow?.hod_status == "WAITING_FOR_APPROVAL" ||
-              selectedRow?.hod_status == "HOD_APPROVED")
-          ) {
-            return "none"; 
-          }
+            if (
+                selectedRow?.operator_status == "OPERATOR_APPROVED"
+            ) {
+                return "none";
+            } else if (
+                selectedRow?.operator_status == "OPERATOR_APPROVED" &&
+                selectedRow?.supervisor_status == "WAITING_FOR_APPROVAL" &&
+                (selectedRow?.hod_status == "WAITING_FOR_APPROVAL" ||
+                    selectedRow?.hod_status == "HOD_APPROVED")
+            ) {
+                return "none";
+            }
         }
         if (roleBase == "ROLE_SUPERVISOR") {
-          if (
-            selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
-            selectedRow?.hod_status == "HOD_REJECTED"
-          ) {
-            return "none"; 
-          } else if (
-            selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
-            (selectedRow?.hod_status == "WAITING_FOR_APPROVAL" ||
-              selectedRow?.hod_status == "HOD_APPROVED")
-          ) {
-            return "none"; 
-          }
+            if (
+                selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
+                selectedRow?.hod_status == "HOD_REJECTED"
+            ) {
+                return "none";
+            } else if (
+                selectedRow?.supervisor_status == "SUPERVISOR_APPROVED" &&
+                (selectedRow?.hod_status == "WAITING_FOR_APPROVAL" ||
+                    selectedRow?.hod_status == "HOD_APPROVED")
+            ) {
+                return "none";
+            }
         } else if (roleBase == "ROLE_HOD" || roleBase == "ROLE_DESIGNEE") {
-          if (
-            selectedRow?.hod_status == "HOD_APPROVED" ||
-            selectedRow?.hod_status == "HOD_REJECTED" ||
-            emptyarraycheck == 0
-          ) {
-            return "none"; 
-          }
-          return "block"; 
+            if (
+                selectedRow?.hod_status == "HOD_APPROVED" ||
+                selectedRow?.hod_status == "HOD_REJECTED" ||
+                emptyarraycheck == 0
+            ) {
+                return "none";
+            }
+            return "block";
         } else {
-          if (
-            selectedRow?.hod_status == "HOD_APPROVED" ||
-            selectedRow?.hod_status == "HOD_REJECTED"
-          ) {
-            return "none"; 
-          }
-          return "block"; 
+            if (
+                selectedRow?.hod_status == "HOD_APPROVED" ||
+                selectedRow?.hod_status == "HOD_REJECTED"
+            ) {
+                return "none";
+            }
+            return "block";
         }
-      };
-      const canEdit = () => {
+    };
+    const canEdit = () => {
         if (roleBase === "ROLE_OPERATOR") {
-          return !(
-            selectedRow &&
-            selectedRow?.operator_status === "OPERATOR_APPROVED" &&
-            selectedRow?.supervisor_status !== "SUPERVISOR_REJECTED" &&
-            selectedRow?.hod_status !== "HOD_REJECTED"
-          );
+            return !(
+                selectedRow &&
+                selectedRow?.operator_status === "OPERATOR_APPROVED" &&
+                selectedRow?.supervisor_status !== "SUPERVISOR_REJECTED" &&
+                selectedRow?.hod_status !== "HOD_REJECTED"
+            );
         } else if (roleBase === "ROLE_SUPERVISOR") {
-          return !(
-            selectedRow &&
-            selectedRow?.operator_status === "OPERATOR_APPROVED" &&
-            (selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" ||
-              selectedRow?.supervisor_status === "WAITING_FOR_APPROVAL") &&
-              selectedRow?.hod_status === "WAITING_FOR_APPROVAL" || "HOD_APPROVED"
-          );
+            return !(
+                selectedRow &&
+                selectedRow?.operator_status === "OPERATOR_APPROVED" &&
+                (selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" ||
+                    selectedRow?.supervisor_status === "WAITING_FOR_APPROVAL") &&
+                selectedRow?.hod_status === "WAITING_FOR_APPROVAL" || "HOD_APPROVED"
+            );
         } else if (roleBase === "ROLE_HOD" || roleBase === "ROLE_DESIGNEE") {
-          return !(
-            selectedRow &&
-            (selectedRow?.hod_status === "HOD_APPROVED" ||
-              selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
-              selectedRow?.hod_status === "HOD_REJECTED")
-          );
+            return !(
+                selectedRow &&
+                (selectedRow?.hod_status === "HOD_APPROVED" ||
+                    selectedRow?.hod_status === "WAITING_FOR_APPROVAL" ||
+                    selectedRow?.hod_status === "HOD_REJECTED")
+            );
         } else {
-          return false;
+            return false;
         }
-      };
-      const handleReject = async () => {
+    };
+    const handleReject = async () => {
         setSaveLoading(true);
-      
+
         const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type if needed
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type if needed
         };
-      
+
         const res = await axios
-          .put(
-            `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
-            {
-              id: id,
-              status: "Reject",
-              remarks: rejectRemarks,
-            },
-            { headers }
-          )
-          .then((res) => {
-            setLoading(false);
-            // console.log("messsage", res.data.message);
-            // window.location.reload();
-            message.success(res.data.message);
-            navigate("/Precot/Spunlace/F-03/Summary");
-          })
-          .catch((err) => {
-            setLoading(false);
-            // console.log("Err", err.response.data.message);
-            message.error(err.response.data.message);
-          })
-          .finally(() => {
-            setSaveLoading(false);
-          });
-      };
-      const handleApprove = async () => {
+            .put(
+                `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
+                {
+                    id: id,
+                    status: "Reject",
+                    remarks: rejectRemarks,
+                },
+                { headers }
+            )
+            .then((res) => {
+                setLoading(false);
+                // console.log("messsage", res.data.message);
+                // window.location.reload();
+                message.success(res.data.message);
+                navigate("/Precot/Spunlace/F-03/Summary");
+            })
+            .catch((err) => {
+                setLoading(false);
+                // console.log("Err", err.response.data.message);
+                message.error(err.response.data.message);
+            })
+            .finally(() => {
+                setSaveLoading(false);
+            });
+    };
+    const handleApprove = async () => {
         setSaveLoading(true);
-      
+
         const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json", // Adjust content type if needed
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json", // Adjust content type if needed
         };
-      
+
         const res = await axios
-          .put(
-            `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
-            {
-              id: id,
-              status: "Approve",
-            },
-            { headers }
-          )
-          .then((res) => {
-            setLoading(false);
-            // console.log("messsage", res);
-            // window.location.reload();
-            message.success(res.data.message);
-            navigate("/Precot/Spunlace/F-03/Summary");
-          })
-          .catch((err) => {
-            setLoading(false);
-            // console.log("Err", err.response.data.message);
-            message.error(err.response.data.message);
-          })
-          .finally(() => {
-            setSaveLoading(false);
-          });
-      };
-      const isEditable = canEdit();
+            .put(
+                `${API.prodUrl}/Precot/api/spulance/ProcessSetupJetLaceF003/approveOrReject`,
+                {
+                    id: id,
+                    status: "Approve",
+                },
+                { headers }
+            )
+            .then((res) => {
+                setLoading(false);
+                // console.log("messsage", res);
+                // window.location.reload();
+                message.success(res.data.message);
+                navigate("/Precot/Spunlace/F-03/Summary");
+            })
+            .catch((err) => {
+                setLoading(false);
+                // console.log("Err", err.response.data.message);
+                message.error(err.response.data.message);
+            })
+            .finally(() => {
+                setSaveLoading(false);
+            });
+    };
+    const isEditable = canEdit();
     const canDisplayPrint = () => {
         // console.log("ss", selectedRow?.supervisor_status);
         if (roleBase == "ROLE_SUPERVISOR") {
@@ -500,7 +500,7 @@ const Spunlace_03 = () => {
 
     }
 
- 
+
     const beforeStyle = {
         content: isMobile ? '"Choose:"' : '"Select:"',
         zIndex: "9",
@@ -555,7 +555,7 @@ const Spunlace_03 = () => {
         try {
             sendProcessSetup2();
 
-         
+
 
         } catch (error) {
             console.error("Error submitting bleaching job card:", error);
@@ -565,7 +565,7 @@ const Spunlace_03 = () => {
         window.print();
     };
 
- 
+
     const handleKeyPress = (e) => {
         const allowedKeys = /[0-9.]/;
         const specialKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
@@ -592,9 +592,9 @@ const Spunlace_03 = () => {
         //     setJ_1_Conveyor_speed(inputValue);
         // }
 
-        if ( inputValue.length <= 2) {
-            setJ_1_Conveyor_speed(inputValue);
-        }
+
+        setJ_1_Conveyor_speed(inputValue);
+
     };
     const handleChange_J_1_Conveyor_speed = (e) => {
         const inputValue = e.target.value;
@@ -603,11 +603,11 @@ const Spunlace_03 = () => {
         //     setJ_1_Conveyor_speed(inputValue);
         // }
 
-        if (inputValue.length <= 2) {
-            setJ_1_Conveyor_speed(inputValue);
-        }
+
+        setJ_1_Conveyor_speed(inputValue);
+
     };
-    //
+
     const handle_blur_JP_Conveyor_speed = () => {
         if (JP_Conveyor_speed < 0 || JP_Conveyor_speed > 75) {
             message.error("Please enter a number between 0 and 75 for JP Conveyor speed");
@@ -618,16 +618,16 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setJP_Conveyor_speed(inputValue);
-        }
+
+        setJP_Conveyor_speed(inputValue);
+
     };
     const handleChange_JP_Conveyor_speed = (e) => {
         const inputValue = e.target.value;
 
-        if ( inputValue.length <= 2) {
-            setJP_Conveyor_speed(inputValue);
-        }
+
+        setJP_Conveyor_speed(inputValue);
+
     };
     const handle_blur_INJ_PW_Pressure = () => {
         if (INJ_PW_Pressure < 0 || INJ_PW_Pressure > 10) {
@@ -639,16 +639,17 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_PW_Pressure(inputValue);
-        }
+
+        setINJ_PW_Pressure(inputValue);
+
+
     };
     const handleChange_INJ_PW_Pressure = (e) => {
         const inputValue = e.target.value;
 
-        if ( inputValue.length <= 2) {
-            setINJ_PW_Pressure(inputValue);
-        }
+
+        setINJ_PW_Pressure(inputValue);
+
     };
     const handle_blur_INJ_01_Pressure = () => {
         if (INJ_01_Pressure < 0 || INJ_01_Pressure > 120) {
@@ -660,9 +661,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_01_Pressure(inputValue);
-        }
+
+        setINJ_01_Pressure(inputValue);
+
     };
     const handle_blur_INJ_IPA_Pressure = () => {
         if (INJ_IPA_Pressure < 0 || INJ_IPA_Pressure > 120) {
@@ -674,9 +675,8 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_IPA_Pressure(inputValue);
-        }
+
+        setINJ_IPA_Pressure(inputValue);
 
     };
     const handle_blur_INJ_11_Pressure = () => {
@@ -689,9 +689,10 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_11_Pressure(inputValue);
-        }
+
+        setINJ_11_Pressure(inputValue);
+
+
 
     };
     const handle_blur_INJ_12_Pressure = () => {
@@ -704,9 +705,10 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_12_Pressure(inputValue);
-        }
+
+        setINJ_12_Pressure(inputValue);
+
+
 
     };
     const handle_blur_INJ_21_Pressure = () => {
@@ -719,12 +721,13 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_21_Pressure(inputValue);
-        }
+
+        setINJ_21_Pressure(inputValue);
+
+
 
     };
-       const handle_blur_CPA_Drum_speed = () => {
+    const handle_blur_CPA_Drum_speed = () => {
         if (CPA_Drum_speed < 0 || CPA_Drum_speed > 80) {
             message.error("Please enter a number between 0 and 80 for  CPA Drum speed");
             setCPA_Drum_speed("");
@@ -734,7 +737,7 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 5) {
+        if (inputValue.length <= 5) {
             setC_1_Drum_speed(inputValue);
         }
 
@@ -749,7 +752,7 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 5) {
+        if (inputValue.length <= 5) {
             setCPA_Drum_speed(inputValue);
         }
 
@@ -764,7 +767,7 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 5) {
+        if (inputValue.length <= 5) {
             setC_2_Drum_speed(inputValue);
         }
 
@@ -779,7 +782,7 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 5) {
+        if (inputValue.length <= 5) {
             setJ2S_Conveyer_speed(inputValue);
         }
 
@@ -794,9 +797,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-   
-            setMDU_TENSION_DRAFTA(inputValue);
-         
+
+        setMDU_TENSION_DRAFTA(inputValue);
+
 
     };
     const handle_blur_MDL_TENSION_DRAFTA = () => {
@@ -809,9 +812,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-    //    if ( inputValue.length <= 3) {
-            setMDL_TENSION_DRAFTA(inputValue);
-      //  }
+        //    if ( inputValue.length <= 3) {
+        setMDL_TENSION_DRAFTA(inputValue);
+        //  }
 
     };
     const handle_blur_MDL_SpeedA = () => {
@@ -824,9 +827,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-      //  if ( inputValue.length <= 2) {
-            setMDL_SpeedA(inputValue);
-       // }
+        //  if ( inputValue.length <= 2) {
+        setMDL_SpeedA(inputValue);
+        // }
 
     };
     const handle_blur_MDL_SpeedB = () => {
@@ -839,9 +842,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-     //   if ( inputValue.length <= 2) {
-            setMDL_SpeedB(inputValue);
-       // }
+        //   if ( inputValue.length <= 2) {
+        setMDL_SpeedB(inputValue);
+        // }
 
     };
     //
@@ -855,8 +858,8 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-      //  if ( inputValue.length <= 2) {
-            setMDU_SpeedA(inputValue);
+        //  if ( inputValue.length <= 2) {
+        setMDU_SpeedA(inputValue);
         //}
 
     };
@@ -870,8 +873,8 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-      //  if ( inputValue.length <= 3) {
-            setTTUA(inputValue);
+        //  if ( inputValue.length <= 3) {
+        setTTUA(inputValue);
         //}
 
     };
@@ -881,13 +884,13 @@ const Spunlace_03 = () => {
             setTTUB("");
         }
     };
-    const handleInput_TTUB= (e) => {
+    const handleInput_TTUB = (e) => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTTUB(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTTUB(inputValue);
+        // }
 
     };
     const handle_blur_TTLA = () => {
@@ -900,9 +903,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTTLA(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTTLA(inputValue);
+        // }
 
     };
     const handle_blur_TTLB = () => {
@@ -915,9 +918,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTTLB(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTTLB(inputValue);
+        // }
 
     };
     const handle_blur_MFUA = () => {
@@ -931,12 +934,12 @@ const Spunlace_03 = () => {
 
         // Limit to two digits
         //if ( inputValue.length <= 3) {
-            setMFU_speedA(inputValue);
+        setMFU_speedA(inputValue);
         //}
 
     };
     const handle_blur_MFUB = () => {
-        if (MFU_speedB < 50 || MFU_speedB> 100) {
+        if (MFU_speedB < 50 || MFU_speedB > 100) {
             message.error("Please enter a number between 50 and 100 for  MFU SPEED B");
             setMFU_speedB("");
         }
@@ -945,9 +948,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-     //   if ( inputValue.length <= 3) {
-            setMFU_speedB(inputValue);
-       // }
+        //   if ( inputValue.length <= 3) {
+        setMFU_speedB(inputValue);
+        // }
 
     };
     //
@@ -962,7 +965,7 @@ const Spunlace_03 = () => {
 
         // Limit to two digits
         //if ( inputValue.length <= 3) {
-            setMFL_speedA(inputValue);
+        setMFL_speedA(inputValue);
         //}
 
     };
@@ -976,9 +979,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTOP_Damper_InletA(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTOP_Damper_InletA(inputValue);
+        // }
 
     };
     //
@@ -992,9 +995,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTOP_Damper_outletA(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTOP_Damper_outletA(inputValue);
+        // }
 
     };
     //
@@ -1008,9 +1011,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setBottom_Damper_InletA(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setBottom_Damper_InletA(inputValue);
+        // }
 
     };
     //
@@ -1024,9 +1027,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setBottom_Damper_OutletA(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setBottom_Damper_OutletA(inputValue);
+        // }
 
     };
     //
@@ -1041,8 +1044,8 @@ const Spunlace_03 = () => {
 
         // Limit to two digits
         //if ( inputValue.length <= 3) {
-            setBoiler_TemperatureA(inputValue);
-       // }
+        setBoiler_TemperatureA(inputValue);
+        // }
 
     };
     //
@@ -1072,8 +1075,8 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setBottom_Damper_OutletB(inputValue);
+        // if ( inputValue.length <= 3) {
+        setBottom_Damper_OutletB(inputValue);
         //}
 
     };
@@ -1088,9 +1091,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setBottom_Damper_InletB(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setBottom_Damper_InletB(inputValue);
+        // }
 
     };
     //
@@ -1104,9 +1107,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setTOP_Damper_outletB(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setTOP_Damper_outletB(inputValue);
+        // }
 
     };
     const handle_blur_TOP_Damper_InletB = () => {
@@ -1119,9 +1122,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-      //  if ( inputValue.length <= 3) {
-            setTOP_Damper_InletB(inputValue);
-       // }
+        //  if ( inputValue.length <= 3) {
+        setTOP_Damper_InletB(inputValue);
+        // }
 
     };
     const handle_blur_MFLB = () => {
@@ -1134,9 +1137,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-      //  if ( inputValue.length <= 3) {
-            setMFL_speedB(inputValue);
-       // }
+        //  if ( inputValue.length <= 3) {
+        setMFL_speedB(inputValue);
+        // }
 
     };
     const handle_blur_MDU_SpeedB = () => {
@@ -1150,7 +1153,7 @@ const Spunlace_03 = () => {
 
         // Limit to two digits
         //if ( inputValue.length <= 2) {
-            setMDU_SpeedB(inputValue);
+        setMDU_SpeedB(inputValue);
         //}
 
     };
@@ -1164,9 +1167,9 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-       // if ( inputValue.length <= 3) {
-            setMDL_TENSION_DRAFTB(inputValue);
-       // }
+        // if ( inputValue.length <= 3) {
+        setMDL_TENSION_DRAFTB(inputValue);
+        // }
 
     };
     const handle_blur_MDU_TENSION_DRAFTB = () => {
@@ -1180,8 +1183,8 @@ const Spunlace_03 = () => {
 
         // Limit to two digits
 
-            setMDU_TENSION_DRAFTB(inputValue);
-    
+        setMDU_TENSION_DRAFTB(inputValue);
+
 
     };
     const handle_blur_INJ_PW_STRIP = () => {
@@ -1194,9 +1197,10 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setINJ_PW_STRIP(inputValue);
-        }
+
+        setINJ_PW_STRIP(inputValue);
+
+
 
     };
     const handle_blur_VACCUM = () => {
@@ -1209,18 +1213,19 @@ const Spunlace_03 = () => {
         const inputValue = e.target.value;
 
         // Limit to two digits
-        if ( inputValue.length <= 2) {
-            setVACCUM(inputValue);
-        }
+
+        setVACCUM(inputValue);
+
+
 
     };
 
 
-  
-    
+
+
 
     const fetchDataOrderNodetails_f3 = async () => {
-       
+
         try {
             setLoading(true);
             axios
@@ -1233,14 +1238,14 @@ const Spunlace_03 = () => {
                     }
                 )
                 .then((res) => {
-                  
+
                     // console.log("resvalue", res.data.length);
-                 
-                  
-                   
 
 
-                    if (res.data.length === 0 || res.data==undefined) {
+
+
+
+                    if (res.data.length === 0 || res.data == undefined) {
                         // console.log('The array is empty');
                     } else {
                         // console.log('The array is not empty',res.data.operator_submitted_on);
@@ -1254,14 +1259,14 @@ const Spunlace_03 = () => {
                         }
                         if (res.data.supervisor_submit_on) {
                             const datePartsupervisor_submit_on = res.data.supervisor_submit_on.split('T')[0];
-                            const formattedDatesupervisorSubmitted = moment( res.data.supervisor_submit_on).format("DD/MM/YYYY HH:mm");;
+                            const formattedDatesupervisorSubmitted = moment(res.data.supervisor_submit_on).format("DD/MM/YYYY HH:mm");;
                             setsupersigndate(formattedDatesupervisorSubmitted);
                         } else {
 
                             setsupersigndate("");
                         }
                         if (res.data.operator_submitted_on) {
-                            
+
                             const datePartsupervisor_submit_on = res.data.operator_submitted_on.split('T')[0];
                             const formattedDatesupervisorSubmitted = moment(res.data.operator_submitted_on).format("DD/MM/YYYY HH:mm");;
                             setoperator_signsignaturedate(formattedDatesupervisorSubmitted);
@@ -1271,11 +1276,11 @@ const Spunlace_03 = () => {
                         }
                     }
 
-                    if (res.data && ((res.data.length > 0 ) || (res.data.length==undefined) )) {
-                       
+                    if (res.data && ((res.data.length > 0) || (res.data.length == undefined))) {
+
                         const select = res.data;
-                        console.log("value of payload",res.data.j1_conveyor_speed);
-                       
+                        console.log("value of payload", res.data.j1_conveyor_speed);
+
                         setSelectedRow(res.data);
                         setid(res.data.process_id);
                         setMoisture(res.data.moisture);
@@ -1350,129 +1355,129 @@ const Spunlace_03 = () => {
                         setoperator_submit_by(res.data.operator_submit_by);
                         setoperator_submit_id(res.data.operator_submit_id);
                         setoperator_sign(res.data.operator_sign);
-    
-    
+
+
                         if (roleBase === "ROLE_SUPERVISOR") {
                             if (
-                              res.data?.supervisor_status === "SUPERVISOR_REJECTED" ||
-                              res.data?.hod_status === "HOD_REJECTED"
+                                res.data?.supervisor_status === "SUPERVISOR_REJECTED" ||
+                                res.data?.hod_status === "HOD_REJECTED"
                             ) {
-                              message.warning("Operator Not Yet Approved or Previous Stage Rejected");
-                              setTimeout(() => {
-                                navigate('/Precot/Spunlace/F-03/Summary');
-                              }, 1500);
+                                message.warning("Operator Not Yet Approved or Previous Stage Rejected");
+                                setTimeout(() => {
+                                    navigate('/Precot/Spunlace/F-03/Summary');
+                                }, 1500);
                             }
-                          }
-              
-                          if (roleBase === "ROLE_HOD" || roleBase === "ROLE_DESIGNEE") {
+                        }
+
+                        if (roleBase === "ROLE_HOD" || roleBase === "ROLE_DESIGNEE") {
                             if (
-                              res.data?.operator_status !== "OPERATOR_APPROVED" ||
-                              res.data?.supervisor_status !== "SUPERVISOR_APPROVED" ||
-                              res.data?.supervisor_status === "SUPERVISOR_REJECTED" ||
-                              res.data?.hod_status === "HOD_REJECTED"
+                                res.data?.operator_status !== "OPERATOR_APPROVED" ||
+                                res.data?.supervisor_status !== "SUPERVISOR_APPROVED" ||
+                                res.data?.supervisor_status === "SUPERVISOR_REJECTED" ||
+                                res.data?.hod_status === "HOD_REJECTED"
                             ) {
-                              message.warning("Operator Not Yet Approved or Previous Stage Rejected");
-                              setTimeout(() => {
-                                navigate('/Precot/Spunlace/F-03/Summary');
-                              }, 1500);
+                                message.warning("Operator Not Yet Approved or Previous Stage Rejected");
+                                setTimeout(() => {
+                                    navigate('/Precot/Spunlace/F-03/Summary');
+                                }, 1500);
                             }
-                          }
-              
-    
-    
+                        }
+
+
+
                         // console.log("value of res ", res.data.length);
                         setemptyarraycheck(res.data.length);
-                     
-                       
-                 //op image
-                 axios
-        .get(
-          `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + token,
-            },
-            responseType: "arraybuffer",
-          }
-        )
-        .then((res) => {
-          // console.log("Response:", res.data);
-          const base64 = btoa(
-            new Uint8Array(res.data).reduce(
-              (data, byte) => data + String.fromCharCode(byte),
-              ""
-            )
-          );
-          const url = `data:image/jpeg;base64,${base64}`;
-          setGetImageOP(url);
-        })
-        .catch((err) => {
-          // console.log("Error in fetching image:", err);
-        });
-                 //
-       //Sup image
-       axios
-       .get(
-         `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
-         {
-           headers: {
-             "Content-Type": "application/json",
-             Authorization: "Bearer " + token,
-           },
-           responseType: "arraybuffer",
-         }
-       )
-       .then((res) => {
-         // console.log("Response:", res.data);
-         const base64 = btoa(
-           new Uint8Array(res.data).reduce(
-             (data, byte) => data + String.fromCharCode(byte),
-             ""
-           )
-         );
-         const url = `data:image/jpeg;base64,${base64}`;
-         setGetImageSUP(url);
-       })
-       .catch((err) => {
-         // console.log("Error in fetching image:", err);
-       });
-                //
 
-                 //Sup image
-       axios
-       .get(
-         `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
-         {
-           headers: {
-             "Content-Type": "application/json",
-             Authorization: "Bearer " + token,
-           },
-           responseType: "arraybuffer",
-         }
-       )
-       .then((res) => {
-         // console.log("Response:", res.data);
-         const base64 = btoa(
-           new Uint8Array(res.data).reduce(
-             (data, byte) => data + String.fromCharCode(byte),
-             ""
-           )
-         );
-         const url = `data:image/jpeg;base64,${base64}`;
-         setGetImageHOD(url);
-       })
-       .catch((err) => {
-         // console.log("Error in fetching image:", err);
-       });
-                //   
+
+                        //op image
+                        axios
+                            .get(
+                                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.operator_sign}`,
+                                {
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: "Bearer " + token,
+                                    },
+                                    responseType: "arraybuffer",
+                                }
+                            )
+                            .then((res) => {
+                                // console.log("Response:", res.data);
+                                const base64 = btoa(
+                                    new Uint8Array(res.data).reduce(
+                                        (data, byte) => data + String.fromCharCode(byte),
+                                        ""
+                                    )
+                                );
+                                const url = `data:image/jpeg;base64,${base64}`;
+                                setGetImageOP(url);
+                            })
+                            .catch((err) => {
+                                // console.log("Error in fetching image:", err);
+                            });
+                        //
+                        //Sup image
+                        axios
+                            .get(
+                                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.supervisor_sign}`,
+                                {
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: "Bearer " + token,
+                                    },
+                                    responseType: "arraybuffer",
+                                }
+                            )
+                            .then((res) => {
+                                // console.log("Response:", res.data);
+                                const base64 = btoa(
+                                    new Uint8Array(res.data).reduce(
+                                        (data, byte) => data + String.fromCharCode(byte),
+                                        ""
+                                    )
+                                );
+                                const url = `data:image/jpeg;base64,${base64}`;
+                                setGetImageSUP(url);
+                            })
+                            .catch((err) => {
+                                // console.log("Error in fetching image:", err);
+                            });
+                        //
+
+                        //Sup image
+                        axios
+                            .get(
+                                `${API.prodUrl}/Precot/api/Format/Service/image?username=${res.data?.hod_sign}`,
+                                {
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Authorization: "Bearer " + token,
+                                    },
+                                    responseType: "arraybuffer",
+                                }
+                            )
+                            .then((res) => {
+                                // console.log("Response:", res.data);
+                                const base64 = btoa(
+                                    new Uint8Array(res.data).reduce(
+                                        (data, byte) => data + String.fromCharCode(byte),
+                                        ""
+                                    )
+                                );
+                                const url = `data:image/jpeg;base64,${base64}`;
+                                setGetImageHOD(url);
+                            })
+                            .catch((err) => {
+                                // console.log("Error in fetching image:", err);
+                            });
+                        //   
 
                     } else { }
 
 
 
 
-                    
+
                 });
 
             // Assuming the response data structure matches the payload structure you provided
@@ -1517,10 +1522,10 @@ const Spunlace_03 = () => {
 
     const sendProcessSetup = () => {
         const isValid = () => {
-           
+
             if (!Moisture) return "Moisture is required";
             if (!Thickness) return "Thickness No is required";
-          
+
             return null;
         };
         const validationMessage = isValid();
@@ -1529,15 +1534,15 @@ const Spunlace_03 = () => {
             return;
         }
         setSaveLoading(true);
-       
+
         // Format the payload according to the API documentation
         const payload = {
             process_id: id,
-            unit: "Unit H",          
-            formatName:"PROCESS SETUP DETAILS JETLACE & DRYER ",
-           formatNo:"PH-PRD02/F-003",
-           sopNumber:"PH-PRD02-D-03",           
-           revisionNo: "01",
+            unit: "Unit H",
+            formatName: "PROCESS SETUP DETAILS JETLACE & DRYER ",
+            formatNo: "PH-PRD02/F-003",
+            sopNumber: "PH-PRD02-D-03",
+            revisionNo: "01",
 
             date: date,
             shift: shift,
@@ -1545,16 +1550,16 @@ const Spunlace_03 = () => {
             mixing: Mixing,
             customer_name: customername,
             std_gsm: STD_GSM,
-            width:width,
+            width: width,
             pattern: Pattern,
             moisture: Moisture,
-            thickness:Thickness,
-            j1_conveyor_speed:  J_1_Conveyor_speed === "" ? "NA" : J_1_Conveyor_speed,
+            thickness: Thickness,
+            j1_conveyor_speed: J_1_Conveyor_speed === "" ? "NA" : J_1_Conveyor_speed,
             jp_conveyor_speed: JP_Conveyor_speed === "" ? "NA" : JP_Conveyor_speed,
             inj_pw_pressure: INJ_PW_Pressure === "" ? "NA" : INJ_PW_Pressure,
             inj_01_pressure: INJ_01_Pressure === "" ? "NA" : INJ_01_Pressure,
             inj_ipa_pressure: INJ_IPA_Pressure === "" ? "NA" : INJ_IPA_Pressure,
-            inj_11_pressure: INJ_11_Pressure === "" ? "NA" : INJ_11_Pressure ,
+            inj_11_pressure: INJ_11_Pressure === "" ? "NA" : INJ_11_Pressure,
             inj_12_pressure: INJ_12_Pressure === "" ? "NA" : INJ_12_Pressure,
             inj_21_pressure: INJ_21_Pressure === "" ? "NA" : INJ_21_Pressure,
             inj_pw_strip: INJ_PW_STRIP === "" ? "NA" : INJ_PW_STRIP,
@@ -1567,8 +1572,8 @@ const Spunlace_03 = () => {
             cpa_drum_speed: CPA_Drum_speed === "" ? "NA" : CPA_Drum_speed,
             c1_drum_speed: C_1_Drum_speed === "" ? "NA" : C_1_Drum_speed,
             c2_drum_speed: C_2_Drum_speed === "" ? "NA" : C_2_Drum_speed,
-            j2s_conveyer_speed:J2S_Conveyer_speed === "" ? "NA" : J2S_Conveyer_speed,
-            mdu_tension_draft_a: MDU_TENSION_DRAFTA === "" ? "NA":MDU_TENSION_DRAFTA,
+            j2s_conveyer_speed: J2S_Conveyer_speed === "" ? "NA" : J2S_Conveyer_speed,
+            mdu_tension_draft_a: MDU_TENSION_DRAFTA === "" ? "NA" : MDU_TENSION_DRAFTA,
             mdl_tension_draft_a: MDL_TENSION_DRAFTA === "" ? "NA" : MDL_TENSION_DRAFTA,
             mdl_speed_a: MDL_SpeedA === "" ? "NA" : MDL_SpeedA,
             mdu_speed_a: MDU_SpeedA === "" ? "NA" : MDU_SpeedA,
@@ -1582,7 +1587,7 @@ const Spunlace_03 = () => {
             bottom_damper_outlet_a: Bottom_Damper_OutletA === "" ? "NA" : Bottom_Damper_OutletA,
             boiler_temperature_a: Boiler_TemperatureA === "" ? "NA" : Boiler_TemperatureA,
             mdu_tension_draft_b: MDU_TENSION_DRAFTB === "" ? "NA" : MDU_TENSION_DRAFTB,
-            mdl_tension_draft_b: MDL_TENSION_DRAFTB === "" ? "NA" : MDL_TENSION_DRAFTB, 
+            mdl_tension_draft_b: MDL_TENSION_DRAFTB === "" ? "NA" : MDL_TENSION_DRAFTB,
             mdl_speed_b: MDL_SpeedB === "" ? "NA" : MDL_SpeedB,
             mdu_speed_b: MDU_SpeedB === "" ? "NA" : MDU_SpeedB,
             ttu_b: TTUB === "" ? "NA" : TTUB,
@@ -1591,7 +1596,7 @@ const Spunlace_03 = () => {
             mfl_speed_b: MFL_speedB === "" ? "NA" : MFL_speedB,
             top_damper_inlet_b: TOP_Damper_InletB === "" ? "NA" : TOP_Damper_InletB,
             top_damper_outlet_b: TOP_Damper_outletB === "" ? "NA" : TOP_Damper_outletB,
-            bottom_damper_inlet_b: Bottom_Damper_InletB === "" ? "NA":Bottom_Damper_InletB,
+            bottom_damper_inlet_b: Bottom_Damper_InletB === "" ? "NA" : Bottom_Damper_InletB,
             bottom_damper_outlet_b: Bottom_Damper_OutletB === "" ? "NA" : Bottom_Damper_OutletB,
             // boiler_temperature_b: Boiler_TemperatureB === "" ? "NA" : Boiler_TemperatureB,
 
@@ -1636,7 +1641,7 @@ const Spunlace_03 = () => {
         ).then((res) => {
             setSaveLoading(false);
             message.success("Form Saved Successfully");
-           // fetchDataOrderNodetails_f3();
+            // fetchDataOrderNodetails_f3();
             // console.log("messsage", res);
             navigate("/Precot/Spunlace/F-03/Summary");
             // message.success("LaydownChecklist Submitted successfully");
@@ -1651,7 +1656,7 @@ const Spunlace_03 = () => {
     };
 
     const handleSave = async () => {
-     
+
         // Here you can add your logic for saving the data
         try {
             sendProcessSetup();
@@ -1669,9 +1674,9 @@ const Spunlace_03 = () => {
 
     const sendProcessSetup2 = () => {
         const isValid = () => {
-          
+
             if (!Moisture) return "Moisture is required";
-            
+
             if (!Thickness) return "Thickness is required";
             if (!J_1_Conveyor_speed) return "J_1 Conveyor speed is required";
             if (!JP_Conveyor_speed) return "JP Conveyor speed No is required";
@@ -1690,9 +1695,9 @@ const Spunlace_03 = () => {
             if (!INJ_21_Strip) return "INJ_21_Strip is required";
             if (!CPA_Drum_speed) return "CPA_Drum_speed is required";
             if (!C_1_Drum_speed) return "C_1_Drum_speed is required";
-             if (!C_2_Drum_speed) return "C_2_Drum_speed are required";
+            if (!C_2_Drum_speed) return "C_2_Drum_speed are required";
             if (!J2S_Conveyer_speed) return "J2S_Conveyer_speed is required";
-           
+
             if (!MDU_TENSION_DRAFTA) return "MDU_TENSION_DRAFTA is required";
             if (!MDL_TENSION_DRAFTA) return "MDL_TENSION_DRAFTAis required";
             if (!MDL_SpeedA) return "MDL_SpeedA is required";
@@ -1704,20 +1709,20 @@ const Spunlace_03 = () => {
             if (!TOP_Damper_InletA) return "TOP_Damper_InletA is required";
             if (!TOP_Damper_outletA) return "TOP_Damper_outletAis required";
             if (!Bottom_Damper_InletA) return "Bottom_Damper_InletA is required";
-             if (!Bottom_Damper_OutletA) return "Bottom_Damper_OutletA  is required";
-             if (!Boiler_TemperatureA) return "Boiler_TemperatureA is required";
-             if (!MDU_TENSION_DRAFTB) return "MDU_TENSION_DRAFTB is required";
-             if (!MDL_TENSION_DRAFTB) return "MDU_TENSION_DRAFTB is required";
-             if (!MDL_SpeedB) return "MDU_TENSION_DRAFTB is required";
-             if (!MDU_SpeedB) return "MDU_SpeedB is required";
-             if (!TTUB) return "TTUB is required";
-             if (!TTLB) return "TTLB is required";
-             if (!MFU_speedB) return "MFU_speedB is required";
-             if (!MFL_speedB) return "MFL_speedB is required";
-             if (!TOP_Damper_InletB) return "TOP_Damper_InletB is required";
-             if (!TOP_Damper_outletB) return "TOP_Damper_outletB is required";
-             if (!Bottom_Damper_InletB) return "Bottom_Damper_InletB is required";
-             if (!Bottom_Damper_OutletB) return "Bottom_Damper_OutletB is required";
+            if (!Bottom_Damper_OutletA) return "Bottom_Damper_OutletA  is required";
+            if (!Boiler_TemperatureA) return "Boiler_TemperatureA is required";
+            if (!MDU_TENSION_DRAFTB) return "MDU_TENSION_DRAFTB is required";
+            if (!MDL_TENSION_DRAFTB) return "MDU_TENSION_DRAFTB is required";
+            if (!MDL_SpeedB) return "MDU_TENSION_DRAFTB is required";
+            if (!MDU_SpeedB) return "MDU_SpeedB is required";
+            if (!TTUB) return "TTUB is required";
+            if (!TTLB) return "TTLB is required";
+            if (!MFU_speedB) return "MFU_speedB is required";
+            if (!MFL_speedB) return "MFL_speedB is required";
+            if (!TOP_Damper_InletB) return "TOP_Damper_InletB is required";
+            if (!TOP_Damper_outletB) return "TOP_Damper_outletB is required";
+            if (!Bottom_Damper_InletB) return "Bottom_Damper_InletB is required";
+            if (!Bottom_Damper_OutletB) return "Bottom_Damper_OutletB is required";
             //  if (!Boiler_TemperatureB) return "Boiler_TemperatureB is required";
 
             return null;
@@ -1732,11 +1737,11 @@ const Spunlace_03 = () => {
         // Format the payload according to the API documentation
         const payload = {
             process_id: id,
-            unit: "Unit H",          
-            formatName:"PROCESS SETUP DETAILS JETLACE & DRYER ",
-           formatNo:"PH-PRD02/F-003",
-           sopNumber:"PH-PRD02-D-03",           
-           revisionNo: "01",
+            unit: "Unit H",
+            formatName: "PROCESS SETUP DETAILS JETLACE & DRYER ",
+            formatNo: "PH-PRD02/F-003",
+            sopNumber: "PH-PRD02-D-03",
+            revisionNo: "01",
 
             date: date,
             shift: shift,
@@ -1744,10 +1749,10 @@ const Spunlace_03 = () => {
             mixing: Mixing,
             customer_name: customername,
             std_gsm: STD_GSM,
-            width:width,
+            width: width,
             pattern: Pattern,
             moisture: Moisture,
-            thickness:Thickness,
+            thickness: Thickness,
             // j1_conveyor_speed: J_1_Conveyor_speed,
             // jp_conveyor_speed: JP_Conveyor_speed,
             // inj_pw_pressure: INJ_PW_Pressure,
@@ -1794,12 +1799,12 @@ const Spunlace_03 = () => {
             // bottom_damper_outlet_b: Bottom_Damper_OutletB,
             // boiler_temperature_b: Boiler_TemperatureB,
 
-            j1_conveyor_speed:  J_1_Conveyor_speed === "" ? "NA" : J_1_Conveyor_speed,
+            j1_conveyor_speed: J_1_Conveyor_speed === "" ? "NA" : J_1_Conveyor_speed,
             jp_conveyor_speed: JP_Conveyor_speed === "" ? "NA" : JP_Conveyor_speed,
             inj_pw_pressure: INJ_PW_Pressure === "" ? "NA" : INJ_PW_Pressure,
             inj_01_pressure: INJ_01_Pressure === "" ? "NA" : INJ_01_Pressure,
             inj_ipa_pressure: INJ_IPA_Pressure === "" ? "NA" : INJ_IPA_Pressure,
-            inj_11_pressure: INJ_11_Pressure === "" ? "NA" : INJ_11_Pressure ,
+            inj_11_pressure: INJ_11_Pressure === "" ? "NA" : INJ_11_Pressure,
             inj_12_pressure: INJ_12_Pressure === "" ? "NA" : INJ_12_Pressure,
             inj_21_pressure: INJ_21_Pressure === "" ? "NA" : INJ_21_Pressure,
             inj_pw_strip: INJ_PW_STRIP === "" ? "NA" : INJ_PW_STRIP,
@@ -1812,8 +1817,8 @@ const Spunlace_03 = () => {
             cpa_drum_speed: CPA_Drum_speed === "" ? "NA" : CPA_Drum_speed,
             c1_drum_speed: C_1_Drum_speed === "" ? "NA" : C_1_Drum_speed,
             c2_drum_speed: C_2_Drum_speed === "" ? "NA" : C_2_Drum_speed,
-            j2s_conveyer_speed:J2S_Conveyer_speed === "" ? "NA" : J2S_Conveyer_speed,
-            mdu_tension_draft_a: MDU_TENSION_DRAFTA === "" ? "NA":MDU_TENSION_DRAFTA,
+            j2s_conveyer_speed: J2S_Conveyer_speed === "" ? "NA" : J2S_Conveyer_speed,
+            mdu_tension_draft_a: MDU_TENSION_DRAFTA === "" ? "NA" : MDU_TENSION_DRAFTA,
             mdl_tension_draft_a: MDL_TENSION_DRAFTA === "" ? "NA" : MDL_TENSION_DRAFTA,
             mdl_speed_a: MDL_SpeedA === "" ? "NA" : MDL_SpeedA,
             mdu_speed_a: MDU_SpeedA === "" ? "NA" : MDU_SpeedA,
@@ -1827,7 +1832,7 @@ const Spunlace_03 = () => {
             bottom_damper_outlet_a: Bottom_Damper_OutletA === "" ? "NA" : Bottom_Damper_OutletA,
             boiler_temperature_a: Boiler_TemperatureA === "" ? "NA" : Boiler_TemperatureA,
             mdu_tension_draft_b: MDU_TENSION_DRAFTB === "" ? "NA" : MDU_TENSION_DRAFTB,
-            mdl_tension_draft_b: MDL_TENSION_DRAFTB === "" ? "NA" : MDL_TENSION_DRAFTB, 
+            mdl_tension_draft_b: MDL_TENSION_DRAFTB === "" ? "NA" : MDL_TENSION_DRAFTB,
             mdl_speed_b: MDL_SpeedB === "" ? "NA" : MDL_SpeedB,
             mdu_speed_b: MDU_SpeedB === "" ? "NA" : MDU_SpeedB,
             ttu_b: TTUB === "" ? "NA" : TTUB,
@@ -1836,7 +1841,7 @@ const Spunlace_03 = () => {
             mfl_speed_b: MFL_speedB === "" ? "NA" : MFL_speedB,
             top_damper_inlet_b: TOP_Damper_InletB === "" ? "NA" : TOP_Damper_InletB,
             top_damper_outlet_b: TOP_Damper_outletB === "" ? "NA" : TOP_Damper_outletB,
-            bottom_damper_inlet_b: Bottom_Damper_InletB === "" ? "NA":Bottom_Damper_InletB,
+            bottom_damper_inlet_b: Bottom_Damper_InletB === "" ? "NA" : Bottom_Damper_InletB,
             bottom_damper_outlet_b: Bottom_Damper_OutletB === "" ? "NA" : Bottom_Damper_OutletB,
             // boiler_temperature_b: Boiler_TemperatureB === "" ? "NA" : Boiler_TemperatureB,
             supervisor_status: supervisor_status,
@@ -1898,31 +1903,31 @@ const Spunlace_03 = () => {
     useEffect(() => {
         if (!initial.current) {
             initial.current = true;
-        fetchDatabatchByOrderdetails();      
-    
-        fetchDataOrderNodetails_f3();
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 600);
-        };
+            fetchDatabatchByOrderdetails();
 
-        window.addEventListener('resize', handleResize);
-        handleResize(); // Check initial window size
+            fetchDataOrderNodetails_f3();
+            const handleResize = () => {
+                setIsMobile(window.innerWidth <= 600);
+            };
 
-        axios
-            .get(
-                `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            )
-            .then((res) => {
-                // console.log("Shift details fetched:", res.data);
-                const shifts = res.data.map((shift) => shift.value);
-                setAvailableShifts(shifts);
-            })
+            window.addEventListener('resize', handleResize);
+            handleResize(); // Check initial window size
+
+            axios
+                .get(
+                    `${API.prodUrl}/Precot/api/LOV/Service/shiftDetailsLov`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    // console.log("Shift details fetched:", res.data);
+                    const shifts = res.data.map((shift) => shift.value);
+                    setAvailableShifts(shifts);
+                })
         }
     }, []);
     const fetchDatabatchByOrderdetails = async () => {
@@ -1943,8 +1948,8 @@ const Spunlace_03 = () => {
             setMixing(response.data[0].mix);
             setSTD_GSM(response.data[0].gsm);
             setwidth(response.data[0].width);
-           // setMoisture(response.data[0].moisture);
-           // setThickness(response.data[0].thickness);
+            // setMoisture(response.data[0].moisture);
+            // setThickness(response.data[0].thickness);
             setMaterial(response.data[0].material);
             setpattern(response.data[0].patternDescription);
 
@@ -2093,7 +2098,7 @@ const Spunlace_03 = () => {
                                 <td colSpan={5} style={{ textAlign: "center" }}>2T9</td>
                                 <td colSpan={5} style={{ textAlign: "center" }}>NA</td>
                                 <td style={{ textAlign: "center" }} colSpan={5}>
-                                     {/* <Input
+                                    {/* <Input
                                     type="text"
                                     value={INJ_PW_STRIP}
                                     style={{ textAlign: "center", width: "100%" }}
@@ -2103,7 +2108,7 @@ const Spunlace_03 = () => {
                                     onChange={handleInput_INJ_PW_STRIP}
                                     disabled={!isEditable}
                                 /> */}
-                                2T9
+                                    2T9
                                 </td>
                             </tr>
                             <tr>
@@ -2226,66 +2231,66 @@ const Spunlace_03 = () => {
                             </td>
                         </tr>
                         <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>CPA Drum speed</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={CPA_Drum_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_CPA_Drum_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_CPA_Drum_speed}
-                                    onChange={handleInput_CPA_Drum_speed}
-                                    disabled={!isEditable}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>C-1 Drum speed</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={C_1_Drum_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_C_1_Drum_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_C_1_Drum_speed}
-                                    onChange={handleInput_C_1_Drum_speed}
-                                    disabled={!isEditable}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>C-2 Drum speed</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={C_2_Drum_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_C_2_Drum_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_C_2_Drum_speed}
-                                    onChange={handleInput_C_2_Drum_speed}
-                                    disabled={!isEditable}
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>J2S-Conveyer speed</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={J2S_Conveyer_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_J2S_Conveyer_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_J2S_Conveyer_speed}
-                                    onChange={handleInput_J2S_Conveyer_speed}
-                                    disabled={!isEditable}
-                                /></td>
-                            </tr>
-                          
+                            <td colSpan={5} style={{ paddingLeft: "5px" }}>CPA Drum speed</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
+                            <td colSpan={5}> <Input
+                                type="text"
+                                value={CPA_Drum_speed}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_CPA_Drum_speed}
+                                onKeyDown={handleKeyPress}
+                                onInput={handleInput_CPA_Drum_speed}
+                                onChange={handleInput_CPA_Drum_speed}
+                                disabled={!isEditable}
+                            /></td>
+                        </tr>
+                        <tr>
+                            <td colSpan={5} style={{ paddingLeft: "5px" }}>C-1 Drum speed</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
+                            <td colSpan={5}> <Input
+                                type="text"
+                                value={C_1_Drum_speed}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_C_1_Drum_speed}
+                                onKeyDown={handleKeyPress}
+                                onInput={handleInput_C_1_Drum_speed}
+                                onChange={handleInput_C_1_Drum_speed}
+                                disabled={!isEditable}
+                            /></td>
+                        </tr>
+                        <tr>
+                            <td colSpan={5} style={{ paddingLeft: "5px" }}>C-2 Drum speed</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
+                            <td colSpan={5}> <Input
+                                type="text"
+                                value={C_2_Drum_speed}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_C_2_Drum_speed}
+                                onKeyDown={handleKeyPress}
+                                onInput={handleInput_C_2_Drum_speed}
+                                onChange={handleInput_C_2_Drum_speed}
+                                disabled={!isEditable}
+                            /></td>
+                        </tr>
+                        <tr>
+                            <td colSpan={5} style={{ paddingLeft: "5px" }}>J2S-Conveyer speed</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>0-80</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
+                            <td colSpan={5}> <Input
+                                type="text"
+                                value={J2S_Conveyer_speed}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_J2S_Conveyer_speed}
+                                onKeyDown={handleKeyPress}
+                                onInput={handleInput_J2S_Conveyer_speed}
+                                onChange={handleInput_J2S_Conveyer_speed}
+                                disabled={!isEditable}
+                            /></td>
+                        </tr>
+
                     </table>
 
 
@@ -2294,347 +2299,347 @@ const Spunlace_03 = () => {
                 </div>
             ),
         },
-       
+
         {
             key: "3",
             label: <p>PROCESS SETUP VERIFICATION OPENING LINE -3</p>,
             children: (
                 <div>
-                   <table style={{ borderCollapse: "collapse", border: "1px solid black", width: "100%" }}>
+                    <table style={{ borderCollapse: "collapse", border: "1px solid black", width: "100%" }}>
                         <thead>
                             <th colSpan={4}>Descriptions</th>
                             <th colSpan={3}>Standards</th>
                             <th colSpan={3}>Units</th>
-                            
+
                             <th colSpan={8}>Set Parameters</th>
                         </thead>
                         <tr>
-                            <td colSpan={10} style={{paddingLeft:"5px"}}>DRYER</td>
-                            <td colSpan={5} style={{textAlign:"center"}}>A</td>
-                            <td colSpan={5}  style={{textAlign:"center"}}>B</td>
+                            <td colSpan={10} style={{ paddingLeft: "5px" }}>DRYER</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>A</td>
+                            <td colSpan={5} style={{ textAlign: "center" }}>B</td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MDU TENSION/DRAFT</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDU_TENSION_DRAFTA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDU_TENSION_DRAFTA}
-                                   // onKeyDown={handleKeyPress}
-                                    // onInput={handleInput_MDU_TENSION_DRAFTA}
-                                    onChange={handleInput_MDU_TENSION_DRAFTA}
-                                    disabled={!isEditable}
-                                    // min="85"
-                                    // max="120"
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDU_TENSION_DRAFTB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDU_TENSION_DRAFTB}
-                                    //onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_MDU_TENSION_DRAFTB}
-                                    onChange={handleInput_MDU_TENSION_DRAFTB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MDU TENSION/DRAFT</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDU_TENSION_DRAFTA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDU_TENSION_DRAFTA}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MDU_TENSION_DRAFTA}
+                                onChange={handleInput_MDU_TENSION_DRAFTA}
+                                disabled={!isEditable}
+                            // min="85"
+                            // max="120"
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDU_TENSION_DRAFTB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDU_TENSION_DRAFTB}
+                                //onKeyDown={handleKeyPress}
+                                //onInput={handleInput_MDU_TENSION_DRAFTB}
+                                onChange={handleInput_MDU_TENSION_DRAFTB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MDL TENSION/DRAFT</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDL_TENSION_DRAFTA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDL_TENSION_DRAFTA}
-                                    //onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_MDL_TENSION_DRAFTA}
-                                    onChange={handleInput_MDL_TENSION_DRAFTA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDL_TENSION_DRAFTB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDL_TENSION_DRAFTB}
-                                  //  onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_MDL_TENSION_DRAFTB}
-                                    onChange={handleInput_MDL_TENSION_DRAFTB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MDL TENSION/DRAFT</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDL_TENSION_DRAFTA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDL_TENSION_DRAFTA}
+                                //onKeyDown={handleKeyPress}
+                                //onInput={handleInput_MDL_TENSION_DRAFTA}
+                                onChange={handleInput_MDL_TENSION_DRAFTA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDL_TENSION_DRAFTB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDL_TENSION_DRAFTB}
+                                //  onKeyDown={handleKeyPress}
+                                //onInput={handleInput_MDL_TENSION_DRAFTB}
+                                onChange={handleInput_MDL_TENSION_DRAFTB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MDL SPEED</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDL_SpeedA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDL_SpeedA}
-                                   // onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_MDL_SpeedA}
-                                    onChange={handleInput_MDL_SpeedA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDL_SpeedB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDL_SpeedB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_MDL_SpeedB}
-                                    onChange={handleInput_MDL_SpeedB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MDL SPEED</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDL_SpeedA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDL_SpeedA}
+                                // onKeyDown={handleKeyPress}
+                                //onInput={handleInput_MDL_SpeedA}
+                                onChange={handleInput_MDL_SpeedA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDL_SpeedB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDL_SpeedB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MDL_SpeedB}
+                                onChange={handleInput_MDL_SpeedB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MDU SPEED</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDU_SpeedA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDU_SpeedA}
-                                    //onKeyDown={handleKeyPress}
-                                  //  onInput={handleInput_MDU_SpeedA}
-                                    onChange={handleInput_MDU_SpeedA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MDU_SpeedB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MDU_SpeedB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_MDU_SpeedB}
-                                    onChange={handleInput_MDU_SpeedB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MDU SPEED</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-120</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDU_SpeedA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDU_SpeedA}
+                                //onKeyDown={handleKeyPress}
+                                //  onInput={handleInput_MDU_SpeedA}
+                                onChange={handleInput_MDU_SpeedA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MDU_SpeedB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MDU_SpeedB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MDU_SpeedB}
+                                onChange={handleInput_MDU_SpeedB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>TTU</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-200</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>C</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TTUA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TTUA}
-                                   // onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_TTUA}
-                                    onChange={handleInput_TTUA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TTUB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TTUB}
-                                    //onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TTUB}
-                                    onChange={handleInput_TTUB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>TTU</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-200</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>C</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TTUA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TTUA}
+                                // onKeyDown={handleKeyPress}
+                                //onInput={handleInput_TTUA}
+                                onChange={handleInput_TTUA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TTUB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TTUB}
+                                //onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TTUB}
+                                onChange={handleInput_TTUB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>TTL</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-200</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>C</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TTLA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TTLA}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TTLA}
-                                    onChange={handleInput_TTLA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TTLB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TTLB}
-                                    //onKeyDown={handleKeyPress}
-                                  //  onInput={handleInput_TTLB}
-                                    onChange={handleInput_TTLB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>TTL</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-200</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>C</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TTLA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TTLA}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TTLA}
+                                onChange={handleInput_TTLA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TTLB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TTLB}
+                                //onKeyDown={handleKeyPress}
+                                //  onInput={handleInput_TTLB}
+                                onChange={handleInput_TTLB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MFU speed</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>50-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MFU_speedA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MFUA}
-                                    //onKeyDown={handleKeyPress}
-                                    //onInput={handleInput_MFUA}
-                                    onChange={handleInput_MFUA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MFU_speedB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MFUB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_MFUB}
-                                    onChange={handleInput_MFUB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MFU speed</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>50-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MFU_speedA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MFUA}
+                                //onKeyDown={handleKeyPress}
+                                //onInput={handleInput_MFUA}
+                                onChange={handleInput_MFUA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MFU_speedB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MFUB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MFUB}
+                                onChange={handleInput_MFUB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>MFL speed</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>50-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MFL_speedA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MFLA}
-                                  //  onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_MFLA}
-                                    onChange={handleInput_MFLA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={MFL_speedB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_MFLB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_MFLB}
-                                    onChange={handleInput_MFLB}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>MFL speed</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>50-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MFL_speedA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MFLA}
+                                //  onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MFLA}
+                                onChange={handleInput_MFLA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={MFL_speedB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_MFLB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_MFLB}
+                                onChange={handleInput_MFLB}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>TOP Damper Inlet</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TOP_Damper_InletA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TOP_Damper_InletA}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TOP_Damper_InletA}
-                                    onChange={handleInput_TOP_Damper_InletA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TOP_Damper_InletB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TOP_Damper_InletB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TOP_Damper_InletB}
-                                    onChange={handleInput_TOP_Damper_InletB}
-                                    disabled={!isEditable}
-                                />
-                                </td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>TOP Damper Inlet</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TOP_Damper_InletA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TOP_Damper_InletA}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TOP_Damper_InletA}
+                                onChange={handleInput_TOP_Damper_InletA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TOP_Damper_InletB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TOP_Damper_InletB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TOP_Damper_InletB}
+                                onChange={handleInput_TOP_Damper_InletB}
+                                disabled={!isEditable}
+                            />
+                            </td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>TOP Damper Outlet</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TOP_Damper_outletA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TOP_Damper_outletA}
-                                    //onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TOP_Damper_outletA}
-                                    onChange={handleInput_TOP_Damper_outletA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={TOP_Damper_outletB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_TOP_Damper_outletB}
-                                    //onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_TOP_Damper_outletB}
-                                    onChange={handleInput_TOP_Damper_outletB}
-                                    disabled={!isEditable}
-                                />
-                                </td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>TOP Damper Outlet</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TOP_Damper_outletA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TOP_Damper_outletA}
+                                //onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TOP_Damper_outletA}
+                                onChange={handleInput_TOP_Damper_outletA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={TOP_Damper_outletB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_TOP_Damper_outletB}
+                                //onKeyDown={handleKeyPress}
+                                // onInput={handleInput_TOP_Damper_outletB}
+                                onChange={handleInput_TOP_Damper_outletB}
+                                disabled={!isEditable}
+                            />
+                            </td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>Bottom Damper Inlet</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={Bottom_Damper_InletA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_Bottom_Damper_InletA}
-                                    ///onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_Bottom_Damper_InletA}
-                                    onChange={handleInput_Bottom_Damper_InletA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}><Input
-                                    type="number"
-                                    value={Bottom_Damper_InletB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_Bottom_Damper_InletB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_Bottom_Damper_InletB}
-                                    onChange={handleInput_Bottom_Damper_InletB}
-                                    disabled={!isEditable}
-                                />
-                                </td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>Bottom Damper Inlet</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={Bottom_Damper_InletA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_Bottom_Damper_InletA}
+                                ///onKeyDown={handleKeyPress}
+                                // onInput={handleInput_Bottom_Damper_InletA}
+                                onChange={handleInput_Bottom_Damper_InletA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}><Input
+                                type="number"
+                                value={Bottom_Damper_InletB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_Bottom_Damper_InletB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_Bottom_Damper_InletB}
+                                onChange={handleInput_Bottom_Damper_InletB}
+                                disabled={!isEditable}
+                            />
+                            </td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>Bottom Damper Outlet</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={Bottom_Damper_OutletA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_Bottom_Damper_OutletA}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_Bottom_Damper_OutletA}
-                                    onChange={handleInput_Bottom_Damper_OutletA}
-                                    disabled={!isEditable}
-                                /></td>
-                                <td colSpan={5}><Input
-                                    type="number"
-                                    value={Bottom_Damper_OutletB}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_Bottom_Damper_OutletB}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_Bottom_Damper_OutletB}
-                                    onChange={handleInput_Bottom_Damper_OutletB}
-                                    disabled={!isEditable}
-                                />
-                                </td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>Bottom Damper Outlet</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>0-100</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>%</td>
+                            <td colSpan={5}> <Input
+                                type="number"
+                                value={Bottom_Damper_OutletA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_Bottom_Damper_OutletA}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_Bottom_Damper_OutletA}
+                                onChange={handleInput_Bottom_Damper_OutletA}
+                                disabled={!isEditable}
+                            /></td>
+                            <td colSpan={5}><Input
+                                type="number"
+                                value={Bottom_Damper_OutletB}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_Bottom_Damper_OutletB}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_Bottom_Damper_OutletB}
+                                onChange={handleInput_Bottom_Damper_OutletB}
+                                disabled={!isEditable}
+                            />
+                            </td>
                         </tr>
                         <tr>
-                                <td colSpan={4} style={{ paddingLeft: "5px" }}>Boiler Temperature</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>180-250</td>
-                                <td colSpan={3} style={{ textAlign: "center" }}>C</td>
-                                <td colSpan={10}> <Input
-                                    type="number"
-                                    value={Boiler_TemperatureA}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_Boiler_TemperatureA}
-                                   // onKeyDown={handleKeyPress}
-                                   // onInput={handleInput_Boiler_TemperatureA}
-                                    onChange={handleInput_Boiler_TemperatureA}
-                                    disabled={!isEditable}
-                                /></td>
+                            <td colSpan={4} style={{ paddingLeft: "5px" }}>Boiler Temperature</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>180-250</td>
+                            <td colSpan={3} style={{ textAlign: "center" }}>C</td>
+                            <td colSpan={10}> <Input
+                                type="number"
+                                value={Boiler_TemperatureA}
+                                style={{ textAlign: "center", width: "100%" }}
+                                onBlur={handle_blur_Boiler_TemperatureA}
+                                // onKeyDown={handleKeyPress}
+                                // onInput={handleInput_Boiler_TemperatureA}
+                                onChange={handleInput_Boiler_TemperatureA}
+                                disabled={!isEditable}
+                            /></td>
                         </tr>
-                        </table>
+                    </table>
                 </div>
             ),
         },
@@ -2646,7 +2651,7 @@ const Spunlace_03 = () => {
                     <table
                         style={{ borderCollapse: "collapse", border: "1px solid black", width: "100%" }}
                     >
-                        
+
                         <tr
                             style={{
                                 border: "1px solid",
@@ -2655,7 +2660,7 @@ const Spunlace_03 = () => {
                                 paddingRight: "1em",
                             }}
                         >
-                               <td
+                            <td
                                 colSpan="1"
                                 style={{
                                     border: "1px solid",
@@ -2685,41 +2690,41 @@ const Spunlace_03 = () => {
                             >
                                 <b style={{ fontSize: "11px" }}>HOD / Designee Sign & Date</b>
                             </td>
-                         
+
                         </tr>
 
                         <tr>
-                            
-                        <td
+
+                            <td
                                 colSpan="1"
                                 style={{
                                     border: "1px solid",
                                     paddingLeft: "1em",
                                     paddingRight: "1em",
-                                  
+
                                     textAlign: "center",
-                                    
+
                                 }}
-                               
-                            >   
-                             
-                                      
-                             {selectedRow?.operator_status === "OPERATOR_APPROVED" && (
-  <>
-    <div>{selectedRow?.operator_sign}</div>
-    <div>{operator_signsignaturedate}</div>
 
-    {getImageOP && (
-      <>
-        <br />
-        <img src={getImageOP} alt="logo" className="signature" />
-      </>
-    )}
-  </>
-)}
+                            >
 
 
-                                  
+                                {selectedRow?.operator_status === "OPERATOR_APPROVED" && (
+                                    <>
+                                        <div>{selectedRow?.operator_sign}</div>
+                                        <div>{operator_signsignaturedate}</div>
+
+                                        {getImageOP && (
+                                            <>
+                                                <br />
+                                                <img src={getImageOP} alt="logo" className="signature" />
+                                            </>
+                                        )}
+                                    </>
+                                )}
+
+
+
                             </td>
                             <td
                                 colSpan="1"
@@ -2728,29 +2733,29 @@ const Spunlace_03 = () => {
                                     paddingLeft: "1em",
                                     paddingRight: "1em",
                                     textAlign: "center",
-                                   
+
                                 }}
-                                
+
                             >
-                                
+
 
 
                                 {(selectedRow?.supervisor_status === "SUPERVISOR_APPROVED" ||
-  selectedRow?.supervisor_status === "SUPERVISOR_REJECTED" ||
-  selectedRow?.hod_status === "HOD_APPROVED" ||
-  selectedRow?.hod_status === "HOD_REJECTED") && (
-  <>
-    <div>{selectedRow?.supervisor_sign}</div>
-    <div>{supersigndate}</div>
+                                    selectedRow?.supervisor_status === "SUPERVISOR_REJECTED" ||
+                                    selectedRow?.hod_status === "HOD_APPROVED" ||
+                                    selectedRow?.hod_status === "HOD_REJECTED") && (
+                                        <>
+                                            <div>{selectedRow?.supervisor_sign}</div>
+                                            <div>{supersigndate}</div>
 
-    {getImageSUP && (
-      <>
-        <br />
-        <img src={getImageSUP} alt="logo" className="signature" />
-      </>
-    )}
-  </>
-)}
+                                            {getImageSUP && (
+                                                <>
+                                                    <br />
+                                                    <img src={getImageSUP} alt="logo" className="signature" />
+                                                </>
+                                            )}
+                                        </>
+                                    )}
                             </td>
 
                             <td
@@ -2759,28 +2764,28 @@ const Spunlace_03 = () => {
                                     border: "1px solid",
                                     paddingLeft: "1em",
                                     paddingRight: "1em",
-                                  
+
                                     textAlign: "center",
                                 }}
-                                
+
                             >
-                               
-                               {(selectedRow?.hod_status === "HOD_APPROVED" || selectedRow?.hod_status === "HOD_REJECTED") && (
-  <>
-    <div>{selectedRow?.hod_sign}</div>
-    <div>{hodsign}</div>
 
-    {getImageHOD && (
-      <>
-        <br />
-        <img src={getImageHOD} alt="logo" className="signature" />
-      </>
-    )}
-  </>
-)}
+                                {(selectedRow?.hod_status === "HOD_APPROVED" || selectedRow?.hod_status === "HOD_REJECTED") && (
+                                    <>
+                                        <div>{selectedRow?.hod_sign}</div>
+                                        <div>{hodsign}</div>
+
+                                        {getImageHOD && (
+                                            <>
+                                                <br />
+                                                <img src={getImageHOD} alt="logo" className="signature" />
+                                            </>
+                                        )}
+                                    </>
+                                )}
 
 
-                                  
+
                             </td>
 
 
@@ -2797,7 +2802,7 @@ const Spunlace_03 = () => {
 
         <div>
 
-<PrecotSidebar open={open} onClose={onClose} role={localStorage.getItem("role")} />
+            <PrecotSidebar open={open} onClose={onClose} role={localStorage.getItem("role")} />
             {/* <BleachingHeader
         unit="Unit-H"
         formName="BLEACHING JOB CARD"
@@ -2859,415 +2864,415 @@ const Spunlace_03 = () => {
                         onClick={showDrawer}
                     ></Button>
                 }
-                buttonsArray ={[
+                buttonsArray={[
 
                     <Button
-                    key="back"
-                    type="primary"
-                    icon={<GoArrowLeft color="#00308F" />}
-                    onClick={handleBack}
-                    style={{
-                      backgroundColor: "#E5EEF9",
-                      color: "#00308F",
-                      fontWeight: "bold",
-                    }}
-                    shape="round"
-                  >
-                    Back
-                  </Button>,
-                  ...(roleBase === "ROLE_HOD" ||
-                    roleBase === "ROLE_SUPERVISOR" ||
-                    roleBase === "ROLE_QC" ||
-                    roleBase === "ROLE_DESIGNEE" ? [
-                    <Button
-                      key="approve"
-                      loading={saveLoading}
-                      type="primary"
-                      style={{
-                        backgroundColor: "#E5EEF9",
-                        color: "#00308F",
-                        fontWeight: "bold",
-                        display: canDisplayButtons(),
-                      }}
-                      onClick={handleApprove}
-                      shape="round"
-                      icon={ <img src={approveIcon} alt="Approve Icon" />}
-                    >
-                      &nbsp;Approve
-                    </Button>,
-                    <Button
-                      key="reject"
-                      loading={saveLoading}
-                      type="primary"
-                      style={{
-                        backgroundColor: "#E5EEF9",
-                        color: "#00308F",
-                        fontWeight: "bold",
-                        display: canDisplayButtons(),
-                      }}
-                      icon={<img src={rejectIcon} alt="Reject Icon" />}
-                       onClick={handleRejectModal}
-                      shape="round"
-                    >
-                      &nbsp;Reject
-                    </Button>
-                  ] : [
-                    <Button
-                      key="save"
-                      loading={saveLoading}
-                      type="primary"
-                      onClick={handleSave}
-                      style={{
-                        backgroundColor: "#E5EEF9",
-                        color: "#00308F",
-                        fontWeight: "bold",
-                        display:canDisplayButton2(),
-                      }}
-                      shape="round"
-                      icon={<IoSave color="#00308F" />}
-                    >
-                      Save
-                    </Button>,
-                    <Button
-                      key="submit"
-                      loading={saveLoading}
-                      type="primary"
-                      onClick={handleSubmit}
-                      style={{
-                        backgroundColor: "#E5EEF9",
-                        color: "#00308F",
-                        fontWeight: "bold",
-                        display: canDisplayButtons(),
-                      }}
-                      icon={<GrDocumentStore color="#00308F" />}
-                      shape="round"
-                    >
-                      Submit
-                    </Button>
-                  ]),
-                  <Button
-                    key="logout"
-                    type="primary"
-                    style={{
-                      backgroundColor: "#E5EEF9",
-                      color: "#00308F",
-                      fontWeight: "bold",
-                    }}
-                    shape="round"
-                    icon={<BiLock color="#00308F" />}
-                    onClick={() => {
-                      if (window.confirm("Are you sure want to logout")) {
-                        localStorage.removeItem("token");
-                        navigate("/Precot"); // Ensure navigate is defined or imported
-                      }
-                    }}
-                  >
-                    Logout
-                  </Button>,
-                  <Tooltip
-                    key="user-info"
-                    trigger="click"
-                    style={{ backgroundColor: "#fff" }}
-                    title={
-                      <div>
-                        <h3>{localStorage.getItem("username")}</h3>
-                        <p>{localStorage.getItem("role")}</p>
-                      </div>
-                    }
-                  >
-                    <Button
-                      type="primary"
-                      style={{ backgroundColor: "#E5EEF9" }}
-                      shape="circle"
-                      icon={<FaUserCircle color="#00308F" size={20} />}
-                    />
-                  </Tooltip>,
-                  <Modal
-                    key="reject-modal"
-                    title="Reject"
-                    open={showModal}
-                    onOk={() => setShowModal(false)}
-                    onCancel={() => setShowModal(false)}
-                    destroyOnClose={true}
-                    footer={[
-                      <Button
-                        key="submit-reject"
+                        key="back"
                         type="primary"
+                        icon={<GoArrowLeft color="#00308F" />}
+                        onClick={handleBack}
                         style={{
-                          backgroundColor: "#E5EEF9",
-                          color: "#00308F",
-                          fontWeight: "bold",
+                            backgroundColor: "#E5EEF9",
+                            color: "#00308F",
+                            fontWeight: "bold",
                         }}
                         shape="round"
-                       onClick={handleReject}
-                      >
-                        Submit
-                      </Button>,
-                    ]}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginBottom: "16px",
-                      }}
                     >
-                      <label style={{ marginRight: "8px" }}>Remarks:</label>
-                      <TextArea
-                       value={rejectRemarks}
-                        onChange={(e) => setRejectRemarks(e.target.value)}
-                        rows={4}
-                        style={{ width: "100%" }}
-                      />
-                    </div>
-                  </Modal>
-          
-                    ]}
+                        Back
+                    </Button>,
+                    ...(roleBase === "ROLE_HOD" ||
+                        roleBase === "ROLE_SUPERVISOR" ||
+                        roleBase === "ROLE_QC" ||
+                        roleBase === "ROLE_DESIGNEE" ? [
+                        <Button
+                            key="approve"
+                            loading={saveLoading}
+                            type="primary"
+                            style={{
+                                backgroundColor: "#E5EEF9",
+                                color: "#00308F",
+                                fontWeight: "bold",
+                                display: canDisplayButtons(),
+                            }}
+                            onClick={handleApprove}
+                            shape="round"
+                            icon={<img src={approveIcon} alt="Approve Icon" />}
+                        >
+                            &nbsp;Approve
+                        </Button>,
+                        <Button
+                            key="reject"
+                            loading={saveLoading}
+                            type="primary"
+                            style={{
+                                backgroundColor: "#E5EEF9",
+                                color: "#00308F",
+                                fontWeight: "bold",
+                                display: canDisplayButtons(),
+                            }}
+                            icon={<img src={rejectIcon} alt="Reject Icon" />}
+                            onClick={handleRejectModal}
+                            shape="round"
+                        >
+                            &nbsp;Reject
+                        </Button>
+                    ] : [
+                        <Button
+                            key="save"
+                            loading={saveLoading}
+                            type="primary"
+                            onClick={handleSave}
+                            style={{
+                                backgroundColor: "#E5EEF9",
+                                color: "#00308F",
+                                fontWeight: "bold",
+                                display: canDisplayButton2(),
+                            }}
+                            shape="round"
+                            icon={<IoSave color="#00308F" />}
+                        >
+                            Save
+                        </Button>,
+                        <Button
+                            key="submit"
+                            loading={saveLoading}
+                            type="primary"
+                            onClick={handleSubmit}
+                            style={{
+                                backgroundColor: "#E5EEF9",
+                                color: "#00308F",
+                                fontWeight: "bold",
+                                display: canDisplayButtons(),
+                            }}
+                            icon={<GrDocumentStore color="#00308F" />}
+                            shape="round"
+                        >
+                            Submit
+                        </Button>
+                    ]),
+                    <Button
+                        key="logout"
+                        type="primary"
+                        style={{
+                            backgroundColor: "#E5EEF9",
+                            color: "#00308F",
+                            fontWeight: "bold",
+                        }}
+                        shape="round"
+                        icon={<BiLock color="#00308F" />}
+                        onClick={() => {
+                            if (window.confirm("Are you sure want to logout")) {
+                                localStorage.removeItem("token");
+                                navigate("/Precot"); // Ensure navigate is defined or imported
+                            }
+                        }}
+                    >
+                        Logout
+                    </Button>,
+                    <Tooltip
+                        key="user-info"
+                        trigger="click"
+                        style={{ backgroundColor: "#fff" }}
+                        title={
+                            <div>
+                                <h3>{localStorage.getItem("username")}</h3>
+                                <p>{localStorage.getItem("role")}</p>
+                            </div>
+                        }
+                    >
+                        <Button
+                            type="primary"
+                            style={{ backgroundColor: "#E5EEF9" }}
+                            shape="circle"
+                            icon={<FaUserCircle color="#00308F" size={20} />}
+                        />
+                    </Tooltip>,
+                    <Modal
+                        key="reject-modal"
+                        title="Reject"
+                        open={showModal}
+                        onOk={() => setShowModal(false)}
+                        onCancel={() => setShowModal(false)}
+                        destroyOnClose={true}
+                        footer={[
+                            <Button
+                                key="submit-reject"
+                                type="primary"
+                                style={{
+                                    backgroundColor: "#E5EEF9",
+                                    color: "#00308F",
+                                    fontWeight: "bold",
+                                }}
+                                shape="round"
+                                onClick={handleReject}
+                            >
+                                Submit
+                            </Button>,
+                        ]}
+                    >
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                marginBottom: "16px",
+                            }}
+                        >
+                            <label style={{ marginRight: "8px" }}>Remarks:</label>
+                            <TextArea
+                                value={rejectRemarks}
+                                onChange={(e) => setRejectRemarks(e.target.value)}
+                                rows={4}
+                                style={{ width: "100%" }}
+                            />
+                        </div>
+                    </Modal>
+
+                ]}
             />
             <div id="section-to-print" style={{ padding: "5px" }}>
-            {Array.isArray(print) &&print.map((item, index) => (
-                  <table  key={index} style={{ borderCollapse: "collapse", border: "1px solid #0000", padding: "5px", width:"95%" ,marginTop:"3%" }}  >
-                  <thead style={{marginTop:"10px",width:"100%",marginBottom:"10px"}}> <br></br><br></br>
-                  <tr>
-                    <td  colSpan="2" rowSpan="4">
-                    <div style={{textAlign:"center"}}>   <img src={logo} alt="logo" style={{ width: "40px", height: "20px" }} /></div>
-                    <div style={{textAlign:"center"}} >Unit H</div>
-                    </td>
-                    <td  colSpan="4" rowSpan="4" style={{textAlign:"center"}}>  Bleaching Job Card <br></br> PRD01/F-13</td>
-                    <td  colSpan="3">Format No:</td>
-                    <td  colSpan="3">PRD01/F-13</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="3">Revision No:</td>
-                    <td colSpan="3">04</td>
-                  </tr>
-                  <tr>
-                    <td colSpan="3">Ref. SOP No:</td>
-                    <td colSpan="3">PRD01-D-12</td>
-        
-                  </tr>
-                  <tr >
-                    <td colSpan="3">Page No:</td>
-                    <td colSpan="3">  {index + 1}of {print.length } </td>
-                   
-                  </tr>
-                      
-                </thead>
-                <tbody>
-                <table style={{ borderCollapse: "collapse", border: "1px solid #0000", padding: "5px" }}  >
-                        <thead>
-                            <th colSpan={5}>Descriptions</th>
-                            <th colSpan={5}>Standards</th>
-                            <th colSpan={5}>Units</th>
-                            <th colSpan={5}>Set Parameters</th>
+                {Array.isArray(print) && print.map((item, index) => (
+                    <table key={index} style={{ borderCollapse: "collapse", border: "1px solid #0000", padding: "5px", width: "95%", marginTop: "3%" }}  >
+                        <thead style={{ marginTop: "10px", width: "100%", marginBottom: "10px" }}> <br></br><br></br>
+                            <tr>
+                                <td colSpan="2" rowSpan="4">
+                                    <div style={{ textAlign: "center" }}>   <img src={logo} alt="logo" style={{ width: "40px", height: "20px" }} /></div>
+                                    <div style={{ textAlign: "center" }} >Unit H</div>
+                                </td>
+                                <td colSpan="4" rowSpan="4" style={{ textAlign: "center" }}>  Bleaching Job Card <br></br> PRD01/F-13</td>
+                                <td colSpan="3">Format No:</td>
+                                <td colSpan="3">PRD01/F-13</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="3">Revision No:</td>
+                                <td colSpan="3">04</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="3">Ref. SOP No:</td>
+                                <td colSpan="3">PRD01-D-12</td>
+
+                            </tr>
+                            <tr >
+                                <td colSpan="3">Page No:</td>
+                                <td colSpan="3">  {index + 1}of {print.length} </td>
+
+                            </tr>
+
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>  J-1 Conveyor speed </td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>18 -75</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM </td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={J_1_Conveyor_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_J_1_Conveyor_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_J_1_Conveyor_speed}
-                                    onChange={handleChange_J_1_Conveyor_speed}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>JP Conveyor speed</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>18 -75</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
-                                <td colSpan={5}> <Input
-                                    type="text"
-                                    value={JP_Conveyor_speed}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_JP_Conveyor_speed}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_JP_Conveyor_speed}
-                                    onChange={handleChange_JP_Conveyor_speed}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-PW Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>5 -10</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_PW_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_PW_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_PW_Pressure}
-                                    onChange={handleChange_INJ_PW_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-01 Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>8-60</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_01_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_01_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_01_Pressure}
-                                    onChange={handleInput_INJ_01_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-IPA Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_IPA_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_IPA_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_IPA_Pressure}
-                                    onChange={handleInput_INJ_IPA_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-11 Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_11_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_11_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_11_Pressure}
-                                    onChange={handleInput_INJ_11_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-12 Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_12_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_12_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_12_Pressure}
-                                    onChange={handleInput_INJ_12_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-21 Pressure</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_21_Pressure}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_21_Pressure}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_IINJ_21_Pressure}
-                                    onChange={handleInput_IINJ_21_Pressure}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-PW STRIP</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>6-10</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>2T9</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={INJ_PW_STRIP}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_INJ_PW_STRIP}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_INJ_PW_STRIP}
-                                    onChange={handleInput_INJ_PW_STRIP}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5} style={{ paddingLeft: "5px" }}>VACCUM</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>60-94</td>
-                                <td colSpan={5} style={{ textAlign: "center" }}>%</td>
-                                <td colSpan={5}> <Input
-                                    type="number"
-                                    value={VACCUM}
-                                    style={{ textAlign: "center", width: "100%" }}
-                                    onBlur={handle_blur_VACCUM}
-                                    onKeyDown={handleKeyPress}
-                                    onInput={handleInput_VACCUM}
-                                    onChange={handleInput_VACCUM}
-                                    disabled={
-                                        (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-                                        (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-                                        (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-                                        (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-                                      }
-                                /></td>
-                            </tr>
+                            <table style={{ borderCollapse: "collapse", border: "1px solid #0000", padding: "5px" }}  >
+                                <thead>
+                                    <th colSpan={5}>Descriptions</th>
+                                    <th colSpan={5}>Standards</th>
+                                    <th colSpan={5}>Units</th>
+                                    <th colSpan={5}>Set Parameters</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>  J-1 Conveyor speed </td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>18 -75</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>MPM </td>
+                                        <td colSpan={5}> <Input
+                                            type="text"
+                                            value={J_1_Conveyor_speed}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_J_1_Conveyor_speed}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_J_1_Conveyor_speed}
+                                            onChange={handleChange_J_1_Conveyor_speed}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>JP Conveyor speed</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>18 -75</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>MPM</td>
+                                        <td colSpan={5}> <Input
+                                            type="text"
+                                            value={JP_Conveyor_speed}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_JP_Conveyor_speed}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_JP_Conveyor_speed}
+                                            onChange={handleChange_JP_Conveyor_speed}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-PW Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>5 -10</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_PW_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_PW_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_PW_Pressure}
+                                            onChange={handleChange_INJ_PW_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-01 Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>8-60</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_01_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_01_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_01_Pressure}
+                                            onChange={handleInput_INJ_01_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-IPA Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_IPA_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_IPA_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_IPA_Pressure}
+                                            onChange={handleInput_INJ_IPA_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-11 Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_11_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_11_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_11_Pressure}
+                                            onChange={handleInput_INJ_11_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-12 Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_12_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_12_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_12_Pressure}
+                                            onChange={handleInput_INJ_12_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-21 Pressure</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>8-90</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>BAR</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_21_Pressure}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_21_Pressure}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_IINJ_21_Pressure}
+                                            onChange={handleInput_IINJ_21_Pressure}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>INJ-PW STRIP</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>6-10</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>2T9</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={INJ_PW_STRIP}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_INJ_PW_STRIP}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_INJ_PW_STRIP}
+                                            onChange={handleInput_INJ_PW_STRIP}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={5} style={{ paddingLeft: "5px" }}>VACCUM</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>60-94</td>
+                                        <td colSpan={5} style={{ textAlign: "center" }}>%</td>
+                                        <td colSpan={5}> <Input
+                                            type="number"
+                                            value={VACCUM}
+                                            style={{ textAlign: "center", width: "100%" }}
+                                            onBlur={handle_blur_VACCUM}
+                                            onKeyDown={handleKeyPress}
+                                            onInput={handleInput_VACCUM}
+                                            onChange={handleInput_VACCUM}
+                                            disabled={
+                                                (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
+                                                (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
+                                                (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
+                                                (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
+                                            }
+                                        /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
                         </tbody>
                     </table>
-
-                </tbody>
-                </table>
-                  ))}
+                ))}
             </div>
 
 
@@ -3279,7 +3284,7 @@ const Spunlace_03 = () => {
                     placeholder="Date"
 
                     value={datefomrat}
-                    
+
                     disabled
                     style={{ width: '100%', height: '35px' }}
 
@@ -3371,11 +3376,11 @@ const Spunlace_03 = () => {
                     onChange={(e) => setMoisture(e.target.value)}
                     onKeyDown={(e) => {
                         if (
-                            e.key === 'e' || 
-                            e.key === 'E' || 
-                            e.key === '-' || 
-                            e.key === '+' || 
-                            e.key === ',' || 
+                            e.key === 'e' ||
+                            e.key === 'E' ||
+                            e.key === '-' ||
+                            e.key === '+' ||
+                            e.key === ',' ||
                             (!/[0-9.]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')
                         ) {
                             e.preventDefault();
@@ -3388,15 +3393,15 @@ const Spunlace_03 = () => {
                 <Input
                     addonBefore="Thickness"
                     placeholder="Thickness"
-                     type="number"
+                    type="number"
                     value={Thickness}
                     onKeyDown={(e) => {
                         if (
-                            e.key === 'e' || 
-                            e.key === 'E' || 
-                            e.key === '-' || 
-                            e.key === '+' || 
-                            e.key === ',' || 
+                            e.key === 'e' ||
+                            e.key === 'E' ||
+                            e.key === '-' ||
+                            e.key === '+' ||
+                            e.key === ',' ||
                             (!/[0-9.]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')
                         ) {
                             e.preventDefault();

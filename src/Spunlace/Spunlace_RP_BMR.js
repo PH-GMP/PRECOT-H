@@ -1,32 +1,29 @@
-import React from "react";
 import {
-  Tabs,
-  Table,
-  InputNumber,
-  Input,
   Button,
-  message,
   DatePicker,
-  TimePicker,
-  Radio,
-  Select,
-  Tooltip,
-  Row,
-  Form,
+  Input,
+  InputNumber,
+  message,
   Modal,
+  Radio,
+  Row,
+  Select,
+  Table,
+  Tabs,
+  TimePicker,
+  Tooltip
 } from "antd";
-import logo from "../Assests/logo.png";
-import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-import { BiEdit, BiLock, BiNavigation } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import { GoArrowLeft } from "react-icons/go";
-import BleachingHeader from "../Components/BleachingHeader";
-import { useNavigate, useLocation } from "react-router-dom";
-import { FaLock, FaUserCircle } from "react-icons/fa";
-import API from "../baseUrl.json";
 import { IoPrint } from "react-icons/io5";
-import { ContinuousColorLegend } from "@mui/x-charts";
+import { useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 const { TabPane } = Tabs;
 const { Column } = Table;
 const { Option } = Select;
@@ -47,6 +44,7 @@ const BMRSummaryRP = () => {
   const role = localStorage.getItem("role");
   const [productionDetailsSignSup, setproductionDetailsSignSup] = useState("");
   const [QaLovs, setQaLovs] = useState([]);
+  const [PDEBatchQnty, setPDEBatchQnty] = useState("");
 
   const userName = localStorage.getItem("username");
 
@@ -379,8 +377,31 @@ const BMRSummaryRP = () => {
       }
     };
 
+
+
+    const fetchBatchQuantity = async () => {
+      console.log("fetchBatchQuantity", fetchBatchQuantity)
+      try {
+        const response = await axios.get(`${API.prodUrl}/Precot/api/spunlace/rp/summary/GetBatchQtyOrderDate?order_no=${orderNoSelect}&fromdate=${startDateOne}&todate=${endDateOne}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setPDEBatchQnty(response.data);
+      } catch (err) {
+        console.error("Error fetching shaft data:", err);
+        setError(err.message || "Failed to fetch data.");
+      }
+    };
+
     if (batchNo && startDateOne && endDateOne) {
-      fetchData(); // Fetch data when dependencies are valid
+      if (orderNoSelect) {
+        fetchData();
+        fetchBatchQuantity()
+      }
+      else {
+        message.error("Please select order number")
+      }
     }
   }, [batchNo, startDateOne, endDateOne]);
 
@@ -541,10 +562,7 @@ const BMRSummaryRP = () => {
       yield: 0,
     },
   ]);
-  const [isSatisfactory, setIsSatisfactory] = useState(false);
-  const [isNotSatisfactory, setIsNotSatisfactory] = useState(false);
-  const [isSatisfactoryRP, setIsSatisfactoryRP] = useState(false);
-  const [isNotSatisfactoryRP, setIsNotSatisfactoryRP] = useState(false);
+
   const [productionDetailsSign, setproductionDetailsSign] = useState("");
 
   useState("");
@@ -552,21 +570,21 @@ const BMRSummaryRP = () => {
   const disabled01 =
     (role == "ROLE_SUPERVISOR" &&
       productionDetails?.bmr01rp01productiondetails?.[0]?.status ==
-        "SUPERVISOR_APPROVED") ||
+      "SUPERVISOR_APPROVED") ||
     role == "ROLE_QA";
   const disabledQa01 =
     (role == "ROLE_QA" &&
       productionDetails?.bmr01rp01productiondetails?.[0]?.status ==
-        "QA_APPROVED") ||
+      "QA_APPROVED") ||
     role == "ROLE_SUPERVISOR";
 
   const disabledSubmit01 =
     (role == "ROLE_QA" &&
       productionDetails?.bmr01rp01productiondetails?.[0]?.status ==
-        "QA_APPROVED") ||
+      "QA_APPROVED") ||
     (role == "ROLE_SUPERVISOR" &&
       productionDetails?.bmr01rp01productiondetails?.[0]?.status ==
-        "SUPERVISOR_APPROVED");
+      "SUPERVISOR_APPROVED");
 
   const disabled10Sup =
     (role == "ROLE_SUPERVISOR" && status10 == "SUPERVISOR_APPROVED") ||
@@ -611,7 +629,7 @@ const BMRSummaryRP = () => {
   const disabled11 =
     (role == "ROLE_SUPERVISOR" &&
       delayEquipmentBreakdownRecordDetails?.bmrSummaryDateList?.[0]?.status ==
-        "SUPERVISOR_APPROVED") ||
+      "SUPERVISOR_APPROVED") ||
     role == "ROLE_HOD" ||
     role == "ROLE_QA";
 
@@ -779,6 +797,8 @@ const BMRSummaryRP = () => {
         );
         setIdOne(data.bmr01rp01productiondetails[0].prod_id);
         setStatus(data.bmr01rp01productiondetails[0].poStatus);
+        setSelectedOption(data.bmr01rp01productiondetails[0].baleFrom)
+        setSelectedOptions(data.bmr01rp01productiondetails[0].baleTo)
         setOrderNoSelect(data.bmr01rp01productiondetails[0].order_no);
         console.log("supervisor sign", productionDetailsSignSup);
       } else {
@@ -948,23 +968,23 @@ const BMRSummaryRP = () => {
         const transformedData =
           details.length > 0
             ? details.map((item, index) => ({
-                key: index.toString(),
-                siNo: (index + 1).toString(),
-                name: item.name_of_pck_meterial,
-                batchNo: item.batch_no,
-                quantity: item.quantity,
-                units: item.unit,
-              }))
+              key: index.toString(),
+              siNo: (index + 1).toString(),
+              name: item.name_of_pck_meterial,
+              batchNo: item.batch_no,
+              quantity: item.quantity,
+              units: item.unit,
+            }))
             : [
-                {
-                  key: "1",
-                  siNo: "1",
-                  name: "Bale wire",
-                  batchNo: "",
-                  quantity: "",
-                  units: "",
-                },
-              ];
+              {
+                key: "1",
+                siNo: "1",
+                name: "Bale wire",
+                batchNo: "",
+                quantity: "",
+                units: "",
+              },
+            ];
 
         console.log("Transformed Data:", transformedData);
 
@@ -1072,7 +1092,7 @@ const BMRSummaryRP = () => {
       if (response.data.length > 0) {
         setcheckedbySign(
           data[0].detailsRecords06[0].checked_sign ||
-            localStorage.getItem("username")
+          localStorage.getItem("username")
         );
         setcheckedbyDate(
           data[0].detailsRecords06[0].checked_date || formattedDate
@@ -1082,7 +1102,7 @@ const BMRSummaryRP = () => {
         );
         setVerifiedbySign(
           data[0].detailsRecords06[0].verified_sign ||
-            localStorage.getItem("username")
+          localStorage.getItem("username")
         );
         setVerifiedbyDate(
           data[0].detailsRecords06[0].verified_date || formattedDate
@@ -1093,7 +1113,7 @@ const BMRSummaryRP = () => {
 
         setcheckedbySignPR(
           data[0].detailsRecords06[1].checked_sign ||
-            localStorage.getItem("username")
+          localStorage.getItem("username")
         );
         setcheckedbyDatePR(
           data[0].detailsRecords06[1].checked_date || formattedDate
@@ -1103,7 +1123,7 @@ const BMRSummaryRP = () => {
         );
         setVerifiedbySignPR(
           data[0].detailsRecords06[1].verified_sign ||
-            localStorage.getItem("username")
+          localStorage.getItem("username")
         );
         setVerifiedbyDatePR(
           data[0].detailsRecords06[1].verified_date || formattedDate
@@ -1202,21 +1222,21 @@ const BMRSummaryRP = () => {
       const transformedData =
         response.data.length > 0
           ? response.data.map((item, index) => ({
-              key: item.id.toString(),
-              // id: item.id,
-              inputQty: parseFloat(item.input_quantity),
-              outputQty: parseFloat(item.output_quantity),
-              yield: parseFloat(item.calculation.replace("%", "")) || 0,
-            }))
+            key: item.id.toString(),
+            // id: item.id,
+            inputQty: parseFloat(item.input_quantity),
+            outputQty: parseFloat(item.output_quantity),
+            yield: parseFloat(item.calculation.replace("%", "")) || 0,
+          }))
           : [
-              {
-                key: "1",
-                id: "",
-                inputQty: 0,
-                outputQty: 0,
-                yield: 0,
-              },
-            ];
+            {
+              key: "1",
+              id: "",
+              inputQty: 0,
+              outputQty: 0,
+              yield: 0,
+            },
+          ];
 
       if (response.data.length > 0) {
         set09Disabled(true);
@@ -1299,18 +1319,18 @@ const BMRSummaryRP = () => {
         transformedData.length > 0
           ? transformedData
           : [
-              {
-                key: "1",
-                id: "",
-                stepNo: "",
-                deviation: "",
-                signature: "",
-                qaRemarks: "",
-                signatureDate: "",
-                supervisorSignature: "",
-                supervisorDate: "",
-              },
-            ]
+            {
+              key: "1",
+              id: "",
+              stepNo: "",
+              deviation: "",
+              signature: "",
+              qaRemarks: "",
+              signatureDate: "",
+              supervisorSignature: "",
+              supervisorDate: "",
+            },
+          ]
       );
     } catch (error) {
       console.error(
@@ -2860,7 +2880,7 @@ const BMRSummaryRP = () => {
           marginTop: "16px",
           display: disabled13Submitted ? "none" : "block",
         }}
-        // loading={postProdReview.load}
+      // loading={postProdReview.load}
       >
         Submit
       </Button>
@@ -3046,31 +3066,31 @@ const BMRSummaryRP = () => {
           const transformedData =
             response.data.length > 0
               ? response.data[0].detailsRecords12.map((item, index) => ({
-                  key: (index + 1).toString(),
-                  id: item.id,
-                  slNo: item.step_no,
-                  date: item.date,
-                  title: item.title,
-                  remarks: item.remarks,
-                }))
+                key: (index + 1).toString(),
+                id: item.id,
+                slNo: item.step_no,
+                date: item.date,
+                title: item.title,
+                remarks: item.remarks,
+              }))
               : [
-                  {
-                    key: "1",
-                    slNo: "1.",
-                    id: null,
-                    date: null,
-                    title: null,
-                    remarks: null,
-                  },
-                  {
-                    key: "2",
-                    slNo: "2.",
-                    id: null,
-                    date: null,
-                    title: null,
-                    remarks: null,
-                  },
-                ];
+                {
+                  key: "1",
+                  slNo: "1.",
+                  id: null,
+                  date: null,
+                  title: null,
+                  remarks: null,
+                },
+                {
+                  key: "2",
+                  slNo: "2.",
+                  id: null,
+                  date: null,
+                  title: null,
+                  remarks: null,
+                },
+              ];
 
           setListOfEnclosuresData(transformedData);
         } else {
@@ -3487,7 +3507,7 @@ const BMRSummaryRP = () => {
               handleDateChange(e, record.key, "dateOfCalibration")
             }
             disabled={role === "ROLE_HOD" || role === "ROLE_QA" || isSubmitted}
-            // style={centeredInputStyle}
+          // style={centeredInputStyle}
           />
         ),
     },
@@ -3506,7 +3526,7 @@ const BMRSummaryRP = () => {
               handleDateChange(e, record.key, "calibrationDueOn")
             }
             disabled={role === "ROLE_HOD" || role === "ROLE_QA" || isSubmitted}
-            // style={centeredInputStyle}
+          // style={centeredInputStyle}
           />
         ),
     },
@@ -4229,7 +4249,7 @@ const BMRSummaryRP = () => {
         <Button
           type="primary"
           onClick={handleverificationSave}
-          // style={{ display: disabled07 ? 'none' : 'block' }}
+        // style={{ display: disabled07 ? 'none' : 'block' }}
         >
           Save
         </Button>
@@ -4492,8 +4512,8 @@ const BMRSummaryRP = () => {
                   value={
                     record.signAndDate.date
                       ? moment(record.signAndDate.date).format(
-                          "YYYY-MM-DDTHH:mm"
-                        )
+                        "YYYY-MM-DDTHH:mm"
+                      )
                       : currentDateQAman_QAdes
                   }
                   onChange={(e) =>
@@ -4771,6 +4791,7 @@ const BMRSummaryRP = () => {
 
   const handleProductiondetailssave = async () => {
     const data = productionDetailsData[0];
+
     const payload = {
       prod_id: IdOne,
       batchNo: selectedOrderValue,
@@ -4786,6 +4807,8 @@ const BMRSummaryRP = () => {
       received_by: productionDetailsSignSup || username,
       received_on: productionDetailsDateSup,
       poStatus: status || "",
+      baleFrom: selectedOption,
+      baleTo: selectedOptions
     };
 
     try {
@@ -4825,6 +4848,8 @@ const BMRSummaryRP = () => {
       received_by: productionDetailsSignSup || username,
       received_on: productionDetailsDateSup,
       poStatus: status,
+      baleFrom: selectedOption,
+      baleTo: selectedOptions
     };
 
     try {
@@ -4861,8 +4886,7 @@ const BMRSummaryRP = () => {
           Batch Quantity in Kgs:
         </th>
         <td colspan="25">
-          {productionDetails?.bmr01rp01productiondetailsSap?.[0]
-            ?.Batch_Quantity ??
+          {PDEBatchQnty ??
             batchqty ??
             "N/A"}
         </td>
@@ -5249,7 +5273,7 @@ const BMRSummaryRP = () => {
           <Input
             addonBefore="Department Name:"
             value="Spunlace"
-            // disabled
+          // disabled
           />
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -5257,7 +5281,7 @@ const BMRSummaryRP = () => {
           <Input
             addonBefore="BMR No. / Rev. No.:"
             value="SL-RP-002 / 01"
-            // disabled
+          // disabled
           />
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -5265,7 +5289,7 @@ const BMRSummaryRP = () => {
           <Input
             addonBefore="Product Name:"
             value="RP Cotton"
-            // disabled
+          // disabled
           />
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -5273,7 +5297,7 @@ const BMRSummaryRP = () => {
           <Input
             addonBefore="Effective Date:"
             value=" 01/04/2024"
-            // disabled
+          // disabled
           />
         </div>
       </div>
@@ -7093,8 +7117,8 @@ const BMRSummaryRP = () => {
             <td>Satisfactory</td>
             <td>
               {printResponseData &&
-              printResponseData?.rpb07verificationofrecords?.[0]
-                ?.detailsRecords06?.[0]?.details === "satisfactory"
+                printResponseData?.rpb07verificationofrecords?.[0]
+                  ?.detailsRecords06?.[0]?.details === "satisfactory"
                 ? "✓"
                 : "NA"}
             </td>
@@ -7103,8 +7127,8 @@ const BMRSummaryRP = () => {
             <td>Not Satisfactory</td>
             <td>
               {printResponseData &&
-              printResponseData?.rpb07verificationofrecords?.[0]
-                ?.detailsRecords06?.[0]?.details === "notSatisfactory"
+                printResponseData?.rpb07verificationofrecords?.[0]
+                  ?.detailsRecords06?.[0]?.details === "notSatisfactory"
                 ? "✓"
                 : "NA"}
             </td>
@@ -7138,8 +7162,8 @@ const BMRSummaryRP = () => {
             <td>Satisfactory</td>
             <td>
               {printResponseData &&
-              printResponseData?.rpb07verificationofrecords?.[0]
-                ?.detailsRecords06?.[1]?.details === "satisfactory"
+                printResponseData?.rpb07verificationofrecords?.[0]
+                  ?.detailsRecords06?.[1]?.details === "satisfactory"
                 ? "✓"
                 : "NA"}
             </td>
@@ -7148,8 +7172,8 @@ const BMRSummaryRP = () => {
             <td>Not Satisfactory</td>
             <td>
               {printResponseData &&
-              printResponseData?.rpb07verificationofrecords?.[0]
-                ?.detailsRecords06?.[1]?.details === "notSatisfactory"
+                printResponseData?.rpb07verificationofrecords?.[0]
+                  ?.detailsRecords06?.[1]?.details === "notSatisfactory"
                 ? "✓"
                 : "NA"}
             </td>
@@ -7496,7 +7520,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[0]
-                    ?.status_1 === "Reviewed"
+                  ?.status_1 === "Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7514,7 +7538,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[0]
-                    ?.status_1 === "Not Reviewed"
+                  ?.status_1 === "Not Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7530,7 +7554,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[1]
-                    ?.status_1 === "Reviewed"
+                  ?.status_1 === "Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7548,7 +7572,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[1]
-                    ?.status_1 === "Not Reviewed"
+                  ?.status_1 === "Not Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7563,7 +7587,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[2]
-                    ?.status_1 === "Reviewed"
+                  ?.status_1 === "Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7581,7 +7605,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[2]
-                    ?.status_1 === "Not Reviewed"
+                  ?.status_1 === "Not Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7596,7 +7620,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[3]
-                    ?.status_1 === "Reviewed"
+                  ?.status_1 === "Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7614,7 +7638,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[3]
-                    ?.status_1 === "Not Reviewed"
+                  ?.status_1 === "Not Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7629,7 +7653,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[4]
-                    ?.status_1 === "Reviewed"
+                  ?.status_1 === "Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}
@@ -7647,7 +7671,7 @@ const BMRSummaryRP = () => {
             <td>
               {printResponseData
                 ? printResponseData?.rpb14qarelease?.[0]?.details?.[4]
-                    ?.status_1 === "Not Reviewed"
+                  ?.status_1 === "Not Reviewed"
                   ? "✓"
                   : "NA"
                 : "NA"}

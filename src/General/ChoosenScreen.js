@@ -30,12 +30,16 @@ const ChoosenScreen = () => {
   const [placement, setPlacement] = useState("left");
   const [formNo, setFormNo] = useState("");
   const departmentId = localStorage.getItem("departmentId");
+
+
   const showDrawer = () => {
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     console.log("departmentId", departmentId);
     const x = localStorage.getItem("role");
@@ -735,6 +739,18 @@ const ChoosenScreen = () => {
     option.roles.includes(role)
   );
 
+  const QCALLOptions = [
+    {
+      value: "PH-QCL01F-029",
+      label: "PH-QCL01F-029 - REQUISITION SAMPLE ANALYSIS REPORT",
+      roles: ["ROLE_HOD"],
+    }
+  ]
+
+  const QCOptions = QCALLOptions.filter((option) =>
+    option.roles.includes(role)
+  );
+
   const BleachingForm =
     [
       {
@@ -821,9 +837,14 @@ const ChoosenScreen = () => {
           },
           {
             value: "PH-PRD01/F-016 RE-PROCESSING REPORT",
-            label: "PH-PRD01/F-016 RE-PROCESSING REPORT",
+            label: " PH-PRD01/F-016 RE-PROCESSING REPORT",
           },
         ],
+      },
+      {
+        label: <span>Quality Control</span>,
+        title: "Quality Control",
+        options: QCOptions,
       },
       {
         label: <span>Quality Assurance</span>,
@@ -958,6 +979,11 @@ const ChoosenScreen = () => {
       ],
     },
     {
+      label: <span>Quality Control</span>,
+      title: "Quality Control",
+      options: QCOptions,
+    },
+    {
       label: <span>Quality Assurance</span>,
       title: "Quality Assurance",
       options: qualityAssuranceOptionsSpunlace,
@@ -1056,6 +1082,16 @@ const ChoosenScreen = () => {
           ]
           : []),
       ],
+    },
+    {
+      label: <span>Quality Control</span>,
+      title: "Quality Control",
+      options: QCOptions,
+    },
+    {
+      label: <span>Quality Assurance</span>,
+      title: "Quality Assurance",
+      options: qualityAssuranceOptionsPadpunching,
     },
     {
       label: <span>Quality Assurance</span>,
@@ -1169,7 +1205,11 @@ const ChoosenScreen = () => {
           : []),
       ],
     },
-
+    {
+      label: <span>Quality Control</span>,
+      title: "Quality Control",
+      options: QCOptions,
+    },
     {
       label: <span>Quality Assurance</span>,
       title: "Quality Assurance",
@@ -2538,6 +2578,11 @@ const ChoosenScreen = () => {
       ],
     },
     {
+      label: <span>Quality Control</span>,
+      title: "Quality Control",
+      options: QCOptions,
+    },
+    {
       label: <span>Quality Assurance</span>,
       title: "Quality Assurance",
       options: [
@@ -2554,7 +2599,7 @@ const ChoosenScreen = () => {
           ]
           : []),
       ],
-    },
+    }
   ];
 
   const marketting = [
@@ -2968,7 +3013,7 @@ const ChoosenScreen = () => {
         },
         {
           value: "PH-PRD01/F-016 RE-PROCESSING REPORT",
-          label: "PH-PRD01/F-016 RE-PROCESSING REPORT",
+          label: " PH-PRD01/F-016 RE-PROCESSING REPORT",
         },
       ],
     },
@@ -4754,6 +4799,7 @@ const ChoosenScreen = () => {
       });
     }
   });
+
   console.log("subdivisionFormsMap", subdivisionFormsMap)
 
   // Step 3: Add consolidated subdivision forms at the end
@@ -6275,7 +6321,7 @@ const ChoosenScreen = () => {
     .map((id) => parseInt(id, 10))
     .filter(Boolean) || [];
 
-  console.log("  const DepartmentIDsMultiple = storedIds", DepartmentIDsMultiple, DepartmentIDsMultiple.includes(3))
+  console.log("const DepartmentIDsMultiple = storedIds", DepartmentIDsMultiple, DepartmentIDsMultiple.includes(3))
 
   return (
     <div className="hell-2">
@@ -6406,13 +6452,27 @@ const ChoosenScreen = () => {
                             color: "#151718",
                           }}
                         >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
+                      key: "7",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
                           Traceability
                         </b>
                       ),
                       onClick: () => navigate("/Precot/Traceability"),
                     },
                     {
-                      key: "7",
+                      key: "8",
                       icon: (
                         <FaLock
                           color="#151718"
@@ -6499,6 +6559,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "6",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "7",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -6539,6 +6613,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -6647,6 +6735,20 @@ const ChoosenScreen = () => {
                     },
                     {
                       key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
+                      key: "5",
                       icon: (
                         <FaLock
                           color="#151718"
@@ -6706,6 +6808,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "3",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "4",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -6762,6 +6878,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "3",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "4",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -6870,6 +7000,20 @@ const ChoosenScreen = () => {
                     },
                     {
                       key: "4",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
+                      key: "5",
                       icon: (
                         <FaLock
                           color="#151718"
@@ -6912,9 +7056,22 @@ const ChoosenScreen = () => {
                         ),
                         onClick: () => navigate("/Precot/choosenScreen"),
                       },
-
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -6955,6 +7112,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7103,6 +7274,20 @@ const ChoosenScreen = () => {
                     },
                     {
                       key: "7",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
+                      key: "8",
                       icon: (
                         <FaLock
                           color="#151718"
@@ -7143,7 +7328,21 @@ const ChoosenScreen = () => {
                         onClick: () => navigate("/Precot/Mapping"),
                       },
                       {
-                        key: "7",
+                        key: "5",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "6",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7186,9 +7385,22 @@ const ChoosenScreen = () => {
                           ),
                           onClick: () => navigate("/Precot/choosenScreen"),
                         },
-
                         {
                           key: "2",
+                          icon: <IoCreate color="#151718" />,
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Approval Status Dashboard
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot/ApprovalDashboard"),
+                        },
+                        {
+                          key: "3",
                           icon: (
                             <FaLock
                               color="#151718"
@@ -7229,6 +7441,20 @@ const ChoosenScreen = () => {
                         },
                         {
                           key: "2",
+                          icon: <IoCreate color="#151718" />,
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Approval Status Dashboard
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot/ApprovalDashboard"),
+                        },
+                        {
+                          key: "3",
                           icon: (
                             <FaLock
                               color="#151718"
@@ -7310,6 +7536,20 @@ const ChoosenScreen = () => {
                       onClick: () => navigate("/Precot/choosenScreen"),
                     },
                     {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
                       key: "3",
                       icon: <IoCreate color="#151718" />,
                       label: (
@@ -7378,9 +7618,22 @@ const ChoosenScreen = () => {
                         ),
                         onClick: () => navigate("/Precot/choosenScreen"),
                       },
-
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7421,6 +7674,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7453,7 +7720,6 @@ const ChoosenScreen = () => {
               <Col>
                 <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
               </Col>
-
               <Col
                 style={{
                   marginLeft: "1em",
@@ -7497,6 +7763,20 @@ const ChoosenScreen = () => {
                         </b>
                       ),
                       onClick: () => navigate("/Precot/choosenScreen"),
+                    },
+                    {
+                      key: "2",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
                     },
                     {
                       key: "3",
@@ -7555,6 +7835,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7595,6 +7889,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "2",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "3",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7701,6 +8009,7 @@ const ChoosenScreen = () => {
                       ),
                       onClick: () => navigate("/Precot/Report/Generation"),
                     },
+
                     {
                       key: "4",
                       icon: <IoCreate color="#151718" />,
@@ -7759,6 +8068,20 @@ const ChoosenScreen = () => {
                     },
                     {
                       key: "8",
+                      icon: <IoCreate color="#151718" />,
+                      label: (
+                        <b
+                          style={{
+                            color: "#151718",
+                          }}
+                        >
+                          Approval Status Dashboard
+                        </b>
+                      ),
+                      onClick: () => navigate("/Precot/ApprovalDashboard"),
+                    },
+                    {
+                      key: "9",
                       icon: (
                         <FaLock
                           color="#151718"
@@ -7829,6 +8152,20 @@ const ChoosenScreen = () => {
                       },
                       {
                         key: "7",
+                        icon: <IoCreate color="#151718" />,
+                        label: (
+                          <b
+                            style={{
+                              color: "#151718",
+                            }}
+                          >
+                            Approval Status Dashboard
+                          </b>
+                        ),
+                        onClick: () => navigate("/Precot/ApprovalDashboard"),
+                      },
+                      {
+                        key: "8",
                         icon: (
                           <FaLock
                             color="#151718"
@@ -7867,6 +8204,20 @@ const ChoosenScreen = () => {
                             </b>
                           ),
                           onClick: () => navigate("/Precot/choosenScreen"),
+                        },
+                        {
+                          key: "2",
+                          icon: <IoCreate color="#151718" />,
+                          label: (
+                            <b
+                              style={{
+                                color: "#151718",
+                              }}
+                            >
+                              Approval Status Dashboard
+                            </b>
+                          ),
+                          onClick: () => navigate("/Precot/ApprovalDashboard"),
                         },
                         {
                           key: "4",
@@ -7998,6 +8349,20 @@ const ChoosenScreen = () => {
                             onClick: () => navigate("/Precot/RawMaterialIssue"),
                           },
                           {
+                            key: "6",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Approval Status Dashboard
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/ApprovalDashboard"),
+                          },
+                          {
                             key: "7",
                             icon: (
                               <FaLock
@@ -8039,6 +8404,20 @@ const ChoosenScreen = () => {
                           },
                           {
                             key: "2",
+                            icon: <IoCreate color="#151718" />,
+                            label: (
+                              <b
+                                style={{
+                                  color: "#151718",
+                                }}
+                              >
+                                Approval Status Dashboard
+                              </b>
+                            ),
+                            onClick: () => navigate("/Precot/ApprovalDashboard"),
+                          },
+                          {
+                            key: "3",
                             icon: (
                               <FaLock
                                 color="#151718"
@@ -8100,50 +8479,63 @@ const ChoosenScreen = () => {
               margin: "0",
             }}
             items={
-              role === "ROLE_HOD"
-                ? [
-                  {
-                    key: "1",
-                    icon: <IoCreate color="#151718" />,
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Form Browser
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot/choosenScreen"),
-                  },
-                  {
-                    key: "2",
-                    icon: (
-                      <FaLock
-                        color="#151718"
-                        onClick={() => {
-                          if (
-                            window.confirm("Are you sure want to logout")
-                          ) {
-                            localStorage.removeItem("token");
-                            navigate("/Precot");
-                          }
-                        }}
-                      />
-                    ),
-                    label: (
-                      <b
-                        style={{
-                          color: "#151718",
-                        }}
-                      >
-                        Logout
-                      </b>
-                    ),
-                    onClick: () => navigate("/Precot"),
-                  },
-                ]
-                : null
+              [
+                {
+                  key: "1",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Form Browser
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/choosenScreen"),
+                },
+                {
+                  key: "2",
+                  icon: <IoCreate color="#151718" />,
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Approval Status Dashboard
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot/ApprovalDashboard"),
+                },
+                {
+                  key: "3",
+                  icon: (
+                    <FaLock
+                      color="#151718"
+                      onClick={() => {
+                        if (
+                          window.confirm("Are you sure want to logout")
+                        ) {
+                          localStorage.removeItem("token");
+                          navigate("/Precot");
+                        }
+                      }}
+                    />
+                  ),
+                  label: (
+                    <b
+                      style={{
+                        color: "#151718",
+                      }}
+                    >
+                      Logout
+                    </b>
+                  ),
+                  onClick: () => navigate("/Precot"),
+                },
+              ]
+
             }
           />
         </>)}

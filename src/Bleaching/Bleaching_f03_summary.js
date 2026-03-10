@@ -35,7 +35,6 @@ import { createGlobalStyle } from "styled-components";
 const Bleaching_f03_summary = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState([{ date: "" }]);
-  // const [formData, setFormData] = useState([]);
   const formName = "Metal Detector Checklist";
 
   const formatNo = "PH-PRD01/F-002";
@@ -53,7 +52,6 @@ const Bleaching_f03_summary = () => {
   const [placement, setPlacement] = useState("left");
   const [reason, setReason] = useState(false);
   const [displayDateFormat, setDisplayFormat] = useState("");
-  // const [formattedDate, setFormattedDate] = useState("");
   const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
   const [selectMonthDates, setSelectMonthDates] = useState([]);
   const [selectMonth, setSelectMonth] = useState("");
@@ -75,8 +73,8 @@ const Bleaching_f03_summary = () => {
       -webkit-print-color-adjust: exact;
       width: 100%;
       height: 100%;
-      transform: scale(0.9); /* Adjust scale as needed */
-      transform-origin: top left right bottom; /* Adjust the origin if needed */
+      transform: scale(0.9);
+      transform-origin: top left right bottom;
     }
   }
   }
@@ -121,8 +119,6 @@ const Bleaching_f03_summary = () => {
     const token = localStorage.getItem("token");
     const username = printData?.[0]?.hod_sign;
     if (username) {
-      // console.log("usernameparams", username);
-
       axios
         .get(
           `${API.prodUrl}/Precot/api/Format/Service/image?username=${username}`,
@@ -135,7 +131,6 @@ const Bleaching_f03_summary = () => {
           }
         )
         .then((res) => {
-          // console.log("Response:", res.data);
           const base64 = btoa(
             new Uint8Array(res.data).reduce(
               (data, byte) => data + String.fromCharCode(byte),
@@ -149,10 +144,23 @@ const Bleaching_f03_summary = () => {
           // console.log("Error in fetching image:", err);
         });
     }
-  }, [printData,API.prodUrl, token]);
+  }, [printData, API.prodUrl, token]);
 
   const [printButtonLoading, setPrintButtonLoading] = useState(false);
 
+  // Helper function to check if selected month/year is current month/year
+  const isCurrentMonthYear = () => {
+    const currentDate = new Date();
+    const currentMonth = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const currentYear = currentDate.getFullYear().toString();
+
+    return selectMonth === currentMonth && selectYear === currentYear;
+  };
+
+  // Get current day number
+  const getCurrentDay = () => {
+    return new Date().getDate();
+  };
 
   const handlePrintSummary = () => {
     setPrintButtonLoading(true);
@@ -190,7 +198,6 @@ const Bleaching_f03_summary = () => {
       .then((response) => {
         if (response.data.length > 0) {
           setPrintData(response.data);
-          // Only attempt print if data is not empty
           setTimeout(() => {
             if (response.data.length > 0) {
               window.print();
@@ -199,7 +206,6 @@ const Bleaching_f03_summary = () => {
             }
           }, 3000);
         } else {
-          // Treat empty array as an error
           message.error("No data found");
           setPrintButtonLoading(false);
         }
@@ -210,7 +216,6 @@ const Bleaching_f03_summary = () => {
         setPrintButtonLoading(false);
       })
       .finally(() => {
-        // Ensure loading state is cleared after success or error
         setPrintButtonLoading(false);
       });
   };
@@ -248,40 +253,30 @@ const Bleaching_f03_summary = () => {
 
   const generateDatesForMonth = (month, year) => {
     const dates = [];
-
     const daysInMonth = new Date(year, month, 0).getDate();
 
     for (let day = 1; day <= daysInMonth; day++) {
-      if (day < 10) {
-        day = "0" + day;
-      }
-      const date = `${day}/${month}/${year}`;
-      console.log('date  generateDatesForMonth =', date);
+      let dayStr = day < 10 ? "0" + day : day.toString();
+      const date = `${dayStr}/${month}/${year}`;
       dates.push(date);
     }
-    console.log('dates  generateDatesForMonth =', dates);
-
     return dates;
   };
 
-  let datesInOctober2024 = [];
-
   const getMonthFromDate = (dateStr) => {
-    // console.log('dateString', dateStr);
     const dateParts = dateStr.split("/");
     return dateParts[1];
   };
+
   const getYearFromDate = (dateStr) => {
     const dateParts = dateStr.split("/");
-    return dateParts[0];
+    return dateParts[2];
   };
 
   const handleEditClick = (record) => {
-    // const month = getMonthFromDate("22-06-2024");
     const date = record.date;
     const month = getMonthFromDate(date);
     const year = getYearFromDate(date);
-    // console.log('current Month Dates', month);
 
     const initialValues = {
       date: date,
@@ -289,12 +284,6 @@ const Bleaching_f03_summary = () => {
     };
     navigate("/Precot/Bleaching/F-03", { state: { initialValues } });
   };
-
-  // const formatDate = (dateString) => {
-  //   // console.log("antd date" , dateString)
-  //   const [year, month, day] = dateString.split('-');
-  //   return `${day}/${month}/${year}`;
-  // };
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -377,7 +366,6 @@ const Bleaching_f03_summary = () => {
   }
 
   const handleDateChange = (e) => {
-
     const date = e.target.value;
     const formattedDate = formatedDate(date);
     const month = getMonthFromDate(formattedDate);
@@ -387,8 +375,6 @@ const Bleaching_f03_summary = () => {
       ...prevValues,
       date: formattedDate,
     }));
-
-    // selectMonthDates = [];
   };
 
   const handleSelctChange = (value) => {
@@ -406,17 +392,8 @@ const Bleaching_f03_summary = () => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-  const formatedDateforSummary = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
 
   const handleClick = () => {
-    // console.log(initialValues.date, initialValues.selectSection)
     if (initialValues.date == "") {
       notificationMessage("warning", "please select Date!");
     } else if (
@@ -425,11 +402,9 @@ const Bleaching_f03_summary = () => {
     ) {
       notificationMessage("warning", "please select Section!");
     } else {
-      // console.log('initial', initialValues);
       navigate("/Precot/Bleaching/F-03", { state: { initialValues } });
     }
   };
-
 
   const fetchPrintData = (date) => {
     const transformValue = (value) => {
@@ -439,7 +414,7 @@ const Bleaching_f03_summary = () => {
         case "no":
           return "X";
         case "NA":
-          "NA";
+          return "NA";
         default:
           return value;
       }
@@ -463,26 +438,86 @@ const Bleaching_f03_summary = () => {
         ),
         noOfMetalContaminants: transformValue(record.noOfMetalContaminants),
         functionCheck: transformValue(record.functionCheck),
-        checkedBy: transformValue(record.supervisor_submit_by),
-        cleanedBy: record.cleanedBy,
+        checkedBy: record.checkedBy || record.supervisor_submit_by || "",
+        cleanedBy: record.cleanedBy || "",
         hod_submit_by: transformValue(record.hod_submit_by),
-      };
-    } else {
-      result = {
-        metalContaminatedMaterials: transformValue("NA"),
-        noOfMetalContaminants: transformValue("-"),
-        functionCheck: transformValue("NA"),
-        checkedBy: "",
-        cleanedBy: "",
-        hod_submit_by: "",
       };
     }
 
     return result;
   };
 
+  // New function to determine what to display based on date and current day
+  const getDisplayValue = (rowDate, value, isForCleanedBy = false) => {
+    // Parse the date to get day number
+    const dateParts = rowDate.split('/');
+    const dayNumber = parseInt(dateParts[0], 10);
+    const monthNumber = dateParts[1];
+    const yearNumber = dateParts[2];
+
+    const isCurrentMonth = isCurrentMonthYear();
+    const currentDay = getCurrentDay();
+
+    // For cleanedBy and checkedBy fields
+    if (isForCleanedBy) {
+      if (value && value !== "") {
+        return value;
+      } else {
+        // If no value, check if we should show empty string or NA
+        if (isCurrentMonth) {
+          if (dayNumber <= currentDay) {
+            return "NA";
+          } else {
+            return "";
+          }
+        } else {
+          return "NA";
+        }
+      }
+    }
+
+    // For other fields (✓, X, numbers, etc.)
+    // If there's a valid value, show it
+    if (value && value !== "" && value !== "NA" && value !== "NA") {
+      return value;
+    }
+
+    // If no valid value, determine based on date
+    if (isCurrentMonth) {
+      if (dayNumber <= currentDay) {
+        return "NA";
+      } else {
+        return "";
+      }
+    } else {
+      return "NA";
+    }
+  };
+
+  // Special handling for noOfMetalContaminants which can have numbers
+  const getNoOfMetalContaminantsValue = (rowDate, value) => {
+    const dateParts = rowDate.split('/');
+    const dayNumber = parseInt(dateParts[0], 10);
+
+    const isCurrentMonth = isCurrentMonthYear();
+    const currentDay = getCurrentDay();
+
+    if (value && value !== "" && value !== "NA" && value !== "NA") {
+      return value;
+    }
+
+    if (isCurrentMonth) {
+      if (dayNumber <= currentDay) {
+        return "NA";
+      } else {
+        return "";
+      }
+    } else {
+      return "NA";
+    }
+  };
+
   const processMetalContaminatedMaterials = (selectMonthDates) => {
-    console.log("processMetalContaminatedMaterials ehted");
     let lastValidIndex = -1;
 
     selectMonthDates.forEach((row, index) => {
@@ -493,20 +528,14 @@ const Bleaching_f03_summary = () => {
     });
 
     return selectMonthDates.map((row, index) => {
-      console.log("processMetalContaminatedMaterials row", row);
-      let value = fetchPrintData(row).metalContaminatedMaterials;
-      if (value === "NA" && index > lastValidIndex) {
-        value = "";
-      }
-      console.log("processMetalContaminatedMaterials value", value);
-
-      return value;
+      const value = fetchPrintData(row).metalContaminatedMaterials;
+      return getDisplayValue(row, value);
     });
   };
+
   const processedData = processMetalContaminatedMaterials(selectMonthDates);
 
   const processFunctionCheck = (selectMonthDates) => {
-    console.log("processFunctionCheck ehted");
     let lastValidIndex = -1;
 
     selectMonthDates.forEach((row, index) => {
@@ -517,14 +546,8 @@ const Bleaching_f03_summary = () => {
     });
 
     return selectMonthDates.map((row, index) => {
-      console.log("processfunctionCheck row", row);
-      let value = fetchPrintData(row).functionCheck;
-      if (value === "NA" && index > lastValidIndex) {
-        value = "";
-      }
-      console.log("processfunctionCheck value", value);
-
-      return value;
+      const value = fetchPrintData(row).functionCheck;
+      return getDisplayValue(row, value);
     });
   };
 
@@ -546,8 +569,6 @@ const Bleaching_f03_summary = () => {
             },
           })
           .then((response) => {
-            // const formattedDate = response.data ? convertDateFormat(response.data.date) : '';
-
             setFormData(response.data);
           })
           .catch((error) => {
@@ -560,28 +581,71 @@ const Bleaching_f03_summary = () => {
 
     fetchData();
   }, []);
+
   const getMonthName = (monthNumber) => {
     const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
     ];
-    return months[monthNumber - 1]; // Adjust month index
+    return months[monthNumber - 1];
   };
+
   const formattedHodSubmitOn = formatDate(
     printData.length > 0 && printData[printData.length - 1].hod_submit_on
       ? printData[printData.length - 1].hod_submit_on
       : ""
   );
+
+  // Helper function to render cell content with vertical text if empty
+  const renderCellContent = (content, isVertical = false) => {
+    if (content === "") {
+      return (
+        <div style={{
+          width: "10px",
+          height: "70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          {/* Empty cell - nothing to display */}
+        </div>
+      );
+    } else if (content === "NA" && isVertical) {
+      return (
+        <div style={{
+          width: "10px",
+          height: "70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          <div style={{
+            writingMode: "vertical-rl",
+            transform: "rotate(180deg)",
+            textAlign: "center",
+            height: "50px",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "center"
+          }}>
+            NA
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div style={{
+          width: "10px",
+          height: "70px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          {content}
+        </div>
+      );
+    }
+  };
 
   return (
     <div>
@@ -688,41 +752,17 @@ const Bleaching_f03_summary = () => {
                         <p>Daily</p>
                       </td>
 
-
-
-                      {processedData.map((value, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "70px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {/* {value} */}
-                            {
-                              value == "NA" ? (
-                                <div style={{
-                                  writingMode: "vertical-rl",
-                                  transform: "rotate(180deg)",
-                                  textAlign: "center",
-                                  height: "50px", // adjust height as needed
-                                  display: "flex",
-                                  alignItems: "flex-end", // align text at the bottom
-                                  justifyContent: "center"
-                                }}>
-                                  NA
-                                </div>
-                              ) : (
-                                "✓"
-                              )
-                            }
-                          </p>
-                        </td>
-                      ))}
+                      {selectMonthDates.map((row, rowIndex) => {
+                        const value = fetchPrintData(row).metalContaminatedMaterials;
+                        const displayValue = getDisplayValue(row, value);
+                        return (
+                          <td className="data-border" key={rowIndex}>
+                            {renderCellContent(displayValue, displayValue === "NA")}
+                          </td>
+                        );
+                      })}
                     </tr>
+
                     <tr>
                       <td className="data-border" style={{ width: "10px" }}>
                         2
@@ -739,59 +779,42 @@ const Bleaching_f03_summary = () => {
                       >
                         <p>Daily</p>
                       </td>
-                      {selectMonthDates.map((row, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "70px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {
-                              fetchPrintData(row).noOfMetalContaminants === "-" ? (
-                                <div style={{
-                                  writingMode: "vertical-rl",
-                                  transform: "rotate(180deg)",
-                                  textAlign: "center",
-                                  height: "50px", // adjust height as needed
-                                  display: "flex",
-                                  alignItems: "flex-end", // align text at the bottom
-                                  justifyContent: "center"
-                                }}>
-                                  NA
-                                </div>
-                              ) : (
-                                fetchPrintData(row).noOfMetalContaminants
-                              )
-                            }
-                          </p>
-                        </td>
-                      ))}
+                      {selectMonthDates.map((row, rowIndex) => {
+                        const value = fetchPrintData(row).noOfMetalContaminants;
+                        const displayValue = getNoOfMetalContaminantsValue(row, value);
+                        return (
+                          <td className="data-border" key={rowIndex}>
+                            {renderCellContent(displayValue, displayValue === "NA" || displayValue === "NA")}
+                          </td>
+                        );
+                      })}
                     </tr>
+
                     <tr>
                       <td className="data-border" colSpan={3}>
                         Cleaned by
                       </td>
-                      {selectMonthDates.map((row, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "90px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              transform: "rotate(270deg)",
-                            }}
-                          >
-                            {/* {printData[0].metalContaminatedMaterials} */}
-                            {fetchPrintData(row).cleanedBy || "NA"}
-                          </p>
-                        </td>
-                      ))}
+                      {selectMonthDates.map((row, rowIndex) => {
+                        const value = fetchPrintData(row).cleanedBy;
+                        const displayValue = getDisplayValue(row, value, true);
+                        return (
+                          <td className="data-border" key={rowIndex}>
+                            <p
+                              style={{
+                                width: "10px",
+                                height: "90px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transform: "rotate(270deg)",
+                                margin: 0,
+                              }}
+                            >
+                              {displayValue}
+                            </p>
+                          </td>
+                        );
+                      })}
                     </tr>
                   </tbody>
                   <br></br>
@@ -834,45 +857,44 @@ const Bleaching_f03_summary = () => {
                         <p style={{ transform: "rotate(270deg)" }}>Daily</p>
                       </td>
 
-                      {processedFunctionCheck.map((value, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "100px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {/* {printData[0].metalContaminatedMaterials} */}
-                            {value}
-                          </p>
-                        </td>
-                      ))}
+                      {selectMonthDates.map((row, rowIndex) => {
+                        const value = fetchPrintData(row).functionCheck;
+                        const displayValue = getDisplayValue(row, value);
+                        return (
+                          <td className="data-border" key={rowIndex}>
+                            {renderCellContent(displayValue, displayValue === "NA")}
+                          </td>
+                        );
+                      })}
                     </tr>
 
                     <tr>
                       <td className="data-border" colSpan={3}>
                         Checked by
                       </td>
-                      {selectMonthDates.map((row, rowIndex) => (
-                        <td className="data-border">
-                          <p
-                            style={{
-                              width: "10px",
-                              height: "100px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              transform: "rotate(270deg)",
-                            }}
-                          >
-                            {fetchPrintData(row).checkedBy || "NA"}
-                          </p>
-                        </td>
-                      ))}
+                      {selectMonthDates.map((row, rowIndex) => {
+                        const value = fetchPrintData(row).checkedBy;
+                        const displayValue = getDisplayValue(row, value, true);
+                        return (
+                          <td className="data-border" key={rowIndex}>
+                            <p
+                              style={{
+                                width: "10px",
+                                height: "100px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transform: "rotate(270deg)",
+                                margin: 0,
+                              }}
+                            >
+                              {displayValue}
+                            </p>
+                          </td>
+                        );
+                      })}
                     </tr>
+
                     <tr>
                       <td
                         className="data-border"
@@ -899,22 +921,9 @@ const Bleaching_f03_summary = () => {
                       <td className="data-border" colSpan={34}>
                         <p style={{ height: "80px" }}>
                           Reviewed by Head of the Department or Designee:
-                          {/* {printData.length > 0 ? printData[0].hod_submit_by : ''}
-                        <br></br>
-                        {formattedHodSubmitOn}
-                        <br></br>
-
-                       Sign&date */}
                           {(printData[0].hod_status === "HOD_REJECTED" ||
                             printData[0].hod_status === "HOD_APPROVED") && (
                               <>
-                                {/* <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >*/}
                                 <div>
                                   {" "}
                                   {printData.length > 0
@@ -931,8 +940,6 @@ const Bleaching_f03_summary = () => {
                                     alt="HOD"
                                   />
                                 )}
-                                {/* </div> */}
-                                {/* <span style={{fontSize:'11px',marginLeft:"0px"}}>Signature & Date</span> */}
                               </>
                             )}
                         </p>
@@ -983,7 +990,6 @@ const Bleaching_f03_summary = () => {
           <Menu
             theme="dark"
             mode="inline"
-            // defaultSelectedKeys={["1"]}
             style={{
               backgroundColor: "transparent",
               display: "flex",
@@ -1225,7 +1231,6 @@ const Bleaching_f03_summary = () => {
             <div>
               <label htmlFor="yearSelect">Select Section</label>
               <Select
-                // defaultValue="Blow room (CCP - 02A)"
                 placeholder="Please select selectSection"
                 style={{
                   width: "100%",
@@ -1258,13 +1263,6 @@ const Bleaching_f03_summary = () => {
             ></Button>
           }
           buttonsArray={[
-            // <Button
-            //     onClick={handleBack}
-            //     style={{ backgroundColor: "blue", color: "white", marginRight: '10px' }}
-            //     type="primary"
-            // >
-            //     Back
-            // </Button>,
             <Button
               style={{
                 backgroundColor: "#E5EEF9",
@@ -1332,7 +1330,6 @@ const Bleaching_f03_summary = () => {
         />
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
-        {/* <DatePicker style={{ margin: '10px' }} format={dateFormat} onChange={(date, dateString) => handleDateChange(date)} className='no-print' /> */}
         <label>Date :</label>
         <input
           type="date"
@@ -1347,7 +1344,6 @@ const Bleaching_f03_summary = () => {
           max={formattedToday}
         />
         <Select
-          // defaultValue="Blow room (CCP - 02A)"
           placeholder="Please select section"
           style={{
             width: 220,
@@ -1376,7 +1372,6 @@ const Bleaching_f03_summary = () => {
           shape="round"
           icon={<BiNavigation />}
           onClick={handleClick}
-        // disabled={gotobtn}
         >
           Go To
         </Button>

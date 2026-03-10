@@ -10,7 +10,7 @@ import UserCreate from "./General/UserCreate";
 import UserList from "./General/UserList";
 import UserEdit from "./General/UserEdit";
 import ChoosenScreen from "./General/ChoosenScreen";
-
+import Status_Dashboard from './General/ApprovalDashboard';
 import Report from "./General/Report";
 import BleachingSummary from "./Bleaching/BleachingSummary";
 import Bleaching from "./Bleaching/Bleaching";
@@ -468,11 +468,13 @@ function App() {
     <BrowserRouter>
       {/* <LogoutTimer />  */}
       <Routes>
+        <Route path="/Precot/ApprovalDashboard" element={<Status_Dashboard />} />
+
         <Route
           path="/Precot/signatureUpload"
           element={
             <ProtectedRoute>
-              <SignatureUpload />{" "}
+              <SignatureUpload />
             </ProtectedRoute>
           }
         />
@@ -534,7 +536,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-                <Route
+        <Route
           path="/Precot/reportDown"
           element={
             <ProtectedRoute>
@@ -679,7 +681,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-          <Route
+        <Route
           path="/Precot/Bleaching_Mapping"
           element={
             <ProtectedRoute>

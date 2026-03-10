@@ -1,25 +1,20 @@
-import { Button, Col, Input, Row, Tabs, Select, message, Tooltip } from "antd";
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import { Radio, Form, DatePicker } from "antd";
-import logo from "../Assests/logo.png";
-import API from "../baseUrl.json";
-import { useNavigate, useLocation } from "react-router-dom";
-import BleachingHeader from "../Components/BleachingHeader";
-import { BiFontSize, BiLock } from "react-icons/bi";
-import { IoChevronBackSharp, IoCreate, IoSave } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
-import { GrDocumentStore } from "react-icons/gr";
-import moment from "moment";
-import gif from "../Assests/gif.gif";
-import { Table, Modal, Drawer, Menu, Avatar } from "antd";
-import { FaLock } from "react-icons/fa6";
-import { TbMenuDeep } from "react-icons/tb";
+import { Button, Input, message, Modal, Select, Tabs, Tooltip } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useRef, useState } from "react";
+import { BiLock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
+import { GoArrowLeft } from "react-icons/go";
+import { GrDocumentStore } from "react-icons/gr";
+import { IoSave } from "react-icons/io5";
+import { TbMenuDeep } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../Assests/logo.png";
 import approveIcon from "../Assests/outlined-approve.svg";
 import rejectIcon from "../Assests/outlined-reject.svg";
-import { GoArrowLeft } from "react-icons/go";
-import { LoadingOutlined, PrinterOutlined } from "@ant-design/icons";
+import API from "../baseUrl.json";
+import BleachingHeader from "../Components/BleachingHeader";
 import PrecotSidebar from "../Components/PrecotSidebar.js";
 
 const Spunlace_f02 = () => {
@@ -52,13 +47,9 @@ const Spunlace_f02 = () => {
   const [licker_in_speed_2, setlicker_in_speed_2] = useState("");
   const [flat_speed, setflat_speed] = useState("");
   const [flat_speed_2, setflat_speed_2] = useState("");
-  const [Condenser_roller_speed_R1, setCondenser_roller_speed_R1] =
-    useState("");
-  const [Condenser_roller_speed_R2, setCondenser_roller_speed_R2] =
-    useState("");
+
   const [id, setid] = useState("");
-  const [PW_Observation, setPW_Observation] = useState("");
-  const { Option } = Select;
+
   const [wbo_stripper_roller_speed_1, setwbo_stripper_roller_speed_1] =
     useState("");
   const [wbo_stripper_roller_speed_2, setwbo_stripper_roller_speed_2] =
@@ -84,8 +75,7 @@ const Spunlace_f02 = () => {
   const [feed_roller_speed_foa_2, setfeed_roller_speed_foa_2] = useState("");
   const [transport_fan_speed_foa_2, settransport_fan_speed_foa_2] =
     useState("");
-  const [feed_roller_speed_for_ALC_1, setfeed_roller_speed_for_ALC_1] =
-    useState("");
+
   const [feed_roller_speed_poa, setfeed_roller_speed_poa] = useState("");
   const [feed_roller_speed_poa_2, setfeed_roller_speed_poa_2] = useState("");
   const [transport_fan_speed_poa, settransport_fan_speed_poa] = useState("");
@@ -918,10 +908,9 @@ const Spunlace_f02 = () => {
   const handleInputlicker_in_speed = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
+
     setlicker_in_speed(inputValue);
-    // }
+
   };
   const handleBlur_range_1300_1500_licker_in_speed_2 = () => {
     if (licker_in_speed_2 < 950 || licker_in_speed_2 > 1150) {
@@ -933,10 +922,9 @@ const Spunlace_f02 = () => {
   const handleInputlicker_in_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
+
     setlicker_in_speed_2(inputValue);
-    // }
+
   };
 
   const handleSubmit = async () => {
@@ -1005,7 +993,7 @@ const Spunlace_f02 = () => {
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setfeed_roller_speed_rc(inputValue);
-    // }
+
   };
   const handleBlur_range950_1150feed_roller_speed_rc_2 = () => {
     if (feed_roller_speed_rc_2 < 950 || feed_roller_speed_rc_2 > 1150) {
@@ -1020,15 +1008,9 @@ const Spunlace_f02 = () => {
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setfeed_roller_speed_rc_2(inputValue);
-    // }
+
   };
-  const handleBlur_range1300_1500Licker_in_speedR1 = () => {
-    if (feed_roller_speed_rc_2 < 950 || feed_roller_speed_rc_2 > 1150) {
-      message.error(
-        "Please enter a number between 950 and 1150 for Feed roller speed R2 "
-      );
-    }
-  };
+
   const handleBlur_range1300_1500Licker_in_speedR2 = () => {
     if (licker_in_speed_2 < 1300 || licker_in_speed_2 > 1500) {
       message.error(
@@ -1036,116 +1018,88 @@ const Spunlace_f02 = () => {
       );
     }
   };
+
   const handleInput_Licker_in_speedR1 = (e) => {
     const inputValue = e.target.value;
 
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setlicker_in_speed(inputValue);
-    // }
+
   };
+
   const handleInput_Licker_in_speedR2 = (e) => {
     const inputValue = e.target.value;
 
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setlicker_in_speed_2(inputValue);
-    // }
+
   };
+
   const handleInput_Flat_speedR1 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (
-    // /^\d*\.?\d*$/.test(inputValue) &&
-    // inputValue.replace(".", "").length <= 3
-    // ) {
+
     setflat_speed(inputValue);
-    // }
+
   };
+
   const handleInput_Flat_speedR2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (
-    // /^\d*\.?\d*$/.test(inputValue) &&
-    // inputValue.replace(".", "").length <= 3
-    // ) {
     setflat_speed_2(inputValue);
-    // }
   };
+
   const handleInput_condenser_roller_speed = (e) => {
     const inputValue = e.target.value;
-    // Limit to two digits
-    // if (inputValue.length <= 2) {
     setcondenser_roller_speed(inputValue);
-    // }
   };
   const handleInput_condenser_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (
-    // /^\d*\.?\d*$/.test(inputValue) &&
-    // inputValue.replace(".", "").length <= 2
-    // ) {
     setcondenser_roller_speed_2(inputValue);
-    // }
+
   };
   const handleInput_reiter_card_1_delivery_speed = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (
-    // /^\d*\.?\d*$/.test(inputValue) &&
-    // inputValue.replace(".", "").length <= 2
-    // ) {
     setreiter_card_1_delivery_speed(inputValue);
-    // }
+
   };
   const handleInput_alc_bottom_chute_pressure = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_bottom_chute_pressure(inputValue);
-    // }
+
   };
   const handleInput_alc_bottom_chute_pressure_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_bottom_chute_pressure_2(inputValue);
-    // }
+
   };
 
   const handleInput_reiter_card_1_delivery_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (
-    // /^\d*\.?\d*$/.test(inputValue) &&
-    // inputValue.replace(".", "").length <= 2
-    // ) {
     setreiter_card_1_delivery_speed_2(inputValue);
-    // }
+
   };
   const handleInput_alc_top_chute_pressure = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_top_chute_pressure(inputValue);
-    // }
+
   };
   const handleInput_alc_top_chute_pressure_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_top_chute_pressure_2(inputValue);
-    // }
+
   };
   const handleBlur_range50_100Spiked = () => {
     if (bo_spiked_lattice_speed < 50 || bo_spiked_lattice_speed > 100) {
@@ -1177,7 +1131,7 @@ const Spunlace_f02 = () => {
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setreiter_chute_feed_roller_speed(inputValue);
-    // }
+
   };
   const handleBlur_range950_1150Chute_feed_Roller_speedR2 = () => {
     if (
@@ -1195,7 +1149,7 @@ const Spunlace_f02 = () => {
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setreiter_chute_feed_roller_speed_2(inputValue);
-    // }
+
   };
 
   const handleBlur_range65_100bo_transport_fan_speed = () => {
@@ -1603,10 +1557,8 @@ const Spunlace_f02 = () => {
       // if (!id) return "Header ID is required";
       // if (!bo_striper_roller_speed) return "BO- Striper roller speed is required";
       // if (!bo_spiked_lattice_speed) return "BO- SPIKED lattice speed is required";
-
       // if (!bo_wiper_roller_speed) return "BO-Wiper roller speed is required";
       // if (!bo_transport_fan_speed) return "BO Transport FAN Speed is required";
-
       return null;
     };
     const validationMessage = isValid();
@@ -1860,27 +1812,6 @@ const Spunlace_f02 = () => {
         return "SREITER CARDING - Reiter Card -1 Delivery speed (Doffer) -R1  is required";
       if (!reiter_card_1_delivery_speed_2)
         return "SSREITER CARDING -Reiter Card -1 Delivery speed (Doffer) -R2 is required";
-
-      // if (!alc_top_chute_pressure) return "AIR LAY CARDING - Top chute pressure -ACL-1 is required";
-      // if (!alc_top_chute_pressure_2) return "AIR LAY CARDING - Top chute pressure -ACL-2 is required";
-      // if (!alc_bottom_chute_pressure) return "AIR LAY CARDING - Bottom chute pressure -ACL-1 is required";
-      // if (!alc_bottom_chute_pressure_2) return "AIR LAY CARDING -Bottom chute pressure -ACL-2 is required";
-      // if (!alc_feed_roller_speed) return "AIR LAY CARDING - Feed Roller speed -ACL-1 is required";
-      // if (!alc_feed_roller_speed_2) return "AIR LAY CARDING  - Feed Roller speed -ACL-2 is required";
-      // if (!alc_k1_roller_speed) return "AIR LAY CARDING -K1 Roller speed -ACL-1 is required";
-      // if (!alc_k1_roller_speed_2) return "AIR LAY CARDING -K1 Roller speed -ACL-2 is required";
-      // if (!alc_k2_roller_speed) return "AIR LAY CARDING -K2 Roller speed -ACL-1 is required";
-      // if (!alc_k2_roller_speed_2) return "AIR LAY CARDING -K2 Roller speed -ACL-2 is required";
-      // if (!alc_k3_roller_speed) return "AIR LAY CARDING -K3 Roller speed -ACL-1 is required";
-      // if (!alc_k3_roller_speed_2) return "AIR LAY CARDING -K3 Roller speed -ACL-2 is required";
-      // if (!turbo_roller_speed) return "AIR LAY CARDING -Turbo Roller speed -ACL-1 is required";
-      // if (!turbo_roller_speed_2) return "AIR LAY CARDING -Turbo Roller -ACl-2 speed is required";
-      // if (!press_roller_speed) return "AIR LAY CARDING  -Press roller speed -ACL-1 is required";
-      // if (!press_roller_speed_2) return "AIR LAY CARDING  -Press roller speed -ACL-2 is required";
-      // if (!mesh_belt_speed) return "AIR LAY CARDING -Mesh belt speed -ACL-1 is required";
-      // if (!mesh_belt_speed_2) return "AIR LAY CARDING -Mesh belt speed -ACL-2 is required";
-      // if (!collecting_belt_speed) return "AIR LAY CARDING -Collecting belt speed -ACL-1 is required";
-      // if (!collecting_belt_speed_2) return "AIR LAY CARDING -Collecting belt speed -ACL-2 is required";
       if (!condenser_roller_speed)
         return "REITER CARDING - Condenser roller speed -R-1 is required";
       if (!collecting_belt_speed_2)
@@ -1893,8 +1824,6 @@ const Spunlace_f02 = () => {
       return;
     }
     setSaveLoading(true);
-    const remarkToSave = CH_remark.trim() === "" ? "Nill" : CH_remark;
-    // Format the payload according to the API documentation
     const payload = {
       header_id: id,
       unit: "Unit H",
@@ -2008,14 +1937,11 @@ const Spunlace_f02 = () => {
       operator_submitted_id: operator_submit_id,
       operator_sign: operator_sign,
     };
-
-    // Make the POST request to the API endpoint
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
-    // Make the POST request to the API endpoint with headers
     axios
       .post(
         `${API.prodUrl}/Precot/api/spulance/submitProcessSetupVerificationOpeningLineF002`,
@@ -2023,16 +1949,10 @@ const Spunlace_f02 = () => {
         { headers }
       )
       .then((res) => {
-        // setSaveLoading(false);
         message.success("Form Submitted successfully");
-        // console.log("messsage", res);
-
-        // message.success("LaydownChecklist Submitted successfully");
         navigate("/Precot/Spunlace/F-02/Summary");
       })
       .catch((err) => {
-        // setSaveLoading(false);
-
         message.error(err.response.data.message);
       })
       .finally(() => {
@@ -2041,11 +1961,7 @@ const Spunlace_f02 = () => {
   };
   const handleChangeBOStriper = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     setbo_striper_roller_speed(inputValue);
-    // }
   };
   const handle_blur_wbo_stripper2 = () => {
     if (wbo_stripper_roller_speed_2 < 50 || wbo_stripper_roller_speed_2 > 100) {
@@ -2054,47 +1970,28 @@ const Spunlace_f02 = () => {
       );
     }
   };
-
   const handleInputwbo_stripper2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setwbo_stripper_roller_speed_2(inputValue);
-    // }
+
   };
 
-  const handleChange_WBO_stripper2 = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    setwbo_stripper_roller_speed_2(inputValue);
-    // }
-  };
   const handleChangeBOspiked = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    setbo_spiked_lattice_speed(inputValue);
-    // }
-  };
-  const handleChangeBOtrans = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setbo_transport_fan_speed(inputValue);
-    // }
+    setbo_spiked_lattice_speed(inputValue);
+
   };
+
   const handleChangewbo_1_1 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
+
     setwbo_1_1(inputValue);
-    // }
+
   };
   const handleChangewbo_1_2 = (e) => {
     const inputValue = e.target.value;
@@ -2102,104 +1999,67 @@ const Spunlace_f02 = () => {
     // Limit to two digits
     // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setwbo_1_2(inputValue);
-    // }
+
   };
   const handleInputwbo_stripper = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    setwbo_stripper_roller_speed_1(inputValue);
-    // }
-  };
-  const handleInput_wbo_stripper = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setwbo_stripper_roller_speed_1(inputValue);
-    // }
-  };
-  const handleChange_WBO_stripper = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    setwbo_stripper_roller_speed_1(inputValue);
-    // }
   };
+
   const handleInput_wbo_wipper = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setwbo_wiper_roller_speed_1(inputValue);
-    // }
+
   };
   const handleInput_cmo_feed_roller_speed = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setcmo_feed_roller_speed(inputValue);
-    // }
+
   };
   const handleInput_feed_roller_speed_for = (e) => {
     const inputValue = e.target.value;
-
-    // const validNumeric = /^\d*\.?\d*$/;
-    // const validNA = /^NA?$/;
-
-    // // Limit to two digits
-    // if (
-    //   (validNumeric.test(inputValue) &&
-    //     inputValue.replace(".", "").length <= 2) ||
-    //   (validNA.test(inputValue) && inputValue.length <= 2)
-    // ) {
     setfeed_roller_speed_for(inputValue);
-    // }
   };
   const handleInput_transport_fan_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     settransport_fan_speed(inputValue);
-    // }
+
   };
   const handleInput_transport_fan_speed_FOR = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     settransport_fan_speed_for(inputValue);
-    // }
+
   };
   const handleInput_feed_roller_speed_foa = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setfeed_roller_speed_foa(inputValue);
-    // }
+
   };
   const handleInput_transport_fan_speed_foa = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     settransport_fan_speed_foa(inputValue);
-    // }
+
   };
   const handleInput_feed_roller_speed_por = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_por(inputValue);
-    // }
-  };
 
+    setfeed_roller_speed_por(inputValue);
+
+  };
   const handleInput_feed_roller_speed_poa = (e) => {
     const inputValue = e.target.value;
 
@@ -2207,240 +2067,126 @@ const Spunlace_f02 = () => {
   };
   const handleInput_transport_fan_speed_poa = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     settransport_fan_speed_poa(inputValue);
-    // }
   };
   const handleInput_transport_fan_speed_poa_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     settransport_fan_speed_poa_2(inputValue);
-    // }
   };
   const handleInput_feed_roller_speed_poa_2 = (e) => {
     const inputValue = e.target.value;
-
-    // // Limit to two digits
-    // if (
-    //   /^\d*\.?\d*$/.test(inputValue) &&
-    //   inputValue.replace(".", "").length <= 2
-    // ) {
     setfeed_roller_speed_poa_2(inputValue);
-    // }
   };
   const handleInput_feed_roller_speed_por_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setfeed_roller_speed_por_2(inputValue);
-    // }
   };
   const handleInput_transport_fan_speed_foa_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     settransport_fan_speed_foa_2(inputValue);
-    // }
-  };
-
-  const handleInput_transport_fan_speed_por = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    settransport_fan_speed_por(inputValue);
-    // }
   };
   const handleInput_alc_feed_roller_speed = (e) => {
     const inputValue = e.target.value;
 
-    // const validNumeric = /^\d*\.?\d*$/;
-
-    // const validNA = /^[NA]*$/;
-
-    // if (
-    //   (validNumeric.test(inputValue) &&
-    //     inputValue.replace(".", "").length <= 2) ||
-    //   (validNA.test(inputValue) && inputValue.length <= 3)
-    // ) {
     setalc_feed_roller_speed(inputValue);
-    // }
-  };
 
+  };
   const handleInput_alc_feed_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // const validNumeric = /^\d*\.?\d*$/;
 
-    // const validNA = /^[NA]*$/;
-
-    // if (
-    //   (validNumeric.test(inputValue) &&
-    //     inputValue.replace(".", "").length <= 2) ||
-    //   (validNA.test(inputValue) && inputValue.length <= 3)
-    // ) {
     setalc_feed_roller_speed_2(inputValue);
-    // }
+
   };
   const handleInput_alc_k1_roller_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setalc_k1_roller_speed(inputValue);
-    // }
   };
   const handleInput_alc_k2_roller_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     setalc_k2_roller_speed(inputValue);
-    // }
   };
   const handleInput_alc_k3_roller_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
     setalc_k3_roller_speed(inputValue);
-    // }
   };
   const handleInput_turbo_roller_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setturbo_roller_speed(inputValue);
-    // }
   };
   const handleInput_press_roller_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setpress_roller_speed(inputValue);
-    // }
   };
   const handleInput_mesh_belt_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setmesh_belt_speed(inputValue);
-    // }
   };
   const handleInput_collecting_belt_speed = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setcollecting_belt_speed(inputValue);
-    // }
   };
   const handleInput_collecting_belt_speed_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setcollecting_belt_speed_2(inputValue);
-    // }
   };
   const handleInput_mesh_belt_speed_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setmesh_belt_speed_2(inputValue);
-    // }
   };
   const handleInput_press_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setpress_roller_speedd_2(inputValue);
-    // }
   };
   const handleInput_alc_k1_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
     setalc_k1_roller_speed_2(inputValue);
-    // }
+
   };
   const handleInput_alc_k2_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_k2_roller_speed_2(inputValue);
-    // }
+
   };
 
   const handleInput_alc_k3_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setalc_k3_roller_speed_2(inputValue);
-    // }
+
   };
   const handleInput_turbo_roller_speed_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
     setturbo_roller_speed_2(inputValue);
-    // }
-  };
-  const handleInput_transport_fan_speed_por2 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    settransport_fan_speed_por2(inputValue);
-    // }
   };
+
   const handleInput_feed_roller_speed_foa_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
+
     setfeed_roller_speed_foa_2(inputValue);
-    // }
+
   };
   const handleInput_wbo_wipper2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setwbo_wiper_roller_speed_2(inputValue);
-    // }
+
   };
   const handleInput_wbo_spiked = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
-    setwbo_spiked_lattice_speed_1(inputValue);
-    // }
-  };
-  const handleInputwbo_2_1 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
-    setwbo_2_1(inputValue);
-    // }
+    setwbo_spiked_lattice_speed_1(inputValue);
+
   };
+
   const handle_blur_wbo_spiked2 = () => {
     if (wbo_spiked_lattice_speed_2 < 50 || wbo_spiked_lattice_speed_2 > 100) {
       message.error(
@@ -2448,212 +2194,46 @@ const Spunlace_f02 = () => {
       );
     }
   };
-  const handleInput_wbo_spiked2 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setwbo_spiked_lattice_speed_2(inputValue);
-    // }
-  };
   const handleChange_WBO_spiked2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setwbo_spiked_lattice_speed_2(inputValue);
-    // }
-  };
-  const handleChange_feed_roller_speed_for = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_for(inputValue);
-    // }
   };
-  const handleChange_feed_roller_speed_for_FOR = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_for(inputValue);
-    // }
-  };
-  const handleChange_feed_roller_speed_foa = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_foa(inputValue);
-    // }
-  };
   const handleChange_transport_fan_speed_foa = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     settransport_fan_speed_foa(inputValue);
-    // }
+
   };
   const handleChange_feed_roller_speed_por = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
+
     setfeed_roller_speed_por(inputValue);
-    // }
-  };
-  const handleChange_feed_roller_speed_for_PO_ALC = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_poa(inputValue);
-    // }
   };
-  const handleChange_transport_fan_speed_poa = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_poa(inputValue);
-    // }
-  };
-  const handleChange_transport_fan_speed_poa_2 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_poa_2(inputValue);
-    // }
-  };
-  const handleChange_feed_roller_speed_poa_2 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_poa_2(inputValue);
-    // }
-  };
-  const handleChange_feed_roller_speed_por_2 = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setfeed_roller_speed_por_2(inputValue);
-    // }
-  };
-  const handleChange_transport_fan_speed_foa_2 = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_foa_2(inputValue);
-    // }
-  };
-  const handleChange_transport_fan_speed_por = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_por(inputValue);
-    // }
-  };
-  const handleChange_transport_fan_speed_por2 = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed_por2(inputValue);
-    // }
-  };
   const handleChange_feed_roller_speed_foa_2 = (e) => {
     const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 3) {
+
     setfeed_roller_speed_foa_2(inputValue);
-    // }
+
   };
-  const handleChange_WBO_spiked = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setwbo_spiked_lattice_speed_1(inputValue);
-    // }
-  };
-  const handleChange_WBO_wiper = (e) => {
-    const inputValue = e.target.value;
 
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setwbo_wiper_roller_speed_1(inputValue);
-    // }
-  };
-  const handleChange_cmo_feed_roller_speed = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setcmo_feed_roller_speed(inputValue);
-    // }
-  };
-  const handleChange_transport_fan_speed = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    settransport_fan_speed(inputValue);
-    // }
-  };
-  const handleChange_WBO_wiper2 = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setwbo_wiper_roller_speed_2(inputValue);
-    // }
-  };
-  const handleChangewbo_2_2 = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 2) {
-    setwbo_2_2(inputValue);
-    // }
-  };
-  const handleInputwbo_2_2S = (e) => {
-    const inputValue = e.target.value;
-
-    // Limit to two digits
-    // if (/^[\dNA]*$/.test(inputValue) && inputValue.length <= 4) {
-    setwbo_2_2(inputValue);
-    // }
-  };
-  // const handleKeyPress = (e) => {
-  //   const allowedKeys = /[0-9]/;
-  //   const specialKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
-
-  //   if (!allowedKeys.test(e.key) && e.key !== 'N' && e.key !== 'A' && !specialKeys.includes(e.key)) {
-  //     e.preventDefault();
-  //     return;
-  //   }
-
-  //   if (values.length >= 2 && !specialKeys.includes(e.key)) {
-  //     e.preventDefault();
-  //   }
-  //   if (values.length === 0 && e.key === 'N') {
-  //     return;
-  //   }
-  //   if (values.length === 1 && e.key === 'A' && values[0] === 'N') {
-  //     return;
-  //   }
-  // };
 
   const handleKeyPress = (e) => {
-    const allowedKeys = /[0-9.]/; // Allow digits and the decimal point
+    const allowedKeys = /[0-9.]/;
     const specialKeys = [
       "Backspace",
       "Delete",
@@ -2662,12 +2242,10 @@ const Spunlace_f02 = () => {
       "Tab",
     ];
 
-    // Allow special keys
     if (specialKeys.includes(e.key)) {
       return;
     }
 
-    // Allow the sequence "NA"
     if (e.target.value.length === 0 && e.key === "N") {
       return;
     }
@@ -2679,79 +2257,37 @@ const Spunlace_f02 = () => {
       return;
     }
 
-    // Prevent further input if "NA" is already entered
     if (e.target.value === "NA") {
       e.preventDefault();
       return;
     }
 
-    // Allow numbers and the decimal point
     if (!allowedKeys.test(e.key)) {
       e.preventDefault();
       return;
     }
 
-    // Prevent input beyond 100
-    const newValue = e.target.value + e.key;
-    if (parseFloat(newValue) > 100) {
-      e.preventDefault();
-    }
   };
 
-  const handleInput = (e) => {
-    // console.log("handle value", e);
-    let inputValue = e.target.value;
-
-    // Ensure input is numeric and limit to two digits
-    if (!isNaN(inputValue) && inputValue.length > 3) {
-      inputValue = inputValue.slice(0, 3);
-    }
-
-    // Update state with formatted value
-    setbo_striper_roller_speed(inputValue);
-  };
   const handleInputwbo_1_1 = (e) => {
-    // console.log("handle value", e);
+
     let inputValue = e.target.value;
 
-    // Ensure input is numeric and limit to two digits
+
     if (!isNaN(inputValue) && inputValue.length > 4) {
       inputValue = inputValue.slice(0, 4);
     }
 
-    // Update state with formatted value
+
     setwbo_1_1(inputValue);
   };
-  const handleInputwbo_1_2 = (e) => {
-    // console.log("handle value", e);
-    let inputValue = e.target.value;
 
-    // Ensure input is numeric and limit to two digits
-    if (!isNaN(inputValue) && inputValue.length > 4) {
-      inputValue = inputValue.slice(0, 4);
-    }
-
-    // Update state with formatted value
-    setwbo_1_2(inputValue);
-  };
-  const handleInputwbo_1_21200_2200 = (e) => {
-    // console.log("handle value", e);
-    let inputValue = e.target.value;
-
-    // Ensure input is numeric and limit to two digits
-    if (!isNaN(inputValue) && inputValue.length > 4) {
-      inputValue = inputValue.slice(0, 4);
-    }
-
-    // Update state with formatted value
-    setwbo_2_1(inputValue);
-  };
   const handleApprove = async () => {
     setSaveLoading(true);
 
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     const res = await axios
@@ -2765,32 +2301,30 @@ const Spunlace_f02 = () => {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res);
-        // window.location.reload();
         message.success(res.data.message);
         navigate("/Precot/Spunlace/F-02/Summary");
       })
       .catch((err) => {
         setLoading(false);
-        // console.log("Err", err.response.data.message);
+
         message.error(err.response.data.message);
       })
       .finally(() => {
         setSaveLoading(false);
       });
   };
+
   const handleRejectModal = () => {
     setShowModal(true);
-    // window.print()
-    // console.log("print screen works");
-    // Add any other print-related logic here
+
   };
+
   const handleReject = async () => {
     setSaveLoading(true);
 
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json", // Adjust content type if needed
+      "Content-Type": "application/json",
     };
 
     const res = await axios
@@ -2805,61 +2339,49 @@ const Spunlace_f02 = () => {
       )
       .then((res) => {
         setLoading(false);
-        // console.log("messsage", res.data.message);
-        // window.location.reload();
+
         message.success(res.data.message);
         navigate("/Precot/Spunlace/F-02/Summary");
       })
       .catch((err) => {
         setLoading(false);
-        // console.log("Err", err.response.data.message);
+
         message.error(err.response.data.message);
       })
       .finally(() => {
         setSaveLoading(false);
       });
   };
-  const handleInput_Spiked = (e) => {
-    // console.log("handle value", e);
-    let inputValue = e.target.value;
 
-    // Ensure input is numeric and limit to two digits
-    if (!isNaN(inputValue) && inputValue.length > 3) {
-      inputValue = inputValue.slice(0, 3);
-    }
-
-    // Update state with formatted value
-    setwbo_spiked_lattice_speed_1(inputValue);
-  };
   const handleInputbotranstfan = (e) => {
-    // console.log("handle value", e);
+
     let inputValue = e.target.value;
 
-    // Ensure input is numeric and limit to two digits
+
     if (!isNaN(inputValue) && inputValue.length > 3) {
-      inputValue = inputValue.slice(0, 3);
+      inputValue = inputValue.slice(0, 5);
     }
 
-    // Update state with formatted value
+
     setbo_transport_fan_speed(inputValue);
   };
+
   const handleInputbowiper = (e) => {
-    // console.log("handle value", e);
+
     let inputValue = e.target.value;
 
-    // Ensure input is numeric and limit to two digits
+
     if (!isNaN(inputValue) && inputValue.length > 3) {
-      inputValue = inputValue.slice(0, 3);
+      inputValue = inputValue.slice(0, 5);
     }
 
-    // Update state with formatted value
+
     setbo_wiper_roller_speed(inputValue);
   };
 
   useEffect(() => {
     if (!initial.current) {
       initial.current = true;
-      // const roleBase = localStorage.getItem("role");
       fetchDatabatchByOrderdetails();
 
       fetchDataOrderNodetails_f2();
@@ -2872,14 +2394,14 @@ const Spunlace_f02 = () => {
           },
         })
         .then((res) => {
-          // console.log("Shift details fetched:", res.data);
+
           const shifts = res.data.map((shift) => shift.value);
           setAvailableShifts(shifts);
         });
     }
   }, [token]);
 
-  // console.log("getImage2", getImageOP, getImageSUP, getImageHOD);
+
   const items = [
     {
       key: "1",
@@ -3088,22 +2610,7 @@ const Spunlace_f02 = () => {
                     disabled={!isEditable}
                   />
                 </td>
-                {/* <td colSpan={2} style={{ textAlign: "center" }}>  <Input type="text"
-                  value={total_weight_2}
-                  style={{ textAlign: "center" }}
-                  onChange={(e) => settotal_weight_2(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (
-                      e.key === 'e' ||
-                      e.key === 'E' ||
-                      e.key === '-' ||
-                      e.key === '+' ||
-                      (!/[0-9.]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')
-                    ) {
-                      e.preventDefault();
-                    }
-                  }}
-                  disabled={!isEditable} /></td> */}
+
               </tr>
               <tr>
                 <td colSpan={4} style={{ paddingLeft: "5px" }}>
@@ -3368,8 +2875,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={8} style={{ paddingLeft: "5px" }}>
                   Fine Opener ALC
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={6} style={{ textAlign: "center" }}>
                   ALC-1
                 </td>
@@ -3451,8 +2957,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={8} style={{ paddingLeft: "5px" }}>
                   Pre-Opener -Reiter
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={6} style={{ textAlign: "center" }}>
                   R-1{" "}
                 </td>
@@ -3495,41 +3000,12 @@ const Spunlace_f02 = () => {
                   />
                 </td>
               </tr>
-              {/* <tr>
-                <td colSpan={3} style={{ paddingLeft: "5px" }}>Transport Fan </td>
-                <td colSpan={3} style={{ textAlign: "center" }}>85-100</td>
-                <td colSpan={2} style={{ textAlign: "center" }}>%</td>
-                <td colSpan={6} style={{ textAlign: "center" }}>
-                  <Input
-                    type="text"
-                    value={transport_fan_speed_por}
-                    style={{ textAlign: "center", width: "100%" }}
-                    onBlur={handle_blur_transport_fan_speed_por}
-                    onKeyDown={handleKeyPress}
-                    onInput={handleInput_transport_fan_speed_por}
-                    onChange={handleChange_transport_fan_speed_por}
-                    disabled={!isEditable}
-                  />
-                </td>
-                <td colSpan={6} style={{ textAlign: "center" }}>
-                  <Input
-                    type="text"
-                    value={transport_fan_speed_por2}
-                    style={{ textAlign: "center", width: "100%" }}
-                    onBlur={handle_blur_transport_fan_speed_por2}
-                    onKeyDown={handleKeyPress}
-                    onInput={handleInput_transport_fan_speed_por2}
-                    onChange={handleInput_transport_fan_speed_por2}
-                    disabled={!isEditable}
-                  />
-                </td>
-              </tr> */}
+
             </tbody>
           </table>
         </div>
       ),
     },
-
     {
       key: "4",
       label: <p>PROCESS SETUP VERIFICATION OPENING LINE -3</p>,
@@ -3547,8 +3023,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={8} style={{ paddingLeft: "5px" }}>
                   Pre-Opener -ALC
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={6} style={{ textAlign: "center" }}>
                   ALC-1
                 </td>
@@ -3572,7 +3047,6 @@ const Spunlace_f02 = () => {
                     value={feed_roller_speed_poa}
                     style={{ textAlign: "center", width: "100%" }}
                     onBlur={handle_blur_feed_roller_speed_for__PO_ALC_1}
-                    // onInput={handleInput_feed_roller_speed_poa}
                     onChange={handleInput_feed_roller_speed_poa}
                     disabled={!isEditable}
                   />
@@ -3583,21 +3057,6 @@ const Spunlace_f02 = () => {
                     value={feed_roller_speed_poa_2}
                     style={{ textAlign: "center", width: "100%" }}
                     onBlur={handle_blur_feed_roller_speed_for__PO_ALC_2}
-                    // onKeyDown={(e) => {
-                    //   if (
-                    //     e.key == "e" ||
-                    //     e.key === "E" ||
-                    //     e.key === "-" ||
-                    //     e.key === "+" ||
-                    //     (!/[0-9.]/.test(e.key) &&
-                    //       e.key !== "Backspace" &&
-                    //       e.key !== "Tab" &&
-                    //       e.key !== "ArrowLeft" &&
-                    //       e.key !== "ArrowRight")
-                    //   ) {
-                    //     e.preventDefault();
-                    //   }
-                    // }}
                     onInput={handleInput_feed_roller_speed_poa_2}
                     onChange={handleInput_feed_roller_speed_poa_2}
                     disabled={!isEditable}
@@ -3643,8 +3102,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={14} style={{ paddingLeft: "5px" }}>
                   REITER CARDING
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={3} style={{ textAlign: "center" }}>
                   R-1
                 </td>
@@ -3854,7 +3312,7 @@ const Spunlace_f02 = () => {
                     disabled={
                       (roleBase === "ROLE_SUPERVISOR" &&
                         selectedRow?.supervisor_status ===
-                          "SUPERVISOR_APPROVED") ||
+                        "SUPERVISOR_APPROVED") ||
                       (roleBase === "ROLE_HOD" &&
                         selectedRow?.hod_status === "HOD_APPROVED") ||
                       (roleBase === "ROLE_OPERATOR" &&
@@ -3882,8 +3340,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={14} style={{ paddingLeft: "5px" }}>
                   AIR LAY CARDING
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={3} style={{ textAlign: "center" }}>
                   ACL-1
                 </td>
@@ -3983,8 +3440,7 @@ const Spunlace_f02 = () => {
                 <td colSpan={8} style={{ paddingLeft: "5px" }}>
                   AIR LAY CARDING
                 </td>
-                {/* <td  colSpan={3} style={{paddingLeft:"5px"}}></td>
-              <td  colSpan={2} style={{paddingLeft:"5px"}}></td> */}
+
                 <td colSpan={6} style={{ textAlign: "center" }}>
                   ACL-1
                 </td>
@@ -4009,18 +3465,6 @@ const Spunlace_f02 = () => {
                     value={alc_feed_roller_speed}
                     style={{ textAlign: "center", width: "100%" }}
                     onBlur={handle_blur_alc_feed_roller_speed}
-                    // onKeyDown={(e) => {
-                    //   if (
-                    //     e.key === 'e' ||
-                    //     e.key === 'E' ||
-                    //     e.key === '-' ||
-                    //     e.key === '+' ||
-                    //     (!/[0-9.]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')
-                    //   ) {
-                    //     e.preventDefault();
-                    //   }
-                    // }}
-                    // onInput={handleInput_alc_feed_roller_speed}
                     onChange={handleInput_alc_feed_roller_speed}
                     disabled={!isEditable}
                   />
@@ -4031,18 +3475,6 @@ const Spunlace_f02 = () => {
                     value={alc_feed_roller_speed_2}
                     style={{ textAlign: "center", width: "100%" }}
                     onBlur={handle_blur_alc_feed_roller_speed_2}
-                    // onKeyDown={(e) => {
-                    //   if (
-                    //     e.key === 'e' ||
-                    //     e.key === 'E' ||
-                    //     e.key === '-' ||
-                    //     e.key === '+' ||
-                    //     (!/[0-9.]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')
-                    //   ) {
-                    //     e.preventDefault();
-                    //   }
-                    // }}
-                    // onInput={handleInput_alc_feed_roller_speed_2}
                     onChange={handleInput_alc_feed_roller_speed_2}
                     disabled={!isEditable}
                   />
@@ -4416,22 +3848,22 @@ const Spunlace_f02 = () => {
                   selectedRow?.supervisor_status === "SUPERVISOR_REJECTED" ||
                   selectedRow?.hod_status === "HOD_APPROVED" ||
                   selectedRow?.hod_status === "HOD_REJECTED") && (
-                  <>
-                    <div>{selectedRow?.supervisor_sign}</div>
-                    <div>{supersigndate}</div>
+                    <>
+                      <div>{selectedRow?.supervisor_sign}</div>
+                      <div>{supersigndate}</div>
 
-                    {getImageSUP && (
-                      <>
-                        <br />
-                        <img
-                          src={getImageSUP}
-                          alt="logo"
-                          className="signature"
-                        />
-                      </>
-                    )}
-                  </>
-                )}
+                      {getImageSUP && (
+                        <>
+                          <br />
+                          <img
+                            src={getImageSUP}
+                            alt="logo"
+                            className="signature"
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
               </td>
 
               <td
@@ -4456,284 +3888,33 @@ const Spunlace_f02 = () => {
               >
                 {(selectedRow?.hod_status === "HOD_APPROVED" ||
                   selectedRow?.hod_status === "HOD_REJECTED") && (
-                  <>
-                    <div>{selectedRow?.hod_sign}</div>
-                    <div>{hodsign}</div>
+                    <>
+                      <div>{selectedRow?.hod_sign}</div>
+                      <div>{hodsign}</div>
 
-                    {getImageHOD && (
-                      <>
-                        <br />
-                        <img
-                          src={getImageHOD}
-                          alt="logo"
-                          className="signature"
-                        />
-                      </>
-                    )}
-                  </>
-                )}
+                      {getImageHOD && (
+                        <>
+                          <br />
+                          <img
+                            src={getImageHOD}
+                            alt="logo"
+                            className="signature"
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
               </td>
             </tr>
           </table>
-          {/* Container for buttons positioned at the right */}
+
         </div>
       ),
     },
   ];
   return (
     <div>
-      {/* <Drawer
-        placement="left"
-        closable={false}
-        onClose={onClose}
-        open={open}
-        width="fit-content"
-        style={{
-          padding: "1em",
-        }}
-      >
-        <Row>
-          <Col>
-            <Avatar>{localStorage.getItem("username").at(0)}</Avatar>
-          </Col>
 
-          <Col
-            style={{
-              marginLeft: "1em",
-            }}
-          >
-            <p>{localStorage.getItem("username")}</p>
-            <p
-              style={{
-                fontSize: "x-small",
-              }}
-            >
-              {localStorage.getItem("role")}
-            </p>
-          </Col>
-        </Row>
-
-        <Menu
-          theme="dark"
-          mode="inline"
-          // defaultSelectedKeys={["1"]}
-          style={{
-            backgroundColor: "transparent",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            padding: "0",
-            margin: "0",
-          }}
-          items={
-            localStorage.getItem("role") == "ROLE_OPERATOR"
-              ? [
-                {
-                  key: "1",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Form Browser
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/choosenScreen"),
-                },
-                {
-                  key: "2",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Generation
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Generate"),
-                },
-                {
-                  key: "3",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Mapping
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Mapping"),
-                },
-                {
-                  key: "4",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Closing
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Closing"),
-                },
-                {
-                  key: "5",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Raw Material Isuue
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/RawMaterialIssue"),
-                },
-                {
-                  key: "6",
-                  icon: (
-                    <FaLock
-                      color="#151718"
-                      onClick={() => navigate("/Precot")}
-                    />
-                  ),
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Logout
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot"),
-                },
-              ]
-              : [
-                {
-                  key: "1",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Form Browser
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/choosenScreen"),
-                },
-                {
-                  key: "2",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Mapping
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Mapping"),
-                },
-                {
-                  key: "3",
-                  icon: <IoCreate color="#151718" />,
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Closing
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot/Closing"),
-                },
-                {
-                  key: "4",
-                  icon: (
-                    <FaLock
-                      color="#151718"
-                      onClick={() => navigate("/Precot")}
-                    />
-                  ),
-                  label: (
-                    <b
-                      style={{
-                        color: "#151718",
-                      }}
-                    >
-                      Logout
-                    </b>
-                  ),
-                  onClick: () => navigate("/Precot"),
-                },
-              ]
-          }
-        />
-      </Drawer> */}
-
-      {/* <BleachingHeader
-        unit="Unit-H"
-        formName="BLEACHING JOB CARD"
-        formatNo="PRD01/F-13"
-        buttonsArray={[
-          <Button
-            onClick={handleSave}
-            style={{ marginRight: "10px" }}
-            type="primary"
-          >
-            Save
-          </Button>,
-          <Button
-            onClick={handleSubmit}
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              marginRight: "10px",
-            }}
-            type="primary"
-          >
-            Submit
-          </Button>,
-          <Button
-            onClick={handleBack}
-            style={{
-              backgroundColor: "blue",
-              color: "white",
-              marginRight: "10px",
-            }}
-            type="primary"
-          >
-            Back
-          </Button>,
-          <Button
-            type="primary"
-            style={{
-              backgroundColor: "#E5EEF9",
-              color: "#00308F",
-              fontWeight: "bold",
-              // display: submitBtnStatus ? "block" : "none",
-            }}
-            //  icon={<PrinterOutlined />}
-            onClick={handlePrint}
-          >
-            Print
-          </Button>
-        ]}
-      /> */}
       <PrecotSidebar
         open={open}
         onClose={onClose}
@@ -4766,77 +3947,77 @@ const Spunlace_f02 = () => {
             Back
           </Button>,
           ...(roleBase === "ROLE_HOD" ||
-          roleBase === "ROLE_SUPERVISOR" ||
-          roleBase === "ROLE_QC" ||
-          roleBase === "ROLE_DESIGNEE"
+            roleBase === "ROLE_SUPERVISOR" ||
+            roleBase === "ROLE_QC" ||
+            roleBase === "ROLE_DESIGNEE"
             ? [
-                <Button
-                  key="approve"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  onClick={handleApprove}
-                  shape="round"
-                  icon={<img src={approveIcon} alt="Approve Icon" />}
-                >
-                  &nbsp;Approve
-                </Button>,
-                <Button
-                  key="reject"
-                  loading={saveLoading}
-                  type="primary"
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<img src={rejectIcon} alt="Reject Icon" />}
-                  onClick={handleRejectModal}
-                  shape="round"
-                >
-                  &nbsp;Reject
-                </Button>,
-              ]
+              <Button
+                key="approve"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                onClick={handleApprove}
+                shape="round"
+                icon={<img src={approveIcon} alt="Approve Icon" />}
+              >
+                &nbsp;Approve
+              </Button>,
+              <Button
+                key="reject"
+                loading={saveLoading}
+                type="primary"
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<img src={rejectIcon} alt="Reject Icon" />}
+                onClick={handleRejectModal}
+                shape="round"
+              >
+                &nbsp;Reject
+              </Button>,
+            ]
             : [
-                <Button
-                  key="save"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButton2(),
-                  }}
-                  shape="round"
-                  icon={<IoSave color="#00308F" />}
-                >
-                  Save
-                </Button>,
-                <Button
-                  key="submit"
-                  loading={saveLoading}
-                  type="primary"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: "#E5EEF9",
-                    color: "#00308F",
-                    fontWeight: "bold",
-                    display: canDisplayButtons(),
-                  }}
-                  icon={<GrDocumentStore color="#00308F" />}
-                  shape="round"
-                >
-                  Submit
-                </Button>,
-              ]),
+              <Button
+                key="save"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButton2(),
+                }}
+                shape="round"
+                icon={<IoSave color="#00308F" />}
+              >
+                Save
+              </Button>,
+              <Button
+                key="submit"
+                loading={saveLoading}
+                type="primary"
+                onClick={handleSubmit}
+                style={{
+                  backgroundColor: "#E5EEF9",
+                  color: "#00308F",
+                  fontWeight: "bold",
+                  display: canDisplayButtons(),
+                }}
+                icon={<GrDocumentStore color="#00308F" />}
+                shape="round"
+              >
+                Submit
+              </Button>,
+            ]),
           <Button
             key="logout"
             type="primary"
@@ -4850,7 +4031,7 @@ const Spunlace_f02 = () => {
             onClick={() => {
               if (window.confirm("Are you sure want to logout")) {
                 localStorage.removeItem("token");
-                navigate("/Precot"); // Ensure navigate is defined or imported
+                navigate("/Precot");
               }
             }}
           >
@@ -5372,11 +4553,10 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="2"
                 rowSpan="4"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.hotwash_one}
@@ -5484,11 +4664,10 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="2"
                 rowSpan="4"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.hotwash_two}
@@ -5528,7 +4707,7 @@ const Spunlace_f02 = () => {
               }}
             ></tr>
 
-            {/* Nutralizing Wash */}
+
 
             <tr
               style={{
@@ -5595,11 +4774,10 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="2"
                 rowSpan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.newtralizing}
@@ -5607,7 +4785,7 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="3"
                 rowspan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
                   paddingLeft: "1em",
@@ -5709,11 +4887,10 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="2"
                 rowSpan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.newtralizing}
@@ -5721,14 +4898,14 @@ const Spunlace_f02 = () => {
               <td
                 colSpan="3"
                 rowspan="5"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
                   paddingLeft: "1em",
                   paddingRight: "1em",
                 }}
               >
-                {/* <span style={{ textAlign: "center" }}>  {print && print.newtralizing_act_temp}</span> */}
+
                 pH actual:
                 <span style={{ textAlign: "center" }}>
                   {" "}
@@ -5738,9 +4915,7 @@ const Spunlace_f02 = () => {
                   Surface Activity actual:
                   <span>{print && print.final_process_act_temp}</span>
                 </div>
-                {/* <span style={{ textAlign: "center" }}>  
 
-              </span> */}
               </td>
             </tr>
             <tr
@@ -5861,11 +5036,10 @@ const Spunlace_f02 = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.caustic_soda_flakes}
@@ -5914,8 +5088,7 @@ const Spunlace_f02 = () => {
                 //  contentEditable="false"
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.haipolene}
@@ -5961,11 +5134,10 @@ const Spunlace_f02 = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.sarofom}
@@ -6011,11 +5183,10 @@ const Spunlace_f02 = () => {
               </td>
               <td
                 colSpan="1"
-                // contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.hydrogen_peroxide}
@@ -6057,9 +5228,7 @@ const Spunlace_f02 = () => {
                     </div>
                   </p>
                 </div>
-                {/* <div>     <p style={{fontSize:"11px"}}>  bo_wiper_roller_speed 9490</p>
-                 
-                </div> */}
+
               </td>
               <td
                 colSpan="2"
@@ -6073,11 +5242,10 @@ const Spunlace_f02 = () => {
               </td>
               <td
                 colSpan="1"
-                //contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.setilon_bo_wiper_roller_speed_actual}
@@ -6123,11 +5291,10 @@ const Spunlace_f02 = () => {
               </td>
               <td
                 colSpan="1"
-                //contentEditable="false"
+
                 style={{
                   border: "1px solid",
-                  //   paddingLeft: "1em",
-                  //   paddingRight: "1em",
+
                 }}
               >
                 {print && print.citric_acid}
@@ -6195,11 +5362,7 @@ const Spunlace_f02 = () => {
                 </div>
               </td>
             </tr>
-            {/* <tr>
-          <td colSpan="5">jjj</td>
-          <td colSpan="4">jjjj</td>
-          <td colSpan="4">ooo</td>
-          </tr> */}
+
           </tfoot>
         </table>
 
@@ -6275,8 +5438,7 @@ const Spunlace_f02 = () => {
                   <br />
                   {supersigndate}
                 </div>
-                {/* <div style={{ fontSize: "11px" }}>Signature</div>
-              <div style={{ fontSize: "11px" }}>Date </div> */}
+
               </td>
 
               <td
@@ -6294,8 +5456,7 @@ const Spunlace_f02 = () => {
                   <br />
                   {hodsign}
                 </div>
-                {/* <div style={{ fontSize: "11px" }}>Signature</div>
-              <div style={{ fontSize: "11px" }}>Date </div> */}
+
               </td>
 
               <td
@@ -6314,8 +5475,7 @@ const Spunlace_f02 = () => {
                   {operator_signsignaturedate}
                 </div>
 
-                {/* <div style={{ fontSize: "11px" }}>Signature</div>
-              <div style={{ fontSize: "11px" }}>Date </div> */}
+
               </td>
             </tr>
           </tbody>
@@ -6417,86 +5577,6 @@ const Spunlace_f02 = () => {
           style={{ width: "100%", height: "35px" }}
         />
       </div>
-      {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
-
-        <div style={containerStyle}>
-          <div style={beforeStyle}>Shift</div>
-          <Select
-            style={{ width: '100%', height: '40x', borderRadius: "0px", border: "1px solid #dddd", backgroundColor: "white" }}
-            placeholder="Select Shift No"
-            value={availableshiftlov}
-            onChange={setAvailableShiftslov}
-            disabled={
-              (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-              (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-              (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-              (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-            }
-          >
-            {availableshift.map((shiftvalue, index) => (
-              <Option key={index} value={shiftvalue}>
-                {shiftvalue}
-              </Option>
-            ))}
-          </Select>
-
-        </div>
-
-
-
-
-        <div style={containerStyle}>
-          <div style={beforeStyle_finish}>Finishing</div>
-          <Select
-            style={{ width: '100%', height: '40x', borderRadius: "0px", border: "1px solid #dddd", backgroundColor: "white" }}
-            placeholder="Select Finish"
-            value={finisharraylist}
-            onChange={setfinisharray}
-            disabled={
-              (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-              (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-              (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-              (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-            }
-          >
-            {finishlov.map((finish, index) => (
-              <Option key={index} value={finish}>
-                {finish}
-              </Option>
-            ))}
-          </Select>
-
-        </div>
-
-
-
-        <div style={containerStyle}>
-          <div style={machineno_finish}>M/C No</div>
-          <Select
-            style={{ width: '100%', height: '40x', borderRadius: "0px", border: "1px solid #dddd", backgroundColor: "white" }}
-            placeholder="Select Machine No"
-            value={availablemclov}
-            onChange={setAvailableMAClov}
-            disabled={
-              (roleBase === "ROLE_SUPERVISOR" && selectedRow?.supervisor_status === "SUPERVISOR_APPROVED") ||
-              (roleBase === "ROLE_HOD" && selectedRow?.hod_status === "HOD_APPROVED") ||
-              (roleBase === "ROLE_OPERATOR" && selectedRow?.operator_status === "OPERATOR_APPROVED") ||
-              (roleBase === "ROLE_DESIGNEE" && selectedRow?.hod_status === "HOD_APPROVED")
-            }
-            showSearch
-          >
-            {availableMachineLov.map((MacLOV, index) => (
-              <Option key={index} value={MacLOV}>
-                {MacLOV}
-              </Option>
-            ))}
-          </Select>
-
-
-        </div>
-
-
-      </div> */}
       <Tabs
         defaultActiveKey="1"
         items={items}
